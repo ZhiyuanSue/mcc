@@ -1,0 +1,267 @@
+read in file name:
+	./bin/test_src/expr_test_07.c
+start print ast tree
+<translation_unit ns:1>
+    <external_decl ns:1>
+        <function_definition ns:1>
+            <&declaration_spec ns:1>
+                <&type_spec ns:1>
+                    <KW_int:int sym level: 1 namespace:1>
+            <&declarator ns:1>
+                <&direct_declarator ns:1>
+                    <identifier:test sym level: 1 namespace:1>
+                    <(:( sym level: 1 namespace:1>
+                    <&parameter_type_list ns:1>
+                        <&parameter_list ns:1>
+                            <&parameter_declaration ns:1>
+                                <&declaration_spec ns:1>
+                                    <&type_spec ns:1>
+                                        <KW_void:void sym level: 2 namespace:1>
+                    <):) sym level: 1 namespace:1>
+            <compound_stmt ns:1>
+                <left_brace:{ sym level: 2 namespace:1>
+                <declaration ns:1>
+                    <&declaration_spec ns:1>
+                        <&type_spec ns:1>
+                            <KW_int:int sym level: 2 namespace:1>
+                    <&init_decl_list ns:1>
+                        <&init_decl ns:1>
+                            <&declarator ns:1>
+                                <&direct_declarator ns:1>
+                                    <identifier:a sym level: 2 namespace:1>
+                    <;:; sym level: 2 namespace:1>
+                <statement ns:1>
+                    <expr_stmt ns:1>
+                        <&unary_expr ns:1>
+                            <KW_sizeof:sizeof sym level: 2 namespace:1>
+                            <&primary_expression ns:1>
+                                <identifier:a sym level: 2 namespace:1>
+                        <;:; sym level: 2 namespace:1>
+                <declaration ns:1>
+                    <&declaration_spec ns:1>
+                        <&type_spec ns:1>
+                            <&struct_union_spec ns:1>
+                                <&struct_union ns:1>
+                                    <KW_struct:struct sym level: 2 namespace:1>
+                                <identifier:bbb sym level: 2 namespace:2>
+                                <left_brace:{ sym level: 2 namespace:1>
+                                <&struct_decl_list ns:4>
+                                    <&struct_decl ns:4>
+                                        <&spec_qual_list ns:4>
+                                            <&type_spec ns:4>
+                                                <KW_int:int sym level: 2 namespace:4>
+                                        <&struct_declarator_list ns:4>
+                                            <&struct_declarator ns:4>
+                                                <&declarator ns:4>
+                                                    <&direct_declarator ns:4>
+                                                        <identifier:ddd sym level: 2 namespace:4>
+                                        <;:; sym level: 2 namespace:4>
+                                <right_brace:} sym level: 2 namespace:1>
+                    <;:; sym level: 2 namespace:1>
+                <statement ns:1>
+                    <expr_stmt ns:1>
+                        <&unary_expr ns:1>
+                            <KW_sizeof:sizeof sym level: 2 namespace:1>
+                            <(:( sym level: 2 namespace:1>
+                            <&type_name ns:1>
+                                <&spec_qual_list ns:1>
+                                    <&type_spec ns:1>
+                                        <&struct_union_spec ns:1>
+                                            <&struct_union ns:1>
+                                                <KW_struct:struct sym level: 2 namespace:1>
+                                            <identifier:bbb sym level: 2 namespace:2>
+                            <):) sym level: 2 namespace:1>
+                        <;:; sym level: 2 namespace:1>
+                <declaration ns:1>
+                    <&declaration_spec ns:1>
+                        <&type_spec ns:1>
+                            <KW_int:int sym level: 2 namespace:1>
+                    <&init_decl_list ns:1>
+                        <&init_decl ns:1>
+                            <&declarator ns:1>
+                                <&direct_declarator ns:1>
+                                    <identifier:ccc sym level: 2 namespace:1>
+                                    <[:[ sym level: 2 namespace:1>
+                                    <&primary_expression ns:1>
+                                        <identifier:a sym level: 2 namespace:1>
+                                    <]:] sym level: 2 namespace:1>
+                    <;:; sym level: 2 namespace:1>
+                <statement ns:1>
+                    <expr_stmt ns:1>
+                        <&unary_expr ns:1>
+                            <KW_sizeof:sizeof sym level: 2 namespace:1>
+                            <&primary_expression ns:1>
+                                <(:( sym level: 2 namespace:1>
+                                <&primary_expression ns:1>
+                                    <identifier:ccc sym level: 2 namespace:1>
+                                <):) sym level: 2 namespace:1>
+                        <;:; sym level: 2 namespace:1>
+                <statement ns:1>
+                    <expr_stmt ns:1>
+                        <&unary_expr ns:1>
+                            <KW__Alignof:_Alignof sym level: 2 namespace:1>
+                            <(:( sym level: 2 namespace:1>
+                            <&type_name ns:1>
+                                <&spec_qual_list ns:1>
+                                    <&type_spec ns:1>
+                                        <&struct_union_spec ns:1>
+                                            <&struct_union ns:1>
+                                                <KW_struct:struct sym level: 2 namespace:1>
+                                            <identifier:bbb sym level: 2 namespace:2>
+                            <):) sym level: 2 namespace:1>
+                        <;:; sym level: 2 namespace:1>
+                <statement ns:1>
+                    <expr_stmt ns:1>
+                        <&primary_expression ns:1>
+                            <(:( sym level: 2 namespace:1>
+                            <&unary_expr ns:1>
+                                <*:* sym level: 2 namespace:1>
+                                <&cast_expr ns:1>
+                                    <(:( sym level: 2 namespace:1>
+                                    <&type_name ns:1>
+                                        <&spec_qual_list ns:1>
+                                            <&type_spec ns:1>
+                                                <KW_int:int sym level: 2 namespace:1>
+                                        <&abstract_declarator ns:1>
+                                            <&pointer ns:1>
+                                                <*:* sym level: 2 namespace:1>
+                                    <):) sym level: 2 namespace:1>
+                                    <&primary_expression ns:1>
+                                        <(:( sym level: 2 namespace:1>
+                                        <&unary_expr ns:1>
+                                            <ampersand:& sym level: 2 namespace:1>
+                                            <&primary_expression ns:1>
+                                                <identifier:a sym level: 2 namespace:1>
+                                        <):) sym level: 2 namespace:1>
+                            <):) sym level: 2 namespace:1>
+                        <;:; sym level: 2 namespace:1>
+                <statement ns:1>
+                    <&return_stmt ns:1>
+                        <KW_return:return sym level: 2 namespace:1>
+                        <&primary_expression ns:1>
+                            <integer_constant:0 sym level: 2 namespace:1>
+                        <;:; sym level: 2 namespace:1>
+                <right_brace:} sym level: 2 namespace:1>
+finish print ast tree
+    start specify or qualify node
+    finish specify or qualify node
+    start declarator
+        start func
+            start specify or qualify node
+            finish specify or qualify node
+        finish func
+    finish declarator
+    start compound expr
+        start declaration line:1
+            start specify or qualify node
+            finish specify or qualify node
+            start declarator
+            finish declarator
+        finish declaration
+        start expr expr
+            start unary
+                start primary expr
+                <Type>:< signed_int >
+                end primary expr
+            <Type>:< signed_int >
+            end unary
+            start declaration line:3
+                start specify or qualify node
+                    start struct union
+                        start specify or qualify node
+                        finish specify or qualify node
+                        start declarator
+                        finish declarator
+                    finish struct union
+                finish specify or qualify node
+            finish declaration
+            start expr expr
+                start unary
+                    start specify or qualify node
+                    finish specify or qualify node
+                <Type>:< signed_int >
+                end unary
+                start declaration line:7
+                    start specify or qualify node
+                    finish specify or qualify node
+                    start declarator
+                        start array
+                            start primary expr
+                            <Type>:< signed_int >
+                            end primary expr
+                        finish array
+                    finish declarator
+                finish declaration
+                start expr expr
+                    start unary
+                        start primary expr
+                            start primary expr
+                            <Type>:< array , signed_int >
+                            end primary expr
+                        <Type>:< array , signed_int >
+                        end primary expr
+                    <Type>:< signed_int >
+                    end unary
+                    start expr expr
+                        start unary
+                            start specify or qualify node
+                            finish specify or qualify node
+                        <Type>:< signed_int >
+                        end unary
+                        start expr expr
+                            start primary expr
+                                start unary
+                                    start cast
+                                        start specify or qualify node
+                                        finish specify or qualify node
+                                        start primary expr
+                                            start unary
+                                                start primary expr
+                                                <Type>:< signed_int >
+                                                end primary expr
+                                            <Type>:< point , signed_int >
+                                            end unary
+                                        <Type>:< point , signed_int >
+                                        end primary expr
+                                    <Type>:< point , signed_int >
+                                    end cast
+                                <Type>:< signed_int >
+                                end unary
+                            <Type>:< signed_int >
+                            end primary expr
+                            start return expr
+                                start primary expr
+                                <Type>:< signed_int >
+                                end primary expr
+                            end return stmt
+                        end comopound stmt
+start print symbol table
+scope type:file_scope with child 1 and namespace 0
+    <symbol table>
+        <symbol:test ns:1 linkage:0>
+            type::< function , signed_int >
+                no parameter
+    scope type:function_scope with child 1 and namespace 0
+        <symbol table>
+        scope type:block_scope with child 0 and namespace 0
+            <symbol table>
+                <symbol:a ns:1 linkage:0>
+                    type::< signed_int >
+                        value:0
+                <symbol:ccc ns:1 linkage:0>
+                    type::< array , signed_int >
+                        array len is: 140645229502832
+                <symbol:bbb ns:2 linkage:0>
+                    type::< struct >
+                        struct have 1 members are:
+                            < ddd off:0 >
+                        total size:4 align size:4
+                <symbol:ddd ns:4 linkage:0>
+                    type::< signed_int >
+                        value:0
+end print symbol table
+mempool global alloc/free: alloc 0 times,free 0 times
+	use sys alloc/free: alloc 54938 times,free 996 times
+mempool file alloc/free: alloc 0 times,free 0 times
+	use sys alloc/free: alloc 8771 times,free 6743 times
+test pass!

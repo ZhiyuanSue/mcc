@@ -1,0 +1,144 @@
+read in file name:
+	./bin/test_src/linkage_test_01.c
+start print ast tree
+<translation_unit ns:1>
+    <external_decl ns:1>
+        <declaration ns:1>
+            <&declaration_spec ns:1>
+                <&storage_class_spec ns:1>
+                    <KW_typedef:typedef sym level: 0 namespace:1>
+                <&type_qual ns:1>
+                    <KW_const:const sym level: 0 namespace:1>
+                <&type_spec ns:1>
+                    <KW_int:int sym level: 0 namespace:1>
+            <&init_decl_list ns:1>
+                <&init_decl ns:1>
+                    <&declarator ns:1>
+                        <&direct_declarator ns:1>
+                            <identifier:aaa sym level: 0 namespace:1>
+            <;:; sym level: 0 namespace:1>
+    <external_decl ns:1>
+        <declaration ns:1>
+            <&declaration_spec ns:1>
+                <&storage_class_spec ns:1>
+                    <KW_typedef:typedef sym level: 0 namespace:1>
+                <&type_spec ns:1>
+                    <&typedef_name ns:1>
+                        <identifier:aaa sym level: 0 namespace:1>
+            <&init_decl_list ns:1>
+                <&init_decl ns:1>
+                    <&declarator ns:1>
+                        <&direct_declarator ns:1>
+                            <identifier:bbb sym level: 0 namespace:1>
+            <;:; sym level: 0 namespace:1>
+    <external_decl ns:1>
+        <declaration ns:1>
+            <&declaration_spec ns:1>
+                <&storage_class_spec ns:1>
+                    <KW_typedef:typedef sym level: 0 namespace:1>
+                <&type_spec ns:1>
+                    <&typedef_name ns:1>
+                        <identifier:bbb sym level: 0 namespace:1>
+            <&init_decl_list ns:1>
+                <&init_decl ns:1>
+                    <&declarator ns:1>
+                        <&direct_declarator ns:1>
+                            <identifier:ccc sym level: 0 namespace:1>
+            <;:; sym level: 0 namespace:1>
+    <external_decl ns:1>
+        <declaration ns:1>
+            <&declaration_spec ns:1>
+                <&storage_class_spec ns:1>
+                    <KW_typedef:typedef sym level: 0 namespace:1>
+                <&type_spec ns:1>
+                    <&typedef_name ns:1>
+                        <identifier:ccc sym level: 0 namespace:1>
+            <&init_decl_list ns:1>
+                <&init_decl ns:1>
+                    <&declarator ns:1>
+                        <&direct_declarator ns:1>
+                            <identifier:ddd sym level: 0 namespace:1>
+            <;:; sym level: 0 namespace:1>
+    <external_decl ns:1>
+        <declaration ns:1>
+            <&declaration_spec ns:1>
+                <&type_spec ns:1>
+                    <&typedef_name ns:1>
+                        <identifier:ddd sym level: 0 namespace:1>
+            <&init_decl_list ns:1>
+                <&init_decl ns:1>
+                    <&declarator ns:1>
+                        <&direct_declarator ns:1>
+                            <identifier:z sym level: 0 namespace:1>
+            <;:; sym level: 0 namespace:1>
+    <external_decl ns:1>
+        <declaration ns:1>
+            <&declaration_spec ns:1>
+                <&type_qual ns:1>
+                    <KW_const:const sym level: 0 namespace:1>
+                <&type_spec ns:1>
+                    <KW_int:int sym level: 0 namespace:1>
+            <&init_decl_list ns:1>
+                <&init_decl ns:1>
+                    <&declarator ns:1>
+                        <&direct_declarator ns:1>
+                            <identifier:z sym level: 0 namespace:1>
+            <;:; sym level: 0 namespace:1>
+finish print ast tree
+    start declaration line:0
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+        finish declarator
+    finish declaration
+    start declaration line:1
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+        finish declarator
+    finish declaration
+    start declaration line:2
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+        finish declarator
+    finish declaration
+    start declaration line:3
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+        finish declarator
+    finish declaration
+    start declaration line:4
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+        finish declarator
+    finish declaration
+    start declaration line:5
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+cmp modifier
+        finish declarator
+    finish declaration
+start print symbol table
+scope type:file_scope with child 0 and namespace 0
+    <symbol table>
+        <symbol:aaa ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:ccc ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:z ns:1 linkage:2>
+            type::< const , signed_int >
+                value:0
+        <symbol:bbb ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:ddd ns:1 linkage:2>
+            type::< typedef_name >
+end print symbol table
+mempool global alloc/free: alloc 0 times,free 0 times
+	use sys alloc/free: alloc 54938 times,free 996 times
+mempool file alloc/free: alloc 0 times,free 0 times
+	use sys alloc/free: alloc 2119 times,free 1408 times
+test pass!

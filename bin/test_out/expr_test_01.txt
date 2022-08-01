@@ -1,0 +1,194 @@
+read in file name:
+	./bin/test_src/expr_test_01.c
+start print ast tree
+<translation_unit ns:1>
+    <external_decl ns:1>
+        <declaration ns:1>
+            <&declaration_spec ns:1>
+                <&type_spec ns:1>
+                    <KW_int:int sym level: 0 namespace:1>
+            <&init_decl_list ns:1>
+                <&init_decl ns:1>
+                    <&declarator ns:1>
+                        <&direct_declarator ns:1>
+                            <identifier:a sym level: 0 namespace:1>
+            <;:; sym level: 0 namespace:1>
+    <external_decl ns:1>
+        <declaration ns:1>
+            <&declaration_spec ns:1>
+                <&type_spec ns:1>
+                    <KW_int:int sym level: 0 namespace:1>
+            <&init_decl_list ns:1>
+                <&init_decl ns:1>
+                    <&declarator ns:1>
+                        <&direct_declarator ns:1>
+                            <identifier:b sym level: 0 namespace:1>
+            <;:; sym level: 0 namespace:1>
+    <external_decl ns:1>
+        <declaration ns:1>
+            <&declaration_spec ns:1>
+                <&type_spec ns:1>
+                    <KW_int:int sym level: 0 namespace:1>
+            <&init_decl_list ns:1>
+                <&init_decl ns:1>
+                    <&declarator ns:1>
+                        <&direct_declarator ns:1>
+                            <identifier:c sym level: 0 namespace:1>
+            <;:; sym level: 0 namespace:1>
+    <external_decl ns:1>
+        <declaration ns:1>
+            <&declaration_spec ns:1>
+                <&type_spec ns:1>
+                    <&struct_union_spec ns:1>
+                        <&struct_union ns:1>
+                            <KW_struct:struct sym level: 0 namespace:1>
+                        <identifier:ddd sym level: 0 namespace:2>
+                        <left_brace:{ sym level: 0 namespace:1>
+                        <&struct_decl_list ns:7>
+                            <&struct_decl ns:7>
+                                <&spec_qual_list ns:7>
+                                    <&type_spec ns:7>
+                                        <KW_int:int sym level: 0 namespace:7>
+                                <&struct_declarator_list ns:7>
+                                    <&struct_declarator ns:7>
+                                        <&declarator ns:7>
+                                            <&direct_declarator ns:7>
+                                                <identifier:db sym level: 0 namespace:7>
+                                <;:; sym level: 0 namespace:7>
+                        <right_brace:} sym level: 0 namespace:1>
+            <&init_decl_list ns:1>
+                <&init_decl ns:1>
+                    <&declarator ns:1>
+                        <&direct_declarator ns:1>
+                            <identifier:d sym level: 0 namespace:1>
+            <;:; sym level: 0 namespace:1>
+    <external_decl ns:1>
+        <function_definition ns:1>
+            <&declaration_spec ns:1>
+                <&type_spec ns:1>
+                    <KW_int:int sym level: 1 namespace:1>
+            <&declarator ns:1>
+                <&direct_declarator ns:1>
+                    <identifier:main sym level: 1 namespace:1>
+                    <(:( sym level: 1 namespace:1>
+                    <):) sym level: 1 namespace:1>
+            <compound_stmt ns:1>
+                <left_brace:{ sym level: 2 namespace:1>
+                <statement ns:1>
+                    <expr_stmt ns:1>
+                        <&assignment_expr ns:1>
+                            <&primary_expression ns:1>
+                                <identifier:a sym level: 2 namespace:1>
+                            <=:= sym level: 2 namespace:1>
+                            <&assignment_expr ns:1>
+                                <&primary_expression ns:1>
+                                    <identifier:b sym level: 2 namespace:1>
+                                <=:= sym level: 2 namespace:1>
+                                <&assignment_expr ns:1>
+                                    <&primary_expression ns:1>
+                                        <identifier:c sym level: 2 namespace:1>
+                                    <=:= sym level: 2 namespace:1>
+                                    <&primary_expression ns:1>
+                                        <integer_constant:1 sym level: 2 namespace:1>
+                        <;:; sym level: 2 namespace:1>
+                <statement ns:1>
+                    <&return_stmt ns:1>
+                        <KW_return:return sym level: 2 namespace:1>
+                        <&primary_expression ns:1>
+                            <integer_constant:1 sym level: 2 namespace:1>
+                        <;:; sym level: 2 namespace:1>
+                <statement ns:1>
+                    <expr_stmt ns:1>
+                        <&assignment_expr ns:1>
+                            <&postfix_expr ns:1>
+                                <&primary_expression ns:1>
+                                    <identifier:d sym level: 2 namespace:1>
+                                <->:-> sym level: 2 namespace:1>
+                                <identifier:db sym level: 2 namespace:0>
+                            <=:= sym level: 2 namespace:1>
+                            <&primary_expression ns:1>
+                                <integer_constant:1 sym level: 2 namespace:1>
+                        <;:; sym level: 2 namespace:1>
+                <right_brace:} sym level: 2 namespace:1>
+finish print ast tree
+    start declaration line:0
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+        finish declarator
+    finish declaration
+    start declaration line:1
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+        finish declarator
+    finish declaration
+    start declaration line:2
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+        finish declarator
+    finish declaration
+    start declaration line:3
+        start specify or qualify node
+            start struct union
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+                finish declarator
+            finish struct union
+        finish specify or qualify node
+        start declarator
+        finish declarator
+    finish declaration
+    start specify or qualify node
+    finish specify or qualify node
+    start declarator
+        start func
+        finish func
+    finish declarator
+    start compound expr
+        start expr expr
+            start assignment expr
+                start primary expr
+                <Type>:< signed_int >
+                end primary expr
+                start assignment expr
+                    start primary expr
+                    <Type>:< signed_int >
+                    end primary expr
+                    start assignment expr
+                        start primary expr
+                        <Type>:< signed_int >
+                        end primary expr
+                        start primary expr
+                        <Type>:< signed_int >
+                        end primary expr
+                    <Type>:< signed_int >
+                    end assignment expr
+                <Type>:< signed_int >
+                end assignment expr
+            <Type>:< signed_int >
+            end assignment expr
+            start return expr
+                start primary expr
+                <Type>:< signed_int >
+                end primary expr
+            end return stmt
+            start expr expr
+                start assignment expr
+                    start postfix expr
+                        start primary expr
+                        <Type>:< struct >
+                        end primary expr
+                    end postfix expr fail
+                end assignment fail
+            end comopound stmt fail
+error
+Compile Error:(file ./bin/test_src/expr_test_01.c: line 9: token -> )
+    d->db=1;
+reason:	C0054:Must be a pointer to struct/union and it's member
+mempool global alloc/free: alloc 0 times,free 0 times
+	use sys alloc/free: alloc 54938 times,free 996 times
+mempool file alloc/free: alloc 0 times,free 0 times
+	use sys alloc/free: alloc 5309 times,free 3805 times

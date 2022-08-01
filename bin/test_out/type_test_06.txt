@@ -1,0 +1,316 @@
+read in file name:
+	./bin/test_src/type_test_06.c
+start print ast tree
+<translation_unit ns:1>
+    <external_decl ns:1>
+        <declaration ns:1>
+            <&declaration_spec ns:1>
+                <&storage_class_spec ns:1>
+                    <KW_typedef:typedef sym level: 0 namespace:1>
+                <&type_spec ns:1>
+                    <KW_long:long sym level: 0 namespace:1>
+                <&type_spec ns:1>
+                    <KW_unsigned:unsigned sym level: 0 namespace:1>
+                <&type_spec ns:1>
+                    <KW_int:int sym level: 0 namespace:1>
+            <&init_decl_list ns:1>
+                <&init_decl ns:1>
+                    <&declarator ns:1>
+                        <&direct_declarator ns:1>
+                            <identifier:size_t sym level: 0 namespace:1>
+            <;:; sym level: 0 namespace:1>
+    <external_decl ns:1>
+        <declaration ns:1>
+            <&declaration_spec ns:1>
+                <&storage_class_spec ns:1>
+                    <KW_typedef:typedef sym level: 0 namespace:1>
+                <&type_spec ns:1>
+                    <KW_long:long sym level: 0 namespace:1>
+                <&type_spec ns:1>
+                    <KW_int:int sym level: 0 namespace:1>
+            <&init_decl_list ns:1>
+                <&init_decl ns:1>
+                    <&declarator ns:1>
+                        <&direct_declarator ns:1>
+                            <identifier:__off64_t sym level: 0 namespace:1>
+            <;:; sym level: 0 namespace:1>
+    <external_decl ns:1>
+        <declaration ns:1>
+            <&declaration_spec ns:1>
+                <&storage_class_spec ns:1>
+                    <KW_typedef:typedef sym level: 0 namespace:1>
+                <&type_spec ns:1>
+                    <KW_long:long sym level: 0 namespace:1>
+                <&type_spec ns:1>
+                    <KW_int:int sym level: 0 namespace:1>
+            <&init_decl_list ns:1>
+                <&init_decl ns:1>
+                    <&declarator ns:1>
+                        <&direct_declarator ns:1>
+                            <identifier:__off_t sym level: 0 namespace:1>
+            <;:; sym level: 0 namespace:1>
+    <external_decl ns:1>
+        <declaration ns:1>
+            <&declaration_spec ns:1>
+                <&storage_class_spec ns:1>
+                    <KW_typedef:typedef sym level: 0 namespace:1>
+                <&type_spec ns:1>
+                    <&struct_union_spec ns:1>
+                        <&struct_union ns:1>
+                            <KW_struct:struct sym level: 0 namespace:1>
+                        <left_brace:{ sym level: 0 namespace:1>
+                        <&struct_decl_list ns:7>
+                            <&struct_decl ns:7>
+                                <&spec_qual_list ns:7>
+                                    <&type_spec ns:7>
+                                        <KW_int:int sym level: 0 namespace:7>
+                                <&struct_declarator_list ns:7>
+                                    <&struct_declarator ns:7>
+                                        <&declarator ns:7>
+                                            <&direct_declarator ns:7>
+                                                <identifier:__count sym level: 0 namespace:7>
+                                <;:; sym level: 0 namespace:7>
+                            <&struct_decl ns:7>
+                                <&spec_qual_list ns:7>
+                                    <&type_spec ns:7>
+                                        <&struct_union_spec ns:7>
+                                            <&struct_union ns:7>
+                                                <KW_union:union sym level: 0 namespace:7>
+                                            <left_brace:{ sym level: 0 namespace:7>
+                                            <&struct_decl_list ns:8>
+                                                <&struct_decl ns:8>
+                                                    <&spec_qual_list ns:8>
+                                                        <&type_spec ns:8>
+                                                            <KW_unsigned:unsigned sym level: 0 namespace:8>
+                                                        <&type_spec ns:8>
+                                                            <KW_int:int sym level: 0 namespace:8>
+                                                    <&struct_declarator_list ns:8>
+                                                        <&struct_declarator ns:8>
+                                                            <&declarator ns:8>
+                                                                <&direct_declarator ns:8>
+                                                                    <identifier:__wch sym level: 0 namespace:8>
+                                                    <;:; sym level: 0 namespace:8>
+                                            <right_brace:} sym level: 0 namespace:7>
+                                <&struct_declarator_list ns:7>
+                                    <&struct_declarator ns:7>
+                                        <&declarator ns:7>
+                                            <&direct_declarator ns:7>
+                                                <identifier:__value sym level: 0 namespace:7>
+                                <;:; sym level: 0 namespace:7>
+                        <right_brace:} sym level: 0 namespace:1>
+            <&init_decl_list ns:1>
+                <&init_decl ns:1>
+                    <&declarator ns:1>
+                        <&direct_declarator ns:1>
+                            <identifier:__mbstate_t sym level: 0 namespace:1>
+            <;:; sym level: 0 namespace:1>
+    <external_decl ns:1>
+        <declaration ns:1>
+            <&declaration_spec ns:1>
+                <&storage_class_spec ns:1>
+                    <KW_typedef:typedef sym level: 0 namespace:1>
+                <&type_spec ns:1>
+                    <&struct_union_spec ns:1>
+                        <&struct_union ns:1>
+                            <KW_struct:struct sym level: 0 namespace:1>
+                        <identifier:_G_fpos_t sym level: 0 namespace:2>
+                        <left_brace:{ sym level: 0 namespace:1>
+                        <&struct_decl_list ns:10>
+                            <&struct_decl ns:10>
+                                <&spec_qual_list ns:10>
+                                    <&type_spec ns:10>
+                                        <&typedef_name ns:10>
+                                            <identifier:__off_t sym level: 0 namespace:10>
+                                <&struct_declarator_list ns:10>
+                                    <&struct_declarator ns:10>
+                                        <&declarator ns:10>
+                                            <&direct_declarator ns:10>
+                                                <identifier:__pos sym level: 0 namespace:10>
+                                <;:; sym level: 0 namespace:10>
+                            <&struct_decl ns:10>
+                                <&spec_qual_list ns:10>
+                                    <&type_spec ns:10>
+                                        <&typedef_name ns:10>
+                                            <identifier:__mbstate_t sym level: 0 namespace:10>
+                                <&struct_declarator_list ns:10>
+                                    <&struct_declarator ns:10>
+                                        <&declarator ns:10>
+                                            <&direct_declarator ns:10>
+                                                <identifier:__state sym level: 0 namespace:10>
+                                <;:; sym level: 0 namespace:10>
+                        <right_brace:} sym level: 0 namespace:1>
+            <&init_decl_list ns:1>
+                <&init_decl ns:1>
+                    <&declarator ns:1>
+                        <&direct_declarator ns:1>
+                            <identifier:__fpos_t sym level: 0 namespace:1>
+            <;:; sym level: 0 namespace:1>
+    <external_decl ns:1>
+        <function_definition ns:1>
+            <&declaration_spec ns:1>
+                <&type_spec ns:1>
+                    <KW_int:int sym level: 1 namespace:1>
+            <&declarator ns:1>
+                <&direct_declarator ns:1>
+                    <identifier:testa sym level: 1 namespace:1>
+                    <(:( sym level: 1 namespace:1>
+                    <&parameter_type_list ns:1>
+                        <&parameter_list ns:1>
+                            <&parameter_declaration ns:1>
+                                <&declaration_spec ns:1>
+                                    <&type_spec ns:1>
+                                        <KW_void:void sym level: 2 namespace:1>
+                    <):) sym level: 1 namespace:1>
+            <compound_stmt ns:1>
+                <left_brace:{ sym level: 2 namespace:1>
+                <declaration ns:1>
+                    <&declaration_spec ns:1>
+                        <&type_spec ns:1>
+                            <&struct_union_spec ns:1>
+                                <&struct_union ns:1>
+                                    <KW_struct:struct sym level: 2 namespace:1>
+                                <identifier:_G_fpos_t sym level: 2 namespace:2>
+                                <left_brace:{ sym level: 2 namespace:1>
+                                <&struct_decl_list ns:12>
+                                    <&struct_decl ns:12>
+                                        <&spec_qual_list ns:12>
+                                            <&type_spec ns:12>
+                                                <KW_char:char sym level: 2 namespace:12>
+                                        <&struct_declarator_list ns:12>
+                                            <&struct_declarator ns:12>
+                                                <&declarator ns:12>
+                                                    <&pointer ns:12>
+                                                        <*:* sym level: 2 namespace:12>
+                                                    <&direct_declarator ns:12>
+                                                        <identifier:name sym level: 2 namespace:12>
+                                        <;:; sym level: 2 namespace:12>
+                                <right_brace:} sym level: 2 namespace:1>
+                    <;:; sym level: 2 namespace:1>
+                <right_brace:} sym level: 2 namespace:1>
+finish print ast tree
+    start declaration line:0
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+        finish declarator
+    finish declaration
+    start declaration line:2
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+        finish declarator
+    finish declaration
+    start declaration line:3
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+        finish declarator
+    finish declaration
+    start declaration line:5
+        start specify or qualify node
+            start struct union
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+                finish declarator
+                start specify or qualify node
+                    start struct union
+                        start specify or qualify node
+                        finish specify or qualify node
+                        start declarator
+                        finish declarator
+                    finish struct union
+                finish specify or qualify node
+                start declarator
+                finish declarator
+            finish struct union
+        finish specify or qualify node
+        start declarator
+        finish declarator
+    finish declaration
+    start declaration line:15
+        start specify or qualify node
+            start struct union
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+                finish declarator
+            finish struct union
+        finish specify or qualify node
+        start declarator
+        finish declarator
+    finish declaration
+    start specify or qualify node
+    finish specify or qualify node
+    start declarator
+        start func
+            start specify or qualify node
+            finish specify or qualify node
+        finish func
+    finish declarator
+    start compound expr
+        start declaration line:21
+            start specify or qualify node
+                start struct union
+                    start specify or qualify node
+                    finish specify or qualify node
+                    start declarator
+                    finish declarator
+                finish struct union
+            finish specify or qualify node
+        finish declaration
+    end comopound stmt
+start print symbol table
+scope type:file_scope with child 1 and namespace 0
+    <symbol table>
+        <symbol:__off64_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:__state ns:10 linkage:0>
+            type::< struct >
+        <symbol:size_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:__wch ns:8 linkage:0>
+            type::< unsigned_int >
+        <symbol:__pos ns:10 linkage:0>
+            type::< signed_long >
+        <symbol:__value ns:7 linkage:0>
+            type::< union >
+        <symbol:__count ns:7 linkage:0>
+            type::< signed_int >
+                value:0
+        <symbol:__fpos_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:__mbstate_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:_G_fpos_t ns:2 linkage:0>
+            type::< struct >
+                struct have 2 members are:
+                    < __pos off:0 >
+                    < __state off:8 >
+                total size:16 align size:8
+        <symbol:__off_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:testa ns:1 linkage:0>
+            type::< function , signed_int >
+                no parameter
+    scope type:function_scope with child 1 and namespace 0
+        <symbol table>
+        scope type:block_scope with child 0 and namespace 0
+            <symbol table>
+                <symbol:name ns:12 linkage:0>
+                    type::< point , signed_char >
+                <symbol:_G_fpos_t ns:2 linkage:0>
+                    type::< struct >
+                        struct have 1 members are:
+                            < name off:0 >
+                        total size:8 align size:8
+end print symbol table
+mempool global alloc/free: alloc 0 times,free 0 times
+	use sys alloc/free: alloc 54938 times,free 996 times
+mempool file alloc/free: alloc 0 times,free 0 times
+	use sys alloc/free: alloc 5421 times,free 3770 times
+test pass!

@@ -1,0 +1,216 @@
+read in file name:
+	./bin/test_src/for_test_01.c
+start print ast tree
+<translation_unit ns:1>
+    <external_decl ns:1>
+        <function_definition ns:1>
+            <&declaration_spec ns:1>
+                <&type_spec ns:1>
+                    <KW_int:int sym level: 1 namespace:1>
+            <&declarator ns:1>
+                <&direct_declarator ns:1>
+                    <identifier:tttest sym level: 1 namespace:1>
+                    <(:( sym level: 1 namespace:1>
+                    <&parameter_type_list ns:1>
+                        <&parameter_list ns:1>
+                            <&parameter_declaration ns:1>
+                                <&declaration_spec ns:1>
+                                    <&type_spec ns:1>
+                                        <KW_void:void sym level: 2 namespace:1>
+                    <):) sym level: 1 namespace:1>
+            <compound_stmt ns:1>
+                <left_brace:{ sym level: 2 namespace:1>
+                <statement ns:1>
+                    <&for_stmt ns:1>
+                        <KW_for:for sym level: 3 namespace:1>
+                        <(:( sym level: 3 namespace:1>
+                        <declaration ns:1>
+                            <&declaration_spec ns:1>
+                                <&type_spec ns:1>
+                                    <KW_int:int sym level: 3 namespace:1>
+                            <&init_decl_list ns:1>
+                                <&init_decl ns:1>
+                                    <&declarator ns:1>
+                                        <&direct_declarator ns:1>
+                                            <identifier:i sym level: 3 namespace:1>
+                                    <=:= sym level: 3 namespace:1>
+                                    <&initializer ns:1>
+                                        <&primary_expression ns:1>
+                                            <integer_constant:0 sym level: 3 namespace:1>
+                            <;:; sym level: 3 namespace:1>
+                        <&relational_expr ns:1>
+                            <&primary_expression ns:1>
+                                <identifier:i sym level: 3 namespace:1>
+                            <<:< sym level: 3 namespace:1>
+                            <&primary_expression ns:1>
+                                <integer_constant:10 sym level: 3 namespace:1>
+                        <;:; sym level: 3 namespace:1>
+                        <&unary_expr ns:1>
+                            <++:++ sym level: 3 namespace:1>
+                            <&primary_expression ns:1>
+                                <identifier:i sym level: 3 namespace:1>
+                        <):) sym level: 3 namespace:1>
+                        <statement ns:1>
+                            <compound_stmt ns:1>
+                                <left_brace:{ sym level: 4 namespace:1>
+                                <statement ns:1>
+                                    <expr_stmt ns:1>
+                                        <;:; sym level: 4 namespace:1>
+                                <right_brace:} sym level: 4 namespace:1>
+                <declaration ns:1>
+                    <&declaration_spec ns:1>
+                        <&type_spec ns:1>
+                            <KW_int:int sym level: 2 namespace:1>
+                    <&init_decl_list ns:1>
+                        <&init_decl ns:1>
+                            <&declarator ns:1>
+                                <&direct_declarator ns:1>
+                                    <identifier:i sym level: 2 namespace:1>
+                    <;:; sym level: 2 namespace:1>
+                <statement ns:1>
+                    <&for_stmt ns:1>
+                        <KW_for:for sym level: 3 namespace:1>
+                        <(:( sym level: 3 namespace:1>
+                        <&assignment_expr ns:1>
+                            <&primary_expression ns:1>
+                                <identifier:i sym level: 3 namespace:1>
+                            <=:= sym level: 3 namespace:1>
+                            <&primary_expression ns:1>
+                                <integer_constant:0 sym level: 3 namespace:1>
+                        <;:; sym level: 3 namespace:1>
+                        <&relational_expr ns:1>
+                            <&primary_expression ns:1>
+                                <identifier:i sym level: 3 namespace:1>
+                            <<:< sym level: 3 namespace:1>
+                            <&primary_expression ns:1>
+                                <integer_constant:10 sym level: 3 namespace:1>
+                        <;:; sym level: 3 namespace:1>
+                        <&unary_expr ns:1>
+                            <++:++ sym level: 3 namespace:1>
+                            <&primary_expression ns:1>
+                                <identifier:i sym level: 3 namespace:1>
+                        <):) sym level: 3 namespace:1>
+                        <statement ns:1>
+                            <compound_stmt ns:1>
+                                <left_brace:{ sym level: 4 namespace:1>
+                                <statement ns:1>
+                                    <expr_stmt ns:1>
+                                        <;:; sym level: 4 namespace:1>
+                                <right_brace:} sym level: 4 namespace:1>
+                <statement ns:1>
+                    <&return_stmt ns:1>
+                        <KW_return:return sym level: 2 namespace:1>
+                        <&primary_expression ns:1>
+                            <integer_constant:0 sym level: 2 namespace:1>
+                        <;:; sym level: 2 namespace:1>
+                <right_brace:} sym level: 2 namespace:1>
+finish print ast tree
+    start specify or qualify node
+    finish specify or qualify node
+    start declarator
+        start func
+            start specify or qualify node
+            finish specify or qualify node
+        finish func
+    finish declarator
+    start compound expr
+        start for expr
+            start declaration line:2
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+                finish declarator
+                start primary expr
+                <Type>:< signed_int >
+                end primary expr
+            finish declaration
+            start relation expr
+                start primary expr
+                <Type>:< signed_int >
+                end primary expr
+                start primary expr
+                <Type>:< signed_int >
+                end primary expr
+            <Type>:< signed_int >
+            end relation expr
+            start unary
+                start primary expr
+                <Type>:< signed_int >
+                end primary expr
+            <Type>:< signed_int >
+            end unary
+            start compound expr
+                start expr expr
+                end comopound stmt
+            end for stmt
+            start declaration line:6
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+                finish declarator
+            finish declaration
+            start for expr
+                start assignment expr
+                    start primary expr
+                    <Type>:< signed_int >
+                    end primary expr
+                    start primary expr
+                    <Type>:< signed_int >
+                    end primary expr
+                <Type>:< signed_int >
+                end assignment expr
+                start relation expr
+                    start primary expr
+                    <Type>:< signed_int >
+                    end primary expr
+                    start primary expr
+                    <Type>:< signed_int >
+                    end primary expr
+                <Type>:< signed_int >
+                end relation expr
+                start unary
+                    start primary expr
+                    <Type>:< signed_int >
+                    end primary expr
+                <Type>:< signed_int >
+                end unary
+                start compound expr
+                    start expr expr
+                    end comopound stmt
+                end for stmt
+                start return expr
+                    start primary expr
+                    <Type>:< signed_int >
+                    end primary expr
+                end return stmt
+            end comopound stmt
+start print symbol table
+scope type:file_scope with child 1 and namespace 0
+    <symbol table>
+        <symbol:tttest ns:1 linkage:0>
+            type::< function , signed_int >
+                no parameter
+    scope type:function_scope with child 1 and namespace 0
+        <symbol table>
+        scope type:block_scope with child 2 and namespace 0
+            <symbol table>
+                <symbol:i ns:1 linkage:0>
+                    type::< signed_int >
+                        value:0
+            scope type:block_scope with child 1 and namespace 0
+                <symbol table>
+                    <symbol:i ns:1 linkage:0>
+                        type::< signed_int >
+                            value:0
+                scope type:block_scope with child 0 and namespace 0
+                    <symbol table>
+            scope type:block_scope with child 1 and namespace 0
+                <symbol table>
+                scope type:block_scope with child 0 and namespace 0
+                    <symbol table>
+end print symbol table
+mempool global alloc/free: alloc 0 times,free 0 times
+	use sys alloc/free: alloc 54938 times,free 996 times
+mempool file alloc/free: alloc 0 times,free 0 times
+	use sys alloc/free: alloc 8348 times,free 6742 times
+test pass!

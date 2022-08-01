@@ -1,0 +1,1220 @@
+#include "decl_semantics.h"
+#ifdef _TEST_SEMANTICS_
+extern int semantics_level;
+#endif
+extern VEC* c_error;
+extern char* filename;
+extern size_t type_data_size[TYPE_NUM];
+const int storage_spec_enum[STORAGE_SPEC_NUM]={
+    KW_type_def,KW_extern,KW_static,KW__Thread_local,KW_auto,KW_register
+    };
+const int type_spec_enum[TYPE_SPEC_NUM]={
+    KW_void,KW_char,KW_short,KW_int,KW_long,KW_float,KW_double,KW_signed,KW_unsigned,KW__Bool,KW__Complex,
+    atomic_type_spec,struct_union_spec,enum_spec,type_def_name
+    };
+const int type_qual_enum[TYPE_QUAL_NUM]={
+    KW_const,KW_restrict,KW_volatile,KW__Atomic
+    };
+const int func_spec_enum[FUNCTION_SPEC_NUM]={
+    KW_inline,KW__Noreturn
+    };
+/*for type spec, the situation is complex,and it can in any order ,so we have to list all the possible case and cmp.*/
+const int type_spec_case[TYPE_SPEC_CASE_NUM][TYPE_SPEC_NUM]={
+    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0},    /*void*/
+    {0,1,0,0,0,0,0,0,0,0,0,0,0,0,0},    /*char*/
+    {0,1,0,0,0,0,0,1,0,0,0,0,0,0,0},    /*signed char*/
+    {0,1,0,0,0,0,0,0,1,0,0,0,0,0,0},    /*unsigned char*/
+    {0,0,1,0,0,0,0,0,0,0,0,0,0,0,0},    /*short*/
+    {0,0,1,0,0,0,0,1,0,0,0,0,0,0,0},    /*signed short*/
+    {0,0,1,1,0,0,0,0,0,0,0,0,0,0,0},    /*short int*/
+    {0,0,1,1,0,0,0,1,0,0,0,0,0,0,0},    /*signed short int*/
+    {0,0,1,0,0,0,0,0,1,0,0,0,0,0,0},    /*unsigned short*/
+    {0,0,1,1,0,0,0,0,1,0,0,0,0,0,0},    /*unsigned short int*/
+    {0,0,0,1,0,0,0,0,0,0,0,0,0,0,0},    /*int*/
+    {0,0,0,0,0,0,0,1,0,0,0,0,0,0,0},    /*signed*/
+    {0,0,0,1,0,0,0,1,0,0,0,0,0,0,0},    /*signed int*/
+    {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0},    /*unsigned*/
+    {0,0,0,1,0,0,0,0,1,0,0,0,0,0,0},    /*unsigned int*/
+    {0,0,0,0,1,0,0,0,0,0,0,0,0,0,0},    /*long*/
+    {0,0,0,0,1,0,0,1,0,0,0,0,0,0,0},    /*signed long*/
+    {0,0,0,1,1,0,0,0,0,0,0,0,0,0,0},    /*long int*/
+    {0,0,0,1,1,0,0,1,0,0,0,0,0,0,0},    /*signed long int*/
+    {0,0,0,0,1,0,0,0,1,0,0,0,0,0,0},    /*unsigned long*/
+    {0,0,0,1,1,0,0,0,1,0,0,0,0,0,0},    /*unsigned long int*/
+    {0,0,0,0,2,0,0,0,0,0,0,0,0,0,0},    /*long long*/
+    {0,0,0,0,2,0,0,1,0,0,0,0,0,0,0},    /*signed long long*/
+    {0,0,0,1,2,0,0,0,0,0,0,0,0,0,0},    /*long long int*/
+    {0,0,0,1,2,0,0,1,0,0,0,0,0,0,0},    /*signed long long int*/
+    {0,0,0,0,2,0,0,0,1,0,0,0,0,0,0},    /*unsigned long long*/
+    {0,0,0,1,2,0,0,0,1,0,0,0,0,0,0},    /*unsigned long long int*/
+    {0,0,0,0,0,1,0,0,0,0,0,0,0,0,0},    /*float*/
+    {0,0,0,0,0,0,1,0,0,0,0,0,0,0,0},    /*double*/
+    {0,0,0,0,1,0,1,0,0,0,0,0,0,0,0},    /*long double, but for the gcc or vs implement, it's the same with the double*/
+    {0,0,0,0,0,0,0,0,0,1,0,0,0,0,0},    /*_Bool*/
+    {0,0,0,0,0,1,0,0,0,0,1,0,0,0,0},    /*float _Complex*/
+    {0,0,0,0,0,0,1,0,0,0,1,0,0,0,0},    /*double _Complex*/
+    {0,0,0,0,1,0,1,0,0,0,1,0,0,0,0},    /*long double _Complex*/
+    {0,0,0,0,0,0,0,0,0,0,0,1,0,0,0},    /*atomic*/
+    {0,0,0,0,0,0,0,0,0,0,0,0,1,0,0},    /*struct/union*/
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,1,0},    /*enum*/
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,1}     /*typedef*/
+};
+enum TP_CATEGORY type_spec_case_type[TYPE_SPEC_CASE_NUM]={
+    TP_VOID,
+#if _FSIGN == 0
+    TP_SCHAR,TP_SCHAR,
+    TP_USCHAR,
+#elif _FSIGN == 1
+    TP_USCHAR,
+    TP_SCHAR,
+    TP_USCHAR,
+#endif
+    TP_SSHORT,TP_SSHORT,TP_SSHORT,TP_SSHORT,
+    TP_USHORT,TP_USHORT,
+    TP_SINT,TP_SINT,TP_SINT,
+    TP_USINT,TP_USINT,
+    TP_SLONG,TP_SLONG,TP_SLONG,TP_SLONG,
+    TP_USLONG,TP_USLONG,
+    TP_SLONGLONG,TP_SLONGLONG,TP_SLONGLONG,TP_SLONGLONG,
+    TP_USLONGLONG,TP_USLONGLONG,
+    TP_FLOAT,
+    TP_DOUBLE,
+    TP_LONG_DOUBLE,
+    TP_BOOL,
+    TP_FLOAT_COMPLEX,
+    TP_DOUBLE_COMPLEX,
+    TP_LONG_DOUBLE_COMPLEX,
+    TP_SPEC_ATOMIC,
+    TP_UNION_STRUCT,
+    TP_ENUM,
+    TP_TYPE_DEF_TYPE
+};
+bool declaration_type(AST_BASE* ast_node,VEC* dec_symbol_item_list)
+{
+#ifdef _TEST_SEMANTICS_
+    semantics_level++;
+    for(size_t i=0;i<semantics_level;++i)
+        printf("    ");
+    printf("start declaration line:%d\n",ast_node->token->line);
+#endif
+    if(!ast_node||ast_node->type!=declaration)
+        return false;
+    ERROR_ITEM* tei=(ERROR_ITEM*)m_alloc(sizeof(ERROR_ITEM));
+    AST_BASE* first_child_node=AST_GET_CHILD(ast_node,0);
+    enum scope_type curr_scope=ast_node->symbol_table->sp_type;
+    if(first_child_node->type==static_assert_declaration){
+        return static_assert_type(first_child_node);
+    }
+    else{
+        int declaration_cnt=0;  /*a declaration must have a declarator a tag or a enumrator*/
+        VEC* type_vec=NULL;
+        bool typedef_declaration=false; /*remember, typedef declaration and typedef name is different*/
+        AST_BASE* declaration_spec_node=first_child_node;
+        AST_BASE* init_declarator_list_node=AST_GET_CHILD(ast_node,1);
+        bool have_declarator=(init_declarator_list_node->type!=semi_colon);
+        if((type_vec=declaration_spec_qual_list_type(
+            declaration_spec_node,
+            &declaration_cnt,
+            &typedef_declaration,
+            true))==NULL)
+            return false;   /*a length==0 type vec means no type,but NULL means an error*/
+        if(have_declarator){
+            for(size_t i=0;i<AST_CHILD_NUM(init_declarator_list_node);i++){
+                VEC* tmp_type_v=InitVEC(DEFAULT_CAPICITY);
+                VECappend(type_vec,tmp_type_v);
+                char* declarator_char_name;
+                AST_BASE* init_dec_node=AST_GET_CHILD(init_declarator_list_node,i);
+                /*declarator part*/
+                AST_BASE* declarator_node=AST_GET_CHILD(init_dec_node,0);
+                if(declarator_type(declarator_node,
+                    tmp_type_v,
+                    &declaration_cnt,
+                    &typedef_declaration,
+                    declarator_node->name_space,
+                    &declarator_char_name
+                )==false)
+                    return false;
+                SYM_ITEM* tmpsi=find_symbol_curr_table(declarator_node->symbol_table,declarator_char_name,declarator_node->name_space);
+                VECinsert(dec_symbol_item_list,(void*)tmpsi);
+                if(tmpsi&&Type_VEC_VM(tmpsi->type_vec)){
+                    if(tmpsi->linkage!=LKA_NONE
+                        ||(curr_scope!=SPT_BLOCK
+                        &&curr_scope!=SPT_FUN_PROTOTYPE))
+                    {
+                        C_ERROR(C0041_ERR_VM_ID,declarator_node);
+                        return false;
+                    }
+                }
+                M_TYPE* tmpt=Type_VEC_get_spec_other(tmpsi->type_vec);
+                if(tmpt){
+                    tmpsi->fspec_type=tmpt->func_spec;
+                    if(tmpt->typ_stor==TP_EXTERN_THREAD_LOCAL||tmpt->typ_stor==TP_STATIC_THREAD_LOCAL)
+                        tmpsi->Thread_local=true;
+                    tmpsi->align_size=tmpt->align_spec;
+                }
+                /*TODO:initialize part*/
+                if(AST_CHILD_NUM(init_dec_node)==3){
+                    AST_BASE* initializer_node=AST_GET_CHILD(init_dec_node,2);
+                    if(!Initialization(initializer_node,tmpsi)){
+                        return false;
+                    }
+                }
+                else{
+                    
+                }
+            }
+        }
+        else{
+            /*this node is opt,so it might be a ';',do some check and return true*/
+
+        }
+        if(declaration_cnt==0){
+            ERROR_ITEM* twi=(ERROR_ITEM*)m_alloc(sizeof(ERROR_ITEM));
+            C_WARN(W0003_WARN_NO_DECLARATION_ANY_THING,ast_node);
+        }   
+    }
+    m_free(tei);
+#ifdef _TEST_SEMANTICS_
+    for(size_t i=0;i<semantics_level;++i)
+        printf("    ");
+    printf("finish declaration\n");
+    semantics_level--;
+#endif
+    return true;
+}
+bool declarator_type(AST_BASE* declarator_node,
+    VEC* type_vec,
+    int* declarator_cnt,
+    bool* typedef_declaration,
+    NMSP name_space,
+    char** declarator_char_name)
+{
+#ifdef _TEST_SEMANTICS_
+    semantics_level++;
+    for(size_t i=0;i<semantics_level;++i)
+        printf("    ");
+    printf("start declarator\n");
+#endif
+    if(!declarator_node||declarator_node->type!=declarator)
+        return false;
+    AST_BASE* point_node=NULL;   /*I changed the syntax,so use the 'rule.c' version, the pointer syntax is a bit different*/
+    AST_BASE* direct_dec_node=NULL;
+    ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
+    for(size_t i=0;i<AST_CHILD_NUM(declarator_node)-1;++i){
+        point_node=AST_GET_CHILD(declarator_node,i);
+        M_TYPE* point_type=build_base_type(TP_POINT);
+        VECinsert(type_vec,(void*)point_type);
+        AST_BASE* type_qual_list_node=AST_GET_CHILD(point_node,1);
+        if(type_qual_list_node!=NULL){
+            VEC* tmpv=InitVEC(DEFAULT_CAPICITY);
+            tmpv=declaration_spec_qual_list_type(type_qual_list_node,
+                declarator_cnt,
+                typedef_declaration,
+                false);
+            if(tmpv==NULL)
+                return false;
+            VECappend(tmpv,type_vec);
+        }
+    }
+    direct_dec_node=AST_GET_CHILD(declarator_node,AST_CHILD_NUM(declarator_node)-1);
+    int direct_dec_index=AST_CHILD_NUM(direct_dec_node)-1;
+    int direct_dec_begin=0,direct_dec_end=0;
+    bool is_vm=true;
+    SYM* curr_table=declarator_node->symbol_table;
+    enum scope_type curr_scope=curr_table->sp_type;
+    while(direct_dec_index>=0){
+        direct_dec_begin=direct_dec_end=direct_dec_index;
+        int function_array=-1;    /*0-array,1-funciton*/
+        enum rule_type_enum dec_end_type=AST_GET_CHILD(direct_dec_node,direct_dec_end)->type;
+        if(dec_end_type==identifier){
+            (*declarator_cnt)++;
+            TOKEN* tmp_token=AST_GET_CHILD(direct_dec_node,direct_dec_end)->token;
+            *declarator_char_name=tmp_token->value;
+            /*TODO:check redefinition and linkage*/
+            SYM_ITEM* tmpsi;
+            tmpsi=find_symbol_curr_table(curr_table,
+                *declarator_char_name,
+                declarator_node->name_space);
+            enum linkage_type tmpl=LKA_NONE;
+            bool should_insert=true;
+            M_TYPE* tmpt=Type_VEC_get_spec_other(type_vec);
+            if(tmpt){
+                if(tmpt->typ_stor==TP_STATIC||tmpt->typ_stor==TP_STATIC_THREAD_LOCAL)
+                    tmpl=LKA_INTERN;
+                else if(tmpt->typ_stor==TP_EXTERN||tmpt->typ_stor==TP_EXTERN_THREAD_LOCAL)
+                    tmpl=LKA_EXTERN;
+            }
+            /*if a function type*/
+            tmpt=Type_VEC_get_actual_base_type(type_vec);
+            /*check whether this identifier is a definition*/
+            bool is_definition=false;
+            if(Type_size(type_vec)>0&&tmpt&&tmpt->typ_category!=TP_FUNCTION&&tmpt->typ_category!=TP_ENUM&&tmpt->typ_category!=TP_TYPE_DEF_TYPE)
+                is_definition=true;
+            else if(tmpt&&tmpt->typ_category==TP_TYPE_DEF_TYPE)
+                is_definition=true;
+            else if(tmpt&&tmpt->typ_category==TP_ENUM)
+            {
+                if(((TP_ENUMERA*)tmpt)->members&&VECLEN(((TP_ENUMERA*)tmpt)->members))
+                    is_definition=true;
+            }
+            if(tmpt&&tmpt->typ_category==TP_FUNCTION)
+            {
+                M_TYPE* tmptt=Type_VEC_get_spec_other(type_vec);
+                if(tmptt&&tmptt->typ_stor==TP_STOR_NONE)
+                    tmptt->typ_stor=TP_EXTERN;
+                if(tmptt&&tmptt->align_spec>0)
+                {
+                    C_ERROR(C0089_ERR_ALIGN_CANNOT_SPECIFIE,direct_dec_node);
+                    return false;
+                }
+                tmpl=LKA_EXTERN;
+                /*TODO:set the function type's name:DONE*/
+                ((TP_FUNC*)tmpt)->func_name=*declarator_char_name;
+            }
+            /*start set linkage according to some information*/
+            if(curr_scope==SPT_FILE){
+                if(tmpl==LKA_INTERN)
+                    tmpl=LKA_INTERN;
+                else{
+                    tmpl=LKA_EXTERN;
+                }
+                if(HASH_ITEM_EXIST(tmpsi)){
+                    enum linkage_type prel=tmpsi->linkage;
+                    if(tmpl!=prel){
+                        C_ERROR(C0032_ERR_CONFICT_LINKAGE,declarator_node);
+                        return false;
+                    }
+                    if(!Type_VEC_cmp(tmpsi->type_vec,type_vec))
+                    {
+                        if(!compatible_types(tmpsi->type_vec,type_vec)){
+                            C_ERROR(C0031_ERR_CONFICT_TYPE,declarator_node);
+                            return false;
+                        }
+                        else
+                        {
+                            M_TYPE* tmp_align_type=Type_VEC_get_spec_other(type_vec);
+                            M_TYPE* tmp_si_align_type=Type_VEC_get_spec_other(tmpsi->type_vec);
+                            if(tmp_si_align_type->align_spec>0
+                            &&tmp_align_type->align_spec!=0
+                            &&tmp_align_type->align_spec!=tmp_si_align_type->align_spec)
+                            {
+                                C_ERROR(C0090_ERR_ALIGN_DIFFERENT_DECLARATION,direct_dec_node);
+                                return false;
+                            }
+                            else if(tmp_si_align_type->align_spec==0
+                            &&tmp_align_type->align_spec!=0)
+                            {
+                                C_ERROR(C0090_ERR_ALIGN_DIFFERENT_DECLARATION,direct_dec_node);
+                                return false;
+                            }
+                            tmpsi->type_vec=composite_types(tmpsi->type_vec,type_vec,true);
+                        }
+                    }
+                    should_insert=false;
+                    declarator_node->token->symbol_item=tmpsi;
+                }
+            }
+            else if(curr_scope==SPT_BLOCK){
+                if(tmpl!=LKA_EXTERN)
+                    tmpl=LKA_NONE;
+                if(HASH_ITEM_EXIST(tmpsi)){      /*find a same identifier at the curr scope*/
+                    /*only extern/extern extern/no no/extern no/no four cases*/
+                    enum linkage_type prel=tmpsi->linkage;
+                    bool redefine=true;
+                    /*check same identifier in the curr scope*/
+                    if(tmpl==LKA_EXTERN){
+                        if(prel!=LKA_EXTERN){
+                            C_ERROR(C0029_ERR_LKA_EXTERN_FOLLOW_NO,declarator_node);
+                            return false;
+                        }
+                        /*if both are extern, not an error and no need to insert*/
+                        /*TODO:the type must be same,check it:DONE*/
+                        if(!Type_VEC_cmp(tmpsi->type_vec,type_vec))
+                        {
+                            if(!compatible_types(tmpsi->type_vec,type_vec)){
+                                C_ERROR(C0031_ERR_CONFICT_TYPE,declarator_node);
+                                return false;
+                            }
+                            else
+                            {
+                                M_TYPE* tmp_align_type=Type_VEC_get_spec_other(type_vec);
+                                M_TYPE* tmp_si_align_type=Type_VEC_get_spec_other(tmpsi->type_vec);
+                                if(tmp_si_align_type->align_spec>0
+                                &&tmp_align_type->align_spec!=0
+                                &&tmp_align_type->align_spec!=tmp_si_align_type->align_spec)
+                                {
+                                    C_ERROR(C0090_ERR_ALIGN_DIFFERENT_DECLARATION,direct_dec_node);
+                                    return false;
+                                }
+                                else if(tmp_si_align_type->align_spec==0
+                                &&tmp_align_type->align_spec!=0)
+                                {
+                                    C_ERROR(C0090_ERR_ALIGN_DIFFERENT_DECLARATION,direct_dec_node);
+                                    return false;
+                                }
+                                tmpsi->type_vec=composite_types(tmpsi->type_vec,type_vec,true);
+                            }
+                        }
+                        should_insert=false;
+                        declarator_node->token->symbol_item=tmpsi;
+                    }
+                    else if(tmpl==LKA_NONE&&prel==LKA_EXTERN){
+                        C_ERROR(C0030_ERR_LKA_NO_FOLLOW_EXTERN,declarator_node);
+                        return false;
+                    }
+                    else{
+                        /*then is the no/no case*/
+                        /*TODO:if a redeclaration of typedef at the same scope and type is the same ,it's not an error:DONE*/
+                        if(*typedef_declaration){
+                            TP_DEF_TYPE* typedef_name_type=(TP_DEF_TYPE*)Type_VEC_get_actual_base_type(tmpsi->type_vec);
+                            if(typedef_name_type&&typedef_name_type->typedef_name_type){
+                                if(Type_VEC_cmp(typedef_name_type->typedef_name_type,type_vec)&&compatible_types(typedef_name_type->typedef_name_type,type_vec))
+                                    redefine=false;
+                            }
+                            /*TODO:the type must not be a variably modified type DONE*/
+                            if(is_vm){
+                                redefine=true;
+                            }   /*I tried the following codes on gcc in a block scope,
+                                'typedef int iarr[testarr];
+                                typedef int iarr[testarr];'
+                                get an error: redefinition of typedef ‘iarr’ with variably modified type
+                            */
+                        }
+                        if(redefine){
+                            C_ERROR(C0015_ERR_REDEFINATION,declarator_node);
+                            return false;
+                        }
+                    }
+                }
+                else{
+                    if(tmpl==LKA_EXTERN)   /*if extern or function,check the prior declarations*/
+                    {
+                        /*try to find*/
+                        curr_table=curr_table->father;
+                        while (curr_table)
+                        {
+                            tmpsi=find_symbol_curr_table(curr_table,
+                                *declarator_char_name,
+                                declarator_node->name_space);
+                            if(tmpsi)
+                                break;
+                            curr_table=curr_table->father;
+                        }
+                        /*set linkage*/
+                        if(HASH_ITEM_EXIST(tmpsi)){
+                            if(tmpsi->linkage==LKA_INTERN)
+                                tmpl=LKA_INTERN;
+                            /*check the type*/
+                            tmpt=NULL;
+                            enum TP_STORAGE_SPEC prestor=TP_STOR_NONE,tmpstor=TP_STOR_NONE;
+                            tmpt=Type_VEC_get_spec_other(tmpsi->type_vec);
+                            if(tmpt)
+                                prestor=tmpt->typ_stor;
+                            tmpt=Type_VEC_get_spec_other(type_vec);
+                            if(tmpt)
+                                tmpstor=tmpt->typ_stor;
+                            if(tmpt&&tmpt->modifier)
+                                tmpt->typ_stor=prestor;
+                            if((prestor==TP_EXTERN_THREAD_LOCAL&&tmpstor!=TP_EXTERN_THREAD_LOCAL)
+                                ||(prestor==TP_STATIC_THREAD_LOCAL&&tmpstor!=TP_STATIC_THREAD_LOCAL))
+                            {
+                                C_ERROR(C0033_ERR_CONFICT_THREAD_LOCAL,declarator_node);
+                                return false;
+                            }
+                            if(!Type_VEC_cmp(tmpsi->type_vec,type_vec))
+                            {
+                                if(!compatible_types(tmpsi->type_vec,type_vec)){
+                                    C_ERROR(C0031_ERR_CONFICT_TYPE,declarator_node);
+                                    return false;
+                                }
+                                else
+                                {
+                                    M_TYPE* tmp_align_type=Type_VEC_get_spec_other(type_vec);
+                                    M_TYPE* tmp_si_align_type=Type_VEC_get_spec_other(tmpsi->type_vec);
+                                    if(tmp_si_align_type->align_spec>0
+                                    &&tmp_align_type->align_spec!=0
+                                    &&tmp_align_type->align_spec!=tmp_si_align_type->align_spec)
+                                    {
+                                        C_ERROR(C0090_ERR_ALIGN_DIFFERENT_DECLARATION,direct_dec_node);
+                                        return false;
+                                    }
+                                    else if(tmp_si_align_type->align_spec==0
+                                    &&tmp_align_type->align_spec!=0)
+                                    {
+                                        C_ERROR(C0090_ERR_ALIGN_DIFFERENT_DECLARATION,direct_dec_node);
+                                        return false;
+                                    }
+                                    tmpsi->type_vec=composite_types(tmpsi->type_vec,type_vec,true);
+                                }
+                            }
+                            if(tmpt&&tmpt->modifier)
+                                tmpt->typ_stor=tmpstor;
+                        }   /*still need insert*/
+                    }
+                }
+            }
+            else{
+                tmpl=LKA_NONE;
+            }
+            /*finish check linkage and redefine,insert*/
+            if(Type_VEC_VLA(type_vec)){
+                printf("%s is a vla\n",AST_GET_CHILD(direct_dec_node,direct_dec_end)->token->value);
+                bool have_static_thread=false;
+                tmpt=Type_VEC_get_spec_other(type_vec);
+                if(tmpt&&
+                (tmpt->typ_stor==TP_STATIC||
+                tmpt->typ_stor==TP_EXTERN_THREAD_LOCAL||
+                tmpt->typ_stor==TP_STATIC_THREAD_LOCAL))
+                    have_static_thread=true;
+                if(have_static_thread){
+                    C_ERROR(C0037_ERR_ARR_STATIC_THREAD_WITH_VLA,declarator_node);
+                    return false;
+                }
+            }
+            if(should_insert)
+            {
+                tmpsi=Create_symbol_item(*declarator_char_name,declarator_node->name_space);
+                tmpsi->linkage=tmpl;
+                tmpsi->count=HASH_CNT_IST;
+                tmpsi->declared=true;
+                tmpsi->defined=is_definition;
+                if(tmpt&&tmpt->typ_category==TP_FUNCTION)
+                {
+                    tmpsi->defined=false;
+                }
+                if(*typedef_declaration){
+                    VEC* tmp_type_v=InitVEC(DEFAULT_CAPICITY);
+                    TP_DEF_TYPE* typedef_type=(TP_DEF_TYPE*)build_base_type(TP_TYPE_DEF_TYPE);
+                    typedef_type->typedef_name_type=type_vec;
+                    VECinsert(tmp_type_v,(void*)typedef_type);
+                    tmpsi->type_vec=tmp_type_v;
+                }
+                else
+                    tmpsi->type_vec=type_vec;
+                if(insert_symbol(declarator_node->symbol_table,tmpsi))
+                    tmp_token->symbol_item=tmpsi;
+            }
+            break;
+        }
+        for(int i=direct_dec_end;i>=0;i--){
+            enum rule_type_enum tmp_begin_type=AST_GET_CHILD(direct_dec_node,i)->type;
+            if(tmp_begin_type==left_bracket&&dec_end_type==right_bracket){
+                direct_dec_begin=i;
+                function_array=0;
+                break;
+            }
+            else if(tmp_begin_type==left_parenthesis&&dec_end_type==right_parenthesis){
+                direct_dec_begin=i;
+                function_array=1;
+                break;
+            }
+        }
+        if(direct_dec_begin==0&&direct_dec_end==2){
+            AST_BASE* sub_declarator_node=AST_GET_CHILD(direct_dec_node,1);
+            if(sub_declarator_node->type==declarator){
+                if(!declarator_type(sub_declarator_node,
+                    type_vec,
+                    declarator_cnt,
+                    typedef_declaration,
+                    name_space,
+                    declarator_char_name
+                ))
+                    return false;
+                break;
+            }
+        }
+        /*deal with function and array type*/
+        M_TYPE* tmpt=NULL;
+        VEC* tmp_node_vec=InitVEC(DEFAULT_CAPICITY);
+
+        if(direct_dec_begin+1<=direct_dec_end){
+            for(size_t i=direct_dec_begin+1;i<direct_dec_end;++i)
+                VECinsert(tmp_node_vec,AST_GET_CHILD(direct_dec_node,i));
+            if(function_array==1)      /*TODO:function*/
+            {
+                tmpt=(M_TYPE*)function_type(tmp_node_vec);
+                if(!tmpt)
+                    return false;
+                /*TODO:check the return type of function*/
+                M_TYPE* tmpfunct=Type_VEC_get_actual_base_type(type_vec);
+                if(tmpfunct&&(tmpfunct->typ_category==TP_FUNCTION||tmpfunct->typ_category==TP_ARRAY))
+                {
+                    C_ERROR(C0043_ERR_FUN_RETURN_TYPE,direct_dec_node);
+                    return false;
+                }
+            }
+            else if(function_array==0){       /*TODO:array*/
+                tmpt=(M_TYPE*)array_type(tmp_node_vec);
+                if(!tmpt)
+                    return false;
+                if(((TP_ARR*)tmpt)->axis_modify){
+                    if(declarator_node->father->type!=parameter_declaration){
+                        C_ERROR(C0036_ERR_ARR_QUAL_STATIC_IN_PARA,declarator_node);
+                        return false;
+                    }
+                    for(int i=VECLEN(type_vec)-1;i>=0;i--){
+                        M_TYPE* tmparrt=VEC_GET_ITEM(type_vec,i);
+                        if(tmparrt&&tmparrt->typ_category==TP_ARRAY&&((TP_ARR*)tmparrt)->axis_modify){
+                            C_ERROR(C0035_ERR_ARR_QUAL_STATIC_OUTMOST,declarator_node);
+                            return false;
+                        }
+                    }
+                }
+                for(int i=VECLEN(type_vec)-1;i>=0;i--){
+                    M_TYPE* tmparrt=VEC_GET_ITEM(type_vec,i);
+                    if(tmparrt&&tmparrt->complete==false){
+                        C_ERROR(C0040_ERR_ARR_FUNCTIONS_INCOMPLETE,declarator_node);
+                        return false;
+                    }
+                }
+                M_TYPE* tmparrt=Type_VEC_get_actual_base_type(type_vec);
+                if(tmparrt&&tmparrt->typ_category==TP_FUNCTION){
+                    C_ERROR(C0040_ERR_ARR_FUNCTIONS_INCOMPLETE,declarator_node);
+                    return false;
+                }
+                if(((TP_ARR*)tmpt)->is_vla)
+                    is_vm=true;
+                if(((TP_ARR*)tmpt)->is_star)
+                {
+                    if(curr_scope!=SPT_FUN_PROTOTYPE){
+                        C_ERROR(C0034_ERR_ARR_STAR_SCOPE,declarator_node);
+                        return false;
+                    }
+                }
+            }
+            else{
+                ;   /*impossible,promised by parser syntex */
+            }
+        }
+        if(tmpt)
+            VECinsert(type_vec,(void*)tmpt);
+        else{   /*TODO:a [] or () without anything inside case*/
+            ;
+        }
+        direct_dec_index=direct_dec_begin-1;
+    }
+    /*TODO:check the array and function defination,and set the datas like function name*/
+    /*TODO:for function type,no linkage means external linkage*/
+    
+    
+    m_free(tei);
+#ifdef _TEST_SEMANTICS_
+    for(size_t i=0;i<semantics_level;++i)
+        printf("    ");
+    printf("finish declarator\n");
+    semantics_level--;
+#endif
+    return true;
+}
+VEC* declaration_spec_qual_list_type(AST_BASE* dec_sq_list_node,
+    int* declaration_cnt,
+    bool* typedef_declaration,
+    bool need_type_spec)
+{
+    /*
+        This function is a bit long, I agree.
+        But I will note every step.
+        So it might not very hard to understand.
+        This function can be reuse by the 
+            declaration-specifiers(in declaration)/
+            specifier-qualifier-list(in struct/union)/
+            type-qualifier-list(in declarator)
+        The reason why I do not split this function is that it is a bit hard to deal with the return type.
+        ——A lot of informations need to consider.
+        Besides, there's no module can reuse,so it's meaningless to split this function.
+    */
+#ifdef _TEST_SEMANTICS_
+    semantics_level++;
+    for(size_t i=0;i<semantics_level;++i)
+        printf("    ");
+    printf("start specify or qualify node\n");
+#endif
+    if(!dec_sq_list_node||
+        (dec_sq_list_node->type!=declaration_spec
+        &&dec_sq_list_node->type!=spec_qual_list
+        &&dec_sq_list_node->type!=type_qual_list)
+    )
+        return NULL;
+    VEC* type_vec=InitVEC(DEFAULT_CAPICITY);
+    enum TP_STORAGE_SPEC storage_spec_type=TP_STOR_NONE;
+    enum TP_CATEGORY spec_type=TP_SPEC_NONE;
+    M_TYPE* modify_type_ptr=NULL;
+    M_TYPE* base_type_ptr=NULL;
+    AST_BASE* Atomic_SPEC_node=NULL;
+    /*First,check the spec or qual number and decide use what kind of type to use*/
+    int storage_spec_total_cnt=0,storage_spec_cnt[STORAGE_SPEC_NUM]={0,0,0,0,0,0};
+    int type_spec_total_cnt=0,type_spec_cnt[TYPE_SPEC_NUM]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    int type_qual_total_cnt=0,type_qual_cnt[TYPE_QUAL_NUM]={0,0,0,0};
+    int func_spec_total_cnt=0,func_spec_cnt[FUNCTION_SPEC_NUM]={0,0};
+    unsigned long int align_spec_cnt=0;
+    ERROR_ITEM* tei=(ERROR_ITEM*)m_alloc(sizeof(ERROR_ITEM));
+    for(size_t i=0;i<AST_CHILD_NUM(dec_sq_list_node);++i){
+        AST_BASE* spec_qual_node=AST_GET_CHILD(dec_sq_list_node,i);
+        AST_BASE* spec_qual_sub_node=AST_GET_CHILD(spec_qual_node,0);
+        if(spec_qual_node->type==storage_class_spec){
+            for(size_t j=0;j<STORAGE_SPEC_NUM;++j){
+                if(spec_qual_sub_node->type==storage_spec_enum[j])
+                {
+                    storage_spec_cnt[j]++;
+                    storage_spec_total_cnt++;
+                }
+            }
+        }
+        else if(spec_qual_node->type==type_spec){
+            for(size_t j=0;j<TYPE_SPEC_NUM;++j){
+                if(spec_qual_sub_node->type==type_spec_enum[j])
+                {
+                    type_spec_cnt[j]++;
+                    type_spec_total_cnt++;
+                }
+                if(spec_qual_sub_node->type==atomic_type_spec){
+                    Atomic_SPEC_node=spec_qual_sub_node;
+                }
+            }
+        }
+        else if(spec_qual_node->type==type_qual){
+            for(size_t j=0;j<TYPE_QUAL_NUM;++j){
+                if(spec_qual_sub_node->type==type_qual_enum[j])
+                {
+                    type_qual_cnt[j]++;
+                    type_qual_total_cnt++;
+                }
+            }
+        }
+        else if(spec_qual_node->type==function_spec){
+            for(size_t j=0;j<FUNCTION_SPEC_NUM;++j){
+                if(spec_qual_sub_node->type==func_spec_enum[j])
+                {
+                    func_spec_cnt[j]++;
+                    func_spec_total_cnt++;
+                }
+            }
+        }
+        else if(spec_qual_node->type==alignment_spec){
+            AST_BASE* Align_SPEC_node=spec_qual_node;
+            /*TODO:calculate the alignment*/
+            AST_BASE* align_num_node=AST_GET_CHILD(Align_SPEC_node,2);
+            if(align_num_node->type==type_name)
+            {
+                VEC* align_type_vec=type_name_type(align_num_node);
+                unsigned long int tmp_align_spec_cnt=Type_align(align_type_vec);
+                if(align_spec_cnt==0)
+                    align_spec_cnt=tmp_align_spec_cnt;
+                else 
+                    align_spec_cnt=max(tmp_align_spec_cnt,align_spec_cnt);
+            }
+            else if(align_num_node->type==constant_expr)
+            {
+                if(!const_value(align_num_node))
+                    return NULL;
+                M_TYPE* tmpt=Type_VEC_get_actual_base_type(align_num_node->expr_attribute->type_vec);
+                if(!IS_INT_TYPE(tmpt->typ_category))
+                {
+                    C_ERROR(C0060_ERR_OPERAND_INTEGER_TYPE,align_num_node);
+                    return NULL;
+                }
+                align_spec_cnt=(size_t)TP_INT_CAST_TYPE(tmpt->typ_category,align_num_node->expr_attribute->data_field);
+            }
+            if(!is_legal_align(align_spec_cnt))
+            {
+                C_ERROR(C0088_ERR_ALIGN_TWO_POWER,align_num_node);
+                return NULL;
+            }
+        }
+    }
+    /*OK, we counted it,check the count*/
+    /*First,check storage class spec number*/
+    if(storage_spec_total_cnt>1){
+        if(storage_spec_total_cnt==2 \
+            &&storage_spec_cnt[3]==1 \
+            &&(storage_spec_cnt[1]==1 \
+            ||storage_spec_cnt[2]==1
+        ))
+        {
+            storage_spec_type=(storage_spec_cnt[1])? \
+            TP_EXTERN_THREAD_LOCAL:TP_STATIC_THREAD_LOCAL;/*right*/
+        }
+        else
+        {
+            /*wrong,insert to error list and return false*/
+            AST_BASE* storage_spec_node=AST_GET_CHILD(dec_sq_list_node,0);
+            C_ERROR(C0008_ERR_TOO_MANY_STOR_SPEC,storage_spec_node);
+            return NULL;
+        }
+    }
+    else if(storage_spec_total_cnt==1){   /*total is 1,but is _Thread_Local, it will be wrong*/
+        if(storage_spec_cnt[3]==1 \
+            &&dec_sq_list_node->symbol_table \
+            &&(dec_sq_list_node->symbol_table->sp_type==SPT_BLOCK)){
+            /*wrong,insert to error list and return false*/
+            AST_BASE* storage_spec_node=AST_GET_CHILD(dec_sq_list_node,0);
+            C_ERROR(C0009_ERR_THREAD_LOCAL_PREFIX,storage_spec_node);
+            return NULL;
+        }
+        /*else is right,decide the storage class type*/
+        for(size_t i=0;i<STORAGE_SPEC_NUM;++i){
+            if(storage_spec_cnt[i]){
+                storage_spec_type=i+1;
+            }
+        }
+    }
+    else{
+        ;/*for 0, do nothing,I just don't want to see a warning*/
+    }
+    if(storage_spec_type==TP_TYPE_DEF){
+        *typedef_declaration=true;
+    }
+    /*Second,check spec number*/
+    if(type_spec_total_cnt==0&&need_type_spec)
+    {
+        /*wrong,but in gcc , the case like 'const a;' only get a warning and the type is given 'int'*/
+        C_ERROR(C0010_ERR_NEED_MORE_TYPE_SPEC,dec_sq_list_node);
+        return NULL;
+    }
+    else if(need_type_spec){
+        for(size_t i=0;i<TYPE_SPEC_CASE_NUM;++i){
+            bool succ=true;
+            for(size_t j=0;j<TYPE_SPEC_NUM;++j){
+                if(type_spec_cnt[j]!=type_spec_case[i][j]){
+                    succ=false;
+                    break;
+                }
+            }
+            if(succ){
+                spec_type=type_spec_case_type[i];
+                break;
+            }
+        }
+        if(spec_type==TP_SPEC_NONE){
+            /*wrong*/
+            C_ERROR(C0011_ERR_WRONG_TYPE_SPEC,dec_sq_list_node);
+            return NULL;
+        }
+        /*find the first type spec node*/
+        AST_BASE* type_spec_first_node=NULL;
+        for(size_t i=0;i<AST_CHILD_NUM(dec_sq_list_node);++i){
+            if((type_spec_first_node=AST_GET_CHILD(dec_sq_list_node,i))->type==type_spec){
+                break;
+            }
+        }
+        /*check the struct/union or enum type*/
+        if(spec_type==TP_UNION_STRUCT||spec_type==TP_ENUM){
+            AST_BASE* spec_node=AST_GET_CHILD(type_spec_first_node,0);
+            AST_BASE* kw_spec_node=AST_GET_CHILD(spec_node,0);
+            if(spec_type==TP_UNION_STRUCT){
+                AST_BASE* kw_node=AST_GET_CHILD(kw_spec_node,0);
+                /*decide a struct or an union*/
+                if(kw_node->type==KW_struct){
+                    spec_type=TP_STRUCT;
+                }
+                else if(kw_node->type==KW_union){
+                    spec_type=TP_UNION;
+                }
+            }
+            /*count the declarator tag,enum,and judge whether an anonymous struct or union*/
+            AST_BASE* id_node=AST_GET_CHILD(spec_node,1);
+            if(id_node->type!=left_brace){
+                (*declaration_cnt)++;
+            }
+            else    /*an anonymous struct or union*/
+                id_node=NULL;
+            /*get struct decl_list*/
+            AST_BASE* struct_decl_enum_list_node=NULL;
+            for(size_t i=0;i<AST_CHILD_NUM(spec_node);++i){
+                AST_BASE* tmp_node=AST_GET_CHILD(spec_node,i);
+                if(tmp_node->type==struct_decl_list||tmp_node->type==enum_list){
+                    struct_decl_enum_list_node=tmp_node;
+                    break;
+                }
+            }
+            if(struct_decl_enum_list_node){
+                if(spec_type==TP_STRUCT||spec_type==TP_UNION){
+                    base_type_ptr=(M_TYPE*)struct_union_type(struct_decl_enum_list_node,id_node,spec_type);
+                    if(base_type_ptr)
+                        ((TP_SU*)base_type_ptr)->typ_category=spec_type;
+                }
+                else if(spec_type==TP_ENUM){
+                    base_type_ptr=(M_TYPE*)enum_type(struct_decl_enum_list_node,id_node);
+                }
+                if(base_type_ptr==NULL){
+                    return NULL;   /*the error has been inserted*/
+                }
+            }
+            else{
+                if(!id_node)
+                {
+                    return NULL;   /*A struct/union/enum without tag and declaration list, actually impossible*/
+                }
+                char* tag=(id_node)?(id_node->token->value):NULL;
+                SYM_ITEM* tag_symbol_item=find_symbol(dec_sq_list_node->symbol_table,tag,NMSP_SU_TAG);
+                if(HASH_ITEM_EXIST(((HASH_ITEM*)tag_symbol_item))){
+                    base_type_ptr=Type_VEC_get_actual_base_type(tag_symbol_item->type_vec);
+                    if(!base_type_ptr){
+                        printf("unfind tag\n"); /*An impossible case,just for test*/
+                        return NULL;
+                    }
+                }
+                else{   /*insert symbol table and type table*/
+                    base_type_ptr=build_base_type(spec_type);
+                    tag_symbol_item=Create_symbol_item(tag,NMSP_SU_TAG);
+                    if(tag_symbol_item){    /*tag is no linkage*/
+                        VECinsert(tag_symbol_item->type_vec,(void*)base_type_ptr);
+                        tag_symbol_item->declared=true;
+                        tag_symbol_item->defined=false; /*it declared but not defined*/
+                        tag_symbol_item->value=tag;
+                        tag_symbol_item->key=SymbolCharToKey(tag,NMSP_SU_TAG);
+                        tag_symbol_item->count=HASH_CNT_IST;
+                        if(insert_symbol(dec_sq_list_node->symbol_table,tag_symbol_item))
+                            id_node->token->symbol_item=tag_symbol_item;
+                    }
+                }
+                id_node->token->symbol_item=(void*)tag_symbol_item;
+            }
+        }
+        else if(spec_type==TP_TYPE_DEF_TYPE){
+            /*if a typedef name type,use symbol table find the type struct and copy the type vec to the curr type vec*/
+            AST_BASE* type_def_name_node=AST_GET_CHILD(type_spec_first_node,0);
+            char* type_def_name_char=type_def_name_node->token->value;
+            SYM_ITEM* find_tmphi=Create_symbol_item(type_def_name_char,NMSP_DEFAULT);
+            SYM* curr_symbol_table=dec_sq_list_node->symbol_table;
+            while(curr_symbol_table){
+                HASH_ITEM* tmphi=HASHFind(curr_symbol_table->sym_hash_table,
+                    find_tmphi,
+                    symbol_item_cmp,
+                    false,
+                    false
+                );
+                if(!HASH_ITEM_EXIST(tmphi))
+                    curr_symbol_table=curr_symbol_table->father;
+                else
+                    break;
+            }
+            m_free(find_tmphi);
+            if(curr_symbol_table){
+                SYM_ITEM* find_tmpsi=find_symbol_curr_table(curr_symbol_table,
+                    type_def_name_char,
+                    NMSP_DEFAULT    /*a typedef name must have namespace 1*/
+                );
+                type_def_name_node->token->symbol_item=find_tmpsi;
+                TP_DEF_TYPE* typedef_name_type=(TP_DEF_TYPE*)Type_VEC_get_actual_base_type(find_tmpsi->type_vec);
+                if(!typedef_name_type||typedef_name_type->typ_category!=TP_TYPE_DEF_TYPE){
+                    C_ERROR(C0017_ERR_TYPEDEF_OVERLAP,dec_sq_list_node);
+                    return NULL;
+                }
+                for(size_t i=0;i<VECLEN(typedef_name_type->typedef_name_type);++i){
+                    VECinsert(type_vec,VEC_GET_ITEM(typedef_name_type->typedef_name_type,i));
+                }
+            }
+        }
+        else if(spec_type==TP_SPEC_ATOMIC&&Atomic_SPEC_node){
+            AST_BASE* type_name_node=AST_GET_CHILD(Atomic_SPEC_node,2);
+            VEC* tmp_type_vec=NULL;
+            if(!(tmp_type_vec=type_name_type(type_name_node))){
+                return NULL;
+            }
+            /*check the type*/
+#if __ATOMIC_SUPPORT==0
+            C_ERROR(C0013_ERR_ATOMIC_UNSUPPORT,Atomic_SPEC_node);
+            return NULL;
+#endif
+            M_TYPE* tmpt=NULL;
+            tmpt=Type_VEC_get_qual(tmp_type_vec);
+            if(tmpt){
+                C_ERROR(C0014_ERR_ATOMIC_TYPE_NAME,Atomic_SPEC_node);
+                return NULL;
+            }
+            tmpt=Type_VEC_get_Atomic(tmp_type_vec);
+            if(tmpt){
+                C_ERROR(C0014_ERR_ATOMIC_TYPE_NAME,Atomic_SPEC_node);
+                return NULL;
+            }
+            tmpt=Type_VEC_get_actual_base_type(tmp_type_vec);
+            if(tmpt&&
+            (tmpt->typ_category==TP_FUNCTION
+            ||tmpt->typ_category==TP_ARRAY))
+            {
+                C_ERROR(C0014_ERR_ATOMIC_TYPE_NAME,Atomic_SPEC_node);
+                return NULL;
+            }
+            VECappend(tmp_type_vec,type_vec);
+            DelVEC(tmp_type_vec);
+            base_type_ptr=build_base_type(spec_type);
+        }
+        else{
+            base_type_ptr=build_base_type(spec_type);
+        }
+    }
+#if _CPLX_SUPPORT == 0  /*The implement don't support the _Complex type case*/
+    if(type_spec_cnt[10]>0){
+        C_ERROR(C0012_ERR_COMPLEX_NOT_SUPPORT,declaration_spec_node);
+        return NULL;
+    }
+#endif
+    if(align_spec_cnt>0&&spec_type==TP_TYPE_DEF_TYPE)
+    {
+        C_ERROR(C0089_ERR_ALIGN_CANNOT_SPECIFIE,dec_sq_list_node);
+        return NULL;
+    }
+    if(align_spec_cnt>0&&storage_spec_cnt[5]!=0)
+    {
+        C_ERROR(C0089_ERR_ALIGN_CANNOT_SPECIFIE,dec_sq_list_node);
+        return NULL;
+    }
+    /*  
+        Third,check qual number and function spec number,
+        but this step is meaningless becauese the number of qual or function spec can be multiple
+        GCC gives a warning when I try to use 'const const int'
+        But for function spec, it seems no such a warning,so "inline inline func()" seems right. Strange
+    */
+    for(int i=0;i<TYPE_QUAL_NUM;++i){
+        if(type_qual_cnt[i]>1){
+            AST_BASE* type_qual_node=NULL;
+            for(size_t j=0;j<AST_CHILD_NUM(dec_sq_list_node);++j){
+                type_qual_node=AST_GET_CHILD(dec_sq_list_node,j);
+                type_qual_node=AST_GET_CHILD(type_qual_node,0);
+                if(type_qual_node->type==type_qual_enum[i]){
+                    break;
+                }
+            }
+            ERROR_ITEM* twi=m_alloc(sizeof(ERROR_ITEM));
+            C_WARN(W0004_WARN_DUPLICATE_QUAL,type_qual_node);
+            break;
+        }
+    }
+    /*Fourth,build basic type and modify type*/
+    if(base_type_ptr!=NULL){
+        VECinsert(type_vec,(void*)base_type_ptr);
+    }
+    modify_type_ptr=build_modify_type(
+        storage_spec_type,
+        type_qual_cnt,
+        func_spec_cnt,
+        align_spec_cnt
+    );
+    if(modify_type_ptr){
+        VECinsert(type_vec,(void*)modify_type_ptr);
+    }
+    /*...finish declaration_spec node check and type build*/
+    m_free(tei);
+#ifdef _TEST_SEMANTICS_
+    for(size_t i=0;i<semantics_level;++i)
+        printf("    ");
+    printf("finish specify or qualify node\n");
+    semantics_level--;
+#endif
+    return type_vec;
+}
+
+VEC* type_name_type(AST_BASE* type_name_node){
+    if(!type_name_node||type_name_node->type!=type_name)
+        return NULL;
+    /*direct declarator is replaced by abstract declarator*/
+    ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
+    VEC* type_vec=NULL;
+    AST_BASE* spec_qual_list_node=AST_GET_CHILD(type_name_node,0);
+    AST_BASE* abstract_declarator_node=NULL;
+    if(AST_CHILD_NUM(type_name_node)==2)
+        abstract_declarator_node=AST_GET_CHILD(type_name_node,1);
+    int spec_qual_cnt=0;
+    bool type_def_dec=false;
+    type_vec=declaration_spec_qual_list_type(
+        spec_qual_list_node,
+        &spec_qual_cnt,
+        &type_def_dec,
+        true);
+    if(abstract_declarator_node){
+        if(!abs_declarator_type(abstract_declarator_node,type_vec))
+        {
+            return NULL;
+        }
+    }
+    m_free(tei);
+    return type_vec;
+}
+bool abs_declarator_type(AST_BASE* abstract_declarator_node,
+        VEC* type_vec)
+{
+    if(!abstract_declarator_node||abstract_declarator_node->type!=abstract_declarator)
+        return false;
+    if(!type_vec)
+        type_vec=InitVEC(DEFAULT_CAPICITY);
+    ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
+    int spec_qual_cnt=0;
+    bool type_def_dec=false;
+    AST_BASE* point_node=NULL;
+    AST_BASE* direct_abs_dec_node=NULL;
+    SYM* curr_table=abstract_declarator_node->symbol_table;
+    enum scope_type curr_scope=curr_table->sp_type;
+    /*
+        pointer part
+        here something is different from the declarator part,it might be:
+            pointer
+            pointer(opt) direct-abstract-declarator
+        but the declatator have only :
+            pointer(opt) direct-declarator
+    */
+    for(size_t i=0;i<AST_CHILD_NUM(abstract_declarator_node);++i){
+        point_node=AST_GET_CHILD(abstract_declarator_node,i);
+        if(point_node->type!=pointer)
+            break;
+        M_TYPE* point_type=build_base_type(TP_POINT);
+        VECinsert(type_vec,(void*)point_type);
+        AST_BASE* type_qual_list_node=AST_GET_CHILD(point_node,1);
+        if(type_qual_list_node!=NULL){
+            VEC* tmpv=InitVEC(DEFAULT_CAPICITY);
+            tmpv=declaration_spec_qual_list_type(type_qual_list_node,
+                &spec_qual_cnt,
+                &type_def_dec,
+                false);
+            if(tmpv==NULL)
+                return false;
+            VECappend(tmpv,type_vec);
+        }
+    }
+    /*direct-abstract-declarator part*/
+    direct_abs_dec_node=VEC_BACK(abstract_declarator_node->child);
+    if(direct_abs_dec_node&&direct_abs_dec_node->type!=pointer){
+        int direct_abs_dec_index=AST_CHILD_NUM(direct_abs_dec_node)-1;
+        int direct_abs_dec_begin,direct_abs_dec_end;
+        while(direct_abs_dec_index>=0){
+            direct_abs_dec_begin=direct_abs_dec_end=direct_abs_dec_index;
+            int function_array=-1;
+            enum rule_type_enum dec_end_type=AST_GET_CHILD(direct_abs_dec_node,direct_abs_dec_end)->type;
+            for(int i=direct_abs_dec_end;i>=0;i--){
+                enum rule_type_enum tmp_begin_type=AST_GET_CHILD(direct_abs_dec_node,i)->type;
+                if(tmp_begin_type==left_bracket&&dec_end_type==right_bracket){
+                    direct_abs_dec_begin=i;
+                    function_array=0;
+                    break;
+                }
+                else if(tmp_begin_type==left_parenthesis&&dec_end_type==right_parenthesis){
+                    direct_abs_dec_begin=i;
+                    function_array=1;
+                    break;
+                }
+            }
+            direct_abs_dec_index=direct_abs_dec_begin-1;
+            if(direct_abs_dec_begin==0&&direct_abs_dec_end==2){
+                AST_BASE* sub_abs_declarator_node=AST_GET_CHILD(direct_abs_dec_node,1);
+                if(sub_abs_declarator_node->type==abstract_declarator){
+                    if(!abs_declarator_type(sub_abs_declarator_node,type_vec))
+                    {
+                        return NULL;
+                    }
+                }
+            }
+            /*deal with function and array type*/
+            M_TYPE* tmpt=NULL;
+            VEC* tmp_node_vec=InitVEC(DEFAULT_CAPICITY);
+            if(direct_abs_dec_begin+1<=direct_abs_dec_end){
+                for(size_t i=direct_abs_dec_begin+1;i<direct_abs_dec_end;++i)
+                    VECinsert(tmp_node_vec,AST_GET_CHILD(direct_abs_dec_node,i));
+                if(function_array==1)   /*function*/
+                {
+                    tmpt=(M_TYPE*)function_type(tmp_node_vec);
+                    if(!tmpt)
+                        return false;
+                    M_TYPE* tmpfunct=Type_VEC_get_actual_base_type(type_vec);
+                    if(tmpfunct->typ_category==TP_FUNCTION||tmpfunct->typ_category==TP_ARRAY)
+                    {
+                        C_ERROR(C0043_ERR_FUN_RETURN_TYPE,direct_abs_dec_node);
+                        return false;
+                    }
+                }
+                else if(function_array==0)  /*array*/
+                {
+                    tmpt=(M_TYPE*)array_type(tmp_node_vec);
+                    if(!tmpt)
+                        return false;
+                    if(((TP_ARR*)tmpt)->axis_modify){
+                        if(abstract_declarator_node->father->type!=parameter_declaration){
+                            C_ERROR(C0036_ERR_ARR_QUAL_STATIC_IN_PARA,abstract_declarator_node);
+                            return false;
+                        }
+                        for(int i=VECLEN(type_vec)-1;i>=0;i--){
+                            M_TYPE* tmparrt=VEC_GET_ITEM(type_vec,i);
+                            if(tmparrt&&tmparrt->typ_category==TP_ARRAY&&((TP_ARR*)tmparrt)->axis_modify){
+                                C_ERROR(C0035_ERR_ARR_QUAL_STATIC_OUTMOST,abstract_declarator_node);
+                                return false;
+                            }
+                        }
+                    }
+                    for(int i=VECLEN(type_vec)-1;i>=0;i--){
+                        M_TYPE* tmparrt=VEC_GET_ITEM(type_vec,i);
+                        if(tmparrt&&tmparrt->complete==false){
+                            C_ERROR(C0040_ERR_ARR_FUNCTIONS_INCOMPLETE,abstract_declarator_node);
+                            return false;
+                        }
+                    }
+                    M_TYPE* tmparrt=Type_VEC_get_actual_base_type(type_vec);
+                    if(tmparrt&&tmparrt->typ_category==TP_FUNCTION){
+                        C_ERROR(C0040_ERR_ARR_FUNCTIONS_INCOMPLETE,abstract_declarator_node);
+                        return false;
+                    }
+                    if(((TP_ARR*)tmpt)->is_star)
+                    {
+                        if(curr_scope!=SPT_FUN_PROTOTYPE){
+                            C_ERROR(C0034_ERR_ARR_STAR_SCOPE,abstract_declarator_node);
+                            return false;
+                        }
+                    }
+                }
+                else
+                    return NULL;
+            }
+            if(tmpt)
+                VECinsert(type_vec,(void*)tmpt);
+            else
+                ;
+        }
+    }
+    m_free(tei);
+    return type_vec;
+}
+bool Default_implict_initialization(SYM_ITEM* symbol_item)
+{
+    if(!symbol_item)
+        goto error;
+error:
+    return false;
+}
+bool Initialization(AST_BASE* initializer_node,SYM_ITEM* symbol_item)
+{
+    if(!initializer_node||initializer_node->type!=initializer||!symbol_item)
+        goto error;
+    AST_BASE* sub_node=AST_GET_CHILD(initializer_node,0);
+    if(sub_node->type!=left_brace){
+        if(!expr_dispatch(sub_node))
+            goto error;
+    }
+    else{
+        sub_node=AST_GET_CHILD(initializer_node,1);
+        if(!initializer_list_value(sub_node,symbol_item))
+            goto error;
+    }
+    return true;
+error:
+    return false;
+}
+bool initializer_list_value(AST_BASE* initializer_list_node,SYM_ITEM* symbol_item){
+    if(!initializer_list_node||initializer_list_node->type!=initializer_list||!symbol_item)
+        goto error;
+    for(size_t i=0;i<AST_CHILD_NUM(initializer_list_node);++i){
+        ;/*TODO*/
+    }
+    return true;
+error:
+    return false;
+}
+bool static_assert_type(AST_BASE* static_assert_declaration_node)
+{
+    ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
+    if(!static_assert_declaration_node||static_assert_declaration_node->type!=static_assert_declaration)
+        goto error;
+    /*TODO*/
+    m_free(tei);
+    return true;
+error:
+    C_ERROR(C0021_ERR_STATIC_ASSERT,static_assert_declaration_node);
+    return false;
+}

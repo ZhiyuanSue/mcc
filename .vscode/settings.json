@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "ast.h": "c",
+        "semantics.h": "c",
+        "build_type.h": "c",
+        "mcc_error.h": "c",
+        "decl_semantics.h": "c",
+        "m_type.h": "c",
+        "ebnf.h": "c",
+        "test.h": "c",
+        "extern_def_semantics.h": "c",
+        "search_mem.h": "c"
+    }
+}

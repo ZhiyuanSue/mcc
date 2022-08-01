@@ -1,0 +1,10 @@
+read in file name:
+	./bin/test_src/func_test_01.c
+error
+Compile Error:(file ./bin/test_src/func_test_01.c: line 0: token int )
+int t(a,b,c) int a,c=1;int b;{
+reason:	C0083:This parameter should not be initilized
+mempool global alloc/free: alloc 0 times,free 0 times
+	use sys alloc/free: alloc 54938 times,free 996 times
+mempool file alloc/free: alloc 0 times,free 0 times
+	use sys alloc/free: alloc 6281 times,free 4970 times

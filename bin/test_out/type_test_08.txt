@@ -1,0 +1,282 @@
+read in file name:
+	./bin/test_src/type_test_08.c
+start print ast tree
+<translation_unit ns:1>
+    <external_decl ns:1>
+        <declaration ns:1>
+            <&declaration_spec ns:1>
+                <&type_spec ns:1>
+                    <&enum_spec ns:1>
+                        <KW_enum:enum sym level: 0 namespace:1>
+                        <identifier:test sym level: 0 namespace:2>
+                        <left_brace:{ sym level: 0 namespace:1>
+                        <&enum_list ns:1>
+                            <&enumerator ns:1>
+                                <&enum_const ns:1>
+                                    <identifier:QWERT sym level: 0 namespace:1>
+                            <&enumerator ns:1>
+                                <&enum_const ns:1>
+                                    <identifier:REWQT sym level: 0 namespace:1>
+                        <right_brace:} sym level: 0 namespace:1>
+            <;:; sym level: 0 namespace:1>
+    <external_decl ns:1>
+        <declaration ns:1>
+            <&declaration_spec ns:1>
+                <&type_spec ns:1>
+                    <&struct_union_spec ns:1>
+                        <&struct_union ns:1>
+                            <KW_struct:struct sym level: 0 namespace:1>
+                        <identifier:test_bit_field_offset sym level: 0 namespace:2>
+                        <left_brace:{ sym level: 0 namespace:1>
+                        <&struct_decl_list ns:5>
+                            <&struct_decl ns:5>
+                                <&spec_qual_list ns:5>
+                                    <&type_spec ns:5>
+                                        <KW_char:char sym level: 0 namespace:5>
+                                <&struct_declarator_list ns:5>
+                                    <&struct_declarator ns:5>
+                                        <&declarator ns:5>
+                                            <&direct_declarator ns:5>
+                                                <identifier:a sym level: 0 namespace:5>
+                                        <colon:: sym level: 0 namespace:5>
+                                        <&constant_expr ns:5>
+                                            <&primary_expression ns:5>
+                                                <integer_constant:7 sym level: 0 namespace:5>
+                                <;:; sym level: 0 namespace:5>
+                            <&struct_decl ns:5>
+                                <&spec_qual_list ns:5>
+                                    <&type_spec ns:5>
+                                        <KW_char:char sym level: 0 namespace:5>
+                                <&struct_declarator_list ns:5>
+                                    <&struct_declarator ns:5>
+                                        <&declarator ns:5>
+                                            <&direct_declarator ns:5>
+                                                <identifier:b sym level: 0 namespace:5>
+                                        <colon:: sym level: 0 namespace:5>
+                                        <&constant_expr ns:5>
+                                            <&primary_expression ns:5>
+                                                <integer_constant:6 sym level: 0 namespace:5>
+                                <;:; sym level: 0 namespace:5>
+                            <&struct_decl ns:5>
+                                <&spec_qual_list ns:5>
+                                    <&type_spec ns:5>
+                                        <KW_int:int sym level: 0 namespace:5>
+                                <&struct_declarator_list ns:5>
+                                    <&struct_declarator ns:5>
+                                        <&declarator ns:5>
+                                            <&direct_declarator ns:5>
+                                                <identifier:c sym level: 0 namespace:5>
+                                        <colon:: sym level: 0 namespace:5>
+                                        <&constant_expr ns:5>
+                                            <&primary_expression ns:5>
+                                                <integer_constant:14 sym level: 0 namespace:5>
+                                <;:; sym level: 0 namespace:5>
+                            <&struct_decl ns:5>
+                                <&spec_qual_list ns:5>
+                                    <&type_spec ns:5>
+                                        <&enum_spec ns:5>
+                                            <KW_enum:enum sym level: 0 namespace:5>
+                                            <identifier:test sym level: 0 namespace:2>
+                                <&struct_declarator_list ns:5>
+                                    <&struct_declarator ns:5>
+                                        <&declarator ns:5>
+                                            <&direct_declarator ns:5>
+                                                <identifier:TTT sym level: 0 namespace:5>
+                                <;:; sym level: 0 namespace:5>
+                            <&struct_decl ns:5>
+                                <&spec_qual_list ns:5>
+                                    <&type_spec ns:5>
+                                        <KW_char:char sym level: 0 namespace:5>
+                                <&struct_declarator_list ns:5>
+                                    <&struct_declarator ns:5>
+                                        <colon:: sym level: 0 namespace:5>
+                                        <&constant_expr ns:5>
+                                            <&primary_expression ns:5>
+                                                <integer_constant:7 sym level: 0 namespace:5>
+                                <;:; sym level: 0 namespace:5>
+                            <&struct_decl ns:5>
+                                <&spec_qual_list ns:5>
+                                    <&type_spec ns:5>
+                                        <KW_char:char sym level: 0 namespace:5>
+                                <&struct_declarator_list ns:5>
+                                    <&struct_declarator ns:5>
+                                        <&declarator ns:5>
+                                            <&direct_declarator ns:5>
+                                                <identifier:d sym level: 0 namespace:5>
+                                        <colon:: sym level: 0 namespace:5>
+                                        <&constant_expr ns:5>
+                                            <&primary_expression ns:5>
+                                                <integer_constant:4 sym level: 0 namespace:5>
+                                <;:; sym level: 0 namespace:5>
+                            <&struct_decl ns:5>
+                                <&spec_qual_list ns:5>
+                                    <&type_spec ns:5>
+                                        <KW_int:int sym level: 0 namespace:5>
+                                <&struct_declarator_list ns:5>
+                                    <&struct_declarator ns:5>
+                                        <&declarator ns:5>
+                                            <&direct_declarator ns:5>
+                                                <identifier:e sym level: 0 namespace:5>
+                                <;:; sym level: 0 namespace:5>
+                            <&struct_decl ns:5>
+                                <&spec_qual_list ns:5>
+                                    <&type_spec ns:5>
+                                        <KW_char:char sym level: 0 namespace:5>
+                                <&struct_declarator_list ns:5>
+                                    <&struct_declarator ns:5>
+                                        <&declarator ns:5>
+                                            <&direct_declarator ns:5>
+                                                <identifier:f sym level: 0 namespace:5>
+                                        <colon:: sym level: 0 namespace:5>
+                                        <&constant_expr ns:5>
+                                            <&primary_expression ns:5>
+                                                <integer_constant:2 sym level: 0 namespace:5>
+                                <;:; sym level: 0 namespace:5>
+                            <&struct_decl ns:5>
+                                <&spec_qual_list ns:5>
+                                    <&type_spec ns:5>
+                                        <KW_char:char sym level: 0 namespace:5>
+                                <&struct_declarator_list ns:5>
+                                    <&struct_declarator ns:5>
+                                        <colon:: sym level: 0 namespace:5>
+                                        <&constant_expr ns:5>
+                                            <&primary_expression ns:5>
+                                                <integer_constant:0 sym level: 0 namespace:5>
+                                <;:; sym level: 0 namespace:5>
+                            <&struct_decl ns:5>
+                                <&spec_qual_list ns:5>
+                                    <&type_spec ns:5>
+                                        <KW_char:char sym level: 0 namespace:5>
+                                <&struct_declarator_list ns:5>
+                                    <&struct_declarator ns:5>
+                                        <&declarator ns:5>
+                                            <&direct_declarator ns:5>
+                                                <identifier:g sym level: 0 namespace:5>
+                                        <colon:: sym level: 0 namespace:5>
+                                        <&constant_expr ns:5>
+                                            <&primary_expression ns:5>
+                                                <integer_constant:2 sym level: 0 namespace:5>
+                                <;:; sym level: 0 namespace:5>
+                        <right_brace:} sym level: 0 namespace:1>
+            <;:; sym level: 0 namespace:1>
+finish print ast tree
+    start declaration line:0
+        start specify or qualify node
+            start enum
+            finish enum
+        finish specify or qualify node
+    finish declaration
+    start declaration line:1
+        start specify or qualify node
+            start struct union
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+                finish declarator
+                start primary expr
+                <Type>:< signed_int >
+                end primary expr
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+                finish declarator
+                start primary expr
+                <Type>:< signed_int >
+                end primary expr
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+                finish declarator
+                start primary expr
+                <Type>:< signed_int >
+                end primary expr
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start primary expr
+                <Type>:< signed_int >
+                end primary expr
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+                finish declarator
+                start primary expr
+                <Type>:< signed_int >
+                end primary expr
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+                finish declarator
+                start primary expr
+                <Type>:< signed_int >
+                end primary expr
+                start specify or qualify node
+                finish specify or qualify node
+                start primary expr
+                <Type>:< signed_int >
+                end primary expr
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+                finish declarator
+                start primary expr
+                <Type>:< signed_int >
+                end primary expr
+            finish struct union
+        finish specify or qualify node
+    finish declaration
+start print symbol table
+scope type:file_scope with child 0 and namespace 0
+    <symbol table>
+        <symbol:test ns:2 linkage:0>
+            type::< enum >
+        <symbol:QWERT ns:1 linkage:0>
+            type::< const , signed_int >
+                value:0
+        <symbol:test_bit_field_offset ns:2 linkage:0>
+            type::< struct >
+                struct have 9 members are:
+                    < a off:0 bit_off:0 bit_size:7 >
+                    < b off:1 bit_off:0 bit_size:6 >
+                    < c off:0 bit_off:14 bit_size:14 >
+                    < TTT off:4 >
+                    < anonymous member off:8 bit_off:0 bit_size:7 >
+                    < d off:9 bit_off:0 bit_size:4 >
+                    < e off:12 >
+                    < f off:16 bit_off:0 bit_size:2 >
+                    < g off:17 bit_off:0 bit_size:2 >
+                total size:20 align size:4
+        <symbol:REWQT ns:1 linkage:0>
+            type::< const , signed_int >
+                value:1
+        <symbol:a ns:5 linkage:0>
+            type::< signed_char >
+        <symbol:b ns:5 linkage:0>
+            type::< signed_char >
+        <symbol:c ns:5 linkage:0>
+            type::< signed_int >
+                value:0
+        <symbol:d ns:5 linkage:0>
+            type::< signed_char >
+        <symbol:TTT ns:5 linkage:0>
+            type::< enum >
+        <symbol:e ns:5 linkage:0>
+            type::< signed_int >
+                value:0
+        <symbol:f ns:5 linkage:0>
+            type::< signed_char >
+        <symbol:g ns:5 linkage:0>
+            type::< signed_char >
+end print symbol table
+mempool global alloc/free: alloc 0 times,free 0 times
+	use sys alloc/free: alloc 54938 times,free 996 times
+mempool file alloc/free: alloc 0 times,free 0 times
+	use sys alloc/free: alloc 4915 times,free 2998 times
+test pass!

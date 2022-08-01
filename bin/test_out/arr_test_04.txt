@@ -1,0 +1,156 @@
+read in file name:
+	./bin/test_src/arr_test_04.c
+start print ast tree
+<translation_unit ns:1>
+    <external_decl ns:1>
+        <declaration ns:1>
+            <&declaration_spec ns:1>
+                <&storage_class_spec ns:1>
+                    <KW_extern:extern sym level: 0 namespace:1>
+                <&type_spec ns:1>
+                    <&struct_union_spec ns:1>
+                        <&struct_union ns:1>
+                            <KW_struct:struct sym level: 0 namespace:1>
+                        <identifier:ssss sym level: 0 namespace:2>
+            <;:; sym level: 0 namespace:1>
+    <external_decl ns:1>
+        <function_definition ns:1>
+            <&declaration_spec ns:1>
+                <&type_spec ns:1>
+                    <KW_int:int sym level: 1 namespace:1>
+            <&declarator ns:1>
+                <&direct_declarator ns:1>
+                    <identifier:main sym level: 1 namespace:1>
+                    <(:( sym level: 1 namespace:1>
+                    <&parameter_type_list ns:1>
+                        <&parameter_list ns:1>
+                            <&parameter_declaration ns:1>
+                                <&declaration_spec ns:1>
+                                    <&type_spec ns:1>
+                                        <KW_void:void sym level: 2 namespace:1>
+                    <):) sym level: 1 namespace:1>
+            <compound_stmt ns:1>
+                <left_brace:{ sym level: 2 namespace:1>
+                <declaration ns:1>
+                    <&declaration_spec ns:1>
+                        <&type_spec ns:1>
+                            <KW_int:int sym level: 2 namespace:1>
+                    <&init_decl_list ns:1>
+                        <&init_decl ns:1>
+                            <&declarator ns:1>
+                                <&direct_declarator ns:1>
+                                    <identifier:testarr sym level: 2 namespace:1>
+                            <=:= sym level: 2 namespace:1>
+                            <&initializer ns:1>
+                                <&primary_expression ns:1>
+                                    <integer_constant:1 sym level: 2 namespace:1>
+                    <;:; sym level: 2 namespace:1>
+                <declaration ns:1>
+                    <&declaration_spec ns:1>
+                        <&storage_class_spec ns:1>
+                            <KW_typedef:typedef sym level: 2 namespace:1>
+                        <&type_spec ns:1>
+                            <KW_int:int sym level: 2 namespace:1>
+                    <&init_decl_list ns:1>
+                        <&init_decl ns:1>
+                            <&declarator ns:1>
+                                <&direct_declarator ns:1>
+                                    <identifier:iarr sym level: 2 namespace:1>
+                                    <[:[ sym level: 2 namespace:1>
+                                    <&primary_expression ns:1>
+                                        <identifier:testarr sym level: 2 namespace:1>
+                                    <]:] sym level: 2 namespace:1>
+                    <;:; sym level: 2 namespace:1>
+                <declaration ns:1>
+                    <&declaration_spec ns:1>
+                        <&storage_class_spec ns:1>
+                            <KW_typedef:typedef sym level: 2 namespace:1>
+                        <&type_spec ns:1>
+                            <KW_int:int sym level: 2 namespace:1>
+                    <&init_decl_list ns:1>
+                        <&init_decl ns:1>
+                            <&declarator ns:1>
+                                <&direct_declarator ns:1>
+                                    <identifier:iarr sym level: 2 namespace:1>
+                                    <[:[ sym level: 2 namespace:1>
+                                    <&primary_expression ns:1>
+                                        <identifier:testarr sym level: 2 namespace:1>
+                                    <]:] sym level: 2 namespace:1>
+                    <;:; sym level: 2 namespace:1>
+                <statement ns:1>
+                    <&return_stmt ns:1>
+                        <KW_return:return sym level: 2 namespace:1>
+                        <&primary_expression ns:1>
+                            <integer_constant:0 sym level: 2 namespace:1>
+                        <;:; sym level: 2 namespace:1>
+                <right_brace:} sym level: 2 namespace:1>
+    <external_decl ns:1>
+        <declaration ns:1>
+            <&declaration_spec ns:1>
+                <&type_spec ns:1>
+                    <&struct_union_spec ns:1>
+                        <&struct_union ns:1>
+                            <KW_struct:struct sym level: 0 namespace:1>
+                        <identifier:ssss sym level: 0 namespace:2>
+            <&init_decl_list ns:1>
+                <&init_decl ns:1>
+                    <&declarator ns:1>
+                        <&direct_declarator ns:1>
+                            <identifier:a sym level: 0 namespace:1>
+                            <[:[ sym level: 0 namespace:1>
+                            <&primary_expression ns:1>
+                                <integer_constant:12 sym level: 0 namespace:1>
+                            <]:] sym level: 0 namespace:1>
+            <;:; sym level: 0 namespace:1>
+finish print ast tree
+    start declaration line:0
+        start specify or qualify node
+        finish specify or qualify node
+    finish declaration
+    start specify or qualify node
+    finish specify or qualify node
+    start declarator
+        start func
+            start specify or qualify node
+            finish specify or qualify node
+        finish func
+    finish declarator
+    start compound expr
+        start declaration line:2
+            start specify or qualify node
+            finish specify or qualify node
+            start declarator
+            finish declarator
+            start primary expr
+            <Type>:< signed_int >
+            end primary expr
+        finish declaration
+        start declaration line:3
+            start specify or qualify node
+            finish specify or qualify node
+            start declarator
+                start array
+                    start primary expr
+                    <Type>:< signed_int >
+                    end primary expr
+                finish array
+            finish declarator
+        finish declaration
+        start declaration line:4
+            start specify or qualify node
+            finish specify or qualify node
+            start declarator
+                start array
+                    start primary expr
+                    <Type>:< signed_int >
+                    end primary expr
+                finish array
+            end comopound stmt fail
+error
+Compile Error:(file ./bin/test_src/arr_test_04.c: line 4: token iarr )
+    typedef int iarr[testarr];
+reason:	C0015:Redeclaration with no linkage or redefinition of typedef with variably modify type
+mempool global alloc/free: alloc 0 times,free 0 times
+	use sys alloc/free: alloc 54938 times,free 996 times
+mempool file alloc/free: alloc 0 times,free 0 times
+	use sys alloc/free: alloc 5417 times,free 4151 times

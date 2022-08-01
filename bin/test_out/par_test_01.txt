@@ -1,0 +1,7 @@
+read in file name:
+	./bin/test_src/par_test_01.c
+error
+mempool global alloc/free: alloc 0 times,free 0 times
+	use sys alloc/free: alloc 54938 times,free 996 times
+mempool file alloc/free: alloc 0 times,free 0 times
+	use sys alloc/free: alloc 103 times,free 6 times

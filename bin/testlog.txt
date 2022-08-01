@@ -1,0 +1,52 @@
+==========
+start test
+==========
+1    fail   arr_test_01.c   0
+2    fail   arr_test_02.c   0
+3    fail   arr_test_03.c   0
+4    fail   arr_test_04.c   0
+5    fail   arr_test_05.c   0
+6    fail   decl_semantics.c   0
+7    fail   expr_test_01.c   0
+8    succ   expr_test_02.c   0
+9    succ   expr_test_03.c   1
+10    fail   expr_test_04.c   2
+11    succ   expr_test_05.c   2
+12    fail   expr_test_06.c   3
+13    succ   expr_test_07.c   3
+14    succ   expr_test_08.c   4
+15    succ   expr_test_09.c   5
+16    succ   expr_test_10.c   6
+17    succ   expr_test_11.c   7
+18    succ   func_test_01.c   8
+19    fail   func_test_02.c   9
+20    fail   func_test_03.c   9
+21    succ   init_test_01.c   9
+22    fail   lex_test.c   10
+23    succ   linkage_test_01.c   10
+24    succ   linkage_test_02.c   11
+25    succ   linkage_test_03.c   12
+26    fail   par_test_01.c   13
+27    fail   par_test_01.i   13
+28    succ   par_test_02.c   13
+29    succ   par_test_03.c   14
+30    succ   par_test_04.c   15
+31    succ   par_test_05.c   16
+32    succ   par_test_06.c   17
+33    succ   par_test_07.c   18
+34    succ   par_test_08.c   19
+35    succ   par_test_09.c   20
+36    succ   par_test_10.c   21
+37    succ   switch_test_01.c   22
+38    fail   type_test_01.c   23
+39    succ   type_test_02.c   23
+40    succ   type_test_03.c   24
+41    fail   type_test_04.c   25
+42    succ   type_test_05.c   25
+43    succ   type_test_06.c   26
+44    succ   type_test_07.c   27
+45    succ   type_test_08.c   28
+46    succ   type_test_09.c   29
+47    succ   vector_test.c   30
+success : 31
+error : 16

@@ -1,0 +1,254 @@
+read in file name:
+	./bin/test_src/linkage_test_02.c
+start print ast tree
+<translation_unit ns:1>
+    <external_decl ns:1>
+        <declaration ns:1>
+            <&declaration_spec ns:1>
+                <&type_spec ns:1>
+                    <KW_void:void sym level: 0 namespace:1>
+            <&init_decl_list ns:1>
+                <&init_decl ns:1>
+                    <&declarator ns:1>
+                        <&direct_declarator ns:1>
+                            <identifier:ta sym level: 0 namespace:1>
+                            <(:( sym level: 0 namespace:1>
+                            <&parameter_type_list ns:1>
+                                <&parameter_list ns:1>
+                                    <&parameter_declaration ns:1>
+                                        <&declaration_spec ns:1>
+                                            <&type_spec ns:1>
+                                                <KW_int:int sym level: 1 namespace:1>
+                                        <&declarator ns:1>
+                                            <&direct_declarator ns:1>
+                                                <identifier:a sym level: 1 namespace:1>
+                            <):) sym level: 0 namespace:1>
+            <;:; sym level: 0 namespace:1>
+    <external_decl ns:1>
+        <declaration ns:1>
+            <&declaration_spec ns:1>
+                <&storage_class_spec ns:1>
+                    <KW_static:static sym level: 0 namespace:1>
+                <&type_spec ns:1>
+                    <KW_double:double sym level: 0 namespace:1>
+            <&init_decl_list ns:1>
+                <&init_decl ns:1>
+                    <&declarator ns:1>
+                        <&direct_declarator ns:1>
+                            <identifier:d sym level: 0 namespace:1>
+            <;:; sym level: 0 namespace:1>
+    <external_decl ns:1>
+        <declaration ns:1>
+            <&declaration_spec ns:1>
+                <&storage_class_spec ns:1>
+                    <KW_static:static sym level: 0 namespace:1>
+                <&type_spec ns:1>
+                    <KW_double:double sym level: 0 namespace:1>
+            <&init_decl_list ns:1>
+                <&init_decl ns:1>
+                    <&declarator ns:1>
+                        <&direct_declarator ns:1>
+                            <identifier:d sym level: 0 namespace:1>
+            <;:; sym level: 0 namespace:1>
+    <external_decl ns:1>
+        <declaration ns:1>
+            <&declaration_spec ns:1>
+                <&storage_class_spec ns:1>
+                    <KW_static:static sym level: 0 namespace:1>
+                <&type_qual ns:1>
+                    <KW_const:const sym level: 0 namespace:1>
+                <&type_spec ns:1>
+                    <KW_int:int sym level: 0 namespace:1>
+            <&init_decl_list ns:1>
+                <&init_decl ns:1>
+                    <&declarator ns:1>
+                        <&direct_declarator ns:1>
+                            <identifier:c sym level: 0 namespace:1>
+            <;:; sym level: 0 namespace:1>
+    <external_decl ns:1>
+        <function_definition ns:1>
+            <&declaration_spec ns:1>
+                <&type_spec ns:1>
+                    <KW_void:void sym level: 1 namespace:1>
+            <&declarator ns:1>
+                <&direct_declarator ns:1>
+                    <identifier:testa sym level: 1 namespace:1>
+                    <(:( sym level: 1 namespace:1>
+                    <&parameter_type_list ns:1>
+                        <&parameter_list ns:1>
+                            <&parameter_declaration ns:1>
+                                <&declaration_spec ns:1>
+                                    <&type_spec ns:1>
+                                        <KW_int:int sym level: 2 namespace:1>
+                                <&declarator ns:1>
+                                    <&direct_declarator ns:1>
+                                        <identifier:b sym level: 2 namespace:1>
+                    <):) sym level: 1 namespace:1>
+            <compound_stmt ns:1>
+                <left_brace:{ sym level: 2 namespace:1>
+                <declaration ns:1>
+                    <&declaration_spec ns:1>
+                        <&type_spec ns:1>
+                            <KW_void:void sym level: 2 namespace:1>
+                    <&init_decl_list ns:1>
+                        <&init_decl ns:1>
+                            <&declarator ns:1>
+                                <&direct_declarator ns:1>
+                                    <identifier:ta sym level: 2 namespace:1>
+                                    <(:( sym level: 2 namespace:1>
+                                    <&parameter_type_list ns:1>
+                                        <&parameter_list ns:1>
+                                            <&parameter_declaration ns:1>
+                                                <&declaration_spec ns:1>
+                                                    <&type_spec ns:1>
+                                                        <KW_int:int sym level: 3 namespace:1>
+                                                <&declarator ns:1>
+                                                    <&direct_declarator ns:1>
+                                                        <identifier:a sym level: 3 namespace:1>
+                                    <):) sym level: 2 namespace:1>
+                    <;:; sym level: 2 namespace:1>
+                <declaration ns:1>
+                    <&declaration_spec ns:1>
+                        <&storage_class_spec ns:1>
+                            <KW_extern:extern sym level: 2 namespace:1>
+                        <&type_qual ns:1>
+                            <KW_const:const sym level: 2 namespace:1>
+                        <&type_spec ns:1>
+                            <KW_int:int sym level: 2 namespace:1>
+                    <&init_decl_list ns:1>
+                        <&init_decl ns:1>
+                            <&declarator ns:1>
+                                <&direct_declarator ns:1>
+                                    <identifier:c sym level: 2 namespace:1>
+                    <;:; sym level: 2 namespace:1>
+                <declaration ns:1>
+                    <&declaration_spec ns:1>
+                        <&storage_class_spec ns:1>
+                            <KW_static:static sym level: 2 namespace:1>
+                        <&type_spec ns:1>
+                            <KW_int:int sym level: 2 namespace:1>
+                    <&init_decl_list ns:1>
+                        <&init_decl ns:1>
+                            <&declarator ns:1>
+                                <&direct_declarator ns:1>
+                                    <identifier:e sym level: 2 namespace:1>
+                    <;:; sym level: 2 namespace:1>
+                <right_brace:} sym level: 2 namespace:1>
+finish print ast tree
+    start declaration line:0
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+                finish declarator
+            finish func
+        finish declarator
+    finish declaration
+    start declaration line:2
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+        finish declarator
+    finish declaration
+    start declaration line:3
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+cmp modifier
+        finish declarator
+    finish declaration
+    start declaration line:5
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+        finish declarator
+    finish declaration
+    start specify or qualify node
+    finish specify or qualify node
+    start declarator
+        start func
+            start specify or qualify node
+            finish specify or qualify node
+            start declarator
+            finish declarator
+        finish func
+    finish declarator
+    start compound expr
+        start declaration line:7
+            start specify or qualify node
+            finish specify or qualify node
+            start declarator
+                start func
+                    start specify or qualify node
+                    finish specify or qualify node
+                    start declarator
+                    finish declarator
+                finish func
+            finish declarator
+        finish declaration
+        start declaration line:8
+            start specify or qualify node
+            finish specify or qualify node
+            start declarator
+cmp modifier
+            finish declarator
+        finish declaration
+        start declaration line:9
+            start specify or qualify node
+            finish specify or qualify node
+            start declarator
+            finish declarator
+        finish declaration
+    end comopound stmt
+start print symbol table
+scope type:file_scope with child 2 and namespace 0
+    <symbol table>
+        <symbol:c ns:1 linkage:1>
+            type::< static  const , signed_int >
+                value:0
+        <symbol:d ns:1 linkage:1>
+            type::< static , double >
+        <symbol:ta ns:1 linkage:2>
+            type::< function , void >
+                function have 1 parameters are:
+                    a
+        <symbol:testa ns:1 linkage:0>
+            type::< function , void >
+                function have 1 parameters are:
+                    b
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:a ns:1 linkage:0>
+                type::< signed_int >
+                    value:0
+    scope type:function_scope with child 1 and namespace 0
+        <symbol table>
+        scope type:block_scope with child 1 and namespace 0
+            <symbol table>
+                <symbol:b ns:1 linkage:0>
+                    type::< signed_int >
+                        value:0
+                <symbol:c ns:1 linkage:1>
+                    type::< extern  const , signed_int >
+                        value:0
+                <symbol:e ns:1 linkage:0>
+                    type::< static , signed_int >
+                        value:0
+                <symbol:ta ns:1 linkage:2>
+                    type::< function , void >
+                        function have 1 parameters are:
+                            a
+            scope type:function_prototype_scope with child 0 and namespace 0
+                <symbol table>
+                    <symbol:a ns:1 linkage:0>
+                        type::< signed_int >
+                            value:0
+end print symbol table
+mempool global alloc/free: alloc 0 times,free 0 times
+	use sys alloc/free: alloc 54938 times,free 996 times
+mempool file alloc/free: alloc 0 times,free 0 times
+	use sys alloc/free: alloc 4817 times,free 3617 times
+test pass!

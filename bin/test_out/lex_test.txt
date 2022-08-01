@@ -1,0 +1,11 @@
+read in file name:
+	./bin/test_src/lex_test.c
+lex error number:1
+error
+Compile Error:(file ./bin/test_src/lex_test.c: line 10: token 456 )
+    unsigned long long int x7=456ullull;    //error
+reason:	C0003:Invalid lexical element
+mempool global alloc/free: alloc 0 times,free 0 times
+	use sys alloc/free: alloc 54938 times,free 996 times
+mempool file alloc/free: alloc 0 times,free 0 times
+	use sys alloc/free: alloc 659 times,free 10 times
