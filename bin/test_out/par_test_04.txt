@@ -819,7 +819,7 @@ scope type:file_scope with child 3 and namespace 0
                 type::< signed_long >
     scope type:function_scope with child 1 and namespace 0
         <symbol table>
-            <symbol:label_test ns:0 linkage:3>
+            <symbol:label_test ns:0 linkage:0>
                 type::< label >
         scope type:block_scope with child 2 and namespace 0
             <symbol table>

@@ -250,7 +250,7 @@ scope type:file_scope with child 1 and namespace 0
                         value:0
                 <symbol:ccc ns:1 linkage:0>
                     type::< array , signed_int >
-                        array len is: 140645229502832
+                        array len is: 140350208072592
                 <symbol:bbb ns:2 linkage:0>
                     type::< struct >
                         struct have 1 members are:

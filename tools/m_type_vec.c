@@ -33,7 +33,6 @@ bool Type_item_cmp(void* a,void* b){
         return false;
     else{
         if(x->modifier){
-            printf("cmp modifier\n");
             if(((x->typ_stor<=TP_TYPE_DEF&&y->typ_stor<=TP_TYPE_DEF)||x->typ_stor==y->typ_stor)&&x->align_spec==y->align_spec&&x->type_qual==y->type_qual&&x->func_spec==y->func_spec)
                 return true;
             else

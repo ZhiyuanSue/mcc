@@ -142,3 +142,92 @@ In another word, if you only use my code and don't use any other code from gccâ€
 But in the future, maybe I will rewrite the lib and try to rebuild those parts. At that case, I might use no any other people's code, and the license might change.
 
 Of course, if you fork this project before my change, or I haven't change that, you can still use it with a GPLv3 license
+
+## Current work with some examples(it need always change)
+
+All my test case is under the /bin/test_src
+
+By now I finished the front end of my complier, and you can see the result at /bin/test_out
+
+Let I use an example to discribe the current output 
+
+e.g. ./bin/test_src/par_test_01.c
+
+the source code is:
+
+```
+int main(void)
+{
+    return 0;
+}
+```
+
+Than in the ./bin/test_out/par_test_01.txt
+
+First you can see the AST tree:
+
+```
+start print ast tree
+<translation_unit ns:1>
+    <external_decl ns:1>
+        <function_definition ns:1>
+            <&declaration_spec ns:1>
+                <&type_spec ns:1>
+                    <KW_int:int sym level: 1 namespace:1>
+            <&declarator ns:1>
+                <&direct_declarator ns:1>
+                    <identifier:main sym level: 1 namespace:1>
+                    <(:( sym level: 1 namespace:1>
+                    <&parameter_type_list ns:1>
+                        <&parameter_list ns:1>
+                            <&parameter_declaration ns:1>
+                                <&declaration_spec ns:1>
+                                    <&type_spec ns:1>
+                                        <KW_void:void sym level: 2 namespace:1>
+                    <):) sym level: 1 namespace:1>
+            <compound_stmt ns:1>
+                <left_brace:{ sym level: 2 namespace:1>
+                <statement ns:1>
+                    <&return_stmt ns:1>
+                        <KW_return:return sym level: 2 namespace:1>
+                        <&primary_expression ns:1>
+                            <integer_constant:0 sym level: 2 namespace:1>
+                        <;:; sym level: 2 namespace:1>
+                <right_brace:} sym level: 2 namespace:1>
+finish print ast tree
+```
+
+And you can also see the symbol table later:
+
+```
+start print symbol table
+scope type:file_scope with child 1 and namespace 0
+    <symbol table>
+        <symbol:main ns:1 linkage:0>
+            type::< function , signed_int >
+                no parameter
+    scope type:function_scope with child 1 and namespace 0
+        <symbol table>
+        scope type:block_scope with child 0 and namespace 0
+            <symbol table>
+end print symbol table
+```
+
+If you have some error in the front end, you might see an error.
+
+e.g. ./bin/test_out/expr_test_01.txt
+
+```
+error
+Compile Error:(file ./bin/test_src/expr_test_01.c: line 9: token -> )
+    d->db=1;
+reason:	C0054:Must be a pointer to struct/union and it's member
+```
+
+It include the error place , and the error reason. Sometimes you might see a warning.
+
+## Future works
+
+try to build an IR and a back end.
+
+try to be more friendly for user.
