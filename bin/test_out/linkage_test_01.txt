@@ -119,7 +119,6 @@ finish print ast tree
         start specify or qualify node
         finish specify or qualify node
         start declarator
-cmp modifier
         finish declarator
     finish declaration
 start print symbol table
@@ -137,8 +136,10 @@ scope type:file_scope with child 0 and namespace 0
         <symbol:ddd ns:1 linkage:2>
             type::< typedef_name >
 end print symbol table
+start print ir
+start print ir
 mempool global alloc/free: alloc 0 times,free 0 times
 	use sys alloc/free: alloc 54938 times,free 996 times
 mempool file alloc/free: alloc 0 times,free 0 times
-	use sys alloc/free: alloc 2119 times,free 1408 times
+	use sys alloc/free: alloc 2120 times,free 1408 times
 test pass!

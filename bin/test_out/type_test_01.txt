@@ -83,7 +83,6 @@ finish print ast tree
         start specify or qualify node
         finish specify or qualify node
         start declarator
-cmp modifier
         finish declarator
     finish declaration
     start specify or qualify node

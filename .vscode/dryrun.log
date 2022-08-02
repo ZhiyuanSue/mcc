@@ -1,48 +1,68 @@
 make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/zhiyuansue/Desktop/mcc'
 gcc -g -Wall --std=c11 -O3 -I ./defs  -o obj/mcc.o -c src/mcc.c
- 
 gcc -g -Wall --std=c11 -O3 -I ./defs  -o obj/mcc_main.o -c src/mcc_main.c
 gcc -g -Wall --std=c11 -O3 -I ./defs  -o obj/test.o -c src/test.c
-gcc -g -Wall --std=c11 -O3 -I ./defs  -o obj/rule.o -c defs/rule.c
  
+gcc -g -Wall --std=c11 -O3 -I ./defs  -o obj/rule.o -c defs/rule.c
 gcc -g -Wall --std=c11 -O3 -I ./defs  -o obj/statement.o -c defs/statement.c
+ 
 gcc -g -Wall --std=c11 -O3 -I ./defs  -o obj/ARG.o -c tools/ARG.c
+ 
 gcc -g -Wall --std=c11 -O3 -I ./defs  -o obj/EBNF.o -c tools/EBNF.c
 gcc -g -Wall --std=c11 -O3 -I ./defs  -o obj/MEM.o -c tools/MEM.c
+ 
 gcc -g -Wall --std=c11 -O3 -I ./defs  -o obj/hash.o -c tools/hash.c
+ 
 gcc -g -Wall --std=c11 -O3 -I ./defs  -o obj/m_type.o -c tools/m_type.c
+ 
 gcc -g -Wall --std=c11 -O3 -I ./defs  -o obj/m_type_vec.o -c tools/m_type_vec.c
+ 
 gcc -g -Wall --std=c11 -O3 -I ./defs  -o obj/mcc_error.o -c tools/mcc_error.c
+ 
 gcc -g -Wall --std=c11 -O3 -I ./defs  -o obj/namespace.o -c tools/namespace.c
+ 
 gcc -g -Wall --std=c11 -O3 -I ./defs  -o obj/symbol_table.o -c tools/symbol_table.c
+ 
 gcc -g -Wall --std=c11 -O3 -I ./defs  -o obj/token.o -c tools/token.c
  
 gcc -g -Wall --std=c11 -O3 -I ./defs  -o obj/vector.o -c tools/vector.c
+ 
 gcc -g -Wall --std=c11 -O3 -I ./defs  -o obj/ast.o -c frontend/ast.c
+ 
 gcc -g -Wall --std=c11 -O3 -I ./defs  -o obj/const_expr.o -c frontend/const_expr.c
+ 
 gcc -g -Wall --std=c11 -O3 -I ./defs  -o obj/decl_semantics.o -c frontend/decl_semantics.c
+ 
 gcc -g -Wall --std=c11 -O3 -I ./defs  -o obj/decl_semantics_module.o -c frontend/decl_semantics_module.c
+ 
 gcc -g -Wall --std=c11 -O3 -I ./defs  -o obj/expr_semantics.o -c frontend/expr_semantics.c
  
 gcc -g -Wall --std=c11 -O3 -I ./defs  -o obj/extern_def_semantics.o -c frontend/extern_def_semantics.c
+ 
 gcc -g -Wall --std=c11 -O3 -I ./defs  -o obj/lex.o -c frontend/lex.c
+ 
 gcc -g -Wall --std=c11 -O3 -I ./defs  -o obj/parser.o -c frontend/parser.c
  
 gcc -g -Wall --std=c11 -O3 -I ./defs  -o obj/parser_post_proc.o -c frontend/parser_post_proc.c
  
 gcc -g -Wall --std=c11 -O3 -I ./defs  -o obj/preprocessor.o -c frontend/preprocessor.c
+ 
 gcc -g -Wall --std=c11 -O3 -I ./defs  -o obj/search_mem.o -c frontend/search_mem.c
  
 gcc -g -Wall --std=c11 -O3 -I ./defs  -o obj/semantics.o -c frontend/semantics.c
 gcc -g -Wall --std=c11 -O3 -I ./defs  -o obj/stat_semantics.o -c frontend/stat_semantics.c
+ 
 gcc -g -Wall --std=c11 -O3 -I ./defs  -o obj/INS.o -c IR/INS.c
  
 gcc -g -Wall --std=c11 -O3 -I ./defs  -o obj/IR.o -c IR/IR.c
+ 
 gcc -g -Wall --std=c11 -O3 -I ./defs  -o obj/transdecl.o -c IR/transdecl.c
  
 gcc -g -Wall --std=c11 -O3 -I ./defs  -o obj/transexpr.o -c IR/transexpr.c
+ 
 gcc -g -Wall --std=c11 -O3 -I ./defs  -o obj/transstmt.o -c IR/transstmt.c
 gcc -g -Wall --std=c11 -O3 -I ./defs  -lc -o bin/mcc ./obj/mcc.o ./obj/mcc_main.o ./obj/test.o ./obj/rule.o ./obj/statement.o ./obj/ARG.o ./obj/EBNF.o ./obj/MEM.o ./obj/hash.o ./obj/m_type.o ./obj/m_type_vec.o ./obj/mcc_error.o ./obj/namespace.o ./obj/symbol_table.o ./obj/token.o ./obj/vector.o ./obj/ast.o ./obj/const_expr.o ./obj/decl_semantics.o ./obj/decl_semantics_module.o ./obj/expr_semantics.o ./obj/extern_def_semantics.o ./obj/lex.o ./obj/parser.o ./obj/parser_post_proc.o ./obj/preprocessor.o ./obj/search_mem.o ./obj/semantics.o ./obj/stat_semantics.o ./obj/INS.o ./obj/IR.o ./obj/transdecl.o ./obj/transexpr.o ./obj/transstmt.o
+ 
 make: Leaving directory `/Users/zhiyuansue/Desktop/mcc'
  

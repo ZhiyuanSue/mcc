@@ -137,6 +137,8 @@ scope type:file_scope with child 2 and namespace 0
         scope type:block_scope with child 0 and namespace 0
             <symbol table>
 end print symbol table
+start print ir
+start print ir
 Compile Warning:(file ./bin/test_src/func_test_05.c: line 8: token return )
     return 0;
 reason:	W0006:A function declarated '_Noreturn' with a return statement
@@ -146,5 +148,5 @@ not decided token c
 mempool global alloc/free: alloc 0 times,free 0 times
 	use sys alloc/free: alloc 54938 times,free 996 times
 mempool file alloc/free: alloc 0 times,free 0 times
-	use sys alloc/free: alloc 3129 times,free 2345 times
+	use sys alloc/free: alloc 3130 times,free 2345 times
 test pass!

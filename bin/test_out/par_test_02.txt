@@ -5,8 +5,10 @@ finish print ast tree
 start print symbol table
 no symbol table
 end print symbol table
+start print ir
+start print ir
 mempool global alloc/free: alloc 0 times,free 0 times
 	use sys alloc/free: alloc 54938 times,free 996 times
 mempool file alloc/free: alloc 0 times,free 0 times
-	use sys alloc/free: alloc 18 times,free 6 times
+	use sys alloc/free: alloc 19 times,free 6 times
 test pass!

@@ -862,10 +862,12 @@ scope type:file_scope with child 3 and namespace 0
                 <symbol:gg ns:1 linkage:0>
                     type::< struct >
 end print symbol table
+start print ir
+start print ir
 not decided token label_test
 not decided token label_test
 mempool global alloc/free: alloc 0 times,free 0 times
 	use sys alloc/free: alloc 54938 times,free 996 times
 mempool file alloc/free: alloc 0 times,free 0 times
-	use sys alloc/free: alloc 23557 times,free 17726 times
+	use sys alloc/free: alloc 23558 times,free 17726 times
 test pass!

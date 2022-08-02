@@ -24,8 +24,10 @@ scope type:file_scope with child 0 and namespace 0
         <symbol:s ns:2 linkage:0>
             type::< struct >
 end print symbol table
+start print ir
+start print ir
 mempool global alloc/free: alloc 0 times,free 0 times
 	use sys alloc/free: alloc 54938 times,free 996 times
 mempool file alloc/free: alloc 0 times,free 0 times
-	use sys alloc/free: alloc 281 times,free 170 times
+	use sys alloc/free: alloc 282 times,free 170 times
 test pass!

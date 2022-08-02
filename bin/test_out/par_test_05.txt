@@ -287,6 +287,8 @@ scope type:file_scope with child 1 and namespace 0
                     type::< signed_int >
                         value:0
 end print symbol table
+start print ir
+start print ir
 not decided token a
 not decided token a
 not decided token b
@@ -304,5 +306,5 @@ not decided token c
 mempool global alloc/free: alloc 0 times,free 0 times
 	use sys alloc/free: alloc 54938 times,free 996 times
 mempool file alloc/free: alloc 0 times,free 0 times
-	use sys alloc/free: alloc 4303 times,free 2639 times
+	use sys alloc/free: alloc 4304 times,free 2639 times
 test pass!

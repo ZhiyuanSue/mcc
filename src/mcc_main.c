@@ -7,6 +7,7 @@
 #include "../frontend/parser.h"
 #include "../frontend/semantics.h"
 #include "../frontend/search_mem.h"
+#include "../IR/trans.h"
 
 extern char token_rules[MAX_RULE_NUM][RULE_CHAR_LEN];
 extern char token_statements[STATE_NUM][STATE_CHAR_LEN];
@@ -75,6 +76,13 @@ int main(int argc,char* argv[]){
         print_symbol_table(ast_root->symbol_table);
         printf("end print symbol table\n");
     }
+#endif
+    if(!(ir_module=trans_to_IR(ast_root)))
+        goto error;
+#ifdef _TEST_IR_
+    printf("start print ir\n");
+    print_IR(ir_module);
+    printf("start print ir\n");
 #endif
     /*if there's some warnings, it need be print*/
     for(size_t i=0;i<VECLEN(c_error);++i){

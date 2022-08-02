@@ -104,7 +104,6 @@ finish print ast tree
             end primary expr
         finish specify or qualify node
         start declarator
-cmp modifier
 error
 Compile Error:(file ./bin/test_src/align_test_01.c: line 2: token a )
 _Alignas(8) int a

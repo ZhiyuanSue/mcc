@@ -157,7 +157,6 @@ finish print ast tree
         start specify or qualify node
         finish specify or qualify node
         start declarator
-cmp modifier
         finish declarator
     finish declaration
     start declaration line:5
@@ -193,7 +192,6 @@ cmp modifier
             start specify or qualify node
             finish specify or qualify node
             start declarator
-cmp modifier
             finish declarator
         finish declaration
         start declaration line:9
@@ -247,8 +245,10 @@ scope type:file_scope with child 2 and namespace 0
                         type::< signed_int >
                             value:0
 end print symbol table
+start print ir
+start print ir
 mempool global alloc/free: alloc 0 times,free 0 times
 	use sys alloc/free: alloc 54938 times,free 996 times
 mempool file alloc/free: alloc 0 times,free 0 times
-	use sys alloc/free: alloc 4817 times,free 3617 times
+	use sys alloc/free: alloc 4818 times,free 3617 times
 test pass!

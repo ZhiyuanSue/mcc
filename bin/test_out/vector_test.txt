@@ -7923,6 +7923,8 @@ scope type:file_scope with child 77 and namespace 0
             scope type:block_scope with child 0 and namespace 0
                 <symbol table>
 end print symbol table
+start print ir
+start print ir
 not decided token data
 not decided token capicity
 not decided token len
@@ -7960,5 +7962,5 @@ not decided token len
 mempool global alloc/free: alloc 0 times,free 0 times
 	use sys alloc/free: alloc 54938 times,free 996 times
 mempool file alloc/free: alloc 0 times,free 0 times
-	use sys alloc/free: alloc 148656 times,free 100739 times
+	use sys alloc/free: alloc 148657 times,free 100739 times
 test pass!

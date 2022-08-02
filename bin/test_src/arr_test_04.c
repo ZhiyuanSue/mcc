@@ -1,8 +1,6 @@
 extern struct ssss;
 int main(void){
     int testarr=1;
-    typedef int iarr[testarr];
-    typedef int iarr[testarr];
+    int a[]={1,2};
     return 0;
 }
-struct ssss a[12];

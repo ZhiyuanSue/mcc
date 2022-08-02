@@ -275,8 +275,10 @@ scope type:file_scope with child 0 and namespace 0
         <symbol:g ns:5 linkage:0>
             type::< signed_char >
 end print symbol table
+start print ir
+start print ir
 mempool global alloc/free: alloc 0 times,free 0 times
 	use sys alloc/free: alloc 54938 times,free 996 times
 mempool file alloc/free: alloc 0 times,free 0 times
-	use sys alloc/free: alloc 4915 times,free 2998 times
+	use sys alloc/free: alloc 4916 times,free 2998 times
 test pass!

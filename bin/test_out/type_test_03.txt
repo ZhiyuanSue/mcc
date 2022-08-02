@@ -113,8 +113,10 @@ scope type:file_scope with child 1 and namespace 0
                 scope type:block_scope with child 0 and namespace 0
                     <symbol table>
 end print symbol table
+start print ir
+start print ir
 mempool global alloc/free: alloc 0 times,free 0 times
 	use sys alloc/free: alloc 54938 times,free 996 times
 mempool file alloc/free: alloc 0 times,free 0 times
-	use sys alloc/free: alloc 3345 times,free 2516 times
+	use sys alloc/free: alloc 3346 times,free 2516 times
 test pass!

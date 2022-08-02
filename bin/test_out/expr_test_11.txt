@@ -362,8 +362,10 @@ scope type:file_scope with child 2 and namespace 0
                     type::< array , signed_int >
                         array len is: 2
 end print symbol table
+start print ir
+start print ir
 mempool global alloc/free: alloc 0 times,free 0 times
 	use sys alloc/free: alloc 54938 times,free 996 times
 mempool file alloc/free: alloc 0 times,free 0 times
-	use sys alloc/free: alloc 9729 times,free 6960 times
+	use sys alloc/free: alloc 9730 times,free 6960 times
 test pass!

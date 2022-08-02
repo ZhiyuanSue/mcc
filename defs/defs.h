@@ -76,6 +76,10 @@
 #define _TEST_SYMBOL_TABLE_
 #endif
 
+#ifndef _TEST_IR_
+#define _TEST_IR_
+#endif
+
 #endif
 
 /*--memory pool choice, DEFAULT_MEM means use system malloc

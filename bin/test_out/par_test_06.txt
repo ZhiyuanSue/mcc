@@ -264,6 +264,8 @@ scope type:file_scope with child 1 and namespace 0
                     type::< function , signed_int >
                         no parameter
 end print symbol table
+start print ir
+start print ir
 Compile Warning:(file ./bin/test_src/par_test_06.c: line 2: token atomic_load )
     int piyo = atomic_load(&hoge);  
 reason:	W0005:Implicit function decleration
@@ -279,5 +281,5 @@ not decided token atomic_store
 mempool global alloc/free: alloc 0 times,free 0 times
 	use sys alloc/free: alloc 54938 times,free 996 times
 mempool file alloc/free: alloc 0 times,free 0 times
-	use sys alloc/free: alloc 8873 times,free 6652 times
+	use sys alloc/free: alloc 8874 times,free 6652 times
 test pass!

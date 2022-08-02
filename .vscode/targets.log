@@ -10,7 +10,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 make: *** No rule to make target `all'.  Stop.
 
 
-# Make data base, printed on Mon Aug  1 21:12:19 2022
+# Make data base, printed on Tue Aug  2 20:48:23 2022
 
 # Variables
 
@@ -51,8 +51,9 @@ modules = src defs tools frontend IR backend
 # environment
 VSCODE_CWD = /
 # environment
- 
 NO_PROXY = 127.0.0.1
+# environment
+LaunchInstanceID = 562C0153-8795-409F-9204-DBC71CF59094
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # makefile (from `Makefile', line 5)
@@ -62,7 +63,7 @@ Defs := ./defs
 # makefile (from `Makefile', line 8)
 IR := ./IR
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.zvC92b4wh4/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.P5NUIibtdR/Listeners
 # automatic
 %F = $(notdir $%)
 # makefile (from `Makefile', line 11)
@@ -134,22 +135,25 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = com.microsoft.VSCode.10012
+XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000004.Electron
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
 +F = $(notdir $+)
 # environment
 __CF_USER_TEXT_ENCODING = 0x1F5:0x19:0x34
+# environment
+COMMAND_MODE = unix2003
 # default
 MAKEFILES := 
 # automatic
 <F = $(notdir $<)
- 
 # environment
 PLATFORMIO_CALLER = vscode
 # environment
 LC_ALL = C
+# environment
+SECURITYSESSIONID = 186a6
 # automatic
 ^F = $(notdir $^)
 # default
@@ -163,11 +167,11 @@ Tools := ./tools
 # environment
 LANG = C
 # environment
-VSCODE_PID = 548
+VSCODE_PID = 339
 # makefile (from `Makefile', line 9)
 Back := ./backend
 # variable set hash-table stats:
-# Load=75/1024=7%, Rehash=0, Collisions=5/120=4%
+# Load=78/1024=8%, Rehash=0, Collisions=5/123=4%
 
 # Pattern-specific Variable Values
 
@@ -176,7 +180,7 @@ Back := ./backend
 # Directories
 
 # ./backend (device 16777222, inode 2902106): 2 files, no impossibilities.
-# . (device 16777222, inode 2901899): 20 files, no impossibilities.
+# . (device 16777222, inode 2901899): 22 files, no impossibilities.
 # ./src (device 16777222, inode 2902149): 7 files, no impossibilities.
 # frontend (device 16777222, inode 2901959): 28 files, no impossibilities.
 # ./IR (device 16777222, inode 2902102): 13 files, no impossibilities.
@@ -189,7 +193,7 @@ Back := ./backend
 # tools (device 16777222, inode 2901934): 24 files, no impossibilities.
 # ./frontend (device 16777222, inode 2901959): 28 files, no impossibilities.
 
-# 184 files, no impossibilities in 13 directories.
+# 186 files, no impossibilities in 13 directories.
 
 # Implicit Rules
 
@@ -270,6 +274,7 @@ all:
 obj/search_mem.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
+ 
 #  File has not been updated.
 
 .PHONY: clean
@@ -344,7 +349,6 @@ Makefile:
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
- 
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
@@ -498,6 +502,6 @@ obj/MEM.o:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Mon Aug  1 21:12:19 2022
+# Finished Make data base on Tue Aug  2 20:48:23 2022
 
  
