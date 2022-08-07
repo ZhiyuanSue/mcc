@@ -613,7 +613,7 @@ M_TYPE* usual_arith_conversion(M_TYPE** operand_a,M_TYPE** operand_b){
                 return build_base_type(type_a);
             }
             else{
-                enum TP_CATEGORY return_type;
+                enum TP_CATEGORY return_type=TP_SPEC_NONE;
                 if(type_a%2==0)
                 {
                     return_type=type_a+1;

@@ -131,5 +131,5 @@ start print ir
 mempool global alloc/free: alloc 0 times,free 0 times
 	use sys alloc/free: alloc 54938 times,free 996 times
 mempool file alloc/free: alloc 0 times,free 0 times
-	use sys alloc/free: alloc 1676 times,free 1037 times
+	use sys alloc/free: alloc 1680 times,free 1037 times
 test pass!

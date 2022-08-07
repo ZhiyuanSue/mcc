@@ -250,7 +250,7 @@ scope type:file_scope with child 1 and namespace 0
                         value:0
                 <symbol:ccc ns:1 linkage:0>
                     type::< array , signed_int >
-                        array len is: 140361298377392
+                        array len is: 140302929725680
                 <symbol:bbb ns:2 linkage:0>
                     type::< struct >
                         struct have 1 members are:
@@ -265,5 +265,5 @@ start print ir
 mempool global alloc/free: alloc 0 times,free 0 times
 	use sys alloc/free: alloc 54938 times,free 996 times
 mempool file alloc/free: alloc 0 times,free 0 times
-	use sys alloc/free: alloc 8772 times,free 6743 times
+	use sys alloc/free: alloc 8776 times,free 6743 times
 test pass!

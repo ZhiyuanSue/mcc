@@ -281,5 +281,5 @@ not decided token atomic_store
 mempool global alloc/free: alloc 0 times,free 0 times
 	use sys alloc/free: alloc 54938 times,free 996 times
 mempool file alloc/free: alloc 0 times,free 0 times
-	use sys alloc/free: alloc 8874 times,free 6652 times
+	use sys alloc/free: alloc 8878 times,free 6652 times
 test pass!

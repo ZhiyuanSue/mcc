@@ -167,11 +167,11 @@ void MEMDel(MEM_POOL* pool){
         return;
     for(int i=0;i<MEM_BLOCK_CHAIN_NUM;++i){
         MEM_BLOCK* block=pool->block_chain[i];
-        MEM_BLOCK* next;
-        while(next){
-            next=block->next;
+        MEM_BLOCK* next=block->next;
+        while(block){
             MEMDelBlock(block);
             block=next;
+            next=block->next;
         }
     }
 #ifdef _TEST_

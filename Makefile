@@ -18,8 +18,14 @@ CC:= gcc
 CFlags:= -g -Wall --std=c11 -O3 -I ${Inc} 
 
 
+all: init ${Target}
+
+init:
+	$(shell if [ ! -d $(Obj) ];then mkdir $(Obj); fi)
+
 ${Target}:$(Object)
 	${CC} $(CFlags) -lc -o $@ ${Object}
+
 
 ${Obj}/%.o: $(SRC)/%.c
 	$(CC) $(CFlags) -o $@ -c $<
