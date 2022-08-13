@@ -1,5 +1,22 @@
 read in file name:
 	./bin/test_src/expr_test_08.c
+parser start
+
+
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
 start print ast tree
 <translation_unit ns:1>
     <external_decl ns:1>
@@ -161,7 +178,13 @@ finish print ast tree
         start specify or qualify node
         finish specify or qualify node
         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:1
         start specify or qualify node
@@ -196,7 +219,13 @@ finish print ast tree
                 <Type>:< signed_int >
                 end add
             finish array
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:2
         start specify or qualify node
@@ -232,6 +261,8 @@ finish print ast tree
                     start unary
                         start primary expr
                             start primary expr
+test point 2
+test point 3
                             <Type>:< unsigned_long >
                             end primary expr
                         <Type>:< unsigned_long >
@@ -241,7 +272,13 @@ finish print ast tree
                 <Type>:< signed_int >
                 end add
             finish array
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:3
         start specify or qualify node
@@ -258,7 +295,13 @@ finish print ast tree
                 <Type>:< signed_int >
                 end equal expr
             finish array
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:4
         start specify or qualify node
@@ -284,7 +327,13 @@ finish print ast tree
                 <Type>:< signed_int >
                 end relation expr
             finish array
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
 start print symbol table
 scope type:file_scope with child 0 and namespace 0

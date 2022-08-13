@@ -1,5 +1,28 @@
 read in file name:
 	./bin/test_src/func_test_01.c
+parser start
+
+
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
 error
 Compile Error:(file ./bin/test_src/func_test_01.c: line 0: token int )
 int t(a,b,c) int a,c=1;int b;{

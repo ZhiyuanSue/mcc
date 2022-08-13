@@ -19,7 +19,7 @@ CONST_VALUE* token_to_const_value(TOKEN* t){
     }
     CONST_VALUE* cv=m_alloc(sizeof(CONST_VALUE));
     cv->const_value=m_alloc(sizeof(VALUE_DATA));
-    memset(cv->const_value,0,sizeof(VALUE_DATA));
+    m_memset(cv->const_value,'\0',sizeof(VALUE_DATA));
     switch(t->type){
         case integer_constant:
             int_const_to_const_value(t,cv);
@@ -341,7 +341,7 @@ bool char_const_to_const_value(TOKEN* t,CONST_VALUE* cv)
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
     cv->const_expr_type=TP_SINT;
     char* realchar=m_alloc(sizeof(char)*(t->value_len));
-    memset(realchar,'\0',(t->value_len));
+    m_memset(realchar,'\0',(t->value_len));
     char* cp=realchar;
     if(*cp=='L')
     {   /*a wchar_t*/

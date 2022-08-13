@@ -1,5 +1,20 @@
 read in file name:
 	./bin/test_src/par_test_10.c
+parser start
+
+
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
 start print ast tree
 <translation_unit ns:1>
     <external_decl ns:1>
@@ -70,7 +85,13 @@ finish print ast tree
         start specify or qualify node
         finish specify or qualify node
         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
         start primary expr
         <Type>:< signed_int >
         end primary expr
@@ -82,13 +103,31 @@ finish print ast tree
             start specify or qualify node
             finish specify or qualify node
         finish func
+test point 2
+test point 3
+test point 2
+test point 3
     finish declarator
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
     start compound expr
         start declaration line:2
             start specify or qualify node
             finish specify or qualify node
             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
             finish declarator
+test point 2
+test point 3
             start primary expr
             <Type>:< signed_int >
             end primary expr
@@ -96,9 +135,13 @@ finish print ast tree
         start expr expr
             start mul
                 start primary expr
+test point 2
+test point 3
                 <Type>:< signed_int >
                 end primary expr
                 start primary expr
+test point 2
+test point 3
                 <Type>:< signed_int >
                 end primary expr
             <Type>:< signed_int >

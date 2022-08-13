@@ -1,5 +1,28 @@
 read in file name:
 	./bin/test_src/expr_test_07.c
+parser start
+
+
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
 start print ast tree
 <translation_unit ns:1>
     <external_decl ns:1>
@@ -150,17 +173,37 @@ finish print ast tree
             start specify or qualify node
             finish specify or qualify node
         finish func
+test point 2
+test point 3
+test point 2
+test point 3
     finish declarator
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
     start compound expr
         start declaration line:1
             start specify or qualify node
             finish specify or qualify node
             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
             finish declarator
+test point 2
+test point 3
         finish declaration
         start expr expr
             start unary
                 start primary expr
+test point 2
+test point 3
                 <Type>:< signed_int >
                 end primary expr
             <Type>:< signed_int >
@@ -171,13 +214,27 @@ finish print ast tree
                         start specify or qualify node
                         finish specify or qualify node
                         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                         finish declarator
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
                     finish struct union
                 finish specify or qualify node
             finish declaration
             start expr expr
                 start unary
                     start specify or qualify node
+test point 2
+test point 3
                     finish specify or qualify node
                 <Type>:< signed_int >
                 end unary
@@ -187,15 +244,25 @@ finish print ast tree
                     start declarator
                         start array
                             start primary expr
+test point 2
+test point 3
                             <Type>:< signed_int >
                             end primary expr
                         finish array
+test point 2
+test point 3
+test point 2
+test point 3
                     finish declarator
+test point 2
+test point 3
                 finish declaration
                 start expr expr
                     start unary
                         start primary expr
                             start primary expr
+test point 2
+test point 3
                             <Type>:< array , signed_int >
                             end primary expr
                         <Type>:< array , signed_int >
@@ -205,6 +272,8 @@ finish print ast tree
                     start expr expr
                         start unary
                             start specify or qualify node
+test point 2
+test point 3
                             finish specify or qualify node
                         <Type>:< signed_int >
                         end unary
@@ -217,6 +286,8 @@ finish print ast tree
                                         start primary expr
                                             start unary
                                                 start primary expr
+test point 2
+test point 3
                                                 <Type>:< signed_int >
                                                 end primary expr
                                             <Type>:< point , signed_int >
@@ -250,7 +321,7 @@ scope type:file_scope with child 1 and namespace 0
                         value:0
                 <symbol:ccc ns:1 linkage:0>
                     type::< array , signed_int >
-                        array len is: 140302929725680
+                        array len is: 105553117090752
                 <symbol:bbb ns:2 linkage:0>
                     type::< struct >
                         struct have 1 members are:

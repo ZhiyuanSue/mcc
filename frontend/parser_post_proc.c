@@ -10,7 +10,7 @@ extern char* filename;
 char post_proc_node_rec[STATE_NUM];
 void post_proc_init()
 {
-    memset(post_proc_node_rec,0,STATE_NUM*sizeof(char));
+    m_memset(post_proc_node_rec,'\0',STATE_NUM*sizeof(char));
     post_proc_node_rec[declaration]=1;
     post_proc_node_rec[struct_declarator_list]=1;
     post_proc_node_rec[identifier_list]=1;

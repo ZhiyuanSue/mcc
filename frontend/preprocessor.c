@@ -26,7 +26,7 @@ char* load_file(char filename[])
     buf_size=1<<(tmp+1);
 
     char* buf=(char*)m_alloc(buf_size);
-    memset(buf,0,buf_size);
+    m_memset(buf,'\0',buf_size);
     
     int readlen=fread(buf,1,file_size,fp);
     if(readlen!=file_size){

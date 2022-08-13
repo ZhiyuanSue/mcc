@@ -29,6 +29,29 @@ SYM* Create_symbol_table(SYM* father,enum scope_type type){
     symbol_table->st_attr=NULL;
     return symbol_table;
 }
+SYM_ITEM* Create_symbol_item(char* symbol,NMSP name_space){
+    if(symbol==NULL)
+        return NULL;
+    SYM_ITEM* tmp=(SYM_ITEM*)m_alloc(sizeof(SYM_ITEM));
+    tmp->value=symbol;
+    tmp->name_space=name_space;
+    tmp->key=SymbolCharToKey(symbol,name_space);
+    tmp->count=HASH_CNT_FD;
+    tmp->declared=tmp->defined=false;
+    tmp->align_size=0;
+    tmp->linkage=LKA_NONE;
+    tmp->fspec_type=FSPEC_NONE;
+    tmp->Thread_local=false;
+    tmp->data_size=0;
+    tmp->data_field=(VALUE_DATA*)m_alloc(sizeof(VALUE_DATA));
+    printf("test point 2\n");
+    m_memset(tmp->data_field,'\0',sizeof(VALUE_DATA));
+    printf("test point 3\n");
+    tmp->type_vec=InitVEC(DEFAULT_CAPICITY);
+    tmp->init_value_ptr=NULL;
+    tmp->const_expr=false;
+    return tmp;
+}
 bool insert_symbol(SYM* symbol_table,SYM_ITEM* symbol_item){
     return HASHInsert(symbol_table->sym_hash_table,(HASH_ITEM*)symbol_item,symbol_item_cmp);
 }

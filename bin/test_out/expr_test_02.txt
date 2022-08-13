@@ -1,5 +1,20 @@
 read in file name:
 	./bin/test_src/expr_test_02.c
+parser start
+
+
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
 start print ast tree
 <translation_unit ns:1>
     <external_decl ns:1>
@@ -59,13 +74,31 @@ finish print ast tree
     start declarator
         start func
         finish func
+test point 2
+test point 3
+test point 2
+test point 3
     finish declarator
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
     start compound expr
         start declaration line:1
             start specify or qualify node
             finish specify or qualify node
             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
             finish declarator
+test point 2
+test point 3
         finish declaration
         start declaration line:2
             start specify or qualify node
@@ -76,15 +109,25 @@ finish print ast tree
                     <Type>:< signed_int >
                     end primary expr
                 finish array
+test point 2
+test point 3
+test point 2
+test point 3
             finish declarator
+test point 2
+test point 3
         finish declaration
         start expr expr
             start assignment expr
                 start primary expr
+test point 2
+test point 3
                 <Type>:< signed_int >
                 end primary expr
                 start postfix expr
                     start primary expr
+test point 2
+test point 3
                     <Type>:< array , signed_int >
                     end primary expr
                     start primary expr

@@ -1,5 +1,180 @@
 read in file name:
 	./bin/test_src/par_test_07.c
+parser start
+
+
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
 start print ast tree
 <translation_unit ns:1>
     <external_decl ns:1>
@@ -1316,8 +1491,14 @@ finish print ast tree
                     <Type>:< signed_int >
                     end primary expr
                 finish array
+test point 2
+test point 3
+test point 2
+test point 3
             finish declarator
         finish declarator
+test point 2
+test point 3
     finish declaration
     start specify or qualify node
     finish specify or qualify node
@@ -1326,602 +1507,1124 @@ finish print ast tree
             start specify or qualify node
             finish specify or qualify node
         finish func
+test point 2
+test point 3
+test point 2
+test point 3
     finish declarator
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
     start compound expr
         start compound expr
             start declaration line:3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish declaration
             start compound expr
                 start declaration line:5
                     start specify or qualify node
                     finish specify or qualify node
                     start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                     finish declarator
+test point 2
+test point 3
                 finish declaration
                 start compound expr
                     start declaration line:7
                         start specify or qualify node
                         finish specify or qualify node
                         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                         finish declarator
+test point 2
+test point 3
                     finish declaration
                     start compound expr
                         start declaration line:9
                             start specify or qualify node
                             finish specify or qualify node
                             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                             finish declarator
+test point 2
+test point 3
                         finish declaration
                         start compound expr
                             start declaration line:11
                                 start specify or qualify node
                                 finish specify or qualify node
                                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                 finish declarator
+test point 2
+test point 3
                             finish declaration
                             start compound expr
                                 start declaration line:13
                                     start specify or qualify node
                                     finish specify or qualify node
                                     start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                     finish declarator
+test point 2
+test point 3
                                 finish declaration
                                 start compound expr
                                     start declaration line:15
                                         start specify or qualify node
                                         finish specify or qualify node
                                         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                         finish declarator
+test point 2
+test point 3
                                     finish declaration
                                     start compound expr
                                         start declaration line:17
                                             start specify or qualify node
                                             finish specify or qualify node
                                             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                             finish declarator
+test point 2
+test point 3
                                         finish declaration
                                         start compound expr
                                             start declaration line:19
                                                 start specify or qualify node
                                                 finish specify or qualify node
                                                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                 finish declarator
+test point 2
+test point 3
                                             finish declaration
                                             start compound expr
                                                 start declaration line:21
                                                     start specify or qualify node
                                                     finish specify or qualify node
                                                     start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                     finish declarator
+test point 2
+test point 3
                                                 finish declaration
                                                 start compound expr
                                                     start declaration line:23
                                                         start specify or qualify node
                                                         finish specify or qualify node
                                                         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                         finish declarator
+test point 2
+test point 3
                                                     finish declaration
                                                     start compound expr
                                                         start declaration line:25
                                                             start specify or qualify node
                                                             finish specify or qualify node
                                                             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                             finish declarator
+test point 2
+test point 3
                                                         finish declaration
                                                         start compound expr
                                                             start declaration line:27
                                                                 start specify or qualify node
                                                                 finish specify or qualify node
                                                                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                 finish declarator
+test point 2
+test point 3
                                                             finish declaration
                                                             start compound expr
                                                                 start declaration line:29
                                                                     start specify or qualify node
                                                                     finish specify or qualify node
                                                                     start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                     finish declarator
+test point 2
+test point 3
                                                                 finish declaration
                                                                 start compound expr
                                                                     start declaration line:31
                                                                         start specify or qualify node
                                                                         finish specify or qualify node
                                                                         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                         finish declarator
+test point 2
+test point 3
                                                                     finish declaration
                                                                     start compound expr
                                                                         start declaration line:33
                                                                             start specify or qualify node
                                                                             finish specify or qualify node
                                                                             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                             finish declarator
+test point 2
+test point 3
                                                                         finish declaration
                                                                         start compound expr
                                                                             start declaration line:35
                                                                                 start specify or qualify node
                                                                                 finish specify or qualify node
                                                                                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                 finish declarator
+test point 2
+test point 3
                                                                             finish declaration
                                                                             start compound expr
                                                                                 start declaration line:37
                                                                                     start specify or qualify node
                                                                                     finish specify or qualify node
                                                                                     start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                     finish declarator
+test point 2
+test point 3
                                                                                 finish declaration
                                                                                 start compound expr
                                                                                     start declaration line:39
                                                                                         start specify or qualify node
                                                                                         finish specify or qualify node
                                                                                         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                         finish declarator
+test point 2
+test point 3
                                                                                     finish declaration
                                                                                     start compound expr
                                                                                         start declaration line:41
                                                                                             start specify or qualify node
                                                                                             finish specify or qualify node
                                                                                             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                             finish declarator
+test point 2
+test point 3
                                                                                         finish declaration
                                                                                         start compound expr
                                                                                             start declaration line:43
                                                                                                 start specify or qualify node
                                                                                                 finish specify or qualify node
                                                                                                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                 finish declarator
+test point 2
+test point 3
                                                                                             finish declaration
                                                                                             start compound expr
                                                                                                 start declaration line:45
                                                                                                     start specify or qualify node
                                                                                                     finish specify or qualify node
                                                                                                     start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                     finish declarator
+test point 2
+test point 3
                                                                                                 finish declaration
                                                                                                 start compound expr
                                                                                                     start declaration line:47
                                                                                                         start specify or qualify node
                                                                                                         finish specify or qualify node
                                                                                                         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                         finish declarator
+test point 2
+test point 3
                                                                                                     finish declaration
                                                                                                     start compound expr
                                                                                                         start declaration line:49
                                                                                                             start specify or qualify node
                                                                                                             finish specify or qualify node
                                                                                                             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                             finish declarator
+test point 2
+test point 3
                                                                                                         finish declaration
                                                                                                         start compound expr
                                                                                                             start declaration line:51
                                                                                                                 start specify or qualify node
                                                                                                                 finish specify or qualify node
                                                                                                                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                 finish declarator
+test point 2
+test point 3
                                                                                                             finish declaration
                                                                                                             start compound expr
                                                                                                                 start declaration line:53
                                                                                                                     start specify or qualify node
                                                                                                                     finish specify or qualify node
                                                                                                                     start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                     finish declarator
+test point 2
+test point 3
                                                                                                                 finish declaration
                                                                                                                 start compound expr
                                                                                                                     start declaration line:55
                                                                                                                         start specify or qualify node
                                                                                                                         finish specify or qualify node
                                                                                                                         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                         finish declarator
+test point 2
+test point 3
                                                                                                                     finish declaration
                                                                                                                     start compound expr
                                                                                                                         start declaration line:57
                                                                                                                             start specify or qualify node
                                                                                                                             finish specify or qualify node
                                                                                                                             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                             finish declarator
+test point 2
+test point 3
                                                                                                                         finish declaration
                                                                                                                         start compound expr
                                                                                                                             start declaration line:59
                                                                                                                                 start specify or qualify node
                                                                                                                                 finish specify or qualify node
                                                                                                                                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                 finish declarator
+test point 2
+test point 3
                                                                                                                             finish declaration
                                                                                                                             start compound expr
                                                                                                                                 start declaration line:61
                                                                                                                                     start specify or qualify node
                                                                                                                                     finish specify or qualify node
                                                                                                                                     start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                     finish declarator
+test point 2
+test point 3
                                                                                                                                 finish declaration
                                                                                                                                 start compound expr
                                                                                                                                     start declaration line:63
                                                                                                                                         start specify or qualify node
                                                                                                                                         finish specify or qualify node
                                                                                                                                         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                         finish declarator
+test point 2
+test point 3
                                                                                                                                     finish declaration
                                                                                                                                     start compound expr
                                                                                                                                         start declaration line:65
                                                                                                                                             start specify or qualify node
                                                                                                                                             finish specify or qualify node
                                                                                                                                             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                             finish declarator
+test point 2
+test point 3
                                                                                                                                         finish declaration
                                                                                                                                         start compound expr
                                                                                                                                             start declaration line:67
                                                                                                                                                 start specify or qualify node
                                                                                                                                                 finish specify or qualify node
                                                                                                                                                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                 finish declarator
+test point 2
+test point 3
                                                                                                                                             finish declaration
                                                                                                                                             start compound expr
                                                                                                                                                 start declaration line:69
                                                                                                                                                     start specify or qualify node
                                                                                                                                                     finish specify or qualify node
                                                                                                                                                     start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                     finish declarator
+test point 2
+test point 3
                                                                                                                                                 finish declaration
                                                                                                                                                 start compound expr
                                                                                                                                                     start declaration line:71
                                                                                                                                                         start specify or qualify node
                                                                                                                                                         finish specify or qualify node
                                                                                                                                                         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                         finish declarator
+test point 2
+test point 3
                                                                                                                                                     finish declaration
                                                                                                                                                     start compound expr
                                                                                                                                                         start declaration line:73
                                                                                                                                                             start specify or qualify node
                                                                                                                                                             finish specify or qualify node
                                                                                                                                                             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                             finish declarator
+test point 2
+test point 3
                                                                                                                                                         finish declaration
                                                                                                                                                         start compound expr
                                                                                                                                                             start declaration line:75
                                                                                                                                                                 start specify or qualify node
                                                                                                                                                                 finish specify or qualify node
                                                                                                                                                                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                 finish declarator
+test point 2
+test point 3
                                                                                                                                                             finish declaration
                                                                                                                                                             start compound expr
                                                                                                                                                                 start declaration line:77
                                                                                                                                                                     start specify or qualify node
                                                                                                                                                                     finish specify or qualify node
                                                                                                                                                                     start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                     finish declarator
+test point 2
+test point 3
                                                                                                                                                                 finish declaration
                                                                                                                                                                 start compound expr
                                                                                                                                                                     start declaration line:79
                                                                                                                                                                         start specify or qualify node
                                                                                                                                                                         finish specify or qualify node
                                                                                                                                                                         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                         finish declarator
+test point 2
+test point 3
                                                                                                                                                                     finish declaration
                                                                                                                                                                     start compound expr
                                                                                                                                                                         start declaration line:81
                                                                                                                                                                             start specify or qualify node
                                                                                                                                                                             finish specify or qualify node
                                                                                                                                                                             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                             finish declarator
+test point 2
+test point 3
                                                                                                                                                                         finish declaration
                                                                                                                                                                         start compound expr
                                                                                                                                                                             start declaration line:83
                                                                                                                                                                                 start specify or qualify node
                                                                                                                                                                                 finish specify or qualify node
                                                                                                                                                                                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                 finish declarator
+test point 2
+test point 3
                                                                                                                                                                             finish declaration
                                                                                                                                                                             start compound expr
                                                                                                                                                                                 start declaration line:85
                                                                                                                                                                                     start specify or qualify node
                                                                                                                                                                                     finish specify or qualify node
                                                                                                                                                                                     start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                     finish declarator
+test point 2
+test point 3
                                                                                                                                                                                 finish declaration
                                                                                                                                                                                 start compound expr
                                                                                                                                                                                     start declaration line:87
                                                                                                                                                                                         start specify or qualify node
                                                                                                                                                                                         finish specify or qualify node
                                                                                                                                                                                         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                         finish declarator
+test point 2
+test point 3
                                                                                                                                                                                     finish declaration
                                                                                                                                                                                     start compound expr
                                                                                                                                                                                         start declaration line:89
                                                                                                                                                                                             start specify or qualify node
                                                                                                                                                                                             finish specify or qualify node
                                                                                                                                                                                             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                             finish declarator
+test point 2
+test point 3
                                                                                                                                                                                         finish declaration
                                                                                                                                                                                         start compound expr
                                                                                                                                                                                             start declaration line:91
                                                                                                                                                                                                 start specify or qualify node
                                                                                                                                                                                                 finish specify or qualify node
                                                                                                                                                                                                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                 finish declarator
+test point 2
+test point 3
                                                                                                                                                                                             finish declaration
                                                                                                                                                                                             start compound expr
                                                                                                                                                                                                 start declaration line:93
                                                                                                                                                                                                     start specify or qualify node
                                                                                                                                                                                                     finish specify or qualify node
                                                                                                                                                                                                     start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                     finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                 finish declaration
                                                                                                                                                                                                 start compound expr
                                                                                                                                                                                                     start declaration line:95
                                                                                                                                                                                                         start specify or qualify node
                                                                                                                                                                                                         finish specify or qualify node
                                                                                                                                                                                                         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                         finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                     finish declaration
                                                                                                                                                                                                     start compound expr
                                                                                                                                                                                                         start declaration line:97
                                                                                                                                                                                                             start specify or qualify node
                                                                                                                                                                                                             finish specify or qualify node
                                                                                                                                                                                                             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                             finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                         finish declaration
                                                                                                                                                                                                         start compound expr
                                                                                                                                                                                                             start declaration line:99
                                                                                                                                                                                                                 start specify or qualify node
                                                                                                                                                                                                                 finish specify or qualify node
                                                                                                                                                                                                                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                 finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                             finish declaration
                                                                                                                                                                                                             start compound expr
                                                                                                                                                                                                                 start declaration line:101
                                                                                                                                                                                                                     start specify or qualify node
                                                                                                                                                                                                                     finish specify or qualify node
                                                                                                                                                                                                                     start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                     finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                 finish declaration
                                                                                                                                                                                                                 start compound expr
                                                                                                                                                                                                                     start declaration line:103
                                                                                                                                                                                                                         start specify or qualify node
                                                                                                                                                                                                                         finish specify or qualify node
                                                                                                                                                                                                                         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                         finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                     finish declaration
                                                                                                                                                                                                                     start compound expr
                                                                                                                                                                                                                         start declaration line:105
                                                                                                                                                                                                                             start specify or qualify node
                                                                                                                                                                                                                             finish specify or qualify node
                                                                                                                                                                                                                             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                             finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                         finish declaration
                                                                                                                                                                                                                         start compound expr
                                                                                                                                                                                                                             start declaration line:107
                                                                                                                                                                                                                                 start specify or qualify node
                                                                                                                                                                                                                                 finish specify or qualify node
                                                                                                                                                                                                                                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                                 finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                             finish declaration
                                                                                                                                                                                                                             start compound expr
                                                                                                                                                                                                                                 start declaration line:109
                                                                                                                                                                                                                                     start specify or qualify node
                                                                                                                                                                                                                                     finish specify or qualify node
                                                                                                                                                                                                                                     start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                                     finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                                 finish declaration
                                                                                                                                                                                                                                 start compound expr
                                                                                                                                                                                                                                     start declaration line:111
                                                                                                                                                                                                                                         start specify or qualify node
                                                                                                                                                                                                                                         finish specify or qualify node
                                                                                                                                                                                                                                         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                                         finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                                     finish declaration
                                                                                                                                                                                                                                     start compound expr
                                                                                                                                                                                                                                         start declaration line:113
                                                                                                                                                                                                                                             start specify or qualify node
                                                                                                                                                                                                                                             finish specify or qualify node
                                                                                                                                                                                                                                             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                                             finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                                         finish declaration
                                                                                                                                                                                                                                         start compound expr
                                                                                                                                                                                                                                             start declaration line:115
                                                                                                                                                                                                                                                 start specify or qualify node
                                                                                                                                                                                                                                                 finish specify or qualify node
                                                                                                                                                                                                                                                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                                                 finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                                             finish declaration
                                                                                                                                                                                                                                             start compound expr
                                                                                                                                                                                                                                                 start declaration line:117
                                                                                                                                                                                                                                                     start specify or qualify node
                                                                                                                                                                                                                                                     finish specify or qualify node
                                                                                                                                                                                                                                                     start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                                                     finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                                                 finish declaration
                                                                                                                                                                                                                                                 start compound expr
                                                                                                                                                                                                                                                     start declaration line:119
                                                                                                                                                                                                                                                         start specify or qualify node
                                                                                                                                                                                                                                                         finish specify or qualify node
                                                                                                                                                                                                                                                         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                                                         finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                                                     finish declaration
                                                                                                                                                                                                                                                     start compound expr
                                                                                                                                                                                                                                                         start declaration line:121
                                                                                                                                                                                                                                                             start specify or qualify node
                                                                                                                                                                                                                                                             finish specify or qualify node
                                                                                                                                                                                                                                                             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                                                             finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                                                         finish declaration
                                                                                                                                                                                                                                                         start compound expr
                                                                                                                                                                                                                                                             start declaration line:123
                                                                                                                                                                                                                                                                 start specify or qualify node
                                                                                                                                                                                                                                                                 finish specify or qualify node
                                                                                                                                                                                                                                                                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                                                                 finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                                                             finish declaration
                                                                                                                                                                                                                                                             start compound expr
                                                                                                                                                                                                                                                                 start declaration line:125
                                                                                                                                                                                                                                                                     start specify or qualify node
                                                                                                                                                                                                                                                                     finish specify or qualify node
                                                                                                                                                                                                                                                                     start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                                                                     finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                                                                 finish declaration
                                                                                                                                                                                                                                                                 start compound expr
                                                                                                                                                                                                                                                                     start declaration line:127
                                                                                                                                                                                                                                                                         start specify or qualify node
                                                                                                                                                                                                                                                                         finish specify or qualify node
                                                                                                                                                                                                                                                                         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                                                                         finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                                                                     finish declaration
                                                                                                                                                                                                                                                                     start compound expr
                                                                                                                                                                                                                                                                         start declaration line:129
                                                                                                                                                                                                                                                                             start specify or qualify node
                                                                                                                                                                                                                                                                             finish specify or qualify node
                                                                                                                                                                                                                                                                             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                                                                             finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                                                                         finish declaration
                                                                                                                                                                                                                                                                         start compound expr
                                                                                                                                                                                                                                                                             start declaration line:131
                                                                                                                                                                                                                                                                                 start specify or qualify node
                                                                                                                                                                                                                                                                                 finish specify or qualify node
                                                                                                                                                                                                                                                                                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                 finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                                                                             finish declaration
                                                                                                                                                                                                                                                                             start compound expr
                                                                                                                                                                                                                                                                                 start declaration line:133
                                                                                                                                                                                                                                                                                     start specify or qualify node
                                                                                                                                                                                                                                                                                     finish specify or qualify node
                                                                                                                                                                                                                                                                                     start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                     finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                 finish declaration
                                                                                                                                                                                                                                                                                 start compound expr
                                                                                                                                                                                                                                                                                     start declaration line:135
                                                                                                                                                                                                                                                                                         start specify or qualify node
                                                                                                                                                                                                                                                                                         finish specify or qualify node
                                                                                                                                                                                                                                                                                         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                         finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                     finish declaration
                                                                                                                                                                                                                                                                                     start compound expr
                                                                                                                                                                                                                                                                                         start declaration line:137
                                                                                                                                                                                                                                                                                             start specify or qualify node
                                                                                                                                                                                                                                                                                             finish specify or qualify node
                                                                                                                                                                                                                                                                                             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                             finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                         finish declaration
                                                                                                                                                                                                                                                                                         start compound expr
                                                                                                                                                                                                                                                                                             start declaration line:139
                                                                                                                                                                                                                                                                                                 start specify or qualify node
                                                                                                                                                                                                                                                                                                 finish specify or qualify node
                                                                                                                                                                                                                                                                                                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                                 finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                             finish declaration
                                                                                                                                                                                                                                                                                             start compound expr
                                                                                                                                                                                                                                                                                                 start declaration line:141
                                                                                                                                                                                                                                                                                                     start specify or qualify node
                                                                                                                                                                                                                                                                                                     finish specify or qualify node
                                                                                                                                                                                                                                                                                                     start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                                     finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                                 finish declaration
                                                                                                                                                                                                                                                                                                 start compound expr
                                                                                                                                                                                                                                                                                                     start declaration line:143
                                                                                                                                                                                                                                                                                                         start specify or qualify node
                                                                                                                                                                                                                                                                                                         finish specify or qualify node
                                                                                                                                                                                                                                                                                                         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                                         finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                                     finish declaration
                                                                                                                                                                                                                                                                                                     start compound expr
                                                                                                                                                                                                                                                                                                         start declaration line:145
                                                                                                                                                                                                                                                                                                             start specify or qualify node
                                                                                                                                                                                                                                                                                                             finish specify or qualify node
                                                                                                                                                                                                                                                                                                             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                                             finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                                         finish declaration
                                                                                                                                                                                                                                                                                                         start compound expr
                                                                                                                                                                                                                                                                                                             start declaration line:147
                                                                                                                                                                                                                                                                                                                 start specify or qualify node
                                                                                                                                                                                                                                                                                                                 finish specify or qualify node
                                                                                                                                                                                                                                                                                                                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                                                 finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                                             finish declaration
                                                                                                                                                                                                                                                                                                             start compound expr
                                                                                                                                                                                                                                                                                                                 start declaration line:149
                                                                                                                                                                                                                                                                                                                     start specify or qualify node
                                                                                                                                                                                                                                                                                                                     finish specify or qualify node
                                                                                                                                                                                                                                                                                                                     start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                                                     finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                                                 finish declaration
                                                                                                                                                                                                                                                                                                                 start compound expr
                                                                                                                                                                                                                                                                                                                     start declaration line:151
                                                                                                                                                                                                                                                                                                                         start specify or qualify node
                                                                                                                                                                                                                                                                                                                         finish specify or qualify node
                                                                                                                                                                                                                                                                                                                         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                                                         finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                                                     finish declaration
                                                                                                                                                                                                                                                                                                                     start compound expr
                                                                                                                                                                                                                                                                                                                         start declaration line:153
                                                                                                                                                                                                                                                                                                                             start specify or qualify node
                                                                                                                                                                                                                                                                                                                             finish specify or qualify node
                                                                                                                                                                                                                                                                                                                             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                                                             finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                                                         finish declaration
                                                                                                                                                                                                                                                                                                                         start compound expr
                                                                                                                                                                                                                                                                                                                             start declaration line:155
                                                                                                                                                                                                                                                                                                                                 start specify or qualify node
                                                                                                                                                                                                                                                                                                                                 finish specify or qualify node
                                                                                                                                                                                                                                                                                                                                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                                                                 finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                                                             finish declaration
                                                                                                                                                                                                                                                                                                                             start compound expr
                                                                                                                                                                                                                                                                                                                                 start declaration line:157
                                                                                                                                                                                                                                                                                                                                     start specify or qualify node
                                                                                                                                                                                                                                                                                                                                     finish specify or qualify node
                                                                                                                                                                                                                                                                                                                                     start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                                                                     finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                                                                 finish declaration
                                                                                                                                                                                                                                                                                                                                 start compound expr
                                                                                                                                                                                                                                                                                                                                     start declaration line:159
                                                                                                                                                                                                                                                                                                                                         start specify or qualify node
                                                                                                                                                                                                                                                                                                                                         finish specify or qualify node
                                                                                                                                                                                                                                                                                                                                         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                                                                         finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                                                                     finish declaration
                                                                                                                                                                                                                                                                                                                                     start compound expr
                                                                                                                                                                                                                                                                                                                                         start declaration line:161
                                                                                                                                                                                                                                                                                                                                             start specify or qualify node
                                                                                                                                                                                                                                                                                                                                             finish specify or qualify node
                                                                                                                                                                                                                                                                                                                                             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                                                                             finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                                                                         finish declaration
                                                                                                                                                                                                                                                                                                                                         start compound expr
                                                                                                                                                                                                                                                                                                                                             start declaration line:163
                                                                                                                                                                                                                                                                                                                                                 start specify or qualify node
                                                                                                                                                                                                                                                                                                                                                 finish specify or qualify node
                                                                                                                                                                                                                                                                                                                                                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                                                                                 finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                                                                             finish declaration
                                                                                                                                                                                                                                                                                                                                             start compound expr
                                                                                                                                                                                                                                                                                                                                                 start declaration line:165
                                                                                                                                                                                                                                                                                                                                                     start specify or qualify node
                                                                                                                                                                                                                                                                                                                                                     finish specify or qualify node
                                                                                                                                                                                                                                                                                                                                                     start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                                                                                     finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                                                                                 finish declaration
                                                                                                                                                                                                                                                                                                                                                 start compound expr
                                                                                                                                                                                                                                                                                                                                                     start declaration line:167
                                                                                                                                                                                                                                                                                                                                                         start specify or qualify node
                                                                                                                                                                                                                                                                                                                                                         finish specify or qualify node
                                                                                                                                                                                                                                                                                                                                                         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                                                                                         finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                                                                                     finish declaration
                                                                                                                                                                                                                                                                                                                                                     start compound expr
                                                                                                                                                                                                                                                                                                                                                         start declaration line:169
                                                                                                                                                                                                                                                                                                                                                             start specify or qualify node
                                                                                                                                                                                                                                                                                                                                                             finish specify or qualify node
                                                                                                                                                                                                                                                                                                                                                             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                                                                                             finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                                                                                         finish declaration
                                                                                                                                                                                                                                                                                                                                                         start compound expr
                                                                                                                                                                                                                                                                                                                                                             start declaration line:171
                                                                                                                                                                                                                                                                                                                                                                 start specify or qualify node
                                                                                                                                                                                                                                                                                                                                                                 finish specify or qualify node
                                                                                                                                                                                                                                                                                                                                                                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                                                                                                 finish declarator
+test point 2
+test point 3
                                                                                                                                                                                                                                                                                                                                                             finish declaration
                                                                                                                                                                                                                                                                                                                                                         end comopound stmt
                                                                                                                                                                                                                                                                                                                                                     end comopound stmt

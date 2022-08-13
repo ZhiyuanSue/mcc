@@ -1,5 +1,50 @@
 read in file name:
 	./bin/test_src/expr_test_11.c
+parser start
+
+
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
 start print ast tree
 <translation_unit ns:1>
     <external_decl ns:1>
@@ -185,9 +230,17 @@ finish print ast tree
     start declaration line:0
         start specify or qualify node
             start enum
+test point 2
+test point 3
                 start primary expr
                 <Type>:< signed_int >
                 end primary expr
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
             finish enum
         finish specify or qualify node
     finish declaration
@@ -199,21 +252,53 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start specify or qualify node
     finish specify or qualify node
@@ -222,19 +307,43 @@ finish print ast tree
             start specify or qualify node
             finish specify or qualify node
         finish func
+test point 2
+test point 3
+test point 2
+test point 3
     finish declarator
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
     start compound expr
         start declaration line:4
             start specify or qualify node
             finish specify or qualify node
             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
             finish declarator
+test point 2
+test point 3
         finish declaration
         start declaration line:5
             start specify or qualify node
             finish specify or qualify node
             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
             finish declarator
+test point 2
+test point 3
             start primary expr
             <Type>:< signed_int >
             end primary expr
@@ -242,24 +351,32 @@ finish print ast tree
         start expr expr
             start assignment expr
                 start primary expr
+test point 2
+test point 3
                 <Type>:< signed_int >
                 end primary expr
                 start primary expr
                     start expr
                         start postfix expr
                             start primary expr
+test point 2
+test point 3
                             <Type>:< signed_int >
                             end primary expr
                         <Type>:< signed_int >
                         end postfix expr
                         start postfix expr
                             start primary expr
+test point 2
+test point 3
                             <Type>:< signed_int >
                             end primary expr
                         <Type>:< signed_int >
                         end postfix expr
                         start add
                             start primary expr
+test point 2
+test point 3
                             <Type>:< signed_int >
                             end primary expr
                             start primary expr
@@ -276,6 +393,8 @@ finish print ast tree
             start expr expr
                 start postfix expr
                     start primary expr
+test point 2
+test point 3
                     <Type>:< function , void >
                     end primary expr
                     start primary expr
@@ -301,14 +420,24 @@ finish print ast tree
                             <Type>:< signed_int >
                             end primary expr
                         finish array
+test point 2
+test point 3
+test point 2
+test point 3
                     finish declarator
+test point 2
+test point 3
                 finish declaration
                 start expr expr
                     start postfix expr
                         start primary expr
+test point 2
+test point 3
                         <Type>:< array , signed_int >
                         end primary expr
                         start primary expr
+test point 2
+test point 3
                         <Type>:< const , signed_int >
                         end primary expr
                     <Type>:< signed_int >

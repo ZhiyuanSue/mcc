@@ -22,7 +22,7 @@ AST_BASE* parser(VEC* token_list,VEC* pvec){
     tei.ce=0;
     tei.error_line=0;
     tei.error_token_value=NULL;
-    memset(new_sym_table_rec,0,sizeof(char)*STATE_NUM);
+    m_memset(new_sym_table_rec,'\0',sizeof(char)*STATE_NUM);
     new_sym_table_rec[translation_unit]=1;
     new_sym_table_rec[function_definition]=1;
     new_sym_table_rec[declaration]=1;
@@ -383,7 +383,7 @@ bool p_symbol_table(AST_BASE* ast_node,SYM* father){
         ast_node->expr_attribute=m_alloc(sizeof(EXPR_NODE_ATTR));
         ast_node->expr_attribute->const_expr=false;
         ast_node->expr_attribute->data_field=m_alloc(sizeof(VALUE_DATA));
-        memset(ast_node->expr_attribute->data_field,0,sizeof(VALUE_DATA));
+        m_memset(ast_node->expr_attribute->data_field,'\0',sizeof(VALUE_DATA));
         ast_node->expr_attribute->data_size=0;
         ast_node->expr_attribute->is_lvalue=false;
         ast_node->expr_attribute->type_vec=NULL;

@@ -1,5 +1,730 @@
 read in file name:
 	./bin/test_src/vector_test.c
+parser start
+
+
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
 start print ast tree
 <translation_unit ns:1>
     <external_decl ns:1>
@@ -4499,19 +5224,37 @@ finish print ast tree
         start specify or qualify node
         finish specify or qualify node
         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:3
         start specify or qualify node
         finish specify or qualify node
         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:4
         start specify or qualify node
         finish specify or qualify node
         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:6
         start specify or qualify node
@@ -4519,79 +5262,209 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                     start struct union
                         start specify or qualify node
                         finish specify or qualify node
                         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                         finish declarator
+test point 2
+test point 3
+test point 2
+test point 3
                     finish struct union
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
             finish struct union
         finish specify or qualify node
         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:16
         start specify or qualify node
             start struct union
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
             finish struct union
         finish specify or qualify node
         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:21
         start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
         finish specify or qualify node
         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:23
         start specify or qualify node
             start struct union
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
             finish struct union
         finish specify or qualify node
         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:29
         start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
         finish specify or qualify node
     finish declaration
     start declaration line:30
         start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
         finish specify or qualify node
     finish declaration
     start declaration line:31
         start specify or qualify node
+test point 2
+test point 3
         finish specify or qualify node
         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:32
         start specify or qualify node
         finish specify or qualify node
         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:33
         start specify or qualify node
@@ -4599,111 +5472,359 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
+                start specify or qualify node
+test point 2
+test point 3
+                finish specify or qualify node
+                start declarator
+test point 2
+test point 3
+test point 2
+test point 3
+                finish declarator
+test point 2
+test point 3
+                start specify or qualify node
+test point 2
+test point 3
+                finish specify or qualify node
+                start declarator
+test point 2
+test point 3
+test point 2
+test point 3
+                finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
+                start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
+                finish specify or qualify node
+                start declarator
+test point 2
+test point 3
+test point 2
+test point 3
+                finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
+                start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
+                finish specify or qualify node
+                start declarator
+test point 2
+test point 3
+test point 2
+test point 3
+                finish declarator
+test point 2
+test point 3
+                start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
+                finish specify or qualify node
+                start declarator
+test point 2
+test point 3
+test point 2
+test point 3
+                finish declarator
+test point 2
+test point 3
+                start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
+                finish specify or qualify node
+                start declarator
+test point 2
+test point 3
+test point 2
+test point 3
+                finish declarator
+test point 2
+test point 3
+                start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
+                finish specify or qualify node
+                start declarator
+test point 2
+test point 3
+test point 2
+test point 3
+                finish declarator
+test point 2
+test point 3
+                start specify or qualify node
+test point 2
+test point 3
+                finish specify or qualify node
+                start declarator
+test point 2
+test point 3
+test point 2
+test point 3
+                finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
+                start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
+                finish specify or qualify node
+                start declarator
+test point 2
+test point 3
+test point 2
+test point 3
+                finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
-                start specify or qualify node
-                finish specify or qualify node
-                start declarator
-                finish declarator
-                start specify or qualify node
-                finish specify or qualify node
-                start declarator
-                finish declarator
-                start specify or qualify node
-                finish specify or qualify node
-                start declarator
-                finish declarator
-                start specify or qualify node
-                finish specify or qualify node
-                start declarator
-                finish declarator
-                start specify or qualify node
-                finish specify or qualify node
-                start declarator
-                finish declarator
-                start specify or qualify node
-                finish specify or qualify node
-                start declarator
-                finish declarator
-                start specify or qualify node
-                finish specify or qualify node
-                start declarator
-                finish declarator
-                start specify or qualify node
-                finish specify or qualify node
-                start declarator
-                finish declarator
-                start specify or qualify node
-                finish specify or qualify node
-                start declarator
-                finish declarator
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
             finish struct union
         finish specify or qualify node
     finish declaration
@@ -4715,9 +5836,21 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:79
         start specify or qualify node
@@ -4727,23 +5860,51 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:81
         start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
         finish specify or qualify node
         start declarator
             start func
                 start specify or qualify node
                 finish specify or qualify node
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:83
         start specify or qualify node
@@ -4753,9 +5914,21 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:85
         start specify or qualify node
@@ -4763,11 +5936,27 @@ finish print ast tree
         start declarator
             start func
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:87
         start specify or qualify node
@@ -4775,14 +5964,34 @@ finish print ast tree
         start declarator
             start func
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:89
         start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
         finish specify or qualify node
         start declarator
             start func
@@ -4791,18 +6000,40 @@ finish print ast tree
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:92
         start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
         finish specify or qualify node
         start declarator
             start func
@@ -4811,21 +6042,49 @@ finish print ast tree
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:96
         start specify or qualify node
@@ -4833,19 +6092,41 @@ finish print ast tree
         start declarator
             start func
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:99
         start specify or qualify node
@@ -4853,27 +6134,65 @@ finish print ast tree
         start declarator
             start func
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:103
         start specify or qualify node
@@ -4881,19 +6200,41 @@ finish print ast tree
         start declarator
             start func
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:106
         start specify or qualify node
@@ -4901,19 +6242,41 @@ finish print ast tree
         start declarator
             start func
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:109
         start specify or qualify node
@@ -4925,9 +6288,21 @@ finish print ast tree
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:111
         start specify or qualify node
@@ -4939,9 +6314,21 @@ finish print ast tree
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:113
         start specify or qualify node
@@ -4953,19 +6340,47 @@ finish print ast tree
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:116
         start specify or qualify node
@@ -4977,15 +6392,33 @@ finish print ast tree
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:119
         start specify or qualify node
@@ -4997,15 +6430,33 @@ finish print ast tree
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:122
         start specify or qualify node
@@ -5017,19 +6468,47 @@ finish print ast tree
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:125
         start specify or qualify node
@@ -5039,13 +6518,35 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:127
         start specify or qualify node
@@ -5057,15 +6558,37 @@ finish print ast tree
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:130
         start specify or qualify node
@@ -5073,11 +6596,27 @@ finish print ast tree
         start declarator
             start func
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:132
         start specify or qualify node
@@ -5087,7 +6626,13 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:134
         start specify or qualify node
@@ -5097,13 +6642,35 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:136
         start specify or qualify node
@@ -5113,9 +6680,21 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:138
         start specify or qualify node
@@ -5125,9 +6704,21 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:140
         start specify or qualify node
@@ -5137,16 +6728,42 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:142
         start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
         finish specify or qualify node
         start declarator
             start func
@@ -5155,26 +6772,72 @@ finish print ast tree
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:146
         start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
         finish specify or qualify node
         start declarator
             start func
@@ -5183,23 +6846,65 @@ finish print ast tree
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:150
         start specify or qualify node
@@ -5207,19 +6912,45 @@ finish print ast tree
         start declarator
             start func
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:153
         start specify or qualify node
@@ -5227,19 +6958,47 @@ finish print ast tree
         start declarator
             start func
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:155
         start specify or qualify node
@@ -5247,15 +7006,41 @@ finish print ast tree
         start declarator
             start func
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:157
         start specify or qualify node
@@ -5263,11 +7048,27 @@ finish print ast tree
         start declarator
             start func
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:159
         start specify or qualify node
@@ -5275,11 +7076,27 @@ finish print ast tree
         start declarator
             start func
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:161
         start specify or qualify node
@@ -5287,11 +7104,27 @@ finish print ast tree
         start declarator
             start func
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:163
         start specify or qualify node
@@ -5299,11 +7132,27 @@ finish print ast tree
         start declarator
             start func
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:165
         start specify or qualify node
@@ -5311,11 +7160,27 @@ finish print ast tree
         start declarator
             start func
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:167
         start specify or qualify node
@@ -5325,9 +7190,21 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:169
         start specify or qualify node
@@ -5335,19 +7212,41 @@ finish print ast tree
         start declarator
             start func
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:172
         start specify or qualify node
@@ -5355,19 +7254,41 @@ finish print ast tree
         start declarator
             start func
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:175
         start specify or qualify node
@@ -5379,9 +7300,21 @@ finish print ast tree
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:177
         start specify or qualify node
@@ -5393,9 +7326,21 @@ finish print ast tree
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:179
         start specify or qualify node
@@ -5407,21 +7352,43 @@ finish print ast tree
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:181
         start specify or qualify node
         finish specify or qualify node
         start declarator
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:183
         start specify or qualify node
@@ -5431,17 +7398,45 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:185
         start specify or qualify node
@@ -5451,13 +7446,31 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:187
         start specify or qualify node
@@ -5469,25 +7482,57 @@ finish print ast tree
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:189
         start specify or qualify node
         finish specify or qualify node
         start declarator
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:191
         start specify or qualify node
@@ -5495,11 +7540,27 @@ finish print ast tree
         start declarator
             start func
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:193
         start specify or qualify node
@@ -5509,9 +7570,21 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:195
         start specify or qualify node
@@ -5521,13 +7594,43 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:196
         start specify or qualify node
             start enum
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
             finish enum
         finish specify or qualify node
     finish declaration
@@ -5535,51 +7638,151 @@ finish print ast tree
         start specify or qualify node
         finish specify or qualify node
         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:206
         start specify or qualify node
             start struct union
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
             finish struct union
         finish specify or qualify node
         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:211
         start specify or qualify node
             start struct union
                 start specify or qualify node
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
+                start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
+                finish specify or qualify node
+                start declarator
+test point 2
+test point 3
+test point 2
+test point 3
+                finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
-                start specify or qualify node
-                finish specify or qualify node
-                start declarator
-                finish declarator
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
             finish struct union
         finish specify or qualify node
         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:218
         start specify or qualify node
@@ -5591,21 +7794,45 @@ finish print ast tree
                 start declarator
                     start array
                     finish array
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start array
                     finish array
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start array
                     finish array
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:219
         start specify or qualify node
@@ -5615,9 +7842,21 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:220
         start specify or qualify node
@@ -5627,9 +7866,21 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:222
         start specify or qualify node
@@ -5641,9 +7892,21 @@ finish print ast tree
                 start declarator
                     start array
                     finish array
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:223
         start specify or qualify node
@@ -5655,9 +7918,21 @@ finish print ast tree
                 start declarator
                     start array
                     finish array
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:224
         start specify or qualify node
@@ -5667,9 +7942,21 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:225
         start specify or qualify node
@@ -5679,9 +7966,21 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:227
         start specify or qualify node
@@ -5689,25 +7988,67 @@ finish print ast tree
         start declarator
             start func
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:229
         start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
         finish specify or qualify node
         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:230
         start specify or qualify node
@@ -5715,11 +8056,33 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
             finish struct union
         finish specify or qualify node
     finish declaration
@@ -5729,37 +8092,103 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
             finish struct union
         finish specify or qualify node
         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:240
         start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
         finish specify or qualify node
         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:241
         start specify or qualify node
             start struct union
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
             finish struct union
         finish specify or qualify node
     finish declaration
@@ -5767,28 +8196,78 @@ finish print ast tree
         start specify or qualify node
             start struct union
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
             finish struct union
         finish specify or qualify node
         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
     finish specify or qualify node
     start declarator
         start func
             start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
             finish specify or qualify node
             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
             finish declarator
+test point 2
+test point 3
         finish func
+test point 2
+test point 3
+test point 2
+test point 3
     finish declarator
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
     start compound expr
         start if expr
             start relation expr
                 start primary expr
+test point 2
+test point 3
                 <Type>:< unsigned_long >
                 end primary expr
                 start primary expr
@@ -5805,6 +8284,8 @@ finish print ast tree
         start if expr
             start relation expr
                 start primary expr
+test point 2
+test point 3
                 <Type>:< unsigned_long >
                 end primary expr
                 start primary expr
@@ -5821,6 +8302,8 @@ finish print ast tree
         start if expr
             start relation expr
                 start primary expr
+test point 2
+test point 3
                 <Type>:< unsigned_long >
                 end primary expr
                 start primary expr
@@ -5838,7 +8321,13 @@ finish print ast tree
             start specify or qualify node
             finish specify or qualify node
             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
             finish declarator
+test point 2
+test point 3
             start primary expr
             <Type>:< signed_int >
             end primary expr
@@ -5846,6 +8335,8 @@ finish print ast tree
         start while expr
             start relation expr
                 start primary expr
+test point 2
+test point 3
                 <Type>:< unsigned_long >
                 end primary expr
                 start primary expr
@@ -5857,10 +8348,14 @@ finish print ast tree
                 start expr expr
                     start assignment expr
                         start primary expr
+test point 2
+test point 3
                         <Type>:< unsigned_long >
                         end primary expr
                         start shift
                             start primary expr
+test point 2
+test point 3
                             <Type>:< unsigned_long >
                             end primary expr
                             start primary expr
@@ -5873,6 +8368,8 @@ finish print ast tree
                     start expr expr
                         start postfix expr
                             start primary expr
+test point 2
+test point 3
                             <Type>:< signed_int >
                             end primary expr
                         <Type>:< signed_int >
@@ -5881,12 +8378,18 @@ finish print ast tree
                 end while stmt
                 start return expr
                     start primary expr
+test point 2
+test point 3
                     <Type>:< signed_int >
                     end primary expr
                 end return stmt
             end comopound stmt
     start declaration line:265
         start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
         finish specify or qualify node
         start declarator
             start func
@@ -5895,21 +8398,53 @@ finish print ast tree
                 start declarator
                     start array
                     finish array
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:266
         start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
         finish specify or qualify node
         start declarator
             start func
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:267
         start specify or qualify node
@@ -5917,11 +8452,27 @@ finish print ast tree
         start declarator
             start func
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:268
         start specify or qualify node
@@ -5929,11 +8480,27 @@ finish print ast tree
         start declarator
             start func
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:269
         start specify or qualify node
@@ -5941,7 +8508,13 @@ finish print ast tree
         start declarator
             start func
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:271
         start specify or qualify node
@@ -5949,11 +8522,27 @@ finish print ast tree
         start declarator
             start func
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:272
         start specify or qualify node
@@ -5963,9 +8552,21 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:274
         start specify or qualify node
@@ -5973,31 +8574,93 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
             finish struct union
         finish specify or qualify node
         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:283
         start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
         finish specify or qualify node
         start declarator
             start func
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:284
         start specify or qualify node
@@ -6005,15 +8668,37 @@ finish print ast tree
         start declarator
             start func
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:285
         start specify or qualify node
@@ -6021,19 +8706,55 @@ finish print ast tree
         start declarator
             start func
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:286
         start specify or qualify node
@@ -6041,11 +8762,27 @@ finish print ast tree
         start declarator
             start func
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:287
         start specify or qualify node
@@ -6053,11 +8790,27 @@ finish print ast tree
         start declarator
             start func
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:288
         start specify or qualify node
@@ -6065,11 +8818,27 @@ finish print ast tree
         start declarator
             start func
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:289
         start specify or qualify node
@@ -6077,35 +8846,91 @@ finish print ast tree
         start declarator
             start func
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
             finish func
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
     finish specify or qualify node
     start declarator
         start func
             start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
             finish specify or qualify node
             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
             finish declarator
+test point 2
+test point 3
         finish func
+test point 2
+test point 3
+test point 2
+test point 3
     finish declarator
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
     start compound expr
         start declaration line:293
             start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
             finish specify or qualify node
             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
             finish declarator
+test point 2
+test point 3
             start postfix expr
                 start primary expr
+test point 2
+test point 3
                 <Type>:< function , point , void >
                 end primary expr
                 start unary
                     start primary expr
                         start primary expr
+test point 2
+test point 3
                         <Type>:< struct >
                         end primary expr
                     <Type>:< struct >
@@ -6119,16 +8944,22 @@ finish print ast tree
             start assignment expr
                 start postfix expr
                     start primary expr
+test point 2
+test point 3
                     <Type>:< point , struct >
                     end primary expr
                 <Type>:< point , point , void >
                 end postfix expr
                 start postfix expr
                     start primary expr
+test point 2
+test point 3
                     <Type>:< function , point , void >
                     end primary expr
                     start mul
                         start primary expr
+test point 2
+test point 3
                         <Type>:< unsigned_long >
                         end primary expr
                         start unary
@@ -6146,6 +8977,8 @@ finish print ast tree
                 start assignment expr
                     start postfix expr
                         start primary expr
+test point 2
+test point 3
                         <Type>:< point , struct >
                         end primary expr
                     <Type>:< unsigned_long >
@@ -6159,6 +8992,8 @@ finish print ast tree
                     start assignment expr
                         start postfix expr
                             start primary expr
+test point 2
+test point 3
                             <Type>:< point , struct >
                             end primary expr
                         <Type>:< unsigned_long >
@@ -6170,6 +9005,8 @@ finish print ast tree
                     end assignment expr
                     start return expr
                         start primary expr
+test point 2
+test point 3
                         <Type>:< point , struct >
                         end primary expr
                     end return stmt
@@ -6179,19 +9016,49 @@ finish print ast tree
     start declarator
         start func
             start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
             finish specify or qualify node
             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
             finish declarator
+test point 2
+test point 3
             start specify or qualify node
             finish specify or qualify node
             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
             finish declarator
+test point 2
+test point 3
         finish func
+test point 2
+test point 3
+test point 2
+test point 3
     finish declarator
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
     start compound expr
         start if expr
             start equal expr
                 start primary expr
+test point 2
+test point 3
                 <Type>:< point , struct >
                 end primary expr
                 start primary expr
@@ -6205,9 +9072,13 @@ finish print ast tree
         start expr expr
             start postfix expr
                 start primary expr
+test point 2
+test point 3
                 <Type>:< function , void >
                 end primary expr
                 start primary expr
+test point 2
+test point 3
                 <Type>:< point , struct >
                 end primary expr
             <Type>:< void >
@@ -6216,11 +9087,15 @@ finish print ast tree
                 start assignment expr
                     start postfix expr
                         start primary expr
+test point 2
+test point 3
                         <Type>:< point , struct >
                         end primary expr
                         start primary expr
                             start postfix expr
                                 start primary expr
+test point 2
+test point 3
                                 <Type>:< point , struct >
                                 end primary expr
                             <Type>:< unsigned_long >
@@ -6230,6 +9105,8 @@ finish print ast tree
                     <Type>:< point , void >
                     end postfix expr
                     start primary expr
+test point 2
+test point 3
                     <Type>:< point , void >
                     end primary expr
                 <Type>:< point , void >
@@ -6239,6 +9116,8 @@ finish print ast tree
                         start primary expr
                             start postfix expr
                                 start primary expr
+test point 2
+test point 3
                                 <Type>:< point , struct >
                                 end primary expr
                             <Type>:< unsigned_long >
@@ -6253,23 +9132,67 @@ finish print ast tree
     start declarator
         start func
             start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
             finish specify or qualify node
             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
             finish declarator
+test point 2
+test point 3
             start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
             finish specify or qualify node
             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
             finish declarator
+test point 2
+test point 3
             start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
             finish specify or qualify node
             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
             finish declarator
+test point 2
+test point 3
         finish func
+test point 2
+test point 3
+test point 2
+test point 3
     finish declarator
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
     start compound expr
         start if expr
             start equal expr
                 start primary expr
+test point 2
+test point 3
                 <Type>:< point , struct >
                 end primary expr
                 start primary expr
@@ -6283,9 +9206,13 @@ finish print ast tree
         start if expr
             start equal expr
                 start primary expr
+test point 2
+test point 3
                 <Type>:< unsigned_long >
                 end primary expr
                 start primary expr
+test point 2
+test point 3
                 <Type>:< unsigned_long >
                 end primary expr
             <Type>:< signed_int >
@@ -6296,11 +9223,15 @@ finish print ast tree
         start while expr
             start relation expr
                 start primary expr
+test point 2
+test point 3
                 <Type>:< unsigned_long >
                 end primary expr
                 start primary expr
                     start postfix expr
                         start primary expr
+test point 2
+test point 3
                         <Type>:< point , struct >
                         end primary expr
                     <Type>:< unsigned_long >
@@ -6313,10 +9244,14 @@ finish print ast tree
                 start assignment expr
                     start postfix expr
                         start primary expr
+test point 2
+test point 3
                         <Type>:< point , struct >
                         end primary expr
                         start postfix expr
                             start primary expr
+test point 2
+test point 3
                             <Type>:< unsigned_long >
                             end primary expr
                         <Type>:< unsigned_long >
@@ -6325,10 +9260,14 @@ finish print ast tree
                     end postfix expr
                     start postfix expr
                         start primary expr
+test point 2
+test point 3
                         <Type>:< point , struct >
                         end primary expr
                         start postfix expr
                             start primary expr
+test point 2
+test point 3
                             <Type>:< unsigned_long >
                             end primary expr
                         <Type>:< unsigned_long >
@@ -6343,6 +9282,8 @@ finish print ast tree
                     start primary expr
                         start postfix expr
                             start primary expr
+test point 2
+test point 3
                             <Type>:< point , struct >
                             end primary expr
                         <Type>:< unsigned_long >
@@ -6350,6 +9291,8 @@ finish print ast tree
                     <Type>:< unsigned_long >
                     end primary expr
                     start primary expr
+test point 2
+test point 3
                     <Type>:< unsigned_long >
                     end primary expr
                 <Type>:< unsigned_long >
@@ -6357,9 +9300,13 @@ finish print ast tree
                 start expr expr
                     start postfix expr
                         start primary expr
+test point 2
+test point 3
                         <Type>:< function , void >
                         end primary expr
                         start primary expr
+test point 2
+test point 3
                         <Type>:< point , struct >
                         end primary expr
                     <Type>:< void >
@@ -6370,15 +9317,39 @@ finish print ast tree
     start declarator
         start func
             start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
             finish specify or qualify node
             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
             finish declarator
+test point 2
+test point 3
         finish func
+test point 2
+test point 3
+test point 2
+test point 3
     finish declarator
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
     start compound expr
         start if expr
             start equal expr
                 start primary expr
+test point 2
+test point 3
                 <Type>:< point , struct >
                 end primary expr
                 start primary expr
@@ -6394,6 +9365,8 @@ finish print ast tree
                 start primary expr
                     start postfix expr
                         start primary expr
+test point 2
+test point 3
                         <Type>:< point , struct >
                         end primary expr
                     <Type>:< unsigned_long >
@@ -6413,6 +9386,8 @@ finish print ast tree
                 start primary expr
                     start postfix expr
                         start primary expr
+test point 2
+test point 3
                         <Type>:< point , struct >
                         end primary expr
                     <Type>:< unsigned_long >
@@ -6427,15 +9402,39 @@ finish print ast tree
     start declarator
         start func
             start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
             finish specify or qualify node
             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
             finish declarator
+test point 2
+test point 3
         finish func
+test point 2
+test point 3
+test point 2
+test point 3
     finish declarator
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
     start compound expr
         start if expr
             start equal expr
                 start primary expr
+test point 2
+test point 3
                 <Type>:< point , struct >
                 end primary expr
                 start primary expr
@@ -6451,6 +9450,8 @@ finish print ast tree
                 start primary expr
                     start postfix expr
                         start primary expr
+test point 2
+test point 3
                         <Type>:< point , struct >
                         end primary expr
                     <Type>:< unsigned_long >
@@ -6459,6 +9460,8 @@ finish print ast tree
                 end primary expr
                 start postfix expr
                     start primary expr
+test point 2
+test point 3
                     <Type>:< point , struct >
                     end primary expr
                 <Type>:< unsigned_long >
@@ -6472,6 +9475,8 @@ finish print ast tree
             start relation expr
                 start postfix expr
                     start primary expr
+test point 2
+test point 3
                     <Type>:< point , struct >
                     end primary expr
                 <Type>:< unsigned_long >
@@ -6485,6 +9490,8 @@ finish print ast tree
                 start assignment expr
                     start postfix expr
                         start primary expr
+test point 2
+test point 3
                         <Type>:< point , struct >
                         end primary expr
                     <Type>:< unsigned_long >
@@ -6499,9 +9506,17 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start postfix expr
                     start primary expr
+test point 2
+test point 3
                     <Type>:< point , struct >
                     end primary expr
                 <Type>:< point , point , void >
@@ -6511,12 +9526,16 @@ finish print ast tree
                 start assignment expr
                     start postfix expr
                         start primary expr
+test point 2
+test point 3
                         <Type>:< point , struct >
                         end primary expr
                     <Type>:< point , point , void >
                     end postfix expr
                     start postfix expr
                         start primary expr
+test point 2
+test point 3
                         <Type>:< function , point , void >
                         end primary expr
                         start mul
@@ -6524,6 +9543,8 @@ finish print ast tree
                                 start shift
                                     start postfix expr
                                         start primary expr
+test point 2
+test point 3
                                         <Type>:< point , struct >
                                         end primary expr
                                     <Type>:< unsigned_long >
@@ -6549,21 +9570,29 @@ finish print ast tree
                 start expr expr
                     start postfix expr
                         start primary expr
+test point 2
+test point 3
                         <Type>:< function , point , extern , void >
                         end primary expr
                         start postfix expr
                             start primary expr
+test point 2
+test point 3
                             <Type>:< point , struct >
                             end primary expr
                         <Type>:< point , point , void >
                         end postfix expr
                         start primary expr
+test point 2
+test point 3
                         <Type>:< point , void >
                         end primary expr
                         start mul
                             start primary expr
                                 start postfix expr
                                     start primary expr
+test point 2
+test point 3
                                     <Type>:< point , struct >
                                     end primary expr
                                 <Type>:< unsigned_long >
@@ -6583,6 +9612,8 @@ finish print ast tree
                         start assignment expr
                             start postfix expr
                                 start primary expr
+test point 2
+test point 3
                                 <Type>:< point , struct >
                                 end primary expr
                             <Type>:< unsigned_long >
@@ -6590,6 +9621,8 @@ finish print ast tree
                             start shift
                                 start postfix expr
                                     start primary expr
+test point 2
+test point 3
                                     <Type>:< point , struct >
                                     end primary expr
                                 <Type>:< unsigned_long >
@@ -6604,9 +9637,13 @@ finish print ast tree
                         start expr expr
                             start postfix expr
                                 start primary expr
+test point 2
+test point 3
                                 <Type>:< function , void >
                                 end primary expr
                                 start primary expr
+test point 2
+test point 3
                                 <Type>:< point , void >
                                 end primary expr
                             <Type>:< void >
@@ -6617,15 +9654,39 @@ finish print ast tree
     start declarator
         start func
             start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
             finish specify or qualify node
             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
             finish declarator
+test point 2
+test point 3
         finish func
+test point 2
+test point 3
+test point 2
+test point 3
     finish declarator
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
     start compound expr
         start if expr
             start equal expr
                 start primary expr
+test point 2
+test point 3
                 <Type>:< point , struct >
                 end primary expr
                 start primary expr
@@ -6640,6 +9701,8 @@ finish print ast tree
             start relation expr
                 start postfix expr
                     start primary expr
+test point 2
+test point 3
                     <Type>:< point , struct >
                     end primary expr
                 <Type>:< unsigned_long >
@@ -6664,6 +9727,8 @@ finish print ast tree
                     start primary expr
                         start postfix expr
                             start primary expr
+test point 2
+test point 3
                             <Type>:< point , struct >
                             end primary expr
                         <Type>:< unsigned_long >
@@ -6677,6 +9742,8 @@ finish print ast tree
                 end shift
                 start postfix expr
                     start primary expr
+test point 2
+test point 3
                     <Type>:< point , struct >
                     end primary expr
                 <Type>:< unsigned_long >
@@ -6690,9 +9757,17 @@ finish print ast tree
             start specify or qualify node
             finish specify or qualify node
             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
             finish declarator
+test point 2
+test point 3
             start postfix expr
                 start primary expr
+test point 2
+test point 3
                 <Type>:< point , struct >
                 end primary expr
             <Type>:< point , point , void >
@@ -6702,12 +9777,16 @@ finish print ast tree
             start assignment expr
                 start postfix expr
                     start primary expr
+test point 2
+test point 3
                     <Type>:< point , struct >
                     end primary expr
                 <Type>:< point , point , void >
                 end postfix expr
                 start postfix expr
                     start primary expr
+test point 2
+test point 3
                     <Type>:< function , point , void >
                     end primary expr
                     start mul
@@ -6715,6 +9794,8 @@ finish print ast tree
                             start shift
                                 start postfix expr
                                     start primary expr
+test point 2
+test point 3
                                     <Type>:< point , struct >
                                     end primary expr
                                 <Type>:< unsigned_long >
@@ -6740,21 +9821,29 @@ finish print ast tree
             start expr expr
                 start postfix expr
                     start primary expr
+test point 2
+test point 3
                     <Type>:< function , point , extern , void >
                     end primary expr
                     start postfix expr
                         start primary expr
+test point 2
+test point 3
                         <Type>:< point , struct >
                         end primary expr
                     <Type>:< point , point , void >
                     end postfix expr
                     start primary expr
+test point 2
+test point 3
                     <Type>:< point , void >
                     end primary expr
                     start mul
                         start primary expr
                             start postfix expr
                                 start primary expr
+test point 2
+test point 3
                                 <Type>:< point , struct >
                                 end primary expr
                             <Type>:< unsigned_long >
@@ -6774,6 +9863,8 @@ finish print ast tree
                     start assignment expr
                         start postfix expr
                             start primary expr
+test point 2
+test point 3
                             <Type>:< point , struct >
                             end primary expr
                         <Type>:< unsigned_long >
@@ -6781,6 +9872,8 @@ finish print ast tree
                         start shift
                             start postfix expr
                                 start primary expr
+test point 2
+test point 3
                                 <Type>:< point , struct >
                                 end primary expr
                             <Type>:< unsigned_long >
@@ -6795,9 +9888,13 @@ finish print ast tree
                     start expr expr
                         start postfix expr
                             start primary expr
+test point 2
+test point 3
                             <Type>:< function , void >
                             end primary expr
                             start primary expr
+test point 2
+test point 3
                             <Type>:< point , void >
                             end primary expr
                         <Type>:< void >
@@ -6808,15 +9905,39 @@ finish print ast tree
     start declarator
         start func
             start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
             finish specify or qualify node
             start declarator
+test point 2
+test point 3
+test point 2
+test point 3
             finish declarator
+test point 2
+test point 3
         finish func
+test point 2
+test point 3
+test point 2
+test point 3
     finish declarator
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
     start compound expr
         start if expr
             start equal expr
                 start primary expr
+test point 2
+test point 3
                 <Type>:< point , struct >
                 end primary expr
                 start primary expr
@@ -6830,9 +9951,13 @@ finish print ast tree
         start expr expr
             start postfix expr
                 start primary expr
+test point 2
+test point 3
                 <Type>:< function , void >
                 end primary expr
                 start primary expr
+test point 2
+test point 3
                 <Type>:< point , struct >
                 end primary expr
                 start primary expr
@@ -6841,6 +9966,8 @@ finish print ast tree
                 start primary expr
                     start postfix expr
                         start primary expr
+test point 2
+test point 3
                         <Type>:< point , struct >
                         end primary expr
                     <Type>:< unsigned_long >
@@ -6852,9 +9979,13 @@ finish print ast tree
             start expr expr
                 start postfix expr
                     start primary expr
+test point 2
+test point 3
                     <Type>:< function , void >
                     end primary expr
                     start primary expr
+test point 2
+test point 3
                     <Type>:< point , struct >
                     end primary expr
                 <Type>:< void >

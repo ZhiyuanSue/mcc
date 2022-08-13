@@ -66,27 +66,7 @@ void print_symbol_table(SYM* symbol_table);
 VEC* get_symbol_hash(HASH* h);
 unsigned long long int SymbolCharToKey(char* symbol,NMSP name_space);
 bool symbol_item_cmp(void* a,void* b);
-inline SYM_ITEM* Create_symbol_item(char* symbol,NMSP name_space){
-    if(symbol==NULL)
-        return NULL;
-    SYM_ITEM* tmp=(SYM_ITEM*)m_alloc(sizeof(SYM_ITEM));
-    tmp->value=symbol;
-    tmp->name_space=name_space;
-    tmp->key=SymbolCharToKey(symbol,name_space);
-    tmp->count=HASH_CNT_FD;
-    tmp->declared=tmp->defined=false;
-    tmp->align_size=0;
-    tmp->linkage=LKA_NONE;
-    tmp->fspec_type=FSPEC_NONE;
-    tmp->Thread_local=false;
-    tmp->data_size=0;
-    tmp->data_field=(VALUE_DATA*)m_alloc(sizeof(VALUE_DATA));
-    memset(tmp->data_field,0,sizeof(VALUE_DATA));
-    tmp->type_vec=InitVEC(DEFAULT_CAPICITY);
-    tmp->init_value_ptr=NULL;
-    tmp->const_expr=false;
-    return tmp;
-}
+SYM_ITEM* Create_symbol_item(char* symbol,NMSP name_space);
 inline bool Copy_sym_item(SYM_ITEM* new,SYM_ITEM* old){
     if(!old)
         return false;

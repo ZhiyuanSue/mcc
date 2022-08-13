@@ -22,7 +22,7 @@ VEC* c_error;   /*errors*/
 VEC* tvec;  /*token*/
 AST_BASE* ast_root; /*ast*/
 IR_MODULE* ir_module; /*IR*/
-MEM_POOL* curr_heap;    /*heap point*/
+MEM_POOL* curr_heap=NULL;    /*heap point*/
 MEM_POOL* global_heap;  /*global*/
 MEM_POOL* file_heap;    /*just for a single file*/
 #ifdef _TEST_SEMANTICS_
@@ -59,6 +59,7 @@ int main(int argc,char* argv[]){
     if(!tvec)
         goto error;
     /*parser*/
+    printf("parser start\n\n\n");
     ast_root=parser(tvec,pvec);
     if(!ast_root)
         goto error;

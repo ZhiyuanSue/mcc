@@ -9,12 +9,14 @@
 #define DEFAULT_CAPICITY 3
 
 /*system alloc hash table*/
+/*
 typedef struct malloc_node M_NODE;
 struct malloc_node{
     void* p;
     M_NODE* next;
-};
+};*/
 /*item*/
+/*
 typedef union mem_item{
     struct {
         unsigned short chain_id;
@@ -24,7 +26,9 @@ typedef union mem_item{
     };
     unsigned char ALIGN[_ALIGN_SIZE_(_MCC_ALIGN_PACK_)];
 }MEM_ITEM;
+*/
 /*block*/
+/*
 typedef struct mem_block MEM_BLOCK;
 struct mem_block{
     MEM_BLOCK* next;
@@ -32,19 +36,19 @@ struct mem_block{
     unsigned short free_item_header;
     void* sys_malloc_res;
     void* data;
-};
+};*/
 /*pool*/
 typedef struct mem_pool{
     char name[8];   /* this size is not because of any special reason,just for fun*/
-    MEM_BLOCK* block_chain[MEM_BLOCK_CHAIN_NUM];
-    M_NODE* sys_alloc;
-    MEM_BLOCK* free_block_chain[MEM_BLOCK_CHAIN_NUM];
+    //MEM_BLOCK* block_chain[MEM_BLOCK_CHAIN_NUM];
+    //M_NODE* sys_alloc;
+    //MEM_BLOCK* free_block_chain[MEM_BLOCK_CHAIN_NUM];
     unsigned long long int malloc_cnt;
     unsigned long long int free_cnt;
     unsigned long long int sys_malloc_cnt;
     unsigned long long int sys_free_cnt;
 }MEM_POOL;
-
+/*
 inline size_t MEM_GET_SIZE(size_t n){
     if(n<=0)
         return 0;
@@ -58,16 +62,36 @@ inline size_t MEM_GET_SIZE(size_t n){
         nlevel++;
     }
     return nlevel;
-}
+}*/
 
 MEM_POOL* MEMInit(char name[]);
+/*
+void TestMem(void);
 void MEMInit_size_array(void);
 MEM_BLOCK* MEMInitBlock(size_t chain_num);
-void MEMDelBlock(MEM_BLOCK* block);
+void MEMDelBlock(MEM_BLOCK* block);*/
 void MEMDel(MEM_POOL* pool);
-void TestMem(void);
+
 
 void* m_alloc(size_t n);
 void m_free(void* p);
-
+#if DEFAULT_MEM==0
+inline void m_memset(void* p,char value,size_t len)
+{
+    memset(p,value,len);
+}
+#else
+inline void m_memset(void* p,char value,size_t len)
+{
+    memset(p,value,len);
+    /*
+    printf("%p %ld %ld\n",p,value,len);
+    for(char* tp=p;
+        (size_t)tp<(size_t)(p)+len;
+        ++p)
+    {
+        *tp=value;
+    }*/
+}
+#endif
 #endif

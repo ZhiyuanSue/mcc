@@ -7,10 +7,8 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 
 # This program built for i386-apple-darwin11.3.0
  
-make: *** No rule to make target `all'.  Stop.
 
-
-# Make data base, printed on Tue Aug  2 20:48:23 2022
+# Make data base, printed on Sat Aug 13 16:29:19 2022
 
 # Variables
 
@@ -19,13 +17,11 @@ make: *** No rule to make target `all'.  Stop.
 # automatic
 ?F = $(notdir $?)
 # makefile (from `Makefile', line 14)
-Source := src/mcc.c src/mcc_main.c src/test.c defs/rule.c defs/statement.c tools/ARG.c tools/EBNF.c tools/MEM.c tools/hash.c tools/m_type.c tools/m_type_vec.c tools/mcc_error.c tools/namespace.c tools/symbol_table.c tools/token.c tools/vector.c frontend/ast.c frontend/const_expr.c frontend/decl_semantics.c frontend/decl_semantics_module.c frontend/expr_semantics.c frontend/extern_def_semantics.c frontend/lex.c frontend/parser.c frontend/parser_post_proc.c frontend/preprocessor.c frontend/search_mem.c frontend/semantics.c frontend/stat_semantics.c IR/INS.c IR/IR.c IR/transdecl.c IR/transexpr.c IR/transstmt.c 
+Source := src/mcc.c src/mcc_main.c src/test.c defs/rule.c defs/statement.c tools/ARG.c tools/EBNF.c tools/MEM.c tools/hash.c tools/m_type.c tools/m_type_vec.c tools/mcc_error.c tools/namespace.c tools/symbol_table.c tools/token.c tools/vector.c frontend/ast.c frontend/const_expr.c frontend/decl_semantics.c frontend/decl_semantics_module.c frontend/expr_semantics.c frontend/extern_def_semantics.c frontend/lex.c frontend/parser.c frontend/parser_post_proc.c frontend/preprocessor.c frontend/search_mem.c frontend/semantics.c frontend/stat_semantics.c IR/IR.c IR/trans.c IR/transdecl.c IR/transexpr.c IR/transstmt.c 
 # makefile (from `Makefile', line 4)
 SRC := ./src
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
-# environment
-PLATFORMIO_IDE = 2.5.1
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
 # automatic
@@ -33,11 +29,11 @@ PLATFORMIO_IDE = 2.5.1
 # makefile (from `Makefile', line 15)
 Object = $(patsubst %.c,$(Obj)/%.o,$(notdir $(Source)))
 # makefile
-CURDIR := /Users/zhiyuansue/Desktop/mcc
+CURDIR := /Users/zhiyuansue/Documents/mcc
 # makefile
 SHELL = /bin/sh
 # environment
-VSCODE_NLS_CONFIG = {"locale":"zh-cn","availableLanguages":{"*":"zh-cn"},"_languagePackId":"1d735750dbb1b9066c7513078396ba0f.zh-cn","_translationsConfigFile":"/Users/zhiyuansue/Library/Application Support/Code/clp/1d735750dbb1b9066c7513078396ba0f.zh-cn/tcf.json","_cacheRoot":"/Users/zhiyuansue/Library/Application Support/Code/clp/1d735750dbb1b9066c7513078396ba0f.zh-cn","_resolvedLanguagePackCoreLocation":"/Users/zhiyuansue/Library/Application Support/Code/clp/1d735750dbb1b9066c7513078396ba0f.zh-cn/3b889b090b5ad5793f524b5d1d39fda662b96a2a","_corruptedFile":"/Users/zhiyuansue/Library/Application Support/Code/clp/1d735750dbb1b9066c7513078396ba0f.zh-cn/corrupted.info","_languagePackSupport":true}
+VSCODE_NLS_CONFIG = {"locale":"zh-cn","availableLanguages":{"*":"zh-cn"},"_languagePackId":"08bdb29c43b4c03defdaaecc51ad48b6.zh-cn","_translationsConfigFile":"/Users/zhiyuansue/Library/Application Support/Code/clp/08bdb29c43b4c03defdaaecc51ad48b6.zh-cn/tcf.json","_cacheRoot":"/Users/zhiyuansue/Library/Application Support/Code/clp/08bdb29c43b4c03defdaaecc51ad48b6.zh-cn","_resolvedLanguagePackCoreLocation":"/Users/zhiyuansue/Library/Application Support/Code/clp/08bdb29c43b4c03defdaaecc51ad48b6.zh-cn/6d9b74a70ca9c7733b29f0456fd8195364076dda","_corruptedFile":"/Users/zhiyuansue/Library/Application Support/Code/clp/08bdb29c43b4c03defdaaecc51ad48b6.zh-cn/corrupted.info","_languagePackSupport":true}
 # environment
 _ = /usr/bin/make
 # makefile (from `Makefile', line 7)
@@ -49,11 +45,13 @@ MAKEFILE_LIST :=  Makefile
 # makefile (from `Makefile', line 12)
 modules = src defs tools frontend IR backend
 # environment
+__CFBundleIdentifier = com.microsoft.VSCode
+# environment
+INFOPATH = /usr/local/share/info:
+# environment
 VSCODE_CWD = /
 # environment
-NO_PROXY = 127.0.0.1
-# environment
-LaunchInstanceID = 562C0153-8795-409F-9204-DBC71CF59094
+PATH = /usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Users/zhiyuansue/.cargo/bin
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # makefile (from `Makefile', line 5)
@@ -63,17 +61,21 @@ Defs := ./defs
 # makefile (from `Makefile', line 8)
 IR := ./IR
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.P5NUIibtdR/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.wxNiIdv9s6/Listeners
 # automatic
 %F = $(notdir $%)
 # makefile (from `Makefile', line 11)
 Obj := ./obj
 # environment
-PWD = /Users/zhiyuansue/Desktop/mcc
+PWD = /Users/zhiyuansue/Documents/mcc
+# environment
+HOMEBREW_CELLAR = /usr/local/Cellar
 # makefile (from `Makefile', line 18)
 CFlags := -g -Wall --std=c11 -O3 -I ./defs 
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+# environment
+MANPATH = /usr/local/share/man::
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
@@ -83,7 +85,7 @@ Inc := ./defs
 # default
 MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/zhiyuansue/Library/Application Support/Code/CachedData/3b889b090b5ad5793f524b5d1d39fda662b96a2a
+VSCODE_CODE_CACHE_PATH = /Users/zhiyuansue/Library/Application Support/Code/CachedData/6d9b74a70ca9c7733b29f0456fd8195364076dda
 # environment
 LOGNAME = zhiyuansue
 # environment
@@ -93,17 +95,14 @@ VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
 # environment
-PLATFORMIO_PATH = /Users/zhiyuansue/.platformio/python3/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Users/zhiyuansue/.cargo/bin
+XPC_FLAGS = 0x0
+ 
 # default
 MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
 # environment
-PATH = /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Users/zhiyuansue/.cargo/bin
-# environment
 SHLVL = 1
-# environment
-XPC_FLAGS = 0x0
 # makefile (from `Makefile', line 17)
 CC := gcc
 # default
@@ -111,7 +110,9 @@ MAKE_VERSION := 3.81
 # environment
 USER = zhiyuansue
 # makefile
-.DEFAULT_GOAL := bin/mcc
+.DEFAULT_GOAL := all
+# environment
+HOMEBREW_BOTTLE_DOMAIN = https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # default
@@ -119,11 +120,11 @@ MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
 # default
 .VARIABLES := 
 # environment
-TMPDIR = /var/folders/cw/t0m4s34j6tb366bgnwqflx180000gn/T/
+TMPDIR = /var/folders/3g/7r10l3jn44ggfht4rnplknk40000gn/T/
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /Users/zhiyuansue/Library/Application Support/Code/1.69.2-main.sock
+VSCODE_IPC_HOOK = /Users/zhiyuansue/Library/Application Support/Code/1.70.1-main.sock
 # makefile (from `Makefile', line 3)
 Target := ./bin/mcc
 # environment
@@ -135,11 +136,15 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000004.Electron
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.2436644.2436650
+# environment
+HOMEBREW_PREFIX = /usr/local
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
 +F = $(notdir $+)
+# environment
+HOMEBREW_REPOSITORY = /usr/local/Homebrew
 # environment
 __CF_USER_TEXT_ENCODING = 0x1F5:0x19:0x34
 # environment
@@ -149,11 +154,7 @@ MAKEFILES :=
 # automatic
 <F = $(notdir $<)
 # environment
-PLATFORMIO_CALLER = vscode
-# environment
 LC_ALL = C
-# environment
-SECURITYSESSIONID = 186a6
 # automatic
 ^F = $(notdir $^)
 # default
@@ -167,11 +168,11 @@ Tools := ./tools
 # environment
 LANG = C
 # environment
-VSCODE_PID = 339
+VSCODE_PID = 5869
 # makefile (from `Makefile', line 9)
 Back := ./backend
 # variable set hash-table stats:
-# Load=78/1024=8%, Rehash=0, Collisions=5/123=4%
+# Load=79/1024=8%, Rehash=0, Collisions=3/131=2%
 
 # Pattern-specific Variable Values
 
@@ -179,51 +180,51 @@ Back := ./backend
 
 # Directories
 
-# ./backend (device 16777222, inode 2902106): 2 files, no impossibilities.
-# . (device 16777222, inode 2901899): 22 files, no impossibilities.
-# ./src (device 16777222, inode 2902149): 7 files, no impossibilities.
-# frontend (device 16777222, inode 2901959): 28 files, no impossibilities.
-# ./IR (device 16777222, inode 2902102): 13 files, no impossibilities.
-# ./defs (device 16777222, inode 2902142): 8 files, no impossibilities.
-# defs (device 16777222, inode 2902142): 8 files, no impossibilities.
-# backend (device 16777222, inode 2902106): 2 files, no impossibilities.
-# IR (device 16777222, inode 2902102): 13 files, no impossibilities.
-# src (device 16777222, inode 2902149): 7 files, no impossibilities.
-# ./tools (device 16777222, inode 2901934): 24 files, no impossibilities.
-# tools (device 16777222, inode 2901934): 24 files, no impossibilities.
-# ./frontend (device 16777222, inode 2901959): 28 files, no impossibilities.
+# ./backend: could not be stat'd.
+# . (device 16777220, inode 1684505): 20 files, no impossibilities.
+# ./src (device 16777220, inode 1685957): 7 files, no impossibilities.
+# frontend (device 16777220, inode 1685920): 28 files, no impossibilities.
+# ./IR (device 16777220, inode 1685774): 12 files, no impossibilities.
+# ./defs (device 16777220, inode 1685895): 8 files, no impossibilities.
+# defs (device 16777220, inode 1685895): 8 files, no impossibilities.
+# backend: could not be stat'd.
+# IR (device 16777220, inode 1685774): 12 files, no impossibilities.
+# src (device 16777220, inode 1685957): 7 files, no impossibilities.
+# ./tools (device 16777220, inode 1685965): 24 files, no impossibilities.
+# tools (device 16777220, inode 1685965): 24 files, no impossibilities.
+# ./frontend (device 16777220, inode 1685920): 28 files, no impossibilities.
 
-# 186 files, no impossibilities in 13 directories.
+# 178 files, no impossibilities in 13 directories.
 
 # Implicit Rules
 
 obj/%.o: ./src/%.c
-#  commands to execute (from `Makefile', line 25):
-	$(CC) $(CFlags) -o $@ -c $<
-	
-
-obj/%.o: ./defs/%.c
-#  commands to execute (from `Makefile', line 27):
-	$(CC) $(CFlags) -o $@ -c $<
-	
-
-obj/%.o: ./tools/%.c
-#  commands to execute (from `Makefile', line 29):
-	$(CC) $(CFlags) -o $@ -c $<
-	
-
-obj/%.o: ./frontend/%.c
 #  commands to execute (from `Makefile', line 31):
 	$(CC) $(CFlags) -o $@ -c $<
 	
 
-obj/%.o: ./IR/%.c
+obj/%.o: ./defs/%.c
 #  commands to execute (from `Makefile', line 33):
 	$(CC) $(CFlags) -o $@ -c $<
 	
 
-obj/%.o: ./backend/%.c
+obj/%.o: ./tools/%.c
 #  commands to execute (from `Makefile', line 35):
+	$(CC) $(CFlags) -o $@ -c $<
+	
+
+obj/%.o: ./frontend/%.c
+#  commands to execute (from `Makefile', line 37):
+	$(CC) $(CFlags) -o $@ -c $<
+	
+
+obj/%.o: ./IR/%.c
+#  commands to execute (from `Makefile', line 39):
+	$(CC) $(CFlags) -o $@ -c $<
+	
+
+obj/%.o: ./backend/%.c
+#  commands to execute (from `Makefile', line 41):
 	$(CC) $(CFlags) -o $@ -c $<
 	
 
@@ -231,51 +232,131 @@ obj/%.o: ./backend/%.c
 
 # Files
 
-# Not a target:
-obj/hash.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-obj/semantics.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-obj/decl_semantics.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-obj/m_type_vec.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-obj/parser.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-all:
-#  Command-line target.
+obj/hash.o: tools/hash.c
 #  Implicit rule search has been done.
-#  File does not exist.
-#  File has not been updated.
+#  Implicit/static pattern stem: `hash'
+#  Last modified 2022-08-09 11:14:40
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 35):
+	$(CC) $(CFlags) -o $@ -c $<
+	
+
+# Not a target:
+IR/transstmt.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-09 11:09:37
+#  File has been updated.
+#  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
-obj/search_mem.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
- 
-#  File has not been updated.
+IR/trans.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-09 11:09:37
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+obj/semantics.o: frontend/semantics.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `semantics'
+#  Last modified 2022-08-09 11:14:46
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 37):
+	$(CC) $(CFlags) -o $@ -c $<
+	
+
+# Not a target:
+tools/mcc_error.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-09 11:09:37
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+obj/decl_semantics.o: frontend/decl_semantics.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `decl_semantics'
+#  Last modified 2022-08-09 11:14:43
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 37):
+	$(CC) $(CFlags) -o $@ -c $<
+	
+
+# Not a target:
+IR/transdecl.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-09 11:09:37
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+tools/symbol_table.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-09 11:09:37
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+obj/m_type_vec.o: tools/m_type_vec.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `m_type_vec'
+#  Last modified 2022-08-09 11:14:41
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 35):
+	$(CC) $(CFlags) -o $@ -c $<
+	
+
+obj/parser.o: frontend/parser.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `parser'
+#  Last modified 2022-08-09 11:14:45
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 37):
+	$(CC) $(CFlags) -o $@ -c $<
+	
+
+all: init bin/mcc
+#  Command-line target.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/6=0%
+
+obj/search_mem.o: frontend/search_mem.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `search_mem'
+#  Last modified 2022-08-09 11:14:46
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 37):
+	$(CC) $(CFlags) -o $@ -c $<
+	
 
 .PHONY: clean
 #  Implicit rule search has not been done.
@@ -283,58 +364,131 @@ obj/search_mem.o:
 #  File has not been updated.
 
 # Not a target:
-obj/namespace.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/mcc_main.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-09 11:09:37
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+obj/namespace.o: tools/namespace.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `namespace'
+#  Last modified 2022-08-09 11:14:41
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 35):
+	$(CC) $(CFlags) -o $@ -c $<
+	
+
+obj/ARG.o: tools/ARG.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `ARG'
+#  Last modified 2022-08-09 11:14:39
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 35):
+	$(CC) $(CFlags) -o $@ -c $<
+	
 
 # Not a target:
-obj/ARG.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+defs/rule.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-09 11:09:37
+ 
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-# Not a target:
-obj/EBNF.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+obj/EBNF.o: tools/EBNF.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `EBNF'
+#  Last modified 2022-08-09 11:14:40
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 35):
+	$(CC) $(CFlags) -o $@ -c $<
+	
 
-# Not a target:
-obj/mcc.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+obj/mcc.o: src/mcc.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `mcc'
+#  Last modified 2022-08-09 11:14:39
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 31):
+	$(CC) $(CFlags) -o $@ -c $<
+	
 
-# Not a target:
-obj/ast.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+obj/ast.o: frontend/ast.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `ast'
+#  Last modified 2022-08-09 11:14:42
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 37):
+	$(CC) $(CFlags) -o $@ -c $<
+	
 
-# Not a target:
-obj/statement.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+obj/statement.o: defs/statement.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `statement'
+#  Last modified 2022-08-09 11:14:39
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 33):
+	$(CC) $(CFlags) -o $@ -c $<
+	
 
-# Not a target:
-obj/preprocessor.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+obj/preprocessor.o: frontend/preprocessor.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `preprocessor'
+#  Last modified 2022-08-09 11:14:46
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 37):
+	$(CC) $(CFlags) -o $@ -c $<
+	
 
-# Not a target:
-obj/transexpr.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+obj/transexpr.o: IR/transexpr.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `transexpr'
+#  Last modified 2022-08-09 11:14:47
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 39):
+	$(CC) $(CFlags) -o $@ -c $<
+	
 
-# Not a target:
-obj/parser_post_proc.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+obj/parser_post_proc.o: frontend/parser_post_proc.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `parser_post_proc'
+#  Last modified 2022-08-09 11:14:45
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 37):
+	$(CC) $(CFlags) -o $@ -c $<
+	
 
 # Not a target:
 .SUFFIXES:
@@ -345,59 +499,234 @@ obj/parser_post_proc.o:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-21 10:18:28
+#  Last modified 2022-08-09 11:09:37
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+obj/decl_semantics_module.o: frontend/decl_semantics_module.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `decl_semantics_module'
+#  Last modified 2022-08-09 11:14:43
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 37):
+	$(CC) $(CFlags) -o $@ -c $<
+	
+
+obj/symbol_table.o: tools/symbol_table.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `symbol_table'
+#  Last modified 2022-08-09 11:14:41
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 35):
+	$(CC) $(CFlags) -o $@ -c $<
+	
+
+obj/stat_semantics.o: frontend/stat_semantics.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `stat_semantics'
+#  Last modified 2022-08-09 11:14:46
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 37):
+	$(CC) $(CFlags) -o $@ -c $<
+	
+
+# Not a target:
+frontend/extern_def_semantics.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-09 11:09:37
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+obj/IR.o: IR/IR.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `IR'
+#  Last modified 2022-08-09 11:14:46
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 39):
+	$(CC) $(CFlags) -o $@ -c $<
+	
+
+obj/const_expr.o: frontend/const_expr.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `const_expr'
+#  Last modified 2022-08-09 11:14:42
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 37):
+	$(CC) $(CFlags) -o $@ -c $<
+	
+
+# Not a target:
+defs/statement.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-09 11:09:37
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
-obj/decl_semantics_module.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+frontend/parser_post_proc.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-09 11:09:37
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
-obj/symbol_table.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+tools/token.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-09 11:09:37
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+ 
+# Not a target:
+tools/m_type.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-09 11:09:37
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
-obj/stat_semantics.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+frontend/semantics.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-09 11:09:37
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+obj/mcc_error.o: tools/mcc_error.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `mcc_error'
+#  Last modified 2022-08-09 11:14:41
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 35):
+	$(CC) $(CFlags) -o $@ -c $<
+	
 
 # Not a target:
-obj/IR.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/mcc.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-09 11:09:37
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
-obj/const_expr.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+frontend/decl_semantics.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-09 11:09:37
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
-obj/mcc_error.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+frontend/parser.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-09 11:09:37
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+obj/test.o: src/test.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `test'
+#  Last modified 2022-08-09 11:14:39
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 31):
+	$(CC) $(CFlags) -o $@ -c $<
+	
 
 # Not a target:
-obj/test.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+frontend/search_mem.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-09 11:09:37
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+obj/transdecl.o: IR/transdecl.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `transdecl'
+#  Last modified 2022-08-09 11:14:47
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 39):
+	$(CC) $(CFlags) -o $@ -c $<
+	
 
 # Not a target:
-obj/transdecl.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+IR/IR.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-09 11:09:37
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+frontend/lex.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-09 11:09:37
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+frontend/ast.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-09 11:09:37
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+frontend/preprocessor.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-09 11:09:37
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 .DEFAULT:
@@ -405,92 +734,307 @@ obj/transdecl.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-# Not a target:
-obj/token.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+obj/token.o: tools/token.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `token'
+#  Last modified 2022-08-09 11:14:41
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 35):
+	$(CC) $(CFlags) -o $@ -c $<
+	
+
+obj/m_type.o: tools/m_type.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `m_type'
+#  Last modified 2022-08-09 11:14:40
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 35):
+	$(CC) $(CFlags) -o $@ -c $<
+	
 
 # Not a target:
-obj/m_type.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+frontend/decl_semantics_module.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-09 11:09:37
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-# Not a target:
-obj/INS.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+obj/rule.o: defs/rule.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `rule'
+#  Last modified 2022-08-09 11:14:39
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 33):
+	$(CC) $(CFlags) -o $@ -c $<
+	
 
-# Not a target:
-obj/rule.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-obj/expr_semantics.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+obj/expr_semantics.o: frontend/expr_semantics.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `expr_semantics'
+#  Last modified 2022-08-09 11:14:45
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 37):
+	$(CC) $(CFlags) -o $@ -c $<
+	
 
 clean:
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 39):
+#  commands to execute (from `Makefile', line 45):
 	rm -f ${Obj}/*.o 
 	rm -f ${Target}
 	
 
-bin/mcc: obj/mcc.o obj/mcc_main.o obj/test.o obj/rule.o obj/statement.o obj/ARG.o obj/EBNF.o obj/MEM.o obj/hash.o obj/m_type.o obj/m_type_vec.o obj/mcc_error.o obj/namespace.o obj/symbol_table.o obj/token.o obj/vector.o obj/ast.o obj/const_expr.o obj/decl_semantics.o obj/decl_semantics_module.o obj/expr_semantics.o obj/extern_def_semantics.o obj/lex.o obj/parser.o obj/parser_post_proc.o obj/preprocessor.o obj/search_mem.o obj/semantics.o obj/stat_semantics.o obj/INS.o obj/IR.o obj/transdecl.o obj/transexpr.o obj/transstmt.o
+# Not a target:
+frontend/stat_semantics.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-09 11:09:37
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+tools/vector.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-09 11:09:37
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+tools/MEM.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-09 11:09:37
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+frontend/const_expr.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-09 11:09:37
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+bin/mcc: obj/mcc.o obj/mcc_main.o obj/test.o obj/rule.o obj/statement.o obj/ARG.o obj/EBNF.o obj/MEM.o obj/hash.o obj/m_type.o obj/m_type_vec.o obj/mcc_error.o obj/namespace.o obj/symbol_table.o obj/token.o obj/vector.o obj/ast.o obj/const_expr.o obj/decl_semantics.o obj/decl_semantics_module.o obj/expr_semantics.o obj/extern_def_semantics.o obj/lex.o obj/parser.o obj/parser_post_proc.o obj/preprocessor.o obj/search_mem.o obj/semantics.o obj/stat_semantics.o obj/IR.o obj/trans.o obj/transdecl.o obj/transexpr.o obj/transstmt.o
 #  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 22):
+#  Last modified 2022-08-09 11:14:47
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 27):
 	${CC} $(CFlags) -lc -o $@ ${Object}
 	
 
-# Not a target:
-obj/transstmt.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+obj/transstmt.o: IR/transstmt.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `transstmt'
+#  Last modified 2022-08-09 11:14:47
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 39):
+	$(CC) $(CFlags) -o $@ -c $<
+	
 
 # Not a target:
-obj/lex.o:
+src/test.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-09 11:09:37
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+init:
 #  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit/static pattern stem: `'
+#  Last modified 1970-01-01 07:59:56
+#  File has been updated.
+#  Successfully updated.
+# automatic
+# @ := init
+# automatic
+# % := 
+# automatic
+# * := 
+# automatic
+ 
+# + := 
+# automatic
+# | := 
+# automatic
+# < := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/14=7%
+#  commands to execute (from `Makefile', line 24):
+	$(shell if [ ! -d $(Obj) ];then mkdir $(Obj); fi)
+	
 
 # Not a target:
-obj/mcc_main.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+tools/hash.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-09 11:09:37
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+obj/lex.o: frontend/lex.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `lex'
+#  Last modified 2022-08-09 11:14:45
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 37):
+	$(CC) $(CFlags) -o $@ -c $<
+	
 
 # Not a target:
-obj/vector.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+IR/transexpr.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-09 11:09:37
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+obj/trans.o: IR/trans.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `trans'
+#  Last modified 2022-08-09 11:14:46
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 39):
+	$(CC) $(CFlags) -o $@ -c $<
+	
 
 # Not a target:
-obj/extern_def_semantics.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+tools/m_type_vec.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-09 11:09:37
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
-obj/MEM.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+frontend/expr_semantics.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-09 11:09:37
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+obj/mcc_main.o: src/mcc_main.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `mcc_main'
+#  Last modified 2022-08-09 11:14:39
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 31):
+	$(CC) $(CFlags) -o $@ -c $<
+	
+
+# Not a target:
+tools/namespace.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-09 11:09:37
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+tools/ARG.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-09 11:09:37
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+tools/EBNF.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-09 11:09:37
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+obj/vector.o: tools/vector.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `vector'
+#  Last modified 2022-08-09 11:14:42
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 35):
+	$(CC) $(CFlags) -o $@ -c $<
+	
+
+obj/extern_def_semantics.o: frontend/extern_def_semantics.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `extern_def_semantics'
+#  Last modified 2022-08-09 11:14:45
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 37):
+	$(CC) $(CFlags) -o $@ -c $<
+	
+
+obj/MEM.o: tools/MEM.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `MEM'
+#  Last modified 2022-08-09 11:14:40
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 35):
+	$(CC) $(CFlags) -o $@ -c $<
+	
 
 # files hash-table stats:
-# Load=41/1024=4%, Rehash=0, Collisions=5/88=6%
+# Load=76/1024=7%, Rehash=0, Collisions=41/312=13%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -502,6 +1046,6 @@ obj/MEM.o:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Tue Aug  2 20:48:23 2022
+# Finished Make data base on Sat Aug 13 16:29:19 2022
 
  

@@ -12,7 +12,7 @@ HASH* InitHASH(void)
     if(tmph==NULL)
         return NULL;
     tmph->data=m_alloc(sizeof(void*)*DEFAULT_CAP);
-    memset(tmph->data,0,sizeof(void*)*DEFAULT_CAP);
+    m_memset(tmph->data,'\0',sizeof(void*)*DEFAULT_CAP);
     tmph->capicity=DEFAULT_CAP;
     tmph->capicity_index=tmph->record_num=0;
     return tmph;
@@ -30,7 +30,7 @@ bool HSAHExpand(HASH* h,bool (*cmp)(void* a,void* b))
     }
     h->capicity=hash_capicity[h->capicity_index];
     h->data=m_alloc(sizeof(void*)*(h->capicity));
-    memset(h->data,0,sizeof(void*)*(h->capicity));
+    m_memset(h->data,'\0',sizeof(void*)*(h->capicity));
     h->record_num=0;
     for(unsigned long long int i=0;i<old_capicity;i++){
         if(old[i]!=NULL&&((HASH_ITEM*)old[i])->count>=0)

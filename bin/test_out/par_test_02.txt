@@ -1,5 +1,8 @@
 read in file name:
 	./bin/test_src/par_test_02.c
+parser start
+
+
 start print ast tree
 finish print ast tree
 start print symbol table

@@ -1,5 +1,34 @@
 read in file name:
 	./bin/test_src/type_test_06.c
+parser start
+
+
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
 start print ast tree
 <translation_unit ns:1>
     <external_decl ns:1>
@@ -192,19 +221,37 @@ finish print ast tree
         start specify or qualify node
         finish specify or qualify node
         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:2
         start specify or qualify node
         finish specify or qualify node
         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:3
         start specify or qualify node
         finish specify or qualify node
         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:5
         start specify or qualify node
@@ -212,37 +259,101 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
                     start struct union
                         start specify or qualify node
                         finish specify or qualify node
                         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                         finish declarator
+test point 2
+test point 3
+test point 2
+test point 3
                     finish struct union
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
             finish struct union
         finish specify or qualify node
         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start declaration line:15
         start specify or qualify node
             start struct union
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start specify or qualify node
+test point 2
+test point 3
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
             finish struct union
         finish specify or qualify node
         start declarator
+test point 2
+test point 3
+test point 2
+test point 3
         finish declarator
+test point 2
+test point 3
     finish declaration
     start specify or qualify node
     finish specify or qualify node
@@ -251,7 +362,19 @@ finish print ast tree
             start specify or qualify node
             finish specify or qualify node
         finish func
+test point 2
+test point 3
+test point 2
+test point 3
     finish declarator
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
     start compound expr
         start declaration line:21
             start specify or qualify node
@@ -259,7 +382,19 @@ finish print ast tree
                     start specify or qualify node
                     finish specify or qualify node
                     start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                     finish declarator
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
                 finish struct union
             finish specify or qualify node
         finish declaration

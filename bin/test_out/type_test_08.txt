@@ -1,5 +1,24 @@
 read in file name:
 	./bin/test_src/type_test_08.c
+parser start
+
+
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
 start print ast tree
 <translation_unit ns:1>
     <external_decl ns:1>
@@ -163,6 +182,14 @@ finish print ast tree
     start declaration line:0
         start specify or qualify node
             start enum
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
             finish enum
         finish specify or qualify node
     finish declaration
@@ -172,51 +199,54 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start primary expr
                 <Type>:< signed_int >
                 end primary expr
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start primary expr
                 <Type>:< signed_int >
                 end primary expr
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start primary expr
                 <Type>:< signed_int >
                 end primary expr
                 start specify or qualify node
+test point 2
+test point 3
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
-                start specify or qualify node
-                finish specify or qualify node
-                start primary expr
-                <Type>:< signed_int >
-                end primary expr
-                start specify or qualify node
-                finish specify or qualify node
-                start declarator
-                finish declarator
-                start primary expr
-                <Type>:< signed_int >
-                end primary expr
-                start specify or qualify node
-                finish specify or qualify node
-                start declarator
-                finish declarator
-                start specify or qualify node
-                finish specify or qualify node
-                start declarator
-                finish declarator
-                start primary expr
-                <Type>:< signed_int >
-                end primary expr
+test point 2
+test point 3
                 start specify or qualify node
                 finish specify or qualify node
                 start primary expr
@@ -225,10 +255,77 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+test point 2
+test point 3
+test point 2
+test point 3
                 finish declarator
+test point 2
+test point 3
                 start primary expr
                 <Type>:< signed_int >
                 end primary expr
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+test point 2
+test point 3
+test point 2
+test point 3
+                finish declarator
+test point 2
+test point 3
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+test point 2
+test point 3
+test point 2
+test point 3
+                finish declarator
+test point 2
+test point 3
+                start primary expr
+                <Type>:< signed_int >
+                end primary expr
+                start specify or qualify node
+                finish specify or qualify node
+                start primary expr
+                <Type>:< signed_int >
+                end primary expr
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+test point 2
+test point 3
+test point 2
+test point 3
+                finish declarator
+test point 2
+test point 3
+                start primary expr
+                <Type>:< signed_int >
+                end primary expr
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
+test point 2
+test point 3
             finish struct union
         finish specify or qualify node
     finish declaration

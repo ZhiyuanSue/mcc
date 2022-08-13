@@ -4,7 +4,7 @@ VEC* LexInitSTATE(VEC* sv,char statements[STATE_NUM][STATE_CHAR_LEN]){
     /*read in state*/
     char buf[STATE_CHAR_LEN];
     for(int i=0;i<STATE_NUM;++i){
-        memset(buf,'\0',STATE_CHAR_LEN);
+        m_memset(buf,'\0',STATE_CHAR_LEN);
         memcpy(buf,statements[i],STATE_CHAR_LEN);
         if((*buf)=='\0')
             continue;
@@ -33,7 +33,7 @@ VEC* InitRULE(VEC* sv,VEC* rv,char rules[MAX_RULE_NUM][RULE_CHAR_LEN]){
     char buf[RULE_CHAR_LEN];
     unsigned int rule_index=0;
     for(int i=0;i<MAX_RULE_NUM;++i){
-        memset(buf,'\0',RULE_CHAR_LEN);
+        m_memset(buf,'\0',RULE_CHAR_LEN);
         memcpy(buf,rules[i],RULE_CHAR_LEN);
         if((*buf)=='\0')
             continue;
@@ -64,7 +64,7 @@ VEC* InitRULE(VEC* sv,VEC* rv,char rules[MAX_RULE_NUM][RULE_CHAR_LEN]){
     }
     RULE* tmpr;
     for(int i=0;i<VECLEN(rv);++i){
-        memset(buf,'\0',RULE_CHAR_LEN);
+        m_memset(buf,'\0',RULE_CHAR_LEN);
         memcpy(buf,rules[i],RULE_CHAR_LEN);
         char* p=buf;
         while((*p)!=':'){ p++; }
@@ -99,7 +99,7 @@ char* readin_value(char* buf){
     }
     else{
         char tmp[BUFSIZE/2];
-        memset(tmp,'\0',BUFSIZE/2);
+        m_memset(tmp,'\0',BUFSIZE/2);
         char* p=buf;
         int plen=0;
         while((*p)!='\0'){

@@ -21,13 +21,13 @@ void m_free(void* p){
     if(p==NULL)
         return;
     free(p);
-    p=NULL;
 }
 #else
 
+/*I tried to build a memory poor, but it seems failed*/
 //here is my memory strategy
-void* m_alloc(size_t n){
-    if(n<=0)
+/*void* m_alloc(size_t n){
+    if(n<=0||curr_heap==NULL)
         return NULL;
     void* res;
     size_t chain_num=MEM_GET_SIZE(n)-2;
@@ -59,23 +59,15 @@ void* m_alloc(size_t n){
         curr_heap->free_block_chain[chain_num]=res_block->next_free;
     }
     res=(void*)(((MEM_ITEM*)res_item)+1);
-    /*
-    unsigned int mod_res=((uintptr_t)res)%(_ALIGN_SIZE_(_MCC_ALIGN_PACK_)*2);
-    //printf("%ld %d %ld %ld\n",(uintptr_t)res,mod_res,n,MEM_GET_SIZE(n));
-    if(mod_res!=0)
-    {
-        printf("Complier error:m_alloc alignment\n");
-    }*/
     curr_heap->malloc_cnt++;
     return res;
 }
 void m_free(void* p){
-    if(p==NULL)
+    if(p==NULL||curr_heap==NULL)
         return;
     M_NODE* pre=curr_heap->sys_alloc;
     M_NODE* curr=curr_heap->sys_alloc->next;
     bool free_succ=false;
-    /*find in system*/
     while(curr){
         if(curr->p==p){
             pre->next=curr->next;
@@ -88,7 +80,6 @@ void m_free(void* p){
         pre=curr;
         curr=curr->next;
     }
-    /*use mem pool*/
     if(!free_succ){
         MEM_ITEM* curr_item=((MEM_ITEM*)p)-1;
         MEM_BLOCK* res_block;
@@ -104,12 +95,11 @@ void m_free(void* p){
         curr_item->next=res_block->free_item_header;
         res_block->free_item_header=curr_item->item_id;
     }
-    p=NULL;
-}
+}*/
 #endif
 MEM_POOL* MEMInit(char name[])
 {
-    MEMInit_size_array();
+    /*MEMInit_size_array();*/
     MEM_POOL* pool=malloc(sizeof(MEM_POOL));
     for(int i=0;i<8;++i){
         if(name[i]=='\0')
@@ -117,14 +107,17 @@ MEM_POOL* MEMInit(char name[])
         pool->name[i]=name[i];
     }
     pool->name[7]='\0';
+    /*
     for(int i=0;i<MEM_BLOCK_CHAIN_NUM;++i)
         pool->block_chain[i]=pool->free_block_chain[i]=NULL;
     pool->sys_alloc=malloc(sizeof(M_NODE));
     pool->sys_alloc->p=NULL;
     pool->sys_alloc->next=NULL;
     pool->malloc_cnt=pool->free_cnt=pool->sys_malloc_cnt=pool->sys_free_cnt=0;
+    */
     return pool;
 }
+/*
 void MEMInit_size_array(void){
     for(size_t i=0;i<MEM_BLOCK_CHAIN_NUM;++i){
         item_size[i]=max(item_size[i],_ALIGN_SIZE_(_MCC_ALIGN_PACK_));
@@ -138,7 +131,7 @@ MEM_BLOCK* MEMInitBlock(size_t chain_num)
     MEM_BLOCK* block=malloc(sizeof(MEM_BLOCK));
     unsigned int sys_malloc_size=MCC_ALIGN( block_size[chain_num], _ALIGN_SIZE_(_MCC_ALIGN_PACK_))+_ALIGN_SIZE_(_MCC_ALIGN_PACK_)+sizeof(MEM_BLOCK*);
     block->sys_malloc_res=malloc(sys_malloc_size);
-    memset(block->sys_malloc_res,0,sys_malloc_size);
+    m_memset(block->sys_malloc_res,'\0',sys_malloc_size);
     block->data=(void*)((uintptr_t)(block->sys_malloc_res)+sizeof(MEM_BLOCK*));
     if(((uintptr_t)(block->data))/_ALIGN_SIZE_(_MCC_ALIGN_PACK_)!=0)
         block->data=(void*)MCC_ALIGN( block->data, _ALIGN_SIZE_(_MCC_ALIGN_PACK_));
@@ -161,10 +154,11 @@ void MEMDelBlock(MEM_BLOCK* block){
     free(block->sys_malloc_res);
     free(block);
     block=NULL;
-}
+}*/
 void MEMDel(MEM_POOL* pool){
     if(!pool)
         return;
+    /*
     for(int i=0;i<MEM_BLOCK_CHAIN_NUM;++i){
         MEM_BLOCK* block=pool->block_chain[i];
         MEM_BLOCK* next=block->next;
@@ -173,11 +167,12 @@ void MEMDel(MEM_POOL* pool){
             block=next;
             next=block->next;
         }
-    }
+    }*/
 #ifdef _TEST_
     printf("mempool %s alloc/free: alloc %lld times,free %lld times\n",pool->name,pool->malloc_cnt,pool->free_cnt);
     printf("\tuse sys alloc/free: alloc %lld times,free %lld times\n",pool->sys_malloc_cnt,pool->sys_free_cnt);
 #endif
+    /*
     M_NODE* pre=curr_heap->sys_alloc;
     M_NODE* curr=pre->next;
     while(curr){
@@ -185,8 +180,7 @@ void MEMDel(MEM_POOL* pool){
         free(curr->p);
         free(curr);
         curr=pre->next;
-    }
+    }*/
     free(pool);
-    pool=NULL;
 }
 #endif
