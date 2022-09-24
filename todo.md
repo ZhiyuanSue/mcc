@@ -20,6 +20,8 @@
 
 实现（done）
 
+需要实现多层次的makefile，在目前仍然是单层的。
+
 bootstrap
 
 ### · preprocess

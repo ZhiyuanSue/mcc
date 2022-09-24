@@ -23,6 +23,9 @@ do
     #echo "----remove "${test_out_path}${file}
     rm -rf ${test_out_path}${file}
 done
+if [ ! -d ${test_out_path} ];then
+    mkdir ${test_out_path}
+fi
 for file in ${src_dir}
 do
     ((file_num++))

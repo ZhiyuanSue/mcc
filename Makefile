@@ -1,49 +1,26 @@
 # name to be set
-Bin:=./bin
-Target:= ${Bin}/mcc
-SRC:=./src
-Defs:=./defs
-Tools:=./tools
-Front:=./frontend
-IR:=./IR
-Back:=./backend
-Inc:= ${Defs}
-Obj:=./obj
-modules += src defs tools frontend IR backend
-#
-Source:=$(foreach n,$(modules),$(wildcard $(n)/*.c))
-Object= $(patsubst %.c,$(Obj)/%.o,$(notdir $(Source)))
+include ./Makefile.env
+export MCC_ROOT_DIR=$(shell pwd)
+export MCC_ROOT_OBJ=${MCC_ROOT_DIR}/obj
+modules += src backend IR frontend tools defs
 
-CC:= gcc
-CFlags:= -g -Wall --std=c11 -O3 -I ${Inc} 
-
-
-all: init ${Target}
+all: init SubModules  ${Target} clean_obj
 
 init:
-	$(shell if [ ! -d $(Obj) ];then mkdir $(Obj); fi)
+	$(shell if [ ! -d $(MCC_ROOT_OBJ) ];then mkdir $(MCC_ROOT_OBJ); fi)
+SubModules:
+	@$(foreach n,$(modules),$(call build_submodule,$(n)))
+${Target}:
+	${CC} $(CFlags) -lc -o $@ $(wildcard ${MCC_ROOT_OBJ}/*.o)
 
-${Target}:$(Object)
-	${CC} $(CFlags) -lc -o $@ ${Object}
-
-
-${Obj}/%.o: $(SRC)/%.c
-	$(CC) $(CFlags) -o $@ -c $<
-${Obj}/%.o: $(Defs)/%.c
-	$(CC) $(CFlags) -o $@ -c $<
-${Obj}/%.o: $(Tools)/%.c
-	$(CC) $(CFlags) -o $@ -c $<
-${Obj}/%.o: $(Front)/%.c
-	$(CC) $(CFlags) -o $@ -c $<
-${Obj}/%.o: $(IR)/%.c
-	$(CC) $(CFlags) -o $@ -c $<
-${Obj}/%.o: $(Back)/%.c
-	$(CC) $(CFlags) -o $@ -c $<
 .PHONY:clean
 
 clean:
-	rm -f ${Obj}/*.o 
+	rm -f ${MCC_ROOT_OBJ}/*.o 
 	rm -f ${Target}
+
+clean_obj:
+	rm -rf ${MCC_ROOT_OBJ}
 
 #wildcard 通配符，例如：$(wildcard $(DIR)/*.c)表示某个目录下所有的c文件
 #parsubst 用于替换的，例如要编译所有的c变成.o文件，那这.o文件的名称肯定需要生成，例如
