@@ -2,6 +2,8 @@
 include ./Makefile.env
 export MCC_ROOT_DIR=$(shell pwd)
 export MCC_ROOT_OBJ=${MCC_ROOT_DIR}/obj
+Bin:=${MCC_ROOT_DIR}/bin
+Target:= ${Bin}/mcc
 modules += src backend IR frontend tools defs
 
 all: init SubModules  ${Target} clean_obj
