@@ -1,5 +1,5 @@
 include ${MCC_ROOT_DIR}/Makefile.env
-modules+=x86
+modules+=
 all:SubModules ${Object}
 ${MCC_ROOT_OBJ}/%.o: ./%.c
 	$(CC) $(CFlags) -o $@ -c $<

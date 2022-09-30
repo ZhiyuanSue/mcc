@@ -20,7 +20,7 @@
 
 实现（done）
 
-需要实现多层次的makefile，在目前仍然是单层的。
+需要实现多层次的makefile，在目前仍然是单层的。（done）
 
 bootstrap
 
