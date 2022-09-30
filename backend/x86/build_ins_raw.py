@@ -32,7 +32,7 @@ def main():
                 s=int(s)
                 s=str(s)
             x86_32_ins_raw_c.write(str(s))
-            x86_32_ins_raw_c.write("\",")
+            x86_32_ins_raw_c.write("\",\t")
         x86_32_ins_raw_c.write("},\n")
     x86_32_ins_raw_c.write("};\n")
     
@@ -51,7 +51,7 @@ def main():
                 s=int(s)
                 s=str(s)
             x86_64_ins_raw_c.write(str(s))
-            x86_64_ins_raw_c.write("\",")
+            x86_64_ins_raw_c.write("\",\t")
         x86_64_ins_raw_c.write("},\n")
     x86_64_ins_raw_c.write("};\n")
     
