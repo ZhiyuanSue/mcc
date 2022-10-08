@@ -44,9 +44,7 @@ SYM_ITEM* Create_symbol_item(char* symbol,NMSP name_space){
     tmp->Thread_local=false;
     tmp->data_size=0;
     tmp->data_field=(VALUE_DATA*)m_alloc(sizeof(VALUE_DATA));
-    printf("test point 2\n");
     m_memset(tmp->data_field,'\0',sizeof(VALUE_DATA));
-    printf("test point 3\n");
     tmp->type_vec=InitVEC(DEFAULT_CAPICITY);
     tmp->init_value_ptr=NULL;
     tmp->const_expr=false;

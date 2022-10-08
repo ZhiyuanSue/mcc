@@ -6,7 +6,7 @@ Bin:=${MCC_ROOT_DIR}/bin
 Target:= ${Bin}/mcc
 modules += src backend IR frontend tools defs
 
-all: init SubModules  ${Target} clean_obj
+all: init SubModules  ${Target}
 
 init:
 	$(shell if [ ! -d $(MCC_ROOT_OBJ) ];then mkdir $(MCC_ROOT_OBJ); fi)
@@ -20,6 +20,7 @@ ${Target}:
 clean:
 	rm -f ${MCC_ROOT_OBJ}/*.o 
 	rm -f ${Target}
+	rm -f ${Bin}/test_out/*
 
 clean_obj:
 	rm -rf ${MCC_ROOT_OBJ}

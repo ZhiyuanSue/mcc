@@ -169,8 +169,8 @@ void MEMDel(MEM_POOL* pool){
         }
     }*/
 #ifdef _TEST_
-    printf("mempool %s alloc/free: alloc %lld times,free %lld times\n",pool->name,pool->malloc_cnt,pool->free_cnt);
-    printf("\tuse sys alloc/free: alloc %lld times,free %lld times\n",pool->sys_malloc_cnt,pool->sys_free_cnt);
+    //printf("mempool %s alloc/free: alloc %lld times,free %lld times\n",pool->name,pool->malloc_cnt,pool->free_cnt);
+    //printf("\tuse sys alloc/free: alloc %lld times,free %lld times\n",pool->sys_malloc_cnt,pool->sys_free_cnt);
 #endif
     /*
     M_NODE* pre=curr_heap->sys_alloc;

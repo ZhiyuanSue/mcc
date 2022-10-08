@@ -1,14 +1,4 @@
-#include "../tools/MEM.h"
-#include "../tools/mcc_error.h"
-#include "../tools/ARG.h"
-#include "../tools/EBNF.h"
-#include "../frontend/preprocessor.h"
-#include "../frontend/lex.h"
-#include "../frontend/parser.h"
-#include "../frontend/semantics.h"
-#include "../frontend/search_mem.h"
-#include "../IR/trans.h"
-#include "../backend/backend.h"
+#include "mcc_main.h"
 
 extern char token_rules[MAX_RULE_NUM][RULE_CHAR_LEN];
 extern char token_statements[STATE_NUM][STATE_CHAR_LEN];
@@ -33,7 +23,7 @@ int semantics_level;
 void test(void){
     enum EE;
 }
-int main(int argc,char* argv[]){
+int mcc_main(char* filename){
     (****test)();
     char* buf=NULL;
     /*init global data*/
@@ -46,12 +36,11 @@ int main(int argc,char* argv[]){
     rvec=InitRULE(svec,rvec,token_rules);
     pvec=InitRULE(rvec,pvec,parsers);
     build_mem(VEC_GET_ITEM(pvec,0));
-    arg(argc,argv);
+   
     /*change heap*/
     curr_heap=file_heap;
     c_error=InitVEC(DEFAULT_CAPICITY);
     /*preprocess*/
-    filename=argv[1];
     buf=prepro(filename);
     /*deal with the preprocessor result*/
     
