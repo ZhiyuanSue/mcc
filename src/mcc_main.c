@@ -1,13 +1,14 @@
 #include "../tools/MEM.h"
 #include "../tools/mcc_error.h"
 #include "../tools/ARG.h"
-#include "../frontend/preprocessor.h"
 #include "../tools/EBNF.h"
+#include "../frontend/preprocessor.h"
 #include "../frontend/lex.h"
 #include "../frontend/parser.h"
 #include "../frontend/semantics.h"
 #include "../frontend/search_mem.h"
 #include "../IR/trans.h"
+#include "../backend/backend.h"
 
 extern char token_rules[MAX_RULE_NUM][RULE_CHAR_LEN];
 extern char token_statements[STATE_NUM][STATE_CHAR_LEN];
@@ -15,6 +16,7 @@ extern char parsers[MAX_RULE_NUM][RULE_CHAR_LEN];
 VEC* svec;  /*lex statement*/
 VEC* rvec;  /*lex rule*/
 VEC* pvec;  /*parser rule*/
+VEC* ivec;  /*instruction vec*/
 VEC linevec;   /*lines*/
 
 char* filename;

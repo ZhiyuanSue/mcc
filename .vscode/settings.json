@@ -9,6 +9,7 @@
         "ebnf.h": "c",
         "test.h": "c",
         "extern_def_semantics.h": "c",
-        "search_mem.h": "c"
+        "search_mem.h": "c",
+        "defs.h": "c"
     }
 }

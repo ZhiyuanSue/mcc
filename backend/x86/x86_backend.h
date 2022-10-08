@@ -1,10 +1,10 @@
+#ifndef _X86_BACKEND_H_
+#define _X86_BACKEND_H_
 #include "../../defs/defs.h"
+#include "../../tools/vector.h"
 #define MAX_INS_RAW_NUM 1200
 struct x86_register{
-
-};
-struct x86_ins{
-
+    char* reg_name;
 };
 
 struct x86_ins_raw{
@@ -32,3 +32,14 @@ struct x86_ins_raw{
     char description[128];
 };
 
+struct x86_ins{
+    struct x86_ins_raw* raw;
+    
+};
+
+extern struct x86_ins_raw x86_32_ins_raw[MAX_INS_RAW_NUM];
+extern struct x86_ins_raw x86_64_ins_raw[MAX_INS_RAW_NUM];
+
+VEC* x86_ins_gen(int bit_len);
+
+#endif
