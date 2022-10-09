@@ -2045,7 +2045,11 @@ bool postfix_expr_value(AST_BASE* ast_node)
         /*TODO: initializer part*/
         if(initializer_list_node)
         {
-            ;
+            INIT_VALUE* init_value_ptr=initializer_list_value(initializer_list_node,tmp_l_type_vec);
+            if(!init_value_ptr)
+                goto error;
+            m_free(init_value_ptr->data);
+            m_free(init_value_ptr);
         }
         is_lvalue=true;
     }

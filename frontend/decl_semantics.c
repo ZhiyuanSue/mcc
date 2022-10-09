@@ -152,7 +152,7 @@ bool declaration_type(AST_BASE* ast_node,VEC* dec_symbol_item_list)
                         tmpsi->Thread_local=true;
                     tmpsi->align_size=tmpt->align_spec;
                 }
-                /*TODO:initialize part*/
+                /*TODO:initialize part:DONE*/
                 if(AST_CHILD_NUM(init_dec_node)==3){
                     AST_BASE* initializer_node=AST_GET_CHILD(init_dec_node,2);
                     if(!Initialization(initializer_node,tmpsi)){
@@ -160,7 +160,10 @@ bool declaration_type(AST_BASE* ast_node,VEC* dec_symbol_item_list)
                     }
                 }
                 else{
-                    
+                    INIT_VALUE* init_value_ptr=Default_implict_initialization(tmpsi);
+                    if(!init_value_ptr)
+                        return false;
+                    tmpsi->init_value_ptr=init_value_ptr;
                 }
             }
         }
@@ -1171,12 +1174,15 @@ bool abs_declarator_type(AST_BASE* abstract_declarator_node,
     m_free(tei);
     return type_vec;
 }
-bool Default_implict_initialization(SYM_ITEM* symbol_item)
+INIT_VALUE* Default_implict_initialization(SYM_ITEM* symbol_item)
 {
     if(!symbol_item)
         goto error;
+    INIT_VALUE* init_value_ptr=m_alloc(sizeof(INIT_VALUE));
+
+    return init_value_ptr;
 error:
-    return false;
+    return NULL;
 }
 bool Initialization(AST_BASE* initializer_node,SYM_ITEM* symbol_item)
 {
@@ -1189,22 +1195,25 @@ bool Initialization(AST_BASE* initializer_node,SYM_ITEM* symbol_item)
     }
     else{
         sub_node=AST_GET_CHILD(initializer_node,1);
-        if(!initializer_list_value(sub_node,symbol_item))
+        INIT_VALUE* init_value_ptr=initializer_list_value(sub_node,symbol_item->type_vec);
+        if(!init_value_ptr)
             goto error;
+        symbol_item->init_value_ptr=init_value_ptr;
     }
     return true;
 error:
     return false;
 }
-bool initializer_list_value(AST_BASE* initializer_list_node,SYM_ITEM* symbol_item){
-    if(!initializer_list_node||initializer_list_node->type!=initializer_list||!symbol_item)
+INIT_VALUE* initializer_list_value(AST_BASE* initializer_list_node,VEC* type_vec){
+    if(!initializer_list_node||initializer_list_node->type!=initializer_list||!type_vec)
         goto error;
+    INIT_VALUE* init_value_ptr=m_alloc(sizeof(INIT_VALUE));
     for(size_t i=0;i<AST_CHILD_NUM(initializer_list_node);++i){
         ;/*TODO*/
     }
-    return true;
+    return init_value_ptr;
 error:
-    return false;
+    return NULL;
 }
 bool static_assert_type(AST_BASE* static_assert_declaration_node)
 {
