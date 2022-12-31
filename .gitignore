@@ -1,4 +1,6 @@
 /obj/*
 /bin/mcc
 /bin/test_out/*
-*.DS_Store
+.DS_Store
+.vscode
+*/.DS_Store

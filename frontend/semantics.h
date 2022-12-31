@@ -33,7 +33,7 @@ TP_ARR* array_type(VEC* tmp_node_vec);
 VEC* type_name_type(AST_BASE* type_name_node);
 bool Initialization(AST_BASE* initializer_node,SYM_ITEM* symbol_item);
 INIT_VALUE* Default_implict_initialization(SYM_ITEM* symbol_item);     //if a declaration have no initialization,use default
-INIT_VALUE* initializer_list_value(AST_BASE* initializer_list_node,VEC* type_vec);
+* initializer_list_value(AST_BASE* initializer_list_node,VEC* type_vec);
 bool static_assert_type(AST_BASE* static_assert_declaration_node);
 /*constant expr*/
 bool const_value(AST_BASE* ast_node);

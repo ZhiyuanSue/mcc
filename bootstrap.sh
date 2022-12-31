@@ -5,7 +5,7 @@
 # Author: Zhiyuan Sue
 # Description:
 #   This file is used to bootstrap,but I need a preprocessor first
-#   TODO:
+#   TODO:This file haven't been done
 #-----------------------------------------
 mcc_path="./bin/mcc"
 test_out_path="./bin/bootstrap_out/"

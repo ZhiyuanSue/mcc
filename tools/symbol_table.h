@@ -24,7 +24,7 @@ enum sym_table_attr_type{
 };
 typedef struct{
     size_t data_len;    /*data_len use char to count the size*/
-    void* data;
+    char* data;
 }INIT_VALUE;
 typedef struct sym_table SYM;
 struct sym_table{
@@ -37,7 +37,8 @@ struct sym_table{
     HASH* typedef_name_table;
     HASH* enum_const_table;
     enum sym_table_attr_type st_attr_type;
-    void* st_attr;
+    void* st_attr;  /*if you need more attributes ,
+                        use this to point to a struct, like the following SYMBOL_TABLE_FUNC_ATTR or SYMBOL_TABLE_SWITCH_ATTR*/
 };
 typedef struct sym_item{
     HASH_COMMON

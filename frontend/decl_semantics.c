@@ -1192,6 +1192,10 @@ bool Initialization(AST_BASE* initializer_node,SYM_ITEM* symbol_item)
     if(sub_node->type!=left_brace){
         if(!expr_dispatch(sub_node))
             goto error;
+        VEC* sub_node_type=sub_node->expr_attribute->type_vec;
+        symbol_item->data_field=sub_node->expr_attribute->data_field;
+        symbol_item->init_value_ptr=malloc(Type_size(sub_node_type));
+        
     }
     else{
         sub_node=AST_GET_CHILD(initializer_node,1);
