@@ -160,10 +160,7 @@ bool declaration_type(AST_BASE* ast_node,VEC* dec_symbol_item_list)
                     }
                 }
                 else{
-                    INIT_VALUE* init_value_ptr=Default_implict_initialization(tmpsi);
-                    if(!init_value_ptr)
-                        return false;
-                    tmpsi->init_value_ptr=init_value_ptr;
+                    /*TODO:Default_implict_initialization part*/
                 }
             }
         }
@@ -1174,16 +1171,6 @@ bool abs_declarator_type(AST_BASE* abstract_declarator_node,
     m_free(tei);
     return type_vec;
 }
-INIT_VALUE* Default_implict_initialization(SYM_ITEM* symbol_item)
-{
-    if(!symbol_item)
-        goto error;
-    INIT_VALUE* init_value_ptr=m_alloc(sizeof(INIT_VALUE));
-
-    return init_value_ptr;
-error:
-    return NULL;
-}
 bool Initialization(AST_BASE* initializer_node,SYM_ITEM* symbol_item)
 {
     if(!initializer_node||initializer_node->type!=initializer||!symbol_item)
@@ -1194,30 +1181,25 @@ bool Initialization(AST_BASE* initializer_node,SYM_ITEM* symbol_item)
             goto error;
         VEC* sub_node_type=sub_node->expr_attribute->type_vec;
         symbol_item->data_field=sub_node->expr_attribute->data_field;
-        symbol_item->init_value_ptr=malloc(Type_size(sub_node_type));
-        
     }
     else{
         sub_node=AST_GET_CHILD(initializer_node,1);
-        INIT_VALUE* init_value_ptr=initializer_list_value(sub_node,symbol_item->type_vec);
-        if(!init_value_ptr)
+        if(!initializer_list_value(sub_node,symbol_item->type_vec))
             goto error;
-        symbol_item->init_value_ptr=init_value_ptr;
     }
     return true;
 error:
     return false;
 }
-INIT_VALUE* initializer_list_value(AST_BASE* initializer_list_node,VEC* type_vec){
+bool initializer_list_value(AST_BASE* initializer_list_node,VEC* type_vec){
     if(!initializer_list_node||initializer_list_node->type!=initializer_list||!type_vec)
         goto error;
-    INIT_VALUE* init_value_ptr=m_alloc(sizeof(INIT_VALUE));
     for(size_t i=0;i<AST_CHILD_NUM(initializer_list_node);++i){
         ;/*TODO*/
     }
-    return init_value_ptr;
+    return true;
 error:
-    return NULL;
+    return false;
 }
 bool static_assert_type(AST_BASE* static_assert_declaration_node)
 {

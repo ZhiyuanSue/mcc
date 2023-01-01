@@ -22,10 +22,6 @@ enum sym_table_attr_type{
     SA_LOOP=0x02,
     SA_FUNC=0x04
 };
-typedef struct{
-    size_t data_len;    /*data_len use char to count the size*/
-    char* data;
-}INIT_VALUE;
 typedef struct sym_table SYM;
 struct sym_table{
     unsigned int level;
@@ -51,7 +47,6 @@ typedef struct sym_item{
     bool Thread_local;
     bool defined;
     bool declared;
-    INIT_VALUE* init_value_ptr;
 }SYM_ITEM;
 typedef struct{
     bool have_ret;

@@ -46,7 +46,6 @@ SYM_ITEM* Create_symbol_item(char* symbol,NMSP name_space){
     tmp->data_field=(VALUE_DATA*)m_alloc(sizeof(VALUE_DATA));
     m_memset(tmp->data_field,'\0',sizeof(VALUE_DATA));
     tmp->type_vec=InitVEC(DEFAULT_CAPICITY);
-    tmp->init_value_ptr=NULL;
     tmp->const_expr=false;
     return tmp;
 }
@@ -116,20 +115,6 @@ void print_symbol_table(SYM* symbol_table)  /*just a print for test,don't care t
             printf("    ");
         }
         printf("<symbol:%s ns:%d linkage:%d>\n",tmp->value,tmp->name_space,tmp->linkage);
-        if(tmp->init_value_ptr) /*this symbol have init value, print it*/
-        {
-            for(int j=0;j<=symbol_table->level+2;++j){
-                printf("    ");
-            }
-            printf("this symbol have init value:");
-            INIT_VALUE* tmp_init_value_ptr=tmp->init_value_ptr;
-            /*as we don't care about the type, just print in hex format*/
-            printf("0x");
-            for(size_t j=0;j<tmp_init_value_ptr->data_len;++j){
-                printf("%X ",tmp_init_value_ptr->data[j]);
-            }
-            printf("\n");
-        }
         for(int j=0;j<=symbol_table->level+2;++j){
             printf("    ");
         }
