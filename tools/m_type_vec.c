@@ -331,11 +331,11 @@ M_TYPE* Type_VEC_get_actual_base_type(VEC* type_vec)
     }
     return NULL;
 }
-bool Type_VEC_change_actual_base_type(VEC* type_vec,M_TYPE* tmptype)
+bool Type_VEC_change_actual_base_type(VEC* type_vec,M_TYPE* tmp_type)
 {
     if(!type_vec||VECLEN(type_vec)==0)
         return false;
-    if(!tmptype)
+    if(!tmp_type)
         return false;
     for(int i=VECLEN(type_vec)-1;i>=0;i--){
         M_TYPE* tmpt=VEC_GET_ITEM(type_vec,i);
@@ -347,7 +347,7 @@ bool Type_VEC_change_actual_base_type(VEC* type_vec,M_TYPE* tmptype)
             }
             else
             {
-                type_vec->data[i]=(void*)tmptype;
+                type_vec->data[i]=(void*)tmp_type;
                 return true;
             }
         }

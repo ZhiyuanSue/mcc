@@ -120,14 +120,14 @@ bool declaration_type(AST_BASE* ast_node,VEC* dec_symbol_item_list)
             return false;   /*a length==0 type vec means no type,but NULL means an error*/
         if(have_declarator){
             for(size_t i=0;i<AST_CHILD_NUM(init_declarator_list_node);i++){
-                VEC* tmp_type_v=InitVEC(DEFAULT_CAPICITY);
-                VECappend(type_vec,tmp_type_v);
+                VEC* tmp_type_vec=InitVEC(DEFAULT_CAPICITY);
+                VECappend(type_vec,tmp_type_vec);
                 char* declarator_char_name;
                 AST_BASE* init_dec_node=AST_GET_CHILD(init_declarator_list_node,i);
                 /*declarator part*/
                 AST_BASE* declarator_node=AST_GET_CHILD(init_dec_node,0);
                 if(declarator_type(declarator_node,
-                    tmp_type_v,
+                    tmp_type_vec,
                     &declaration_cnt,
                     &typedef_declaration,
                     declarator_node->name_space,
@@ -483,11 +483,11 @@ bool declarator_type(AST_BASE* declarator_node,
                     tmpsi->defined=false;
                 }
                 if(*typedef_declaration){
-                    VEC* tmp_type_v=InitVEC(DEFAULT_CAPICITY);
+                    VEC* tmp_type_vec=InitVEC(DEFAULT_CAPICITY);
                     TP_DEF_TYPE* typedef_type=(TP_DEF_TYPE*)build_base_type(TP_TYPE_DEF_TYPE);
                     typedef_type->typedef_name_type=type_vec;
-                    VECinsert(tmp_type_v,(void*)typedef_type);
-                    tmpsi->type_vec=tmp_type_v;
+                    VECinsert(tmp_type_vec,(void*)typedef_type);
+                    tmpsi->type_vec=tmp_type_vec;
                 }
                 else
                     tmpsi->type_vec=type_vec;
@@ -1175,18 +1175,48 @@ bool Initialization(AST_BASE* initializer_node,SYM_ITEM* symbol_item)
 {
     if(!initializer_node||initializer_node->type!=initializer||!symbol_item)
         goto error;
+    ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
     AST_BASE* sub_node=AST_GET_CHILD(initializer_node,0);
     if(sub_node->type!=left_brace){
+        /*check the target type, which must be a complete or an array of unknown length type*/
+        VEC* target_type_vec=symbol_item->type_vec;
+        M_TYPE* tmp_type=Type_VEC_get_actual_base_type(target_type_vec);
+        bool target_type_error=true;
+        if((!tmp_type->complete)&&(tmp_type->typ_category==TP_ARRAY))
+            target_type_error=false;
+        if(tmp_type->complete)
+            target_type_error=false;
+        if(target_type_error)
+        {
+            C_ERROR(C0091_ERR_INIT_TYPE_COMPLETE,initializer_node);
+            goto error;
+        }
+        /*use simple assignment rules to judge the type between target and source*/
         if(!expr_dispatch(sub_node))
             goto error;
         VEC* sub_node_type=sub_node->expr_attribute->type_vec;
-        symbol_item->data_field=sub_node->expr_attribute->data_field;
+        VEC* unary_type_vec=lvalue_convertion(target_type_vec);
+        VEC* assign_type_vec=lvalue_convertion(sub_node_type);
+        M_TYPE* assign_base_type=Type_VEC_get_actual_base_type(assign_type_vec);
+        if(IS_INT_TYPE(assign_base_type->typ_category)&&sub_node->expr_attribute->const_expr){
+            long long int null_pointer_value=TP_INT_CAST_TYPE(assign_base_type->typ_category,sub_node->expr_attribute->data_field);
+            if(null_pointer_value==0)
+                assign_base_type->typ_category=TP_NULL_POINTER_CONSTANT;
+        }
+        /*please consider the null pointer constant*/
+        if(!assignment_type_check(unary_type_vec,assign_type_vec))
+        {
+            C_ERROR(C0072_ERR_ASSIGN_OPERAND,initializer_node);
+            goto error;
+        }
+
     }
     else{
         sub_node=AST_GET_CHILD(initializer_node,1);
         if(!initializer_list_value(sub_node,symbol_item->type_vec))
             goto error;
     }
+    m_free(tei);
     return true;
 error:
     return false;
@@ -1194,9 +1224,24 @@ error:
 bool initializer_list_value(AST_BASE* initializer_list_node,VEC* type_vec){
     if(!initializer_list_node||initializer_list_node->type!=initializer_list||!type_vec)
         goto error;
+    ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
+    /*check the type, which must be a complete or an array of unknown length type*/
+    M_TYPE* tmp_type=Type_VEC_get_actual_base_type(type_vec);
+    bool target_type_error=true;
+    if((!tmp_type->complete)&&(tmp_type->typ_category==TP_ARRAY))
+        target_type_error=false;
+    if(tmp_type->complete)
+        target_type_error=false;
+    if(target_type_error)
+    {
+        C_ERROR(C0091_ERR_INIT_TYPE_COMPLETE,initializer_list_node);
+        goto error;
+    }
     for(size_t i=0;i<AST_CHILD_NUM(initializer_list_node);++i){
         ;/*TODO*/
     }
+
+    m_free(tei);
     return true;
 error:
     return false;

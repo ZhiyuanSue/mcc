@@ -117,7 +117,7 @@ const char error_describe[ERROR_NUMBER][ERROR_DES_LEN]={
     "C0088:The size of alignment specified should be a positive power of 2",
     "C0089:An alignment attribute shall not be specified in a declaration of a typedef, or a bit-field, or a function, or a parameter, or an object declared with the register storage-class specifier.",
     "C0090:Two declaration or definition with incompatible alignment",
-    "C0091:This initialization has wrong format",
+    "C0091:The initialization of an identifier need complete type or an array with unknown length",
     /*warning*/
     "W0001:",
     "W0002:Unknown warning",

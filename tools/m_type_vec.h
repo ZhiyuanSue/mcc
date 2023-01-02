@@ -10,7 +10,7 @@ M_TYPE* Type_VEC_get_qual(VEC* type_vec);
 M_TYPE* Type_composite_qual(M_TYPE* qual_a,M_TYPE* qual_b);
 M_TYPE* Type_VEC_get_spec_other(VEC* type_vec); /*get the storage class/ align spec/ function spec type node*/
 M_TYPE* Type_VEC_get_actual_base_type(VEC* type_vec);
-bool Type_VEC_change_actual_base_type(VEC* type_vec,M_TYPE* tmptype);
+bool Type_VEC_change_actual_base_type(VEC* type_vec,M_TYPE* tmp_type);
 M_TYPE* Type_VEC_get_Atomic(VEC* type_vec);
 
 VEC* Type_VEC_get_Atomic_TO(VEC* type_vec,bool is_atomic);
