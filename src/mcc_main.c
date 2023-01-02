@@ -20,9 +20,6 @@ MEM_POOL* file_heap;    /*just for a single file*/
 #ifdef _TEST_SEMANTICS_
 int semantics_level;
 #endif
-void test(void){
-    enum EE;
-}
 int mcc_main(char* filename){
     (****test)();
     char* buf=NULL;

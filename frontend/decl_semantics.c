@@ -1173,6 +1173,7 @@ bool abs_declarator_type(AST_BASE* abstract_declarator_node,
 }
 bool Initialization(AST_BASE* initializer_node,SYM_ITEM* symbol_item)
 {
+    /*TODO: char array type*/
     if(!initializer_node||initializer_node->type!=initializer||!symbol_item)
         goto error;
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));

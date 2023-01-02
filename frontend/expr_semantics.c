@@ -274,8 +274,7 @@ bool assign_expr_value(AST_BASE* ast_node)
         goto error;
     }
     if(assign_operator->type==equal){
-        bool legal=assignment_type_check(unary_type_vec,assign_type_vec);
-        if(!legal)
+        if(!assignment_type_check(unary_type_vec,assign_type_vec))
         {
             C_ERROR(C0072_ERR_ASSIGN_OPERAND,ast_node);
             goto error;
@@ -332,7 +331,7 @@ bool assignment_type_check(VEC* unary_type_vec,VEC* assign_type_vec)
     else if((unary_base_type->typ_category==TP_UNION&&assign_base_type->typ_category==TP_UNION)||(unary_base_type->typ_category==TP_STRUCT&&assign_base_type->typ_category==TP_STRUCT))
     {
         if(compatible_types(unary_type_vec,assign_type_vec))
-            return false;
+            legal=true;
     }
     else if(unary_base_type->typ_category==TP_POINT&&assign_base_type->typ_category==TP_POINT)
     {

@@ -12,7 +12,7 @@
 #include "../frontend/search_mem.h"
 #include "../IR/trans.h"
 #include "../backend/backend.h"
-
+#include "test.h"
 int mcc_main(char* filename);
 
 #endif
