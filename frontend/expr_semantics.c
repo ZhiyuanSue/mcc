@@ -2044,7 +2044,7 @@ bool postfix_expr_value(AST_BASE* ast_node)
         /*TODO: initializer part*/
         if(initializer_list_node)
         {
-            if(!initializer_list_value(initializer_list_node,tmp_l_type_vec))
+            if(!initializer_list_semantic(initializer_list_node,tmp_l_type_vec))
                 goto error;
         }
         is_lvalue=true;

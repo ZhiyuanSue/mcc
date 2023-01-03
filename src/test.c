@@ -5,6 +5,7 @@ void test(void)
 {
     struct{
         int a[3],b;
-    } w[]={ {1},2,3,4,{5,6},[3]=2 };
-    printf("%d\n",w[1].b);
+    } w[]={ {1},2,3,4,{5,6},[3]=7,8 };
+    printf("%d\n",w[3].a[0]);
+    printf("%d\n",w[3].a[1]);
 }
