@@ -699,6 +699,7 @@ TP_ARR* array_type(VEC* tmp_node_vec)
     if(VECLEN(tmp_node_vec)==0){
         /*no any nodes*/
         res->complete=false;
+        res->is_vla=true;
     }
     else{
         /*first,find all the nodes*/

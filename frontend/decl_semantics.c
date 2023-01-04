@@ -136,15 +136,7 @@ bool declaration_type(AST_BASE* ast_node,VEC* dec_symbol_item_list)
                     return false;
                 SYM_ITEM* tmpsi=find_symbol_curr_table(declarator_node->symbol_table,declarator_char_name,declarator_node->name_space);
                 VECinsert(dec_symbol_item_list,(void*)tmpsi);
-                if(tmpsi&&Type_VEC_VM(tmpsi->type_vec)){
-                    if(tmpsi->linkage!=LKA_NONE
-                        ||(curr_scope!=SPT_BLOCK
-                        &&curr_scope!=SPT_FUN_PROTOTYPE))
-                    {
-                        C_ERROR(C0041_ERR_VM_ID,declarator_node);
-                        return false;
-                    }
-                }
+                
                 M_TYPE* tmpt=Type_VEC_get_spec_other(tmpsi->type_vec);
                 if(tmpt){
                     tmpsi->fspec_type=tmpt->func_spec;
@@ -155,13 +147,21 @@ bool declaration_type(AST_BASE* ast_node,VEC* dec_symbol_item_list)
                 /*TODO:initialize part:DONE*/
                 if(AST_CHILD_NUM(init_dec_node)==3){
                     AST_BASE* initializer_node=AST_GET_CHILD(init_dec_node,2);
-                    bool begin_with_left_brace=false;
                     if(!initializer_semantic(initializer_node,tmpsi->type_vec)){
                         return false;
                     }
                 }
                 else{
                     /*TODO:Default_implict_initialization part*/
+                }
+                if(tmpsi&&Type_VEC_VM(tmpsi->type_vec)){
+                    if(tmpsi->linkage!=LKA_NONE
+                        ||(curr_scope!=SPT_BLOCK
+                        &&curr_scope!=SPT_FUN_PROTOTYPE))
+                    {
+                        C_ERROR(C0041_ERR_VM_ID,declarator_node);
+                        return false;
+                    }
                 }
             }
         }
@@ -1179,20 +1179,19 @@ bool initializer_semantic(AST_BASE* initializer_node,VEC* target_type_vec)
         goto error;
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
     AST_BASE* sub_node=AST_GET_CHILD(initializer_node,0);
+    /*check the target type, which must be a complete or an array of unknown length type*/
+    M_TYPE* tmp_type=Type_VEC_get_actual_base_type(target_type_vec);
+    bool type_error=true;
+    if((!tmp_type->complete)&&(tmp_type->typ_category==TP_ARRAY)&&((TP_ARR*)tmp_type)->is_vla)
+        type_error=false;
+    if(tmp_type->complete)
+        type_error=false;
+    if(type_error)
+    {
+        C_ERROR(C0091_ERR_INIT_TYPE_COMPLETE,initializer_node);
+        goto error;
+    }
     if(sub_node->type!=left_brace){
-        *begin_with_left_brace=false;
-        /*check the target type, which must be a complete or an array of unknown length type*/
-        M_TYPE* tmp_type=Type_VEC_get_actual_base_type(target_type_vec);
-        bool target_type_error=true;
-        if((!tmp_type->complete)&&(tmp_type->typ_category==TP_ARRAY))
-            target_type_error=false;
-        if(tmp_type->complete)
-            target_type_error=false;
-        if(target_type_error)
-        {
-            C_ERROR(C0091_ERR_INIT_TYPE_COMPLETE,initializer_node);
-            goto error;
-        }
         /*use simple assignment rules to judge the type between target and source*/
         if(!expr_dispatch(sub_node))
             goto error;
@@ -1211,10 +1210,8 @@ bool initializer_semantic(AST_BASE* initializer_node,VEC* target_type_vec)
             C_ERROR(C0072_ERR_ASSIGN_OPERAND,initializer_node);
             goto error;
         }
-
     }
     else{
-        *begin_with_left_brace=true;
         sub_node=AST_GET_CHILD(initializer_node,1);
         if(!initializer_list_semantic(sub_node,target_type_vec))
             goto error;
@@ -1228,22 +1225,60 @@ bool initializer_list_semantic(AST_BASE* initializer_list_node,VEC* type_vec){
     if(!initializer_list_node||initializer_list_node->type!=initializer_list||!type_vec)
         goto error;
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
-    /*check the type, which must be a complete or an array of unknown length type*/
     M_TYPE* tmp_type=Type_VEC_get_actual_base_type(type_vec);
-    bool target_type_error=true;
-    if((!tmp_type->complete)&&(tmp_type->typ_category==TP_ARRAY))
-        target_type_error=false;
-    if(tmp_type->complete)
-        target_type_error=false;
-    if(target_type_error)
-    {
-        C_ERROR(C0091_ERR_INIT_TYPE_COMPLETE,initializer_list_node);
-        goto error;
-    }
+    unsigned int sub_obj_size=0;
+    unsigned int sub_obj_off=0;
     for(size_t i=0;i<AST_CHILD_NUM(initializer_list_node);++i){
-        ;/*TODO*/
-    }
+        AST_BASE* sub_node=AST_GET_CHILD(initializer_list_node,i);
+        /*check the size*/
+        if(tmp_type->complete){
+            if(IS_SCALAR_TYPE(tmp_type->typ_category))
+            {
+                if(sub_obj_size!=0)
+                    break;
+            }
+            else if(tmp_type->typ_category==TP_UNION)
+            {
+                if(sub_obj_size!=0)
+                    break;
+            }
+            else if(tmp_type->typ_category==TP_STRUCT)
+            {
+                unsigned int struct_sub_length=VECLEN(((TP_SU*)tmp_type)->members);
+                if(sub_obj_size>=struct_sub_length)
+                    break;
+            }
+            else if(tmp_type->typ_category==TP_ARRAY)
+            {
+                if(((TP_ARR*)tmp_type)->is_vla)
+                    ;   /*a vla,so the length is don't know*/
+                else
+                {
+                    unsigned int array_sub_length=((TP_ARR*)tmp_type)->axis_size;
+                    if(sub_obj_size>=array_sub_length)
+                    break;
+                }
+            }
+            else{
+                /*ohter types like function type/enum type, etc.*/
+                C_ERROR(C0092_ERR_INIT_ENTITY,initializer_list_node);
+                goto error;
+            }
+        }
+        /*judge the sub node*/
+        if(sub_node->type==initializer){
+            
+        }
+        else if(sub_node->type==designation){
 
+        }
+    }
+    if((!tmp_type->complete)&&(tmp_type->typ_category==TP_ARRAY))
+    {
+        tmp_type->complete=true;
+        ((TP_ARR*)tmp_type)->is_vla=false;
+        ((TP_ARR*)tmp_type)->axis_size=sub_obj_size;
+    }
     m_free(tei);
     return true;
 error:
