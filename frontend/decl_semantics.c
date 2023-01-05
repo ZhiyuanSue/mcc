@@ -1227,10 +1227,18 @@ bool initializer_list_semantic(AST_BASE* initializer_list_node,VEC* type_vec){
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
     M_TYPE* tmp_type=Type_VEC_get_actual_base_type(type_vec);
     unsigned int sub_obj_size=0;
+    unsigned int array_max_size=0;
+    /*
+        e.x. int arr[]={[10]=10,[1]=1} ,the length of array must be 11,
+        the size at the signator [10]= is 10,and the size become 11 at the initializer 10.
+        but the size at the signator [1]= is 1,and the size become 2 at the initializer 1.
+        so I have to remember the max length of the array.
+    */
     unsigned int sub_obj_off=0;
+    bool is_vla_array=false;
     for(size_t i=0;i<AST_CHILD_NUM(initializer_list_node);++i){
         AST_BASE* sub_node=AST_GET_CHILD(initializer_list_node,i);
-        /*check the size*/
+        /*check the size,if it's long enough to fill the object,just break and ignore the left initializer*/
         if(tmp_type->complete){
             if(IS_SCALAR_TYPE(tmp_type->typ_category))
             {
@@ -1265,19 +1273,60 @@ bool initializer_list_semantic(AST_BASE* initializer_list_node,VEC* type_vec){
                 goto error;
             }
         }
+        else if((!tmp_type->complete)&&(tmp_type->typ_category==TP_ARRAY)&&((TP_ARR*)tmp_type)->is_vla)
+            is_vla_array=true;
         /*judge the sub node*/
         if(sub_node->type==initializer){
-            
+            /*test the sub initializer begin with left brace or not*/
+            bool begin_with_left_brace=false;
+            if(AST_CHILD_NUM(sub_node)!=1)
+            {
+                begin_with_left_brace=true;
+            }
+            /*use sub_obj_off and begin_with_left_brace to judge*/
+            if(!sub_obj_off&&begin_with_left_brace)
+            {
+                VEC* sub_obj_type=Type_VEC_get_sub_obj_type(type_vec,sub_obj_size);
+                if(!initializer_semantic(sub_node,sub_obj_type))
+                    goto error;
+                sub_obj_off=0;
+                sub_obj_size++;
+            }
+            else
+            {
+                VEC* sub_obj_type=Type_VEC_get_sub_obj_type(type_vec,sub_obj_size);
+                VEC* sub_obj_element_type=Type_VEC_get_sub_obj_off_element_type(sub_obj_type,sub_obj_off);
+                if(!initializer_semantic(sub_node,sub_obj_element_type))
+                    goto error;
+                /*TODO:set the new size and off*/
+
+            }
+            if(is_vla_array&&sub_obj_size>array_max_size)
+                array_max_size=sub_obj_size;
         }
         else if(sub_node->type==designation){
+            AST_BASE* designator_list_node=AST_GET_CHILD(sub_node,0);
+            /*check the designation*/
+            for(size_t i=0;i<AST_CHILD_NUM(designator_list_node);++i)
+            {
+                AST_BASE* designator_node=AST_GET_CHILD(designator_list_node,i);
+                if(AST_CHILD_NUM(designator_node)==3)   /* '[const expr]' case*/
+                {
+                    /*check the closest enclose obj type*/
 
+                    /*change the size and the */
+                }
+                else{       /* '.identifier' case*/
+
+                }
+            }
         }
     }
-    if((!tmp_type->complete)&&(tmp_type->typ_category==TP_ARRAY))
+    if(is_vla_array)
     {
         tmp_type->complete=true;
         ((TP_ARR*)tmp_type)->is_vla=false;
-        ((TP_ARR*)tmp_type)->axis_size=sub_obj_size;
+        ((TP_ARR*)tmp_type)->axis_size=array_max_size;
     }
     m_free(tei);
     return true;

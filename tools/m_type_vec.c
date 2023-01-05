@@ -4,7 +4,6 @@ int int_rank[TYPE_NUM+1]={255,255,2,2,3,3,4,4,5,5,6,6,255,255,255,1,
     255,255,255,255,255,255,255,255,255,255,255,255,4
 };
 bool Type_VEC_cmp(VEC* a,VEC* b){
-
     M_TYPE* tmpa=VEC_GET_ITEM(a,0);
     if(tmpa->typ_category==TP_TYPE_DEF_TYPE){
         VEC* tmpavec=((TP_DEF_TYPE*)tmpa)->typedef_name_type;
@@ -658,6 +657,33 @@ bool float_promotion(M_TYPE** float_operand){
     *float_operand=new_o;
     return true;
 }
+
+VEC* Type_VEC_get_sub_obj_type(VEC* current_obj_type,unsigned int sub_obj_size)
+{
+    if(!current_obj_type)
+        return NULL;
+    VEC* res_vec=NULL;
+    M_TYPE* actual_type=Type_VEC_get_actual_base_type(current_obj_type);
+    if(actual_type->typ_category==TP_ARRAY)
+    {
+        res_vec=Type_VEC_get_Array_TO(current_obj_type,true);
+    }
+    else if(actual_type->typ_category==TP_STRUCT||actual_type->typ_category==TP_UNION)
+    {
+        VEC* sub_obj_list=((TP_SU*)actual_type)->members;
+        TP_SU_MEMBER* sub_obj=VEC_GET_ITEM(sub_obj_list,sub_obj_size);
+        res_vec=sub_obj->type_vec;
+    }
+    return res_vec;
+}
+VEC* Type_VEC_get_sub_obj_off_element_type(VEC* sub_obj_type,unsigned int sub_obj_off)
+{
+    if(!sub_obj_type)
+        return NULL;
+    /*TODO*/
+    return sub_obj_type;
+}
+
 void print_type_vec(VEC* type_vec)
 {
     printf("<");
