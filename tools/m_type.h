@@ -120,7 +120,7 @@ typedef struct {
     bool is_vla;
     bool is_star;
     union{
-        signed long long int axis_size;
+        size_t axis_size;
         void* assign_expr_node;
     };
     void* axis_modify;

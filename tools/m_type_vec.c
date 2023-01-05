@@ -332,6 +332,7 @@ M_TYPE* Type_VEC_get_actual_base_type(VEC* type_vec)
 }
 bool Type_VEC_change_actual_base_type(VEC* type_vec,M_TYPE* tmp_type)
 {
+    /*This function assume that the type vec exist and have a base type,if not ,build one*/
     if(!type_vec||VECLEN(type_vec)==0)
         return false;
     if(!tmp_type)
@@ -658,30 +659,129 @@ bool float_promotion(M_TYPE** float_operand){
     return true;
 }
 
-VEC* Type_VEC_get_sub_obj_type(VEC* current_obj_type,unsigned int sub_obj_size)
+size_t Type_VEC_get_element_size(VEC* current_obj_type)
+/*
+    This function is used to count a given type vec , how many elements in this type
+    e.x.
+    struct {
+        int a[3];
+        double b;
+    };
+    have 3+1 =4 elements
+*/
+{
+    size_t element_size=0;
+    M_TYPE* base_type=Type_VEC_get_actual_base_type(current_obj_type);
+    if(IS_SCALAR_TYPE(base_type->typ_category))
+    {
+        element_size=1;
+    }
+    else if(base_type->typ_category==TP_ARRAY){
+        if(!((TP_ARR*)base_type)->is_vla)
+        {
+            VEC* sub_obj_type=Type_VEC_get_Array_TO(current_obj_type,true);
+            element_size=(((TP_ARR*)base_type)->axis_size)*Type_VEC_get_element_size(sub_obj_type);
+        }
+    }
+    else if(base_type->typ_category==TP_STRUCT)
+    {
+        VEC* struct_member_list=((TP_SU*)base_type)->members;
+        for(size_t i=0;i<VECLEN(struct_member_list);++i){
+            TP_SU_MEMBER* sub_obj=VEC_GET_ITEM(struct_member_list,i);
+            element_size+=Type_VEC_get_element_size(sub_obj->type_vec);
+        }
+    }
+    else if(base_type->typ_category==TP_UNION){
+        VEC* struct_member_list=((TP_SU*)base_type)->members;
+        TP_SU_MEMBER* sub_obj=VEC_GET_ITEM(struct_member_list,0);
+        element_size+=Type_VEC_get_element_size(sub_obj->type_vec);
+    }
+    return element_size;
+}
+VEC* Type_VEC_get_sub_obj_type(VEC* current_obj_type,size_t sub_obj_size)
 {
     if(!current_obj_type)
         return NULL;
     VEC* res_vec=NULL;
     M_TYPE* actual_type=Type_VEC_get_actual_base_type(current_obj_type);
-    if(actual_type->typ_category==TP_ARRAY)
+    if(IS_SCALAR_TYPE(actual_type->typ_category))
+    {
+        VECcpy(current_obj_type,&res_vec);
+    }
+    else if(actual_type->typ_category==TP_ENUM)
+    {
+        M_TYPE* tmpt=build_base_type(TP_SINT);
+        res_vec=InitVEC(DEFAULT_CAPICITY);
+        VECinsert(res_vec,tmpt);
+    }
+    else if(actual_type->typ_category==TP_ARRAY)
     {
         res_vec=Type_VEC_get_Array_TO(current_obj_type,true);
     }
     else if(actual_type->typ_category==TP_STRUCT||actual_type->typ_category==TP_UNION)
     {
-        VEC* sub_obj_list=((TP_SU*)actual_type)->members;
-        TP_SU_MEMBER* sub_obj=VEC_GET_ITEM(sub_obj_list,sub_obj_size);
-        res_vec=sub_obj->type_vec;
+        VEC* struct_member_list=((TP_SU*)actual_type)->members;
+        TP_SU_MEMBER* sub_obj=VEC_GET_ITEM(struct_member_list,sub_obj_size);
+        VECcpy(sub_obj->type_vec,&res_vec);
     }
     return res_vec;
 }
-VEC* Type_VEC_get_sub_obj_off_element_type(VEC* sub_obj_type,unsigned int sub_obj_off)
+VEC* Type_VEC_get_sub_obj_off_element_type(VEC* sub_obj_type,size_t sub_obj_off)
+/*
+    let me use the previous example to explain the function:
+    struct {
+        int a[3];
+        double b;
+    };
+    sub_obj_type is TP_STRUCT
+    if sub_obj_off is 0,1,2 the return type is int ——for the first 3 elements is int type
+    if the sub_obj_off is 3 , the return type is double ——the b's type
+*/
 {
     if(!sub_obj_type)
         return NULL;
-    /*TODO*/
-    return sub_obj_type;
+    VEC* res_vec=NULL;
+    M_TYPE* actual_type=Type_VEC_get_actual_base_type(sub_obj_type);
+    if(IS_SCALAR_TYPE(actual_type->typ_category))
+    {
+        VECcpy(sub_obj_type,&res_vec);
+    }
+    else if(actual_type->typ_category==TP_ENUM)
+    {
+        M_TYPE* tmpt=build_base_type(TP_SINT);
+        res_vec=InitVEC(DEFAULT_CAPICITY);
+        VECinsert(res_vec,tmpt);
+    }
+    else if(actual_type->typ_category==TP_ARRAY)
+    {
+        /*Note:it's sub obj type, which must not be a vla*/
+        VEC* sub_sub_obj_type=Type_VEC_get_Array_TO(sub_obj_type,true);
+        size_t sub_sub_obj_element_size=Type_VEC_get_element_size(sub_sub_obj_type);
+        res_vec=Type_VEC_get_sub_obj_off_element_type(sub_sub_obj_type,sub_obj_off%sub_sub_obj_element_size);
+    }
+    else if(actual_type->typ_category==TP_STRUCT)
+    {
+        VEC* struct_member_list=((TP_SU*)actual_type)->members;
+        for(size_t i=0;i<VECLEN(struct_member_list);++i)
+        {
+            TP_SU_MEMBER* struct_member=VEC_GET_ITEM(struct_member_list,i);
+            size_t struct_member_size=Type_VEC_get_element_size(struct_member->type_vec);
+            if(struct_member_size>sub_obj_off)
+            {
+                res_vec=Type_VEC_get_sub_obj_off_element_type(struct_member->type_vec,sub_obj_off);
+            }
+            else{
+                sub_obj_off-=struct_member_size;
+            }
+        }
+    }
+    else if(actual_type->typ_category==TP_UNION)
+    {
+        VEC* struct_member_list=((TP_SU*)actual_type)->members;
+        TP_SU_MEMBER* struct_member=VEC_GET_ITEM(struct_member_list,0);
+        res_vec=Type_VEC_get_sub_obj_off_element_type(struct_member->type_vec,sub_obj_off);
+    }
+    return res_vec;
 }
 
 void print_type_vec(VEC* type_vec)

@@ -200,7 +200,7 @@ void print_symbol_table(SYM* symbol_table)  /*just a print for test,don't care t
                 for(int j=0;j<=symbol_table->level+3;++j){
                     printf("    ");
                 }
-                printf("array len is: %lld\n",((TP_ARR*)tmpt)->axis_size);
+                printf("array len is: %zu\n",((TP_ARR*)tmpt)->axis_size);
             }
         }
     }

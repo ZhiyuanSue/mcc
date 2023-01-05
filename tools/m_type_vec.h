@@ -27,8 +27,9 @@ bool integer_promotion(M_TYPE** integer_operand);
 bool float_promotion(M_TYPE** float_operand);
 
 /*The following is used for initialize*/
-VEC* Type_VEC_get_sub_obj_type(VEC* current_obj_type,unsigned int sub_obj_size);
-VEC* Type_VEC_get_sub_obj_off_element_type(VEC* sub_obj_type,unsigned int sub_obj_off);
+size_t Type_VEC_get_element_size(VEC* current_obj_type);
+VEC* Type_VEC_get_sub_obj_type(VEC* current_obj_type,size_t sub_obj_size);
+VEC* Type_VEC_get_sub_obj_off_element_type(VEC* sub_obj_type,size_t sub_obj_off);
 /*Note: the input is sub object's type,please use the previous function to get the type of sub object first*/
 
 void print_type_vec(VEC* type_vec);

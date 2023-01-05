@@ -1226,26 +1226,21 @@ bool initializer_list_semantic(AST_BASE* initializer_list_node,VEC* type_vec){
         goto error;
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
     M_TYPE* tmp_type=Type_VEC_get_actual_base_type(type_vec);
-    unsigned int sub_obj_size=0;
-    unsigned int array_max_size=0;
+    size_t sub_obj_size=0;
+    size_t array_max_size=0;
     /*
         e.x. int arr[]={[10]=10,[1]=1} ,the length of array must be 11,
         the size at the signator [10]= is 10,and the size become 11 at the initializer 10.
         but the size at the signator [1]= is 1,and the size become 2 at the initializer 1.
         so I have to remember the max length of the array.
     */
-    unsigned int sub_obj_off=0;
+    size_t sub_obj_off=0;
     bool is_vla_array=false;
     for(size_t i=0;i<AST_CHILD_NUM(initializer_list_node);++i){
         AST_BASE* sub_node=AST_GET_CHILD(initializer_list_node,i);
         /*check the size,if it's long enough to fill the object,just break and ignore the left initializer*/
         if(tmp_type->complete){
-            if(IS_SCALAR_TYPE(tmp_type->typ_category))
-            {
-                if(sub_obj_size!=0)
-                    break;
-            }
-            else if(tmp_type->typ_category==TP_UNION)
+            if(IS_SCALAR_TYPE(tmp_type->typ_category)||tmp_type->typ_category==TP_UNION||tmp_type->typ_category==TP_ENUM)
             {
                 if(sub_obj_size!=0)
                     break;
@@ -1268,7 +1263,7 @@ bool initializer_list_semantic(AST_BASE* initializer_list_node,VEC* type_vec){
                 }
             }
             else{
-                /*ohter types like function type/enum type, etc.*/
+                /*ohter types like function type, etc.*/
                 C_ERROR(C0092_ERR_INIT_ENTITY,initializer_list_node);
                 goto error;
             }
@@ -1298,8 +1293,13 @@ bool initializer_list_semantic(AST_BASE* initializer_list_node,VEC* type_vec){
                 VEC* sub_obj_element_type=Type_VEC_get_sub_obj_off_element_type(sub_obj_type,sub_obj_off);
                 if(!initializer_semantic(sub_node,sub_obj_element_type))
                     goto error;
-                /*TODO:set the new size and off*/
-
+                /*set the new size and off,here you need to promise the off cannot out range*/
+                sub_obj_off++;
+                size_t sub_obj_max_size=Type_VEC_get_element_size(sub_obj_type);
+                if(sub_obj_off>=sub_obj_max_size){
+                    sub_obj_off-=sub_obj_max_size;
+                    sub_obj_size++;
+                }
             }
             if(is_vla_array&&sub_obj_size>array_max_size)
                 array_max_size=sub_obj_size;
@@ -1314,7 +1314,7 @@ bool initializer_list_semantic(AST_BASE* initializer_list_node,VEC* type_vec){
                 {
                     /*check the closest enclose obj type*/
 
-                    /*change the size and the */
+                    /*change the size and the off*/
                 }
                 else{       /* '.identifier' case*/
 
