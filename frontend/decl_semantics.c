@@ -144,7 +144,7 @@ bool declaration_type(AST_BASE* ast_node,VEC* dec_symbol_item_list)
                         tmpsi->Thread_local=true;
                     tmpsi->align_size=tmpt->align_spec;
                 }
-                /*TODO:initialize part:DONE*/
+                /*initialize part*/
                 if(AST_CHILD_NUM(init_dec_node)==3){
                     AST_BASE* initializer_node=AST_GET_CHILD(init_dec_node,2);
                     if(!initializer_semantic(initializer_node,tmpsi->type_vec)){
@@ -152,7 +152,7 @@ bool declaration_type(AST_BASE* ast_node,VEC* dec_symbol_item_list)
                     }
                 }
                 else{
-                    /*TODO:Default_implict_initialization part*/
+                    /*Default_implict_initialization part,do nothing*/
                 }
                 if(tmpsi&&Type_VEC_VM(tmpsi->type_vec)){
                     if(tmpsi->linkage!=LKA_NONE
@@ -269,7 +269,7 @@ bool declarator_type(AST_BASE* declarator_node,
                     return false;
                 }
                 tmpl=LKA_EXTERN;
-                /*TODO:set the function type's name:DONE*/
+                /*set the function type's name*/
                 ((TP_FUNC*)tmpt)->func_name=*declarator_char_name;
             }
             /*start set linkage according to some information*/
@@ -329,7 +329,7 @@ bool declarator_type(AST_BASE* declarator_node,
                             return false;
                         }
                         /*if both are extern, not an error and no need to insert*/
-                        /*TODO:the type must be same,check it:DONE*/
+                        /*the type must be same,check it*/
                         if(!Type_VEC_cmp(tmpsi->type_vec,type_vec))
                         {
                             if(!compatible_types(tmpsi->type_vec,type_vec)){
@@ -365,14 +365,14 @@ bool declarator_type(AST_BASE* declarator_node,
                     }
                     else{
                         /*then is the no/no case*/
-                        /*TODO:if a redeclaration of typedef at the same scope and type is the same ,it's not an error:DONE*/
+                        /*if a redeclaration of typedef at the same scope and type is the same ,it's not an error*/
                         if(*typedef_declaration){
                             TP_DEF_TYPE* typedef_name_type=(TP_DEF_TYPE*)Type_VEC_get_actual_base_type(tmpsi->type_vec);
                             if(typedef_name_type&&typedef_name_type->typedef_name_type){
                                 if(Type_VEC_cmp(typedef_name_type->typedef_name_type,type_vec)&&compatible_types(typedef_name_type->typedef_name_type,type_vec))
                                     redefine=false;
                             }
-                            /*TODO:the type must not be a variably modified type DONE*/
+                            /*the type must not be a variably modified type*/
                             if(is_vm){
                                 redefine=true;
                             }   /*I tried the following codes on gcc in a block scope,
@@ -531,12 +531,12 @@ bool declarator_type(AST_BASE* declarator_node,
         if(direct_dec_begin+1<=direct_dec_end){
             for(size_t i=direct_dec_begin+1;i<direct_dec_end;++i)
                 VECinsert(tmp_node_vec,AST_GET_CHILD(direct_dec_node,i));
-            if(function_array==1)      /*TODO:function*/
+            if(function_array==1)      /*function*/
             {
                 tmpt=(M_TYPE*)function_type(tmp_node_vec);
                 if(!tmpt)
                     return false;
-                /*TODO:check the return type of function*/
+                /*check the return type of function*/
                 M_TYPE* tmpfunct=Type_VEC_get_actual_base_type(type_vec);
                 if(tmpfunct&&(tmpfunct->typ_category==TP_FUNCTION||tmpfunct->typ_category==TP_ARRAY))
                 {
@@ -544,7 +544,7 @@ bool declarator_type(AST_BASE* declarator_node,
                     return false;
                 }
             }
-            else if(function_array==0){       /*TODO:array*/
+            else if(function_array==0){       /*array*/
                 tmpt=(M_TYPE*)array_type(tmp_node_vec);
                 if(!tmpt)
                     return false;
@@ -1307,17 +1307,116 @@ bool initializer_list_semantic(AST_BASE* initializer_list_node,VEC* type_vec){
         else if(sub_node->type==designation){
             AST_BASE* designator_list_node=AST_GET_CHILD(sub_node,0);
             /*check the designation*/
-            for(size_t i=0;i<AST_CHILD_NUM(designator_list_node);++i)
+            VEC* curr_type_vec=type_vec;
+            for(size_t j=0;j<AST_CHILD_NUM(designator_list_node);++j)
             {
-                AST_BASE* designator_node=AST_GET_CHILD(designator_list_node,i);
+                AST_BASE* designator_node=AST_GET_CHILD(designator_list_node,j);
                 if(AST_CHILD_NUM(designator_node)==3)   /* '[const expr]' case*/
                 {
                     /*check the closest enclose obj type*/
-
-                    /*change the size and the off*/
+                    M_TYPE* curr_base_type=Type_VEC_get_actual_base_type(curr_type_vec);
+                    if(curr_base_type->typ_category!=TP_ARRAY)
+                    {
+                        C_ERROR(C0093_ERR_INIT_DESIGNATOR_CONST_EXPR,designator_node);
+                        goto error;
+                    }
+                    /*check const expr and integer nonnegative value*/
+                    AST_BASE* const_expr_node=AST_GET_CHILD(designator_node,1);
+                    if(!const_value(const_expr_node)||
+                        !const_expr_node->expr_attribute->const_expr)
+                    {   /*const*/
+                        C_ERROR(C0093_ERR_INIT_DESIGNATOR_CONST_EXPR,designator_node);
+                        goto error;
+                    }
+                    M_TYPE* const_expr_type=Type_VEC_get_actual_base_type(const_expr_node->expr_attribute->type_vec);
+                    if(!IS_INT_TYPE(const_expr_type->typ_category))
+                    {   /*integer, you have to check the const first,then to get the type*/
+                        C_ERROR(C0093_ERR_INIT_DESIGNATOR_CONST_EXPR,designator_node);
+                        goto error;
+                    }
+                    /*nonnegative*/
+                    VALUE_DATA* tmp_data_field=const_expr_node->expr_attribute->data_field;
+                    if(
+                        ((const_expr_type->typ_category==TP_SCHAR)&&tmp_data_field->schar <=0)
+                        ||((const_expr_type->typ_category==TP_SSHORT)&&tmp_data_field->sshort <=0)
+                        ||((const_expr_type->typ_category==TP_SINT)&&tmp_data_field->sint <=0)
+                        ||((const_expr_type->typ_category==TP_SLONG)&&tmp_data_field->slong <=0)
+                        ||((const_expr_type->typ_category==TP_SLONGLONG)&&tmp_data_field->sllong <=0)
+                    )
+                    {
+                        C_ERROR(C0093_ERR_INIT_DESIGNATOR_CONST_EXPR,designator_node);
+                        goto error;
+                    }
+                    /*finish check*/
+                    /*change the size and the off and the current type vec*/
+                    curr_type_vec=Type_VEC_get_Array_TO(curr_type_vec,true);
+                    size_t const_expr_value=(size_t)get_int_const(const_expr_type->typ_category,tmp_data_field,true);
+                    if(j==0){   /*the top level need to change the size ,but off must be 0*/
+                        /*no need to consider the max array size,for a initializer must follow*/
+                        sub_obj_size=const_expr_value;
+                        sub_obj_off=0;
+                    }
+                    else{
+                        size_t sub_obj_element_size=Type_VEC_get_element_size(curr_type_vec);
+                        sub_obj_off+=sub_obj_element_size * const_expr_value;
+                    }
                 }
                 else{       /* '.identifier' case*/
-
+                    /*check the closest enclose obj type*/
+                    AST_BASE* identifier_node=AST_GET_CHILD(designator_node,1);
+                    M_TYPE* curr_base_type=Type_VEC_get_actual_base_type(curr_type_vec);
+                    if(curr_base_type->typ_category!=TP_STRUCT&&curr_base_type->typ_category!=TP_UNION)
+                    {
+                        C_ERROR(C0094_ERR_INIT_DESIGNATOR_IDENTIFIER,designator_node);
+                        goto error;
+                    }
+                    /*check whether the identifier is one of the member*/
+                    VEC* struct_member_list=((TP_SU*)curr_base_type)->members;
+                    bool struct_have_identifier_member=false;
+                    for(size_t k=0;k<VECLEN(struct_member_list);++k)
+                    {
+                        TP_SU_MEMBER* tmpmem=VEC_GET_ITEM(struct_member_list,k);
+                        /*
+                            change the size and the off and the current type vec
+                            you have to change them here
+                        */
+                        curr_type_vec=tmpmem->type_vec;
+                        if(j==0)
+                        {
+                            if(curr_base_type->typ_category==TP_STRUCT)
+                            {
+                                sub_obj_size=k;
+                                sub_obj_off=0;
+                            }
+                            else if(curr_base_type->typ_category==TP_UNION)
+                            {
+                                sub_obj_size=1;
+                                sub_obj_off=0;
+                            }
+                        }
+                        else
+                        {
+                            if(curr_base_type->typ_category==TP_STRUCT)
+                            {
+                                sub_obj_off+=Type_VEC_get_element_size(curr_type_vec);
+                            }
+                            else if(curr_base_type->typ_category==TP_UNION)
+                            {
+                                sub_obj_off=1;
+                            }
+                        }
+                        if(strcmp(identifier_node->token->value,tmpmem->member_name)==0)
+                        {
+                            struct_have_identifier_member=true;
+                            break;
+                        }
+                    }
+                    if(!struct_have_identifier_member)
+                    {
+                        C_ERROR(C0094_ERR_INIT_DESIGNATOR_IDENTIFIER,designator_node);
+                        goto error;
+                    }
+                    /*finish check*/
                 }
             }
         }

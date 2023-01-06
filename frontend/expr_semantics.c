@@ -542,7 +542,7 @@ bool bit_inclusive_or_expr_value(AST_BASE* ast_node)
     if(const_expr)
     {
         ast_node->expr_attribute->data_size=type_data_size[res_type->typ_category];
-        /*TODO:const_value DONE*/
+        /*const_value*/
         bitwise_const(res_type->typ_category,ast_node->expr_attribute->data_field,const_value);
     }
     m_free(tei);
@@ -686,7 +686,7 @@ bool and_expr_value(AST_BASE* ast_node)
     if(const_expr)
     {
         ast_node->expr_attribute->data_size=type_data_size[res_type->typ_category];
-        /*TODO:const_value DONE*/
+        /*const_value*/
         bitwise_const(res_type->typ_category,ast_node->expr_attribute->data_field,const_value);
     }
     m_free(tei);
@@ -1352,7 +1352,7 @@ bool add_expr_value(AST_BASE* ast_node)
         ast_node->expr_attribute->const_expr=true;
         ast_node->expr_attribute->data_size=type_data_size[tmpt->typ_category];
         cast_const(tmpt->typ_category,ast_node->expr_attribute->data_field,tmp_category,tmp_data_field);
-        /*TODO:const expr data DONE*/
+        /*const expr data*/
     }
     /*The result should not be a lvalue*/
     m_free(tei);
@@ -1659,7 +1659,6 @@ bool cast_expr_value(AST_BASE* ast_node)
     {
         ast_node->expr_attribute->const_expr=true;
         ast_node->expr_attribute->data_size=type_data_size[tmp_tn_type->typ_category];
-        /*TODO:data DONE*/
         cast_const(tmp_tn_type->typ_category,ast_node->expr_attribute->data_field,tmp_op_type->typ_category,operand_node->expr_attribute->data_field);
     }
     /*A cast does not yield an lvalue*/
@@ -2590,7 +2589,6 @@ bool pri_expr_value(AST_BASE* ast_node)
         ast_node->expr_attribute->is_bit_field=child_node->expr_attribute->is_bit_field;
         ast_node->expr_attribute->data_size=child_node->expr_attribute->data_size;
         memcpy(ast_node->expr_attribute->data_field,child_node->expr_attribute->data_field,sizeof(VALUE_DATA));
-        /*TODO:data DONE  */
     }
 succ:
 #ifdef _TEST_SEMANTICS_

@@ -109,7 +109,7 @@ TP_SU* struct_union_type(AST_BASE* struct_decl_list_node,
                     C_ERROR(C0089_ERR_ALIGN_CANNOT_SPECIFIE,spec_qual_list_node);
                     return false;
                 }
-                /*TODO:check type,must be some kind of integer type.Besides, signed and unsigned int type should be same here:DONE*/
+                /*check type,must be some kind of integer type.Besides, signed and unsigned int type should be same here*/
                 enum TP_CATEGORY bit_field_base_type=TP_SPEC_NONE;
                 int base_type_num=0;
                 for(size_t i=0;i<VECLEN(tmp_type_v);++i){
@@ -134,13 +134,13 @@ TP_SU* struct_union_type(AST_BASE* struct_decl_list_node,
                 bool const_expr=const_value(field_size_node);
                 if(!const_expr)
                     return false;
-                /*TODO:get the right const_base_type:DONE*/
+                /*get the right const_base_type*/
                 enum TP_CATEGORY const_base_type=(Type_VEC_get_actual_base_type(field_size_node->expr_attribute->type_vec))->typ_category;
                 if(!IS_INT_TYPE(const_base_type)){
                     C_ERROR(C0024_ERR_BIT_FIELD_WIDTH_INT,su_declarator_node);
                     return false;
                 }
-                unsigned long long int bit_field_size=(TP_INT_CAST_TYPE(const_base_type,field_size_node->expr_attribute->data_field));    /*TODO:set the bit field size DONE*/
+                unsigned long long int bit_field_size=(TP_INT_CAST_TYPE(const_base_type,field_size_node->expr_attribute->data_field));    /*set the bit field size*/
                 if(bit_field_size<0){
                     C_ERROR(C0024_ERR_BIT_FIELD_WIDTH_INT,su_declarator_node);
                     return false;
@@ -247,7 +247,7 @@ TP_SU* struct_union_type(AST_BASE* struct_decl_list_node,
                 }
                 struct_align_size=max(struct_align_size,Type_align(tmp_type_v));
             }
-            /*TODO:recursively change can_be_modified_lvalue:DONE*/
+            /*recursively change can_be_modified_lvalue*/
             M_TYPE* tmpt=Type_VEC_get_qual(su_member->type_vec);
             if(tmpt&&tmpt->type_qual>=8)
                 can_be_modified_lvalue=false;
@@ -285,7 +285,7 @@ TP_SU* struct_union_type(AST_BASE* struct_decl_list_node,
                             VECinsert(sub_su_member->type_vec,VEC_GET_ITEM(su_member->type_vec,k));
                         }/*if there's some modify type,copy*/
                         sub_su_member->offset=sub_su_member->offset+su_member->offset;
-                        /*TODO:design offset algorithm:DONE*/
+                        /*offset algorithm*/
                         find_tmpsi=Create_symbol_item(sub_su_member->member_name,struct_decl_list_node->name_space);
                         tmpsi=(SYM_ITEM*)HASHFind(
                             struct_decl_list_node->symbol_table->sym_hash_table,
@@ -310,7 +310,7 @@ TP_SU* struct_union_type(AST_BASE* struct_decl_list_node,
     bool flexible_array_type=false;
     enum scope_type curr_scope=struct_decl_list_node->symbol_table->sp_type;
     for(size_t i=0;i<VECLEN(su_member_vec);++i){
-        /*TODO:check the incomplete type or function type:DONE*/
+        /*check the incomplete type or function type*/
         /*TODO:flexable array type*/
         TP_SU_MEMBER* su_member=(TP_SU_MEMBER*)VEC_GET_ITEM(su_member_vec,i);
         M_TYPE* tmp_base_type=NULL;
