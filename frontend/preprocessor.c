@@ -34,7 +34,25 @@ char* load_file(char filename[])
         exit(1);
     }
     fclose(fp);
-#if 0
+    bool need_clear_line=false;
+    char* tmpbuf=buf;
+    while(*tmpbuf!='\0'){   /*clear the gcc preprocessor's format*/
+        if((*tmpbuf)=='#')
+        {
+            if(buf==tmpbuf||is_end_of_line(tmpbuf-1)) /*The start of the file*/
+            {
+                need_clear_line=true;
+            }
+        }
+        if(is_end_of_line(tmpbuf))
+        {
+            need_clear_line=false;
+        }
+        if(need_clear_line)
+            (*tmpbuf)=' ';
+        tmpbuf++;
+    }
+#if 1
     printf("%s\n",buf);
 #endif
     return buf;
