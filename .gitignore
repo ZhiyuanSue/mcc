@@ -1,5 +1,7 @@
 /obj/*
 /pre/*
+/bin/bootstrap_asm_out_path/*
+/bin/bootstrap_print_out_path/*
 /bin/mcc
 /bin/test_out/*
 .DS_Store

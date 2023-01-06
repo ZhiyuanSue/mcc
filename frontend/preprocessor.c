@@ -52,7 +52,7 @@ char* load_file(char filename[])
             (*tmpbuf)=' ';
         tmpbuf++;
     }
-#if 1
+#if 0
     printf("%s\n",buf);
 #endif
     return buf;

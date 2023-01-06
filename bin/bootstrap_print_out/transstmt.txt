@@ -1,0 +1,17 @@
+read in file name:
+	./pre/transstmt.i
+                 
+                  
+                  
+                    
+                      
+                  
+                   
+
+
+start print ast tree
+finish print ast tree
+start print symbol table
+no symbol table
+end print symbol table
+error

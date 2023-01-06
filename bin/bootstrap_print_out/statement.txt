@@ -1,0 +1,346 @@
+read in file name:
+	./pre/statement.i
+                 
+                  
+                  
+                    
+                      
+                  
+                   
+                     
+                    
+enum rule_type_enum{
+
+    child,
+
+    whitespace,KW_auto,KW_break,KW_case,
+    KW_char,KW_const,KW_continue,KW_default,
+    KW_do,KW_double,KW_else,KW_enum,
+    KW_extern,KW_float,KW_for,KW_goto,
+    KW_if,KW_inline,KW_int,KW_long,
+    KW_register,KW_restrict,KW_return,KW_short,
+    KW_signed,KW_sizeof,KW_static,KW_struct,
+    KW_switch,KW_type_def,KW_union,KW_unsigned,
+    KW_void,KW_volatile,KW_while,KW__Alignas,
+    KW__Alignof,KW__Atomic,KW__Bool,KW__Complex,
+    KW__Generic,KW__Imaginary,KW__Noreturn,KW__Static_assert,
+    KW__Thread_local,KW_asm,KW_asm_volatile,
+
+    identifier,
+    integer_constant,
+    floating_constant,
+    enum_const,
+    char_const,
+    string,
+
+    left_bracket,right_bracket,left_parenthesis,right_parenthesis,
+    left_brace,right_brace,dot,point,
+    double_plus,double_minus,ampersand,star,
+    plus,minus,tilde,exclamation,
+    forward_slash,percent,left_shift,right_shift,
+    less_than,greater_than,less_equal,greater_equal,
+    double_equal,un_equal,caret,vertical_bar,
+    double_ampersand,double_ver_bar,question,colon,
+    semi_colon,three_dot,equal,mul_equal,
+    forward_equal,percent_equal,plus_equal,minus_equal,
+    left_shift_equal,right_shift_equal,ampersand_equal,caret_equal,
+    ver_bar_equal,comma,number_sign,double_number_sign,
+    less_colon,colon_greater,less_percent,percent_greater,
+    percent_colon,double_percent_colon,
+
+    translation_unit,external_decl,function_definition,expression,
+    declaration,statement,
+
+    assignment_expr,conditional_expr,
+    logical_or_expr,logical_and_expr,inclusive_or_expr,exclusive_or_expr,
+    and_expression,equality_expr,relational_expr,shift_expr,
+    additive_expr,multi_expr,cast_expr,unary_expr,
+    postfix_expr,primary_expression,generic_selection,
+    constant_expr,
+
+    declaration_spec,init_decl_list,init_decl,storage_class_spec,
+    type_spec,atomic_type_spec,struct_union_spec,struct_union,
+    struct_decl_list,struct_decl,spec_qual_list,struct_declarator_list,
+    struct_declarator,enum_spec,enum_list,enumerator,enumerator_const,
+    type_qual,function_spec,alignment_spec,declarator,
+    pointer,direct_declarator,type_qual_list,parameter_type_list,
+    parameter_list,parameter_declaration,identifier_list,
+    type_name,abstract_declarator,direct_abstract_declarator,type_def_name,
+    initializer,initializer_list,designation,designator_list,
+    designator,static_assert_declaration,
+
+    labeled_stmt,compound_stmt,expr_stmt,if_stmt,
+    switch_stmt,while_stmt,do_stmt,for_stmt,
+    goto_stmt,continue_stmt,break_stmt,return_stmt,
+
+    asm_stmt,ASM_extend,
+    ASM_output,ASM_input,ASM_register,ASM_restrict,
+
+    end_of_file
+};
+                   
+const char token_statements[256][256]={
+    "space: ",
+    "exclamation:!",
+    "double_quote:\"",
+    "number_sign:#",
+    "dollar_sign:$",
+    "percent:%",
+    "ampersand:&",
+    "single_quote:\'",
+    "left_parenthesis:(",
+    "right_parenthesis:)",
+    "asterisk:*",
+    "plus:+",
+    "comma:,",
+    "minus:-",
+    "dot:.",
+    "forward_slash:/",
+    "colon::",
+    "semi_colon:;",
+    "less_than:<",
+    "equal:=",
+    "greater_than:>",
+    "question:\?",
+
+    "left_bracket:[",
+    "back_slash:\\",
+    "right_bracket:]",
+    "caret:^",
+    "underscore:_",
+    "point:`",
+    "left_brace:{",
+    "vertical_bar:|",
+    "right_brace:}",
+    "tilde:~",
+    "zero:0",
+    "one:1",
+    "two:2",
+    "three:3",
+    "four:4",
+    "five:5",
+    "six:6",
+    "seven:7",
+    "eight:8",
+    "nine:9",
+    "la:a",
+    "lb:b",
+    "lc:c",
+    "ld:d",
+    "le:e",
+    "lf:f",
+    "lg:g",
+    "lh:h",
+    "li:i",
+    "lj:j",
+    "lk:k",
+    "ll:l",
+    "lm:m",
+    "ln:n",
+    "lo:o",
+    "lp:p",
+    "lq:q",
+    "lr:r",
+    "ls:s",
+    "lt:t",
+    "lu:u",
+    "lv:v",
+    "lw:w",
+    "lx:x",
+    "ly:y",
+    "lz:z",
+    "ba:A",
+    "bb:B",
+    "bc:C",
+    "bd:D",
+    "be:E",
+    "bf:F",
+    "bg:G",
+    "bh:H",
+    "bi:I",
+    "bj:J",
+    "bk:K",
+    "bl:L",
+    "bm:M",
+    "bn:N",
+    "bo:O",
+    "bp:P",
+    "bq:Q",
+    "br:R",
+    "bs:S",
+    "bt:T",
+    "bu:U",
+    "bv:V",
+    "bw:W",
+    "bx:X",
+    "by:Y",
+    "bz:Z",
+    "nonzero_digit:1-9",
+    "octal_digit:0-7",
+    "hex_digit:0123456789abcdefABCDEF",
+    "littleletter:a-z",
+    "bigletter:A-Z",
+    "digit:0-9",
+    "sign:-+",
+    "nondigit:_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "whitespace: \r\n\t",
+    "float_suffix:flFL",
+    "exp_char:eE",
+    "bi_exp_char:pP",
+    "c_char_prefix:LuU",
+    "source_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"#%&\'()*+,-./:;<=>\?[\\]^_{|}~ \v\t\f\0\a\b\r\n",
+    "c_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"#%&()*+,-./:;<=>\?[]^_{|}~ \v\t\f\0\a\b\r",
+    "s_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!#%&\'()*+,-./:;<=>\?[]^_{|}~ \v\t\f\0\a\b\r",
+    "h_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"#%&\'()*+,-./:;<=\?[\\]^_{|}~ \v\t\f\0\a\b\r",
+    "p_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!#%&\'()*+,-./:;<=>\?[\\]^_{|}~ \v\t\f\0\a\b\r"
+};
+
+const char rule_type_str[256][256]={
+
+    "",
+
+    "whitespace","KW_auto","KW_break","KW_case",
+    "KW_char","KW_const","KW_continue","KW_default",
+    "KW_do","KW_double","KW_else","KW_enum",
+    "KW_extern","KW_float","KW_for","KW_goto",
+    "KW_if","KW_inline","KW_int","KW_long",
+    "KW_register","KW_restrict","KW_return","KW_short",
+    "KW_signed","KW_sizeof","KW_static","KW_struct",
+    "KW_switch","KW_typedef","KW_union","KW_unsigned",
+    "KW_void","KW_volatile","KW_while","KW__Alignas",
+    "KW__Alignof","KW__Atomic","KW__Bool","KW__Complex",
+    "KW__Generic","KW__Imaginary","KW__Noreturn","KW__Static_assert",
+    "KW__Thread_local","KW_asm","KW_asm_volatile",
+    "identifier",
+    "integer_constant",
+    "floating_constant",
+    "enum_const",
+    "char_const",
+    "string",
+    "[","]","(",")",
+    "left_brace","right_brace",".","->",
+    "++","--","ampersand","*",
+    "+","-","~","!",
+    "/","%","<<",">>",
+    "<",">","<=",">=",
+    "==","!=","^","|",
+    "double_ampersand","||","\?","colon",
+    ";","...","=","*=",
+    "/=","%=","+=","-=",
+    "<<=",">>=","ampersand=","^=",
+    "|=",",","#","##",
+    "<colon","colon>","<%","%>",
+    "%colon","double_%colon",
+
+    "translation_unit","external_decl","function_definition","expression",
+    "declaration","statement",
+    "&assignment_expr","&conditional_expr",
+    "&logical_or_expr","&logical_and_expr","&inclusive_or_expr","&exclusive_or_expr",
+    "&and_expression","&equality_expr","&relational_expr","&shift_expr",
+    "&additive_expr","&multi_expr","&cast_expr","&unary_expr",
+    "&postfix_expr","&primary_expression","&generic_selection",
+    "&constant_expr",
+    "&declaration_spec",
+    "&init_decl_list","&init_decl","&storage_class_spec",
+    "&type_spec","&atomic_type_spec","&struct_union_spec","&struct_union",
+    "&struct_decl_list","&struct_decl","&spec_qual_list","&struct_declarator_list",
+    "&struct_declarator","&enum_spec","&enum_list","&enumerator","&enum_const",
+    "&type_qual","&function_spec","&alignment_spec","&declarator",
+    "&pointer","&direct_declarator","&type_qual_list","&parameter_type_list",
+    "&parameter_list","&parameter_declaration","&identifier_list",
+    "&type_name","&abstract_declarator","&direct_abstract_declarator","&typedef_name",
+    "&initializer","&initializer_list","&designation","&designator_list",
+    "&designator","&static_assert-declaration",
+    "labeled_stmt","compound_stmt","expr_stmt","&if_stmt",
+    "&switch_stmt","&while_stmt","&do_stmt","&for_stmt",
+    "&goto_stmt","&continue_stmt","&break_stmt","&return_stmt",
+
+    "asm_stmt","&ASM_extend",
+    "&ASM_output","&ASM_input","&ASM_register","&ASM_restrict",
+
+    ""
+};
+
+lex error number:27
+error
+Compile Error:(file (null): line 84: token "dollar_sign: )
+    "dollar_sign:$",
+reason:	C0003:Invalid lexical element
+Compile Error:(file (null): line 84: token (null) )
+    "dollar_sign:$",
+reason:	C0003:Invalid lexical element
+Compile Error:(file (null): line 84: token ", )
+    "dollar_sign:$",
+reason:	C0003:Invalid lexical element
+Compile Error:(file (null): line 108: token "point: )
+    "point:`",
+reason:	C0003:Invalid lexical element
+Compile Error:(file (null): line 108: token (null) )
+    "point:`",
+reason:	C0003:Invalid lexical element
+Compile Error:(file (null): line 108: token ", )
+    "point:`",
+reason:	C0003:Invalid lexical element
+Compile Error:(file (null): line 183: token "whitespace:  )
+    "whitespace: \r\n\t",
+reason:	C0003:Invalid lexical element
+Compile Error:(file (null): line 183: token \ )
+    "whitespace: \r\n\t",
+reason:	C0003:Invalid lexical element
+Compile Error:(file (null): line 183: token \ )
+    "whitespace: \r\n\t",
+reason:	C0003:Invalid lexical element
+Compile Error:(file (null): line 183: token \ )
+    "whitespace: \r\n\t",
+reason:	C0003:Invalid lexical element
+Compile Error:(file (null): line 183: token ", )
+    "whitespace: \r\n\t",
+reason:	C0003:Invalid lexical element
+Compile Error:(file (null): line 188: token "source_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"#%&\'()*+,-./:;<=>\?[\\]^_{|}~ \v\t\f\0\a\b )
+    "source_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"#%&\'()*+,-./:;<=>\?[\\]^_{|}~ \v\t\f\0\a\b\r\n",
+reason:	C0003:Invalid lexical element
+Compile Error:(file (null): line 188: token \ )
+    "source_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"#%&\'()*+,-./:;<=>\?[\\]^_{|}~ \v\t\f\0\a\b\r\n",
+reason:	C0003:Invalid lexical element
+Compile Error:(file (null): line 188: token \ )
+    "source_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"#%&\'()*+,-./:;<=>\?[\\]^_{|}~ \v\t\f\0\a\b\r\n",
+reason:	C0003:Invalid lexical element
+Compile Error:(file (null): line 188: token ", )
+    "source_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"#%&\'()*+,-./:;<=>\?[\\]^_{|}~ \v\t\f\0\a\b\r\n",
+reason:	C0003:Invalid lexical element
+Compile Error:(file (null): line 189: token "c_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"#%&()*+,-./:;<=>\?[]^_{|}~ \v\t\f\0\a\b )
+    "c_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"#%&()*+,-./:;<=>\?[]^_{|}~ \v\t\f\0\a\b\r",
+reason:	C0003:Invalid lexical element
+Compile Error:(file (null): line 189: token \ )
+    "c_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"#%&()*+,-./:;<=>\?[]^_{|}~ \v\t\f\0\a\b\r",
+reason:	C0003:Invalid lexical element
+Compile Error:(file (null): line 189: token ", )
+    "c_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"#%&()*+,-./:;<=>\?[]^_{|}~ \v\t\f\0\a\b\r",
+reason:	C0003:Invalid lexical element
+Compile Error:(file (null): line 190: token "s_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!#%&\'()*+,-./:;<=>\?[]^_{|}~ \v\t\f\0\a\b )
+    "s_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!#%&\'()*+,-./:;<=>\?[]^_{|}~ \v\t\f\0\a\b\r",
+reason:	C0003:Invalid lexical element
+Compile Error:(file (null): line 190: token \ )
+    "s_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!#%&\'()*+,-./:;<=>\?[]^_{|}~ \v\t\f\0\a\b\r",
+reason:	C0003:Invalid lexical element
+Compile Error:(file (null): line 190: token ", )
+    "s_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!#%&\'()*+,-./:;<=>\?[]^_{|}~ \v\t\f\0\a\b\r",
+reason:	C0003:Invalid lexical element
+Compile Error:(file (null): line 191: token "h_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"#%&\'()*+,-./:;<=\?[\\]^_{|}~ \v\t\f\0\a\b )
+    "h_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"#%&\'()*+,-./:;<=\?[\\]^_{|}~ \v\t\f\0\a\b\r",
+reason:	C0003:Invalid lexical element
+Compile Error:(file (null): line 191: token \ )
+    "h_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"#%&\'()*+,-./:;<=\?[\\]^_{|}~ \v\t\f\0\a\b\r",
+reason:	C0003:Invalid lexical element
+Compile Error:(file (null): line 191: token ", )
+    "h_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"#%&\'()*+,-./:;<=\?[\\]^_{|}~ \v\t\f\0\a\b\r",
+reason:	C0003:Invalid lexical element
+Compile Error:(file (null): line 192: token "p_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!#%&\'()*+,-./:;<=>\?[\\]^_{|}~ \v\t\f\0\a\b )
+    "p_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!#%&\'()*+,-./:;<=>\?[\\]^_{|}~ \v\t\f\0\a\b\r"
+reason:	C0003:Invalid lexical element
+Compile Error:(file (null): line 192: token \ )
+    "p_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!#%&\'()*+,-./:;<=>\?[\\]^_{|}~ \v\t\f\0\a\b\r"
+reason:	C0003:Invalid lexical element
+Compile Error:(file (null): line 192: token " )
+    "p_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!#%&\'()*+,-./:;<=>\?[\\]^_{|}~ \v\t\f\0\a\b\r"
+reason:	C0003:Invalid lexical element
