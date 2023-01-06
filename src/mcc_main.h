@@ -13,6 +13,6 @@
 #include "../IR/trans.h"
 #include "../backend/backend.h"
 #include "test.h"
-int mcc_main(char* filename);
+int mcc_main(char* filename,char* target_file);
 
 #endif

@@ -1,4 +1,5 @@
 /obj/*
+/pre/*
 /bin/mcc
 /bin/test_out/*
 .DS_Store

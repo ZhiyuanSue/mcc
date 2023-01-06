@@ -20,8 +20,8 @@ MEM_POOL* file_heap;    /*just for a single file*/
 #ifdef _TEST_SEMANTICS_
 int semantics_level;
 #endif
-int mcc_main(char* filename){
-    (****test)();
+int mcc_main(char* filename,char* target_file){
+    /*(****test)();*/
     char* buf=NULL;
     /*init global data*/
     global_heap=MEMInit("global");
@@ -33,7 +33,7 @@ int mcc_main(char* filename){
     rvec=InitRULE(svec,rvec,token_rules);
     pvec=InitRULE(rvec,pvec,parsers);
     build_mem(VEC_GET_ITEM(pvec,0));
-   
+    
     /*change heap*/
     curr_heap=file_heap;
     c_error=InitVEC(DEFAULT_CAPICITY);
@@ -47,7 +47,6 @@ int mcc_main(char* filename){
     if(!tvec)
         goto error;
     /*parser*/
-    printf("parser start\n\n\n");
     ast_root=parser(tvec,pvec);
     if(!ast_root)
         goto error;

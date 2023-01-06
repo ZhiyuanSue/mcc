@@ -1,9 +1,10 @@
 #include "ARG.h"
 bool arg(int argc,char* argv[])
 {
-    //deal with the shell argument part
-    if(argc<2){
-        printf("mcc:need more argument\n");     //it's not a internal error
+    /*deal with the shell argument part*/
+    /*for now, I just use a source and a target file name*/
+    if(argc!=3){
+        printf("mcc:wrong argument number\n");     //it's not a internal error
         exit(1);
         goto no_comply;
     }

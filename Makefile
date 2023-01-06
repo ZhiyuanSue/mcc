@@ -2,6 +2,7 @@
 include ./Makefile.env
 export MCC_ROOT_DIR=$(shell pwd)
 export MCC_ROOT_OBJ=${MCC_ROOT_DIR}/obj
+export MCC_ROOT_PRE=${MCC_ROOT_DIR}/pre
 Bin:=${MCC_ROOT_DIR}/bin
 Target:= ${Bin}/mcc
 modules += src backend IR frontend tools defs
@@ -10,6 +11,7 @@ all: init SubModules  ${Target}
 
 init:
 	$(shell if [ ! -d $(MCC_ROOT_OBJ) ];then mkdir $(MCC_ROOT_OBJ); fi)
+	$(shell if [ ! -d $(MCC_ROOT_PRE) ];then mkdir $(MCC_ROOT_PRE); fi)
 SubModules:
 	@$(foreach n,$(modules),$(call build_submodule,$(n)))
 ${Target}:
