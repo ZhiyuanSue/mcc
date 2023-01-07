@@ -1,14 +1,5 @@
 read in file name:
 	./pre/transdecl.i
-                 
-                  
-                  
-                    
-                      
-                  
-                   
-
-
 start print ast tree
 finish print ast tree
 start print symbol table

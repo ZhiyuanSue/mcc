@@ -22,7 +22,7 @@ const char token_statements[STATE_NUM][STATE_CHAR_LEN]={
     "equal:=",
     "greater_than:>",
     "question:\?",
-    //"at:@",     //In C,no this char
+    "at:@",
     "left_bracket:[",
     "back_slash:\\",
     "right_bracket:]",
@@ -108,11 +108,11 @@ const char token_statements[STATE_NUM][STATE_CHAR_LEN]={
     "exp_char:eE",
     "bi_exp_char:pP",
     "c_char_prefix:LuU",
-    "source_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"#%&\'()*+,-./:;<=>\?[\\]^_{|}~ \v\t\f\0\a\b\r\n",
-    "c_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"#%&()*+,-./:;<=>\?[]^_{|}~ \v\t\f\0\a\b\r",
-    "s_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!#%&\'()*+,-./:;<=>\?[]^_{|}~ \v\t\f\0\a\b\r",
-    "h_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"#%&\'()*+,-./:;<=\?[\\]^_{|}~ \v\t\f\0\a\b\r",
-    "p_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!#%&\'()*+,-./:;<=>\?[\\]^_{|}~ \v\t\f\0\a\b\r"
+    "source_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789`!\"@#$%&\'()*+,-./:;<=>\?[\\]^_{|}~ \v\t\f\0\a\b\r\n",
+    "c_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789`!\"@#$%&()*+,-./:;<=>\?[]^_{|}~ \v\t\f\0\a\b\r",
+    "s_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789`!@#$%&\'()*+,-./:;<=>\?[]^_{|}~ \v\t\f\0\a\b\r",
+    "h_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789`!\"@#$%&\'()*+,-./:;<=\?[\\]^_{|}~ \v\t\f\0\a\b\r",
+    "p_char_set:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789`!@#$%&\'()*+,-./:;<=>\?[\\]^_{|}~ \v\t\f\0\a\b\r"
 };
 
 const char rule_type_str[STATE_NUM][STATE_CHAR_LEN]={

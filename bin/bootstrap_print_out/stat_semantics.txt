@@ -1,1961 +1,5 @@
 read in file name:
 	./pre/stat_semantics.i
-                      
-                  
-                  
-                    
-                      
-                  
-                        
-                          
-
-
-                     
-
-
-               
-
-
-                                 
-
-
-                         
-
-
-
-
-
-
-                              
-
-
-
-
-                                 
-                                 
-                                         
-                                        
-typedef long unsigned int size_t;
-
-typedef long int __off64_t;
-typedef long int __off_t;
-
-typedef struct
-{
-  int __count;
-  union
-  {
-    unsigned int __wch;
-    char __wchb[4];
-  } __value;
-} __mbstate_t;
-
-typedef struct _G_fpos_t
-{
-  __off_t __pos;
-  __mbstate_t __state;
-} __fpos_t;
-typedef __fpos_t fpos_t;
-
-typedef struct _G_fpos64_t
-{
-  __off64_t __pos;
-  __mbstate_t __state;
-} __fpos64_t;
-
-struct _IO_marker;
-struct _IO_FILE;
-typedef struct _IO_FILE FILE;
-typedef void _IO_lock_t;
-struct _IO_FILE
-{
-  int _flags;
-
-
-  char *_IO_read_ptr;
-  char *_IO_read_end;
-  char *_IO_read_base;
-  char *_IO_write_base;
-  char *_IO_write_ptr;
-  char *_IO_write_end;
-  char *_IO_buf_base;
-  char *_IO_buf_end;
-
-
-  char *_IO_save_base;
-  char *_IO_backup_base;
-  char *_IO_save_end;
-
-  struct _IO_marker *_markers;
-
-  struct _IO_FILE *_chain;
-
-  int _fileno;
-  int _flags2;
-  __off_t _old_offset;
-
-  unsigned short _cur_column;
-  signed char _vtable_offset;
-  char _shortbuf[1];
-
-  _IO_lock_t *_lock;
-
-  __off64_t _offset;
-
-  struct _IO_codecvt *_codecvt;
-  struct _IO_wide_data *_wide_data;
-  struct _IO_FILE *_freeres_list;
-  void *_freeres_buf;
-  size_t __pad5;
-  int _mode;
-
-  char _unused2[15 * sizeof (int) - 4 * sizeof (void *) - sizeof (size_t)];
-};
-extern int remove(const char *filename);
-
-extern int rename(const char *old, const char *new);
-
-extern FILE *tmpfile(void);
-
-extern char *tmpnam(char *s);
-
-extern int fclose(FILE *stream);
-
-extern int fflush(FILE *stream);
-
-extern FILE *fopen(const char * restrict filename,
-    const char * restrict mode);
-
-extern FILE *freopen(const char * restrict filename,
-    const char * restrict mode,
-    FILE * restrict stream);
-
-extern void setbuf(FILE * restrict stream,
-    char * restrict buf);
-
-extern int setvbuf(FILE * restrict stream,
-    char * restrict buf,
-    int mode, size_t size);
-
-extern int fprintf(FILE * restrict stream,
-    const char * restrict format, ...);
-
-extern int fscanf(FILE * restrict stream,
-    const char * restrict format, ...);
-
-extern int printf(const char * restrict format, ...);
-
-extern int scanf(const char * restrict format, ...);
-
-extern int snprintf(char * restrict s, size_t n,
-    const char * restrict format, ...);
-
-extern int sprintf(char * restrict s,
-    const char * restrict format, ...);
-
-extern int sscanf(const char * restrict s,
-    const char * restrict format, ...);
-
-extern char *fgets(char * restrict s, int n,
-    FILE * restrict stream);
-
-extern int fputc(int c, FILE *stream);
-
-extern int fputs(const char * restrict s,
-    FILE * restrict stream);
-
-extern int getc(FILE *stream);
-
-extern int getchar(void);
-
-extern int putc(int c, FILE *stream);
-
-extern int putchar(int c);
-
-extern int puts(const char *s);
-
-extern int ungetc(int c, FILE *stream);
-
-extern size_t fread(void * restrict ptr,
-    size_t size, size_t nmemb,
-    FILE * restrict stream);
-
-extern size_t fwrite(const void * restrict ptr,
-    size_t size, size_t nmemb,
-    FILE * restrict stream);
-
-extern int fgetpos(FILE * restrict stream,
-    fpos_t * restrict pos);
-
-extern int fseek(FILE *stream, long int offset, int whence);
-
-extern int fsetpos(FILE *stream, const fpos_t *pos);
-
-extern long int ftell(FILE *stream);
-
-extern void rewind(FILE *stream);
-
-extern void clearerr(FILE *stream);
-
-extern int feof(FILE *stream);
-
-extern int ferror(FILE *stream);
-
-extern void perror(const char *s);
-
-extern int fprintf_s(FILE * restrict stream,
-    const char * restrict format, ...);
-
-extern int fscanf_s(FILE * restrict stream,
-    const char * restrict format, ...);
-
-extern int printf_s(const char * restrict format, ...);
-
-extern int scanf_s(const char * restrict format, ...);
-
-extern int sscanf_s(const char * restrict s,
-    const char * restrict format, ...);
-                                   
-
-                                          
-                                         
-typedef long unsigned int size_t;
-
-extern void *memset(void *s, int c, size_t n);
-
-extern int strcmp(const char *s1, const char *s2);
-
-extern void *memcpy(void * restrict s1,
-    const void * restrict s2, size_t n);
-                                   
-
-                                          
-
-
-
-
-
-
-                                         
-                                        
-extern int *__errno_location(void);
-                                          
-                                          
-
-
-                                          
-                                         
-                                            
-                                           
-typedef signed char int8_t;
-typedef short int16_t;
-typedef int int32_t;
-typedef long long int64_t;
-typedef unsigned char uint8_t;
-typedef unsigned short uint16_t;
-typedef unsigned int uint32_t;
-typedef unsigned long long uint64_t;
-
-typedef signed char int_least8_t;
-typedef short int_least16_t;
-typedef int int_least32_t;
-typedef long long int_least64_t;
-typedef unsigned char uint_least8_t;
-typedef unsigned short uint_least16_t;
-typedef unsigned int uint_least32_t;
-typedef unsigned long long uint_least64_t;
-
-typedef signed char int_fast8_t;
-typedef int int_fast16_t;
-typedef int int_fast32_t;
-typedef long long int_fast64_t;
-typedef unsigned char uint_fast8_t;
-typedef unsigned int uint_fast16_t;
-typedef unsigned int uint_fast32_t;
-typedef unsigned long long uint_fast64_t;
-
-typedef long long intmax_t;
-typedef unsigned long long uintmax_t;
-                                          
-    typedef unsigned long int uintptr_t;
-                                          
-
-
-typedef int wchar_t;
-typedef uint_least16_t char16_t;
-typedef uint_least32_t char32_t;
-
-
-
-
-
-typedef long int ptrdiff_t;
-
-typedef struct
-{
-  int count;
-  union
-  {
-    int wch;
-    char wchb[4];
-  } value;
-} mbstate_t;
-
-
-
-
-extern size_t mbrtoc16 (char16_t *restrict pc16,
-                        const char *restrict s, size_t n,
-                        mbstate_t *restrict p);
-
-
-extern size_t c16rtomb (char *restrict s, char16_t c16,
-                        mbstate_t *restrict ps);
-
-
-
-extern size_t mbrtoc32 (char32_t *restrict pc32,
-                        const char *restrict s, size_t n,
-                        mbstate_t *restrict p);
-
-
-extern size_t c32rtomb (char *restrict s, char32_t c32,
-                        mbstate_t *restrict ps);
-                                          
-
-
-
-
-extern size_t __ctype_get_mb_cur_max (void);
-
-typedef long unsigned int size_t;
-
-extern void *malloc(size_t size);
-
-extern void free(void *ptr);
-
-extern _Noreturn void exit(int status);
-
-extern long int strtol(
-    const char * restrict nptr,
-    char ** restrict endptr,
-    int base);
-
-extern long long int strtoll(
-    const char * restrict nptr,
-    char ** restrict endptr,
-    int base);
-
-extern unsigned long int strtoul(
-    const char * restrict nptr,
-    char ** restrict endptr,
-    int base);
-
-extern unsigned long long int strtoull(
-    const char * restrict nptr,
-    char ** restrict endptr,
-    int base);
-
-extern double strtod(const char * restrict nptr,
-    char ** restrict endptr);
-
-extern float strtof(const char * restrict nptr,
-    char ** restrict endptr);
-
-extern long double strtold(const char * restrict nptr,
-    char ** restrict endptr);
-
-extern int mbtowc(wchar_t *pwc, const char *str, size_t n);
-
-extern int mblen (const char *s, size_t n);
-                                   
-
-                                           
-                                   
-
-
-
-                                         
-                                   
-                                 
-                                  
-                                 
-inline _Bool is_legal_align(unsigned long int align_size)
-{
-        if (align_size==0)
-                return 0;
-        while(align_size%2==0)
-        {
-                align_size/=2;
-        }
-        if(align_size!=1)
-                return 0;
-        else
-                return 1;
-}
-                                   
-                              
-                             
-enum compiler_error{
-    C0001_ERR_NONE,C0002_ERR_UNKNOWN,
-
-    C0003_ERR_LEX_ERROR,
-
-    C0004_ERR_NAMESPACE,
-    C0005_ERR_REDEFINE,
-    C0006_ERR_NOT_IN_SYMBOL_TABLE,
-    C0007_ERR_UNEXPECTED_TOKEN,
-
-
-    C0008_ERR_TOO_MANY_STOR_SPEC,
-    C0009_ERR_THREAD_LOCAL_PREFIX,
-    C0010_ERR_NEED_MORE_TYPE_SPEC,
-    C0011_ERR_WRONG_TYPE_SPEC,
-    C0012_ERR_COMPLEX_NOT_SUPPORT,
-    C0013_ERR_ATOMIC_UNSUPPORT,
-    C0014_ERR_ATOMIC_TYPE_NAME,
-
-    C0015_ERR_REDEFINATION,
-    C0016_ERR_UNDECLARATION,
-    C0017_ERR_TYPEDEF_OVERLAP,
-    C0018_ERR_STRUCT_INCOMPLETE_FUNCTION_TYPE,
-    C0019_ERR_ILLEGAL_CONST_EXPR,
-    C0020_ERR_CONST_EXPR_RANGE,
-    C0021_ERR_STATIC_ASSERT,
-
-
-    C0022_ERR_BIT_FIELD_TYPE,
-    C0023_ERR_BIT_FIELD_WIDTH_EXCEED,
-    C0024_ERR_BIT_FIELD_WIDTH_INT,
-    C0025_ERR_BIT_FIELD_WIDTH_NEGATIVE,
-    C0026_ERR_BIT_FIELD_ZERO_WITH_DECLERATOR,
-
-    C0027_ERR_ENUM_NOT_INT,
-    C0028_ERR_ENUM_RANGE,
-
-    C0029_ERR_LKA_EXTERN_FOLLOW_NO,
-    C0030_ERR_LKA_NO_FOLLOW_EXTERN,
-    C0031_ERR_CONFICT_TYPE,
-    C0032_ERR_CONFICT_LINKAGE,
-    C0033_ERR_CONFICT_THREAD_LOCAL,
-
-    C0034_ERR_ARR_STAR_SCOPE,
-    C0035_ERR_ARR_QUAL_STATIC_OUTMOST,
-    C0036_ERR_ARR_QUAL_STATIC_IN_PARA,
-    C0037_ERR_ARR_STATIC_THREAD_WITH_VLA,
-    C0038_ERR_ARR_SIZE_INTEGER,
-    C0039_ERR_ARR_SIZE_ZERO,
-    C0040_ERR_ARR_FUNCTIONS_INCOMPLETE,
-    C0041_ERR_VM_ID,
-
-    C0042_ERR_FUN_IDENTIFIER_LIST,
-    C0043_ERR_FUN_RETURN_TYPE,
-    C0044_ERR_FUNC_DEF_DECL_TYPE,
-    C0045_ERR_FUNC_PARA_INCOMPLETE_TYPE,
-    C0046_ERR_FUNC_VOID_MORE_THAN_ONE,
-    C0047_ERR_FUNC_PARA_STORAGE,
-
-    C0048_ERR_LVALUE_ARR_TYPE_COMPLETE,
-    C0049_ERR_LVALUE_ARR_TYPE_WRONG,
-    C0050_ERR_LVALUE_FUNC_TYPE_WRONG,
-    C0051_ERR_LVALUE_REQUIRED,
-
-    C0052_ERR_EXPR_TYPE_ERROR,
-    C0053_ERR_EXPR_STRUCT_UNION_DOT_TYPE_WRONG,
-    C0054_ERR_EXPR_STRUCT_UNION_POINT_TYPE_WRONG,
-    C0055_ERR_EXPR_POSTFIX_DOUBLE_P_M_TYPE,
-    C0056_ERR_EXPR_MODIFIABLE_LVALUE,
-
-    C0057_ERR_OPERAND_BIT_FIELD,
-    C0058_ERR_OPERAND_REGISTER,
-    C0059_ERR_OPERAND_SHOULD_POINTER,
-
-    C0060_ERR_OPERAND_INTEGER_TYPE,
-    C0061_ERR_OPERAND_ARTHMATIC_TYPE,
-    C0062_ERR_OPERAND_SCALAR_TYPE,
-    C0063_ERR_OPERAND_REAL_TYPE,
-
-    C0064_ERR_SIZEOF_INCOMPLETE,
-    C0065_ERR_SIZEOF_FUNCTION,
-
-    C0066_ERR_CAST_CONVERT_POINT_FLOAT,
-    C0067_ERR_ADD_OPERAND_TYPE,
-    C0068_ERR_MINUS_OPERAND_TYPE,
-    C0069_ERR_NEED_COMPATIBLE_TYPE,
-    C0070_ERR_EQUAL_OPERAND,
-    C0071_ERR_CONDITION_OPERAND,
-    C0072_ERR_ASSIGN_OPERAND,
-
-    C0073_ERR_FUNC_MORE_PARAMETERS,
-    C0074_ERR_FUNC_PARA_TYPE,
-
-    C0075_ERR_FOR_DECLARATION_STOR,
-    C0076_ERR_IN_SWITCH,
-    C0077_ERR_SWITCH_SAME_CASE,
-    C0078_ERR_IN_LOOP,
-    C0079_ERR_IN_SWITCH_LOOP,
-    C0080_ERR_FUNC_RET_VOID,
-    C0081_ERR_FUNC_RET_NONE_VOID,
-    C0082_ERR_FUNC_NO_ID_LIST_BUT_DEC,
-    C0083_ERR_FUNC_PARA_INITILIZATION,
-    C0084_ERR_FUNC_STORAGE,
-    C0085_ERR_FUNC_PARA_OLD_NOT_FIND,
-    C0086_ERR_FUNC_PARA_OLD_NOT_DEC,
-    C0087_ERR_FUNC_PARA_OLD_STOR,
-    C0088_ERR_ALIGN_TWO_POWER,
-    C0089_ERR_ALIGN_CANNOT_SPECIFIE,
-    C0090_ERR_ALIGN_DIFFERENT_DECLARATION,
-    C0091_ERR_INIT_TYPE_COMPLETE,
-    C0092_ERR_INIT_ENTITY,
-    C0093_ERR_INIT_DESIGNATOR_CONST_EXPR,
-    C0094_ERR_INIT_DESIGNATOR_IDENTIFIER,
-
-    W0001_WARN_NONE,W0002_WARN_UNKNOWN,
-    W0003_WARN_NO_DECLARATION_ANY_THING,
-    W0004_WARN_DUPLICATE_QUAL,
-    W0005_WARN_IMPLICIT_DEC,
-    W0006_WARN_NO_RETURN,
-};
-typedef unsigned int LINE_NUM;
-typedef struct line{
-    LINE_NUM line_number;
-    size_t start;
-    size_t end;
-}LINE;
-typedef struct mcc_error_item{
-    enum compiler_error ce;
-    char* filename;
-    LINE_NUM error_line;
-    char* error_token_value;
-}ERROR_ITEM;
-
-void m_error(char filename[],char function[],char reason[]);
-void m_error_arg_char(char* arg);
-void m_error_arg_int(int arg);
-
-void m_test(char test[]);
-void m_test_item(char test_item_name[]);
-void m_test_arg_char(char* item_arg);
-void m_test_arg_int(int item_arg);
-
-void mcc_error(ERROR_ITEM* e,char* file_buf,LINE* line);
-inline void* m_error_item(
-    ERROR_ITEM* tei,
-    enum compiler_error ce,
-    char* filename,
-    LINE_NUM error_line,
-    char* error_token_value)
-{
-    tei->ce=ce;
-    tei->filename=filename;
-    tei->error_line=error_line;
-    tei->error_token_value=error_token_value;
-    return (void*)tei;
-}
-                         
-                        
-                       
-typedef struct mem_pool{
-    char name[8];
-
-
-
-    unsigned long long int malloc_cnt;
-    unsigned long long int free_cnt;
-    unsigned long long int sys_malloc_cnt;
-    unsigned long long int sys_free_cnt;
-}MEM_POOL;
-                       
-MEM_POOL* MEMInit(char name[]);
-
-
-
-
-
-void MEMDel(MEM_POOL* pool);
-
-
-void* m_alloc(size_t n);
-void m_free(void* p);
-
-inline void m_memset(void* p,char value,size_t len)
-{
-    memset(p,value,len);
-}
-                         
-                              
-
-
-typedef unsigned int NMSP;
-
-
-
-NMSP GET_NEW_NAMESPACE(void);
-void RESET_NAMESPACE(void);
-                          
-
-
-typedef struct hash_table{
-    void** data;
-    unsigned long long int capicity;
-    unsigned long long int capicity_index;
-    unsigned long long int record_num;
-}HASH;
-
-
-typedef struct hash_item{
-    unsigned long long int key; unsigned int count;
-}HASH_ITEM;
-inline unsigned long long int HASHFunction(unsigned long long int key,HASH* h)
-{
-    return key%(h->capicity);
-}
-HASH* InitHASH(void);
-_Bool HSAHExpand(HASH* h,_Bool (*cmp)(void* a,void* b));
-void* HASHInsert(HASH* h,HASH_ITEM* item,_Bool (*cmp)(void* a,void* b));
-HASH_ITEM* HASHFind(HASH* h,void* a,_Bool (*cmp)(void* a,void* b),_Bool delete_item,_Bool insert_item);
-HASH* HASHCOPY(HASH* h);
-                        
-void DelHASH(HASH* h);
-void TestHASH(void);
-                                 
-                           
-
-
-
-
-
-typedef struct vector{
-    void** data;
-    size_t capicity;
-    size_t len;
-}VEC;
-
-
-
-
-
-VEC* InitVEC(size_t len);
-void VECinsert(VEC* v,void* p);
-void VECremove(VEC* v,size_t low,size_t high);
-void VECpopback(VEC* v);
-void VECexpand(VEC* v);
-void VECshrink(VEC* v);
-void VECcpy(VEC* src,VEC** dst);
-inline void VECappend(VEC* src,VEC* dst){
-    if(!src||!dst)
-        return;
-    for(size_t i=0;i<(src->len);++i){
-        VECinsert(dst,((src!=0&&i<(src->len))?(src->data[i]):0));
-    }
-}
-void DelVEC(VEC* v);
-                                 
-
-                           
-                          
-enum TP_STORAGE_SPEC{
-    TP_STOR_NONE,
-    TP_TYPE_DEF,
-    TP_EXTERN,
-    TP_STATIC,
-    TP_EXTERN_THREAD_LOCAL,
-    TP_AUTO,
-    TP_REGISTER,
-    TP_STATIC_THREAD_LOCAL
-};
-enum TP_CATEGORY{
-    TP_SPEC_NONE,
-
-    TP_VOID,
-    TP_SCHAR,
-    TP_USCHAR,
-    TP_SSHORT,
-    TP_USHORT,
-    TP_SINT,
-    TP_USINT,
-    TP_SLONG,
-    TP_USLONG,
-    TP_SLONGLONG,
-    TP_USLONGLONG,
-    TP_FLOAT,
-    TP_DOUBLE,
-    TP_LONG_DOUBLE,
-    TP_BOOL,
-    TP_FLOAT_COMPLEX,
-    TP_DOUBLE_COMPLEX,
-    TP_LONG_DOUBLE_COMPLEX,
-
-    TP_POINT,
-    TP_UNION_STRUCT,
-    TP_UNION,
-    TP_STRUCT,
-    TP_ARRAY,
-    TP_ENUM,
-    TP_FUNCTION,
-    TP_TYPE_DEF_TYPE,
-    TP_SPEC_ATOMIC,
-
-
-    TP_NULL_POINTER_CONSTANT,
-    TP_LABEL
-};
-                          
-typedef struct {
-    unsigned long long int key; unsigned int count;
-    _Bool complete; _Bool modifier;
-    union{
-        struct{
-            enum TP_STORAGE_SPEC typ_stor;
-            unsigned char type_qual;
-            unsigned char func_spec;
-            unsigned long int align_spec;
-        };
-        struct{
-            enum TP_CATEGORY typ_category; unsigned int data_size;
-        };
-    };
-}M_TYPE;
-
-typedef struct {
-    unsigned long long int key; unsigned int count;
-    _Bool complete; _Bool modifier;
-    enum TP_CATEGORY typ_category; unsigned int data_size;
-    char* tag;
-    VEC* members;
-    size_t data_align;
-    size_t total_data_size;
-    NMSP namespece;
-    _Bool can_be_modified_lvalue;
-    _Bool have_flex_array;
-}TP_SU;
-typedef struct {
-    char* member_name;
-    NMSP name_space;
-    size_t offset;
-    VEC* type_vec;
-    _Bool bit_field;
-    size_t bit_field_size;
-    size_t bit_field_offset;
-}TP_SU_MEMBER;
-
-typedef struct {
-    unsigned long long int key; unsigned int count;
-    _Bool complete; _Bool modifier;
-    enum TP_CATEGORY typ_category; unsigned int data_size;
-    _Bool is_vla;
-    _Bool is_star;
-    union{
-        size_t axis_size;
-        void* assign_expr_node;
-    };
-    void* axis_modify;
-}TP_ARR;
-
-typedef struct {
-    unsigned long long int key; unsigned int count;
-    _Bool complete; _Bool modifier;
-    enum TP_CATEGORY typ_category; unsigned int data_size;
-    char* tag;
-    VEC* members;
-}TP_ENUMERA;
-
-typedef struct {
-    unsigned long long int key; unsigned int count;
-    _Bool complete; _Bool modifier;
-    enum TP_CATEGORY typ_category; unsigned int data_size;
-    char* func_name;
-    VEC* func_parameters;
-    _Bool have_ellipsis;
-    _Bool is_old_style;
-}TP_FUNC;
-typedef struct {
-    char* para_name;
-    VEC* type_vec;
-}TP_FUNC_PARA;
-
-typedef struct {
-    unsigned long long int key; unsigned int count;
-    _Bool complete; _Bool modifier;
-    enum TP_CATEGORY typ_category; unsigned int data_size;
-    VEC* typedef_name_type;
-}TP_DEF_TYPE;
-
-typedef struct {
-    _Bool databool;
-    signed char schar;
-    unsigned char uschar;
-    signed short sshort;
-    unsigned short usshort;
-    signed int sint;
-    unsigned int usint;
-    signed long int slong;
-    unsigned long int uslong;
-    signed long long int sllong;
-    unsigned long long int usllong;
-    float datafloat;
-    double datadouble;
-    long double datalongdouble;
-    float floatcomplex[2];
-    double doublecomplex[2];
-    long double longdoublecomplex[2];
-    void* pointer;
-}VALUE_DATA;
-                           
-typedef struct VALUE{
-    enum TP_CATEGORY const_expr_type;
-    VALUE_DATA* const_value;
-}CONST_VALUE;
-
-M_TYPE* build_modify_type(
-    enum TP_STORAGE_SPEC storage_spec_type,
-    int type_qual_cnt[4],
-    int func_spec_cnt[2],
-    unsigned long int align_spec_cnt
-);
-M_TYPE* build_base_type(
-    enum TP_CATEGORY spec_type
-);
-unsigned long long int StrToKey(char* str);
-unsigned long long int TypeToKey(M_TYPE* t);
-
-void print_type(M_TYPE* tmpt);
-                                 
-                               
-
-_Bool Type_VEC_cmp(VEC* a,VEC* b);
-_Bool Type_item_cmp(void* a,void* b);
-_Bool Type_VEC_VM(VEC* type_vec);
-_Bool Type_VEC_VLA(VEC* type_vec);
-_Bool Type_VEC_modify_lvalue(VEC* type_vec,_Bool is_lvalue);
-size_t Type_size(VEC* type_vec);
-size_t Type_align(VEC* type_vec);
-M_TYPE* Type_VEC_get_qual(VEC* type_vec);
-M_TYPE* Type_composite_qual(M_TYPE* qual_a,M_TYPE* qual_b);
-M_TYPE* Type_VEC_get_spec_other(VEC* type_vec);
-M_TYPE* Type_VEC_get_actual_base_type(VEC* type_vec);
-_Bool Type_VEC_change_actual_base_type(VEC* type_vec,M_TYPE* tmp_type);
-M_TYPE* Type_VEC_get_Atomic(VEC* type_vec);
-
-VEC* Type_VEC_get_Atomic_TO(VEC* type_vec,_Bool is_atomic);
-VEC* Type_VEC_get_Pointer_TO(VEC* type_vec,_Bool is_pointer);
-VEC* Type_VEC_get_Array_TO(VEC* type_vec,_Bool is_array);
-VEC* Type_VEC_get_func_return_type(VEC* type_vec,_Bool is_function);
-VEC* Type_VEC_unqualifier(VEC* type_vec,_Bool is_qual);
-
-VEC* lvalue_convertion(VEC* tmp_type_vec);
-_Bool compatible_types(VEC* type_vec_a,VEC* type_vec_b);
-VEC* composite_types(VEC* type_vec_a,VEC* type_vec_b,_Bool compatible_type);
-M_TYPE* usual_arith_conversion(M_TYPE** operand_a,M_TYPE** operand_b);
-_Bool integer_promotion(M_TYPE** integer_operand);
-_Bool float_promotion(M_TYPE** float_operand);
-
-
-size_t Type_VEC_get_element_size(VEC* current_obj_type);
-VEC* Type_VEC_get_sub_obj_type(VEC* current_obj_type,size_t sub_obj_size);
-VEC* Type_VEC_get_sub_obj_off_element_type(VEC* sub_obj_type,size_t sub_obj_off);
-
-
-void print_type_vec(VEC* type_vec);
-                                 
-
-
-enum scope_type{
-    SPT_NONE,SPT_BLOCK,SPT_FUN,SPT_FILE,SPT_FUN_PROTOTYPE
-};
-enum linkage_type{
-    LKA_NONE,LKA_INTERN,LKA_EXTERN
-};
-enum function_spec_type{
-    FSPEC_NONE,FSPEC_INLINE,FSPEC_NORETURN
-};
-enum sym_table_attr_type{
-    SA_ATTR_NONE=0,
-    SA_SWITCH=0x01,
-    SA_LOOP=0x02,
-    SA_FUNC=0x04
-};
-typedef struct sym_table SYM;
-struct sym_table{
-    unsigned int level;
-    SYM* father;
-    VEC* child_table;
-    HASH* sym_hash_table;
-    enum scope_type sp_type;
-    NMSP name_space;
-    HASH* typedef_name_table;
-    HASH* enum_const_table;
-    enum sym_table_attr_type st_attr_type;
-    void* st_attr;
-
-};
-typedef struct sym_item{
-    unsigned long long int key; unsigned int count;
-    VEC* type_vec; size_t data_size; VALUE_DATA* data_field; _Bool const_expr:1;
-    char* value;
-    NMSP name_space;
-    int align_size;
-    enum linkage_type linkage;
-    enum function_spec_type fspec_type;
-    _Bool Thread_local;
-    _Bool defined;
-    _Bool declared;
-}SYM_ITEM;
-typedef struct{
-    _Bool have_ret;
-    SYM_ITEM* function_symbol;
-}SYMBOL_TABLE_FUNC_ATTR;
-typedef struct{
-    VEC* switch_value;
-    _Bool have_default;
-}SYMBOL_TABLE_SWITCH_ATTR;
-SYM* Create_symbol_table(SYM* father,enum scope_type type);
-_Bool insert_symbol(SYM* symbol_table,SYM_ITEM* symbol_item);
-SYM_ITEM* find_symbol(SYM* symbol_table,char* symbol,NMSP name_space);
-SYM_ITEM* find_symbol_curr_table(SYM* symbol_table,char* symbol,NMSP name_space);
-void del_symbol(SYM* symbol_table,char* symbol,NMSP name_space);
-void Del_symbol_table(SYM* symbol_table);
-void print_symbol_table(SYM* symbol_table);
-VEC* get_symbol_hash(HASH* h);
-unsigned long long int SymbolCharToKey(char* symbol,NMSP name_space);
-_Bool symbol_item_cmp(void* a,void* b);
-SYM_ITEM* Create_symbol_item(char* symbol,NMSP name_space);
-inline _Bool Copy_sym_item(SYM_ITEM* new,SYM_ITEM* old){
-    if(!old)
-        return 0;
-    if(!new)
-        new=m_alloc(sizeof(SYM_ITEM));
-    new->count=old->count;
-    new->data_field=old->data_field;
-    new->data_size=old->data_size;
-    new->declared=old->declared;
-    new->defined=old->defined;
-    new->key=old->key;
-    new->linkage=old->linkage;
-    new->name_space=old->name_space;
-    new->type_vec=old->type_vec;
-    new->value=old->value;
-    return 1;
-}
-               
-
-                          
-
-
-
-
-
-
-                         
-
-
-
-                                 
-                         
-                                      
-                                     
-enum rule_type_enum{
-
-    child,
-
-    whitespace,KW_auto,KW_break,KW_case,
-    KW_char,KW_const,KW_continue,KW_default,
-    KW_do,KW_double,KW_else,KW_enum,
-    KW_extern,KW_float,KW_for,KW_goto,
-    KW_if,KW_inline,KW_int,KW_long,
-    KW_register,KW_restrict,KW_return,KW_short,
-    KW_signed,KW_sizeof,KW_static,KW_struct,
-    KW_switch,KW_type_def,KW_union,KW_unsigned,
-    KW_void,KW_volatile,KW_while,KW__Alignas,
-    KW__Alignof,KW__Atomic,KW__Bool,KW__Complex,
-    KW__Generic,KW__Imaginary,KW__Noreturn,KW__Static_assert,
-    KW__Thread_local,KW_asm,KW_asm_volatile,
-
-    identifier,
-    integer_constant,
-    floating_constant,
-    enum_const,
-    char_const,
-    string,
-
-    left_bracket,right_bracket,left_parenthesis,right_parenthesis,
-    left_brace,right_brace,dot,point,
-    double_plus,double_minus,ampersand,star,
-    plus,minus,tilde,exclamation,
-    forward_slash,percent,left_shift,right_shift,
-    less_than,greater_than,less_equal,greater_equal,
-    double_equal,un_equal,caret,vertical_bar,
-    double_ampersand,double_ver_bar,question,colon,
-    semi_colon,three_dot,equal,mul_equal,
-    forward_equal,percent_equal,plus_equal,minus_equal,
-    left_shift_equal,right_shift_equal,ampersand_equal,caret_equal,
-    ver_bar_equal,comma,number_sign,double_number_sign,
-    less_colon,colon_greater,less_percent,percent_greater,
-    percent_colon,double_percent_colon,
-
-    translation_unit,external_decl,function_definition,expression,
-    declaration,statement,
-
-    assignment_expr,conditional_expr,
-    logical_or_expr,logical_and_expr,inclusive_or_expr,exclusive_or_expr,
-    and_expression,equality_expr,relational_expr,shift_expr,
-    additive_expr,multi_expr,cast_expr,unary_expr,
-    postfix_expr,primary_expression,generic_selection,
-    constant_expr,
-
-    declaration_spec,init_decl_list,init_decl,storage_class_spec,
-    type_spec,atomic_type_spec,struct_union_spec,struct_union,
-    struct_decl_list,struct_decl,spec_qual_list,struct_declarator_list,
-    struct_declarator,enum_spec,enum_list,enumerator,enumerator_const,
-    type_qual,function_spec,alignment_spec,declarator,
-    pointer,direct_declarator,type_qual_list,parameter_type_list,
-    parameter_list,parameter_declaration,identifier_list,
-    type_name,abstract_declarator,direct_abstract_declarator,type_def_name,
-    initializer,initializer_list,designation,designator_list,
-    designator,static_assert_declaration,
-
-    labeled_stmt,compound_stmt,expr_stmt,if_stmt,
-    switch_stmt,while_stmt,do_stmt,for_stmt,
-    goto_stmt,continue_stmt,break_stmt,return_stmt,
-
-    asm_stmt,ASM_extend,
-    ASM_output,ASM_input,ASM_register,ASM_restrict,
-
-    end_of_file
-};
-                         
-
-
-
-
-extern char rule_type_str[256][256];
-
-typedef struct base{
-    int type;
-    char* name;
-}BASE;
-                        
-typedef struct statement{
-    BASE base;
-    char* value;
-}STATE;
-
-
-typedef struct rule{
-    BASE base;
-    enum rule_type_enum type;
-    VEC* rule_value;
-    unsigned int rule_index;
-}RULE;
-
-char* readin_name(char* buf,int length);
-char* readin_value(char* buf);
-_Bool is_Match_state(STATE* s,char target);
-
-
-
-
-
-void* match_name(char* str,int strlen,VEC* v);
-VEC* readin_rule_value(char* buf,VEC* source_v,VEC* dest_v,int* type);
-
-VEC* LexInitSTATE(VEC* sv,char statements[256][256]);
-VEC* InitRULE(VEC* sv,VEC* rv,char rules[1024][256]);
-
-void test_statement(VEC* sv);
-void test_rule(VEC* sv,VEC* rv);
-                          
-
-
-
-typedef char* TK_VALUE;
-typedef struct token{
-    enum rule_type_enum type;
-    size_t value_len;
-    TK_VALUE value;
-    LINE_NUM line;
-    void* symbol_item;
-    VEC* parser_token_mem;
-}TOKEN;
-typedef VEC TOKEN_VEC;
-void m_test_token(TOKEN* t);
-
-CONST_VALUE* token_to_const_value(TOKEN* t);
-_Bool int_const_to_const_value(TOKEN* t,CONST_VALUE* cv);
-_Bool int_const_int(TOKEN* t,CONST_VALUE* cv);
-_Bool int_const_uint(TOKEN* t,CONST_VALUE* cv);
-_Bool int_const_l(TOKEN* t,CONST_VALUE* cv);
-_Bool int_const_ul(TOKEN* t,CONST_VALUE* cv);
-_Bool int_const_ll(TOKEN* t,CONST_VALUE* cv);
-_Bool int_const_ull(TOKEN* t,CONST_VALUE* cv);
-_Bool float_const_to_const_value(TOKEN* t,CONST_VALUE* cv);
-_Bool char_const_to_const_value(TOKEN* t,CONST_VALUE* cv);
-               
-
-                         
-               
-
-
-
-typedef struct{
-    VEC* type_vec; size_t data_size; VALUE_DATA* data_field; _Bool const_expr:1;
-    _Bool is_lvalue:1;
-    _Bool complete:1;
-    _Bool is_bit_field:1;
-}EXPR_NODE_ATTR;
-typedef struct ast_base AST_BASE;
-struct ast_base{
-    enum rule_type_enum type;
-    VEC* child;
-    AST_BASE* father;
-    SYM* symbol_table;
-    TOKEN* token;
-    size_t ter_num;
-    NMSP name_space;
-    EXPR_NODE_ATTR* expr_attribute;
-};
-
-inline AST_BASE* creat_ast_node(enum rule_type_enum type,VEC* child,SYM* symbol_table,TOKEN* token,size_t ter_num,NMSP name_space){
-    AST_BASE* node=(AST_BASE*)m_alloc(sizeof(AST_BASE));
-    node->type=type;
-    node->child=child;
-    node->symbol_table=symbol_table;
-    node->token=token;
-    node->ter_num=ter_num;
-    node->name_space=name_space;
-    node->father=0;
-    node->expr_attribute=0;
-    return node;
-}
-void destory_ast_tree(AST_BASE* node);
-void print_ast_tree(AST_BASE* node,int level);
-void destory_subast_sym_table(AST_BASE* node,SYM* top_sym_table);
-void destory_ast_symbol(AST_BASE* node);
-                     
-
-                               
-
-_Bool Type_VEC_cmp(VEC* a,VEC* b);
-_Bool Type_item_cmp(void* a,void* b);
-_Bool Type_VEC_VM(VEC* type_vec);
-_Bool Type_VEC_VLA(VEC* type_vec);
-_Bool Type_VEC_modify_lvalue(VEC* type_vec,_Bool is_lvalue);
-size_t Type_size(VEC* type_vec);
-size_t Type_align(VEC* type_vec);
-M_TYPE* Type_VEC_get_qual(VEC* type_vec);
-M_TYPE* Type_composite_qual(M_TYPE* qual_a,M_TYPE* qual_b);
-M_TYPE* Type_VEC_get_spec_other(VEC* type_vec);
-M_TYPE* Type_VEC_get_actual_base_type(VEC* type_vec);
-_Bool Type_VEC_change_actual_base_type(VEC* type_vec,M_TYPE* tmp_type);
-M_TYPE* Type_VEC_get_Atomic(VEC* type_vec);
-
-VEC* Type_VEC_get_Atomic_TO(VEC* type_vec,_Bool is_atomic);
-VEC* Type_VEC_get_Pointer_TO(VEC* type_vec,_Bool is_pointer);
-VEC* Type_VEC_get_Array_TO(VEC* type_vec,_Bool is_array);
-VEC* Type_VEC_get_func_return_type(VEC* type_vec,_Bool is_function);
-VEC* Type_VEC_unqualifier(VEC* type_vec,_Bool is_qual);
-
-VEC* lvalue_convertion(VEC* tmp_type_vec);
-_Bool compatible_types(VEC* type_vec_a,VEC* type_vec_b);
-VEC* composite_types(VEC* type_vec_a,VEC* type_vec_b,_Bool compatible_type);
-M_TYPE* usual_arith_conversion(M_TYPE** operand_a,M_TYPE** operand_b);
-_Bool integer_promotion(M_TYPE** integer_operand);
-_Bool float_promotion(M_TYPE** float_operand);
-
-
-size_t Type_VEC_get_element_size(VEC* current_obj_type);
-VEC* Type_VEC_get_sub_obj_type(VEC* current_obj_type,size_t sub_obj_size);
-VEC* Type_VEC_get_sub_obj_off_element_type(VEC* sub_obj_type,size_t sub_obj_off);
-
-
-void print_type_vec(VEC* type_vec);
-                     
-
-                    
-                   
-enum operand_type{
-    OPERAND_REG,
-    OPERAND_IMM,
-    OPERAND_LABEL,
-    OPERAND_FUNC,
-    OPERAND_OBJ,
-};
-enum operand_flow{
-    FLOW_IN,
-    FLOW_OUT,
-};
-typedef struct function IR_FUNC;
-typedef struct basic_block IR_BB;
-typedef struct instruction IR_INS;
-typedef struct {
-    enum operand_type type;
-    enum operand_flow direction;
-    union{
-        struct {
-            size_t reg_id;
-            IR_INS* op;
-        } reg;
-        struct {
-            int ir_d_type; int ir_d_len;
-        } imm;
-        struct {
-            IR_BB* op;
-        } label;
-        struct {
-            IR_FUNC* function;
-        } func;
-        struct {
-            size_t start_of_stack_deepth;
-            size_t bytes;
-            void* initializer_value;
-        } obj;
-    } operand_data;
-}IR_OPERAND;
-
-
-enum ins_op
-{
-    OP_NONE,
-    OP_PHI,
-};
-typedef struct instruction{
-    enum ins_op op;
-    VEC* operands;
-    IR_FUNC* func;
-    IR_BB* block;
-}IR_INS;
-IR_INS* GenINS();
-
-
-typedef struct {
-    VEC* func_list;
-    VEC* external_symbols;
-}IR_MODULE;
-typedef struct function{
-    char* func_name;
-    VEC* register_list;
-    VEC* BB_list;
-}IR_FUNC;
-typedef struct basic_block{
-    VEC* Instruction_list;
-}IR_BB;
-
-void print_IR(IR_MODULE* irm);
-                     
-
-
-_Bool semantics(AST_BASE* ast_node);
-
-
-_Bool declaration_type(AST_BASE* ast_node,VEC* dec_symbol_item_list);
-_Bool function_definition_type(AST_BASE* ast_node);
-_Bool declarator_type(AST_BASE* declarator_node,
-        VEC* type_vec,
-        int* declarator_cnt,
-        _Bool* typedef_declaration,
-        NMSP name_space,
-        char** declarator_char_name);
-_Bool abs_declarator_type(AST_BASE* abstract_declarator_node,
-        VEC* type_vec);
-VEC* declaration_spec_qual_list_type(AST_BASE* dec_sq_list_node,
-        int* declaration_cnt,
-        _Bool* typedef_declaration,
-        _Bool need_type_spec);
-TP_SU* struct_union_type(AST_BASE* struct_decl_list_node,
-        AST_BASE* tag_node,
-        enum TP_CATEGORY struct_union);
-TP_ENUMERA* enum_type(AST_BASE* enumerator_list_node,AST_BASE* tag_node);
-TP_FUNC* function_type(VEC* tmp_node_vec);
-TP_ARR* array_type(VEC* tmp_node_vec);
-VEC* type_name_type(AST_BASE* type_name_node);
-_Bool initializer_semantic(AST_BASE* initializer_node,VEC* target_type_vec);
-_Bool initializer_list_semantic(AST_BASE* initializer_list_node,VEC* type_vec);
-_Bool static_assert_type(AST_BASE* static_assert_declaration_node);
-
-_Bool const_value(AST_BASE* ast_node);
-
-_Bool expr_dispatch(AST_BASE* expr_node);
-_Bool cond_expr_value(AST_BASE* ast_node);
-_Bool expr_value(AST_BASE* ast_node);
-_Bool assign_expr_value(AST_BASE* ast_node);
-_Bool logical_or_expr_value(AST_BASE* ast_node);
-_Bool logical_and_expr_value(AST_BASE* ast_node);
-_Bool bit_inclusive_or_expr_value(AST_BASE* ast_node);
-_Bool bit_exclusive_or_expr_value(AST_BASE* ast_node);
-_Bool and_expr_value(AST_BASE* ast_node);
-_Bool equal_expr_value(AST_BASE* ast_node);
-_Bool relation_expr_value(AST_BASE* ast_node);
-_Bool shift_expr_value(AST_BASE* ast_node);
-_Bool add_expr_value(AST_BASE* ast_node);
-_Bool mul_expr_value(AST_BASE* ast_node);
-_Bool cast_expr_value(AST_BASE* ast_node);
-_Bool unary_expr_value(AST_BASE* ast_node);
-_Bool postfix_expr_value(AST_BASE* ast_node);
-_Bool pri_expr_value(AST_BASE* ast_node);
-
-_Bool statement_dispatch(AST_BASE* ast_node);
-
-_Bool labeled_statement(AST_BASE* ast_node);
-_Bool compound_statement(AST_BASE* ast_node);
-_Bool expr_statement(AST_BASE* ast_node);
-_Bool if_statement(AST_BASE* ast_node);
-_Bool switch_statement(AST_BASE* ast_node);
-_Bool while_statement(AST_BASE* ast_node);
-_Bool do_statement(AST_BASE* ast_node);
-_Bool for_statement(AST_BASE* ast_node);
-_Bool goto_statement(AST_BASE* ast_node);
-_Bool continue_statement(AST_BASE* ast_node);
-_Bool break_statement(AST_BASE* ast_node);
-_Bool return_statement(AST_BASE* ast_node);
-_Bool asm_statement(AST_BASE* ast_node);
-                          
-                      
-
-
-
-extern void const_illegal_error(AST_BASE* ast_node);
-long long int get_int_const(enum TP_CATEGORY type,VALUE_DATA* data_field,_Bool is_int);
-long double get_float_const(enum TP_CATEGORY type,VALUE_DATA* data_field,_Bool is_float);
-long double* get_complex_const(enum TP_CATEGORY type,VALUE_DATA* data_field,_Bool is_complex);
-_Bool logical_const(enum TP_CATEGORY type,VALUE_DATA* data_field);
-void bitwise_const(enum TP_CATEGORY type,VALUE_DATA* data_field,long long int const_value);
-void cast_const(enum TP_CATEGORY dst_type,VALUE_DATA* dst_data_field,enum TP_CATEGORY src_type,VALUE_DATA* src_data_field);
-void plus_const(enum TP_CATEGORY type,VALUE_DATA* dst_data_field,VALUE_DATA* src_data_field);
-void minus_const(enum TP_CATEGORY type,VALUE_DATA* dst_data_field,VALUE_DATA* src_data_field);
-void tilde_const(enum TP_CATEGORY type,VALUE_DATA* dst_data_field,VALUE_DATA* src_data_field);
-int exclamation_const(enum TP_CATEGORY type,VALUE_DATA* data_field);
-                          
-                        
-
-extern int semantics_level;
-
-extern VEC* c_error;
-extern char* filename;
-_Bool statement_dispatch(AST_BASE* ast_node)
-{
-    if(!ast_node)
-        return 0;
-    _Bool (*statement_dis[13])(AST_BASE*)={
-        labeled_statement,compound_statement,expr_statement,
-        if_statement,switch_statement,while_statement,
-        do_statement,for_statement,goto_statement,
-        continue_statement,break_statement,return_statement,
-        asm_statement
-    };
-    if((ast_node->type>=labeled_stmt&&ast_node->type<=asm_stmt))
-        return statement_dis[ast_node->type-labeled_stmt](ast_node);
-    if(ast_node->type==statement)
-    {
-        return statement_dispatch(( (ast_node && (ast_node->child) && (0<ast_node->child->len) ) ? (AST_BASE*)ast_node->child->data[0]: 0 ));
-    }
-    return 0;
-}
-_Bool labeled_statement(AST_BASE* ast_node)
-{
-
-    semantics_level++;
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("start label expr\n");
-
-    if(!ast_node||ast_node->type!=labeled_stmt)
-        goto error;
-    ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
-    AST_BASE* label_node=( (ast_node && (ast_node->child) && (0<ast_node->child->len) ) ? (AST_BASE*)ast_node->child->data[0]: 0 );
-    AST_BASE* statement_node=(AST_BASE*)(ast_node->child&&ast_node->child->len>0?ast_node->child->data[ast_node->child->len-1]:0);
-
-    if(label_node->type==KW_case){
-        AST_BASE* const_expr_node=( (ast_node && (ast_node->child) && (1<ast_node->child->len) ) ? (AST_BASE*)ast_node->child->data[1]: 0 );
-        if(!const_value(const_expr_node))
-            goto error;
-        SYM* target_symbol_table=ast_node->symbol_table;
-        while(1)
-        {
-            if(target_symbol_table->father==0||((target_symbol_table->father->st_attr_type)&SA_SWITCH)==0)
-                break;
-            else
-                target_symbol_table=target_symbol_table->father;
-        }
-        if(((target_symbol_table->st_attr_type)&SA_SWITCH)==0)
-        {
-            VECinsert(c_error,m_error_item( tei, C0076_ERR_IN_SWITCH, filename, label_node->token->line, label_node->token->value));
-            goto error;
-        }
-        SYMBOL_TABLE_SWITCH_ATTR* tmp_switch_attr=(SYMBOL_TABLE_SWITCH_ATTR*)target_symbol_table->st_attr;
-        unsigned long long int* tmp_value;
-        M_TYPE* const_node_type=Type_VEC_get_actual_base_type(const_expr_node->expr_attribute->type_vec);
-        if(!((const_node_type->typ_category>=TP_SCHAR&&const_node_type->typ_category<=TP_USLONGLONG)||const_node_type->typ_category==TP_BOOL||const_node_type->typ_category==TP_NULL_POINTER_CONSTANT))
-        {
-            VECinsert(c_error,m_error_item( tei, C0060_ERR_OPERAND_INTEGER_TYPE, filename, const_expr_node->token->line, const_expr_node->token->value));
-            goto error;
-        }
-        cast_const(TP_USLONGLONG,const_expr_node->expr_attribute->data_field,const_node_type->typ_category,const_expr_node->expr_attribute->data_field);
-        unsigned long long int const_value=const_expr_node->expr_attribute->data_field->usllong;
-        for(size_t i=0;i<(tmp_switch_attr->switch_value->len);++i)
-        {
-            tmp_value=(unsigned long long int*)((tmp_switch_attr->switch_value!=0&&i<(tmp_switch_attr->switch_value->len))?(tmp_switch_attr->switch_value->data[i]):0);
-            if(const_value==*tmp_value)
-            {
-                VECinsert(c_error,m_error_item( tei, C0077_ERR_SWITCH_SAME_CASE, filename, const_expr_node->token->line, const_expr_node->token->value));
-                goto error;
-            }
-        }
-        tmp_value=m_alloc(sizeof(unsigned long long int));
-        *tmp_value=const_value;
-        VECinsert(tmp_switch_attr->switch_value,(void*)tmp_value);
-    }
-    else if(label_node->type==KW_default){
-        SYM* target_symbol_table=ast_node->symbol_table;
-        while(1)
-        {
-            if(target_symbol_table->father==0||((target_symbol_table->father->st_attr_type)&SA_SWITCH)==0)
-                break;
-            else
-                target_symbol_table=target_symbol_table->father;
-        }
-        if(((target_symbol_table->st_attr_type)&SA_SWITCH)==0)
-        {
-            VECinsert(c_error,m_error_item( tei, C0076_ERR_IN_SWITCH, filename, label_node->token->line, label_node->token->value));
-            goto error;
-        }
-        SYMBOL_TABLE_SWITCH_ATTR* tmp_switch_attr=(SYMBOL_TABLE_SWITCH_ATTR*)target_symbol_table->st_attr;
-        if(!tmp_switch_attr->have_default)
-            tmp_switch_attr->have_default=1;
-        else
-        {
-            VECinsert(c_error,m_error_item( tei, C0005_ERR_REDEFINE, filename, label_node->token->line, label_node->token->value));
-            goto error;
-        }
-    }
-    else if(label_node->type==identifier){
-        ;
-    }
-    else
-        goto error;
-
-    if(!statement_dispatch(statement_node))
-        goto error;
-    m_free(tei);
-
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("end label stmt\n");
-    semantics_level--;
-
-    return 1;
-error:
-
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("end label stmt fail\n");
-    semantics_level--;
-
-    return 0;
-}
-_Bool compound_statement(AST_BASE* ast_node)
-{
-
-    semantics_level++;
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("start compound expr\n");
-
-    if(!ast_node||ast_node->type!=compound_stmt)
-        goto error;
-    for(size_t i=1;i<( (ast_node&& (ast_node->child)) ? (ast_node->child->len) : 0 )-1;++i){
-        AST_BASE* sub_ast=( (ast_node && (ast_node->child) && (i<ast_node->child->len) ) ? (AST_BASE*)ast_node->child->data[i]: 0 );
-        VEC* tmp_sym_item=InitVEC(3);
-        if(sub_ast){
-            if(sub_ast->type==declaration&&!declaration_type(sub_ast,tmp_sym_item))
-                goto error;
-            else if(sub_ast->type==statement&&!statement_dispatch(sub_ast))
-                goto error;
-        }
-        DelVEC(tmp_sym_item);
-    }
-
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("end comopound stmt\n");
-    semantics_level--;
-
-    return 1;
-error:
-
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("end comopound stmt fail\n");
-    semantics_level--;
-
-    return 0;
-}
-_Bool expr_statement(AST_BASE* ast_node)
-{
-
-    semantics_level++;
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("start expr expr\n");
-
-    if(!ast_node||ast_node->type!=expr_stmt)
-        goto error;
-    if(( (ast_node&& (ast_node->child)) ? (ast_node->child->len) : 0 )==1)
-        return 1;
-    else if(( (ast_node&& (ast_node->child)) ? (ast_node->child->len) : 0 )==2){
-        AST_BASE* expr_node=( (ast_node && (ast_node->child) && (0<ast_node->child->len) ) ? (AST_BASE*)ast_node->child->data[0]: 0 );
-        return expr_dispatch(expr_node);
-    }
-    else
-        goto error;
-
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("end expr stmt\n");
-    semantics_level--;
-
-    return 1;
-error:
-
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("end expr stmt fail\n");
-    semantics_level--;
-
-    return 0;
-}
-_Bool if_statement(AST_BASE* ast_node)
-{
-
-    semantics_level++;
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("start if expr\n");
-
-    if(!ast_node||ast_node->type!=if_stmt)
-        goto error;
-    ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
-    AST_BASE* expr_node=( (ast_node && (ast_node->child) && (2<ast_node->child->len) ) ? (AST_BASE*)ast_node->child->data[2]: 0 );
-    AST_BASE* stmt_node=( (ast_node && (ast_node->child) && (4<ast_node->child->len) ) ? (AST_BASE*)ast_node->child->data[4]: 0 );
-    if(!expr_dispatch(expr_node))
-        goto error;
-    M_TYPE* tmpt=Type_VEC_get_actual_base_type(expr_node->expr_attribute->type_vec);
-    if(!((tmpt->typ_category>=TP_SCHAR&&tmpt->typ_category<=TP_POINT)||tmpt->typ_category==TP_NULL_POINTER_CONSTANT))
-    {
-        VECinsert(c_error,m_error_item( tei, C0062_ERR_OPERAND_SCALAR_TYPE, filename, expr_node->token->line, expr_node->token->value));
-        goto error;
-    }
-    if(!statement_dispatch(stmt_node))
-        goto error;
-    if(( (ast_node&& (ast_node->child)) ? (ast_node->child->len) : 0 )==7)
-    {
-        stmt_node=( (ast_node && (ast_node->child) && (6<ast_node->child->len) ) ? (AST_BASE*)ast_node->child->data[6]: 0 );
-        if(!statement_dispatch(stmt_node))
-            goto error;
-    }
-    m_free(tei);
-
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("end if stmt\n");
-    semantics_level--;
-
-    return 1;
-error:
-
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("end if stmt fail\n");
-    semantics_level--;
-
-    return 0;
-}
-_Bool switch_statement(AST_BASE* ast_node)
-{
-
-    semantics_level++;
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("start switch expr\n");
-
-    if(!ast_node||ast_node->type!=switch_stmt)
-        goto error;
-    ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
-    AST_BASE* expr_node=( (ast_node && (ast_node->child) && (2<ast_node->child->len) ) ? (AST_BASE*)ast_node->child->data[2]: 0 );
-    if(!expr_dispatch(expr_node))
-        goto error;
-    M_TYPE* tmpt=Type_VEC_get_actual_base_type(expr_node->expr_attribute->type_vec);
-    if(!((tmpt->typ_category>=TP_SCHAR&&tmpt->typ_category<=TP_USLONGLONG)||tmpt->typ_category==TP_BOOL||tmpt->typ_category==TP_NULL_POINTER_CONSTANT))
-    {
-        VECinsert(c_error,m_error_item( tei, C0060_ERR_OPERAND_INTEGER_TYPE, filename, expr_node->token->line, expr_node->token->value));
-        goto error;
-    }
-    m_free(tei);
-
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("end switch stmt\n");
-    semantics_level--;
-
-    return 1;
-error:
-
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("end switch stmt fail\n");
-    semantics_level--;
-
-    return 0;
-}
-_Bool while_statement(AST_BASE* ast_node)
-{
-
-    semantics_level++;
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("start while expr\n");
-
-    if(!ast_node||ast_node->type!=while_stmt)
-        goto error;
-    ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
-    AST_BASE* expr_node=( (ast_node && (ast_node->child) && (2<ast_node->child->len) ) ? (AST_BASE*)ast_node->child->data[2]: 0 );
-    AST_BASE* stmt_node=( (ast_node && (ast_node->child) && (4<ast_node->child->len) ) ? (AST_BASE*)ast_node->child->data[4]: 0 );
-    if(!expr_dispatch(expr_node))
-        goto error;
-    if(!statement_dispatch(stmt_node))
-        goto error;
-    M_TYPE* tmpt=Type_VEC_get_actual_base_type(expr_node->expr_attribute->type_vec);
-    if(!((tmpt->typ_category>=TP_SCHAR&&tmpt->typ_category<=TP_POINT)||tmpt->typ_category==TP_NULL_POINTER_CONSTANT))
-    {
-        VECinsert(c_error,m_error_item( tei, C0062_ERR_OPERAND_SCALAR_TYPE, filename, ast_node->token->line, ast_node->token->value));
-        goto error;
-    }
-    m_free(tei);
-
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("end while stmt\n");
-    semantics_level--;
-
-    return 1;
-error:
-
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("end while stmt fail\n");
-    semantics_level--;
-
-    return 0;
-}
-_Bool do_statement(AST_BASE* ast_node)
-{
-
-    semantics_level++;
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("start do expr\n");
-
-    if(!ast_node||ast_node->type!=while_stmt)
-        goto error;
-    ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
-    AST_BASE* expr_node=( (ast_node && (ast_node->child) && (4<ast_node->child->len) ) ? (AST_BASE*)ast_node->child->data[4]: 0 );
-    AST_BASE* stmt_node=( (ast_node && (ast_node->child) && (1<ast_node->child->len) ) ? (AST_BASE*)ast_node->child->data[1]: 0 );
-    if(!expr_dispatch(expr_node))
-        goto error;
-    if(!statement_dispatch(stmt_node))
-        goto error;
-    M_TYPE* tmpt=Type_VEC_get_actual_base_type(expr_node->expr_attribute->type_vec);
-    if(!((tmpt->typ_category>=TP_SCHAR&&tmpt->typ_category<=TP_POINT)||tmpt->typ_category==TP_NULL_POINTER_CONSTANT))
-    {
-        VECinsert(c_error,m_error_item( tei, C0062_ERR_OPERAND_SCALAR_TYPE, filename, ast_node->token->line, ast_node->token->value));
-        goto error;
-    }
-    m_free(tei);
-
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("end do stmt\n");
-    semantics_level--;
-
-    return 1;
-error:
-
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("end do stmt fail\n");
-    semantics_level--;
-
-    return 0;
-}
-_Bool for_statement(AST_BASE* ast_node)
-{
-
-    semantics_level++;
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("start for expr\n");
-
-    if(!ast_node||ast_node->type!=for_stmt)
-        goto error;
-    ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
-    for(size_t i=2;i<( (ast_node&& (ast_node->child)) ? (ast_node->child->len) : 0 )-2;i++)
-    {
-        AST_BASE* tmp_ast=( (ast_node && (ast_node->child) && (i<ast_node->child->len) ) ? (AST_BASE*)ast_node->child->data[i]: 0 );
-        if(tmp_ast->type==declaration)
-        {
-            VEC* tmp_sym_item=InitVEC(3);
-            if(!declaration_type(tmp_ast,tmp_sym_item))
-                goto error;
-            for(size_t i=0;i<(tmp_sym_item->len);++i)
-            {
-                SYM_ITEM* tmpsi=((tmp_sym_item!=0&&i<(tmp_sym_item->len))?(tmp_sym_item->data[i]):0);
-                M_TYPE* tmpt=Type_VEC_get_spec_other(tmpsi->type_vec);
-                if(tmpt)
-                {
-                    if(tmpt->typ_stor!=TP_AUTO&&tmpt->typ_stor!=TP_REGISTER)
-                    {
-                        VECinsert(c_error,m_error_item( tei, C0075_ERR_FOR_DECLARATION_STOR, filename, tmp_ast->token->line, tmp_ast->token->value));
-                        goto error;
-                    }
-                }
-            }
-            DelVEC(tmp_sym_item);
-        }
-        else if((tmp_ast->type==expression||(tmp_ast->type>=assignment_expr&&tmp_ast->type<=primary_expression)))
-        {
-            if(!expr_dispatch(tmp_ast))
-                goto error;
-        }
-    }
-    AST_BASE* stmt_node=(ast_node->child&&ast_node->child->len>0?ast_node->child->data[ast_node->child->len-1]:0);
-    if(!statement_dispatch(stmt_node))
-        goto error;
-    m_free(tei);
-
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("end for stmt\n");
-    semantics_level--;
-
-    return 1;
-error:
-
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("end for stmt fail\n");
-    semantics_level--;
-
-    return 0;
-}
-_Bool goto_statement(AST_BASE* ast_node)
-{
-
-    semantics_level++;
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("start goto expr\n");
-
-    if(!ast_node||ast_node->type!=goto_stmt)
-        goto error;
-    ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
-    AST_BASE* label_node=( (ast_node && (ast_node->child) && (1<ast_node->child->len) ) ? (AST_BASE*)ast_node->child->data[1]: 0 );
-    SYM* target_symbol_table=ast_node->symbol_table;
-    while(target_symbol_table->father&&target_symbol_table->sp_type!=SPT_FUN)
-        target_symbol_table=target_symbol_table->father;
-    SYM_ITEM* find_tmpsi=Create_symbol_item(label_node->token->value,0);
-    HASH_ITEM* tmphi=HASHFind(target_symbol_table->sym_hash_table,
-        find_tmpsi,
-        symbol_item_cmp,
-        0,
-        0
-    );
-    if(!(tmphi&&tmphi->count))
-    {
-        VECinsert(c_error,m_error_item( tei, C0016_ERR_UNDECLARATION, filename, label_node->token->line, label_node->token->value));
-        goto error;
-    }
-    m_free(tei);
-
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("end goto stmt\n");
-    semantics_level--;
-
-    return 1;
-error:
-
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("end goto stmt fail\n");
-    semantics_level--;
-
-    return 0;
-}
-_Bool continue_statement(AST_BASE* ast_node)
-{
-
-    semantics_level++;
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("start continue expr\n");
-
-    if(!ast_node||ast_node->type!=continue_stmt)
-        goto error;
-    ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
-    SYM* target_symbol_table=ast_node->symbol_table;
-    if(((target_symbol_table->st_attr_type)&SA_LOOP)==0)
-    {
-        VECinsert(c_error,m_error_item( tei, C0078_ERR_IN_LOOP, filename, ast_node->token->line, ast_node->token->value));
-        goto error;
-    }
-    m_free(tei);
-
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("end continue stmt\n");
-    semantics_level--;
-
-    return 1;
-error:
-
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("end continue stmt fail\n");
-    semantics_level--;
-
-    return 0;
-}
-_Bool break_statement(AST_BASE* ast_node)
-{
-
-    semantics_level++;
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("start break expr\n");
-
-    if(!ast_node||ast_node->type!=break_stmt)
-        goto error;
-    ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
-    SYM* target_symbol_table=ast_node->symbol_table;
-    if(((target_symbol_table->father->st_attr_type)&SA_LOOP)==0&&((target_symbol_table->father->st_attr_type)&SA_SWITCH)==0)
-    {
-        VECinsert(c_error,m_error_item( tei, C0079_ERR_IN_SWITCH_LOOP, filename, ast_node->token->line, ast_node->token->value));
-        goto error;
-    }
-    m_free(tei);
-
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("end break stmt\n");
-    semantics_level--;
-
-    return 1;
-error:
-
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("end break stmt fail\n");
-    semantics_level--;
-
-    return 0;
-}
-_Bool return_statement(AST_BASE* ast_node)
-{
-
-    semantics_level++;
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("start return expr\n");
-
-    if(!ast_node||ast_node->type!=return_stmt)
-        goto error;
-    _Bool have_expr=0;
-    AST_BASE* expr_node=( (ast_node && (ast_node->child) && (1<ast_node->child->len) ) ? (AST_BASE*)ast_node->child->data[1]: 0 );
-    if(( (ast_node&& (ast_node->child)) ? (ast_node->child->len) : 0 )==2)
-        have_expr=0;
-    else if(( (ast_node&& (ast_node->child)) ? (ast_node->child->len) : 0 )==3)
-    {
-        have_expr=1;
-        if(!expr_dispatch(expr_node))
-            goto error;
-    }
-    ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
-    SYM* target_symbol_table=ast_node->symbol_table;
-    while(1)
-    {
-        if(target_symbol_table->father==0||((target_symbol_table->father->st_attr_type)&SA_FUNC)==0)
-            break;
-        else
-            target_symbol_table=target_symbol_table->father;
-    }
-    if(((target_symbol_table->st_attr_type)&SA_FUNC)==0)
-    {
-        goto error;
-    }
-    SYM_ITEM* tmpsi=((SYMBOL_TABLE_FUNC_ATTR*)(target_symbol_table->st_attr))->function_symbol;
-    M_TYPE* func_spec=Type_VEC_get_spec_other(tmpsi->type_vec);
-    if(func_spec&&func_spec->func_spec==1)
-    {
-
-        ERROR_ITEM* twi=m_alloc(sizeof(ERROR_ITEM));
-        VECinsert(c_error,m_error_item( twi, W0006_WARN_NO_RETURN, filename, ast_node->token->line, ast_node->token->value));
-    }
-    ((SYMBOL_TABLE_FUNC_ATTR*)(target_symbol_table->st_attr))->have_ret=1;
-    VEC* func_ret_type_vec=Type_VEC_get_func_return_type(tmpsi->type_vec,1);
-    M_TYPE* ret_type=Type_VEC_get_actual_base_type(func_ret_type_vec);
-    if(ret_type->typ_category==TP_VOID&&have_expr==1)
-    {
-        VECinsert(c_error,m_error_item( tei, C0080_ERR_FUNC_RET_VOID, filename, expr_node->token->line, expr_node->token->value));
-        goto error;
-    }
-    else if(ret_type->typ_category!=TP_VOID&&have_expr==0)
-    {
-        VECinsert(c_error,m_error_item( tei, C0081_ERR_FUNC_RET_NONE_VOID, filename, ast_node->token->line, ast_node->token->value));
-        goto error;
-    }
-    m_free(tei);
-
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("end return stmt\n");
-    semantics_level--;
-
-    return 1;
-error:
-
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("end return stmt fail\n");
-    semantics_level--;
-
-    return 0;
-}
-_Bool asm_statement(AST_BASE* ast_node)
-{
-
-    semantics_level++;
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("start asm expr\n");
-
-    if(!ast_node||ast_node->type!=asm_stmt)
-        goto error;
-
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("end asm stmt\n");
-    semantics_level--;
-
-    return 1;
-error:
-
-    for(size_t i=0;i<semantics_level;++i)
-        printf("    ");
-    printf("end asm stmt fail\n");
-    semantics_level--;
-
-    return 0;
-}
-
 start print ast tree
 <translation_unit ns:1>
     <external_decl ns:1>
@@ -25415,18 +23459,27 @@ finish print ast tree
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:37
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:38
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:40
@@ -25435,29 +23488,45 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                     start struct union
                         start specify or qualify node
                         finish specify or qualify node
                         start declarator
+direct_dec_index 0
+identifier
+3
                         finish declarator
                         start specify or qualify node
                         finish specify or qualify node
                         start declarator
+direct_dec_index 3
                             start array
                                 start primary expr
                                 <Type>:< signed_int >
                                 end primary expr
                             finish array
+direct_dec_index 0
+identifier
+3
                         finish declarator
                     finish struct union
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:50
@@ -25466,20 +23535,32 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:55
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:57
@@ -25488,14 +23569,23 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:63
@@ -25510,12 +23600,18 @@ finish print ast tree
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:66
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:67
@@ -25524,123 +23620,209 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 3
                     start array
                         start primary expr
                         <Type>:< signed_int >
                         end primary expr
                     finish array
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 3
                     start array
                         start add
                             start mul
@@ -25677,6 +23859,9 @@ finish print ast tree
                         <Type>:< signed_int >
                         end add
                     finish array
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish struct union
         finish specify or qualify node
@@ -25685,972 +23870,1495 @@ finish print ast tree
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:113
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:115
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:117
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:119
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:121
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:123
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:126
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:130
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:133
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:137
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:140
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:143
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:145
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:147
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:150
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:153
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:156
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:159
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:161
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:164
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:166
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:168
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:170
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:172
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:174
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:176
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:180
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:184
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:187
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:189
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:191
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:193
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:195
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:197
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:199
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:201
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:203
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:206
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:209
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:211
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:213
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:219
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:221
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:223
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:225
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:238
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:247
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:248
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:249
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:250
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:251
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:252
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:253
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:254
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:256
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:257
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:258
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:259
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:260
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:261
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:262
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:263
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:265
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:266
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:267
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:268
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:269
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:270
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:271
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:272
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:274
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:275
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:277
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:281
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:282
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:283
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:289
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:291
@@ -26659,392 +25367,606 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                     start struct union
                         start specify or qualify node
                         finish specify or qualify node
                         start declarator
+direct_dec_index 0
+identifier
+3
                         finish declarator
                         start specify or qualify node
                         finish specify or qualify node
                         start declarator
+direct_dec_index 3
                             start array
                                 start primary expr
                                 <Type>:< signed_int >
                                 end primary expr
                             finish array
+direct_dec_index 0
+identifier
+3
                         finish declarator
                     finish struct union
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:304
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:309
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:314
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:319
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:326
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:328
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:330
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:332
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:334
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:336
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:341
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:346
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:351
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:356
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:359
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:362
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:365
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:367
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start specify or qualify node
     finish specify or qualify node
     start declarator
+direct_dec_index 3
         start func
             start specify or qualify node
             finish specify or qualify node
             start declarator
+direct_dec_index 0
+identifier
+3
             finish declarator
         finish func
+direct_dec_index 0
+identifier
+3
     finish declarator
     start compound expr
         start if expr
@@ -27130,6 +26052,9 @@ finish print ast tree
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:517
@@ -27138,18 +26063,30 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:522
@@ -27158,171 +26095,278 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:529
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 2
                     start array
                     finish array
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 2
                     start array
                     finish array
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 2
                     start array
                     finish array
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:530
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:531
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:533
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 2
                     start array
                     finish array
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:534
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 2
                     start array
                     finish array
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:535
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:536
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:538
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start specify or qualify node
     finish specify or qualify node
     start declarator
+direct_dec_index 3
         start func
             start specify or qualify node
             finish specify or qualify node
             start declarator
+direct_dec_index 0
+identifier
+3
             finish declarator
             start specify or qualify node
             finish specify or qualify node
             start declarator
+direct_dec_index 0
+identifier
+3
             finish declarator
             start specify or qualify node
             finish specify or qualify node
             start declarator
+direct_dec_index 0
+identifier
+3
             finish declarator
             start specify or qualify node
             finish specify or qualify node
             start declarator
+direct_dec_index 0
+identifier
+3
             finish declarator
             start specify or qualify node
             finish specify or qualify node
             start declarator
+direct_dec_index 0
+identifier
+3
             finish declarator
         finish func
+direct_dec_index 0
+identifier
+3
     finish declarator
     start compound expr
         start expr expr
@@ -27394,100 +26438,161 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 3
                     start array
                         start primary expr
                         <Type>:< signed_int >
                         end primary expr
                     finish array
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:566
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 2
                     start array
                     finish array
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:572
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:575
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:576
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start specify or qualify node
     finish specify or qualify node
     start declarator
+direct_dec_index 3
         start func
             start specify or qualify node
             finish specify or qualify node
             start declarator
+direct_dec_index 0
+identifier
+3
             finish declarator
             start specify or qualify node
             finish specify or qualify node
             start declarator
+direct_dec_index 0
+identifier
+3
             finish declarator
             start specify or qualify node
             finish specify or qualify node
             start declarator
+direct_dec_index 0
+identifier
+3
             finish declarator
         finish func
+direct_dec_index 0
+identifier
+3
     finish declarator
     start compound expr
         start expr expr
@@ -27511,26 +26616,37 @@ finish print ast tree
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:590
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:591
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:595
@@ -27539,22 +26655,37 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:603
@@ -27563,29 +26694,48 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start specify or qualify node
     finish specify or qualify node
     start declarator
+direct_dec_index 3
         start func
             start specify or qualify node
             finish specify or qualify node
             start declarator
+direct_dec_index 0
+identifier
+3
             finish declarator
             start specify or qualify node
             finish specify or qualify node
             start declarator
+direct_dec_index 0
+identifier
+3
             finish declarator
         finish func
+direct_dec_index 0
+identifier
+3
     finish declarator
     start compound expr
         start return expr
@@ -27610,144 +26760,235 @@ finish print ast tree
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:611
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 5
                     start func
                         start specify or qualify node
                         finish specify or qualify node
                         start declarator
+direct_dec_index 0
+identifier
+3
                         finish declarator
                         start specify or qualify node
                         finish specify or qualify node
                         start declarator
+direct_dec_index 0
+identifier
+3
                         finish declarator
                     finish func
+direct_dec_index 2
                     start declarator
+direct_dec_index 0
+identifier
+3
                     finish declarator
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:612
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 5
                     start func
                         start specify or qualify node
                         finish specify or qualify node
                         start declarator
+direct_dec_index 0
+identifier
+3
                         finish declarator
                         start specify or qualify node
                         finish specify or qualify node
                         start declarator
+direct_dec_index 0
+identifier
+3
                         finish declarator
                     finish func
+direct_dec_index 2
                     start declarator
+direct_dec_index 0
+identifier
+3
                     finish declarator
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:613
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 5
                     start func
                         start specify or qualify node
                         finish specify or qualify node
                         start declarator
+direct_dec_index 0
+identifier
+3
                         finish declarator
                         start specify or qualify node
                         finish specify or qualify node
                         start declarator
+direct_dec_index 0
+identifier
+3
                         finish declarator
                     finish func
+direct_dec_index 2
                     start declarator
+direct_dec_index 0
+identifier
+3
                     finish declarator
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:614
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:616
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:617
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:625
@@ -27756,133 +26997,216 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:635
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:636
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:637
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:638
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:639
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:640
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:641
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start specify or qualify node
     finish specify or qualify node
     start declarator
+direct_dec_index 3
         start func
             start specify or qualify node
             finish specify or qualify node
             start declarator
+direct_dec_index 0
+identifier
+3
             finish declarator
             start specify or qualify node
             finish specify or qualify node
             start declarator
+direct_dec_index 0
+identifier
+3
             finish declarator
         finish func
+direct_dec_index 0
+identifier
+3
     finish declarator
     start compound expr
         start if expr
@@ -27909,6 +27233,9 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start primary expr
                 <Type>:< signed_int >
@@ -28004,12 +27331,19 @@ finish print ast tree
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:654
@@ -28030,18 +27364,30 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                     start struct union
@@ -28050,18 +27396,30 @@ finish print ast tree
                                 start specify or qualify node
                                 finish specify or qualify node
                                 start declarator
+direct_dec_index 0
+identifier
+3
                                 finish declarator
                                 start specify or qualify node
                                 finish specify or qualify node
                                 start declarator
+direct_dec_index 0
+identifier
+3
                                 finish declarator
                                 start specify or qualify node
                                 finish specify or qualify node
                                 start declarator
+direct_dec_index 0
+identifier
+3
                                 finish declarator
                                 start specify or qualify node
                                 finish specify or qualify node
                                 start declarator
+direct_dec_index 0
+identifier
+3
                                 finish declarator
                             finish struct union
                         finish specify or qualify node
@@ -28070,10 +27428,16 @@ finish print ast tree
                                 start specify or qualify node
                                 finish specify or qualify node
                                 start declarator
+direct_dec_index 0
+identifier
+3
                                 finish declarator
                                 start specify or qualify node
                                 finish specify or qualify node
                                 start declarator
+direct_dec_index 0
+identifier
+3
                                 finish declarator
                             finish struct union
                         finish specify or qualify node
@@ -28082,6 +27446,9 @@ finish print ast tree
             finish struct union
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:717
@@ -28090,58 +27457,100 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:729
@@ -28150,34 +27559,58 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:739
@@ -28186,54 +27619,90 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                     start struct union
                         start specify or qualify node
                         finish specify or qualify node
                         start declarator
+direct_dec_index 0
+identifier
+3
                         finish declarator
                         start specify or qualify node
                         finish specify or qualify node
                         start declarator
+direct_dec_index 0
+identifier
+3
                         finish declarator
                     finish struct union
                 finish specify or qualify node
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:752
@@ -28242,38 +27711,65 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:760
@@ -28282,46 +27778,79 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:769
@@ -28330,14 +27859,23 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:774
@@ -28346,34 +27884,58 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:781
@@ -28382,93 +27944,153 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 3
                     start array
                         start primary expr
                         <Type>:< signed_int >
                         end primary expr
                     finish array
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 3
                     start array
                         start primary expr
                         <Type>:< signed_int >
                         end primary expr
                     finish array
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 3
                     start array
                         start primary expr
                         <Type>:< signed_int >
                         end primary expr
                     finish array
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:802
@@ -28477,496 +28099,795 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:807
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 3
                     start array
                         start primary expr
                         <Type>:< signed_int >
                         end primary expr
                     finish array
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 3
                     start array
                         start primary expr
                         <Type>:< signed_int >
                         end primary expr
                     finish array
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:813
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:816
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:817
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:819
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:823
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:824
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:825
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:826
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:827
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:828
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:829
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:830
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:831
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:832
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:833
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:834
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:835
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:837
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:838
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:839
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:840
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:841
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:843
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:844
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:845
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:846
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:847
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:848
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:851
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:852
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:853
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:856
         start specify or qualify node
         finish specify or qualify node
         start declarator
+direct_dec_index 3
             start func
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
+direct_dec_index 0
+identifier
+3
                 finish declarator
             finish func
+direct_dec_index 0
+identifier
+3
         finish declarator
     finish declaration
     start declaration line:860
