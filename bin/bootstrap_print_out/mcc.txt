@@ -656,11 +656,13 @@ start print ast tree
                                                     <-:- sym level: 0 namespace:19>
                                                     <&unary_expr ns:19>
                                                         <KW_sizeof:sizeof sym level: 0 namespace:19>
-                                                        <&primary_expression ns:19>
-                                                            <(:( sym level: 0 namespace:19>
-                                                            <&primary_expression ns:19>
-                                                                <identifier:size_t sym level: 0 namespace:19>
-                                                            <):) sym level: 0 namespace:19>
+                                                        <(:( sym level: 0 namespace:19>
+                                                        <&type_name ns:19>
+                                                            <&spec_qual_list ns:19>
+                                                                <&type_spec ns:19>
+                                                                    <&typedef_name ns:19>
+                                                                        <identifier:size_t sym level: 0 namespace:19>
+                                                        <):) sym level: 0 namespace:19>
                                                 <]:] sym level: 0 namespace:19>
                                 <;:; sym level: 0 namespace:19>
                         <right_brace:} sym level: 0 namespace:1>
@@ -11211,11 +11213,13 @@ start print ast tree
                                         <(:( sym level: 3 namespace:1>
                                         <&unary_expr ns:1>
                                             <KW_sizeof:sizeof sym level: 3 namespace:1>
-                                            <&primary_expression ns:1>
-                                                <(:( sym level: 3 namespace:1>
-                                                <&primary_expression ns:1>
-                                                    <identifier:SYM_ITEM sym level: 3 namespace:1>
-                                                <):) sym level: 3 namespace:1>
+                                            <(:( sym level: 3 namespace:1>
+                                            <&type_name ns:1>
+                                                <&spec_qual_list ns:1>
+                                                    <&type_spec ns:1>
+                                                        <&typedef_name ns:1>
+                                                            <identifier:SYM_ITEM sym level: 3 namespace:1>
+                                            <):) sym level: 3 namespace:1>
                                         <):) sym level: 3 namespace:1>
                                 <;:; sym level: 3 namespace:1>
                 <statement ns:1>
@@ -16229,12 +16233,8 @@ finish print ast tree
                             <Type>:< signed_int >
                             end mul
                             start unary
-                                start primary expr
-                                    start primary expr
-                                    <Type>:< unsigned_long >
-                                    end primary expr
-                                <Type>:< unsigned_long >
-                                end primary expr
+                                start specify or qualify node
+                                finish specify or qualify node
                             <Type>:< signed_int >
                             end unary
                         <Type>:< signed_int >
@@ -20533,12 +20533,8 @@ finish print ast tree
                         <Type>:< function , point , void >
                         end primary expr
                         start unary
-                            start primary expr
-                                start primary expr
-                                <Type>:< struct >
-                                end primary expr
-                            <Type>:< struct >
-                            end primary expr
+                            start specify or qualify node
+                            finish specify or qualify node
                         <Type>:< signed_int >
                         end unary
                     <Type>:< point , void >

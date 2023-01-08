@@ -3,6 +3,7 @@ include ./Makefile.env
 export MCC_ROOT_DIR=$(shell pwd)
 export MCC_ROOT_OBJ=${MCC_ROOT_DIR}/obj
 export MCC_ROOT_PRE=${MCC_ROOT_DIR}/pre
+export MCC_BOOTSTRAP_OUT=${MCC_ROOT_DIR}/bin/bootstrap_print_out
 Bin:=${MCC_ROOT_DIR}/bin
 Target:= ${Bin}/mcc
 modules += src backend IR frontend tools defs
@@ -24,6 +25,7 @@ clean:
 	rm -f ${Target}
 	rm -f ${Bin}/test_out/*
 	rm -f ${MCC_ROOT_PRE}/*.o 
+	rm -f ${MCC_BOOTSTRAP_OUT}/*.o
 
 clean_obj:
 	rm -rf ${MCC_ROOT_OBJ}

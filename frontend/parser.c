@@ -130,8 +130,22 @@ AST_BASE* p_match(VEC* token_list,
                     father_rule_type=*(enum rule_type_enum*)VEC_GET_ITEM(trace_stack,VECLEN(trace_stack)-2);
                 if(VECLEN(trace_stack)>=3)
                     grand_father_rule_type=*(enum rule_type_enum*)VEC_GET_ITEM(trace_stack,VECLEN(trace_stack)-3);
-                if(father_rule_type==type_def_name){
-                    if(!is_type_def_name(curr_token->value,curr_sym_table))
+                if(father_rule_type==type_def_name&&!is_type_def_name(curr_token->value,curr_sym_table))
+                    goto parser_error;
+                if(is_type_def_name(curr_token->value,curr_sym_table)&&father_rule_type!=type_def_name)
+                {/*in a statment , a typedef name identifier must have a father node type_def_name*/
+                    bool stmt_or_decl=0;    /*0-stmt,1-decl*/
+                    for(size_t j=VECLEN(trace_stack)-1;j>0;j--)
+                    {
+                        if(*(enum rule_type_enum*)VEC_GET_ITEM(trace_stack,j)==declaration)
+                        {
+                            stmt_or_decl=1;
+                            break;
+                        }
+                        else if(*(enum rule_type_enum*)VEC_GET_ITEM(trace_stack,j)==statement)
+                            break;
+                    }
+                    if(!stmt_or_decl)
                         goto parser_error;
                 }
                 if(father_rule_type!=enumerator_const&&grand_father_rule_type==primary_expression){

@@ -435,7 +435,7 @@ const char parsers[MAX_RULE_NUM][RULE_CHAR_LEN]={
     "&-multi_expr_opt:&{&-multi_expr}*",
     "&-multi_expr:&{&multi_operator}&{&cast_expr}",
 
-    "&cast_expr:&{&unary_expr}|&{&-cast_expr}",
+    "&cast_expr:&{&-cast_expr}|&{&unary_expr}",
     "&-cast_expr:&{&(type_name)}&{&cast_expr}",
     
     "&unary_expr:&{&postfix_expr}|&{&unary_expr1}|&{&unary_expr2}|&{&unary_expr3}",

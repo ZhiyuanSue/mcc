@@ -675,11 +675,13 @@ start print ast tree
                                                     <-:- sym level: 0 namespace:20>
                                                     <&unary_expr ns:20>
                                                         <KW_sizeof:sizeof sym level: 0 namespace:20>
-                                                        <&primary_expression ns:20>
-                                                            <(:( sym level: 0 namespace:20>
-                                                            <&primary_expression ns:20>
-                                                                <identifier:size_t sym level: 0 namespace:20>
-                                                            <):) sym level: 0 namespace:20>
+                                                        <(:( sym level: 0 namespace:20>
+                                                        <&type_name ns:20>
+                                                            <&spec_qual_list ns:20>
+                                                                <&type_spec ns:20>
+                                                                    <&typedef_name ns:20>
+                                                                        <identifier:size_t sym level: 0 namespace:20>
+                                                        <):) sym level: 0 namespace:20>
                                                 <]:] sym level: 0 namespace:20>
                                 <;:; sym level: 0 namespace:20>
                         <right_brace:} sym level: 0 namespace:1>
@@ -4162,12 +4164,8 @@ finish print ast tree
                             <Type>:< signed_int >
                             end mul
                             start unary
-                                start primary expr
-                                    start primary expr
-                                    <Type>:< unsigned_long >
-                                    end primary expr
-                                <Type>:< unsigned_long >
-                                end primary expr
+                                start specify or qualify node
+                                finish specify or qualify node
                             <Type>:< signed_int >
                             end unary
                         <Type>:< signed_int >

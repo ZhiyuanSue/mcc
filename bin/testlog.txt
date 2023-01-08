@@ -56,60 +56,58 @@ start test
 success : 35
 error : 17
 
-==========
-start test
-==========
 1    fail   align_test_01.c   0
 2    fail   arr_test_01.c   0
 3    fail   arr_test_02.c   0
 4    fail   arr_test_03.c   0
 5    succ   arr_test_04.c   0
 6    fail   arr_test_05.c   1
-7    succ   decl_semantics.c   1
-8    fail   expr_test_01.c   2
-9    succ   expr_test_02.c   2
-10    succ   expr_test_03.c   3
-11    fail   expr_test_04.c   4
-12    succ   expr_test_05.c   4
-13    fail   expr_test_06.c   5
-14    succ   expr_test_07.c   5
-15    succ   expr_test_08.c   6
-16    succ   expr_test_09.c   7
-17    succ   expr_test_10.c   8
-18    succ   expr_test_11.c   9
-19    succ   for_test_01.c   10
-20    fail   func_test_01.c   11
-21    fail   func_test_02.c   11
-22    fail   func_test_03.c   11
-23    succ   func_test_04.c   11
-24    succ   func_test_05.c   12
-25    fail   func_test_06.c   13
-26    fail   init_test_01.c   13
+7    fail   decl_semantics.c   1
+8    fail   expr_test_01.c   1
+9    succ   expr_test_02.c   1
+10    succ   expr_test_03.c   2
+11    fail   expr_test_04.c   3
+12    succ   expr_test_05.c   3
+13    fail   expr_test_06.c   4
+14    succ   expr_test_07.c   4
+15    succ   expr_test_08.c   5
+16    succ   expr_test_09.c   6
+17    succ   expr_test_10.c   7
+18    succ   expr_test_11.c   8
+19    succ   for_test_01.c   9
+20    fail   func_test_01.c   10
+21    fail   func_test_02.c   10
+22    fail   func_test_03.c   10
+23    succ   func_test_04.c   10
+24    succ   func_test_05.c   11
+25    fail   func_test_06.c   12
+26    succ   init_test_01.c   12
 27    fail   lex_test.c   13
 28    succ   linkage_test_01.c   13
 29    succ   linkage_test_02.c   14
 30    succ   linkage_test_03.c   15
 31    succ   par_test_01.c   16
 32    fail   par_test_01.i   17
-33    fail   par_test_02.c   17
-34    succ   par_test_03.c   17
-35    succ   par_test_04.c   18
+33    succ   par_test_02.c   17
+34    succ   par_test_03.c   18
+35    fail   par_test_04.c   19
 36    succ   par_test_05.c   19
 37    succ   par_test_06.c   20
 38    succ   par_test_07.c   21
 39    succ   par_test_08.c   22
 40    succ   par_test_09.c   23
 41    succ   par_test_10.c   24
-42    succ   switch_test_01.c   25
-43    fail   type_test_01.c   26
-44    succ   type_test_02.c   26
-45    succ   type_test_03.c   27
-46    fail   type_test_04.c   28
-47    succ   type_test_05.c   28
-48    succ   type_test_06.c   29
-49    succ   type_test_07.c   30
-50    succ   type_test_08.c   31
-51    succ   type_test_09.c   32
-52    succ   vector_test.c   33
+42    succ   par_test_11.c   25
+43    succ   switch_test_01.c   26
+44    fail   type_test_01.c   27
+45    succ   type_test_02.c   27
+46    succ   type_test_03.c   28
+47    fail   type_test_04.c   29
+48    succ   type_test_05.c   29
+49    succ   type_test_06.c   30
+50    succ   type_test_07.c   31
+51    succ   type_test_08.c   32
+52    succ   type_test_09.c   33
+53    fail   vector_test.c   34
 success : 34
-error : 18
+error : 19
