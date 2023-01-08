@@ -8817,10 +8817,1812 @@ finish print ast tree
                     start primary expr
                     <Type>:< point , const , signed_char >
                     end primary expr
-                end add fail
-            end return stmt fail
-        end comopound stmt fail
-error
-Compile Error:(file (null): line 642: token str )
-    return str-start;
-reason:	C0068:The minus operator have an error operand type
+                <Type>:< signed_long , const , signed_char >
+                end add
+            end return stmt
+        end comopound stmt
+    start specify or qualify node
+    finish specify or qualify node
+    start declarator
+        start func
+            start specify or qualify node
+            finish specify or qualify node
+            start declarator
+            finish declarator
+        finish func
+    finish declarator
+    start compound expr
+        start declaration line:646
+            start specify or qualify node
+            finish specify or qualify node
+            start declarator
+            finish declarator
+            start postfix expr
+                start primary expr
+                <Type>:< function , point , struct >
+                end primary expr
+                start primary expr
+                <Type>:< signed_int >
+                end primary expr
+            <Type>:< point , struct >
+            end postfix expr
+        finish declaration
+        start declaration line:647
+            start specify or qualify node
+            finish specify or qualify node
+            start declarator
+            finish declarator
+        finish declaration
+        start if expr
+            start equal expr
+                start primary expr
+                <Type>:< signed_int >
+                end primary expr
+                start primary expr
+                <Type>:< signed_int >
+                end primary expr
+            <Type>:< signed_int >
+            end equal expr
+            start compound expr
+                start expr expr
+                    start assignment expr
+                        start primary expr
+                        <Type>:< point , struct >
+                        end primary expr
+                        start primary expr
+                        <Type>:< array , extern , struct >
+                        end primary expr
+                    <Type>:< point , struct >
+                    end assignment expr
+                end comopound stmt
+                start if expr
+                    start equal expr
+                        start primary expr
+                        <Type>:< signed_int >
+                        end primary expr
+                        start primary expr
+                        <Type>:< signed_int >
+                        end primary expr
+                    <Type>:< signed_int >
+                    end equal expr
+                    start compound expr
+                        start expr expr
+                            start assignment expr
+                                start primary expr
+                                <Type>:< point , struct >
+                                end primary expr
+                                start primary expr
+                                <Type>:< array , extern , struct >
+                                end primary expr
+                            <Type>:< point , struct >
+                            end assignment expr
+                        end comopound stmt
+                        start compound expr
+                            start goto expr
+                            end goto stmt
+                        end comopound stmt
+                    end if stmt
+                end if stmt
+                start declaration line:660
+                    start specify or qualify node
+                    finish specify or qualify node
+                    start declarator
+                    finish declarator
+                    start primary expr
+                    <Type>:< signed_int >
+                    end primary expr
+                finish declaration
+                start while expr
+                    start relation expr
+                        start postfix expr
+                            start primary expr
+                            <Type>:< function , static , unsigned_long >
+                            end primary expr
+                            start postfix expr
+                                start primary expr
+                                <Type>:< point , struct >
+                                end primary expr
+                                start primary expr
+                                <Type>:< signed_int >
+                                end primary expr
+                            <Type>:< array , signed_char >
+                            end postfix expr
+                        <Type>:< static , unsigned_long >
+                        end postfix expr
+                        start primary expr
+                        <Type>:< signed_int >
+                        end primary expr
+                    <Type>:< signed_int >
+                    end relation expr
+                    start compound expr
+                        start declaration line:662
+                            start specify or qualify node
+                            finish specify or qualify node
+                            start declarator
+                            finish declarator
+                            start postfix expr
+                                start primary expr
+                                <Type>:< point , struct >
+                                end primary expr
+                                start primary expr
+                                <Type>:< signed_int >
+                                end primary expr
+                            <Type>:< struct >
+                            end postfix expr
+                        finish declaration
+                        start if expr
+                            start relation expr
+                                start postfix expr
+                                    start primary expr
+                                    <Type>:< function , static , unsigned_long >
+                                    end primary expr
+                                    start postfix expr
+                                        start primary expr
+                                        <Type>:< struct >
+                                        end primary expr
+                                    <Type>:< array , signed_char >
+                                    end postfix expr
+                                <Type>:< static , unsigned_long >
+                                end postfix expr
+                                start primary expr
+                                <Type>:< signed_int >
+                                end primary expr
+                            <Type>:< signed_int >
+                            end relation expr
+                            start compound expr
+                            end comopound stmt
+                        end if stmt
+                    end comopound stmt
+                end while stmt
+                start label expr
+                    start expr expr
+                        start postfix expr
+                            start primary expr
+                            <Type>:< function , extern , signed_int >
+                            end primary expr
+                            start primary expr
+                            <Type>:< point , signed_char >
+                            end primary expr
+                        <Type>:< extern , signed_int >
+                        end postfix expr
+                    end label stmt
+                    start expr expr
+                        start postfix expr
+                            start primary expr
+                            <Type>:< function , void >
+                            end primary expr
+                            start primary expr
+                            <Type>:< point , struct >
+                            end primary expr
+                        <Type>:< void >
+                        end postfix expr
+                        start return expr
+                            start primary expr
+                            <Type>:< signed_int >
+                            end primary expr
+                        end return stmt
+                    end comopound stmt
+start print symbol table
+scope type:file_scope with child 90 and namespace 0
+    <symbol table>
+        <symbol:C0088_ERR_ALIGN_TWO_POWER ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:int_least64_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:C0030_ERR_LKA_NO_FOLLOW_EXTERN ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:freopen ns:1 linkage:2>
+            type::< function , point , extern , struct >
+                function have 3 parameters are:
+                    filename
+                    mode
+                    stream
+        <symbol:snprintf ns:1 linkage:2>
+            type::< function , extern , signed_int >
+                function have 3 parameters are:
+                    s
+                    n
+                    format
+        <symbol:uint8_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:clearerr ns:1 linkage:2>
+            type::< function , extern , void >
+                function have 1 parameters are:
+                    stream
+        <symbol:__wch ns:8 linkage:0>
+            type::< unsigned_int >
+        <symbol:int_least16_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:int8_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:iext ns:156 linkage:0>
+            type::< array , signed_char >
+                array len is: 8
+        <symbol:fopen ns:1 linkage:2>
+            type::< function , point , extern , struct >
+                function have 2 parameters are:
+                    filename
+                    mode
+        <symbol:C0023_ERR_BIT_FIELD_WIDTH_EXCEED ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:C0058_ERR_OPERAND_REGISTER ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:fseek ns:1 linkage:2>
+            type::< function , extern , signed_int >
+                function have 3 parameters are:
+                    stream
+                    offset
+                    whence
+        <symbol:C0082_ERR_FUNC_NO_ID_LIST_BUT_DEC ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:undef_f ns:156 linkage:0>
+            type::< array , signed_char >
+                array len is: 16
+        <symbol:C0070_ERR_EQUAL_OPERAND ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:sscanf_s ns:1 linkage:2>
+            type::< function , extern , signed_int >
+                function have 2 parameters are:
+                    s
+                    format
+        <symbol:C0006_ERR_NOT_IN_SYMBOL_TABLE ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:len ns:143 linkage:0>
+            type::< unsigned_long >
+        <symbol:C0029_ERR_LKA_EXTERN_FOLLOW_NO ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:C0017_ERR_TYPEDEF_OVERLAP ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:line ns:2 linkage:0>
+            type::< struct >
+                struct have 3 members are:
+                    < line_number off:0 >
+                    < start off:8 >
+                    < end off:16 >
+                total size:24 align size:8
+        <symbol:C0016_ERR_UNDECLARATION ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:m_error ns:1 linkage:2>
+            type::< function , void >
+                function have 3 parameters are:
+                    filename
+                    function
+                    reason
+        <symbol:scanf_s ns:1 linkage:2>
+            type::< function , extern , signed_int >
+                function have 1 parameters are:
+                    format
+        <symbol:pf ns:156 linkage:0>
+            type::< array , signed_char >
+                array len is: 4
+        <symbol:C0044_ERR_FUNC_DEF_DECL_TYPE ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:C0079_ERR_IN_SWITCH_LOOP ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:start ns:123 linkage:0>
+            type::< unsigned_long >
+        <symbol:x86_64_ins_raw ns:1 linkage:2>
+            type::< array , extern , struct >
+                array len is: 1200
+        <symbol:int_least8_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:po ns:156 linkage:0>
+            type::< array , signed_char >
+                array len is: 8
+        <symbol:mem_pool ns:2 linkage:0>
+            type::< struct >
+                struct have 5 members are:
+                    < name off:0 >
+                    < malloc_cnt off:8 >
+                    < free_cnt off:16 >
+                    < sys_malloc_cnt off:24 >
+                    < sys_free_cnt off:32 >
+                total size:40 align size:8
+        <symbol:_freeres_list ns:19 linkage:0>
+            type::< point , struct >
+        <symbol:setvbuf ns:1 linkage:2>
+            type::< function , extern , signed_int >
+                function have 4 parameters are:
+                    stream
+                    buf
+                    mode
+                    size
+        <symbol:ERROR_ITEM ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:_fileno ns:19 linkage:0>
+            type::< signed_int >
+        <symbol:free ns:1 linkage:2>
+            type::< function , extern , void >
+                function have 1 parameters are:
+                    ptr
+        <symbol:VECexpand ns:1 linkage:2>
+            type::< function , void >
+                function have 1 parameters are:
+                    v
+        <symbol:tmpfile ns:1 linkage:2>
+            type::< function , point , extern , struct >
+                no parameter
+        <symbol:C0037_ERR_ARR_STATIC_THREAD_WITH_VLA ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:malloc ns:1 linkage:2>
+            type::< function , point , extern , void >
+                function have 1 parameters are:
+                    size
+        <symbol:rl ns:156 linkage:0>
+            type::< array , signed_char >
+                array len is: 4
+        <symbol:C0033_ERR_CONFICT_THREAD_LOCAL ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:filename ns:125 linkage:0>
+            type::< point , signed_char >
+        <symbol:x86_ins ns:2 linkage:0>
+            type::< struct >
+                struct have 1 members are:
+                    < raw off:0 >
+                total size:8 align size:8
+        <symbol:__count ns:7 linkage:0>
+            type::< signed_int >
+        <symbol:C0036_ERR_ARR_QUAL_STATIC_IN_PARA ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:fflush ns:1 linkage:2>
+            type::< function , extern , signed_int >
+                function have 1 parameters are:
+                    stream
+        <symbol:_IO_read_base ns:19 linkage:0>
+            type::< point , signed_char >
+        <symbol:_IO_wide_data ns:2 linkage:0>
+            type::< struct >
+        <symbol:C0015_ERR_REDEFINATION ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:VEC ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:x86_32_ins_raw ns:1 linkage:2>
+            type::< array , extern , struct >
+                array len is: 1200
+        <symbol:C0007_ERR_UNEXPECTED_TOKEN ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:C0041_ERR_VM_ID ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:so ns:156 linkage:0>
+            type::< array , signed_char >
+                array len is: 4
+        <symbol:is_legal_align ns:1 linkage:0>
+            type::< function , extern  inline , bool >
+                function have 1 parameters are:
+                    align_size
+        <symbol:m_test ns:1 linkage:2>
+            type::< function , void >
+                function have 1 parameters are:
+                    test
+        <symbol:st ns:156 linkage:0>
+            type::< array , signed_char >
+                array len is: 8
+        <symbol:C0009_ERR_THREAD_LOCAL_PREFIX ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:f_values ns:156 linkage:0>
+            type::< array , signed_char >
+                array len is: 16
+        <symbol:getc ns:1 linkage:2>
+            type::< function , extern , signed_int >
+                function have 1 parameters are:
+                    stream
+        <symbol:int64_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:mcc_error ns:1 linkage:2>
+            type::< function , void >
+                function have 3 parameters are:
+                    e
+                    file_buf
+                    line
+        <symbol:C0063_ERR_OPERAND_REAL_TYPE ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:fpos_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:char32_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:int16_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:VECpopback ns:1 linkage:2>
+            type::< function , void >
+                function have 1 parameters are:
+                    v
+        <symbol:rewind ns:1 linkage:2>
+            type::< function , extern , void >
+                function have 1 parameters are:
+                    stream
+        <symbol:C0092_ERR_INIT_ENTITY ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:C0075_ERR_FOR_DECLARATION_STOR ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:free_cnt ns:136 linkage:0>
+            type::< unsigned_long_long_int >
+        <symbol:perror ns:1 linkage:2>
+            type::< function , extern , void >
+                function have 1 parameters are:
+                    s
+        <symbol:C0085_ERR_FUNC_PARA_OLD_NOT_FIND ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:sscanf ns:1 linkage:2>
+            type::< function , extern , signed_int >
+                function have 2 parameters are:
+                    s
+                    format
+        <symbol:C0035_ERR_ARR_QUAL_STATIC_OUTMOST ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:line_number ns:123 linkage:0>
+            type::< unsigned_int >
+        <symbol:mnemonic ns:156 linkage:0>
+            type::< array , signed_char >
+                array len is: 16
+        <symbol:C0091_ERR_INIT_TYPE_COMPLETE ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:VECcpy ns:1 linkage:2>
+            type::< function , void >
+                function have 2 parameters are:
+                    src
+                    dst
+        <symbol:int_fast64_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:end ns:123 linkage:0>
+            type::< unsigned_long >
+        <symbol:_IO_save_end ns:19 linkage:0>
+            type::< point , signed_char >
+        <symbol:__wchb ns:8 linkage:0>
+            type::< array , signed_char >
+                array len is: 4
+        <symbol:_vtable_offset ns:19 linkage:0>
+            type::< signed_char >
+        <symbol:W0002_WARN_UNKNOWN ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:int_fast16_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:_lock ns:19 linkage:0>
+            type::< point , void >
+        <symbol:C0069_ERR_NEED_COMPATIBLE_TYPE ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:memcpy ns:1 linkage:2>
+            type::< function , point , extern , void >
+                function have 3 parameters are:
+                    s1
+                    s2
+                    n
+        <symbol:m_test_arg_int ns:1 linkage:2>
+            type::< function , void >
+                function have 1 parameters are:
+                    item_arg
+        <symbol:mbstate_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:m_error_item ns:1 linkage:0>
+            type::< function , point , extern  inline , void >
+                function have 5 parameters are:
+                    tei
+                    ce
+                    filename
+                    error_line
+                    error_token_value
+        <symbol:C0060_ERR_OPERAND_INTEGER_TYPE ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:C0028_ERR_ENUM_RANGE ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:sprintf ns:1 linkage:2>
+            type::< function , extern , signed_int >
+                function have 2 parameters are:
+                    s
+                    format
+        <symbol:_flags2 ns:19 linkage:0>
+            type::< signed_int >
+        <symbol:C0004_ERR_NAMESPACE ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:C0011_ERR_WRONG_TYPE_SPEC ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:_markers ns:19 linkage:0>
+            type::< point , struct >
+        <symbol:vector ns:2 linkage:0>
+            type::< struct >
+                struct have 3 members are:
+                    < data off:0 >
+                    < capicity off:8 >
+                    < len off:16 >
+                total size:24 align size:8
+        <symbol:C0026_ERR_BIT_FIELD_ZERO_WITH_DECLERATOR ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:modif_f ns:156 linkage:0>
+            type::< array , signed_char >
+                array len is: 16
+        <symbol:size_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:m_free ns:1 linkage:2>
+            type::< function , void >
+                function have 1 parameters are:
+                    p
+        <symbol:C0013_ERR_ATOMIC_UNSUPPORT ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:C0054_ERR_EXPR_STRUCT_UNION_POINT_TYPE_WRONG ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:C0068_ERR_MINUS_OPERAND_TYPE ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:uint_least64_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:__value ns:7 linkage:0>
+            type::< union >
+        <symbol:C0072_ERR_ASSIGN_OPERAND ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:C0048_ERR_LVALUE_ARR_TYPE_COMPLETE ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:op1 ns:156 linkage:0>
+            type::< array , signed_char >
+                array len is: 16
+        <symbol:op2 ns:156 linkage:0>
+            type::< array , signed_char >
+                array len is: 16
+        <symbol:W0001_WARN_NONE ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:__pad5 ns:19 linkage:0>
+            type::< unsigned_long >
+        <symbol:op4 ns:156 linkage:0>
+            type::< array , signed_char >
+                array len is: 16
+        <symbol:uint_least16_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:op3 ns:156 linkage:0>
+            type::< array , signed_char >
+                array len is: 16
+        <symbol:fscanf_s ns:1 linkage:2>
+            type::< function , extern , signed_int >
+                function have 2 parameters are:
+                    stream
+                    format
+        <symbol:uint64_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:m_alloc ns:1 linkage:2>
+            type::< function , point , void >
+                function have 1 parameters are:
+                    n
+        <symbol:strtod ns:1 linkage:2>
+            type::< function , extern , double >
+                function have 2 parameters are:
+                    nptr
+                    endptr
+        <symbol:strtof ns:1 linkage:2>
+            type::< function , extern , float >
+                function have 2 parameters are:
+                    nptr
+                    endptr
+        <symbol:_G_fpos64_t ns:2 linkage:0>
+            type::< struct >
+                struct have 2 members are:
+                    < __pos off:0 >
+                    < __state off:8 >
+                total size:16 align size:8
+        <symbol:strtol ns:1 linkage:2>
+            type::< function , extern , signed_long >
+                function have 3 parameters are:
+                    nptr
+                    endptr
+                    base
+        <symbol:LINE ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:uint16_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:_IO_buf_end ns:19 linkage:0>
+            type::< point , signed_char >
+        <symbol:getchar ns:1 linkage:2>
+            type::< function , extern , signed_int >
+                no parameter
+        <symbol:C0061_ERR_OPERAND_ARTHMATIC_TYPE ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:C0090_ERR_ALIGN_DIFFERENT_DECLARATION ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:_IO_FILE ns:2 linkage:0>
+            type::< struct >
+                struct have 29 members are:
+                    < _flags off:0 >
+                    < _IO_read_ptr off:8 >
+                    < _IO_read_end off:16 >
+                    < _IO_read_base off:24 >
+                    < _IO_write_base off:32 >
+                    < _IO_write_ptr off:40 >
+                    < _IO_write_end off:48 >
+                    < _IO_buf_base off:56 >
+                    < _IO_buf_end off:64 >
+                    < _IO_save_base off:72 >
+                    < _IO_backup_base off:80 >
+                    < _IO_save_end off:88 >
+                    < _markers off:96 >
+                    < _chain off:104 >
+                    < _fileno off:112 >
+                    < _flags2 off:116 >
+                    < _old_offset off:120 >
+                    < _cur_column off:128 >
+                    < _vtable_offset off:130 >
+                    < _shortbuf off:0 >
+                    < _lock off:8 >
+                    < _offset off:16 >
+                    < _codecvt off:24 >
+                    < _wide_data off:32 >
+                    < _freeres_list off:40 >
+                    < _freeres_buf off:48 >
+                    < __pad5 off:56 >
+                    < _mode off:64 >
+                    < _unused2 off:0 >
+                total size:24 align size:8
+        <symbol:VECinsert ns:1 linkage:2>
+            type::< function , void >
+                function have 2 parameters are:
+                    v
+                    p
+        <symbol:fgetpos ns:1 linkage:2>
+            type::< function , extern , signed_int >
+                function have 2 parameters are:
+                    stream
+                    pos
+        <symbol:exit ns:1 linkage:2>
+            type::< function , extern  noreturn , void >
+                function have 1 parameters are:
+                    status
+        <symbol:data ns:143 linkage:0>
+            type::< point , point , void >
+        <symbol:C0024_ERR_BIT_FIELD_WIDTH_INT ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:uint_fast32_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:C0053_ERR_EXPR_STRUCT_UNION_DOT_TYPE_WRONG ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:C0083_ERR_FUNC_PARA_INITILIZATION ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:C0049_ERR_LVALUE_ARR_TYPE_WRONG ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:__state ns:13 linkage:0>
+            type::< struct >
+        <symbol:uintptr_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:C0005_ERR_REDEFINE ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:count ns:99 linkage:0>
+            type::< signed_int >
+        <symbol:__pos ns:10 linkage:0>
+            type::< signed_long >
+        <symbol:_IO_read_end ns:19 linkage:0>
+            type::< point , signed_char >
+        <symbol:C0094_ERR_INIT_DESIGNATOR_IDENTIFIER ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:uintmax_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:C0014_ERR_ATOMIC_TYPE_NAME ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:C0064_ERR_SIZEOF_INCOMPLETE ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:wchb ns:100 linkage:0>
+            type::< array , signed_char >
+                array len is: 4
+        <symbol:__fpos64_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:C0002_ERR_UNKNOWN ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:C0032_ERR_CONFICT_LINKAGE ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:proc ns:156 linkage:0>
+            type::< array , signed_char >
+                array len is: 8
+        <symbol:fputc ns:1 linkage:2>
+            type::< function , extern , signed_int >
+                function have 2 parameters are:
+                    c
+                    stream
+        <symbol:setbuf ns:1 linkage:2>
+            type::< function , extern , void >
+                function have 2 parameters are:
+                    stream
+                    buf
+        <symbol:__mbstate_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:C0021_ERR_STATIC_ASSERT ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:C0042_ERR_FUN_IDENTIFIER_LIST ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:fputs ns:1 linkage:2>
+            type::< function , extern , signed_int >
+                function have 2 parameters are:
+                    s
+                    stream
+        <symbol:VECshrink ns:1 linkage:2>
+            type::< function , void >
+                function have 1 parameters are:
+                    v
+        <symbol:W0006_WARN_NO_RETURN ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:C0089_ERR_ALIGN_CANNOT_SPECIFIE ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:C0084_ERR_FUNC_STORAGE ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:C0012_ERR_COMPLEX_NOT_SUPPORT ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:C0051_ERR_LVALUE_REQUIRED ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:MEM_POOL ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:compiler_error ns:2 linkage:0>
+            type::< enum >
+        <symbol:wchar_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:C0052_ERR_EXPR_TYPE_ERROR ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:_IO_write_base ns:19 linkage:0>
+            type::< point , signed_char >
+        <symbol:strtold ns:1 linkage:2>
+            type::< function , extern , long_double >
+                function have 2 parameters are:
+                    nptr
+                    endptr
+        <symbol:ptrdiff_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:ftell ns:1 linkage:2>
+            type::< function , extern , signed_long >
+                function have 1 parameters are:
+                    stream
+        <symbol:C0046_ERR_FUNC_VOID_MORE_THAN_ONE ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:mbrtoc16 ns:1 linkage:2>
+            type::< function , extern , unsigned_long >
+                function have 4 parameters are:
+                    pc16
+                    s
+                    n
+                    p
+        <symbol:C0038_ERR_ARR_SIZE_INTEGER ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:strtoll ns:1 linkage:2>
+            type::< function , extern , signed_long_long_int >
+                function have 3 parameters are:
+                    nptr
+                    endptr
+                    base
+        <symbol:__off64_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:mbtowc ns:1 linkage:2>
+            type::< function , extern , signed_int >
+                function have 3 parameters are:
+                    pwc
+                    str
+                    n
+        <symbol:tested_f ns:156 linkage:0>
+            type::< array , signed_char >
+                array len is: 16
+        <symbol:FILE ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:wch ns:100 linkage:0>
+            type::< signed_int >
+        <symbol:_freeres_buf ns:19 linkage:0>
+            type::< point , void >
+        <symbol:C0080_ERR_FUNC_RET_VOID ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:C0067_ERR_ADD_OPERAND_TYPE ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:__ctype_get_mb_cur_max ns:1 linkage:2>
+            type::< function , extern , unsigned_long >
+                no parameter
+        <symbol:_IO_backup_base ns:19 linkage:0>
+            type::< point , signed_char >
+        <symbol:C0043_ERR_FUN_RETURN_TYPE ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:c32rtomb ns:1 linkage:2>
+            type::< function , extern , unsigned_long >
+                function have 3 parameters are:
+                    s
+                    c32
+                    ps
+        <symbol:fwrite ns:1 linkage:2>
+            type::< function , extern , unsigned_long >
+                function have 4 parameters are:
+                    ptr
+                    size
+                    nmemb
+                    stream
+        <symbol:mcc_error_item ns:2 linkage:0>
+            type::< struct >
+                struct have 4 members are:
+                    < ce off:0 >
+                    < filename off:8 >
+                    < error_line off:16 >
+                    < error_token_value off:24 >
+                total size:32 align size:8
+        <symbol:C0008_ERR_TOO_MANY_STOR_SPEC ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:m ns:156 linkage:0>
+            type::< array , signed_char >
+                array len is: 2
+        <symbol:_IO_buf_base ns:19 linkage:0>
+            type::< point , signed_char >
+        <symbol:_mode ns:19 linkage:0>
+            type::< signed_int >
+        <symbol:char16_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:m_error_arg_char ns:1 linkage:2>
+            type::< function , void >
+                function have 1 parameters are:
+                    arg
+        <symbol:c16rtomb ns:1 linkage:2>
+            type::< function , extern , unsigned_long >
+                function have 3 parameters are:
+                    s
+                    c16
+                    ps
+        <symbol:_IO_lock_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:o ns:156 linkage:0>
+            type::< array , signed_char >
+                array len is: 2
+        <symbol:fscanf ns:1 linkage:2>
+            type::< function , extern , signed_int >
+                function have 2 parameters are:
+                    stream
+                    format
+        <symbol:mbrtoc32 ns:1 linkage:2>
+            type::< function , extern , unsigned_long >
+                function have 4 parameters are:
+                    pc32
+                    s
+                    n
+                    p
+        <symbol:x ns:156 linkage:0>
+            type::< array , signed_char >
+                array len is: 2
+        <symbol:value ns:99 linkage:0>
+            type::< union >
+        <symbol:printf_s ns:1 linkage:2>
+            type::< function , extern , signed_int >
+                function have 1 parameters are:
+                    format
+        <symbol:mblen ns:1 linkage:2>
+            type::< function , extern , signed_int >
+                function have 2 parameters are:
+                    s
+                    n
+        <symbol:__errno_location ns:1 linkage:2>
+            type::< function , point , extern , signed_int >
+                no parameter
+        <symbol:error_token_value ns:125 linkage:0>
+            type::< point , signed_char >
+        <symbol:uint_least8_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:C0066_ERR_CAST_CONVERT_POINT_FLOAT ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:rename ns:1 linkage:2>
+            type::< function , extern , signed_int >
+                function have 2 parameters are:
+                    old
+                    new
+        <symbol:sys_free_cnt ns:136 linkage:0>
+            type::< unsigned_long_long_int >
+        <symbol:uint_fast8_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:_IO_write_end ns:19 linkage:0>
+            type::< point , signed_char >
+        <symbol:C0062_ERR_OPERAND_SCALAR_TYPE ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:VECappend ns:1 linkage:0>
+            type::< function , extern  inline , void >
+                function have 2 parameters are:
+                    src
+                    dst
+        <symbol:_G_fpos_t ns:2 linkage:0>
+            type::< struct >
+                struct have 2 members are:
+                    < __pos off:0 >
+                    < __state off:8 >
+                total size:16 align size:8
+        <symbol:x86_ins_raw ns:2 linkage:0>
+            type::< struct >
+                struct have 22 members are:
+                    < pf off:0 >
+                    < _0F off:0 >
+                    < po off:0 >
+                    < so off:0 >
+                    < o off:0 >
+                    < proc off:0 >
+                    < st off:0 >
+                    < m off:0 >
+                    < rl off:0 >
+                    < x off:0 >
+                    < mnemonic off:0 >
+                    < op1 off:0 >
+                    < op2 off:0 >
+                    < op3 off:0 >
+                    < op4 off:0 >
+                    < iext off:0 >
+                    < tested_f off:0 >
+                    < modif_f off:0 >
+                    < def_f off:0 >
+                    < undef_f off:0 >
+                    < f_values off:0 >
+                    < description off:0 >
+                total size:0 align size:0
+        <symbol:fread ns:1 linkage:2>
+            type::< function , extern , unsigned_long >
+                function have 4 parameters are:
+                    ptr
+                    size
+                    nmemb
+                    stream
+        <symbol:__state ns:10 linkage:0>
+            type::< struct >
+        <symbol:C0074_ERR_FUNC_PARA_TYPE ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:_wide_data ns:19 linkage:0>
+            type::< point , struct >
+        <symbol:C0065_ERR_SIZEOF_FUNCTION ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:_IO_save_base ns:19 linkage:0>
+            type::< point , signed_char >
+        <symbol:int_least32_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:C0078_ERR_IN_LOOP ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:MEMInit ns:1 linkage:2>
+            type::< function , point , struct >
+                function have 1 parameters are:
+                    name
+        <symbol:capicity ns:143 linkage:0>
+            type::< unsigned_long >
+        <symbol:_old_offset ns:19 linkage:0>
+            type::< signed_long >
+        <symbol:def_f ns:156 linkage:0>
+            type::< array , signed_char >
+                array len is: 16
+        <symbol:putchar ns:1 linkage:2>
+            type::< function , extern , signed_int >
+                function have 1 parameters are:
+                    c
+        <symbol:C0031_ERR_CONFICT_TYPE ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:_0F ns:156 linkage:0>
+            type::< array , signed_char >
+                array len is: 4
+        <symbol:_flags ns:19 linkage:0>
+            type::< signed_int >
+        <symbol:x86_ins_gen ns:1 linkage:2>
+            type::< function , point , struct >
+                function have 1 parameters are:
+                    bit_len
+        <symbol:m_test_item ns:1 linkage:2>
+            type::< function , void >
+                function have 1 parameters are:
+                    test_item_name
+        <symbol:C0040_ERR_ARR_FUNCTIONS_INCOMPLETE ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:ungetc ns:1 linkage:2>
+            type::< function , extern , signed_int >
+                function have 2 parameters are:
+                    c
+                    stream
+        <symbol:C0027_ERR_ENUM_NOT_INT ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:_chain ns:19 linkage:0>
+            type::< point , struct >
+        <symbol:C0086_ERR_FUNC_PARA_OLD_NOT_DEC ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:putc ns:1 linkage:2>
+            type::< function , extern , signed_int >
+                function have 2 parameters are:
+                    c
+                    stream
+        <symbol:m_memset ns:1 linkage:0>
+            type::< function , extern  inline , void >
+                function have 3 parameters are:
+                    p
+                    value
+                    len
+        <symbol:C0022_ERR_BIT_FIELD_TYPE ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:_unused2 ns:19 linkage:0>
+            type::< array , signed_char >
+                array len is: 20
+        <symbol:VECremove ns:1 linkage:2>
+            type::< function , void >
+                function have 3 parameters are:
+                    v
+                    low
+                    high
+        <symbol:C0059_ERR_OPERAND_SHOULD_POINTER ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:scanf ns:1 linkage:2>
+            type::< function , extern , signed_int >
+                function have 1 parameters are:
+                    format
+        <symbol:description ns:156 linkage:0>
+            type::< array , signed_char >
+                array len is: 128
+        <symbol:strcmp ns:1 linkage:2>
+            type::< function , extern , signed_int >
+                function have 2 parameters are:
+                    s1
+                    s2
+        <symbol:ce ns:125 linkage:0>
+            type::< enum >
+        <symbol:puts ns:1 linkage:2>
+            type::< function , extern , signed_int >
+                function have 1 parameters are:
+                    s
+        <symbol:C0020_ERR_CONST_EXPR_RANGE ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:_codecvt ns:19 linkage:0>
+            type::< point , struct >
+        <symbol:tmpnam ns:1 linkage:2>
+            type::< function , point , extern , signed_char >
+                function have 1 parameters are:
+                    s
+        <symbol:MEMDel ns:1 linkage:2>
+            type::< function , void >
+                function have 1 parameters are:
+                    pool
+        <symbol:C0087_ERR_FUNC_PARA_OLD_STOR ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:_IO_codecvt ns:2 linkage:0>
+            type::< struct >
+        <symbol:C0018_ERR_STRUCT_INCOMPLETE_FUNCTION_TYPE ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:_offset ns:19 linkage:0>
+            type::< signed_long >
+        <symbol:feof ns:1 linkage:2>
+            type::< function , extern , signed_int >
+                function have 1 parameters are:
+                    stream
+        <symbol:__fpos_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:strtoull ns:1 linkage:2>
+            type::< function , extern , unsigned_long_long_int >
+                function have 3 parameters are:
+                    nptr
+                    endptr
+                    base
+        <symbol:_shortbuf ns:19 linkage:0>
+            type::< array , signed_char >
+                array len is: 1
+        <symbol:LINE_NUM ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:uint_fast64_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:_IO_read_ptr ns:19 linkage:0>
+            type::< point , signed_char >
+        <symbol:C0019_ERR_ILLEGAL_CONST_EXPR ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:_cur_column ns:19 linkage:0>
+            type::< unsigned_short >
+        <symbol:C0003_ERR_LEX_ERROR ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:uint_fast16_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:C0047_ERR_FUNC_PARA_STORAGE ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:C0039_ERR_ARR_SIZE_ZERO ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:C0076_ERR_IN_SWITCH ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:name ns:136 linkage:0>
+            type::< array , signed_char >
+                array len is: 8
+        <symbol:__pos ns:13 linkage:0>
+            type::< signed_long >
+        <symbol:printf ns:1 linkage:2>
+            type::< function , extern , signed_int >
+                function have 1 parameters are:
+                    format
+        <symbol:strtoul ns:1 linkage:2>
+            type::< function , extern , unsigned_long >
+                function have 3 parameters are:
+                    nptr
+                    endptr
+                    base
+        <symbol:raw ns:158 linkage:0>
+            type::< point , struct >
+        <symbol:error_line ns:125 linkage:0>
+            type::< unsigned_int >
+        <symbol:C0034_ERR_ARR_STAR_SCOPE ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:C0045_ERR_FUNC_PARA_INCOMPLETE_TYPE ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:int32_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:reg_name ns:154 linkage:0>
+            type::< point , signed_char >
+        <symbol:memset ns:1 linkage:2>
+            type::< function , point , extern , void >
+                function have 3 parameters are:
+                    s
+                    c
+                    n
+        <symbol:fclose ns:1 linkage:2>
+            type::< function , extern , signed_int >
+                function have 1 parameters are:
+                    stream
+        <symbol:__off_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:InitVEC ns:1 linkage:2>
+            type::< function , point , struct >
+                function have 1 parameters are:
+                    len
+        <symbol:C0056_ERR_EXPR_MODIFIABLE_LVALUE ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:m_test_arg_char ns:1 linkage:2>
+            type::< function , void >
+                function have 1 parameters are:
+                    item_arg
+        <symbol:x86_register ns:2 linkage:0>
+            type::< struct >
+                struct have 1 members are:
+                    < reg_name off:0 >
+                total size:8 align size:8
+        <symbol:int_fast8_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:_IO_marker ns:2 linkage:0>
+            type::< struct >
+        <symbol:m_error_arg_int ns:1 linkage:2>
+            type::< function , void >
+                function have 1 parameters are:
+                    arg
+        <symbol:C0073_ERR_FUNC_MORE_PARAMETERS ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:C0001_ERR_NONE ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:C0081_ERR_FUNC_RET_NONE_VOID ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:fprintf_s ns:1 linkage:2>
+            type::< function , extern , signed_int >
+                function have 2 parameters are:
+                    stream
+                    format
+        <symbol:int_fast32_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:fsetpos ns:1 linkage:2>
+            type::< function , extern , signed_int >
+                function have 2 parameters are:
+                    stream
+                    pos
+        <symbol:malloc_cnt ns:136 linkage:0>
+            type::< unsigned_long_long_int >
+        <symbol:C0055_ERR_EXPR_POSTFIX_DOUBLE_P_M_TYPE ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:DelVEC ns:1 linkage:2>
+            type::< function , void >
+                function have 1 parameters are:
+                    v
+        <symbol:W0004_WARN_DUPLICATE_QUAL ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:C0093_ERR_INIT_DESIGNATOR_CONST_EXPR ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:C0050_ERR_LVALUE_FUNC_TYPE_WRONG ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:C0057_ERR_OPERAND_BIT_FIELD ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:C0077_ERR_SWITCH_SAME_CASE ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:sys_malloc_cnt ns:136 linkage:0>
+            type::< unsigned_long_long_int >
+        <symbol:C0071_ERR_CONDITION_OPERAND ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:remove ns:1 linkage:2>
+            type::< function , extern , signed_int >
+                function have 1 parameters are:
+                    filename
+        <symbol:C0025_ERR_BIT_FIELD_WIDTH_NEGATIVE ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:ferror ns:1 linkage:2>
+            type::< function , extern , signed_int >
+                function have 1 parameters are:
+                    stream
+        <symbol:fgets ns:1 linkage:2>
+            type::< function , point , extern , signed_char >
+                function have 3 parameters are:
+                    s
+                    n
+                    stream
+        <symbol:_IO_write_ptr ns:19 linkage:0>
+            type::< point , signed_char >
+        <symbol:str_len ns:1 linkage:0>
+            type::< function , static , unsigned_long >
+                function have 1 parameters are:
+                    str
+        <symbol:uint_least32_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:intmax_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:W0005_WARN_IMPLICIT_DEC ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:uint32_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:C0010_ERR_NEED_MORE_TYPE_SPEC ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:W0003_WARN_NO_DECLARATION_ANY_THING ns:1 linkage:0>
+            type::< const , signed_int >
+        <symbol:fprintf ns:1 linkage:2>
+            type::< function , extern , signed_int >
+                function have 2 parameters are:
+                    stream
+                    format
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:filename ns:1 linkage:0>
+                type::< point , const , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:new ns:1 linkage:0>
+                type::< point , const , signed_char >
+            <symbol:old ns:1 linkage:0>
+                type::< point , const , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:s ns:1 linkage:0>
+                type::< point , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:stream ns:1 linkage:0>
+                type::< point , struct >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:stream ns:1 linkage:0>
+                type::< point , struct >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:mode ns:1 linkage:0>
+                type::< restrict , point , const , signed_char >
+            <symbol:filename ns:1 linkage:0>
+                type::< restrict , point , const , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:mode ns:1 linkage:0>
+                type::< restrict , point , const , signed_char >
+            <symbol:stream ns:1 linkage:0>
+                type::< restrict , point , struct >
+            <symbol:filename ns:1 linkage:0>
+                type::< restrict , point , const , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:stream ns:1 linkage:0>
+                type::< restrict , point , struct >
+            <symbol:buf ns:1 linkage:0>
+                type::< restrict , point , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:mode ns:1 linkage:0>
+                type::< signed_int >
+            <symbol:stream ns:1 linkage:0>
+                type::< restrict , point , struct >
+            <symbol:buf ns:1 linkage:0>
+                type::< restrict , point , signed_char >
+            <symbol:size ns:1 linkage:0>
+                type::< unsigned_long >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:stream ns:1 linkage:0>
+                type::< restrict , point , struct >
+            <symbol:format ns:1 linkage:0>
+                type::< restrict , point , const , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:stream ns:1 linkage:0>
+                type::< restrict , point , struct >
+            <symbol:format ns:1 linkage:0>
+                type::< restrict , point , const , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:format ns:1 linkage:0>
+                type::< restrict , point , const , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:format ns:1 linkage:0>
+                type::< restrict , point , const , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:n ns:1 linkage:0>
+                type::< unsigned_long >
+            <symbol:s ns:1 linkage:0>
+                type::< restrict , point , signed_char >
+            <symbol:format ns:1 linkage:0>
+                type::< restrict , point , const , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:s ns:1 linkage:0>
+                type::< restrict , point , signed_char >
+            <symbol:format ns:1 linkage:0>
+                type::< restrict , point , const , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:s ns:1 linkage:0>
+                type::< restrict , point , const , signed_char >
+            <symbol:format ns:1 linkage:0>
+                type::< restrict , point , const , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:n ns:1 linkage:0>
+                type::< signed_int >
+            <symbol:s ns:1 linkage:0>
+                type::< restrict , point , signed_char >
+            <symbol:stream ns:1 linkage:0>
+                type::< restrict , point , struct >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:c ns:1 linkage:0>
+                type::< signed_int >
+            <symbol:stream ns:1 linkage:0>
+                type::< point , struct >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:s ns:1 linkage:0>
+                type::< restrict , point , const , signed_char >
+            <symbol:stream ns:1 linkage:0>
+                type::< restrict , point , struct >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:stream ns:1 linkage:0>
+                type::< point , struct >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:c ns:1 linkage:0>
+                type::< signed_int >
+            <symbol:stream ns:1 linkage:0>
+                type::< point , struct >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:c ns:1 linkage:0>
+                type::< signed_int >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:s ns:1 linkage:0>
+                type::< point , const , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:c ns:1 linkage:0>
+                type::< signed_int >
+            <symbol:stream ns:1 linkage:0>
+                type::< point , struct >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:stream ns:1 linkage:0>
+                type::< restrict , point , struct >
+            <symbol:nmemb ns:1 linkage:0>
+                type::< unsigned_long >
+            <symbol:ptr ns:1 linkage:0>
+                type::< restrict , point , void >
+            <symbol:size ns:1 linkage:0>
+                type::< unsigned_long >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:stream ns:1 linkage:0>
+                type::< restrict , point , struct >
+            <symbol:nmemb ns:1 linkage:0>
+                type::< unsigned_long >
+            <symbol:ptr ns:1 linkage:0>
+                type::< restrict , point , const , void >
+            <symbol:size ns:1 linkage:0>
+                type::< unsigned_long >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:stream ns:1 linkage:0>
+                type::< restrict , point , struct >
+            <symbol:pos ns:1 linkage:0>
+                type::< restrict , point , struct >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:stream ns:1 linkage:0>
+                type::< point , struct >
+            <symbol:offset ns:1 linkage:0>
+                type::< signed_long >
+            <symbol:whence ns:1 linkage:0>
+                type::< signed_int >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:stream ns:1 linkage:0>
+                type::< point , struct >
+            <symbol:pos ns:1 linkage:0>
+                type::< point , const , struct >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:stream ns:1 linkage:0>
+                type::< point , struct >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:stream ns:1 linkage:0>
+                type::< point , struct >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:stream ns:1 linkage:0>
+                type::< point , struct >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:stream ns:1 linkage:0>
+                type::< point , struct >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:stream ns:1 linkage:0>
+                type::< point , struct >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:s ns:1 linkage:0>
+                type::< point , const , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:stream ns:1 linkage:0>
+                type::< restrict , point , struct >
+            <symbol:format ns:1 linkage:0>
+                type::< restrict , point , const , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:stream ns:1 linkage:0>
+                type::< restrict , point , struct >
+            <symbol:format ns:1 linkage:0>
+                type::< restrict , point , const , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:format ns:1 linkage:0>
+                type::< restrict , point , const , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:format ns:1 linkage:0>
+                type::< restrict , point , const , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:s ns:1 linkage:0>
+                type::< restrict , point , const , signed_char >
+            <symbol:format ns:1 linkage:0>
+                type::< restrict , point , const , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:c ns:1 linkage:0>
+                type::< signed_int >
+            <symbol:n ns:1 linkage:0>
+                type::< unsigned_long >
+            <symbol:s ns:1 linkage:0>
+                type::< point , void >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:s1 ns:1 linkage:0>
+                type::< point , const , signed_char >
+            <symbol:s2 ns:1 linkage:0>
+                type::< point , const , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:n ns:1 linkage:0>
+                type::< unsigned_long >
+            <symbol:s1 ns:1 linkage:0>
+                type::< restrict , point , void >
+            <symbol:s2 ns:1 linkage:0>
+                type::< restrict , point , const , void >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:n ns:1 linkage:0>
+                type::< unsigned_long >
+            <symbol:p ns:1 linkage:0>
+                type::< restrict , point , struct >
+            <symbol:s ns:1 linkage:0>
+                type::< restrict , point , const , signed_char >
+            <symbol:pc16 ns:1 linkage:0>
+                type::< restrict , point , unsigned_short >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:c16 ns:1 linkage:0>
+                type::< unsigned_short >
+            <symbol:s ns:1 linkage:0>
+                type::< restrict , point , signed_char >
+            <symbol:ps ns:1 linkage:0>
+                type::< restrict , point , struct >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:n ns:1 linkage:0>
+                type::< unsigned_long >
+            <symbol:p ns:1 linkage:0>
+                type::< restrict , point , struct >
+            <symbol:s ns:1 linkage:0>
+                type::< restrict , point , const , signed_char >
+            <symbol:pc32 ns:1 linkage:0>
+                type::< restrict , point , unsigned_int >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:s ns:1 linkage:0>
+                type::< restrict , point , signed_char >
+            <symbol:ps ns:1 linkage:0>
+                type::< restrict , point , struct >
+            <symbol:c32 ns:1 linkage:0>
+                type::< unsigned_int >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:size ns:1 linkage:0>
+                type::< unsigned_long >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:ptr ns:1 linkage:0>
+                type::< point , void >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:status ns:1 linkage:0>
+                type::< signed_int >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:nptr ns:1 linkage:0>
+                type::< restrict , point , const , signed_char >
+            <symbol:base ns:1 linkage:0>
+                type::< signed_int >
+            <symbol:endptr ns:1 linkage:0>
+                type::< restrict , point , point , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:nptr ns:1 linkage:0>
+                type::< restrict , point , const , signed_char >
+            <symbol:base ns:1 linkage:0>
+                type::< signed_int >
+            <symbol:endptr ns:1 linkage:0>
+                type::< restrict , point , point , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:nptr ns:1 linkage:0>
+                type::< restrict , point , const , signed_char >
+            <symbol:base ns:1 linkage:0>
+                type::< signed_int >
+            <symbol:endptr ns:1 linkage:0>
+                type::< restrict , point , point , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:nptr ns:1 linkage:0>
+                type::< restrict , point , const , signed_char >
+            <symbol:base ns:1 linkage:0>
+                type::< signed_int >
+            <symbol:endptr ns:1 linkage:0>
+                type::< restrict , point , point , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:nptr ns:1 linkage:0>
+                type::< restrict , point , const , signed_char >
+            <symbol:endptr ns:1 linkage:0>
+                type::< restrict , point , point , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:nptr ns:1 linkage:0>
+                type::< restrict , point , const , signed_char >
+            <symbol:endptr ns:1 linkage:0>
+                type::< restrict , point , point , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:nptr ns:1 linkage:0>
+                type::< restrict , point , const , signed_char >
+            <symbol:endptr ns:1 linkage:0>
+                type::< restrict , point , point , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:n ns:1 linkage:0>
+                type::< unsigned_long >
+            <symbol:pwc ns:1 linkage:0>
+                type::< point , signed_int >
+            <symbol:str ns:1 linkage:0>
+                type::< point , const , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:n ns:1 linkage:0>
+                type::< unsigned_long >
+            <symbol:s ns:1 linkage:0>
+                type::< point , const , signed_char >
+    scope type:function_scope with child 1 and namespace 0
+        <symbol table>
+        scope type:block_scope with child 3 and namespace 0
+            <symbol table>
+                <symbol:align_size ns:1 linkage:0>
+                    type::< unsigned_long >
+            scope type:block_scope with child 0 and namespace 0
+                <symbol table>
+            scope type:block_scope with child 1 and namespace 0
+                <symbol table>
+                scope type:block_scope with child 0 and namespace 0
+                    <symbol table>
+            scope type:block_scope with child 0 and namespace 0
+                <symbol table>
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:function ns:1 linkage:0>
+                type::< point , signed_char >
+            <symbol:reason ns:1 linkage:0>
+                type::< point , signed_char >
+            <symbol:filename ns:1 linkage:0>
+                type::< point , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:arg ns:1 linkage:0>
+                type::< point , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:arg ns:1 linkage:0>
+                type::< signed_int >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:test ns:1 linkage:0>
+                type::< point , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:test_item_name ns:1 linkage:0>
+                type::< point , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:item_arg ns:1 linkage:0>
+                type::< point , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:item_arg ns:1 linkage:0>
+                type::< signed_int >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:e ns:1 linkage:0>
+                type::< point , struct >
+            <symbol:file_buf ns:1 linkage:0>
+                type::< point , signed_char >
+            <symbol:line ns:1 linkage:0>
+                type::< point , struct >
+    scope type:function_scope with child 1 and namespace 0
+        <symbol table>
+        scope type:block_scope with child 0 and namespace 0
+            <symbol table>
+                <symbol:error_line ns:1 linkage:0>
+                    type::< unsigned_int >
+                <symbol:tei ns:1 linkage:0>
+                    type::< point , struct >
+                <symbol:filename ns:1 linkage:0>
+                    type::< point , signed_char >
+                <symbol:error_token_value ns:1 linkage:0>
+                    type::< point , signed_char >
+                <symbol:ce ns:1 linkage:0>
+                    type::< enum >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:name ns:1 linkage:0>
+                type::< point , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:pool ns:1 linkage:0>
+                type::< point , struct >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:n ns:1 linkage:0>
+                type::< unsigned_long >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:p ns:1 linkage:0>
+                type::< point , void >
+    scope type:function_scope with child 1 and namespace 0
+        <symbol table>
+        scope type:block_scope with child 0 and namespace 0
+            <symbol table>
+                <symbol:value ns:1 linkage:0>
+                    type::< signed_char >
+                <symbol:p ns:1 linkage:0>
+                    type::< point , void >
+                <symbol:len ns:1 linkage:0>
+                    type::< unsigned_long >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:len ns:1 linkage:0>
+                type::< unsigned_long >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:p ns:1 linkage:0>
+                type::< point , void >
+            <symbol:v ns:1 linkage:0>
+                type::< point , struct >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:low ns:1 linkage:0>
+                type::< unsigned_long >
+            <symbol:high ns:1 linkage:0>
+                type::< unsigned_long >
+            <symbol:v ns:1 linkage:0>
+                type::< point , struct >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:v ns:1 linkage:0>
+                type::< point , struct >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:v ns:1 linkage:0>
+                type::< point , struct >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:v ns:1 linkage:0>
+                type::< point , struct >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:dst ns:1 linkage:0>
+                type::< point , point , struct >
+            <symbol:src ns:1 linkage:0>
+                type::< point , struct >
+    scope type:function_scope with child 1 and namespace 0
+        <symbol table>
+        scope type:block_scope with child 2 and namespace 0
+            <symbol table>
+                <symbol:dst ns:1 linkage:0>
+                    type::< point , struct >
+                <symbol:src ns:1 linkage:0>
+                    type::< point , struct >
+            scope type:block_scope with child 0 and namespace 0
+                <symbol table>
+            scope type:block_scope with child 1 and namespace 0
+                <symbol table>
+                    <symbol:i ns:1 linkage:0>
+                        type::< unsigned_long >
+                scope type:block_scope with child 0 and namespace 0
+                    <symbol table>
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:v ns:1 linkage:0>
+                type::< point , struct >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:bit_len ns:1 linkage:0>
+                type::< signed_int >
+    scope type:function_scope with child 1 and namespace 0
+        <symbol table>
+        scope type:block_scope with child 2 and namespace 0
+            <symbol table>
+                <symbol:start ns:1 linkage:0>
+                    type::< point , const , signed_char >
+                <symbol:str ns:1 linkage:0>
+                    type::< point , const , signed_char >
+            scope type:block_scope with child 1 and namespace 0
+                <symbol table>
+                scope type:block_scope with child 0 and namespace 0
+                    <symbol table>
+            scope type:block_scope with child 1 and namespace 0
+                <symbol table>
+                scope type:block_scope with child 0 and namespace 0
+                    <symbol table>
+    scope type:function_scope with child 1 and namespace 0
+        <symbol table>
+            <symbol:error ns:0 linkage:0>
+                type::< label >
+        scope type:block_scope with child 2 and namespace 0
+            <symbol table>
+                <symbol:i ns:1 linkage:0>
+                    type::< signed_int >
+                <symbol:_ins_raw ns:1 linkage:0>
+                    type::< point , struct >
+                <symbol:res ns:1 linkage:0>
+                    type::< point , struct >
+                <symbol:bit_len ns:1 linkage:0>
+                    type::< signed_int >
+            scope type:block_scope with child 2 and namespace 0
+                <symbol table>
+                scope type:block_scope with child 0 and namespace 0
+                    <symbol table>
+                scope type:block_scope with child 2 and namespace 0
+                    <symbol table>
+                    scope type:block_scope with child 0 and namespace 0
+                        <symbol table>
+                    scope type:block_scope with child 0 and namespace 0
+                        <symbol table>
+            scope type:block_scope with child 1 and namespace 0
+                <symbol table>
+                scope type:block_scope with child 1 and namespace 0
+                    <symbol table>
+                        <symbol:tmp ns:1 linkage:0>
+                            type::< struct >
+                    scope type:block_scope with child 1 and namespace 0
+                        <symbol table>
+                        scope type:block_scope with child 0 and namespace 0
+                            <symbol table>
+end print symbol table
+start print ir
+start print ir
+not decided token ce
+not decided token filename
+not decided token error_line
+not decided token error_token_value
+not decided token len
+not decided token len
+not decided token data
+not decided token error
+not decided token mnemonic
+not decided token iext
+not decided token error
+test pass!

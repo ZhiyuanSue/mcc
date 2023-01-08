@@ -1188,6 +1188,7 @@ bool add_expr_value(AST_BASE* ast_node)
                     C_ERROR(C0069_ERR_NEED_COMPATIBLE_TYPE,ast_node);
                     goto error;
                 }
+                legal=true;
             }
             else{
                 const_expr=false;
@@ -2112,7 +2113,7 @@ bool postfix_expr_value(AST_BASE* ast_node)
             suffix_start_index+=3;
             is_lvalue=true;
         }
-        else if(tmp_ast->type==left_parenthesis){   /*TODO:Function case:*/
+        else if(tmp_ast->type==left_parenthesis){   /*Function case:*/
             VEC* parameters=InitVEC(DEFAULT_CAPICITY);
             VEC* parameter_type_vecs=InitVEC(DEFAULT_CAPICITY);
             /*get all the parameters*/

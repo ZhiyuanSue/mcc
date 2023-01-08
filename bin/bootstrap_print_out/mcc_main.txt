@@ -29996,7 +29996,7 @@ scope type:file_scope with child 272 and namespace 0
                 type::< point , signed_char >
     scope type:function_scope with child 1 and namespace 0
         <symbol table>
-            <symbol:succ_end ns:0 linkage:29872368>
+            <symbol:succ_end ns:0 linkage:65728560>
                 type::< label >
             <symbol:error ns:0 linkage:0>
                 type::< label >
