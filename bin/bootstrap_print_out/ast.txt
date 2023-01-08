@@ -12218,7 +12218,6 @@ finish print ast tree
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:31
@@ -12227,7 +12226,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:32
@@ -12236,7 +12234,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:34
@@ -12247,7 +12244,6 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                     start struct union
@@ -12256,7 +12252,6 @@ identifier
                         start declarator
 direct_dec_index 0
 identifier
-3
                         finish declarator
                         start specify or qualify node
                         finish specify or qualify node
@@ -12269,21 +12264,18 @@ direct_dec_index 3
                             finish array
 direct_dec_index 0
 identifier
-3
                         finish declarator
                     finish struct union
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:44
@@ -12294,21 +12286,18 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:49
@@ -12317,7 +12306,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:51
@@ -12328,21 +12316,18 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:57
@@ -12359,7 +12344,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:60
@@ -12368,7 +12352,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:61
@@ -12379,133 +12362,114 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -12518,63 +12482,54 @@ direct_dec_index 3
                     finish array
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -12618,7 +12573,6 @@ direct_dec_index 3
                     finish array
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish struct union
         finish specify or qualify node
@@ -12634,12 +12588,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:107
@@ -12653,19 +12605,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:109
@@ -12679,7 +12628,6 @@ direct_dec_index 3
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:111
@@ -12693,12 +12641,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:113
@@ -12712,12 +12658,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:115
@@ -12731,12 +12675,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:117
@@ -12752,7 +12694,6 @@ direct_dec_index 3
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -12761,12 +12702,10 @@ identifier
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:120
@@ -12782,7 +12721,6 @@ direct_dec_index 3
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -12791,7 +12729,6 @@ identifier
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -12800,12 +12737,10 @@ identifier
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:124
@@ -12821,7 +12756,6 @@ direct_dec_index 3
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -12830,12 +12764,10 @@ identifier
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:127
@@ -12851,7 +12783,6 @@ direct_dec_index 3
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -12860,26 +12791,22 @@ identifier
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:131
@@ -12895,7 +12822,6 @@ direct_dec_index 3
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -12904,12 +12830,10 @@ identifier
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:134
@@ -12925,7 +12849,6 @@ direct_dec_index 3
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -12934,12 +12857,10 @@ identifier
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:137
@@ -12955,12 +12876,10 @@ direct_dec_index 3
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:139
@@ -12976,12 +12895,10 @@ direct_dec_index 3
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:141
@@ -12997,14 +12914,12 @@ direct_dec_index 3
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -13013,12 +12928,10 @@ identifier
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:144
@@ -13034,7 +12947,6 @@ direct_dec_index 3
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -13043,12 +12955,10 @@ identifier
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:147
@@ -13064,7 +12974,6 @@ direct_dec_index 3
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -13073,12 +12982,10 @@ identifier
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:150
@@ -13094,14 +13001,12 @@ direct_dec_index 3
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -13110,12 +13015,10 @@ identifier
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:153
@@ -13129,19 +13032,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:155
@@ -13157,7 +13057,6 @@ direct_dec_index 3
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -13166,12 +13065,10 @@ identifier
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:158
@@ -13185,12 +13082,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:160
@@ -13204,7 +13099,6 @@ direct_dec_index 3
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:162
@@ -13218,19 +13112,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:164
@@ -13244,12 +13135,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:166
@@ -13263,12 +13152,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:168
@@ -13282,19 +13169,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:170
@@ -13310,21 +13194,18 @@ direct_dec_index 3
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -13333,12 +13214,10 @@ identifier
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:174
@@ -13354,21 +13233,18 @@ direct_dec_index 3
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -13377,12 +13253,10 @@ identifier
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:178
@@ -13398,7 +13272,6 @@ direct_dec_index 3
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -13407,12 +13280,10 @@ identifier
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:181
@@ -13426,26 +13297,22 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:183
@@ -13459,19 +13326,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:185
@@ -13485,12 +13349,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:187
@@ -13504,12 +13366,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:189
@@ -13523,12 +13383,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:191
@@ -13542,12 +13400,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:193
@@ -13561,12 +13417,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:195
@@ -13580,12 +13434,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:197
@@ -13601,7 +13453,6 @@ direct_dec_index 3
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -13610,12 +13461,10 @@ identifier
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:200
@@ -13631,7 +13480,6 @@ direct_dec_index 3
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -13640,12 +13488,10 @@ identifier
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:203
@@ -13661,12 +13507,10 @@ direct_dec_index 3
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:205
@@ -13682,12 +13526,10 @@ direct_dec_index 3
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:207
@@ -13703,7 +13545,6 @@ direct_dec_index 3
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -13712,12 +13553,10 @@ identifier
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:213
@@ -13726,7 +13565,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:215
@@ -13740,26 +13578,22 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:217
@@ -13773,19 +13607,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:219
@@ -13801,7 +13632,6 @@ direct_dec_index 3
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -13810,19 +13640,16 @@ identifier
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:232
@@ -13836,7 +13663,6 @@ direct_dec_index 3
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:241
@@ -13845,7 +13671,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:242
@@ -13854,7 +13679,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:243
@@ -13863,7 +13687,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:244
@@ -13872,7 +13695,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:245
@@ -13881,7 +13703,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:246
@@ -13890,7 +13711,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:247
@@ -13899,7 +13719,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:248
@@ -13908,7 +13727,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:250
@@ -13917,7 +13735,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:251
@@ -13926,7 +13743,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:252
@@ -13935,7 +13751,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:253
@@ -13944,7 +13759,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:254
@@ -13953,7 +13767,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:255
@@ -13962,7 +13775,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:256
@@ -13971,7 +13783,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:257
@@ -13980,7 +13791,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:259
@@ -13989,7 +13799,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:260
@@ -13998,7 +13807,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:261
@@ -14007,7 +13815,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:262
@@ -14016,7 +13823,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:263
@@ -14025,7 +13831,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:264
@@ -14034,7 +13839,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:265
@@ -14043,7 +13847,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:266
@@ -14052,7 +13855,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:268
@@ -14061,7 +13863,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:269
@@ -14070,7 +13871,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:271
@@ -14079,7 +13879,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:275
@@ -14088,7 +13887,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:276
@@ -14097,7 +13895,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:277
@@ -14106,7 +13903,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:283
@@ -14115,7 +13911,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:285
@@ -14126,7 +13921,6 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                     start struct union
@@ -14135,7 +13929,6 @@ identifier
                         start declarator
 direct_dec_index 0
 identifier
-3
                         finish declarator
                         start specify or qualify node
                         finish specify or qualify node
@@ -14148,21 +13941,18 @@ direct_dec_index 3
                             finish array
 direct_dec_index 0
 identifier
-3
                         finish declarator
                     finish struct union
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:298
@@ -14178,7 +13968,6 @@ direct_dec_index 3
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -14187,14 +13976,12 @@ identifier
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -14203,12 +13990,10 @@ identifier
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:303
@@ -14224,14 +14009,12 @@ direct_dec_index 3
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -14240,12 +14023,10 @@ identifier
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:308
@@ -14261,7 +14042,6 @@ direct_dec_index 3
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -14270,14 +14050,12 @@ identifier
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -14286,12 +14064,10 @@ identifier
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:313
@@ -14307,14 +14083,12 @@ direct_dec_index 3
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -14323,12 +14097,10 @@ identifier
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:320
@@ -14342,7 +14114,6 @@ direct_dec_index 3
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:322
@@ -14351,7 +14122,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:324
@@ -14365,12 +14135,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:326
@@ -14384,12 +14152,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:328
@@ -14403,12 +14169,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:330
@@ -14424,7 +14188,6 @@ direct_dec_index 3
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -14433,19 +14196,16 @@ identifier
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:335
@@ -14461,7 +14221,6 @@ direct_dec_index 3
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -14470,19 +14229,16 @@ identifier
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:340
@@ -14498,7 +14254,6 @@ direct_dec_index 3
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -14507,19 +14262,16 @@ identifier
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:345
@@ -14535,7 +14287,6 @@ direct_dec_index 3
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -14544,19 +14295,16 @@ identifier
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:350
@@ -14572,7 +14320,6 @@ direct_dec_index 3
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -14581,12 +14328,10 @@ identifier
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:353
@@ -14602,7 +14347,6 @@ direct_dec_index 3
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -14611,12 +14355,10 @@ identifier
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:356
@@ -14632,7 +14374,6 @@ direct_dec_index 3
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -14641,12 +14382,10 @@ identifier
                     finish specify or qualify node
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:359
@@ -14660,26 +14399,22 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:361
@@ -14693,19 +14428,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start specify or qualify node
@@ -14718,12 +14450,10 @@ direct_dec_index 3
             start declarator
 direct_dec_index 0
 identifier
-3
             finish declarator
         finish func
 direct_dec_index 0
 identifier
-3
     finish declarator
     start compound expr
         start if expr
@@ -14811,7 +14541,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:511
@@ -14822,28 +14551,24 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:516
@@ -14854,35 +14579,30 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:523
@@ -14899,7 +14619,6 @@ direct_dec_index 2
                     finish array
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -14909,7 +14628,6 @@ direct_dec_index 2
                     finish array
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -14919,12 +14637,10 @@ direct_dec_index 2
                     finish array
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:524
@@ -14938,12 +14654,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:525
@@ -14957,12 +14671,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:527
@@ -14979,12 +14691,10 @@ direct_dec_index 2
                     finish array
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:528
@@ -15001,12 +14711,10 @@ direct_dec_index 2
                     finish array
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:529
@@ -15020,12 +14728,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:530
@@ -15039,12 +14745,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:532
@@ -15058,26 +14762,22 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start specify or qualify node
@@ -15090,40 +14790,34 @@ direct_dec_index 3
             start declarator
 direct_dec_index 0
 identifier
-3
             finish declarator
             start specify or qualify node
             finish specify or qualify node
             start declarator
 direct_dec_index 0
 identifier
-3
             finish declarator
             start specify or qualify node
             finish specify or qualify node
             start declarator
 direct_dec_index 0
 identifier
-3
             finish declarator
             start specify or qualify node
             finish specify or qualify node
             start declarator
 direct_dec_index 0
 identifier
-3
             finish declarator
             start specify or qualify node
             finish specify or qualify node
             start declarator
 direct_dec_index 0
 identifier
-3
             finish declarator
         finish func
 direct_dec_index 0
 identifier
-3
     finish declarator
     start compound expr
         start expr expr
@@ -15203,42 +14897,36 @@ direct_dec_index 3
                     finish array
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:560
@@ -15255,12 +14943,10 @@ direct_dec_index 2
                     finish array
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:566
@@ -15274,12 +14960,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:569
@@ -15293,12 +14977,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:570
@@ -15312,12 +14994,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start specify or qualify node
@@ -15330,26 +15010,22 @@ direct_dec_index 3
             start declarator
 direct_dec_index 0
 identifier
-3
             finish declarator
             start specify or qualify node
             finish specify or qualify node
             start declarator
 direct_dec_index 0
 identifier
-3
             finish declarator
             start specify or qualify node
             finish specify or qualify node
             start declarator
 direct_dec_index 0
 identifier
-3
             finish declarator
         finish func
 direct_dec_index 0
 identifier
-3
     finish declarator
     start compound expr
         start expr expr
@@ -15375,7 +15051,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:584
@@ -15389,7 +15064,6 @@ direct_dec_index 3
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:585
@@ -15403,7 +15077,6 @@ direct_dec_index 3
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:589
@@ -15414,35 +15087,30 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:597
@@ -15453,21 +15121,18 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start specify or qualify node
@@ -15480,19 +15145,16 @@ direct_dec_index 3
             start declarator
 direct_dec_index 0
 identifier
-3
             finish declarator
             start specify or qualify node
             finish specify or qualify node
             start declarator
 direct_dec_index 0
 identifier
-3
             finish declarator
         finish func
 direct_dec_index 0
 identifier
-3
     finish declarator
     start compound expr
         start return expr
@@ -15524,7 +15186,6 @@ direct_dec_index 3
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:605
@@ -15538,7 +15199,6 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -15550,28 +15210,23 @@ direct_dec_index 5
                         start declarator
 direct_dec_index 0
 identifier
-3
                         finish declarator
                         start specify or qualify node
                         finish specify or qualify node
                         start declarator
 direct_dec_index 0
 identifier
-3
                         finish declarator
                     finish func
 direct_dec_index 2
                     start declarator
 direct_dec_index 0
 identifier
-3
                     finish declarator
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:606
@@ -15585,14 +15240,12 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -15604,28 +15257,23 @@ direct_dec_index 5
                         start declarator
 direct_dec_index 0
 identifier
-3
                         finish declarator
                         start specify or qualify node
                         finish specify or qualify node
                         start declarator
 direct_dec_index 0
 identifier
-3
                         finish declarator
                     finish func
 direct_dec_index 2
                     start declarator
 direct_dec_index 0
 identifier
-3
                     finish declarator
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:607
@@ -15639,14 +15287,12 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -15658,42 +15304,35 @@ direct_dec_index 5
                         start declarator
 direct_dec_index 0
 identifier
-3
                         finish declarator
                         start specify or qualify node
                         finish specify or qualify node
                         start declarator
 direct_dec_index 0
 identifier
-3
                         finish declarator
                     finish func
 direct_dec_index 2
                     start declarator
 direct_dec_index 0
 identifier
-3
                     finish declarator
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:608
@@ -15707,12 +15346,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:610
@@ -15726,12 +15363,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:611
@@ -15745,7 +15380,6 @@ direct_dec_index 3
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:619
@@ -15756,28 +15390,24 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:629
@@ -15791,12 +15421,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:630
@@ -15810,19 +15438,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:631
@@ -15836,26 +15461,22 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:632
@@ -15869,12 +15490,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:633
@@ -15888,12 +15507,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:634
@@ -15907,12 +15524,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:635
@@ -15926,19 +15541,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start specify or qualify node
@@ -15951,19 +15563,16 @@ direct_dec_index 3
             start declarator
 direct_dec_index 0
 identifier
-3
             finish declarator
             start specify or qualify node
             finish specify or qualify node
             start declarator
 direct_dec_index 0
 identifier
-3
             finish declarator
         finish func
 direct_dec_index 0
 identifier
-3
     finish declarator
     start compound expr
         start if expr
@@ -15992,7 +15601,6 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start primary expr
                 <Type>:< signed_int >
@@ -16095,12 +15703,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:648
@@ -16123,28 +15729,24 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                     start struct union
@@ -16155,28 +15757,24 @@ identifier
                                 start declarator
 direct_dec_index 0
 identifier
-3
                                 finish declarator
                                 start specify or qualify node
                                 finish specify or qualify node
                                 start declarator
 direct_dec_index 0
 identifier
-3
                                 finish declarator
                                 start specify or qualify node
                                 finish specify or qualify node
                                 start declarator
 direct_dec_index 0
 identifier
-3
                                 finish declarator
                                 start specify or qualify node
                                 finish specify or qualify node
                                 start declarator
 direct_dec_index 0
 identifier
-3
                                 finish declarator
                             finish struct union
                         finish specify or qualify node
@@ -16187,14 +15785,12 @@ identifier
                                 start declarator
 direct_dec_index 0
 identifier
-3
                                 finish declarator
                                 start specify or qualify node
                                 finish specify or qualify node
                                 start declarator
 direct_dec_index 0
 identifier
-3
                                 finish declarator
                             finish struct union
                         finish specify or qualify node
@@ -16205,7 +15801,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:711
@@ -16216,98 +15811,84 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:723
@@ -16318,56 +15899,48 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:733
@@ -16378,56 +15951,48 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                     start struct union
@@ -16436,14 +16001,12 @@ identifier
                         start declarator
 direct_dec_index 0
 identifier
-3
                         finish declarator
                         start specify or qualify node
                         finish specify or qualify node
                         start declarator
 direct_dec_index 0
 identifier
-3
                         finish declarator
                     finish struct union
                 finish specify or qualify node
@@ -16452,14 +16015,12 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:746
@@ -16470,63 +16031,54 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:754
@@ -16537,77 +16089,66 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:763
@@ -16618,21 +16159,18 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:768
@@ -16643,56 +16181,48 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:775
@@ -16703,98 +16233,84 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -16807,7 +16323,6 @@ direct_dec_index 3
                     finish array
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -16820,7 +16335,6 @@ direct_dec_index 3
                     finish array
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -16833,21 +16347,18 @@ direct_dec_index 3
                     finish array
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:796
@@ -16858,21 +16369,18 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:801
@@ -16886,7 +16394,6 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -16899,7 +16406,6 @@ direct_dec_index 3
                     finish array
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -16912,19 +16418,16 @@ direct_dec_index 3
                     finish array
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:807
@@ -16938,12 +16441,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:810
@@ -16957,12 +16458,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:811
@@ -16976,12 +16475,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:813
@@ -16995,12 +16492,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:817
@@ -17014,19 +16509,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:818
@@ -17040,19 +16532,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:819
@@ -17066,12 +16555,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:820
@@ -17085,12 +16572,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:821
@@ -17104,19 +16589,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:822
@@ -17130,12 +16612,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:823
@@ -17149,12 +16629,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:824
@@ -17168,12 +16646,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:825
@@ -17187,19 +16663,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:826
@@ -17213,12 +16686,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:827
@@ -17232,12 +16703,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:828
@@ -17251,19 +16720,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:829
@@ -17277,12 +16743,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:831
@@ -17296,19 +16760,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:832
@@ -17322,19 +16783,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:833
@@ -17348,19 +16806,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:834
@@ -17374,19 +16829,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:835
@@ -17400,19 +16852,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:837
@@ -17426,12 +16875,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:838
@@ -17445,19 +16892,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:839
@@ -17471,26 +16915,22 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:840
@@ -17504,19 +16944,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:841
@@ -17530,12 +16967,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:842
@@ -17549,12 +16984,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:845
@@ -17568,12 +17001,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:846
@@ -17587,19 +17018,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:847
@@ -17613,19 +17041,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:850
@@ -17639,12 +17064,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:854
@@ -17689,7 +17112,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:870
@@ -17700,70 +17122,60 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish struct union
         finish specify or qualify node
@@ -17776,42 +17188,36 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start primary expr
                 <Type>:< signed_int >
@@ -17821,63 +17227,54 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:895
@@ -17888,21 +17285,18 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:899
@@ -17913,21 +17307,18 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:903
@@ -17941,19 +17332,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:904
@@ -17967,19 +17355,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:905
@@ -17993,26 +17378,22 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:906
@@ -18026,26 +17407,22 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:907
@@ -18059,26 +17436,22 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:908
@@ -18092,12 +17465,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:909
@@ -18111,12 +17482,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:910
@@ -18130,12 +17499,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:911
@@ -18149,19 +17516,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:912
@@ -18175,19 +17539,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:913
@@ -18201,19 +17562,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start specify or qualify node
@@ -18226,19 +17584,16 @@ direct_dec_index 3
             start declarator
 direct_dec_index 0
 identifier
-3
             finish declarator
             start specify or qualify node
             finish specify or qualify node
             start declarator
 direct_dec_index 0
 identifier
-3
             finish declarator
         finish func
 direct_dec_index 0
 identifier
-3
     finish declarator
     start compound expr
         start if expr
@@ -18474,7 +17829,6 @@ direct_dec_index 3
             finish array
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:1024
@@ -18485,21 +17839,18 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:1029
@@ -18510,21 +17861,18 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:1035
@@ -18535,35 +17883,30 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:1042
@@ -18577,19 +17920,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:1043
@@ -18603,12 +17943,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:1044
@@ -18622,19 +17960,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:1050
@@ -18648,26 +17983,22 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:1051
@@ -18681,33 +18012,28 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:1053
@@ -18721,7 +18047,6 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -18740,12 +18065,10 @@ direct_dec_index 3
                     finish array
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:1054
@@ -18759,14 +18082,12 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
@@ -18785,12 +18106,10 @@ direct_dec_index 3
                     finish array
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:1056
@@ -18804,12 +18123,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:1057
@@ -18823,19 +18140,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:1062
@@ -18844,7 +18158,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:1063
@@ -18855,49 +18168,42 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish struct union
         finish specify or qualify node
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:1071
@@ -18906,7 +18212,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:1072
@@ -18920,12 +18225,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:1074
@@ -18939,12 +18242,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:1075
@@ -18958,19 +18259,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:1076
@@ -18984,19 +18282,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:1077
@@ -19010,19 +18305,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:1078
@@ -19036,19 +18328,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:1079
@@ -19062,19 +18351,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:1080
@@ -19088,19 +18374,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:1081
@@ -19114,19 +18397,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:1082
@@ -19140,19 +18420,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:1083
@@ -19166,19 +18443,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:1091
@@ -19189,28 +18463,24 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start primary expr
                 <Type>:< signed_int >
@@ -19220,7 +18490,6 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start primary expr
                 <Type>:< signed_int >
@@ -19230,7 +18499,6 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start primary expr
                 <Type>:< signed_int >
@@ -19240,7 +18508,6 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start primary expr
                 <Type>:< signed_int >
@@ -19250,7 +18517,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:1097
@@ -19259,7 +18525,6 @@ identifier
         start declarator
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:1098
@@ -19270,56 +18535,48 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish struct union
         finish specify or qualify node
@@ -19334,47 +18591,40 @@ direct_dec_index 3
             start declarator
 direct_dec_index 0
 identifier
-3
             finish declarator
             start specify or qualify node
             finish specify or qualify node
             start declarator
 direct_dec_index 0
 identifier
-3
             finish declarator
             start specify or qualify node
             finish specify or qualify node
             start declarator
 direct_dec_index 0
 identifier
-3
             finish declarator
             start specify or qualify node
             finish specify or qualify node
             start declarator
 direct_dec_index 0
 identifier
-3
             finish declarator
             start specify or qualify node
             finish specify or qualify node
             start declarator
 direct_dec_index 0
 identifier
-3
             finish declarator
             start specify or qualify node
             finish specify or qualify node
             start declarator
 direct_dec_index 0
 identifier
-3
             finish declarator
         finish func
 direct_dec_index 0
 identifier
-3
     finish declarator
     start compound expr
         start declaration line:1110
@@ -19383,7 +18633,6 @@ identifier
             start declarator
 direct_dec_index 0
 identifier
-3
             finish declarator
             start cast
                 start specify or qualify node
@@ -19527,12 +18776,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:1122
@@ -19546,19 +18793,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:1123
@@ -19572,19 +18816,16 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start declaration line:1124
@@ -19598,12 +18839,10 @@ direct_dec_index 3
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
             finish func
 direct_dec_index 0
 identifier
-3
         finish declarator
     finish declaration
     start specify or qualify node
@@ -19616,12 +18855,10 @@ direct_dec_index 3
             start declarator
 direct_dec_index 0
 identifier
-3
             finish declarator
         finish func
 direct_dec_index 0
 identifier
-3
     finish declarator
     start compound expr
         start if expr
@@ -19652,7 +18889,6 @@ identifier
                         start declarator
 direct_dec_index 0
 identifier
-3
                         finish declarator
                         start primary expr
                         <Type>:< signed_int >
@@ -19686,7 +18922,6 @@ identifier
                             start declarator
 direct_dec_index 0
 identifier
-3
                             finish declarator
                             start primary expr
                                 start condition expr
@@ -19791,19 +19026,16 @@ direct_dec_index 3
             start declarator
 direct_dec_index 0
 identifier
-3
             finish declarator
             start specify or qualify node
             finish specify or qualify node
             start declarator
 direct_dec_index 0
 identifier
-3
             finish declarator
         finish func
 direct_dec_index 0
 identifier
-3
     finish declarator
     start compound expr
         start if expr
@@ -19841,7 +19073,6 @@ identifier
                 start declarator
 direct_dec_index 0
 identifier
-3
                 finish declarator
                 start primary expr
                 <Type>:< signed_int >
@@ -19994,7 +19225,6 @@ identifier
                                     start declarator
 direct_dec_index 0
 identifier
-3
                                     finish declarator
                                     start primary expr
                                     <Type>:< signed_int >

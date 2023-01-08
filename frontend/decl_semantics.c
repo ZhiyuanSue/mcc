@@ -297,18 +297,21 @@ bool declarator_type(AST_BASE* declarator_node,
                         {
                             M_TYPE* tmp_align_type=Type_VEC_get_spec_other(type_vec);
                             M_TYPE* tmp_si_align_type=Type_VEC_get_spec_other(tmpsi->type_vec);
-                            if(tmp_si_align_type->align_spec>0
-                            &&tmp_align_type->align_spec!=0
-                            &&tmp_align_type->align_spec!=tmp_si_align_type->align_spec)
+                            if(tmp_align_type&&tmp_si_align_type)
                             {
-                                C_ERROR(C0090_ERR_ALIGN_DIFFERENT_DECLARATION,direct_dec_node);
-                                return false;
-                            }
-                            else if(tmp_si_align_type->align_spec==0
-                            &&tmp_align_type->align_spec!=0)
-                            {
-                                C_ERROR(C0090_ERR_ALIGN_DIFFERENT_DECLARATION,direct_dec_node);
-                                return false;
+                                if(tmp_si_align_type->align_spec>0
+                                &&tmp_align_type->align_spec!=0
+                                &&tmp_align_type->align_spec!=tmp_si_align_type->align_spec)
+                                {
+                                    C_ERROR(C0090_ERR_ALIGN_DIFFERENT_DECLARATION,direct_dec_node);
+                                    return false;
+                                }
+                                else if(tmp_si_align_type->align_spec==0
+                                &&tmp_align_type->align_spec!=0)
+                                {
+                                    C_ERROR(C0090_ERR_ALIGN_DIFFERENT_DECLARATION,direct_dec_node);
+                                    return false;
+                                }
                             }
                             tmpsi->type_vec=composite_types(tmpsi->type_vec,type_vec,true);
                         }
@@ -599,7 +602,6 @@ bool declarator_type(AST_BASE* declarator_node,
     /*TODO:check the array and function defination,and set the datas like function name*/
     /*TODO:for function type,no linkage means external linkage*/
     
-    printf("3\n");
     m_free(tei);
 #ifdef _TEST_SEMANTICS_
     for(size_t i=0;i<semantics_level;++i)
