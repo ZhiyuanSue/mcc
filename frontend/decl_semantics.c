@@ -224,12 +224,10 @@ bool declarator_type(AST_BASE* declarator_node,
     SYM* curr_table=declarator_node->symbol_table;
     enum scope_type curr_scope=curr_table->sp_type;
     while(direct_dec_index>=0){
-        printf("direct_dec_index %d\n",direct_dec_index);
         direct_dec_begin=direct_dec_end=direct_dec_index;
         int function_array=-1;    /*0-array,1-funciton*/
         enum rule_type_enum dec_end_type=AST_GET_CHILD(direct_dec_node,direct_dec_end)->type;
         if(dec_end_type==identifier){
-            printf("identifier\n");
             (*declarator_cnt)++;
             TOKEN* tmp_token=AST_GET_CHILD(direct_dec_node,direct_dec_end)->token;
             *declarator_char_name=tmp_token->value;

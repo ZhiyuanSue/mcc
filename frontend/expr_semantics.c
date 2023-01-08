@@ -1193,9 +1193,9 @@ bool add_expr_value(AST_BASE* ast_node)
                 const_expr=false;
                 pointer_add=true;
                 VEC* tmpv=NULL;
-                if(IS_INT_TYPE(add_base_type->typ_category)&&mul_base_type->typ_category==TP_POINT)
+                if(IS_INT_TYPE(mul_base_type->typ_category)&&add_base_type->typ_category==TP_POINT)
                 {
-                    tmpv=Type_VEC_get_Pointer_TO(mul_expression_node->expr_attribute->type_vec,true);
+                    tmpv=Type_VEC_get_Pointer_TO(tmp_type_vec,true);
                 }
                 M_TYPE* tmpt=Type_VEC_get_actual_base_type(tmpv);
                 if(tmpt&&tmpt->typ_category!=TP_VOID&&tmpt->complete){
