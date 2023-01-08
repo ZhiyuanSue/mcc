@@ -29994,7 +29994,7 @@ scope type:file_scope with child 272 and namespace 0
         <symbol table>
             <symbol:succ_end ns:0 linkage:0>
                 type::< label >
-            <symbol:error ns:0 linkage:0>
+            <symbol:error ns:0 linkage:5976960>
                 type::< label >
         scope type:block_scope with child 10 and namespace 0
             <symbol table>

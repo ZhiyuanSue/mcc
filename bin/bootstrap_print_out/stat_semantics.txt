@@ -41523,7 +41523,7 @@ scope type:file_scope with child 268 and namespace 0
                         type::< unsigned_long >
     scope type:function_scope with child 1 and namespace 0
         <symbol table>
-            <symbol:error ns:0 linkage:0>
+            <symbol:error ns:0 linkage:13825280>
                 type::< label >
         scope type:block_scope with child 7 and namespace 0
             <symbol table>
@@ -41705,7 +41705,7 @@ scope type:file_scope with child 268 and namespace 0
                         type::< unsigned_long >
     scope type:function_scope with child 1 and namespace 0
         <symbol table>
-            <symbol:error ns:0 linkage:48543504>
+            <symbol:error ns:0 linkage:13825152>
                 type::< label >
         scope type:block_scope with child 5 and namespace 0
             <symbol table>
@@ -41735,7 +41735,7 @@ scope type:file_scope with child 268 and namespace 0
                         type::< unsigned_long >
     scope type:function_scope with child 1 and namespace 0
         <symbol table>
-            <symbol:error ns:0 linkage:48543472>
+            <symbol:error ns:0 linkage:0>
                 type::< label >
         scope type:block_scope with child 5 and namespace 0
             <symbol table>

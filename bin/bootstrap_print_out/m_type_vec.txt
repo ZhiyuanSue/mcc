@@ -33203,7 +33203,7 @@ scope type:file_scope with child 160 and namespace 0
                 <symbol table>
     scope type:function_scope with child 1 and namespace 0
         <symbol table>
-            <symbol:final ns:0 linkage:58903024>
+            <symbol:final ns:0 linkage:0>
                 type::< label >
         scope type:block_scope with child 5 and namespace 0
             <symbol table>

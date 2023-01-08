@@ -740,6 +740,10 @@ bool equal_expr_value(AST_BASE* ast_node)
             if(null_pointer_value==0)
                 rela_base_type->typ_category=TP_NULL_POINTER_CONSTANT;
         }
+        if(equal_base_type->typ_category==TP_ENUM)
+            equal_base_type=build_base_type(TP_SINT);
+        if(rela_base_type->typ_category==TP_ENUM)
+            rela_base_type=build_base_type(TP_SINT);
         bool legal=false;
         if(IS_ARTH_TYPE(equal_base_type->typ_category)&&IS_ARTH_TYPE(rela_base_type->typ_category))
         {
@@ -859,6 +863,9 @@ bool equal_expr_value(AST_BASE* ast_node)
         }
         if(!legal)
         {
+            printf("type_vec\n");
+            print_type_vec(tmp_type_vec);
+            print_type_vec(relation_expression_node->expr_attribute->type_vec);
             C_ERROR(C0070_ERR_EQUAL_OPERAND,ast_node);
             goto error;
         }
@@ -2133,6 +2140,12 @@ bool postfix_expr_value(AST_BASE* ast_node)
                     if(!expr_dispatch(tmp_ast))
                         return false;
                     VEC* tmp_type_vec=lvalue_convertion(tmp_ast->expr_attribute->type_vec);
+                    M_TYPE* assign_base_type=Type_VEC_get_actual_base_type(tmp_type_vec);
+                    if(IS_INT_TYPE(assign_base_type->typ_category)&&tmp_ast->expr_attribute->const_expr){
+                        long long int null_pointer_value=TP_INT_CAST_TYPE(assign_base_type->typ_category,tmp_ast->expr_attribute->data_field);
+                        if(null_pointer_value==0)
+                            assign_base_type->typ_category=TP_NULL_POINTER_CONSTANT;
+                    }
                     VECinsert(parameter_type_vecs,(void*)tmp_type_vec);
                 }
                 if(tmp_ast->type==right_parenthesis)
@@ -2212,6 +2225,7 @@ bool postfix_expr_value(AST_BASE* ast_node)
                         TP_FUNC_PARA* tmp_fun_para=VEC_GET_ITEM(func_para,i);
                         VEC* func_para_type_vec=NULL;
                         VECcpy(tmp_fun_para->type_vec,&func_para_type_vec);
+                        func_para_type_vec=lvalue_convertion(func_para_type_vec);
                         VEC* tmp_type_vec=VEC_GET_ITEM(parameter_type_vecs,i);
                         /*TODO:promotion*/
                         if(!assignment_type_check(func_para_type_vec,tmp_type_vec))
@@ -2260,6 +2274,7 @@ bool postfix_expr_value(AST_BASE* ast_node)
                             TP_FUNC_PARA* tmp_fun_para=VEC_GET_ITEM(func_para,i);
                             VEC* func_para_type_vec=NULL;
                             VECcpy(tmp_fun_para->type_vec,&func_para_type_vec);
+                            func_para_type_vec=lvalue_convertion(func_para_type_vec);
                             VEC* tmp_type_vec=VEC_GET_ITEM(parameter_type_vecs,i);
                             /*TODO:promotion*/
                             if(!assignment_type_check(func_para_type_vec,tmp_type_vec))

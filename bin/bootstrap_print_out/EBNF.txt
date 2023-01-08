@@ -18216,7 +18216,7 @@ scope type:file_scope with child 105 and namespace 0
                                     <symbol table>
     scope type:function_scope with child 1 and namespace 0
         <symbol table>
-            <symbol:final ns:0 linkage:0>
+            <symbol:final ns:0 linkage:452064>
                 type::< label >
         scope type:block_scope with child 2 and namespace 0
             <symbol table>
