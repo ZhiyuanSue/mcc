@@ -46,6 +46,8 @@ int mcc_main(char* filename,char* target_file){
     tvec=lex(buf,svec,rvec,&linevec);
     if(!tvec)
         goto error;
+    if(VECLEN(tvec)==1) /*only a EOF*/
+        goto succ_end;
     /*parser*/
     ast_root=parser(tvec,pvec);
     if(!ast_root)
@@ -87,6 +89,7 @@ int mcc_main(char* filename,char* target_file){
             printf("not decided token %s\n",tmpt->value);
         }
     }
+succ_end:
     MEMDel(global_heap);
     MEMDel(file_heap);
 #ifdef _TEST_
