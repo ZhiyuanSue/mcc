@@ -22875,7 +22875,7 @@ scope type:file_scope with child 170 and namespace 0
                 type::< point , struct >
     scope type:function_scope with child 1 and namespace 0
         <symbol table>
-            <symbol:error ns:0 linkage:20690784>
+            <symbol:error ns:0 linkage:0>
                 type::< label >
         scope type:block_scope with child 1 and namespace 0
             <symbol table>
