@@ -37,14 +37,14 @@ do
     ((file_num++))
     ${mcc_path} ${bootstrap_src_path}${file} ${bootstrap_asm_out_path}${file} > ${bootstrap_print_out_path}${file%.i*}".txt"
     last_line=$(tail -n 1 ${bootstrap_print_out_path}${file%.i*}".txt")
-    if [[ ${last_line} == "test pass!" ]]
+    if [[ ${last_line} != "test pass!" ]]
     then
-        echo ${file_num}"    succ   "${succ_accu}   "${file}"
-        ((succ_num++))
-        ((succ_accu++))
-    else
         echo ${file_num}"    fail   "${succ_accu}   "${file}"
         ((error_num++))
+    else
+    #    echo ${file_num}"    succ   "${succ_accu}   "${file}"
+        ((succ_num++))
+        ((succ_accu++))
     fi
 done
 echo "success : "${succ_num}

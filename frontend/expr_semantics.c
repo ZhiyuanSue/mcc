@@ -1129,6 +1129,7 @@ bool add_expr_value(AST_BASE* ast_node)
     if(!expr_dispatch(add_expression_node))
         goto error;
     VECcpy(add_expression_node->expr_attribute->type_vec,&tmp_type_vec);
+    tmp_type_vec=lvalue_convertion(tmp_type_vec);
     bool const_expr=add_expression_node->expr_attribute->const_expr;
     enum TP_CATEGORY tmp_category=TP_SPEC_NONE;
     VALUE_DATA* tmp_data_field=m_alloc(sizeof(VALUE_DATA));
@@ -1145,7 +1146,8 @@ bool add_expr_value(AST_BASE* ast_node)
         else
             const_expr=false;
         M_TYPE* add_base_type=Type_VEC_get_actual_base_type(tmp_type_vec);
-        M_TYPE* mul_base_type=Type_VEC_get_actual_base_type(mul_expression_node->expr_attribute->type_vec);
+        VEC* mul_type_vec=lvalue_convertion(mul_expression_node->expr_attribute->type_vec);
+        M_TYPE* mul_base_type=Type_VEC_get_actual_base_type(mul_type_vec);
         if(operator->type==plus){
             bool legal=false;
             if(IS_ARTH_TYPE(add_base_type->typ_category)&&IS_ARTH_TYPE(mul_base_type->typ_category))
@@ -1179,6 +1181,7 @@ bool add_expr_value(AST_BASE* ast_node)
             if(IS_ARTH_TYPE(add_base_type->typ_category)&&IS_ARTH_TYPE(mul_base_type->typ_category))
                 legal=true;
             else if(add_base_type->typ_category==TP_POINT&&mul_base_type->typ_category==TP_POINT){
+                printf("both are pointer\n");
                 const_expr=false;
                 ptrdiff=true;
                 VEC* tmpa,*tmpm;
@@ -1783,6 +1786,7 @@ bool unary_expr_value(AST_BASE* ast_node)
             if(!expr_dispatch(operand_node))
                 goto error;
             VECcpy(operand_node->expr_attribute->type_vec,&tmp_type_vec);
+            tmp_type_vec=lvalue_convertion(tmp_type_vec);
             M_TYPE* tmpt=Type_VEC_get_actual_base_type(tmp_type_vec);
             if(tmpt->typ_category!=TP_POINT)
             {
@@ -2116,6 +2120,11 @@ bool postfix_expr_value(AST_BASE* ast_node)
         else if(tmp_ast->type==left_parenthesis){   /*Function case:*/
             VEC* parameters=InitVEC(DEFAULT_CAPICITY);
             VEC* parameter_type_vecs=InitVEC(DEFAULT_CAPICITY);
+            /*lvalue conversion*/
+            old_l=tmp_l_type_vec;
+            tmp_l_type_vec=lvalue_convertion(tmp_l_type_vec);
+            if(old_l!=tmp_l_type_vec)
+                DelVEC(old_l);
             /*get all the parameters*/
             for(size_t i=suffix_start_index;i<AST_CHILD_NUM(ast_node);++i){
                 tmp_ast=AST_GET_CHILD(ast_node,i);
@@ -2174,6 +2183,15 @@ bool postfix_expr_value(AST_BASE* ast_node)
                 }
             }
             else{
+                tmp_l_base_type=Type_VEC_get_actual_base_type(tmp_l_type_vec);
+                if(tmp_l_base_type->typ_category!=TP_POINT){
+                    C_ERROR(C0050_ERR_LVALUE_FUNC_TYPE_WRONG,tmp_ast);
+                    goto error;
+                }
+                old_l=tmp_l_type_vec;
+                tmp_l_type_vec=Type_VEC_get_Pointer_TO(tmp_l_type_vec,true);
+                if(old_l!=tmp_l_type_vec)
+                    DelVEC(old_l);
                 tmp_l_base_type=Type_VEC_get_actual_base_type(tmp_l_type_vec);
                 if(tmp_l_base_type->typ_category!=TP_FUNCTION){
                     C_ERROR(C0050_ERR_LVALUE_FUNC_TYPE_WRONG,tmp_ast);

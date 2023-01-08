@@ -12277,22 +12277,6 @@ start print ast tree
     <external_decl ns:1>
         <declaration ns:1>
             <&declaration_spec ns:1>
-                <&storage_class_spec ns:1>
-                    <KW_static:static sym level: 0 namespace:1>
-                <&type_spec ns:1>
-                    <&typedef_name ns:1>
-                        <identifier:VEC sym level: 0 namespace:1>
-            <&init_decl_list ns:1>
-                <&init_decl ns:1>
-                    <&declarator ns:1>
-                        <&pointer ns:1>
-                            <*:* sym level: 0 namespace:1>
-                        <&direct_declarator ns:1>
-                            <identifier:trace_name_stack sym level: 0 namespace:1>
-            <;:; sym level: 0 namespace:1>
-    <external_decl ns:1>
-        <declaration ns:1>
-            <&declaration_spec ns:1>
                 <&type_spec ns:1>
                     <&typedef_name ns:1>
                         <identifier:ERROR_ITEM sym level: 0 namespace:1>
@@ -12786,30 +12770,6 @@ start print ast tree
                             <&primary_expression ns:1>
                                 <integer_constant:1 sym level: 2 namespace:1>
                         <;:; sym level: 2 namespace:1>
-                <statement ns:1>
-                    <expr_stmt ns:1>
-                        <&postfix_expr ns:1>
-                            <&primary_expression ns:1>
-                                <identifier:printf sym level: 2 namespace:1>
-                            <(:( sym level: 2 namespace:1>
-                            <&primary_expression ns:1>
-                                <string:"parser start\n" sym level: 2 namespace:1>
-                            <):) sym level: 2 namespace:1>
-                        <;:; sym level: 2 namespace:1>
-                <statement ns:1>
-                    <expr_stmt ns:1>
-                        <&assignment_expr ns:1>
-                            <&primary_expression ns:1>
-                                <identifier:trace_name_stack sym level: 2 namespace:1>
-                            <=:= sym level: 2 namespace:1>
-                            <&postfix_expr ns:1>
-                                <&primary_expression ns:1>
-                                    <identifier:InitVEC sym level: 2 namespace:1>
-                                <(:( sym level: 2 namespace:1>
-                                <&primary_expression ns:1>
-                                    <integer_constant:3 sym level: 2 namespace:1>
-                                <):) sym level: 2 namespace:1>
-                        <;:; sym level: 2 namespace:1>
                 <declaration ns:1>
                     <&declaration_spec ns:1>
                         <&type_spec ns:1>
@@ -13017,19 +12977,6 @@ start print ast tree
                             <compound_stmt ns:1>
                                 <left_brace:{ sym level: 4 namespace:1>
                                 <statement ns:1>
-                                    <expr_stmt ns:1>
-                                        <&postfix_expr ns:1>
-                                            <&primary_expression ns:1>
-                                                <identifier:printf sym level: 4 namespace:1>
-                                            <(:( sym level: 4 namespace:1>
-                                            <&primary_expression ns:1>
-                                                <string:"parser max match %ld\n" sym level: 4 namespace:1>
-                                            <,:, sym level: 4 namespace:1>
-                                            <&primary_expression ns:1>
-                                                <identifier:max_match_len sym level: 4 namespace:1>
-                                            <):) sym level: 4 namespace:1>
-                                        <;:; sym level: 4 namespace:1>
-                                <statement ns:1>
                                     <&if_stmt ns:1>
                                         <KW_if:if sym level: 5 namespace:1>
                                         <(:( sym level: 5 namespace:1>
@@ -13079,45 +13026,6 @@ start print ast tree
                         <statement ns:1>
                             <compound_stmt ns:1>
                                 <left_brace:{ sym level: 4 namespace:1>
-                                <statement ns:1>
-                                    <expr_stmt ns:1>
-                                        <&postfix_expr ns:1>
-                                            <&primary_expression ns:1>
-                                                <identifier:printf sym level: 4 namespace:1>
-                                            <(:( sym level: 4 namespace:1>
-                                            <&primary_expression ns:1>
-                                                <string:"parser success with deepth %d!\n" sym level: 4 namespace:1>
-                                            <,:, sym level: 4 namespace:1>
-                                            <&primary_expression ns:1>
-                                                <identifier:max_deepth sym level: 4 namespace:1>
-                                            <):) sym level: 4 namespace:1>
-                                        <;:; sym level: 4 namespace:1>
-                                <statement ns:1>
-                                    <expr_stmt ns:1>
-                                        <&postfix_expr ns:1>
-                                            <&primary_expression ns:1>
-                                                <identifier:printf sym level: 4 namespace:1>
-                                            <(:( sym level: 4 namespace:1>
-                                            <&primary_expression ns:1>
-                                                <string:"parser totally searched %ld nodes\n" sym level: 4 namespace:1>
-                                            <,:, sym level: 4 namespace:1>
-                                            <&primary_expression ns:1>
-                                                <identifier:total_search_nodes sym level: 4 namespace:1>
-                                            <):) sym level: 4 namespace:1>
-                                        <;:; sym level: 4 namespace:1>
-                                <statement ns:1>
-                                    <expr_stmt ns:1>
-                                        <&postfix_expr ns:1>
-                                            <&primary_expression ns:1>
-                                                <identifier:printf sym level: 4 namespace:1>
-                                            <(:( sym level: 4 namespace:1>
-                                            <&primary_expression ns:1>
-                                                <string:"parser totally build an ast with %ld nodes\n" sym level: 4 namespace:1>
-                                            <,:, sym level: 4 namespace:1>
-                                            <&primary_expression ns:1>
-                                                <identifier:ast_total_nodes sym level: 4 namespace:1>
-                                            <):) sym level: 4 namespace:1>
-                                        <;:; sym level: 4 namespace:1>
                                 <statement ns:1>
                                     <&for_stmt ns:1>
                                         <KW_for:for sym level: 5 namespace:1>
@@ -13803,117 +13711,6 @@ start print ast tree
                                     <identifier:C0001_ERR_NONE sym level: 2 namespace:1>
                     <;:; sym level: 2 namespace:1>
                 <statement ns:1>
-                    <expr_stmt ns:1>
-                        <&postfix_expr ns:1>
-                            <&primary_expression ns:1>
-                                <identifier:total_search_nodes sym level: 2 namespace:1>
-                            <++:++ sym level: 2 namespace:1>
-                        <;:; sym level: 2 namespace:1>
-                <statement ns:1>
-                    <&for_stmt ns:1>
-                        <KW_for:for sym level: 3 namespace:1>
-                        <(:( sym level: 3 namespace:1>
-                        <declaration ns:1>
-                            <&declaration_spec ns:1>
-                                <&type_spec ns:1>
-                                    <KW_int:int sym level: 3 namespace:1>
-                            <&init_decl_list ns:1>
-                                <&init_decl ns:1>
-                                    <&declarator ns:1>
-                                        <&direct_declarator ns:1>
-                                            <identifier:i sym level: 3 namespace:1>
-                                    <=:= sym level: 3 namespace:1>
-                                    <&initializer ns:1>
-                                        <&primary_expression ns:1>
-                                            <integer_constant:0 sym level: 3 namespace:1>
-                            <;:; sym level: 3 namespace:1>
-                        <&relational_expr ns:1>
-                            <&primary_expression ns:1>
-                                <identifier:i sym level: 3 namespace:1>
-                            <<:< sym level: 3 namespace:1>
-                            <&primary_expression ns:1>
-                                <(:( sym level: 3 namespace:1>
-                                <&postfix_expr ns:1>
-                                    <&primary_expression ns:1>
-                                        <identifier:trace_stack sym level: 3 namespace:1>
-                                    <->:-> sym level: 3 namespace:1>
-                                    <identifier:len sym level: 3 namespace:0>
-                                <):) sym level: 3 namespace:1>
-                        <;:; sym level: 3 namespace:1>
-                        <&unary_expr ns:1>
-                            <++:++ sym level: 3 namespace:1>
-                            <&primary_expression ns:1>
-                                <identifier:i sym level: 3 namespace:1>
-                        <):) sym level: 3 namespace:1>
-                        <statement ns:1>
-                            <expr_stmt ns:1>
-                                <&postfix_expr ns:1>
-                                    <&primary_expression ns:1>
-                                        <identifier:printf sym level: 3 namespace:1>
-                                    <(:( sym level: 3 namespace:1>
-                                    <&primary_expression ns:1>
-                                        <string:"\t" sym level: 3 namespace:1>
-                                    <):) sym level: 3 namespace:1>
-                                <;:; sym level: 3 namespace:1>
-                <statement ns:1>
-                    <expr_stmt ns:1>
-                        <&postfix_expr ns:1>
-                            <&primary_expression ns:1>
-                                <identifier:printf sym level: 2 namespace:1>
-                            <(:( sym level: 2 namespace:1>
-                            <&primary_expression ns:1>
-                                <string:"i:%ld t:%s r:%s ns:%d\n" sym level: 2 namespace:1>
-                            <,:, sym level: 2 namespace:1>
-                            <&primary_expression ns:1>
-                                <identifier:token_index sym level: 2 namespace:1>
-                            <,:, sym level: 2 namespace:1>
-                            <&postfix_expr ns:1>
-                                <&primary_expression ns:1>
-                                    <identifier:curr_token sym level: 2 namespace:1>
-                                <->:-> sym level: 2 namespace:1>
-                                <identifier:value sym level: 2 namespace:0>
-                            <,:, sym level: 2 namespace:1>
-                            <&postfix_expr ns:1>
-                                <&primary_expression ns:1>
-                                    <identifier:curr_rule sym level: 2 namespace:1>
-                                <->:-> sym level: 2 namespace:1>
-                                <identifier:base sym level: 2 namespace:0>
-                                <.:. sym level: 2 namespace:1>
-                                <identifier:name sym level: 2 namespace:0>
-                            <,:, sym level: 2 namespace:1>
-                            <&primary_expression ns:1>
-                                <identifier:name_space sym level: 2 namespace:1>
-                            <):) sym level: 2 namespace:1>
-                        <;:; sym level: 2 namespace:1>
-                <statement ns:1>
-                    <expr_stmt ns:1>
-                        <&postfix_expr ns:1>
-                            <&primary_expression ns:1>
-                                <identifier:VECinsert sym level: 2 namespace:1>
-                            <(:( sym level: 2 namespace:1>
-                            <&primary_expression ns:1>
-                                <identifier:trace_name_stack sym level: 2 namespace:1>
-                            <,:, sym level: 2 namespace:1>
-                            <&cast_expr ns:1>
-                                <(:( sym level: 2 namespace:1>
-                                <&type_name ns:1>
-                                    <&spec_qual_list ns:1>
-                                        <&type_spec ns:1>
-                                            <KW_void:void sym level: 2 namespace:1>
-                                    <&abstract_declarator ns:1>
-                                        <&pointer ns:1>
-                                            <*:* sym level: 2 namespace:1>
-                                <):) sym level: 2 namespace:1>
-                                <&postfix_expr ns:1>
-                                    <&primary_expression ns:1>
-                                        <identifier:curr_rule sym level: 2 namespace:1>
-                                    <->:-> sym level: 2 namespace:1>
-                                    <identifier:base sym level: 2 namespace:0>
-                                    <.:. sym level: 2 namespace:1>
-                                    <identifier:name sym level: 2 namespace:0>
-                            <):) sym level: 2 namespace:1>
-                        <;:; sym level: 2 namespace:1>
-                <statement ns:1>
                     <&if_stmt ns:1>
                         <KW_if:if sym level: 3 namespace:1>
                         <(:( sym level: 3 namespace:1>
@@ -14243,7 +14040,7 @@ start print ast tree
                                                                         <statement ns:1>
                                                                             <&goto_stmt ns:1>
                                                                                 <KW_goto:goto sym level: 9 namespace:1>
-                                                                                <identifier:parser_error sym level: 9 namespace:319>
+                                                                                <identifier:parser_error sym level: 9 namespace:318>
                                                                                 <;:; sym level: 9 namespace:1>
                                                                 <statement ns:1>
                                                                     <&if_stmt ns:1>
@@ -14499,7 +14296,7 @@ start print ast tree
                                                                                         <statement ns:1>
                                                                                             <&goto_stmt ns:1>
                                                                                                 <KW_goto:goto sym level: 11 namespace:1>
-                                                                                                <identifier:parser_error sym level: 11 namespace:319>
+                                                                                                <identifier:parser_error sym level: 11 namespace:318>
                                                                                                 <;:; sym level: 11 namespace:1>
                                                                                 <right_brace:} sym level: 10 namespace:1>
                                                                 <statement ns:1>
@@ -14545,7 +14342,7 @@ start print ast tree
                                                                                         <statement ns:1>
                                                                                             <&goto_stmt ns:1>
                                                                                                 <KW_goto:goto sym level: 11 namespace:1>
-                                                                                                <identifier:parser_error sym level: 11 namespace:319>
+                                                                                                <identifier:parser_error sym level: 11 namespace:318>
                                                                                                 <;:; sym level: 11 namespace:1>
                                                                                 <right_brace:} sym level: 10 namespace:1>
                                                                         <KW_else:else sym level: 9 namespace:1>
@@ -14594,7 +14391,7 @@ start print ast tree
                                                                                                 <statement ns:1>
                                                                                                     <&goto_stmt ns:1>
                                                                                                         <KW_goto:goto sym level: 12 namespace:1>
-                                                                                                        <identifier:parser_error sym level: 12 namespace:319>
+                                                                                                        <identifier:parser_error sym level: 12 namespace:318>
                                                                                                         <;:; sym level: 12 namespace:1>
                                                                                         <right_brace:} sym level: 11 namespace:1>
                                                                 <right_brace:} sym level: 8 namespace:1>
@@ -14633,14 +14430,14 @@ start print ast tree
                                                 <statement ns:1>
                                                     <&goto_stmt ns:1>
                                                         <KW_goto:goto sym level: 6 namespace:1>
-                                                        <identifier:parser_succ sym level: 6 namespace:319>
+                                                        <identifier:parser_succ sym level: 6 namespace:318>
                                                         <;:; sym level: 6 namespace:1>
                                                 <right_brace:} sym level: 6 namespace:1>
                                         <KW_else:else sym level: 5 namespace:1>
                                         <statement ns:1>
                                             <&goto_stmt ns:1>
                                                 <KW_goto:goto sym level: 5 namespace:1>
-                                                <identifier:parser_error sym level: 5 namespace:319>
+                                                <identifier:parser_error sym level: 5 namespace:318>
                                                 <;:; sym level: 5 namespace:1>
                                 <right_brace:} sym level: 4 namespace:1>
                         <KW_else:else sym level: 3 namespace:1>
@@ -14839,7 +14636,7 @@ start print ast tree
                                                                 <statement ns:1>
                                                                     <&goto_stmt ns:1>
                                                                         <KW_goto:goto sym level: 8 namespace:1>
-                                                                        <identifier:final sym level: 8 namespace:319>
+                                                                        <identifier:final sym level: 8 namespace:318>
                                                                         <;:; sym level: 8 namespace:1>
                                                                 <right_brace:} sym level: 8 namespace:1>
                                                 <right_brace:} sym level: 6 namespace:1>
@@ -14859,12 +14656,12 @@ start print ast tree
                                             <compound_stmt ns:1>
                                                 <left_brace:{ sym level: 6 namespace:1>
                                                 <statement ns:1>
-                                                    <labeled_stmt ns:319>
-                                                        <KW_case:case sym level: 6 namespace:319>
-                                                        <&constant_expr ns:319>
-                                                            <&primary_expression ns:319>
-                                                                <integer_constant:2 sym level: 6 namespace:319>
-                                                        <colon:: sym level: 6 namespace:319>
+                                                    <labeled_stmt ns:318>
+                                                        <KW_case:case sym level: 6 namespace:318>
+                                                        <&constant_expr ns:318>
+                                                            <&primary_expression ns:318>
+                                                                <integer_constant:2 sym level: 6 namespace:318>
+                                                        <colon:: sym level: 6 namespace:318>
                                                         <statement ns:1>
                                                             <&if_stmt ns:1>
                                                                 <KW_if:if sym level: 7 namespace:1>
@@ -14913,7 +14710,7 @@ start print ast tree
                                                                         <statement ns:1>
                                                                             <&goto_stmt ns:1>
                                                                                 <KW_goto:goto sym level: 8 namespace:1>
-                                                                                <identifier:parser_error sym level: 8 namespace:319>
+                                                                                <identifier:parser_error sym level: 8 namespace:318>
                                                                                 <;:; sym level: 8 namespace:1>
                                                                         <right_brace:} sym level: 8 namespace:1>
                                                 <statement ns:1>
@@ -15098,7 +14895,7 @@ start print ast tree
                                                                                 <statement ns:1>
                                                                                     <&goto_stmt ns:1>
                                                                                         <KW_goto:goto sym level: 10 namespace:1>
-                                                                                        <identifier:parser_error sym level: 10 namespace:319>
+                                                                                        <identifier:parser_error sym level: 10 namespace:318>
                                                                                         <;:; sym level: 10 namespace:1>
                                                                                 <right_brace:} sym level: 10 namespace:1>
                                                                 <statement ns:1>
@@ -15224,12 +15021,12 @@ start print ast tree
                                                         <KW_break:break sym level: 6 namespace:1>
                                                         <;:; sym level: 6 namespace:1>
                                                 <statement ns:1>
-                                                    <labeled_stmt ns:319>
-                                                        <KW_case:case sym level: 6 namespace:319>
-                                                        <&constant_expr ns:319>
-                                                            <&primary_expression ns:319>
-                                                                <integer_constant:3 sym level: 6 namespace:319>
-                                                        <colon:: sym level: 6 namespace:319>
+                                                    <labeled_stmt ns:318>
+                                                        <KW_case:case sym level: 6 namespace:318>
+                                                        <&constant_expr ns:318>
+                                                            <&primary_expression ns:318>
+                                                                <integer_constant:3 sym level: 6 namespace:318>
+                                                        <colon:: sym level: 6 namespace:318>
                                                         <statement ns:1>
                                                             <&if_stmt ns:1>
                                                                 <KW_if:if sym level: 7 namespace:1>
@@ -15278,7 +15075,7 @@ start print ast tree
                                                                         <statement ns:1>
                                                                             <&goto_stmt ns:1>
                                                                                 <KW_goto:goto sym level: 8 namespace:1>
-                                                                                <identifier:parser_error sym level: 8 namespace:319>
+                                                                                <identifier:parser_error sym level: 8 namespace:318>
                                                                                 <;:; sym level: 8 namespace:1>
                                                                         <right_brace:} sym level: 8 namespace:1>
                                                 <statement ns:1>
@@ -15571,7 +15368,7 @@ start print ast tree
                                                         <statement ns:1>
                                                             <&goto_stmt ns:1>
                                                                 <KW_goto:goto sym level: 7 namespace:1>
-                                                                <identifier:parser_error sym level: 7 namespace:319>
+                                                                <identifier:parser_error sym level: 7 namespace:318>
                                                                 <;:; sym level: 7 namespace:1>
                                                 <statement ns:1>
                                                     <expr_stmt ns:1>
@@ -15636,12 +15433,12 @@ start print ast tree
                                                         <KW_break:break sym level: 6 namespace:1>
                                                         <;:; sym level: 6 namespace:1>
                                                 <statement ns:1>
-                                                    <labeled_stmt ns:319>
-                                                        <KW_case:case sym level: 6 namespace:319>
-                                                        <&constant_expr ns:319>
-                                                            <&primary_expression ns:319>
-                                                                <integer_constant:4 sym level: 6 namespace:319>
-                                                        <colon:: sym level: 6 namespace:319>
+                                                    <labeled_stmt ns:318>
+                                                        <KW_case:case sym level: 6 namespace:318>
+                                                        <&constant_expr ns:318>
+                                                            <&primary_expression ns:318>
+                                                                <integer_constant:4 sym level: 6 namespace:318>
+                                                        <colon:: sym level: 6 namespace:318>
                                                         <statement ns:1>
                                                             <&while_stmt ns:1>
                                                                 <KW_while:while sym level: 7 namespace:1>
@@ -15876,12 +15673,12 @@ start print ast tree
                                                         <KW_break:break sym level: 6 namespace:1>
                                                         <;:; sym level: 6 namespace:1>
                                                 <statement ns:1>
-                                                    <labeled_stmt ns:319>
-                                                        <KW_case:case sym level: 6 namespace:319>
-                                                        <&constant_expr ns:319>
-                                                            <&primary_expression ns:319>
-                                                                <integer_constant:5 sym level: 6 namespace:319>
-                                                        <colon:: sym level: 6 namespace:319>
+                                                    <labeled_stmt ns:318>
+                                                        <KW_case:case sym level: 6 namespace:318>
+                                                        <&constant_expr ns:318>
+                                                            <&primary_expression ns:318>
+                                                                <integer_constant:5 sym level: 6 namespace:318>
+                                                        <colon:: sym level: 6 namespace:318>
                                                         <statement ns:1>
                                                             <&while_stmt ns:1>
                                                                 <KW_while:while sym level: 7 namespace:1>
@@ -16116,7 +15913,7 @@ start print ast tree
                                                                 <statement ns:1>
                                                                     <&goto_stmt ns:1>
                                                                         <KW_goto:goto sym level: 8 namespace:1>
-                                                                        <identifier:parser_error sym level: 8 namespace:319>
+                                                                        <identifier:parser_error sym level: 8 namespace:318>
                                                                         <;:; sym level: 8 namespace:1>
                                                                 <right_brace:} sym level: 8 namespace:1>
                                                         <KW_else:else sym level: 7 namespace:1>
@@ -16212,9 +16009,9 @@ start print ast tree
                                                         <KW_break:break sym level: 6 namespace:1>
                                                         <;:; sym level: 6 namespace:1>
                                                 <statement ns:1>
-                                                    <labeled_stmt ns:319>
-                                                        <KW_default:default sym level: 6 namespace:319>
-                                                        <colon:: sym level: 6 namespace:319>
+                                                    <labeled_stmt ns:318>
+                                                        <KW_default:default sym level: 6 namespace:318>
+                                                        <colon:: sym level: 6 namespace:318>
                                                         <statement ns:1>
                                                             <expr_stmt ns:1>
                                                                 <&postfix_expr ns:1>
@@ -16248,9 +16045,9 @@ start print ast tree
                                                 <right_brace:} sym level: 6 namespace:1>
                                 <right_brace:} sym level: 4 namespace:1>
                 <statement ns:1>
-                    <labeled_stmt ns:319>
-                        <identifier:parser_succ sym level: 2 namespace:319>
-                        <colon:: sym level: 2 namespace:319>
+                    <labeled_stmt ns:318>
+                        <identifier:parser_succ sym level: 2 namespace:318>
+                        <colon:: sym level: 2 namespace:318>
                         <statement ns:1>
                             <expr_stmt ns:1>
                                 <&assignment_expr ns:1>
@@ -16329,7 +16126,7 @@ start print ast tree
                                 <statement ns:1>
                                     <&goto_stmt ns:1>
                                         <KW_goto:goto sym level: 4 namespace:1>
-                                        <identifier:parser_error sym level: 4 namespace:319>
+                                        <identifier:parser_error sym level: 4 namespace:318>
                                         <;:; sym level: 4 namespace:1>
                                 <right_brace:} sym level: 4 namespace:1>
                 <declaration ns:1>
@@ -16608,12 +16405,12 @@ start print ast tree
                 <statement ns:1>
                     <&goto_stmt ns:1>
                         <KW_goto:goto sym level: 2 namespace:1>
-                        <identifier:final sym level: 2 namespace:319>
+                        <identifier:final sym level: 2 namespace:318>
                         <;:; sym level: 2 namespace:1>
                 <statement ns:1>
-                    <labeled_stmt ns:319>
-                        <identifier:parser_error sym level: 2 namespace:319>
-                        <colon:: sym level: 2 namespace:319>
+                    <labeled_stmt ns:318>
+                        <identifier:parser_error sym level: 2 namespace:318>
+                        <colon:: sym level: 2 namespace:318>
                         <statement ns:1>
                             <&if_stmt ns:1>
                                 <KW_if:if sym level: 3 namespace:1>
@@ -16728,216 +16525,19 @@ start print ast tree
                                 <integer_constant:0 sym level: 2 namespace:1>
                         <;:; sym level: 2 namespace:1>
                 <statement ns:1>
-                    <labeled_stmt ns:319>
-                        <identifier:final sym level: 2 namespace:319>
-                        <colon:: sym level: 2 namespace:319>
+                    <labeled_stmt ns:318>
+                        <identifier:final sym level: 2 namespace:318>
+                        <colon:: sym level: 2 namespace:318>
                         <statement ns:1>
-                            <&for_stmt ns:1>
-                                <KW_for:for sym level: 3 namespace:1>
-                                <(:( sym level: 3 namespace:1>
-                                <declaration ns:1>
-                                    <&declaration_spec ns:1>
-                                        <&type_spec ns:1>
-                                            <KW_int:int sym level: 3 namespace:1>
-                                    <&init_decl_list ns:1>
-                                        <&init_decl ns:1>
-                                            <&declarator ns:1>
-                                                <&direct_declarator ns:1>
-                                                    <identifier:i sym level: 3 namespace:1>
-                                            <=:= sym level: 3 namespace:1>
-                                            <&initializer ns:1>
-                                                <&primary_expression ns:1>
-                                                    <integer_constant:0 sym level: 3 namespace:1>
-                                    <;:; sym level: 3 namespace:1>
-                                <&relational_expr ns:1>
-                                    <&primary_expression ns:1>
-                                        <identifier:i sym level: 3 namespace:1>
-                                    <<:< sym level: 3 namespace:1>
-                                    <&primary_expression ns:1>
-                                        <(:( sym level: 3 namespace:1>
-                                        <&postfix_expr ns:1>
-                                            <&primary_expression ns:1>
-                                                <identifier:trace_stack sym level: 3 namespace:1>
-                                            <->:-> sym level: 3 namespace:1>
-                                            <identifier:len sym level: 3 namespace:0>
-                                        <):) sym level: 3 namespace:1>
-                                <;:; sym level: 3 namespace:1>
-                                <&unary_expr ns:1>
-                                    <++:++ sym level: 3 namespace:1>
-                                    <&primary_expression ns:1>
-                                        <identifier:i sym level: 3 namespace:1>
-                                <):) sym level: 3 namespace:1>
-                                <statement ns:1>
-                                    <compound_stmt ns:1>
-                                        <left_brace:{ sym level: 4 namespace:1>
-                                        <statement ns:1>
-                                            <expr_stmt ns:1>
-                                                <&postfix_expr ns:1>
-                                                    <&primary_expression ns:1>
-                                                        <identifier:printf sym level: 4 namespace:1>
-                                                    <(:( sym level: 4 namespace:1>
-                                                    <&primary_expression ns:1>
-                                                        <string:"\t" sym level: 4 namespace:1>
-                                                    <):) sym level: 4 namespace:1>
-                                                <;:; sym level: 4 namespace:1>
-                                        <right_brace:} sym level: 4 namespace:1>
-                <statement ns:1>
-                    <&if_stmt ns:1>
-                        <KW_if:if sym level: 3 namespace:1>
-                        <(:( sym level: 3 namespace:1>
-                        <&relational_expr ns:1>
-                            <&primary_expression ns:1>
-                                <(:( sym level: 3 namespace:1>
+                            <expr_stmt ns:1>
                                 <&postfix_expr ns:1>
                                     <&primary_expression ns:1>
-                                        <identifier:trace_stack sym level: 3 namespace:1>
-                                    <->:-> sym level: 3 namespace:1>
-                                    <identifier:len sym level: 3 namespace:0>
-                                <):) sym level: 3 namespace:1>
-                            <>:> sym level: 3 namespace:1>
-                            <&primary_expression ns:1>
-                                <integer_constant:0 sym level: 3 namespace:1>
-                        <):) sym level: 3 namespace:1>
-                        <statement ns:1>
-                            <compound_stmt ns:1>
-                                <left_brace:{ sym level: 4 namespace:1>
-                                <statement ns:1>
-                                    <expr_stmt ns:1>
-                                        <&postfix_expr ns:1>
-                                            <&primary_expression ns:1>
-                                                <identifier:printf sym level: 4 namespace:1>
-                                            <(:( sym level: 4 namespace:1>
-                                            <&primary_expression ns:1>
-                                                <string:"return to r:%s " sym level: 4 namespace:1>
-                                            <,:, sym level: 4 namespace:1>
-                                            <&cast_expr ns:1>
-                                                <(:( sym level: 4 namespace:1>
-                                                <&type_name ns:1>
-                                                    <&spec_qual_list ns:1>
-                                                        <&type_spec ns:1>
-                                                            <KW_char:char sym level: 4 namespace:1>
-                                                    <&abstract_declarator ns:1>
-                                                        <&pointer ns:1>
-                                                            <*:* sym level: 4 namespace:1>
-                                                <):) sym level: 4 namespace:1>
-                                                <&primary_expression ns:1>
-                                                    <(:( sym level: 4 namespace:1>
-                                                    <&conditional_expr ns:1>
-                                                        <&primary_expression ns:1>
-                                                            <(:( sym level: 4 namespace:1>
-                                                            <&logical_and_expr ns:1>
-                                                                <&equality_expr ns:1>
-                                                                    <&primary_expression ns:1>
-                                                                        <identifier:trace_name_stack sym level: 4 namespace:1>
-                                                                    <!=:!= sym level: 4 namespace:1>
-                                                                    <&primary_expression ns:1>
-                                                                        <integer_constant:0 sym level: 4 namespace:1>
-                                                                <double_ampersand:&& sym level: 4 namespace:1>
-                                                                <&relational_expr ns:1>
-                                                                    <&additive_expr ns:1>
-                                                                        <&primary_expression ns:1>
-                                                                            <(:( sym level: 4 namespace:1>
-                                                                            <&postfix_expr ns:1>
-                                                                                <&primary_expression ns:1>
-                                                                                    <identifier:trace_name_stack sym level: 4 namespace:1>
-                                                                                <->:-> sym level: 4 namespace:1>
-                                                                                <identifier:len sym level: 4 namespace:0>
-                                                                            <):) sym level: 4 namespace:1>
-                                                                        <-:- sym level: 4 namespace:1>
-                                                                        <&primary_expression ns:1>
-                                                                            <integer_constant:2 sym level: 4 namespace:1>
-                                                                    <<:< sym level: 4 namespace:1>
-                                                                    <&primary_expression ns:1>
-                                                                        <(:( sym level: 4 namespace:1>
-                                                                        <&postfix_expr ns:1>
-                                                                            <&primary_expression ns:1>
-                                                                                <identifier:trace_name_stack sym level: 4 namespace:1>
-                                                                            <->:-> sym level: 4 namespace:1>
-                                                                            <identifier:len sym level: 4 namespace:0>
-                                                                        <):) sym level: 4 namespace:1>
-                                                            <):) sym level: 4 namespace:1>
-                                                        <?:? sym level: 4 namespace:1>
-                                                        <&primary_expression ns:1>
-                                                            <(:( sym level: 4 namespace:1>
-                                                            <&postfix_expr ns:1>
-                                                                <&primary_expression ns:1>
-                                                                    <identifier:trace_name_stack sym level: 4 namespace:1>
-                                                                <->:-> sym level: 4 namespace:1>
-                                                                <identifier:data sym level: 4 namespace:0>
-                                                                <[:[ sym level: 4 namespace:1>
-                                                                <&additive_expr ns:1>
-                                                                    <&primary_expression ns:1>
-                                                                        <(:( sym level: 4 namespace:1>
-                                                                        <&postfix_expr ns:1>
-                                                                            <&primary_expression ns:1>
-                                                                                <identifier:trace_name_stack sym level: 4 namespace:1>
-                                                                            <->:-> sym level: 4 namespace:1>
-                                                                            <identifier:len sym level: 4 namespace:0>
-                                                                        <):) sym level: 4 namespace:1>
-                                                                    <-:- sym level: 4 namespace:1>
-                                                                    <&primary_expression ns:1>
-                                                                        <integer_constant:2 sym level: 4 namespace:1>
-                                                                <]:] sym level: 4 namespace:1>
-                                                            <):) sym level: 4 namespace:1>
-                                                        <colon:: sym level: 4 namespace:1>
-                                                        <&primary_expression ns:1>
-                                                            <integer_constant:0 sym level: 4 namespace:1>
-                                                    <):) sym level: 4 namespace:1>
-                                            <):) sym level: 4 namespace:1>
-                                        <;:; sym level: 4 namespace:1>
-                                <statement ns:1>
-                                    <&if_stmt ns:1>
-                                        <KW_if:if sym level: 5 namespace:1>
-                                        <(:( sym level: 5 namespace:1>
-                                        <&equality_expr ns:1>
-                                            <&primary_expression ns:1>
-                                                <identifier:curr_ast sym level: 5 namespace:1>
-                                            <==:== sym level: 5 namespace:1>
-                                            <&primary_expression ns:1>
-                                                <integer_constant:0 sym level: 5 namespace:1>
-                                        <):) sym level: 5 namespace:1>
-                                        <statement ns:1>
-                                            <expr_stmt ns:1>
-                                                <&postfix_expr ns:1>
-                                                    <&primary_expression ns:1>
-                                                        <identifier:printf sym level: 5 namespace:1>
-                                                    <(:( sym level: 5 namespace:1>
-                                                    <&primary_expression ns:1>
-                                                        <string:"fail\n" sym level: 5 namespace:1>
-                                                    <):) sym level: 5 namespace:1>
-                                                <;:; sym level: 5 namespace:1>
-                                        <KW_else:else sym level: 5 namespace:1>
-                                        <statement ns:1>
-                                            <expr_stmt ns:1>
-                                                <&postfix_expr ns:1>
-                                                    <&primary_expression ns:1>
-                                                        <identifier:printf sym level: 5 namespace:1>
-                                                    <(:( sym level: 5 namespace:1>
-                                                    <&primary_expression ns:1>
-                                                        <string:"succ\n" sym level: 5 namespace:1>
-                                                    <):) sym level: 5 namespace:1>
-                                                <;:; sym level: 5 namespace:1>
-                                <right_brace:} sym level: 4 namespace:1>
-                <statement ns:1>
-                    <expr_stmt ns:1>
-                        <&postfix_expr ns:1>
-                            <&primary_expression ns:1>
-                                <identifier:VECpopback sym level: 2 namespace:1>
-                            <(:( sym level: 2 namespace:1>
-                            <&primary_expression ns:1>
-                                <identifier:trace_name_stack sym level: 2 namespace:1>
-                            <):) sym level: 2 namespace:1>
-                        <;:; sym level: 2 namespace:1>
-                <statement ns:1>
-                    <expr_stmt ns:1>
-                        <&postfix_expr ns:1>
-                            <&primary_expression ns:1>
-                                <identifier:VECpopback sym level: 2 namespace:1>
-                            <(:( sym level: 2 namespace:1>
-                            <&primary_expression ns:1>
-                                <identifier:trace_stack sym level: 2 namespace:1>
-                            <):) sym level: 2 namespace:1>
-                        <;:; sym level: 2 namespace:1>
+                                        <identifier:VECpopback sym level: 2 namespace:1>
+                                    <(:( sym level: 2 namespace:1>
+                                    <&primary_expression ns:1>
+                                        <identifier:trace_stack sym level: 2 namespace:1>
+                                    <):) sym level: 2 namespace:1>
+                                <;:; sym level: 2 namespace:1>
                 <statement ns:1>
                     <&return_stmt ns:1>
                         <KW_return:return sym level: 2 namespace:1>
@@ -16979,13 +16579,6 @@ start print ast tree
                     <):) sym level: 1 namespace:1>
             <compound_stmt ns:1>
                 <left_brace:{ sym level: 2 namespace:1>
-                <statement ns:1>
-                    <expr_stmt ns:1>
-                        <&postfix_expr ns:1>
-                            <&primary_expression ns:1>
-                                <identifier:ast_total_nodes sym level: 2 namespace:1>
-                            <++:++ sym level: 2 namespace:1>
-                        <;:; sym level: 2 namespace:1>
                 <statement ns:1>
                     <&if_stmt ns:1>
                         <KW_if:if sym level: 3 namespace:1>
@@ -18867,7 +18460,7 @@ start print ast tree
                                                 <statement ns:1>
                                                     <&goto_stmt ns:1>
                                                         <KW_goto:goto sym level: 6 namespace:1>
-                                                        <identifier:label_case sym level: 6 namespace:322>
+                                                        <identifier:label_case sym level: 6 namespace:321>
                                                         <;:; sym level: 6 namespace:1>
                                                 <right_brace:} sym level: 6 namespace:1>
                 <statement ns:1>
@@ -19135,7 +18728,7 @@ start print ast tree
                                                                                 <statement ns:1>
                                                                                     <&goto_stmt ns:1>
                                                                                         <KW_goto:goto sym level: 10 namespace:1>
-                                                                                        <identifier:label_case sym level: 10 namespace:322>
+                                                                                        <identifier:label_case sym level: 10 namespace:321>
                                                                                         <;:; sym level: 10 namespace:1>
                                                                                 <right_brace:} sym level: 10 namespace:1>
                                                 <right_brace:} sym level: 6 namespace:1>
@@ -19185,9 +18778,9 @@ start print ast tree
                             <integer_constant:1 sym level: 2 namespace:1>
                         <;:; sym level: 2 namespace:1>
                 <statement ns:1>
-                    <labeled_stmt ns:322>
-                        <identifier:label_case sym level: 2 namespace:322>
-                        <colon:: sym level: 2 namespace:322>
+                    <labeled_stmt ns:321>
+                        <identifier:label_case sym level: 2 namespace:321>
+                        <colon:: sym level: 2 namespace:321>
                         <statement ns:1>
                             <&while_stmt ns:1>
                                 <KW_while:while sym level: 3 namespace:1>
@@ -25476,12 +25069,6 @@ finish print ast tree
         start declarator
         finish declarator
     finish declaration
-    start declaration line:1178
-        start specify or qualify node
-        finish specify or qualify node
-        start declarator
-        finish declarator
-    finish declaration
     start declaration line:1180
         start specify or qualify node
         finish specify or qualify node
@@ -25941,156 +25528,130 @@ finish print ast tree
                                                                                                 end primary expr
                                                                                             <Type>:< signed_char >
                                                                                             end assignment expr
-                                                                                            start expr expr
-                                                                                                start postfix expr
+                                                                                            start declaration line:1213
+                                                                                                start specify or qualify node
+                                                                                                finish specify or qualify node
+                                                                                                start declarator
+                                                                                                finish declarator
+                                                                                                start cast
+                                                                                                    start specify or qualify node
+                                                                                                    finish specify or qualify node
                                                                                                     start primary expr
-                                                                                                    <Type>:< function , extern , signed_int >
-                                                                                                    end primary expr
-                                                                                                    start primary expr
-                                                                                                    <Type>:< point , signed_char >
-                                                                                                    end primary expr
-                                                                                                <Type>:< extern , signed_int >
-                                                                                                end postfix expr
-                                                                                                start expr expr
-                                                                                                    start assignment expr
-                                                                                                        start primary expr
-                                                                                                        <Type>:< point , static , struct >
-                                                                                                        end primary expr
-                                                                                                        start postfix expr
+                                                                                                        start condition expr
                                                                                                             start primary expr
-                                                                                                            <Type>:< function , point , struct >
-                                                                                                            end primary expr
-                                                                                                            start primary expr
-                                                                                                            <Type>:< signed_int >
-                                                                                                            end primary expr
-                                                                                                        <Type>:< point , struct >
-                                                                                                        end postfix expr
-                                                                                                    <Type>:< point , static , struct >
-                                                                                                    end assignment expr
-                                                                                                    start declaration line:1213
-                                                                                                        start specify or qualify node
-                                                                                                        finish specify or qualify node
-                                                                                                        start declarator
-                                                                                                        finish declarator
-                                                                                                        start cast
-                                                                                                            start specify or qualify node
-                                                                                                            finish specify or qualify node
-                                                                                                            start primary expr
-                                                                                                                start condition expr
-                                                                                                                    start primary expr
-                                                                                                                        start logical and expr
-                                                                                                                            start equal expr
+                                                                                                                start logical and expr
+                                                                                                                    start equal expr
+                                                                                                                        start primary expr
+                                                                                                                        <Type>:< point , struct >
+                                                                                                                        end primary expr
+                                                                                                                        start primary expr
+                                                                                                                        <Type>:< signed_int >
+                                                                                                                        end primary expr
+                                                                                                                    <Type>:< signed_int >
+                                                                                                                    end equal expr
+                                                                                                                    start relation expr
+                                                                                                                        start primary expr
+                                                                                                                        <Type>:< signed_int >
+                                                                                                                        end primary expr
+                                                                                                                        start primary expr
+                                                                                                                            start postfix expr
                                                                                                                                 start primary expr
                                                                                                                                 <Type>:< point , struct >
                                                                                                                                 end primary expr
-                                                                                                                                start primary expr
-                                                                                                                                <Type>:< signed_int >
-                                                                                                                                end primary expr
-                                                                                                                            <Type>:< signed_int >
-                                                                                                                            end equal expr
-                                                                                                                            start relation expr
-                                                                                                                                start primary expr
-                                                                                                                                <Type>:< signed_int >
-                                                                                                                                end primary expr
-                                                                                                                                start primary expr
-                                                                                                                                    start postfix expr
-                                                                                                                                        start primary expr
-                                                                                                                                        <Type>:< point , struct >
-                                                                                                                                        end primary expr
-                                                                                                                                    <Type>:< unsigned_long >
-                                                                                                                                    end postfix expr
-                                                                                                                                <Type>:< unsigned_long >
-                                                                                                                                end primary expr
-                                                                                                                            <Type>:< signed_int >
-                                                                                                                            end relation expr
-                                                                                                                        <Type>:< signed_int >
-                                                                                                                        end logical and expr
+                                                                                                                            <Type>:< unsigned_long >
+                                                                                                                            end postfix expr
+                                                                                                                        <Type>:< unsigned_long >
+                                                                                                                        end primary expr
                                                                                                                     <Type>:< signed_int >
-                                                                                                                    end primary expr
+                                                                                                                    end relation expr
+                                                                                                                <Type>:< signed_int >
+                                                                                                                end logical and expr
+                                                                                                            <Type>:< signed_int >
+                                                                                                            end primary expr
+                                                                                                            start primary expr
+                                                                                                                start postfix expr
                                                                                                                     start primary expr
-                                                                                                                        start postfix expr
-                                                                                                                            start primary expr
-                                                                                                                            <Type>:< point , struct >
-                                                                                                                            end primary expr
-                                                                                                                            start primary expr
-                                                                                                                            <Type>:< signed_int >
-                                                                                                                            end primary expr
-                                                                                                                        <Type>:< point , void >
-                                                                                                                        end postfix expr
-                                                                                                                    <Type>:< point , void >
+                                                                                                                    <Type>:< point , struct >
                                                                                                                     end primary expr
                                                                                                                     start primary expr
                                                                                                                     <Type>:< signed_int >
                                                                                                                     end primary expr
                                                                                                                 <Type>:< point , void >
-                                                                                                                end condition expr
+                                                                                                                end postfix expr
                                                                                                             <Type>:< point , void >
                                                                                                             end primary expr
-                                                                                                        <Type>:< point , struct >
-                                                                                                        end cast
-                                                                                                    finish declaration
-                                                                                                    start declaration line:1214
-                                                                                                        start specify or qualify node
-                                                                                                        finish specify or qualify node
-                                                                                                        start declarator
-                                                                                                        finish declarator
-                                                                                                        start primary expr
-                                                                                                        <Type>:< signed_int >
-                                                                                                        end primary expr
-                                                                                                    finish declaration
-                                                                                                    start expr expr
+                                                                                                            start primary expr
+                                                                                                            <Type>:< signed_int >
+                                                                                                            end primary expr
+                                                                                                        <Type>:< point , void >
+                                                                                                        end condition expr
+                                                                                                    <Type>:< point , void >
+                                                                                                    end primary expr
+                                                                                                <Type>:< point , struct >
+                                                                                                end cast
+                                                                                            finish declaration
+                                                                                            start declaration line:1214
+                                                                                                start specify or qualify node
+                                                                                                finish specify or qualify node
+                                                                                                start declarator
+                                                                                                finish declarator
+                                                                                                start primary expr
+                                                                                                <Type>:< signed_int >
+                                                                                                end primary expr
+                                                                                            finish declaration
+                                                                                            start expr expr
+                                                                                                start postfix expr
+                                                                                                    start primary expr
+                                                                                                    <Type>:< function , void >
+                                                                                                    end primary expr
+                                                                                                <Type>:< void >
+                                                                                                end postfix expr
+                                                                                                start if expr
+                                                                                                    start equal expr
                                                                                                         start postfix expr
                                                                                                             start primary expr
-                                                                                                            <Type>:< function , void >
+                                                                                                            <Type>:< point , struct >
                                                                                                             end primary expr
-                                                                                                        <Type>:< void >
+                                                                                                        <Type>:< signed_int >
                                                                                                         end postfix expr
-                                                                                                        start if expr
-                                                                                                            start equal expr
+                                                                                                        start primary expr
+                                                                                                        <Type>:< const , signed_int >
+                                                                                                        end primary expr
+                                                                                                    <Type>:< signed_int >
+                                                                                                    end equal expr
+                                                                                                    start compound expr
+                                                                                                        start expr expr
+                                                                                                            start assignment expr
+                                                                                                                start primary expr
+                                                                                                                <Type>:< point , struct >
+                                                                                                                end primary expr
                                                                                                                 start postfix expr
+                                                                                                                    start primary expr
+                                                                                                                    <Type>:< function , point , extern  inline , struct >
+                                                                                                                    end primary expr
+                                                                                                                    start primary expr
+                                                                                                                    <Type>:< const , signed_int >
+                                                                                                                    end primary expr
+                                                                                                                    start primary expr
+                                                                                                                    <Type>:< signed_int >
+                                                                                                                    end primary expr
+                                                                                                                    start primary expr
+                                                                                                                    <Type>:< signed_int >
+                                                                                                                    end primary expr
                                                                                                                     start primary expr
                                                                                                                     <Type>:< point , struct >
                                                                                                                     end primary expr
-                                                                                                                <Type>:< signed_int >
-                                                                                                                end postfix expr
-                                                                                                                start primary expr
-                                                                                                                <Type>:< const , signed_int >
-                                                                                                                end primary expr
-                                                                                                            <Type>:< signed_int >
-                                                                                                            end equal expr
-                                                                                                            start compound expr
-                                                                                                                start expr expr
-                                                                                                                    start assignment expr
-                                                                                                                        start primary expr
-                                                                                                                        <Type>:< point , struct >
-                                                                                                                        end primary expr
-                                                                                                                        start postfix expr
-                                                                                                                            start primary expr
-                                                                                                                            <Type>:< function , point , extern  inline , struct >
-                                                                                                                            end primary expr
-                                                                                                                            start primary expr
-                                                                                                                            <Type>:< const , signed_int >
-                                                                                                                            end primary expr
-                                                                                                                            start primary expr
-                                                                                                                            <Type>:< signed_int >
-                                                                                                                            end primary expr
-                                                                                                                            start primary expr
-                                                                                                                            <Type>:< signed_int >
-                                                                                                                            end primary expr
-                                                                                                                            start primary expr
-                                                                                                                            <Type>:< point , struct >
-                                                                                                                            end primary expr
-                                                                                                                            start primary expr
-                                                                                                                            <Type>:< signed_int >
-                                                                                                                            end primary expr
-                                                                                                                            start primary expr
-                                                                                                                            <Type>:< signed_int >
-                                                                                                                            end primary expr
-                                                                                                                        end postfix expr fail
-                                                                                                                    end assignment fail
-                                                                                                                end comopound stmt fail
-                                                                                                            end if stmt fail
+                                                                                                                    start primary expr
+                                                                                                                    <Type>:< signed_int >
+                                                                                                                    end primary expr
+                                                                                                                    start primary expr
+                                                                                                                    <Type>:< signed_int >
+                                                                                                                    end primary expr
+                                                                                                                end postfix expr fail
+                                                                                                            end assignment fail
                                                                                                         end comopound stmt fail
+                                                                                                    end if stmt fail
+                                                                                                end comopound stmt fail
 error
 Compile Error:(file (null): line 1217: token ) )
         trans_unit=creat_ast_node(end_of_file,0,0,first_token,0,0);

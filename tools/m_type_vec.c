@@ -530,10 +530,6 @@ VEC* lvalue_convertion(VEC* tmp_type_vec)
         VECinsert(res,(void*)pointer);
     }
     else if(tmpt->typ_category==TP_FUNCTION){
-        oldres=res;
-        res=Type_VEC_get_func_return_type(res,true);
-        if(oldres!=res)
-            DelVEC(oldres);
         M_TYPE* pointer=build_base_type(TP_POINT);
         VECinsert(res,(void*)pointer);
     }

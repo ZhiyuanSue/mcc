@@ -1031,6 +1031,13 @@ VEC* type_name_type(AST_BASE* type_name_node){
             return NULL;
         }
     }
+    M_TYPE* base_type=Type_VEC_get_actual_base_type(type_vec);
+    if(base_type->typ_category==TP_ENUM)
+    {
+        M_TYPE* new_base_type=build_base_type(TP_SINT);
+        if(!Type_VEC_change_actual_base_type(type_vec,new_base_type))
+            return NULL;
+    }
     m_free(tei);
     return type_vec;
 }

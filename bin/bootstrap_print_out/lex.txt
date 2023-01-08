@@ -15648,6 +15648,7 @@ finish print ast tree
                                                 start primary expr
                                                 <Type>:< point , signed_char >
                                                 end primary expr
+both are pointer
                                                 start primary expr
                                                 <Type>:< signed_int >
                                                 end primary expr
@@ -15752,6 +15753,7 @@ finish print ast tree
                                             start primary expr
                                             <Type>:< point , signed_char >
                                             end primary expr
+both are pointer
                                         <Type>:< signed_long , signed_char >
                                         end add
                                     <Type>:< unsigned_long >
