@@ -7,6 +7,7 @@
 #include "EBNF.h"
 #include "m_type.h"
 #define is_digit(c) (c>='0'&&c<='9')
+#define is_oct_digit(c) (c>='0'&&c<='7')
 #define is_hex_digit(c) ((c>='0'&&c<='9')||(c>='A'&&c<='F')||(c>='a'&&c<='f'))
 typedef char* TK_VALUE;
 typedef struct token{

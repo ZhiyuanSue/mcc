@@ -35559,9 +35559,1958 @@ identifier
                 <Type>:< signed_int >
                 end primary expr
                 start primary expr
-                <Type>:< none >
+                <Type>:< signed_int >
                 end primary expr
-error
-Compile Error:(file (null): line 874: token SA_ATTR_NONE )
-    SA_ATTR_NONE=0,
-reason:	C0027:Enumerator value is not an integer value
+                start primary expr
+                <Type>:< signed_int >
+                end primary expr
+                start primary expr
+                <Type>:< signed_int >
+                end primary expr
+            finish enum
+        finish specify or qualify node
+    finish declaration
+    start declaration line:879
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:880
+        start specify or qualify node
+            start struct union
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish struct union
+        finish specify or qualify node
+    finish declaration
+    start declaration line:893
+        start specify or qualify node
+            start struct union
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start primary expr
+                <Type>:< signed_int >
+                end primary expr
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish struct union
+        finish specify or qualify node
+        start declarator
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:905
+        start specify or qualify node
+            start struct union
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish struct union
+        finish specify or qualify node
+        start declarator
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:909
+        start specify or qualify node
+            start struct union
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish struct union
+        finish specify or qualify node
+        start declarator
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:913
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish func
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:914
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish func
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:915
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish func
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:916
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish func
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:917
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish func
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:918
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish func
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:919
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish func
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:920
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish func
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:921
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish func
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:922
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish func
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:923
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish func
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start specify or qualify node
+    finish specify or qualify node
+    start declarator
+direct_dec_index 3
+        start func
+            start specify or qualify node
+            finish specify or qualify node
+            start declarator
+direct_dec_index 0
+identifier
+3
+            finish declarator
+            start specify or qualify node
+            finish specify or qualify node
+            start declarator
+direct_dec_index 0
+identifier
+3
+            finish declarator
+        finish func
+direct_dec_index 0
+identifier
+3
+    finish declarator
+    start compound expr
+        start if expr
+            start unary
+                start primary expr
+                <Type>:< point , struct >
+                end primary expr
+            <Type>:< signed_int >
+            end unary
+            start return expr
+                start primary expr
+                <Type>:< signed_int >
+                end primary expr
+            end return stmt
+        end if stmt
+        start if expr
+            start unary
+                start primary expr
+                <Type>:< point , struct >
+                end primary expr
+            <Type>:< signed_int >
+            end unary
+            start expr expr
+                start assignment expr
+                    start primary expr
+                    <Type>:< point , struct >
+                    end primary expr
+                    start postfix expr
+                        start primary expr
+                        <Type>:< function , point , void >
+                        end primary expr
+                        start unary
+                            start primary expr
+                                start primary expr
+                                <Type>:< struct >
+                                end primary expr
+                            <Type>:< struct >
+                            end primary expr
+                        <Type>:< signed_int >
+                        end unary
+                    <Type>:< point , void >
+                    end postfix expr
+                <Type>:< point , struct >
+                end assignment expr
+            end if stmt
+            start expr expr
+                start assignment expr
+                    start postfix expr
+                        start primary expr
+                        <Type>:< point , struct >
+                        end primary expr
+                    <Type>:< unsigned_int >
+                    end postfix expr
+                    start postfix expr
+                        start primary expr
+                        <Type>:< point , struct >
+                        end primary expr
+                    <Type>:< unsigned_int >
+                    end postfix expr
+                <Type>:< unsigned_int >
+                end assignment expr
+                start expr expr
+                    start assignment expr
+                        start postfix expr
+                            start primary expr
+                            <Type>:< point , struct >
+                            end primary expr
+                        <Type>:< point , struct >
+                        end postfix expr
+                        start postfix expr
+                            start primary expr
+                            <Type>:< point , struct >
+                            end primary expr
+                        <Type>:< point , struct >
+                        end postfix expr
+                    <Type>:< point , struct >
+                    end assignment expr
+                    start expr expr
+                        start assignment expr
+                            start postfix expr
+                                start primary expr
+                                <Type>:< point , struct >
+                                end primary expr
+                            <Type>:< unsigned_long >
+                            end postfix expr
+                            start postfix expr
+                                start primary expr
+                                <Type>:< point , struct >
+                                end primary expr
+                            <Type>:< unsigned_long >
+                            end postfix expr
+                        <Type>:< unsigned_long >
+                        end assignment expr
+                        start expr expr
+                            start assignment expr
+                                start postfix expr
+                                    start primary expr
+                                    <Type>:< point , struct >
+                                    end primary expr
+                                <Type>:< bool >
+                                end postfix expr
+                                start postfix expr
+                                    start primary expr
+                                    <Type>:< point , struct >
+                                    end primary expr
+                                <Type>:< bool >
+                                end postfix expr
+                            <Type>:< bool >
+                            end assignment expr
+                            start expr expr
+                                start assignment expr
+                                    start postfix expr
+                                        start primary expr
+                                        <Type>:< point , struct >
+                                        end primary expr
+                                    <Type>:< bool >
+                                    end postfix expr
+                                    start postfix expr
+                                        start primary expr
+                                        <Type>:< point , struct >
+                                        end primary expr
+                                    <Type>:< bool >
+                                    end postfix expr
+                                <Type>:< bool >
+                                end assignment expr
+                                start expr expr
+                                    start assignment expr
+                                        start postfix expr
+                                            start primary expr
+                                            <Type>:< point , struct >
+                                            end primary expr
+                                        <Type>:< unsigned_long_long_int >
+                                        end postfix expr
+                                        start postfix expr
+                                            start primary expr
+                                            <Type>:< point , struct >
+                                            end primary expr
+                                        <Type>:< unsigned_long_long_int >
+                                        end postfix expr
+                                    <Type>:< unsigned_long_long_int >
+                                    end assignment expr
+                                    start expr expr
+                                        start assignment expr
+                                            start postfix expr
+                                                start primary expr
+                                                <Type>:< point , struct >
+                                                end primary expr
+                                            <Type>:< signed_int >
+                                            end postfix expr
+                                            start postfix expr
+                                                start primary expr
+                                                <Type>:< point , struct >
+                                                end primary expr
+                                            <Type>:< signed_int >
+                                            end postfix expr
+                                        <Type>:< signed_int >
+                                        end assignment expr
+                                        start expr expr
+                                            start assignment expr
+                                                start postfix expr
+                                                    start primary expr
+                                                    <Type>:< point , struct >
+                                                    end primary expr
+                                                <Type>:< unsigned_int >
+                                                end postfix expr
+                                                start postfix expr
+                                                    start primary expr
+                                                    <Type>:< point , struct >
+                                                    end primary expr
+                                                <Type>:< unsigned_int >
+                                                end postfix expr
+                                            <Type>:< unsigned_int >
+                                            end assignment expr
+                                            start expr expr
+                                                start assignment expr
+                                                    start postfix expr
+                                                        start primary expr
+                                                        <Type>:< point , struct >
+                                                        end primary expr
+                                                    <Type>:< point , struct >
+                                                    end postfix expr
+                                                    start postfix expr
+                                                        start primary expr
+                                                        <Type>:< point , struct >
+                                                        end primary expr
+                                                    <Type>:< point , struct >
+                                                    end postfix expr
+                                                <Type>:< point , struct >
+                                                end assignment expr
+                                                start expr expr
+                                                    start assignment expr
+                                                        start postfix expr
+                                                            start primary expr
+                                                            <Type>:< point , struct >
+                                                            end primary expr
+                                                        <Type>:< point , signed_char >
+                                                        end postfix expr
+                                                        start postfix expr
+                                                            start primary expr
+                                                            <Type>:< point , struct >
+                                                            end primary expr
+                                                        <Type>:< point , signed_char >
+                                                        end postfix expr
+                                                    <Type>:< point , signed_char >
+                                                    end assignment expr
+                                                    start return expr
+                                                        start primary expr
+                                                        <Type>:< signed_int >
+                                                        end primary expr
+                                                    end return stmt
+                                                end comopound stmt
+    start declaration line:958
+        start specify or qualify node
+            start enum
+            finish enum
+        finish specify or qualify node
+    finish declaration
+    start declaration line:1032
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 6
+            start array
+                start primary expr
+                <Type>:< signed_int >
+                end primary expr
+            finish array
+direct_dec_index 3
+            start array
+                start primary expr
+                <Type>:< signed_int >
+                end primary expr
+            finish array
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:1034
+        start specify or qualify node
+            start struct union
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish struct union
+        finish specify or qualify node
+        start declarator
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:1039
+        start specify or qualify node
+            start struct union
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish struct union
+        finish specify or qualify node
+        start declarator
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:1045
+        start specify or qualify node
+            start struct union
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish struct union
+        finish specify or qualify node
+        start declarator
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:1052
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish func
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:1053
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish func
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:1054
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish func
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:1060
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish func
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:1061
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish func
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:1063
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 6
+                    start array
+                        start primary expr
+                        <Type>:< signed_int >
+                        end primary expr
+                    finish array
+direct_dec_index 3
+                    start array
+                        start primary expr
+                        <Type>:< signed_int >
+                        end primary expr
+                    finish array
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish func
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:1064
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 6
+                    start array
+                        start primary expr
+                        <Type>:< signed_int >
+                        end primary expr
+                    finish array
+direct_dec_index 3
+                    start array
+                        start primary expr
+                        <Type>:< signed_int >
+                        end primary expr
+                    finish array
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish func
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:1066
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish func
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:1067
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish func
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:1072
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:1073
+        start specify or qualify node
+            start struct union
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish struct union
+        finish specify or qualify node
+        start declarator
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:1081
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:1082
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish func
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:1084
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish func
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:1085
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish func
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:1086
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish func
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:1087
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish func
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:1088
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish func
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:1089
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish func
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:1090
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish func
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:1091
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish func
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:1092
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish func
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:1093
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish func
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:1101
+        start specify or qualify node
+            start struct union
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start primary expr
+                <Type>:< signed_int >
+                end primary expr
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start primary expr
+                <Type>:< signed_int >
+                end primary expr
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start primary expr
+                <Type>:< signed_int >
+                end primary expr
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start primary expr
+                <Type>:< signed_int >
+                end primary expr
+            finish struct union
+        finish specify or qualify node
+        start declarator
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:1107
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:1108
+        start specify or qualify node
+            start struct union
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish struct union
+        finish specify or qualify node
+    finish declaration
+    start specify or qualify node
+    finish specify or qualify node
+    start declarator
+direct_dec_index 3
+        start func
+            start specify or qualify node
+            finish specify or qualify node
+            start declarator
+direct_dec_index 0
+identifier
+3
+            finish declarator
+            start specify or qualify node
+            finish specify or qualify node
+            start declarator
+direct_dec_index 0
+identifier
+3
+            finish declarator
+            start specify or qualify node
+            finish specify or qualify node
+            start declarator
+direct_dec_index 0
+identifier
+3
+            finish declarator
+            start specify or qualify node
+            finish specify or qualify node
+            start declarator
+direct_dec_index 0
+identifier
+3
+            finish declarator
+            start specify or qualify node
+            finish specify or qualify node
+            start declarator
+direct_dec_index 0
+identifier
+3
+            finish declarator
+            start specify or qualify node
+            finish specify or qualify node
+            start declarator
+direct_dec_index 0
+identifier
+3
+            finish declarator
+        finish func
+direct_dec_index 0
+identifier
+3
+    finish declarator
+    start compound expr
+        start declaration line:1120
+            start specify or qualify node
+            finish specify or qualify node
+            start declarator
+direct_dec_index 0
+identifier
+3
+            finish declarator
+            start cast
+                start specify or qualify node
+                finish specify or qualify node
+                start postfix expr
+                    start primary expr
+                    <Type>:< function , point , void >
+                    end primary expr
+                    start unary
+                        start primary expr
+                            start primary expr
+                            <Type>:< struct >
+                            end primary expr
+                        <Type>:< struct >
+                        end primary expr
+                    <Type>:< signed_int >
+                    end unary
+                <Type>:< point , void >
+                end postfix expr
+            <Type>:< point , struct >
+            end cast
+        finish declaration
+        start expr expr
+            start assignment expr
+                start postfix expr
+                    start primary expr
+                    <Type>:< point , struct >
+                    end primary expr
+                <Type>:< signed_int >
+                end postfix expr
+                start primary expr
+                <Type>:< signed_int >
+                end primary expr
+            <Type>:< signed_int >
+            end assignment expr
+            start expr expr
+                start assignment expr
+                    start postfix expr
+                        start primary expr
+                        <Type>:< point , struct >
+                        end primary expr
+                    <Type>:< point , struct >
+                    end postfix expr
+                    start primary expr
+                    <Type>:< point , struct >
+                    end primary expr
+                <Type>:< point , struct >
+                end assignment expr
+                start expr expr
+                    start assignment expr
+                        start postfix expr
+                            start primary expr
+                            <Type>:< point , struct >
+                            end primary expr
+                        <Type>:< point , struct >
+                        end postfix expr
+                        start primary expr
+                        <Type>:< point , struct >
+                        end primary expr
+                    <Type>:< point , struct >
+                    end assignment expr
+                    start expr expr
+                        start assignment expr
+                            start postfix expr
+                                start primary expr
+                                <Type>:< point , struct >
+                                end primary expr
+                            <Type>:< point , struct >
+                            end postfix expr
+                            start primary expr
+                            <Type>:< point , struct >
+                            end primary expr
+                        <Type>:< point , struct >
+                        end assignment expr
+                        start expr expr
+                            start assignment expr
+                                start postfix expr
+                                    start primary expr
+                                    <Type>:< point , struct >
+                                    end primary expr
+                                <Type>:< unsigned_long >
+                                end postfix expr
+                                start primary expr
+                                <Type>:< unsigned_long >
+                                end primary expr
+                            <Type>:< unsigned_long >
+                            end assignment expr
+                            start expr expr
+                                start assignment expr
+                                    start postfix expr
+                                        start primary expr
+                                        <Type>:< point , struct >
+                                        end primary expr
+                                    <Type>:< unsigned_int >
+                                    end postfix expr
+                                    start primary expr
+                                    <Type>:< unsigned_int >
+                                    end primary expr
+                                <Type>:< unsigned_int >
+                                end assignment expr
+                                start expr expr
+                                    start assignment expr
+                                        start postfix expr
+                                            start primary expr
+                                            <Type>:< point , struct >
+                                            end primary expr
+                                        <Type>:< point , struct >
+                                        end postfix expr
+                                        start primary expr
+                                        <Type>:< signed_int >
+                                        end primary expr
+                                    <Type>:< point , struct >
+                                    end assignment expr
+                                    start expr expr
+                                        start assignment expr
+                                            start postfix expr
+                                                start primary expr
+                                                <Type>:< point , struct >
+                                                end primary expr
+                                            <Type>:< point , struct >
+                                            end postfix expr
+                                            start primary expr
+                                            <Type>:< signed_int >
+                                            end primary expr
+                                        <Type>:< point , struct >
+                                        end assignment expr
+                                        start return expr
+                                            start primary expr
+                                            <Type>:< point , struct >
+                                            end primary expr
+                                        end return stmt
+                                    end comopound stmt
+    start declaration line:1131
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish func
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:1132
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish func
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:1133
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish func
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:1134
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+            finish func
+direct_dec_index 0
+identifier
+3
+        finish declarator
+    finish declaration
+    start declaration line:1139
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+direct_dec_index 3
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+direct_dec_index 0
+identifier
+3
+                finish declarator
+   

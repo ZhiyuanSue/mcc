@@ -75,8 +75,22 @@ bool int_const_to_const_value(TOKEN* t,CONST_VALUE* cv)
         else
             prefix=1;
     }   /*else is dec*/
-    while(is_hex_digit(*cp)){
+    if(prefix==0)
+    {
+        while(is_digit(*cp))
+            cp++;
+    }
+    else if(prefix==1)
+    {
         cp++;
+        while(is_oct_digit(*cp))
+            cp++;
+    }
+    else if(prefix==2)
+    {
+        cp+=2;
+        while(is_hex_digit(*cp))
+            cp++;
     }
     if(*cp=='\0'){
         if(prefix){
