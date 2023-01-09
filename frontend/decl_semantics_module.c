@@ -17,12 +17,14 @@ TP_SU* struct_union_type(AST_BASE* struct_decl_list_node,
 #endif
     if(!struct_decl_list_node||struct_decl_list_node->type!=struct_decl_list)
         return NULL;
+    char* tag=(tag_node)?(tag_node->token->value):NULL;
+    /*
     char* tag=NULL;
     if(tag_node)
     {
         tag=m_alloc(strlen(tag_node->token->value)+1);
         strcpy(tag,(tag_node->token->value));
-    }
+    }*/
     TP_SU* su_t=NULL;
     ERROR_ITEM* tei=(ERROR_ITEM*)m_alloc(sizeof(ERROR_ITEM));
     SYM_ITEM* find_tmpsi=NULL;
