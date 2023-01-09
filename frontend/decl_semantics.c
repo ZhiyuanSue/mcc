@@ -1216,6 +1216,8 @@ bool initializer_semantic(AST_BASE* initializer_node,VEC* target_type_vec)
         /*please consider the null pointer constant*/
         if(!assignment_type_check(unary_type_vec,assign_type_vec))
         {
+            print_type_vec(unary_type_vec);
+            print_type_vec(assign_type_vec);
             C_ERROR(C0072_ERR_ASSIGN_OPERAND,initializer_node);
             goto error;
         }

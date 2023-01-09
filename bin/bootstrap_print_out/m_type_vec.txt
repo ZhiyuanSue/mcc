@@ -656,13 +656,11 @@ start print ast tree
                                                     <-:- sym level: 0 namespace:19>
                                                     <&unary_expr ns:19>
                                                         <KW_sizeof:sizeof sym level: 0 namespace:19>
-                                                        <(:( sym level: 0 namespace:19>
-                                                        <&type_name ns:19>
-                                                            <&spec_qual_list ns:19>
-                                                                <&type_spec ns:19>
-                                                                    <&typedef_name ns:19>
-                                                                        <identifier:size_t sym level: 0 namespace:19>
-                                                        <):) sym level: 0 namespace:19>
+                                                        <&primary_expression ns:19>
+                                                            <(:( sym level: 0 namespace:19>
+                                                            <&primary_expression ns:19>
+                                                                <identifier:size_t sym level: 0 namespace:19>
+                                                            <):) sym level: 0 namespace:19>
                                                 <]:] sym level: 0 namespace:19>
                                 <;:; sym level: 0 namespace:19>
                         <right_brace:} sym level: 0 namespace:1>
@@ -19027,8 +19025,12 @@ finish print ast tree
                             <Type>:< signed_int >
                             end mul
                             start unary
-                                start specify or qualify node
-                                finish specify or qualify node
+                                start primary expr
+                                    start primary expr
+                                    <Type>:< unsigned_long >
+                                    end primary expr
+                                <Type>:< unsigned_long >
+                                end primary expr
                             <Type>:< signed_int >
                             end unary
                         <Type>:< signed_int >
@@ -33203,7 +33205,7 @@ scope type:file_scope with child 160 and namespace 0
                 <symbol table>
     scope type:function_scope with child 1 and namespace 0
         <symbol table>
-            <symbol:final ns:0 linkage:0>
+            <symbol:final ns:0 linkage:5987104>
                 type::< label >
         scope type:block_scope with child 5 and namespace 0
             <symbol table>

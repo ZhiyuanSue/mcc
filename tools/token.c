@@ -349,7 +349,7 @@ bool float_const_to_const_value(TOKEN* t,CONST_VALUE* cv)
 bool char_const_to_const_value(TOKEN* t,CONST_VALUE* cv)
 {
     /*
-    the escape chars in source character set has been translated to execution character set at preprossor stage
+    the escape chars in source character set has been translated to execution character set at the previous stage
     */
     /*TODO:test this module*/
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));

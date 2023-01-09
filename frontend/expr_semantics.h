@@ -2,6 +2,7 @@
 #define _CONST_EXPR_
 #include "semantics.h"
 #include "../tools/token.h"
+#include "../tools/string_literal.h"
 #include "const_expr.h"
 #define EXPR_NUM 17
 

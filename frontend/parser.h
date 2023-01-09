@@ -30,6 +30,5 @@ NMSP parser_node_name_space(enum rule_type_enum rule_type,
     SYM* curr_sym_table);
 
 VEC* shorten_tree(VEC* v);
-bool is_type_def_name(char* symbol,SYM* curr_sym_table);
 bool is_enum_const(char* symbol,SYM* curr_sym_table);
 #endif

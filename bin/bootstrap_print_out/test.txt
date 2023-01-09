@@ -675,13 +675,11 @@ start print ast tree
                                                     <-:- sym level: 0 namespace:20>
                                                     <&unary_expr ns:20>
                                                         <KW_sizeof:sizeof sym level: 0 namespace:20>
-                                                        <(:( sym level: 0 namespace:20>
-                                                        <&type_name ns:20>
-                                                            <&spec_qual_list ns:20>
-                                                                <&type_spec ns:20>
-                                                                    <&typedef_name ns:20>
-                                                                        <identifier:size_t sym level: 0 namespace:20>
-                                                        <):) sym level: 0 namespace:20>
+                                                        <&primary_expression ns:20>
+                                                            <(:( sym level: 0 namespace:20>
+                                                            <&primary_expression ns:20>
+                                                                <identifier:size_t sym level: 0 namespace:20>
+                                                            <):) sym level: 0 namespace:20>
                                                 <]:] sym level: 0 namespace:20>
                                 <;:; sym level: 0 namespace:20>
                         <right_brace:} sym level: 0 namespace:1>
@@ -2440,6 +2438,74 @@ start print ast tree
                 <&storage_class_spec ns:1>
                     <KW_extern:extern sym level: 0 namespace:1>
                 <&type_spec ns:1>
+                    <KW_char:char sym level: 0 namespace:1>
+            <&init_decl_list ns:1>
+                <&init_decl ns:1>
+                    <&declarator ns:1>
+                        <&pointer ns:1>
+                            <*:* sym level: 0 namespace:1>
+                        <&direct_declarator ns:1>
+                            <identifier:strcpy sym level: 0 namespace:1>
+                            <(:( sym level: 0 namespace:1>
+                            <&parameter_type_list ns:1>
+                                <&parameter_list ns:1>
+                                    <&parameter_declaration ns:1>
+                                        <&declaration_spec ns:1>
+                                            <&type_spec ns:1>
+                                                <KW_char:char sym level: 1 namespace:1>
+                                        <&declarator ns:1>
+                                            <&pointer ns:1>
+                                                <*:* sym level: 1 namespace:1>
+                                            <&direct_declarator ns:1>
+                                                <identifier:s1 sym level: 1 namespace:1>
+                                    <&parameter_declaration ns:1>
+                                        <&declaration_spec ns:1>
+                                            <&type_qual ns:1>
+                                                <KW_const:const sym level: 1 namespace:1>
+                                            <&type_spec ns:1>
+                                                <KW_char:char sym level: 1 namespace:1>
+                                        <&declarator ns:1>
+                                            <&pointer ns:1>
+                                                <*:* sym level: 1 namespace:1>
+                                            <&direct_declarator ns:1>
+                                                <identifier:s2 sym level: 1 namespace:1>
+                            <):) sym level: 0 namespace:1>
+            <;:; sym level: 0 namespace:1>
+    <external_decl ns:1>
+        <declaration ns:1>
+            <&declaration_spec ns:1>
+                <&storage_class_spec ns:1>
+                    <KW_extern:extern sym level: 0 namespace:1>
+                <&type_spec ns:1>
+                    <&typedef_name ns:1>
+                        <identifier:size_t sym level: 0 namespace:1>
+            <&init_decl_list ns:1>
+                <&init_decl ns:1>
+                    <&declarator ns:1>
+                        <&direct_declarator ns:1>
+                            <identifier:strlen sym level: 0 namespace:1>
+                            <(:( sym level: 0 namespace:1>
+                            <&parameter_type_list ns:1>
+                                <&parameter_list ns:1>
+                                    <&parameter_declaration ns:1>
+                                        <&declaration_spec ns:1>
+                                            <&type_qual ns:1>
+                                                <KW_const:const sym level: 1 namespace:1>
+                                            <&type_spec ns:1>
+                                                <KW_char:char sym level: 1 namespace:1>
+                                        <&declarator ns:1>
+                                            <&pointer ns:1>
+                                                <*:* sym level: 1 namespace:1>
+                                            <&direct_declarator ns:1>
+                                                <identifier:s sym level: 1 namespace:1>
+                            <):) sym level: 0 namespace:1>
+            <;:; sym level: 0 namespace:1>
+    <external_decl ns:1>
+        <declaration ns:1>
+            <&declaration_spec ns:1>
+                <&storage_class_spec ns:1>
+                    <KW_extern:extern sym level: 0 namespace:1>
+                <&type_spec ns:1>
                     <KW_int:int sym level: 0 namespace:1>
             <&init_decl_list ns:1>
                 <&init_decl ns:1>
@@ -2926,56 +2992,56 @@ start print ast tree
                         <&struct_union ns:1>
                             <KW_struct:struct sym level: 0 namespace:1>
                         <left_brace:{ sym level: 0 namespace:1>
-                        <&struct_decl_list ns:100>
-                            <&struct_decl ns:100>
-                                <&spec_qual_list ns:100>
-                                    <&type_spec ns:100>
-                                        <KW_int:int sym level: 0 namespace:100>
-                                <&struct_declarator_list ns:100>
-                                    <&struct_declarator ns:100>
-                                        <&declarator ns:100>
-                                            <&direct_declarator ns:100>
-                                                <identifier:count sym level: 0 namespace:100>
-                                <;:; sym level: 0 namespace:100>
-                            <&struct_decl ns:100>
-                                <&spec_qual_list ns:100>
-                                    <&type_spec ns:100>
-                                        <&struct_union_spec ns:100>
-                                            <&struct_union ns:100>
-                                                <KW_union:union sym level: 0 namespace:100>
-                                            <left_brace:{ sym level: 0 namespace:100>
-                                            <&struct_decl_list ns:101>
-                                                <&struct_decl ns:101>
-                                                    <&spec_qual_list ns:101>
-                                                        <&type_spec ns:101>
-                                                            <KW_int:int sym level: 0 namespace:101>
-                                                    <&struct_declarator_list ns:101>
-                                                        <&struct_declarator ns:101>
-                                                            <&declarator ns:101>
-                                                                <&direct_declarator ns:101>
-                                                                    <identifier:wch sym level: 0 namespace:101>
-                                                    <;:; sym level: 0 namespace:101>
-                                                <&struct_decl ns:101>
-                                                    <&spec_qual_list ns:101>
-                                                        <&type_spec ns:101>
-                                                            <KW_char:char sym level: 0 namespace:101>
-                                                    <&struct_declarator_list ns:101>
-                                                        <&struct_declarator ns:101>
-                                                            <&declarator ns:101>
-                                                                <&direct_declarator ns:101>
-                                                                    <identifier:wchb sym level: 0 namespace:101>
-                                                                    <[:[ sym level: 0 namespace:101>
-                                                                    <&primary_expression ns:101>
-                                                                        <integer_constant:4 sym level: 0 namespace:101>
-                                                                    <]:] sym level: 0 namespace:101>
-                                                    <;:; sym level: 0 namespace:101>
-                                            <right_brace:} sym level: 0 namespace:100>
-                                <&struct_declarator_list ns:100>
-                                    <&struct_declarator ns:100>
-                                        <&declarator ns:100>
-                                            <&direct_declarator ns:100>
-                                                <identifier:value sym level: 0 namespace:100>
-                                <;:; sym level: 0 namespace:100>
+                        <&struct_decl_list ns:102>
+                            <&struct_decl ns:102>
+                                <&spec_qual_list ns:102>
+                                    <&type_spec ns:102>
+                                        <KW_int:int sym level: 0 namespace:102>
+                                <&struct_declarator_list ns:102>
+                                    <&struct_declarator ns:102>
+                                        <&declarator ns:102>
+                                            <&direct_declarator ns:102>
+                                                <identifier:count sym level: 0 namespace:102>
+                                <;:; sym level: 0 namespace:102>
+                            <&struct_decl ns:102>
+                                <&spec_qual_list ns:102>
+                                    <&type_spec ns:102>
+                                        <&struct_union_spec ns:102>
+                                            <&struct_union ns:102>
+                                                <KW_union:union sym level: 0 namespace:102>
+                                            <left_brace:{ sym level: 0 namespace:102>
+                                            <&struct_decl_list ns:103>
+                                                <&struct_decl ns:103>
+                                                    <&spec_qual_list ns:103>
+                                                        <&type_spec ns:103>
+                                                            <KW_int:int sym level: 0 namespace:103>
+                                                    <&struct_declarator_list ns:103>
+                                                        <&struct_declarator ns:103>
+                                                            <&declarator ns:103>
+                                                                <&direct_declarator ns:103>
+                                                                    <identifier:wch sym level: 0 namespace:103>
+                                                    <;:; sym level: 0 namespace:103>
+                                                <&struct_decl ns:103>
+                                                    <&spec_qual_list ns:103>
+                                                        <&type_spec ns:103>
+                                                            <KW_char:char sym level: 0 namespace:103>
+                                                    <&struct_declarator_list ns:103>
+                                                        <&struct_declarator ns:103>
+                                                            <&declarator ns:103>
+                                                                <&direct_declarator ns:103>
+                                                                    <identifier:wchb sym level: 0 namespace:103>
+                                                                    <[:[ sym level: 0 namespace:103>
+                                                                    <&primary_expression ns:103>
+                                                                        <integer_constant:4 sym level: 0 namespace:103>
+                                                                    <]:] sym level: 0 namespace:103>
+                                                    <;:; sym level: 0 namespace:103>
+                                            <right_brace:} sym level: 0 namespace:102>
+                                <&struct_declarator_list ns:102>
+                                    <&struct_declarator ns:102>
+                                        <&declarator ns:102>
+                                            <&direct_declarator ns:102>
+                                                <identifier:value sym level: 0 namespace:102>
+                                <;:; sym level: 0 namespace:102>
                         <right_brace:} sym level: 0 namespace:1>
             <&init_decl_list ns:1>
                 <&init_decl ns:1>
@@ -4164,8 +4230,12 @@ finish print ast tree
                             <Type>:< signed_int >
                             end mul
                             start unary
-                                start specify or qualify node
-                                finish specify or qualify node
+                                start primary expr
+                                    start primary expr
+                                    <Type>:< unsigned_long >
+                                    end primary expr
+                                <Type>:< unsigned_long >
+                                end primary expr
                             <Type>:< signed_int >
                             end unary
                         <Type>:< signed_int >
@@ -4951,7 +5021,35 @@ finish print ast tree
             finish func
         finish declarator
     finish declaration
-    start declaration line:220
+    start declaration line:209
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+                finish declarator
+            finish func
+        finish declarator
+    finish declaration
+    start declaration line:210
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+                finish declarator
+            finish func
+        finish declarator
+    finish declaration
+    start declaration line:222
         start specify or qualify node
         finish specify or qualify node
         start declarator
@@ -4959,18 +5057,6 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
             finish func
-        finish declarator
-    finish declaration
-    start declaration line:229
-        start specify or qualify node
-        finish specify or qualify node
-        start declarator
-        finish declarator
-    finish declaration
-    start declaration line:230
-        start specify or qualify node
-        finish specify or qualify node
-        start declarator
         finish declarator
     finish declaration
     start declaration line:231
@@ -5009,13 +5095,13 @@ finish print ast tree
         start declarator
         finish declarator
     finish declaration
-    start declaration line:238
+    start declaration line:237
         start specify or qualify node
         finish specify or qualify node
         start declarator
         finish declarator
     finish declaration
-    start declaration line:239
+    start declaration line:238
         start specify or qualify node
         finish specify or qualify node
         start declarator
@@ -5057,13 +5143,13 @@ finish print ast tree
         start declarator
         finish declarator
     finish declaration
-    start declaration line:247
+    start declaration line:246
         start specify or qualify node
         finish specify or qualify node
         start declarator
         finish declarator
     finish declaration
-    start declaration line:248
+    start declaration line:247
         start specify or qualify node
         finish specify or qualify node
         start declarator
@@ -5105,13 +5191,19 @@ finish print ast tree
         start declarator
         finish declarator
     finish declaration
+    start declaration line:255
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+        finish declarator
+    finish declaration
     start declaration line:256
         start specify or qualify node
         finish specify or qualify node
         start declarator
         finish declarator
     finish declaration
-    start declaration line:257
+    start declaration line:258
         start specify or qualify node
         finish specify or qualify node
         start declarator
@@ -5123,13 +5215,7 @@ finish print ast tree
         start declarator
         finish declarator
     finish declaration
-    start declaration line:263
-        start specify or qualify node
-        finish specify or qualify node
-        start declarator
-        finish declarator
-    finish declaration
-    start declaration line:264
+    start declaration line:261
         start specify or qualify node
         finish specify or qualify node
         start declarator
@@ -5141,13 +5227,25 @@ finish print ast tree
         start declarator
         finish declarator
     finish declaration
-    start declaration line:271
+    start declaration line:266
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+        finish declarator
+    finish declaration
+    start declaration line:267
         start specify or qualify node
         finish specify or qualify node
         start declarator
         finish declarator
     finish declaration
     start declaration line:273
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+        finish declarator
+    finish declaration
+    start declaration line:275
         start specify or qualify node
             start struct union
                 start specify or qualify node
@@ -5178,7 +5276,7 @@ finish print ast tree
         start declarator
         finish declarator
     finish declaration
-    start declaration line:286
+    start declaration line:288
         start specify or qualify node
         finish specify or qualify node
         start declarator
@@ -5208,7 +5306,7 @@ finish print ast tree
             finish func
         finish declarator
     finish declaration
-    start declaration line:291
+    start declaration line:293
         start specify or qualify node
         finish specify or qualify node
         start declarator
@@ -5232,7 +5330,7 @@ finish print ast tree
             finish func
         finish declarator
     finish declaration
-    start declaration line:296
+    start declaration line:298
         start specify or qualify node
         finish specify or qualify node
         start declarator
@@ -5262,7 +5360,7 @@ finish print ast tree
             finish func
         finish declarator
     finish declaration
-    start declaration line:301
+    start declaration line:303
         start specify or qualify node
         finish specify or qualify node
         start declarator
@@ -5283,16 +5381,6 @@ finish print ast tree
                     start specify or qualify node
                     finish specify or qualify node
                 finish declarator
-            finish func
-        finish declarator
-    finish declaration
-    start declaration line:308
-        start specify or qualify node
-        finish specify or qualify node
-        start declarator
-            start func
-                start specify or qualify node
-                finish specify or qualify node
             finish func
         finish declarator
     finish declaration
@@ -5300,18 +5388,16 @@ finish print ast tree
         start specify or qualify node
         finish specify or qualify node
         start declarator
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+            finish func
         finish declarator
     finish declaration
     start declaration line:312
         start specify or qualify node
         finish specify or qualify node
         start declarator
-            start func
-                start specify or qualify node
-                finish specify or qualify node
-                start declarator
-                finish declarator
-            finish func
         finish declarator
     finish declaration
     start declaration line:314
@@ -5346,23 +5432,11 @@ finish print ast tree
                 start specify or qualify node
                 finish specify or qualify node
                 start declarator
-                    start specify or qualify node
-                    finish specify or qualify node
-                finish declarator
-                start specify or qualify node
-                finish specify or qualify node
-                start declarator
-                    start specify or qualify node
-                    finish specify or qualify node
-                finish declarator
-                start specify or qualify node
-                finish specify or qualify node
-                start declarator
                 finish declarator
             finish func
         finish declarator
     finish declaration
-    start declaration line:323
+    start declaration line:320
         start specify or qualify node
         finish specify or qualify node
         start declarator
@@ -5386,7 +5460,7 @@ finish print ast tree
             finish func
         finish declarator
     finish declaration
-    start declaration line:328
+    start declaration line:325
         start specify or qualify node
         finish specify or qualify node
         start declarator
@@ -5410,7 +5484,7 @@ finish print ast tree
             finish func
         finish declarator
     finish declaration
-    start declaration line:333
+    start declaration line:330
         start specify or qualify node
         finish specify or qualify node
         start declarator
@@ -5434,7 +5508,31 @@ finish print ast tree
             finish func
         finish declarator
     finish declaration
-    start declaration line:338
+    start declaration line:335
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+                    start specify or qualify node
+                    finish specify or qualify node
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+                    start specify or qualify node
+                    finish specify or qualify node
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+                finish declarator
+            finish func
+        finish declarator
+    finish declaration
+    start declaration line:340
         start specify or qualify node
         finish specify or qualify node
         start declarator
@@ -5454,7 +5552,7 @@ finish print ast tree
             finish func
         finish declarator
     finish declaration
-    start declaration line:341
+    start declaration line:343
         start specify or qualify node
         finish specify or qualify node
         start declarator
@@ -5474,7 +5572,7 @@ finish print ast tree
             finish func
         finish declarator
     finish declaration
-    start declaration line:344
+    start declaration line:346
         start specify or qualify node
         finish specify or qualify node
         start declarator
@@ -5490,31 +5588,31 @@ finish print ast tree
                 start declarator
                     start specify or qualify node
                     finish specify or qualify node
-                finish declarator
-            finish func
-        finish declarator
-    finish declaration
-    start declaration line:347
-        start specify or qualify node
-        finish specify or qualify node
-        start declarator
-            start func
-                start specify or qualify node
-                finish specify or qualify node
-                start declarator
-                finish declarator
-                start specify or qualify node
-                finish specify or qualify node
-                start declarator
-                finish declarator
-                start specify or qualify node
-                finish specify or qualify node
-                start declarator
                 finish declarator
             finish func
         finish declarator
     finish declaration
     start declaration line:349
+        start specify or qualify node
+        finish specify or qualify node
+        start declarator
+            start func
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+                finish declarator
+                start specify or qualify node
+                finish specify or qualify node
+                start declarator
+                finish declarator
+            finish func
+        finish declarator
+    finish declaration
+    start declaration line:351
         start specify or qualify node
         finish specify or qualify node
         start declarator
@@ -5625,7 +5723,7 @@ finish print ast tree
     start compound expr
     end comopound stmt
 start print symbol table
-scope type:file_scope with child 66 and namespace 0
+scope type:file_scope with child 68 and namespace 0
     <symbol table>
         <symbol:_IO_wide_data ns:2 linkage:0>
             type::< struct >
@@ -5646,10 +5744,6 @@ scope type:file_scope with child 66 and namespace 0
                     format
         <symbol:_markers ns:20 linkage:0>
             type::< point , struct >
-        <symbol:value ns:100 linkage:0>
-            type::< union >
-        <symbol:count ns:100 linkage:0>
-            type::< signed_int >
         <symbol:sprintf ns:1 linkage:2>
             type::< function , extern , signed_int >
                 function have 2 parameters are:
@@ -5666,9 +5760,6 @@ scope type:file_scope with child 66 and namespace 0
             type::< function , extern , void >
                 function have 1 parameters are:
                     stream
-        <symbol:wchb ns:101 linkage:0>
-            type::< array , signed_char >
-                array len is: 4
         <symbol:c32rtomb ns:1 linkage:2>
             type::< function , extern , unsigned_long >
                 function have 3 parameters are:
@@ -5763,12 +5854,16 @@ scope type:file_scope with child 66 and namespace 0
                     size
                     nmemb
                     stream
+        <symbol:value ns:102 linkage:0>
+            type::< union >
         <symbol:strtoull ns:1 linkage:2>
             type::< function , extern , unsigned_long_long_int >
                 function have 3 parameters are:
                     nptr
                     endptr
                     base
+        <symbol:count ns:102 linkage:0>
+            type::< signed_int >
         <symbol:_IO_lock_t ns:1 linkage:2>
             type::< typedef_name >
         <symbol:_wide_data ns:20 linkage:0>
@@ -5843,9 +5938,14 @@ scope type:file_scope with child 66 and namespace 0
             type::< point , struct >
         <symbol:uint8_t ns:1 linkage:2>
             type::< typedef_name >
-        <symbol:uintmax_t ns:1 linkage:2>
-            type::< typedef_name >
+        <symbol:strcpy ns:1 linkage:2>
+            type::< function , point , extern , signed_char >
+                function have 2 parameters are:
+                    s1
+                    s2
         <symbol:fpos_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:uintmax_t ns:1 linkage:2>
             type::< typedef_name >
         <symbol:rewind ns:1 linkage:2>
             type::< function , extern , void >
@@ -5913,14 +6013,14 @@ scope type:file_scope with child 66 and namespace 0
             type::< signed_int >
         <symbol:_offset ns:20 linkage:0>
             type::< signed_long >
-        <symbol:uint32_t ns:1 linkage:2>
-            type::< typedef_name >
-        <symbol:ptrdiff_t ns:1 linkage:2>
-            type::< typedef_name >
         <symbol:printf_s ns:1 linkage:2>
             type::< function , extern , signed_int >
                 function have 1 parameters are:
                     format
+        <symbol:uint32_t ns:1 linkage:2>
+            type::< typedef_name >
+        <symbol:ptrdiff_t ns:1 linkage:2>
+            type::< typedef_name >
         <symbol:int_fast64_t ns:1 linkage:2>
             type::< typedef_name >
         <symbol:perror ns:1 linkage:2>
@@ -5972,10 +6072,17 @@ scope type:file_scope with child 66 and namespace 0
             type::< function , extern , void >
                 function have 1 parameters are:
                     ptr
+        <symbol:wchb ns:103 linkage:0>
+            type::< array , signed_char >
+                array len is: 4
         <symbol:uint_least64_t ns:1 linkage:2>
             type::< typedef_name >
         <symbol:uint_least16_t ns:1 linkage:2>
             type::< typedef_name >
+        <symbol:strlen ns:1 linkage:2>
+            type::< function , extern , unsigned_long >
+                function have 1 parameters are:
+                    s
         <symbol:ferror ns:1 linkage:2>
             type::< function , extern , signed_int >
                 function have 1 parameters are:
@@ -6098,8 +6205,6 @@ scope type:file_scope with child 66 and namespace 0
                     new
         <symbol:_cur_column ns:20 linkage:0>
             type::< unsigned_short >
-        <symbol:wch ns:101 linkage:0>
-            type::< signed_int >
         <symbol:fsetpos ns:1 linkage:2>
             type::< function , extern , signed_int >
                 function have 2 parameters are:
@@ -6129,6 +6234,8 @@ scope type:file_scope with child 66 and namespace 0
         <symbol:__wchb ns:9 linkage:0>
             type::< array , signed_char >
                 array len is: 4
+        <symbol:wch ns:103 linkage:0>
+            type::< signed_int >
         <symbol:_IO_save_end ns:20 linkage:0>
             type::< point , signed_char >
         <symbol:scanf_s ns:1 linkage:2>
@@ -6417,6 +6524,16 @@ scope type:file_scope with child 66 and namespace 0
                 type::< restrict , point , void >
             <symbol:s2 ns:1 linkage:0>
                 type::< restrict , point , const , void >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:s1 ns:1 linkage:0>
+                type::< point , signed_char >
+            <symbol:s2 ns:1 linkage:0>
+                type::< point , const , signed_char >
+    scope type:function_prototype_scope with child 0 and namespace 0
+        <symbol table>
+            <symbol:s ns:1 linkage:0>
+                type::< point , const , signed_char >
     scope type:function_prototype_scope with child 0 and namespace 0
         <symbol table>
     scope type:function_prototype_scope with child 0 and namespace 0

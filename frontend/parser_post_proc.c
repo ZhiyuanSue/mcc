@@ -12,6 +12,7 @@ void post_proc_init()
 {
     m_memset(post_proc_node_rec,'\0',STATE_NUM*sizeof(char));
     post_proc_node_rec[declaration]=1;
+    post_proc_node_rec[parameter_declaration]=1;
     post_proc_node_rec[struct_declarator_list]=1;
     post_proc_node_rec[identifier_list]=1;
     post_proc_node_rec[parameter_list]=1;
@@ -60,6 +61,17 @@ AST_BASE* post_processing(AST_BASE* curr_ast)
                             HASHInsert(curr_ast->symbol_table->typedef_name_table,(HASH_ITEM*)tmpsi,symbol_item_cmp);
                         }
                     }
+                    else
+                    {
+                        AST_BASE* identifier_node=declarator_node(declarator_ast);
+                        /*
+                            If a typedef identifier is defined
+                            and in a sub scope, if a same identifier is used in a declarator
+                            than in the following text of that scope,this id should not be seen as the previous typedef
+                        */
+                        if(identifier_node&&is_type_def_name(identifier_node->token->value,identifier_node->symbol_table))
+                            del_symbol_typedef_table(identifier_node->symbol_table,identifier_node->token->value);
+                    }
                 }
             }
             if(curr_ast->father&&curr_ast->father->type==function_definition)
@@ -87,6 +99,14 @@ AST_BASE* post_processing(AST_BASE* curr_ast)
                     }
                 }
             }
+            break;
+        }
+        case parameter_declaration:
+        {
+            AST_BASE* declarator_ast=AST_GET_CHILD(curr_ast,1);
+            AST_BASE* identifier_node=declarator_node(declarator_ast);
+            if(identifier_node&&is_type_def_name(identifier_node->token->value,identifier_node->symbol_table))
+                del_symbol_typedef_table(identifier_node->symbol_table,identifier_node->token->value);
             break;
         }
         case struct_declarator_list:
@@ -339,19 +359,30 @@ final:
 /*just a tool function to deal with the recursively declarator*/
 AST_BASE* declarator_node(AST_BASE* declarator_ast)
 {
-    if(declarator_ast->type!=declarator)
-    {
+    if(!declarator_ast&&declarator_ast->type!=declarator)
         return NULL;
-    }
     AST_BASE* direct_declarator_node=AST_GET_CHILD(declarator_ast,AST_CHILD_NUM(declarator_ast)-1);
+    if(!direct_declarator_node)
+        return NULL;
     AST_BASE* first_child=AST_GET_CHILD(direct_declarator_node,0);
+    if(!first_child)
+        return NULL;
     if(first_child->type==identifier)
-    {
         return first_child;
-    }
     else if(first_child->type==left_parenthesis)
-    {
         return declarator_node(AST_GET_CHILD(direct_declarator_node,1));
-    }
     else return NULL;
+}
+bool is_type_def_name(char* symbol,SYM* curr_sym_table)
+{
+    HASH_ITEM* tmphi;
+    SYM_ITEM* find_item=Create_symbol_item(symbol,NMSP_UNKNOWN);
+    tmphi=HASHFind(curr_sym_table->typedef_name_table,
+            find_item,
+            symbol_item_cmp,
+            false,
+            false);
+    if(HASH_ITEM_EXIST(tmphi))
+        return true;
+    return false;
 }

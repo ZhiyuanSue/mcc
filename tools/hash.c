@@ -26,14 +26,14 @@ bool HSAHExpand(HASH* h,bool (*cmp)(void* a,void* b))
     h->capicity_index++;
     if(h->capicity_index>=HASH_CAP_NUM){
         return false;
-        /* I don't believe any normal program can see this, 12,2282,7239 is a very big number in one scope*/
+        /* I don't believe any normal program can run to this, 12,2282,7239 is a very big number in one scope*/
     }
     h->capicity=hash_capicity[h->capicity_index];
     h->data=m_alloc(sizeof(void*)*(h->capicity));
     m_memset(h->data,'\0',sizeof(void*)*(h->capicity));
     h->record_num=0;
     for(unsigned long long int i=0;i<old_capicity;i++){
-        if(old[i]!=NULL&&((HASH_ITEM*)old[i])->count>=0)
+        if(old[i]!=NULL&&((HASH_ITEM*)old[i])->count>0)
         {
             HASHInsert(h,(HASH_ITEM*)old[i],cmp);
         }
@@ -98,25 +98,48 @@ HASH_ITEM* HASHFind(HASH* h,void* a,bool (*cmp)(void* a,void* b),bool delete_ite
     }
     return NULL;
 }
-HASH* HASHCOPY(HASH* h){
-    HASH* tmph=(HASH*)m_alloc(sizeof(HASH));
-    if(tmph==NULL)
-        return NULL;
-    tmph->data=m_alloc(sizeof(void*)*(h->capicity));
-    tmph->capicity=h->capicity;
-    tmph->capicity_index=h->capicity_index;
-    tmph->record_num=h->record_num;
-    memcpy(tmph->data,h->data,sizeof(void*)*(h->capicity));
-    return tmph;
+bool HASHCOPY(HASH* dst,HASH* src,bool (*cmp)(void* a,void* b)){
+    if(!dst||!src)
+        return false;
+    m_free(dst->data);
+    dst->data=m_alloc(sizeof(void*)*(src->capicity));
+    dst->capicity=src->capicity;
+    dst->capicity_index=src->capicity_index;
+    dst->record_num=src->record_num;
+    memcpy(dst->data,src->data,sizeof(void*)*(src->capicity));
+    return true;
+}
+bool HASHDELITEM(HASH* h,HASH_ITEM* del_item,bool (*cmp)(void* a,void* b))
+{
+    /*
+        please use hashfind to search the pointer first
+    */
+    if(h==NULL||del_item==NULL)
+        return false;
+    void** old=h->data;
+    unsigned long long int old_capicity=h->capicity;
+    h->capicity_index++;
+    if(h->capicity_index>=HASH_CAP_NUM){
+        return false;
+        /* I don't believe any normal program can run to this, 12,2282,7239 is a very big number in one scope*/
+    }
+    h->capicity=hash_capicity[h->capicity_index];
+    h->data=m_alloc(sizeof(void*)*(h->capicity));
+    m_memset(h->data,'\0',sizeof(void*)*(h->capicity));
+    h->record_num=0;
+    for(unsigned long long int i=0;i<old_capicity;i++){
+        if(old[i]!=NULL&&old[i]!=del_item&&((HASH_ITEM*)old[i])->count>0)
+        {
+            HASHInsert(h,(HASH_ITEM*)old[i],cmp);
+        }
+    }
+    m_free(old);
+    return true;
 }
 void DelHASH(HASH* h)
 {
     if(h==NULL)
         return;
-    for(size_t i=0;i<h->capicity;++i){
-        if(h->data[i]!=NULL)
-            m_free(h->data[i]);
-    }
     m_free(h->data);
     m_free(h);
 }

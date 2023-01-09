@@ -749,8 +749,7 @@ bool equal_expr_value(AST_BASE* ast_node)
         {
             if(const_expr&&relation_expression_node->expr_attribute->const_expr){
                 const_expr=true;
-                /*TODO:const value*/
-                /*I feels sad about this code,*/
+                /*I feels sad about this code,for I have to list all the cases*/
                 if(IS_INT_TYPE(equal_base_type->typ_category)&&IS_INT_TYPE(rela_base_type->typ_category))
                 {
                     long long int equal_base_value=get_int_const(equal_base_type->typ_category,tmp_data_field,true);
@@ -2093,6 +2092,8 @@ bool postfix_expr_value(AST_BASE* ast_node)
             /*judge the operands*/
             tmp_l_base_type=Type_VEC_get_actual_base_type(tmp_l_type_vec);
             tmp_r_base_type=Type_VEC_get_actual_base_type(tmp_r_type_vec);
+            if(tmp_r_base_type->typ_category==TP_ENUM)
+                tmp_r_base_type=build_base_type(TP_SINT);
             if(tmp_l_base_type->typ_category==TP_POINT&&IS_INT_TYPE(tmp_r_base_type->typ_category)){
                 VEC* pointer_to=Type_VEC_get_Pointer_TO(tmp_l_type_vec,true);
                 M_TYPE* pointer_actual_type=Type_VEC_get_actual_base_type(pointer_to);
@@ -2588,7 +2589,6 @@ bool pri_expr_value(AST_BASE* ast_node)
         case string:
         {
             ast_node->expr_attribute->const_expr=false;
-            ast_node->expr_attribute->is_lvalue=true;
             ast_node->expr_attribute->complete=true;
             ast_node->expr_attribute->is_bit_field=false;
             ast_node->expr_attribute->is_lvalue=false;

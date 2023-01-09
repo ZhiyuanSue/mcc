@@ -12,4 +12,5 @@
 void post_proc_init();
 AST_BASE* post_processing(AST_BASE* curr_ast);
 AST_BASE* declarator_node(AST_BASE* declarator_ast);
+bool is_type_def_name(char* symbol,SYM* curr_sym_table);
 #endif

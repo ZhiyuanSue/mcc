@@ -656,13 +656,11 @@ start print ast tree
                                                     <-:- sym level: 0 namespace:19>
                                                     <&unary_expr ns:19>
                                                         <KW_sizeof:sizeof sym level: 0 namespace:19>
-                                                        <(:( sym level: 0 namespace:19>
-                                                        <&type_name ns:19>
-                                                            <&spec_qual_list ns:19>
-                                                                <&type_spec ns:19>
-                                                                    <&typedef_name ns:19>
-                                                                        <identifier:size_t sym level: 0 namespace:19>
-                                                        <):) sym level: 0 namespace:19>
+                                                        <&primary_expression ns:19>
+                                                            <(:( sym level: 0 namespace:19>
+                                                            <&primary_expression ns:19>
+                                                                <identifier:size_t sym level: 0 namespace:19>
+                                                            <):) sym level: 0 namespace:19>
                                                 <]:] sym level: 0 namespace:19>
                                 <;:; sym level: 0 namespace:19>
                         <right_brace:} sym level: 0 namespace:1>
@@ -5750,8 +5748,12 @@ finish print ast tree
                             <Type>:< signed_int >
                             end mul
                             start unary
-                                start specify or qualify node
-                                finish specify or qualify node
+                                start primary expr
+                                    start primary expr
+                                    <Type>:< unsigned_long >
+                                    end primary expr
+                                <Type>:< unsigned_long >
+                                end primary expr
                             <Type>:< signed_int >
                             end unary
                         <Type>:< signed_int >
@@ -7705,6 +7707,8 @@ finish print ast tree
         start primary expr
         <Type>:< point , signed_char >
         end primary expr
+< signed_char >
+< point , signed_char >
 error
 Compile Error:(file (null): line 559: token "C0001:" )
     "C0001:",

@@ -61,6 +61,7 @@ bool insert_symbol(SYM* symbol_table,SYM_ITEM* symbol_item);
 SYM_ITEM* find_symbol(SYM* symbol_table,char* symbol,NMSP name_space);
 SYM_ITEM* find_symbol_curr_table(SYM* symbol_table,char* symbol,NMSP name_space);
 void del_symbol(SYM* symbol_table,char* symbol,NMSP name_space);
+void del_symbol_typedef_table(SYM* symbol_table,char* symbol);
 void Del_symbol_table(SYM* symbol_table);
 void print_symbol_table(SYM* symbol_table);
 VEC* get_symbol_hash(HASH* h);

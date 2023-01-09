@@ -20,7 +20,12 @@ SYM* Create_symbol_table(SYM* father,enum scope_type type){
     symbol_table->sym_hash_table=InitHASH();
     symbol_table->sp_type=type;
     symbol_table->name_space=0;
-    symbol_table->typedef_name_table=InitHASH();
+    if(father&&father->typedef_name_table){
+        symbol_table->typedef_name_table=InitHASH();
+        HASHCOPY(symbol_table->typedef_name_table,father->typedef_name_table,symbol_item_cmp);
+    }
+    else
+        symbol_table->typedef_name_table=InitHASH();
     symbol_table->enum_const_table=InitHASH();
     if(father)
         symbol_table->st_attr_type=father->st_attr_type;
@@ -76,6 +81,12 @@ SYM_ITEM* find_symbol_curr_table(SYM* symbol_table,char* symbol,NMSP name_space)
 void del_symbol(SYM* symbol_table,char* symbol,NMSP name_space){
     SYM_ITEM* find_item=Create_symbol_item(symbol,name_space);
     HASHFind(symbol_table->sym_hash_table,find_item,symbol_item_cmp,true,false);
+    m_free(find_item);
+}
+void del_symbol_typedef_table(SYM* symbol_table,char* symbol){
+    SYM_ITEM* find_item=Create_symbol_item(symbol,NMSP_UNKNOWN);
+    HASH_ITEM* del_item=HASHFind(symbol_table->typedef_name_table,find_item,symbol_item_cmp,false,true);
+    HASHDELITEM(symbol_table->typedef_name_table,del_item,symbol_item_cmp);
     m_free(find_item);
 }
 void Del_symbol_table(SYM* symbol_table){
