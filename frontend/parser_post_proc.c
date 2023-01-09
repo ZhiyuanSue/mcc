@@ -359,7 +359,7 @@ final:
 /*just a tool function to deal with the recursively declarator*/
 AST_BASE* declarator_node(AST_BASE* declarator_ast)
 {
-    if(!declarator_ast&&declarator_ast->type!=declarator)
+    if(!declarator_ast||declarator_ast->type!=declarator)
         return NULL;
     AST_BASE* direct_declarator_node=AST_GET_CHILD(declarator_ast,AST_CHILD_NUM(declarator_ast)-1);
     if(!direct_declarator_node)

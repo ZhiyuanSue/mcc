@@ -1,3 +1,0 @@
-read in file name:
-	./pre/transstmt.i
-test pass!

@@ -1,3 +1,0 @@
-read in file name:
-	./pre/transexpr.i
-test pass!

@@ -24,8 +24,8 @@ clean:
 	rm -f ${MCC_ROOT_OBJ}/*.o 
 	rm -f ${Target}
 	rm -f ${Bin}/test_out/*
-	rm -f ${MCC_ROOT_PRE}/*.o 
-	rm -f ${MCC_BOOTSTRAP_OUT}/*.o
+	rm -f ${MCC_ROOT_PRE}/*
+	rm -f ${MCC_BOOTSTRAP_OUT}/*
 
 clean_obj:
 	rm -rf ${MCC_ROOT_OBJ}

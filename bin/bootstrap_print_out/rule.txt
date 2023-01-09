@@ -1,6 +1,0 @@
-read in file name:
-	./pre/rule.i
-error
-Compile Error:(file (null): line 9: token const )
-const char preprocess_token_rules[1024][256]={
-reason:	C0007:Unexpected token(Attention:the error might happened at the later place)
