@@ -19,7 +19,7 @@ const char preprocess_token_rules[MAX_RULE_NUM][RULE_CHAR_LEN]={
     "&h_char1:${h_char_set}*",
 
     "&p_char_sequence:${p_char_set}&{&p_char1}",
-    "&p_char1:${p_char_set}*"
+    "&p_char1:${p_char_set}*",
     /*Preprocessing numbers ???
         I find very little knowledge about preprocessing number
         accroding to the rule,a pp_num can start with a dot and end with a dot?? strange... */

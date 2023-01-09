@@ -75,6 +75,9 @@ M_TYPE* build_base_type(
 ){  /*key must be calculated outside,because the member is unknown*/
     if(spec_type==TP_UNION_STRUCT||spec_type==TP_UNION||spec_type==TP_STRUCT){
         TP_SU* res=(TP_SU*)m_alloc(sizeof(TP_SU));
+        res->data_align=res->data_size=0;
+        res->have_flex_array=false;
+        res->can_be_modified_lvalue=false;
         res->tag=NULL;
         res->modifier=false;
         res->typ_category=spec_type;
