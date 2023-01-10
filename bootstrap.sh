@@ -39,10 +39,12 @@ do
     last_line=$(tail -n 1 ${bootstrap_print_out_path}${file%.i*}".txt")
     if [[ ${last_line} != "test pass!" ]]
     then
+        echo "========== error =========="
         echo ${file_num}"    fail   "${succ_accu}   "${file}"
+        echo "========== error =========="
         ((error_num++))
     else
-    #    echo ${file_num}"    succ   "${succ_accu}   "${file}"
+        echo ${file_num}"    succ   "${succ_accu}   "${file}"
         ((succ_num++))
         ((succ_accu++))
     fi

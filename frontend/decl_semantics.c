@@ -1216,8 +1216,6 @@ bool initializer_semantic(AST_BASE* initializer_node,VEC* target_type_vec)
         /*please consider the null pointer constant*/
         if(!assignment_type_check(unary_type_vec,assign_type_vec))
         {
-            print_type_vec(unary_type_vec);
-            print_type_vec(assign_type_vec);
             C_ERROR(C0072_ERR_ASSIGN_OPERAND,initializer_node);
             goto error;
         }
@@ -1237,88 +1235,234 @@ bool initializer_list_semantic(AST_BASE* initializer_list_node,VEC* type_vec){
         goto error;
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
     M_TYPE* tmp_type=Type_VEC_get_actual_base_type(type_vec);
-    size_t sub_obj_size=0;
-    size_t array_max_size=0;
-    /*
-        e.x. int arr[]={[10]=10,[1]=1} ,the length of array must be 11,
-        the size at the signator [10]= is 10,and the size become 11 at the initializer 10.
-        but the size at the signator [1]= is 1,and the size become 2 at the initializer 1.
-        so I have to remember the max length of the array.
-    */
-    size_t sub_obj_off=0;
-    bool is_vla_array=false;
+    size_t total_size=Type_size(type_vec)*8;
+    size_t off=0;
+    bool array_unknown_size=false;
+    bool variable_length_array=false;
+    if((!tmp_type->complete)&&(tmp_type->typ_category==TP_ARRAY)&&((TP_ARR*)tmp_type)->is_vla)
+        array_unknown_size=true;
+    if(tmp_type->complete&&(tmp_type->typ_category==TP_ARRAY)&&((TP_ARR*)tmp_type)->is_vla)
+        variable_length_array=true;
     for(size_t i=0;i<AST_CHILD_NUM(initializer_list_node);++i){
         AST_BASE* sub_node=AST_GET_CHILD(initializer_list_node,i);
-        /*check the size,if it's long enough to fill the object,just break and ignore the left initializer*/
-        if(tmp_type->complete){
-            if(IS_SCALAR_TYPE(tmp_type->typ_category)||tmp_type->typ_category==TP_UNION||tmp_type->typ_category==TP_ENUM)
-            {
-                if(sub_obj_size!=0)
-                    break;
-            }
-            else if(tmp_type->typ_category==TP_STRUCT)
-            {
-                unsigned int struct_sub_length=VECLEN(((TP_SU*)tmp_type)->members);
-                if(sub_obj_size>=struct_sub_length)
-                    break;
-            }
-            else if(tmp_type->typ_category==TP_ARRAY)
-            {
-                if(((TP_ARR*)tmp_type)->is_vla)
-                    ;   /*a vla,so the length is don't know*/
-                else
-                {
-                    unsigned int array_sub_length=((TP_ARR*)tmp_type)->axis_size;
-                    if(sub_obj_size>=array_sub_length)
-                    break;
-                }
-            }
-            else{
-                /*ohter types like function type, etc.*/
-                C_ERROR(C0092_ERR_INIT_ENTITY,initializer_list_node);
-                goto error;
-            }
-        }
-        else if((!tmp_type->complete)&&(tmp_type->typ_category==TP_ARRAY)&&((TP_ARR*)tmp_type)->is_vla)
-            is_vla_array=true;
-        /*judge the sub node*/
+        if(!variable_length_array&&off>=total_size)
+            break;
         if(sub_node->type==initializer){
             /*test the sub initializer begin with left brace or not*/
             bool begin_with_left_brace=false;
             if(AST_CHILD_NUM(sub_node)!=1)
-            {
                 begin_with_left_brace=true;
-            }
-            /*use sub_obj_off and begin_with_left_brace to judge*/
-            if(!sub_obj_off&&begin_with_left_brace)
+            if(begin_with_left_brace)
             {
-                VEC* sub_obj_type=Type_VEC_get_sub_obj_type(type_vec,sub_obj_size);
-                if(!initializer_semantic(sub_node,sub_obj_type))
+                if(IS_SCALAR_TYPE(tmp_type->typ_category))
+                {
+                    if(off!=0)
+                        break;
+                    if(!initializer_semantic(sub_node,type_vec))
+                        goto error;
+                }
+                else if(tmp_type->typ_category==TP_UNION)
+                {
+                    if(off!=0)
+                        break;
+                    VEC* su_member_list=((TP_SU*)tmp_type)->members;
+                    for(size_t j=0;j<VECLEN(su_member_list);++j)
+                    {
+                        TP_SU_MEMBER* member=(TP_SU_MEMBER*)VEC_GET_ITEM(su_member_list,j);
+                        if(member->member_name!=NULL)
+                        {
+                            VEC* first_named_member_type=member->type_vec;
+                            if(!initializer_semantic(sub_node,first_named_member_type))
+                                goto error;
+                            break;
+                        }
+                    }
+                }
+                else if(tmp_type->typ_category==TP_STRUCT)
+                {
+                    if(off>=(Type_size(type_vec)*8))
+                        break;
+                    VEC* su_member_list=((TP_SU*)tmp_type)->members;
+                    for(size_t j=0;j<VECLEN(su_member_list);++j)
+                    {
+                        TP_SU_MEMBER* member=(TP_SU_MEMBER*)VEC_GET_ITEM(su_member_list,j);
+                        /*get the member's actual off*/
+                        size_t member_off=member->offset*8;
+                        if(member->bit_field)
+                            member_off+=member->bit_field_offset;
+                        if(member_off>=off)
+                        {
+                            if(!initializer_semantic(sub_node,member->type_vec))
+                                goto error;
+                            if(j==VECLEN(su_member_list)-1)
+                                off=(Type_size(type_vec)*8);
+                            else{
+                                TP_SU_MEMBER* next_member=(TP_SU_MEMBER*)VEC_GET_ITEM(su_member_list,j+1);
+                                off=next_member->offset*8;
+                                if(next_member->bit_field)
+                                    off+=member->bit_field_offset;
+                            }
+                            break;
+                        }
+                    }
+                }
+                else if(tmp_type->typ_category==TP_ARRAY)
+                {
+                    VEC* sub_obj_type=Type_VEC_get_Array_TO(type_vec,true);
+                    if(!initializer_semantic(sub_node,sub_obj_type))
+                        goto error;
+                    off+=Type_size(sub_obj_type)*8;
+                }
+                else if(tmp_type->typ_category==TP_ENUM)
+                {
+                    if(off!=0)
+                        break;
+                    VEC* sub_obj_type=InitVEC(DEFAULT_CAPICITY);
+                    M_TYPE* sint_type=build_base_type(TP_SINT);
+                    VECinsert(sub_obj_type,sint_type);
+                    if(!initializer_semantic(sub_node,sub_obj_type))
+                        goto error;
+                }
+                else
+                {
+                    C_ERROR(C0092_ERR_INIT_ENTITY,sub_node);
                     goto error;
-                sub_obj_off=0;
-                sub_obj_size++;
+                }
             }
             else
             {
-                VEC* sub_obj_type=Type_VEC_get_sub_obj_type(type_vec,sub_obj_size);
-                VEC* sub_obj_element_type=Type_VEC_get_sub_obj_off_element_type(sub_obj_type,sub_obj_off);
-                if(!initializer_semantic(sub_node,sub_obj_element_type))
-                    goto error;
-                /*set the new size and off,here you need to promise the off cannot out range*/
-                sub_obj_off++;
-                size_t sub_obj_max_size=Type_VEC_get_element_size(sub_obj_type);
-                if(sub_obj_off>=sub_obj_max_size){
-                    sub_obj_off-=sub_obj_max_size;
-                    sub_obj_size++;
+                VEC* curr_type_vec=type_vec;
+                if(initializer_semantic(sub_node,curr_type_vec))
+                    break;
+                size_t curr_obj_off=0;
+                /*if a bit field of struct be initialized and recursively goto the scalar type,use that*/
+                bool bit_field=false;
+                size_t bit_field_size=0;
+                while(1)
+                {
+                    M_TYPE* tmp_type=Type_VEC_get_actual_base_type(curr_type_vec);
+                    if(IS_SCALAR_TYPE(tmp_type->typ_category))
+                    {   /*recursive base*/
+                        if(!initializer_semantic(sub_node,curr_type_vec))
+                            goto error;
+                        if(bit_field)
+                            off+=bit_field_size;
+                        else
+                            off+=Type_size(curr_type_vec)*8;
+                        break;
+                    }
+                    else if(tmp_type->typ_category==TP_UNION)
+                    {
+                        size_t union_size=Type_size(curr_type_vec)*8;
+                        VEC* su_member_list=((TP_SU*)tmp_type)->members;
+                        TP_SU_MEMBER* member=NULL;
+                        for(size_t j=0;j<VECLEN(su_member_list);++j)
+                        {
+                            member=(TP_SU_MEMBER*)VEC_GET_ITEM(su_member_list,j);
+                            if(member&&member->member_name!=NULL)
+                                break;
+                        }
+                        if(member&&member->member_name!=NULL)
+                        {
+                            curr_type_vec=member->type_vec;
+                            if(curr_obj_off!=off){
+                                continue;/*no need to change the curr_obj_off*/
+                            }
+                            if(initializer_semantic(sub_node,curr_type_vec))
+                            {
+                                off+=union_size;
+                                break;
+                            }
+                        }
+                        else
+                            break;
+                    }
+                    else if(tmp_type->typ_category==TP_STRUCT)
+                    {
+                        size_t struct_size=Type_size(curr_type_vec)*8;
+                        if(off>=struct_size)
+                            break;
+                        VEC* su_member_list=((TP_SU*)tmp_type)->members;
+                        for(size_t j=0;j<VECLEN(su_member_list);++j)
+                        {
+                            TP_SU_MEMBER* member=(TP_SU_MEMBER*)VEC_GET_ITEM(su_member_list,j);
+                            /*get the member's actual off*/
+                            size_t member_off=member->offset*8;
+                            if(member->bit_field){
+                                member_off+=member->bit_field_offset;
+                                bit_field=true;
+                                bit_field_size=member->bit_field_size;
+                            }
+                            size_t member_end=member_off;
+                            if(bit_field){
+                                member_end+=bit_field_size;
+                            }
+                            else{
+                                member_end+=Type_size(member->type_vec)*8;
+                            }
+                            if(member_off<=off&&member_end>off)
+                            {
+                                if(member_off==off)
+                                {
+                                    if(initializer_semantic(sub_node,member->type_vec))
+                                    {
+                                        if(j==VECLEN(su_member_list)-1)
+                                            off+=struct_size;
+                                        else{
+                                            TP_SU_MEMBER* next_member=(TP_SU_MEMBER*)VEC_GET_ITEM(su_member_list,j+1);
+                                            off=next_member->offset*8;
+                                            if(next_member->bit_field)
+                                                off+=member->bit_field_offset;
+                                        }
+                                        break;
+                                    }
+                                }
+                                else{
+                                    curr_type_vec=member->type_vec;
+                                    curr_obj_off=member_off;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    else if(tmp_type->typ_category==TP_ARRAY)
+                    {
+                        curr_type_vec=Type_VEC_get_Array_TO(curr_type_vec,true);
+                        size_t sub_type_size=Type_size(curr_type_vec)*8;
+                        if(curr_obj_off!=off){
+                            curr_obj_off+=sub_type_size*((off-curr_obj_off)/sub_type_size);
+                            continue;
+                        }
+                        if(initializer_semantic(sub_node,curr_type_vec))
+                        {
+                            off+=sub_type_size;
+                            break;
+                        }
+                    }
+                    else if(tmp_type->typ_category==TP_ENUM)
+                    {   /*recursive base*/
+                        VEC* sub_obj_type=InitVEC(DEFAULT_CAPICITY);
+                        M_TYPE* sint_type=build_base_type(TP_SINT);
+                        VECinsert(sub_obj_type,sint_type);
+                        if(!initializer_semantic(sub_node,sub_obj_type))
+                            goto error;
+                        /* a enum cannot be a bit field,so add the sint size*/
+                        off+=Type_size(sub_obj_type)*8;
+                        break;
+                    }
+                    else
+                    {   /*error case*/
+                        C_ERROR(C0092_ERR_INIT_ENTITY,sub_node);
+                        goto error;
+                    }
                 }
             }
-            if(is_vla_array&&sub_obj_size>array_max_size)
-                array_max_size=sub_obj_size;
         }
         else if(sub_node->type==designation){
             AST_BASE* designator_list_node=AST_GET_CHILD(sub_node,0);
             /*check the designation*/
             VEC* curr_type_vec=type_vec;
+            off=0;
             for(size_t j=0;j<AST_CHILD_NUM(designator_list_node);++j)
             {
                 AST_BASE* designator_node=AST_GET_CHILD(designator_list_node,j);
@@ -1362,15 +1506,7 @@ bool initializer_list_semantic(AST_BASE* initializer_list_node,VEC* type_vec){
                     /*change the size and the off and the current type vec*/
                     curr_type_vec=Type_VEC_get_Array_TO(curr_type_vec,true);
                     size_t const_expr_value=(size_t)get_int_const(const_expr_type->typ_category,tmp_data_field,true);
-                    if(j==0){   /*the top level need to change the size ,but off must be 0*/
-                        /*no need to consider the max array size,for a initializer must follow*/
-                        sub_obj_size=const_expr_value;
-                        sub_obj_off=0;
-                    }
-                    else{
-                        size_t sub_obj_element_size=Type_VEC_get_element_size(curr_type_vec);
-                        sub_obj_off+=sub_obj_element_size * const_expr_value;
-                    }
+                    off+=const_expr_value*Type_size(curr_type_vec)*8;
                 }
                 else{       /* '.identifier' case*/
                     /*check the closest enclose obj type*/
@@ -1387,38 +1523,13 @@ bool initializer_list_semantic(AST_BASE* initializer_list_node,VEC* type_vec){
                     for(size_t k=0;k<VECLEN(struct_member_list);++k)
                     {
                         TP_SU_MEMBER* tmpmem=VEC_GET_ITEM(struct_member_list,k);
-                        /*
-                            change the size and the off and the current type vec
-                            you have to change them here
-                        */
-                        curr_type_vec=tmpmem->type_vec;
-                        if(j==0)
-                        {
-                            if(curr_base_type->typ_category==TP_STRUCT)
-                            {
-                                sub_obj_size=k;
-                                sub_obj_off=0;
-                            }
-                            else if(curr_base_type->typ_category==TP_UNION)
-                            {
-                                sub_obj_size=1;
-                                sub_obj_off=0;
-                            }
-                        }
-                        else
-                        {
-                            if(curr_base_type->typ_category==TP_STRUCT)
-                            {
-                                sub_obj_off+=Type_VEC_get_element_size(curr_type_vec);
-                            }
-                            else if(curr_base_type->typ_category==TP_UNION)
-                            {
-                                sub_obj_off=1;
-                            }
-                        }
                         if(strcmp(identifier_node->token->value,tmpmem->member_name)==0)
                         {
                             struct_have_identifier_member=true;
+                            curr_type_vec=tmpmem->type_vec;
+                            off+=tmpmem->offset*8;
+                            if(tmpmem->bit_field)
+                                off+=tmpmem->bit_field_offset;
                             break;
                         }
                     }
@@ -1432,11 +1543,14 @@ bool initializer_list_semantic(AST_BASE* initializer_list_node,VEC* type_vec){
             }
         }
     }
-    if(is_vla_array)
+succ:
+    if(array_unknown_size)
     {
+        VEC* sub_type_vec=Type_VEC_get_Array_TO(type_vec,true);
+        size_t sub_type_size=Type_size(sub_type_vec)*8;
         tmp_type->complete=true;
         ((TP_ARR*)tmp_type)->is_vla=false;
-        ((TP_ARR*)tmp_type)->axis_size=array_max_size;
+        ((TP_ARR*)tmp_type)->axis_size=(off%sub_type_size==0)?(off/sub_type_size):(off/sub_type_size+1);
     }
     m_free(tei);
     return true;
