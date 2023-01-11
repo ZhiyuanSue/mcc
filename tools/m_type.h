@@ -90,19 +90,6 @@ typedef struct {
         };
     };
 }M_TYPE;
-/*struct/union*/
-typedef struct {
-    HASH_COMMON
-    TP_COMMON
-    TP_BASE_COMMON
-    char* tag;  /*if tag==NULL it means a anonymous struct or union,and the namespace must be 2*/
-    VEC* members;
-    size_t data_align;
-    size_t total_data_size;
-    NMSP namespece;
-    bool can_be_modified_lvalue; /*a lvalue struct cannot have any recursively const member*/
-    bool have_flex_array;
-}TP_SU;
 typedef struct {
     char* member_name;
     NMSP name_space;
@@ -112,6 +99,21 @@ typedef struct {
     size_t bit_field_size;
     size_t bit_field_offset;
 }TP_SU_MEMBER;
+/*struct/union*/
+typedef struct {
+    HASH_COMMON
+    TP_COMMON
+    TP_BASE_COMMON
+    char* tag;  /*if tag==NULL it means a anonymous struct or union,and the namespace must be 2*/
+    VEC* members;
+    TP_SU_MEMBER* curr_designated_member;   /*only union use this field, for the storage is overlaped,so it must point out which member be used*/
+    size_t data_align;
+    size_t total_data_size;
+    NMSP namespece;
+    bool can_be_modified_lvalue; /*a lvalue struct cannot have any recursively const member*/
+    bool have_flex_array;
+}TP_SU;
+
 /*array*/
 typedef struct {
     HASH_COMMON

@@ -84,6 +84,7 @@ M_TYPE* build_base_type(
         res->count=HASH_CNT_IST;
         res->complete=false;
         res->members=NULL;
+        res->curr_designated_member=NULL;
         res->can_be_modified_lvalue=true;
         return (M_TYPE*)res;
     }

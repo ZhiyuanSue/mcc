@@ -1265,18 +1265,24 @@ bool initializer_list_semantic(AST_BASE* initializer_list_node,VEC* type_vec){
                 {
                     if(off!=0)
                         break;
-                    VEC* su_member_list=((TP_SU*)tmp_type)->members;
-                    for(size_t j=0;j<VECLEN(su_member_list);++j)
+                    TP_SU_MEMBER* member=NULL;
+                    if(((TP_SU*)tmp_type)->curr_designated_member)
+                        member=((TP_SU*)tmp_type)->curr_designated_member;
+                    else
                     {
-                        TP_SU_MEMBER* member=(TP_SU_MEMBER*)VEC_GET_ITEM(su_member_list,j);
-                        if(member->member_name!=NULL)
+                        VEC* su_member_list=((TP_SU*)tmp_type)->members;
+                        for(size_t j=0;j<VECLEN(su_member_list);++j)
                         {
-                            VEC* first_named_member_type=member->type_vec;
-                            if(!initializer_semantic(sub_node,first_named_member_type))
-                                goto error;
-                            break;
+                            member=(TP_SU_MEMBER*)VEC_GET_ITEM(su_member_list,j);
+                            if(member&&member->member_name)
+                                break;
                         }
                     }
+                    VEC* first_named_member_type=member->type_vec;
+                    if(!initializer_semantic(sub_node,first_named_member_type))
+                        goto error;
+                    if(((TP_SU*)tmp_type)->curr_designated_member)
+                        ((TP_SU*)tmp_type)->curr_designated_member=NULL;
                 }
                 else if(tmp_type->typ_category==TP_STRUCT)
                 {
@@ -1356,11 +1362,16 @@ bool initializer_list_semantic(AST_BASE* initializer_list_node,VEC* type_vec){
                         size_t union_size=Type_size(curr_type_vec)*8;
                         VEC* su_member_list=((TP_SU*)tmp_type)->members;
                         TP_SU_MEMBER* member=NULL;
-                        for(size_t j=0;j<VECLEN(su_member_list);++j)
+                        if(((TP_SU*)tmp_type)->curr_designated_member)
+                            member=((TP_SU*)tmp_type)->curr_designated_member;
+                        else
                         {
-                            member=(TP_SU_MEMBER*)VEC_GET_ITEM(su_member_list,j);
-                            if(member&&member->member_name!=NULL)
-                                break;
+                            for(size_t j=0;j<VECLEN(su_member_list);++j)
+                            {
+                                member=(TP_SU_MEMBER*)VEC_GET_ITEM(su_member_list,j);
+                                if(member&&member->member_name!=NULL)
+                                    break;
+                            }
                         }
                         if(member&&member->member_name!=NULL)
                         {
@@ -1530,6 +1541,8 @@ bool initializer_list_semantic(AST_BASE* initializer_list_node,VEC* type_vec){
                             off+=tmpmem->offset*8;
                             if(tmpmem->bit_field)
                                 off+=tmpmem->bit_field_offset;
+                            if(curr_base_type->typ_category==TP_UNION)
+                                ((TP_SU*)curr_base_type)->curr_designated_member=tmpmem;
                             break;
                         }
                     }

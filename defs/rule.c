@@ -48,7 +48,7 @@ const char preprocess_token_rules[MAX_RULE_NUM][RULE_CHAR_LEN]={
     "&esc_backspace:${back_slash}${lb}",
     "&esc_form_feed:${back_slash}${lf}",
     "&esc_new_line:${back_slash}${ln}",
-    "&esc_return:${back_slash}${ln}",
+    "&esc_return:${back_slash}${lr}",
     "&esc_h_tab:${back_slash}${lt}",
     "&esc_v_tab:${back_slash}${lv}",
 
@@ -289,7 +289,7 @@ const char token_rules[MAX_RULE_NUM][RULE_CHAR_LEN]={
     "&esc_backspace:${back_slash}${lb}",
     "&esc_form_feed:${back_slash}${lf}",
     "&esc_new_line:${back_slash}${ln}",
-    "&esc_return:${back_slash}${ln}",
+    "&esc_return:${back_slash}${lr}",
     "&esc_h_tab:${back_slash}${lt}",
     "&esc_v_tab:${back_slash}${lv}",
 
