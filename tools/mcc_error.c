@@ -121,6 +121,7 @@ const char error_describe[ERROR_NUMBER][ERROR_DES_LEN]={
     "C0092:No initializer shall attempt to provide a value for an object not contained within the entity being initialized.",
     "C0093:a designator has the form '[ constant-expression ]',but not a array type or not a nonnegative const integer expression",
     "C0094:a designator has the form '.identifier',but not a struct or union type or one member of current struct or union",
+    "C0095:If the declaration of an identifier has block scope, and the identifier has external or internal linkage, the declaration shall have no initializer for the identifier.",
     /*warning*/
     "W0001:",
     "W0002:Unknown warning",

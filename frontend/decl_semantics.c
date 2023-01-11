@@ -135,6 +135,8 @@ bool declaration_type(AST_BASE* ast_node,VEC* dec_symbol_item_list)
                 )==false)
                     return false;
                 SYM_ITEM* tmpsi=find_symbol_curr_table(declarator_node->symbol_table,declarator_char_name,declarator_node->name_space);
+                if(!tmpsi)
+                    return false;
                 VECinsert(dec_symbol_item_list,(void*)tmpsi);
                 
                 M_TYPE* tmpt=Type_VEC_get_spec_other(tmpsi->type_vec);
@@ -146,6 +148,12 @@ bool declaration_type(AST_BASE* ast_node,VEC* dec_symbol_item_list)
                 }
                 /*initialize part*/
                 if(AST_CHILD_NUM(init_dec_node)==3){
+                    if(declarator_node->symbol_table->sp_type==SPT_BLOCK
+                        &&(tmpsi->linkage==LKA_INTERN||tmpsi->linkage==LKA_EXTERN))
+                    {
+                        C_ERROR(C0095_ERR_INIT_SCOPE_AND_LINKAGE,declarator_node);
+                        return false;
+                    }
                     AST_BASE* initializer_node=AST_GET_CHILD(init_dec_node,2);
                     if(!initializer_semantic(initializer_node,tmpsi->type_vec)){
                         return false;
