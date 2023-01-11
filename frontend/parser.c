@@ -398,6 +398,12 @@ bool p_symbol_table(AST_BASE* ast_node,SYM* father){
         ast_node->expr_attribute->complete=false;
         ast_node->expr_attribute->is_bit_field=false;
     }
+    if(ast_node->type==initializer)
+    {
+        ast_node->init_attribute=m_alloc(sizeof(INIT_NODE_ATTR));
+        ast_node->init_attribute->off=0;
+        ast_node->init_attribute->size=0;
+    }
     VECpopback(trace_stack);
     return true;
 }

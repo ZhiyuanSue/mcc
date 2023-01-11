@@ -31,8 +31,8 @@ TP_ENUMERA* enum_type(AST_BASE* enumerator_list_node,AST_BASE* tag_node);
 TP_FUNC* function_type(VEC* tmp_node_vec);
 TP_ARR* array_type(VEC* tmp_node_vec);
 VEC* type_name_type(AST_BASE* type_name_node);
-bool initializer_semantic(AST_BASE* initializer_node,VEC* target_type_vec);
-bool initializer_list_semantic(AST_BASE* initializer_list_node,VEC* type_vec);
+bool initializer_semantic(AST_BASE* initializer_node,VEC* target_type_vec,size_t off);
+bool initializer_list_semantic(AST_BASE* initializer_list_node,VEC* type_vec,size_t off);
 bool static_assert_type(AST_BASE* static_assert_declaration_node);
 /*constant expr*/
 bool const_value(AST_BASE* ast_node);

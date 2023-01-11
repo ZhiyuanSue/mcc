@@ -14,6 +14,10 @@ typedef struct{
     bool complete:1;
     bool is_bit_field:1;
 }EXPR_NODE_ATTR;
+typedef struct{
+    size_t off;
+    size_t size;
+}INIT_NODE_ATTR;
 typedef struct ast_base AST_BASE;
 struct ast_base{
     enum rule_type_enum type;
@@ -24,6 +28,7 @@ struct ast_base{
     size_t ter_num;
     NMSP name_space;
     EXPR_NODE_ATTR* expr_attribute;
+    INIT_NODE_ATTR* init_attribute;
 };
 
 inline AST_BASE* creat_ast_node(enum rule_type_enum type,VEC* child,SYM* symbol_table,TOKEN* token,size_t ter_num,NMSP name_space){
@@ -36,6 +41,7 @@ inline AST_BASE* creat_ast_node(enum rule_type_enum type,VEC* child,SYM* symbol_
     node->name_space=name_space;
     node->father=NULL;
     node->expr_attribute=NULL;
+    node->init_attribute=NULL;
     return node;
 }
 void destory_ast_tree(AST_BASE* node);

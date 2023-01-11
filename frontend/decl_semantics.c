@@ -155,7 +155,7 @@ bool declaration_type(AST_BASE* ast_node,VEC* dec_symbol_item_list)
                         return false;
                     }
                     AST_BASE* initializer_node=AST_GET_CHILD(init_dec_node,2);
-                    if(!initializer_semantic(initializer_node,tmpsi->type_vec)){
+                    if(!initializer_semantic(initializer_node,tmpsi->type_vec,0)){
                         return false;
                     }
                 }
@@ -1189,7 +1189,7 @@ bool abs_declarator_type(AST_BASE* abstract_declarator_node,
     m_free(tei);
     return type_vec;
 }
-bool initializer_semantic(AST_BASE* initializer_node,VEC* target_type_vec)
+bool initializer_semantic(AST_BASE* initializer_node,VEC* target_type_vec,size_t off)
 {
     /*TODO: char array type*/
     if(!initializer_node||initializer_node->type!=initializer||!target_type_vec)
@@ -1229,7 +1229,7 @@ bool initializer_semantic(AST_BASE* initializer_node,VEC* target_type_vec)
     }
     else{
         sub_node=AST_GET_CHILD(initializer_node,1);
-        if(!initializer_list_semantic(sub_node,target_type_vec))
+        if(!initializer_list_semantic(sub_node,target_type_vec,off))
             goto error;
     }
     m_free(tei);
@@ -1237,13 +1237,12 @@ bool initializer_semantic(AST_BASE* initializer_node,VEC* target_type_vec)
 error:
     return false;
 }
-bool initializer_list_semantic(AST_BASE* initializer_list_node,VEC* type_vec){
+bool initializer_list_semantic(AST_BASE* initializer_list_node,VEC* type_vec,size_t off){
     if(!initializer_list_node||initializer_list_node->type!=initializer_list||!type_vec)
         goto error;
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
     M_TYPE* tmp_type=Type_VEC_get_actual_base_type(type_vec);
     size_t total_size=Type_size(type_vec)*8;
-    size_t off=0;
     bool array_unknown_size=false;
     bool variable_length_array=false;
     if((!tmp_type->complete)&&(tmp_type->typ_category==TP_ARRAY)&&((TP_ARR*)tmp_type)->is_vla)
@@ -1392,12 +1391,18 @@ bool initializer_search(
     if(IS_SCALAR_TYPE(tmp_type->typ_category)){ /*recursive base*/
         if((*off)!=curr_obj_off)    /*goto the terminal, cannot search deeper*/
             goto error;
-        if(!initializer_semantic(initializer_node,type_vec))
+        if(!initializer_semantic(initializer_node,type_vec,(*off)))
             goto error;
+        initializer_node->init_attribute->off=curr_obj_off;
         if(bit_field)
+        {
+            initializer_node->init_attribute->size=bit_field_size;
             off+=bit_field_size;
-        else
+        }
+        else{
+            initializer_node->init_attribute->size=Type_size(type_vec)*8;
             off+=Type_size(type_vec)*8;
+        }
     }
     else if(tmp_type->typ_category==TP_ENUM)
     {   /*recursive base*/
@@ -1406,9 +1411,11 @@ bool initializer_search(
         VEC* sub_obj_type=InitVEC(DEFAULT_CAPICITY);
         M_TYPE* sint_type=build_base_type(TP_SINT);
         VECinsert(sub_obj_type,sint_type);
-        if(!initializer_semantic(initializer_node,sub_obj_type))
+        if(!initializer_semantic(initializer_node,sub_obj_type,(*off)))
             goto error;
         /* a enum cannot be a bit field,so add the sint size*/
+        initializer_node->init_attribute->off=curr_obj_off;
+        initializer_node->init_attribute->size=Type_size(sub_obj_type)*8;
         off+=Type_size(sub_obj_type)*8;
     }
     else if(tmp_type->typ_category==TP_UNION)
@@ -1450,8 +1457,10 @@ bool initializer_search(
                 }
             }
             else{
-                if(initializer_semantic(initializer_node,sub_obj_type_vec))
+                if(initializer_semantic(initializer_node,sub_obj_type_vec,(*off)))
                 {
+                    initializer_node->init_attribute->off=curr_obj_off;
+                    initializer_node->init_attribute->size=union_size;
                     (*off)+=union_size;
                     ((TP_SU*)tmp_type)->curr_designated_member=NULL;
                     goto succ;
@@ -1532,12 +1541,20 @@ bool initializer_search(
                     goto error;
             }
             else{
-                if(initializer_semantic(initializer_node,sub_obj_type_vec))
+                if(initializer_semantic(initializer_node,sub_obj_type_vec,(*off)))
                 {
+                    initializer_node->init_attribute->off=curr_obj_off;
                     if(index==VECLEN(su_member_list)-1)
+                    {
+                        initializer_node->init_attribute->size=struct_size;
                         off+=struct_size;
+                    }
                     else{
                         TP_SU_MEMBER* next_member=(TP_SU_MEMBER*)VEC_GET_ITEM(su_member_list,index+1);
+                        if(member->bit_field)
+                            initializer_node->init_attribute->size=member->bit_field_size;
+                        else
+                            initializer_node->init_attribute->size=Type_size(member->type_vec);
                         (*off)=next_member->offset*8;
                         if(next_member->bit_field)
                             off+=member->bit_field_offset;
@@ -1582,8 +1599,10 @@ bool initializer_search(
                 goto error;
         }
         else{
-            if(initializer_semantic(initializer_node,sub_obj_type_vec))
+            if(initializer_semantic(initializer_node,sub_obj_type_vec,(*off)))
             {
+                initializer_node->init_attribute->off=curr_obj_off;
+                initializer_node->init_attribute->size=sub_type_size;
                 off+=sub_type_size;
                 goto succ;
             }
