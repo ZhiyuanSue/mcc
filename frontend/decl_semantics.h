@@ -4,5 +4,12 @@
 #include "../frontend/semantics.h"
 #include "../frontend/expr_semantics.h"
 #define TYPE_SPEC_CASE_NUM 38
-
-#endif
+bool initializer_search(
+    AST_BASE* initializer_node,
+    VEC* type_vec,
+    size_t* off,
+    size_t curr_obj_obj,
+    bool begin_with_left_brace,
+    bool bit_field,
+    size_t bit_field_size);
+#endif   
