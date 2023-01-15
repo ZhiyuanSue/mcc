@@ -82,13 +82,6 @@ int mcc_main(char* filename,char* target_file){
             mcc_error(ei,buf,error_line);
         }
     }
-    if(tvec){
-        for(size_t i=0;i<VECLEN(tvec);++i){
-            TOKEN* tmpt=VEC_GET_ITEM(tvec,i);
-            if(tmpt->type==identifier&&tmpt->symbol_item==NULL)
-            printf("not decided token %s\n",tmpt->value);
-        }
-    }
 succ_end:
     MEMDel(global_heap);
     MEMDel(file_heap);
