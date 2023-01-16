@@ -1500,6 +1500,7 @@ bool initializer_search(
         size_t struct_size=Type_size(type_vec)*8;
         VEC* su_member_list=((TP_SU*)tmp_type)->members;
         VEC* sub_obj_type_vec=NULL;
+        size_t struct_start_off=curr_obj_off;
         for(size_t i=0;i<VECLEN(su_member_list);++i)
         {
             member=(TP_SU_MEMBER*)VEC_GET_ITEM(su_member_list,i);
@@ -1517,7 +1518,7 @@ bool initializer_search(
                 member_end+=member_bit_field_size;
             else
                 member_end+=Type_size(member->type_vec)*8;
-            if(curr_obj_off<=(*off)&&member_end>(*off))
+            if((curr_obj_off<=(*off)&&member_end>(*off))||(((TP_SU*)tmp_type)->curr_designated_member==member))
             {
                 find_member=true;
                 index=i;
@@ -1539,6 +1540,9 @@ bool initializer_search(
                     member_bit_field_size
                 ))
                     goto error;
+                if((*off)>=struct_start_off+struct_size){
+                    ((TP_SU*)tmp_type)->curr_designated_member=NULL;
+                }
             }
             else{
                 if(initializer_semantic(initializer_node,sub_obj_type_vec,(*off)))
@@ -1550,14 +1554,49 @@ bool initializer_search(
                         off+=struct_size;
                     }
                     else{
-                        TP_SU_MEMBER* next_member=(TP_SU_MEMBER*)VEC_GET_ITEM(su_member_list,index+1);
-                        if(member->bit_field)
-                            initializer_node->init_attribute->size=member->bit_field_size;
-                        else
-                            initializer_node->init_attribute->size=Type_size(member->type_vec);
-                        (*off)=next_member->offset*8;
-                        if(next_member->bit_field)
-                            off+=member->bit_field_offset;
+                        TP_SU_MEMBER* next_member=NULL;
+                        size_t next_member_off=struct_start_off;
+                        /*
+                            consider unnamed member case,
+                            you have to check all the following members,
+                            until you find one that the start bit is diffient with the current one or all the next member are checked 
+                            e.x.:
+                                struct a{
+                                    union{
+                                        int b;
+                                        int c;
+                                    };
+                                } d;
+                                this union is a unnamed one ,and in member list, only have member b and c,
+                                but b and c start from the same position. 
+                        */
+                        for(size_t j=index+1;j<VECLEN(su_member_list);++j)
+                        {
+                            next_member=(TP_SU_MEMBER*)VEC_GET_ITEM(su_member_list,index+1);
+                            size_t tmp_next_member_off=next_member_off+(next_member->offset)*8; /*start test*/
+                            if(next_member->bit_field)
+                                tmp_next_member_off+=next_member->bit_field_offset;
+                            if(tmp_next_member_off!=curr_obj_off)
+                            {
+                                next_member_off=tmp_next_member_off;
+                                break;
+                            }
+                        }
+                        if(next_member&&next_member_off!=curr_obj_off)
+                        {
+                            if(member->bit_field)
+                                initializer_node->init_attribute->size=member->bit_field_size;
+                            else
+                                initializer_node->init_attribute->size=Type_size(member->type_vec);
+                            (*off)=next_member->offset*8;
+                            if(next_member->bit_field)
+                                off+=member->bit_field_offset;
+                        }
+                        else    /*it means no next member start with different offset*/
+                        {
+                            initializer_node->init_attribute->size=struct_size;
+                            off+=struct_size;
+                        }
                     }
                 }
                 else{
@@ -1573,6 +1612,9 @@ bool initializer_search(
                         member_bit_field_size
                     ))
                         goto error;
+                    if((*off)>=struct_start_off+struct_size){
+                        ((TP_SU*)tmp_type)->curr_designated_member=NULL;
+                    }
                 }
             }
         }
