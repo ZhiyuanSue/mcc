@@ -1,5 +1,6 @@
 /obj/*
 /pre/*
+/asm/*
 /bin/bootstrap_asm_out/*
 /bin/bootstrap_print_out/*
 /bin/mcc

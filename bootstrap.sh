@@ -10,6 +10,7 @@ mcc_path="./bin/mcc"
 bootstrap_src_path="./pre/"
 bootstrap_print_out_path="./bin/bootstrap_print_out/"    #used to store the print information
 bootstrap_asm_out_path="./bin/bootstrap_asm_out/"        #used to store the output asm file
+bootstrap_asm_test_path="./asm/"                          #use gcc to get asm file for compare and test
 file_num=0
 succ_accu=0
 succ_num=0
@@ -36,6 +37,7 @@ for file in $(ls ${bootstrap_src_path})
 do
     ((file_num++))
     ${mcc_path} ${bootstrap_src_path}${file} ${bootstrap_asm_out_path}${file} > ${bootstrap_print_out_path}${file%.i*}".txt"
+    gcc -fno-asynchronous-unwind-tables -S  ${bootstrap_src_path}${file} -o ${bootstrap_asm_test_path}${file%.i*}".s"
     last_line=$(tail -n 1 ${bootstrap_print_out_path}${file%.i*}".txt")
     if [[ ${last_line} != "test pass!" ]]
     then

@@ -3,6 +3,7 @@ include ./Makefile.env
 export MCC_ROOT_DIR=$(shell pwd)
 export MCC_ROOT_OBJ=${MCC_ROOT_DIR}/obj
 export MCC_ROOT_PRE=${MCC_ROOT_DIR}/pre
+export MCC_ROOT_ASM=${MCC_ROOT_DIR}/asm
 export MCC_BOOTSTRAP_OUT=${MCC_ROOT_DIR}/bin/bootstrap_print_out
 Bin:=${MCC_ROOT_DIR}/bin
 Target:= ${Bin}/mcc
@@ -13,6 +14,7 @@ all: init SubModules  ${Target}
 init:
 	$(shell if [ ! -d $(MCC_ROOT_OBJ) ];then mkdir $(MCC_ROOT_OBJ); fi)
 	$(shell if [ ! -d $(MCC_ROOT_PRE) ];then mkdir $(MCC_ROOT_PRE); fi)
+	$(shell if [ ! -d $(MCC_ROOT_ASM) ];then mkdir $(MCC_ROOT_ASM); fi)
 SubModules:
 	@$(foreach n,$(modules),$(call build_submodule,$(n)))
 ${Target}:
@@ -26,6 +28,7 @@ clean:
 	rm -f ${Bin}/test_out/*
 	rm -f ${MCC_ROOT_PRE}/*
 	rm -f ${MCC_BOOTSTRAP_OUT}/*
+	rm -f ${MCC_ROOT_ASM}/*
 
 clean_obj:
 	rm -rf ${MCC_ROOT_OBJ}
