@@ -18,6 +18,9 @@ typedef struct{
     size_t off;
     size_t size;
 }INIT_NODE_ATTR;
+typedef struct{
+    VEC* decl_symbol_item_list;
+}DECL_NODE_ATTR;
 typedef struct ast_base AST_BASE;
 struct ast_base{
     enum rule_type_enum type;
@@ -27,8 +30,11 @@ struct ast_base{
     TOKEN* token;
     size_t ter_num;
     NMSP name_space;
-    EXPR_NODE_ATTR* expr_attribute;
-    INIT_NODE_ATTR* init_attribute;
+    union{  /*some node need extral attributes,but they cannot appear at the same time*/
+        EXPR_NODE_ATTR* expr_attribute;
+        INIT_NODE_ATTR* init_attribute;
+        DECL_NODE_ATTR* decl_attribute;
+    };
 };
 
 inline AST_BASE* creat_ast_node(enum rule_type_enum type,VEC* child,SYM* symbol_table,TOKEN* token,size_t ter_num,NMSP name_space){

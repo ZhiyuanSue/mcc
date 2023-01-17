@@ -391,7 +391,6 @@ bool for_statement(AST_BASE* ast_node)
                     }
                 }
             }
-            DelVEC(tmp_sym_item);
         }
         else if(IS_EXPR_NODE(tmp_ast->type))
         {

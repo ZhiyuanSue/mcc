@@ -16,7 +16,6 @@ bool semantics(AST_BASE* ast_node){
     case declaration:{
         VEC* tmp_sym_item=InitVEC(DEFAULT_CAPICITY);
         return declaration_type(ast_node,tmp_sym_item);
-        DelVEC(tmp_sym_item);
     }
     case function_definition:{
         return function_definition_type(ast_node);

@@ -182,6 +182,7 @@ bool declaration_type(AST_BASE* ast_node,VEC* dec_symbol_item_list)
             C_WARN(W0003_WARN_NO_DECLARATION_ANY_THING,ast_node);
         }   
     }
+    ast_node->decl_attribute->decl_symbol_item_list=dec_symbol_item_list;
     m_free(tei);
 #ifdef _TEST_SEMANTICS_
     for(size_t i=0;i<semantics_level;++i)

@@ -404,6 +404,11 @@ bool p_symbol_table(AST_BASE* ast_node,SYM* father){
         ast_node->init_attribute->off=0;
         ast_node->init_attribute->size=0;
     }
+    if(ast_node->type==declaration)
+    {
+        ast_node->decl_attribute=m_alloc(sizeof(DECL_NODE_ATTR));
+        ast_node->decl_attribute->decl_symbol_item_list=NULL;
+    }
     VECpopback(trace_stack);
     return true;
 }

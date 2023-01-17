@@ -4,4 +4,5 @@
 #include "../frontend/ast.h"
 /*The following trans is used to translate the AST to the IR*/
 IR_MODULE* trans_to_IR(AST_BASE* ast_node);
+bool trans_func(AST_BASE* ast_node,IR_FUNC* ir_func);
 #endif

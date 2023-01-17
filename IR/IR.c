@@ -51,6 +51,12 @@ IR_INS* add_new_ins(IR_BB* bb)
     new_ins->func=bb->func;
     new_ins->IR_module=bb->IR_module;
     new_ins->op=OP_NONE;
+    new_ins->dst=(IR_OPERAND*)m_alloc(sizeof(IR_OPERAND));
+    new_ins->dst->type=OPERAND_NONE;
+    new_ins->src1=(IR_OPERAND*)m_alloc(sizeof(IR_OPERAND));
+    new_ins->src1->type=OPERAND_NONE;
+    new_ins->src2=(IR_OPERAND*)m_alloc(sizeof(IR_OPERAND));
+    new_ins->src2->type=OPERAND_NONE;
     if(!bb->Instruction_list)
     {
         init_list_node(&(new_ins->node));
@@ -70,5 +76,20 @@ char* label_allocator(void)
 }
 void print_IR(IR_MODULE* irm)
 {
-    
+    printf("<external declarations>:\n");
+    for(size_t i=0;i<VECLEN(irm->global_and_external_symbols);++i)
+    {
+        SYM_ITEM* tmpsi=(SYM_ITEM*)VEC_GET_ITEM(irm->global_and_external_symbols,i);
+        print_symbol(tmpsi,0);
+    }
+    printf("<function definitions>:\n");
+    for(size_t i=0;i<VECLEN(irm->func_list);++i)
+    {
+        printf(".globl function:\n");
+
+        printf("{\n");
+
+
+        printf("}\n");
+    }
 }

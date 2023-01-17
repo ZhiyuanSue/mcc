@@ -64,6 +64,7 @@ void del_symbol(SYM* symbol_table,char* symbol,NMSP name_space);
 void del_symbol_typedef_table(SYM* symbol_table,char* symbol);
 void Del_symbol_table(SYM* symbol_table);
 void print_symbol_table(SYM* symbol_table);
+void print_symbol(SYM_ITEM* symbol,size_t indentation);
 VEC* get_symbol_hash(HASH* h);
 unsigned long long int SymbolCharToKey(char* symbol,NMSP name_space);
 bool symbol_item_cmp(void* a,void* b);

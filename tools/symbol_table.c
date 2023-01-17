@@ -118,102 +118,10 @@ void print_symbol_table(SYM* symbol_table)  /*just a print for test,don't care t
     printf("<symbol table>\n");
     symbol_vec=get_symbol_hash(symbol_table->sym_hash_table);
     for(size_t i=0;i<VECLEN(symbol_vec);++i){
-        
         tmp=VEC_GET_ITEM(symbol_vec,i);
         if(!tmp||tmp->count<=0)
             continue;
-        for(int j=0;j<=symbol_table->level+1;++j){
-            printf("    ");
-        }
-        printf("<symbol:%s ns:%d linkage:%d>\n",tmp->value,tmp->name_space,tmp->linkage);
-        for(int j=0;j<=symbol_table->level+2;++j){
-            printf("    ");
-        }
-        printf("type::<");
-        M_TYPE* tmpfunct=NULL;
-        M_TYPE* tmpt=NULL;
-        
-        if(tmp->type_vec){
-            for(int j=VECLEN(tmp->type_vec)-1;j>=0;--j){
-                tmpt=VEC_GET_ITEM(tmp->type_vec,j);
-                if(tmpt){
-                    if(tmpfunct==NULL&&tmpt->typ_category==TP_FUNCTION)
-                        tmpfunct=tmpt;
-                    print_type(tmpt);
-                }
-                if(j)
-                    printf(",");
-            }
-        }
-        printf(">\n");
-        tmpt=Type_VEC_get_actual_base_type(tmp->type_vec);
-        if(tmpfunct){
-            VEC* paravec=((TP_FUNC*)tmpfunct)->func_parameters;
-            if(paravec==NULL||VECLEN(paravec)==0){
-                for(int k=0;k<=symbol_table->level+3;++k){
-                    printf("    ");
-                }
-                printf("no parameter\n");
-                continue;
-            }
-            for(int j=0;j<=symbol_table->level+3;++j){
-                printf("    ");
-            }
-            printf("function have %ld parameters are:\n",VECLEN(paravec));
-            for(size_t j=0;j<VECLEN(paravec);++j){
-                TP_FUNC_PARA* tmpfuncpara=VEC_GET_ITEM(paravec,j);
-                for(int k=0;k<=symbol_table->level+4;++k){
-                    printf("    ");
-                }
-                if(tmpfuncpara->para_name)
-                    printf("%s\n",tmpfuncpara->para_name);
-                else
-                    printf("(no parameter name)\n");
-            }
-        }
-        else if(tmpt&&tmpt->modifier==false){
-            if(tmp->name_space==NMSP_SU_TAG&&(tmpt->typ_category==TP_UNION||tmpt->typ_category==TP_STRUCT)){
-                if(((TP_SU*)tmpt)->members==NULL)
-                    continue;
-                for(int j=0;j<=symbol_table->level+3;++j){
-                    printf("    ");
-                }
-                printf("struct have %ld members are:\n",VECLEN(((TP_SU*)tmpt)->members));
-                for(size_t j=0;j<VECLEN(((TP_SU*)tmpt)->members);++j){
-                    TP_SU_MEMBER* tmpm=VEC_GET_ITEM(((TP_SU*)tmpt)->members,j);
-                    if(tmpm){
-                        for(int k=0;k<=symbol_table->level+4;++k){
-                            printf("    ");
-                        }
-                        if(tmpm->member_name)
-                        {
-                            if(tmpm->bit_field)
-                                printf("< %s off:%ld bit_off:%ld bit_size:%ld >\n",tmpm->member_name,tmpm->offset,tmpm->bit_field_offset,tmpm->bit_field_size);
-                            else
-                                printf("< %s off:%ld >\n",tmpm->member_name,tmpm->offset);
-                        }
-                        else
-                        {
-                            if(tmpm->bit_field)
-                                printf("< anonymous member off:%ld bit_off:%ld bit_size:%ld >\n",tmpm->offset,tmpm->bit_field_offset,tmpm->bit_field_size);
-                            else
-                                printf("< anonymous member off:%ld >\n",tmpm->offset);
-                        }
-                    }
-                }
-                for(int j=0;j<=symbol_table->level+3;++j){
-                    printf("    ");
-                }
-                printf("total size:%ld align size:%ld\n",((TP_SU*)tmpt)->total_data_size,((TP_SU*)tmpt)->data_align);
-            }
-            if(tmpt->typ_category==TP_ARRAY)
-            {
-                for(int j=0;j<=symbol_table->level+3;++j){
-                    printf("    ");
-                }
-                printf("array len is: %zu\n",((TP_ARR*)tmpt)->axis_size);
-            }
-        }
+        print_symbol(tmp,symbol_table->level);
     }
 #endif
 #if PRINT_TYPEDEF_TABLE == 1
@@ -236,6 +144,101 @@ void print_symbol_table(SYM* symbol_table)  /*just a print for test,don't care t
         SYM* child=(SYM*)VEC_GET_ITEM(symbol_table->child_table,i);
         if(child!=NULL)
             print_symbol_table(child);
+    }
+}
+void print_symbol(SYM_ITEM* symbol,size_t indentation)
+{
+    for(int j=0;j<=indentation+1;++j){
+        printf("    ");
+    }
+    printf("<symbol:%s ns:%d linkage:%d>\n",symbol->value,symbol->name_space,symbol->linkage);
+    for(int j=0;j<=indentation+2;++j){
+        printf("    ");
+    }
+    printf("type::<");
+    M_TYPE* tmpfunct=NULL;
+    M_TYPE* tmpt=NULL;
+    
+    if(symbol->type_vec){
+        for(int j=VECLEN(symbol->type_vec)-1;j>=0;--j){
+            tmpt=VEC_GET_ITEM(symbol->type_vec,j);
+            if(tmpt){
+                if(tmpfunct==NULL&&tmpt->typ_category==TP_FUNCTION)
+                    tmpfunct=tmpt;
+                print_type(tmpt);
+            }
+            if(j)
+                printf(",");
+        }
+    }
+    printf(">\n");
+    tmpt=Type_VEC_get_actual_base_type(symbol->type_vec);
+    if(tmpfunct){
+        VEC* paravec=((TP_FUNC*)tmpfunct)->func_parameters;
+        if(paravec==NULL||VECLEN(paravec)==0){
+            for(int k=0;k<=indentation+3;++k){
+                printf("    ");
+            }
+            printf("no parameter\n");
+            return;
+        }
+        for(int j=0;j<=indentation+3;++j){
+            printf("    ");
+        }
+        printf("function have %ld parameters are:\n",VECLEN(paravec));
+        for(size_t j=0;j<VECLEN(paravec);++j){
+            TP_FUNC_PARA* tmpfuncpara=VEC_GET_ITEM(paravec,j);
+            for(int k=0;k<=indentation+4;++k){
+                printf("    ");
+            }
+            if(tmpfuncpara->para_name)
+                printf("%s\n",tmpfuncpara->para_name);
+            else
+                printf("(no parameter name)\n");
+        }
+    }
+    else if(tmpt&&tmpt->modifier==false){
+        if(symbol->name_space==NMSP_SU_TAG&&(tmpt->typ_category==TP_UNION||tmpt->typ_category==TP_STRUCT)){
+            if(((TP_SU*)tmpt)->members==NULL)
+                return;
+            for(int j=0;j<=indentation+3;++j){
+                printf("    ");
+            }
+            printf("struct have %ld members are:\n",VECLEN(((TP_SU*)tmpt)->members));
+            for(size_t j=0;j<VECLEN(((TP_SU*)tmpt)->members);++j){
+                TP_SU_MEMBER* tmpm=VEC_GET_ITEM(((TP_SU*)tmpt)->members,j);
+                if(tmpm){
+                    for(int k=0;k<=indentation+4;++k){
+                        printf("    ");
+                    }
+                    if(tmpm->member_name)
+                    {
+                        if(tmpm->bit_field)
+                            printf("< %s off:%ld bit_off:%ld bit_size:%ld >\n",tmpm->member_name,tmpm->offset,tmpm->bit_field_offset,tmpm->bit_field_size);
+                        else
+                            printf("< %s off:%ld >\n",tmpm->member_name,tmpm->offset);
+                    }
+                    else
+                    {
+                        if(tmpm->bit_field)
+                            printf("< anonymous member off:%ld bit_off:%ld bit_size:%ld >\n",tmpm->offset,tmpm->bit_field_offset,tmpm->bit_field_size);
+                        else
+                            printf("< anonymous member off:%ld >\n",tmpm->offset);
+                    }
+                }
+            }
+            for(int j=0;j<=indentation+3;++j){
+                printf("    ");
+            }
+            printf("total size:%ld align size:%ld\n",((TP_SU*)tmpt)->total_data_size,((TP_SU*)tmpt)->data_align);
+        }
+        if(tmpt->typ_category==TP_ARRAY)
+        {
+            for(int j=0;j<=indentation+3;++j){
+                printf("    ");
+            }
+            printf("array len is: %zu\n",((TP_ARR*)tmpt)->axis_size);
+        }
     }
 }
 VEC* get_symbol_hash(HASH* h){

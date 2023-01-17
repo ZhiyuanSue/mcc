@@ -114,7 +114,6 @@ bool function_definition_type(AST_BASE* ast_node)
                     goto error;
                 }
             }
-            DelVEC(para_declarator_list);
         }
         for(size_t i=0;i<VECLEN(func_para_list);++i)
         {

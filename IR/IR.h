@@ -3,37 +3,16 @@
 #include "../tools/vector.h"
 #include "../tools/list.h"
 #include "../tools/symbol_table.h"
+#include "IR_ENUM.h"
 #define IR_DATA_TYPE \
-    int ir_d_type; \
+    enum data_type ir_d_type; \
     int ir_d_len; 
-    /* type: 0-no,1-signed (i),2-unsigned (u),3-float (f)*/
-/*operand*/
-enum data_type{
-    DATA_NONE,
-    DATA_SIGNED,
-    DATA_UNSIGNED,
-    DATA_FLOAT
-};
-enum operand_type{
-    OPERAND_NONE,   /*no operand*/
-    OPERAND_VOID,   /*void operand type*/
-    OPERAND_REG, /*the operand is a register*/
-    OPERAND_IMM, /*immediate*/
-    OPERAND_POINTER,    /*pointer*/
-    OPERAND_LABEL, /*label position*/
-    OPERAND_FUNC, /*function position*/
-    OPERAND_VECTOR, /*an array type,which might have special machine instructions to accelerate it*/
-    OPERAND_OBJ, /*an object,including struct union or another complex type*/
-};
-enum operand_flow{
-    FLOW_IN,
-    FLOW_OUT,
-};
 typedef struct module IR_MODULE;
 typedef struct function IR_FUNC;
 typedef struct basic_block IR_BB;
 typedef struct instruction IR_INS;
-typedef struct {
+typedef struct operand IR_OPERAND;
+typedef struct operand{
     enum operand_type type;
     enum operand_flow direction;
     union{
@@ -70,18 +49,12 @@ typedef struct {
     } operand_data;
 }IR_OPERAND;
 
-/*instruction type*/
-enum ins_op
-{
-    OP_NONE,
-    OP_PHI,
-
-
-};
 typedef struct instruction{
     LIST_NODE node;
     enum ins_op op;
-    VEC* operands;
+    IR_OPERAND* dst;
+    IR_OPERAND* src1;
+    IR_OPERAND* src2;
     IR_MODULE* IR_module;
     IR_FUNC* func;
     IR_BB* block;
@@ -90,7 +63,7 @@ bool GenINS(IR_INS* ins);   /*use add_new_ins to get a new one and fill in the d
 
 typedef struct module{
     VEC* func_list;
-    VEC* external_symbols;
+    VEC* global_and_external_symbols;
 }IR_MODULE;
 typedef struct function{
     char* func_name;
