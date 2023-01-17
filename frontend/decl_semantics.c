@@ -1519,7 +1519,10 @@ bool initializer_search(
             else
                 member_end+=Type_size(member->type_vec)*8;
             if((curr_obj_off<=(*off)&&member_end>(*off))||(((TP_SU*)tmp_type)->curr_designated_member==member))
-            {
+            {   /*
+                    unlike the union,the struct must calculate some data,so it have to check all
+                    actually,I think just record the index in member list might works.
+                */
                 find_member=true;
                 index=i;
                 break;
@@ -1569,6 +1572,7 @@ bool initializer_search(
                                 } d;
                                 this union is a unnamed one ,and in member list, only have member b and c,
                                 but b and c start from the same position. 
+                                so ,if you try to init this struct , only one int is needed
                         */
                         for(size_t j=index+1;j<VECLEN(su_member_list);++j)
                         {

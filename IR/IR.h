@@ -19,6 +19,7 @@ enum operand_type{
     OPERAND_VOID,   /*void operand type*/
     OPERAND_REG, /*the operand is a register*/
     OPERAND_IMM, /*immediate*/
+    OPERAND_POINTER,    /*pointer*/
     OPERAND_LABEL, /*label position*/
     OPERAND_FUNC, /*function position*/
     OPERAND_VECTOR, /*an array type,which might have special machine instructions to accelerate it*/
@@ -47,11 +48,14 @@ typedef struct {
             IR_BB* op;
         } operand_label;
         struct {
+            void* p;
+        } operand_pointer;
+        struct {
             IR_FUNC* function;
         } operand_func;
         struct {
             size_t start_off_sfp;      /*the start of array*/
-            size_t array_element_size;
+            IR_OPERAND* array_element;
             bool is_vla;
             union{
                 size_t length;
@@ -66,11 +70,13 @@ typedef struct {
     } operand_data;
 }IR_OPERAND;
 
-/*instruction*/
+/*instruction type*/
 enum ins_op
 {
     OP_NONE,
     OP_PHI,
+
+
 };
 typedef struct instruction{
     LIST_NODE node;
@@ -80,8 +86,7 @@ typedef struct instruction{
     IR_FUNC* func;
     IR_BB* block;
 }IR_INS;
-bool GenINS(IR_INS* ins);
-
+bool GenINS(IR_INS* ins);   /*use add_new_ins to get a new one and fill in the data*/
 
 typedef struct module{
     VEC* func_list;
@@ -106,6 +111,6 @@ IR_BB* add_new_bb(IR_FUNC* func);
 IR_INS* add_new_ins(IR_BB* bb);
 
 
-char* label_allocator(void);
+char* label_allocator(void);    /*allocate a label name for a bb*/
 void print_IR(IR_MODULE* irm);
 #endif
