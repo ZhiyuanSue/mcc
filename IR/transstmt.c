@@ -35,7 +35,7 @@ bool compound_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     for(size_t i=1;i<AST_CHILD_NUM(ast_node)-1;++i){
         AST_BASE* sub_ast=AST_GET_CHILD(ast_node,i);
         if(sub_ast){
-            if(sub_ast->type==declaration&&!local_decl(ast_node,ir_bb))
+            if(sub_ast->type==declaration&&!stack_decl(ast_node,ir_bb))
                 goto error;
             else if(sub_ast->type==statement&&!stmt_trans_dispatch(ast_node,ir_bb))
                 goto error;

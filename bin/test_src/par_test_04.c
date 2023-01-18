@@ -1,4 +1,6 @@
 _Thread_local struct c;
+_Thread_local int tl=0x1234567;
+_Thread_local int tb=0x654321;
 struct c{
     int cc;
 };
@@ -29,6 +31,7 @@ void g(signed long int ccc){
     char* a="a is a bool";
     b++;
     b+=SPT_FILE;
+    b+=tl;
     if(0){
         int a=1;
         goto label_test;
@@ -40,8 +43,6 @@ void g(signed long int ccc){
     case 1:
         break;
     case 2:
-        break;
-    default:
         break;
     default:
         break;

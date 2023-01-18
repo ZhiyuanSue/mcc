@@ -7,9 +7,8 @@ IR_MODULE* trans_to_IR(AST_BASE* ast_node);
 bool trans_func(AST_BASE* ast_node,IR_FUNC* ir_func);
 
 /*decl*/
-bool decl_dispatch(AST_BASE* ast_node,IR_BB* ir_bb,bool external_decl);
-bool global_decl(AST_BASE* ast_node,IR_MODULE* irm);
-bool local_decl(AST_BASE* ast_node,IR_BB* ir_bb);
+bool static_storage_decl(AST_BASE* ast_node,IR_MODULE* irm);
+bool stack_decl(AST_BASE* ast_node,IR_BB* ir_bb);
 /*the global declaration is in module,and the local declaration must in one block*/
 
 /*stmt*/
