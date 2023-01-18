@@ -61,7 +61,11 @@ typedef struct instruction{
     IR_FUNC* func;
     IR_BB* block;
 }IR_INS;
-bool GenINS(IR_INS* ins);   /*use add_new_ins to get a new one and fill in the data*/
+bool GenINS(IR_INS* ins,
+    enum ins_op op,
+    IR_OPERAND* dst,
+    IR_OPERAND* src1,
+    IR_OPERAND* src2);   /*use add_new_ins to get a new one and fill in the data*/
 
 typedef struct module{
     VEC* func_list;

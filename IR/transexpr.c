@@ -3,25 +3,32 @@ bool expr_trans_dispatch(AST_BASE* ast_node,IR_BB* ir_bb)
 {
     if(!ast_node||!ir_bb)
         goto error;
-    bool (*expr_trans[EXPR_NUM])(AST_BASE* ast_node,IR_BB* ir_bb)={
-        expr_value,assign_expr_value,cond_expr_value,logical_or_expr_value,
-        logical_and_expr_value,bit_inclusive_or_expr_value,bit_exclusive_or_expr_value,
-        and_expr_value,equal_expr_value,relation_expr_value,shift_expr_value,
-        add_expr_value,mul_expr_value,cast_expr_value,unary_expr_value,
-        postfix_expr_value,pri_expr_value
+    bool (*expr_translation[EXPR_NUM])(AST_BASE* ast_node,IR_BB* ir_bb)={
+        expr_trans,assign_expr_trans,cond_expr_trans,logical_or_expr_trans,
+        logical_and_expr_trans,bit_inclusive_or_expr_trans,bit_exclusive_or_expr_trans,and_expr_trans,
+        equal_expr_trans,relation_expr_trans,shift_expr_trans,add_expr_trans,
+        mul_expr_trans,cast_expr_trans,unary_expr_trans,postfix_expr_trans,
+        pri_expr_trans
     };
     bool res=false;
     if(ast_node->type==expression)
-        res=expr_trans[0](ast_node,ir_bb);
+        res=expr_translation[0](ast_node,ir_bb);
     else if(ast_node->type>=assignment_expr&&ast_node->type<=primary_expression){
-        res=expr_trans[ast_node->type-assignment_expr+1](ast_node,ir_bb);
+        res=expr_translation[ast_node->type-assignment_expr+1](ast_node,ir_bb);
     }
     return res;
-    return true;
 error:
     return false;
 }
 bool cond_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
+{
+    if(!ast_node||!ir_bb)
+        goto error;
+    return true;
+error:
+    return false;
+}
+bool expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
 {
     if(!ast_node||!ir_bb)
         goto error;

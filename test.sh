@@ -39,6 +39,7 @@ do
     last_line=$(tail -n 1 ${test_out_path}${file%.c*}".txt")
     if [[ ${last_line} == "test pass!" ]]
     then
+        gcc -fno-asynchronous-unwind-tables -S  ${test_src_path}${file} -o ${test_asm_path}${file%.i*}".s"
         echo ${file_num}"    succ   "${file}"   "${succ_accu}
         ((succ_num++))
         ((succ_accu++))

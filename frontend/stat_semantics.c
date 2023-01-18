@@ -144,7 +144,6 @@ bool compound_statement(AST_BASE* ast_node)
             else if(sub_ast->type==statement&&!statement_dispatch(sub_ast))
                 goto error;
         }
-        DelVEC(tmp_sym_item);
     }
 #ifdef _TEST_SEMANTICS_
     for(size_t i=0;i<semantics_level;++i)
@@ -262,6 +261,9 @@ bool switch_statement(AST_BASE* ast_node)
         C_ERROR(C0060_ERR_OPERAND_INTEGER_TYPE,expr_node);
         goto error;
     }
+    AST_BASE* stmt_node=AST_GET_CHILD(ast_node,4);
+    if(!statement_dispatch(stmt_node))
+        goto error;
     m_free(tei);
 #ifdef _TEST_SEMANTICS_
     for(size_t i=0;i<semantics_level;++i)

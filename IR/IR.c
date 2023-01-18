@@ -1,7 +1,11 @@
 #include "IR.h"
 extern char operand_name_string[OPERAND_NUM][OPERAND_STR_LEN];
 extern char op_name_string[OP_NUM][OP_STRING_LEN];
-bool GenINS(IR_INS* ins){
+bool GenINS(IR_INS* ins,
+    enum ins_op op,
+    IR_OPERAND* dst,
+    IR_OPERAND* src1,
+    IR_OPERAND* src2){
     if(!ins)
         goto error;
     return true;

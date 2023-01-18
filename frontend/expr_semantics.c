@@ -12,10 +12,10 @@ bool expr_dispatch(AST_BASE* expr_node)
         return false;
     bool (*expr[EXPR_NUM])(AST_BASE* ast_node)={
         expr_value,assign_expr_value,cond_expr_value,logical_or_expr_value,
-        logical_and_expr_value,bit_inclusive_or_expr_value,bit_exclusive_or_expr_value,
-        and_expr_value,equal_expr_value,relation_expr_value,shift_expr_value,
-        add_expr_value,mul_expr_value,cast_expr_value,unary_expr_value,
-        postfix_expr_value,pri_expr_value
+        logical_and_expr_value,bit_inclusive_or_expr_value,bit_exclusive_or_expr_value,and_expr_value,
+        equal_expr_value,relation_expr_value,shift_expr_value,add_expr_value,
+        mul_expr_value,cast_expr_value,unary_expr_value,postfix_expr_value,
+        pri_expr_value
     };
     bool res=false;
     if(expr_node->type==expression)

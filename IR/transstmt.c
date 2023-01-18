@@ -1,4 +1,5 @@
 #include "transstmt.h"
+/*as semantic has been done,so ,we needn't do too much checks*/
 bool stmt_trans_dispatch(AST_BASE* ast_node,IR_BB* ir_bb)
 {
     if(!ast_node||!ir_bb)
@@ -22,6 +23,7 @@ bool labeled_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
 {
     if(!ast_node||!ir_bb||ast_node->type!=labeled_stmt)
         goto error;
+    
     return true;
 error:
     return false;
@@ -30,6 +32,15 @@ bool compound_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
 {
     if(!ast_node||!ir_bb||ast_node->type!=compound_stmt)
         goto error;
+    for(size_t i=1;i<AST_CHILD_NUM(ast_node)-1;++i){
+        AST_BASE* sub_ast=AST_GET_CHILD(ast_node,i);
+        if(sub_ast){
+            if(sub_ast->type==declaration&&!local_decl(ast_node,ir_bb))
+                goto error;
+            else if(sub_ast->type==statement&&!stmt_trans_dispatch(ast_node,ir_bb))
+                goto error;
+        }
+    }
     return true;
 error:
     return false;

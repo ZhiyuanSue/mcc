@@ -48,7 +48,17 @@ bool trans_func(AST_BASE* ast_node,IR_FUNC* ir_func)
     if(!ast_node||!ir_func||ast_node->type!=function_definition)
         goto error;
     SYM_ITEM* tmpsi=ast_node->func_attribute;
-    
+    /*do some work for arguments*/
+
+    /*add a return basic block,in which only one ins, ret*/
+    IR_BB* last_bb=add_new_bb(ir_func);
+    last_bb->bb_label=label_allocator();
+    IR_INS* ret_ins=add_new_ins(last_bb);
+    GenINS(ret_ins,OP_RET,NULL,NULL,NULL);
+    /*compound stmt part*/
+    IR_BB* compound_bb=add_new_bb(ir_func);
+    AST_BASE* compount_stmt_node=AST_GET_CHILD(ast_node,AST_CHILD_NUM(ast_node)-1);
+    //compound_stmt_trans(compount_stmt_node,compound_bb);
     return true;
 error:
     return false;
