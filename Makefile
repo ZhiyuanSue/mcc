@@ -29,6 +29,7 @@ clean:
 	rm -f ${MCC_ROOT_PRE}/*
 	rm -f ${MCC_BOOTSTRAP_OUT}/*
 	rm -f ${MCC_ROOT_ASM}/*
+	rm -f ${Bin}/test_asm/*
 
 clean_obj:
 	rm -rf ${MCC_ROOT_OBJ}

@@ -3,6 +3,7 @@
 /asm/*
 /bin/bootstrap_asm_out/*
 /bin/bootstrap_print_out/*
+/bin/test_asm/*
 /bin/mcc
 /bin/test_out/*
 .DS_Store
