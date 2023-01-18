@@ -1164,7 +1164,7 @@ bool add_expr_value(AST_BASE* ast_node)
                 VEC* tmpv=NULL;
                 if(IS_INT_TYPE(add_base_type->typ_category)&&mul_base_type->typ_category==TP_POINT)
                 {
-                    tmpv=Type_VEC_get_Pointer_TO(mul_expression_node->expr_attribute->type_vec,true);
+                    tmpv=Type_VEC_get_Pointer_TO(mul_type_vec,true);
                 }
                 if(IS_INT_TYPE(mul_base_type->typ_category)&&add_base_type->typ_category==TP_POINT)
                 {
@@ -1187,12 +1187,11 @@ bool add_expr_value(AST_BASE* ast_node)
             if(IS_ARTH_TYPE(add_base_type->typ_category)&&IS_ARTH_TYPE(mul_base_type->typ_category))
                 legal=true;
             else if(add_base_type->typ_category==TP_POINT&&mul_base_type->typ_category==TP_POINT){
-                printf("both are pointer\n");
                 const_expr=false;
                 ptrdiff=true;
                 VEC* tmpa,*tmpm;
                 tmpa=Type_VEC_get_Pointer_TO(tmp_type_vec,true);
-                tmpm=Type_VEC_get_Pointer_TO(mul_expression_node->expr_attribute->type_vec,true);
+                tmpm=Type_VEC_get_Pointer_TO(mul_type_vec,true);
                 if(!compatible_types(tmpa,tmpm)){
                     C_ERROR(C0069_ERR_NEED_COMPATIBLE_TYPE,ast_node);
                     goto error;

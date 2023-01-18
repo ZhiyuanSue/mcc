@@ -537,12 +537,23 @@ VEC* lvalue_convertion(VEC* tmp_type_vec)
 }
 bool compatible_types(VEC* type_vec_a,VEC* type_vec_b)
 {
+    if(!type_vec_a||!type_vec_b)
+        return false;
+    printf("compatible_type part still need to do\n");
+    print_type_vec(type_vec_a);
+    print_type_vec(type_vec_b);
     /*TODO*/
     return true;
 }
 VEC* composite_types(VEC* type_vec_a,VEC* type_vec_b,bool compatible_type)
 {
     /*TODO*/
+    if(!type_vec_a||!type_vec_b||!compatible_type)
+        return NULL;
+    printf("composite_type part still need to do\n");
+    print_type_vec(type_vec_a);
+    print_type_vec(type_vec_b);
+    
     VEC* tmpv;
     VECcpy(type_vec_a,&tmpv);
     return tmpv;
@@ -783,12 +794,16 @@ VEC* Type_VEC_get_sub_obj_off_element_type(VEC* sub_obj_type,size_t sub_obj_off)
 void print_type_vec(VEC* type_vec)
 {
     printf("<");
-    for(int i=VECLEN(type_vec)-1;i>=0;i--){
-        M_TYPE* tmpt=(M_TYPE*)VEC_GET_ITEM(type_vec,i);
-        if(tmpt)
-            print_type(tmpt);
-        if(i)
-            printf(",");
+    if(type_vec==NULL)
+        printf("(nil)");
+    else{
+        for(int i=VECLEN(type_vec)-1;i>=0;i--){
+            M_TYPE* tmpt=(M_TYPE*)VEC_GET_ITEM(type_vec,i);
+            if(tmpt)
+                print_type(tmpt);
+            if(i)
+                printf(",");
+        }
     }
     printf(">\n");
 }

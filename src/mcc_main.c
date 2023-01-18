@@ -20,7 +20,7 @@ MEM_POOL* file_heap;    /*just for a single file*/
 #ifdef _TEST_SEMANTICS_
 int semantics_level;
 #endif
-int mcc_main(char* filename,char* target_file){
+int mcc_main(char* src_file,char* target_file){
     /*(****test)();*/
     char* buf=NULL;
     /*init global data*/
@@ -38,7 +38,8 @@ int mcc_main(char* filename,char* target_file){
     curr_heap=file_heap;
     c_error=InitVEC(DEFAULT_CAPICITY);
     /*preprocess*/
-    buf=prepro(filename);
+    filename=src_file;
+    buf=prepro(src_file);
     /*deal with the preprocessor result*/
     
     /*lex*/
