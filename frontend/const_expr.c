@@ -138,11 +138,11 @@ bool logical_const(enum TP_CATEGORY type,VALUE_DATA* data_field)
     case TP_BOOL:
         return (data_field->databool)==0;
     case TP_FLOAT_COMPLEX:
-        return (data_field->floatcomplex)==0;
+        return (data_field->floatcomplex[0])==0;
     case TP_DOUBLE_COMPLEX:
-        return (data_field->doublecomplex)==0;
+        return (data_field->doublecomplex[0])==0;
     case TP_LONG_DOUBLE_COMPLEX:
-        return (data_field->longdoublecomplex)==0;
+        return (data_field->longdoublecomplex[0])==0;
     case TP_POINT:
         return (data_field->pointer)==0;
     case TP_NULL_POINTER_CONSTANT:
