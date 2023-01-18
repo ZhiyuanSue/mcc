@@ -327,7 +327,7 @@ bool do_statement(AST_BASE* ast_node)
         printf("    ");
     printf("start do expr\n");
 #endif
-    if(!ast_node||ast_node->type!=while_stmt)
+    if(!ast_node||ast_node->type!=do_stmt)
         goto error;
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
     AST_BASE* expr_node=AST_GET_CHILD(ast_node,4);

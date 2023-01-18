@@ -1,5 +1,6 @@
 #include "IR.h"
-
+extern char operand_name_string[OPERAND_NUM][OPERAND_STR_LEN];
+extern char op_name_string[OP_NUM][OP_STRING_LEN];
 bool GenINS(IR_INS* ins){
     if(!ins)
         goto error;
@@ -69,27 +70,67 @@ IR_INS* add_new_ins(IR_BB* bb)
 error:
     return NULL;
 }
-
+static size_t label_id=0;
 char* label_allocator(void)
 {
+    
     return NULL;
+}
+static size_t next_alloc_reg_id=0;
+IR_REG* reg_allocator(IR_MODULE* irm,enum reg_type type,IR_INS* op)
+{
+    IR_REG* new_reg=(IR_REG*)m_alloc(sizeof(IR_REG));
+    new_reg->type=type;
+    new_reg->reg_id=next_alloc_reg_id;
+    next_alloc_reg_id++;
+    VECinsert(irm->reg_list,(void*)new_reg);
+    return new_reg;
 }
 void print_IR(IR_MODULE* irm)
 {
-    printf("<external declarations>:\n");
+    printf("<external declarations>:%ld declarations in total\n",VECLEN(irm->global_and_external_symbols));
     for(size_t i=0;i<VECLEN(irm->global_and_external_symbols);++i)
     {
         SYM_ITEM* tmpsi=(SYM_ITEM*)VEC_GET_ITEM(irm->global_and_external_symbols,i);
         print_symbol(tmpsi,0);
     }
-    printf("<function definitions>:\n");
-    for(size_t i=0;i<VECLEN(irm->func_list);++i)
+    printf("<function definitions>:%ld functions in total\n",VECLEN(irm->func_list));
+    if(irm->func_list)
     {
-        printf(".globl function:\n");
-
-        printf("{\n");
-
-
-        printf("}\n");
+        for(size_t i=0;i<VECLEN(irm->func_list);++i)
+        {
+            printf(".globl function:\n");
+            /*print function*/
+            IR_FUNC* curr_func=VEC_GET_ITEM(irm->func_list,i);
+            printf("{\n");
+            LIST_NODE* bb_p=curr_func->BB_list;
+            while(bb_p&&bb_p!=curr_func->BB_list)
+            {
+                IR_BB* curr_bb=(IR_BB*)bb_p;
+                printf("<basic block label:%s>\n",curr_bb->bb_label);
+                LIST_NODE* ins_p=curr_bb->Instruction_list;
+                while (ins_p&&ins_p!=curr_bb->Instruction_list)
+                {
+                    IR_INS* curr_ins=(IR_INS*)ins_p;
+                    print_INS(curr_ins,1);
+                    ins_p=ins_p->next;
+                }
+                bb_p=bb_p->next;
+            }
+            printf("}\n");
+        }
     }
+    
+}
+void print_INS(IR_INS* ins,size_t indentation)
+{
+    if(!ins)
+        return;
+    for(size_t i=0;i<indentation+1;++i){
+        printf(" ");
+    }
+    printf("<op:%s,",op_name_string[ins->op]);
+    printf("dst:%s,",operand_name_string[ins->dst->type]);
+    printf("src1:%s,",operand_name_string[ins->src1->type]);
+    printf("src2:%s>\n",operand_name_string[ins->src2->type]);
 }

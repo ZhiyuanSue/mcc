@@ -34,6 +34,7 @@ struct ast_base{
         EXPR_NODE_ATTR* expr_attribute;
         INIT_NODE_ATTR* init_attribute;
         DECL_NODE_ATTR* decl_attribute;
+        SYM_ITEM* func_attribute;
     };
 };
 

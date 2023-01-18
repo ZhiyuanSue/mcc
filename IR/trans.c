@@ -7,6 +7,7 @@ IR_MODULE* trans_to_IR(AST_BASE* ast_node)
     IR_MODULE* res=m_alloc(sizeof(IR_MODULE));
     res->global_and_external_symbols=InitVEC(DEFAULT_CAPICITY);
     res->func_list=InitVEC(DEFAULT_CAPICITY);
+    res->reg_list=InitVEC(DEFAULT_CAPICITY);
     for(size_t i=0;i<AST_CHILD_NUM(ast_node);++i)
     {
         AST_BASE* external_decl_node=AST_GET_CHILD(ast_node,i);
@@ -46,6 +47,7 @@ bool trans_func(AST_BASE* ast_node,IR_FUNC* ir_func)
 {
     if(!ast_node||!ir_func||ast_node->type!=function_definition)
         goto error;
+    SYM_ITEM* tmpsi=ast_node->func_attribute;
     
     return true;
 error:

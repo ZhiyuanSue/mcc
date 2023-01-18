@@ -398,17 +398,19 @@ bool p_symbol_table(AST_BASE* ast_node,SYM* father){
         ast_node->expr_attribute->complete=false;
         ast_node->expr_attribute->is_bit_field=false;
     }
-    if(ast_node->type==initializer)
+    else if(ast_node->type==initializer)
     {
         ast_node->init_attribute=m_alloc(sizeof(INIT_NODE_ATTR));
         ast_node->init_attribute->off=0;
         ast_node->init_attribute->size=0;
     }
-    if(ast_node->type==declaration)
+    else if(ast_node->type==declaration)
     {
         ast_node->decl_attribute=m_alloc(sizeof(DECL_NODE_ATTR));
         ast_node->decl_attribute->decl_symbol_item_list=NULL;
     }
+    else if(ast_node->type==function_definition)
+        ast_node->func_attribute=NULL;
     VECpopback(trace_stack);
     return true;
 }

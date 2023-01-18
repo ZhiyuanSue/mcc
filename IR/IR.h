@@ -12,13 +12,15 @@ typedef struct function IR_FUNC;
 typedef struct basic_block IR_BB;
 typedef struct instruction IR_INS;
 typedef struct operand IR_OPERAND;
+typedef struct ir_register IR_REG;
 typedef struct operand{
     enum operand_type type;
     enum operand_flow direction;
     union{
-        struct {
+        struct ir_register{
+            enum reg_type type;
             size_t reg_id;
-            IR_INS* op;
+            IR_INS* op; /*as we use SSA format,one reg must be use by a previous instruction*/
         } operand_reg;
         struct {
             IR_DATA_TYPE
@@ -64,6 +66,7 @@ bool GenINS(IR_INS* ins);   /*use add_new_ins to get a new one and fill in the d
 typedef struct module{
     VEC* func_list;
     VEC* global_and_external_symbols;
+    VEC* reg_list;
 }IR_MODULE;
 typedef struct function{
     char* func_name;
@@ -85,5 +88,8 @@ IR_INS* add_new_ins(IR_BB* bb);
 
 
 char* label_allocator(void);    /*allocate a label name for a bb*/
+IR_REG* reg_allocator(IR_MODULE* irm,enum reg_type type,IR_INS* op);
+
 void print_IR(IR_MODULE* irm);
+void print_INS(IR_INS* ins,size_t indentation);
 #endif
