@@ -73,7 +73,7 @@ int mcc_main(char* src_file,char* target_file){
 #ifdef _TEST_IR_
     printf("start print ir\n");
     print_IR(ir_module);
-    printf("start print ir\n");
+    printf("end print ir\n");
 #endif
     /*if there's some warnings, it need be print*/
     for(size_t i=0;i<VECLEN(c_error);++i){

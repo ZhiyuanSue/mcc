@@ -8,6 +8,22 @@ bool GenINS(IR_INS* ins,
     IR_OPERAND* src2){
     if(!ins)
         goto error;
+    /*check the operand type for op*/
+
+    /*fill in*/
+    ins->op=op;
+    if(dst==NULL)
+        ins->dst->type=OPERAND_NONE;
+    else
+        ins->dst=dst;
+    if(src1==NULL)
+        ins->src1->type=OPERAND_NONE;
+    else
+        ins->src1=src1;
+    if(src2==NULL)
+        ins->src2->type=OPERAND_NONE;
+    else
+        ins->src2=src2;    
     return true;
 error:
     return false;
@@ -31,18 +47,11 @@ IR_BB* add_new_bb(IR_FUNC* func)
     if(!func)
         goto error;
     IR_BB* new_bb=(IR_BB*)m_alloc(sizeof(IR_BB));
+    new_bb->node.next=new_bb->node.prev=(LIST_NODE*)new_bb;
     new_bb->Instruction_list=NULL;
     new_bb->bb_label=NULL;
     new_bb->func=func;
     new_bb->IR_module=func->IR_module;
-    if(!func->BB_list)
-    {
-        init_list_node(&(new_bb->node));
-        func->BB_list=&(new_bb->node);
-    }
-    else{
-        _add_before(func->BB_list,&(new_bb->node)); /*add to the list tail*/
-    }
     return new_bb;
 error:
     return NULL;
@@ -52,6 +61,7 @@ IR_INS* add_new_ins(IR_BB* bb)
     if(!bb)
         goto error;
     IR_INS* new_ins=(IR_INS*)m_alloc(sizeof(IR_INS));
+    new_ins->node.next=new_ins->node.prev=(LIST_NODE*)new_ins;
     new_ins->block=bb;
     new_ins->func=bb->func;
     new_ins->IR_module=bb->IR_module;
@@ -62,14 +72,6 @@ IR_INS* add_new_ins(IR_BB* bb)
     new_ins->src1->type=OPERAND_NONE;
     new_ins->src2=(IR_OPERAND*)m_alloc(sizeof(IR_OPERAND));
     new_ins->src2->type=OPERAND_NONE;
-    if(!bb->Instruction_list)
-    {
-        init_list_node(&(new_ins->node));
-        bb->Instruction_list=&(new_ins->node);
-    }
-    else{
-        _add_before(bb->Instruction_list,&(new_ins->node)); /*add to the list tail*/
-    }
     return new_ins;
 error:
     return NULL;
@@ -77,7 +79,8 @@ error:
 static size_t label_id=0;
 char* label_allocator(void)
 {
-    
+    label_id++;
+
     return NULL;
 }
 static size_t next_alloc_reg_id=0;
@@ -108,23 +111,26 @@ void print_IR(IR_MODULE* irm)
             IR_FUNC* curr_func=VEC_GET_ITEM(irm->func_list,i);
             printf("{\n");
             LIST_NODE* bb_p=curr_func->BB_list;
-            while(bb_p&&bb_p!=curr_func->BB_list)
+            while(bb_p)
             {
                 IR_BB* curr_bb=(IR_BB*)bb_p;
-                printf("<basic block label:%s>\n",curr_bb->bb_label);
                 LIST_NODE* ins_p=curr_bb->Instruction_list;
-                while (ins_p&&ins_p!=curr_bb->Instruction_list)
+                if(ins_p)
+                    printf("<basic block label:%s>\n",curr_bb->bb_label);
+                while (ins_p)
                 {
-                    IR_INS* curr_ins=(IR_INS*)ins_p;
-                    print_INS(curr_ins,1);
+                    print_INS((IR_INS*)ins_p,1);
                     ins_p=ins_p->next;
+                    if(ins_p==curr_bb->Instruction_list)
+                        break;
                 }
                 bb_p=bb_p->next;
+                if(bb_p==curr_func->BB_list)
+                    break;
             }
             printf("}\n");
         }
     }
-    
 }
 void print_INS(IR_INS* ins,size_t indentation)
 {
