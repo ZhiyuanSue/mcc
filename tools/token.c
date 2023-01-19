@@ -356,7 +356,7 @@ bool char_const_to_const_value(TOKEN* t,CONST_VALUE* cv)
     cv->const_expr_type=TP_SINT;
     char* realchar=m_alloc(sizeof(char)*(t->value_len));
     m_memset(realchar,'\0',(t->value_len));
-    char* cp=realchar;
+    char* cp=t->value;
     if(*cp=='L')
     {   /*a wchar_t*/
         for(size_t i=0;i<t->value_len-3;++i){
@@ -407,7 +407,7 @@ bool char_const_to_const_value(TOKEN* t,CONST_VALUE* cv)
         if(t->value_len>7)
             goto error;
         int tmp=0;
-        for(size_t i=2;i<t->value_len-1;++i){
+        for(size_t i=1;i<t->value_len-1;++i){
             tmp*=0xff+1;
             tmp+=(int)(t->value[i]);
         }

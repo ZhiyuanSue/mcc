@@ -69,7 +69,7 @@
 #endif
 
 #ifndef _TEST_SEMANTICS_
-#define _TEST_SEMANTICS_
+//#define _TEST_SEMANTICS_
 #endif
 
 #ifndef _TEST_SYMBOL_TABLE_
