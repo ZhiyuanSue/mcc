@@ -44,12 +44,12 @@ bool labeled_statement(AST_BASE* ast_node)
         SYM* target_symbol_table=ast_node->symbol_table;
         while(1)
         {
-            if(target_symbol_table->father==NULL||((target_symbol_table->father->st_attr_type)&SA_SWITCH)==0)
+            if(target_symbol_table->father==NULL||(target_symbol_table->father->st_attr_type[0])!=target_symbol_table->st_attr_type[0])
                 break;
             else
                 target_symbol_table=target_symbol_table->father;
         }
-        if(((target_symbol_table->st_attr_type)&SA_SWITCH)==0)
+        if((target_symbol_table->st_attr_type[0])==0)
         {
             C_ERROR(C0076_ERR_IN_SWITCH,label_node);
             goto error;
@@ -81,12 +81,12 @@ bool labeled_statement(AST_BASE* ast_node)
         SYM* target_symbol_table=ast_node->symbol_table;
         while(1)
         {
-            if(target_symbol_table->father==NULL||((target_symbol_table->father->st_attr_type)&SA_SWITCH)==0)
+            if(target_symbol_table->father==NULL||(target_symbol_table->father->st_attr_type[0])!=(target_symbol_table->st_attr_type[0]))
                 break;
             else
                 target_symbol_table=target_symbol_table->father;
         }
-        if(((target_symbol_table->st_attr_type)&SA_SWITCH)==0)
+        if((target_symbol_table->st_attr_type[0])==0)
         {
             C_ERROR(C0076_ERR_IN_SWITCH,label_node);
             goto error;
@@ -476,7 +476,7 @@ bool continue_statement(AST_BASE* ast_node)
         goto error;
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
     SYM* target_symbol_table=ast_node->symbol_table;
-    if(((target_symbol_table->st_attr_type)&SA_LOOP)==0)
+    if((target_symbol_table->st_attr_type[1])==0)
     {
         C_ERROR(C0078_ERR_IN_LOOP,ast_node);
         goto error;
@@ -510,7 +510,7 @@ bool break_statement(AST_BASE* ast_node)
         goto error;
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
     SYM* target_symbol_table=ast_node->symbol_table;
-    if(((target_symbol_table->father->st_attr_type)&SA_LOOP)==0&&((target_symbol_table->father->st_attr_type)&SA_SWITCH)==0)
+    if((target_symbol_table->father->st_attr_type[0])==0&&(target_symbol_table->father->st_attr_type[1])==0)
     {
         C_ERROR(C0079_ERR_IN_SWITCH_LOOP,ast_node);
         goto error;
@@ -556,13 +556,14 @@ bool return_statement(AST_BASE* ast_node)
     SYM* target_symbol_table=ast_node->symbol_table;
     while(1)
     {
-        if(target_symbol_table->father==NULL||((target_symbol_table->father->st_attr_type)&SA_FUNC)==0)
+        if(target_symbol_table->father==NULL||(target_symbol_table->father->st_attr_type[2])!=(target_symbol_table->st_attr_type[2]))
             break;
         else
             target_symbol_table=target_symbol_table->father;
     }
-    if(((target_symbol_table->st_attr_type)&SA_FUNC)==0)
+    if((target_symbol_table->st_attr_type[2])==0)
     {
+        C_ERROR(C0081_ERR_FUNC_RET_NONE_VOID,ast_node);
         goto error; /*just for test,impossible*/
     }
     SYM_ITEM* tmpsi=((SYMBOL_TABLE_FUNC_ATTR*)(target_symbol_table->st_attr))->function_symbol;

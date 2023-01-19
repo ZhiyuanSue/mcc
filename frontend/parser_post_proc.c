@@ -320,7 +320,7 @@ AST_BASE* post_processing(AST_BASE* curr_ast)
                 SYM* target_symbol_table=curr_ast->symbol_table;
                 while(1)
                 {
-                    if(target_symbol_table->father==NULL||((target_symbol_table->father->st_attr_type)&SA_FUNC)==0)
+                    if(target_symbol_table->father==NULL||(target_symbol_table->father->st_attr_type[2])!=(target_symbol_table->st_attr_type[2]))
                         break;
                     else
                         target_symbol_table=target_symbol_table->father;

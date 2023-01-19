@@ -28,9 +28,17 @@ SYM* Create_symbol_table(SYM* father,enum scope_type type){
         symbol_table->typedef_name_table=InitHASH();
     symbol_table->enum_const_table=InitHASH();
     if(father)
-        symbol_table->st_attr_type=father->st_attr_type;
+    {
+        symbol_table->st_attr_type[0]=father->st_attr_type[0];
+        symbol_table->st_attr_type[1]=father->st_attr_type[1];
+        symbol_table->st_attr_type[2]=father->st_attr_type[2];
+    }
     else
-        symbol_table->st_attr_type=SA_ATTR_NONE;
+    {   
+        symbol_table->st_attr_type[0]=0;
+        symbol_table->st_attr_type[1]=0;
+        symbol_table->st_attr_type[2]=0;
+    }   
     symbol_table->st_attr=NULL;
     return symbol_table;
 }

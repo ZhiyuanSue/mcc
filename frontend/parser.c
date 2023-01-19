@@ -430,7 +430,7 @@ SYM* parser_creater_symbol_table(SYM* father,
     else if(rule_type==function_definition){
         *have_create_symbol_table=true;
         SYM* tmpsym= Create_symbol_table(father,SPT_FUN);
-        tmpsym->st_attr_type=(tmpsym->st_attr_type)|SA_FUNC;
+        tmpsym->st_attr_type[2]=tmpsym->st_attr_type[2]+1;
         tmpsym->st_attr=m_alloc(sizeof(SYMBOL_TABLE_FUNC_ATTR));
         SYMBOL_TABLE_FUNC_ATTR* tmpp=(SYMBOL_TABLE_FUNC_ATTR*)tmpsym->st_attr;
         tmpp->function_symbol=NULL;
@@ -470,7 +470,7 @@ SYM* parser_creater_symbol_table(SYM* father,
         SYM* tmpsym= Create_symbol_table(father,SPT_BLOCK);
         if(rule_type==switch_stmt)
         {
-            tmpsym->st_attr_type=(tmpsym->st_attr_type)|SA_SWITCH;
+            tmpsym->st_attr_type[0]=tmpsym->st_attr_type[0]+1;
             tmpsym->st_attr=m_alloc(sizeof(SYMBOL_TABLE_SWITCH_ATTR));
             SYMBOL_TABLE_SWITCH_ATTR* tmpp=(SYMBOL_TABLE_SWITCH_ATTR*)tmpsym->st_attr;
             tmpp->have_default=false;
@@ -478,7 +478,7 @@ SYM* parser_creater_symbol_table(SYM* father,
         }
         else if(rule_type==while_stmt||rule_type==do_stmt||rule_type==for_stmt)
         {
-            tmpsym->st_attr_type=(tmpsym->st_attr_type)|SA_LOOP;
+            tmpsym->st_attr_type[1]=tmpsym->st_attr_type[1]+1;
         }
         return tmpsym;
     }

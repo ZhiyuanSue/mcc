@@ -16,12 +16,6 @@ enum linkage_type{
 enum function_spec_type{
     FSPEC_NONE,FSPEC_INLINE,FSPEC_NORETURN
 };
-enum sym_table_attr_type{
-    SA_ATTR_NONE=0,
-    SA_SWITCH=0x01,
-    SA_LOOP=0x02,
-    SA_FUNC=0x04
-};
 typedef struct sym_table SYM;
 struct sym_table{
     unsigned int level;
@@ -32,7 +26,7 @@ struct sym_table{
     NMSP name_space;    /*only used for label name space*/
     HASH* typedef_name_table;
     HASH* enum_const_table;
-    enum sym_table_attr_type st_attr_type;
+    unsigned int st_attr_type[3];    /*0-switch,1-loop,2-func*/
     void* st_attr;  /*if you need more attributes ,
                         use this to point to a struct, like the following SYMBOL_TABLE_FUNC_ATTR or SYMBOL_TABLE_SWITCH_ATTR*/
 };
