@@ -5,6 +5,8 @@
 # Author: Zhiyuan Sue
 # Description:
 #   This file is test all the possible error in mcc
+#   If your gcc give some warning or error,emmm, it's normal.
+#   Just because I use some grammar which might be legal in ANSI C but will cause some warnings in gcc
 #-----------------------------------------
 mcc_path="./bin/mcc"
 test_src_path="./bin/test_src/"

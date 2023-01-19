@@ -135,7 +135,7 @@ bool compound_statement(AST_BASE* ast_node)
 #endif
     if(!ast_node||ast_node->type!=compound_stmt)
         goto error;
-    for(size_t i=1;i<AST_CHILD_NUM(ast_node)-1;++i){
+    for(int i=1;i<AST_CHILD_NUM(ast_node)-1;++i){
         AST_BASE* sub_ast=AST_GET_CHILD(ast_node,i);
         VEC* tmp_sym_item=InitVEC(DEFAULT_CAPICITY);
         if(sub_ast){

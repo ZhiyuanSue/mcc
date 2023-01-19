@@ -18,14 +18,8 @@ IR_MODULE* trans_to_IR(AST_BASE* ast_node)
         {
         case declaration:
         {
-            if(ast_child->decl_attribute)
-            {
-                VEC* tmpsi_vec=ast_child->decl_attribute->decl_symbol_item_list;
-                for(size_t i=0;i<VECLEN(tmpsi_vec);++i)
-                {
-                    VECinsert(res->global_and_external_symbols,VEC_GET_ITEM(tmpsi_vec,i));
-                }
-            }
+            if (!declaration_trans(ast_child,res,NULL,NULL))
+                goto error;
             break;
         }
         case function_definition:
@@ -58,7 +52,7 @@ bool trans_func(AST_BASE* ast_node,IR_FUNC* ir_func)
     /*compound stmt part*/
     IR_BB* compound_bb=add_new_bb(ir_func);
     AST_BASE* compount_stmt_node=AST_GET_CHILD(ast_node,AST_CHILD_NUM(ast_node)-1);
-    //compound_stmt_trans(compount_stmt_node,compound_bb);
+    compound_stmt_trans(compount_stmt_node,compound_bb);
     return true;
 error:
     return false;

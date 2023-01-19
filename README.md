@@ -88,7 +88,15 @@ you can also use
 ./test.sh
 ```
 
-to run some test case
+to run some test case(remember, in test cases, you might see some error or warnings,for it's just used for test that)
+
+And you can use
+
+```
+./bootstrap.sh
+```
+
+to compliy itself. At most time, I will do my best to make sure that comply itself is usable.
 
 mcc is just a C compiler, but it doesn't include an assembler or a linker until now.
 
