@@ -21,6 +21,12 @@
             size_t data_size;   \
             VALUE_DATA* data_field;   \
             bool const_expr:1;
+enum FUNC_CALL_CONVERSION{
+    CDECL_DEFAULT,
+    STDCALL,
+    MICROSOFT_x64,
+    SYSTEM_V_AMD64,
+};
 enum TP_STORAGE_SPEC{
     TP_STOR_NONE,
     TP_TYPE_DEF,
@@ -144,6 +150,7 @@ typedef struct {
     VEC* func_parameters;
     bool have_ellipsis;
     bool is_old_style;
+    enum FUNC_CALL_CONVERSION fcc;
 }TP_FUNC;
 typedef struct {
     char* para_name;

@@ -121,6 +121,11 @@ M_TYPE* build_base_type(
         res->have_ellipsis=false;
         res->is_old_style=false;
         res->complete=true;
+#if __WORDSIZE==64
+        res->fcc=SYSTEM_V_AMD64;
+#elif __WORDSIZE==32
+        res->fcc=CDECL_DEFAULT;
+#endif
         return (M_TYPE*)res;
     }
     else if(spec_type==TP_TYPE_DEF_TYPE){
