@@ -2,14 +2,15 @@
 #define _TRANS_H_
 #include "IR.h"
 #include "../frontend/ast.h"
+#include "../tools/m_type_vec.h"
+extern VEC* c_error;
+extern char* filename;
 /*The following trans is used to translate the AST to the IR*/
 IR_MODULE* trans_to_IR(AST_BASE* ast_node);
 bool trans_func(AST_BASE* ast_node,IR_FUNC* ir_func);
 
 /*decl*/
 bool declaration_trans(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR_BB* ir_bb);
-bool static_storage_decl(AST_BASE* ast_node,IR_MODULE* irm);
-bool stack_decl(AST_BASE* ast_node,IR_BB* ir_bb);
 /*the global declaration is in module,and the local declaration must in one block*/
 
 /*stmt*/

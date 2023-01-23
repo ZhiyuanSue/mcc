@@ -207,6 +207,10 @@ void print_symbol(SYM_ITEM* symbol,size_t indentation)
     }
     else if(tmpt&&tmpt->modifier==false){
         if(symbol->name_space==NMSP_SU_TAG&&(tmpt->typ_category==TP_UNION||tmpt->typ_category==TP_STRUCT)){
+            for(int j=0;j<=indentation+3;++j){
+                printf("    ");
+            }
+            printf("total size:%ld align size:%ld\n",((TP_SU*)tmpt)->total_data_size,((TP_SU*)tmpt)->data_align);
             if(((TP_SU*)tmpt)->members==NULL)
                 return;
             for(int j=0;j<=indentation+3;++j){
@@ -235,10 +239,6 @@ void print_symbol(SYM_ITEM* symbol,size_t indentation)
                     }
                 }
             }
-            for(int j=0;j<=indentation+3;++j){
-                printf("    ");
-            }
-            printf("total size:%ld align size:%ld\n",((TP_SU*)tmpt)->total_data_size,((TP_SU*)tmpt)->data_align);
         }
         if(tmpt->typ_category==TP_ARRAY)
         {

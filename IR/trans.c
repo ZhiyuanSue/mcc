@@ -8,6 +8,18 @@ IR_MODULE* trans_to_IR(AST_BASE* ast_node)
     res->global_and_external_symbols=InitVEC(DEFAULT_CAPICITY);
     res->func_list=InitVEC(DEFAULT_CAPICITY);
     res->reg_list=InitVEC(DEFAULT_CAPICITY);
+    res->bind_reg_list=InitVEC(DEFAULT_CAPICITY);
+   
+    for(size_t i=0;i<6;++i){
+        /*push int regs into bind reg list*/
+        IR_REG* tmp_reg=reg_allocator(res,DATA_INTEGER,res->bind_reg_list);
+    }
+    for(size_t i=0;i<8;++i){
+        /*push float fegs into bind reg list*/
+        IR_REG* tmp_reg=reg_allocator(res,DATA_FLOAT,res->bind_reg_list);
+    }
+    /*push count reg*/
+    IR_REG* tmp_reg=reg_allocator(res,DATA_INTEGER,res->bind_reg_list);
     for(size_t i=0;i<AST_CHILD_NUM(ast_node);++i)
     {
         AST_BASE* external_decl_node=AST_GET_CHILD(ast_node,i);

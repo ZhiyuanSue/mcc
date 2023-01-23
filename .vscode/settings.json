@@ -11,6 +11,8 @@
         "extern_def_semantics.h": "c",
         "search_mem.h": "c",
         "defs.h": "c",
-        "mcc_main.h": "c"
+        "mcc_main.h": "c",
+        "trans.h": "c",
+        "mem.h": "c"
     }
 }

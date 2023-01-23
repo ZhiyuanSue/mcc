@@ -270,8 +270,8 @@ bool declarator_type(AST_BASE* declarator_node,
             if(tmpt&&tmpt->typ_category==TP_FUNCTION)
             {
                 M_TYPE* tmptt=Type_VEC_get_spec_other(type_vec);
-                if(tmptt&&tmptt->typ_stor==TP_STOR_NONE)
-                    tmptt->typ_stor=TP_EXTERN;
+                //if(tmptt&&tmptt->typ_stor==TP_STOR_NONE)
+                //    tmptt->typ_stor=TP_EXTERN;
                 if(tmptt&&tmptt->align_spec>0)
                 {
                     C_ERROR(C0089_ERR_ALIGN_CANNOT_SPECIFIE,direct_dec_node);
@@ -426,8 +426,8 @@ bool declarator_type(AST_BASE* declarator_node,
                             tmpt=Type_VEC_get_spec_other(type_vec);
                             if(tmpt)
                                 tmpstor=tmpt->typ_stor;
-                            if(tmpt&&tmpt->modifier)
-                                tmpt->typ_stor=prestor;
+                            //if(tmpt&&tmpt->modifier)
+                            //    tmpt->typ_stor=prestor;
                             if((prestor==TP_EXTERN_THREAD_LOCAL&&tmpstor!=TP_EXTERN_THREAD_LOCAL)
                                 ||(prestor==TP_STATIC_THREAD_LOCAL&&tmpstor!=TP_STATIC_THREAD_LOCAL))
                             {
@@ -460,8 +460,8 @@ bool declarator_type(AST_BASE* declarator_node,
                                     tmpsi->type_vec=composite_types(tmpsi->type_vec,type_vec,true);
                                 }
                             }
-                            if(tmpt&&tmpt->modifier)
-                                tmpt->typ_stor=tmpstor;
+                            //if(tmpt&&tmpt->modifier)
+                            //    tmpt->typ_stor=tmpstor;
                         }   /*still need insert*/
                     }
                 }
@@ -1252,7 +1252,7 @@ bool initializer_list_semantic(AST_BASE* initializer_list_node,VEC* type_vec,siz
         variable_length_array=true;
     for(size_t i=0;i<AST_CHILD_NUM(initializer_list_node);++i){
         AST_BASE* sub_node=AST_GET_CHILD(initializer_list_node,i);
-        if(!variable_length_array&&off>=total_size)
+        if(!variable_length_array&&!array_unknown_size&&off>=total_size)
             break;
         if(sub_node->type==initializer){
             /*test the sub initializer begin with left brace or not*/

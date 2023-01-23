@@ -1,3 +1,5 @@
+
+
 ==========
 start test
 ==========
@@ -5,6 +7,9 @@ start test
 2    fail   arr_test_01.c   0
 3    fail   arr_test_02.c   0
 4    fail   arr_test_03.c   0
+./bin/test_src/arr_test_04.c:1:15: warning: useless storage class specifier in empty declaration
+    1 | extern struct ssss;
+      |               ^~~~
 5    succ   arr_test_04.c   0
 6    fail   arr_test_05.c   1
 7    succ   decl_semantics.c   1
@@ -15,6 +20,9 @@ start test
 12    succ   expr_test_05.c   4
 13    fail   expr_test_06.c   5
 14    succ   expr_test_07.c   5
+./bin/test_src/expr_test_08.c:4:1: warning: variably modified ‘bbb’ at file scope
+    4 | char bbb[12.2==12.2];
+      | ^~~~
 15    succ   expr_test_08.c   6
 16    succ   expr_test_09.c   7
 17    succ   expr_test_10.c   8
@@ -23,91 +31,124 @@ start test
 20    fail   func_test_01.c   11
 21    fail   func_test_02.c   11
 22    fail   func_test_03.c   11
+./bin/test_src/func_test_04.c:2:6: error: conflicting types for ‘main’
+    2 | void main(double a)
+      |      ^~~~
+./bin/test_src/func_test_04.c:1:6: note: previous declaration of ‘main’ was here
+    1 | void main(int a);
+      |      ^~~~
 23    succ   func_test_04.c   11
+./bin/test_src/func_test_05.c: In function ‘abc’:
+./bin/test_src/func_test_05.c:9:12: warning: function declared ‘noreturn’ has a ‘return’ statement
+    9 |     return 0;
+      |            ^
+./bin/test_src/func_test_05.c:9:12: warning: ‘noreturn’ function does return
 24    succ   func_test_05.c   12
 25    fail   func_test_06.c   13
-26    succ   init_test_01.c   13
-27    fail   lex_test.c   14
-28    succ   linkage_test_01.c   14
-29    succ   linkage_test_02.c   15
-30    succ   linkage_test_03.c   16
-31    succ   par_test_01.c   17
-32    fail   par_test_01.i   18
-33    fail   par_test_02.c   18
-34    succ   par_test_03.c   18
-35    succ   par_test_04.c   19
-36    succ   par_test_05.c   20
-37    succ   par_test_06.c   21
-38    succ   par_test_07.c   22
-39    succ   par_test_08.c   23
-40    succ   par_test_09.c   24
-41    succ   par_test_10.c   25
-42    succ   switch_test_01.c   26
-43    fail   type_test_01.c   27
-44    succ   type_test_02.c   27
-45    succ   type_test_03.c   28
-46    fail   type_test_04.c   29
-47    succ   type_test_05.c   29
-48    succ   type_test_06.c   30
-49    succ   type_test_07.c   31
-50    succ   type_test_08.c   32
-51    succ   type_test_09.c   33
-52    succ   vector_test.c   34
-success : 35
-error : 17
-
-1    fail   align_test_01.c   0
-2    fail   arr_test_01.c   0
-3    fail   arr_test_02.c   0
-4    fail   arr_test_03.c   0
-5    succ   arr_test_04.c   0
-6    fail   arr_test_05.c   1
-7    fail   decl_semantics.c   1
-8    fail   expr_test_01.c   1
-9    succ   expr_test_02.c   1
-10    succ   expr_test_03.c   2
-11    fail   expr_test_04.c   3
-12    succ   expr_test_05.c   3
-13    fail   expr_test_06.c   4
-14    succ   expr_test_07.c   4
-15    succ   expr_test_08.c   5
-16    succ   expr_test_09.c   6
-17    succ   expr_test_10.c   7
-18    succ   expr_test_11.c   8
-19    succ   for_test_01.c   9
-20    fail   func_test_01.c   10
-21    fail   func_test_02.c   10
-22    fail   func_test_03.c   10
-23    succ   func_test_04.c   10
-24    succ   func_test_05.c   11
-25    fail   func_test_06.c   12
-26    succ   init_test_01.c   12
+26    fail   init_test_01.c   13
 27    fail   lex_test.c   13
 28    succ   linkage_test_01.c   13
 29    succ   linkage_test_02.c   14
+./bin/test_src/linkage_test_03.c:1:15: warning: useless storage class specifier in empty declaration
+    1 | extern struct s;
+      |               ^
 30    succ   linkage_test_03.c   15
 31    succ   par_test_01.c   16
 32    fail   par_test_01.i   17
 33    succ   par_test_02.c   17
 34    succ   par_test_03.c   18
-35    fail   par_test_04.c   19
-36    succ   par_test_05.c   19
-37    succ   par_test_06.c   20
-38    succ   par_test_07.c   21
-39    succ   par_test_08.c   22
-40    succ   par_test_09.c   23
-41    succ   par_test_10.c   24
-42    succ   par_test_11.c   25
-43    succ   switch_test_01.c   26
-44    fail   type_test_01.c   27
-45    succ   type_test_02.c   27
-46    succ   type_test_03.c   28
-47    fail   type_test_04.c   29
-48    succ   type_test_05.c   29
-49    succ   type_test_06.c   30
-50    succ   type_test_07.c   31
-51    succ   type_test_08.c   32
-52    succ   type_test_09.c   33
-53    fail   vector_test.c   34
-success : 34
-error : 19
+./bin/test_src/par_test_04.c:1:22: warning: useless ‘_Thread_local’ in empty declaration
+    1 | _Thread_local struct c;
+      |                      ^
+./bin/test_src/par_test_04.c: In function ‘g’:
+./bin/test_src/par_test_04.c:25:33: warning: useless storage class specifier in empty declaration
+   25 |     extern _Thread_local struct thread_c;
+      |                                 ^~~~~~~~
+35    succ   par_test_04.c   19
+./bin/test_src/par_test_05.c: In function ‘main’:
+./bin/test_src/par_test_05.c:8:5: error: output operand constraint lacks ‘=’
+    8 |     );
+      |     ^
+./bin/test_src/par_test_05.c:13:5: error: output operand constraint lacks ‘=’
+   13 |     );
+      |     ^
+./bin/test_src/par_test_05.c:19:5: error: output operand constraint lacks ‘=’
+   19 |     );
+      |     ^
+./bin/test_src/par_test_05.c:31:5: error: output operand constraint lacks ‘=’
+   31 |     );
+      |     ^
+./bin/test_src/par_test_05.c:31:5: error: output operand constraint lacks ‘=’
+./bin/test_src/par_test_05.c:31:5: error: output operand constraint lacks ‘=’
+./bin/test_src/par_test_05.c:37:5: error: output operand constraint lacks ‘=’
+   37 |     );
+      |     ^
+./bin/test_src/par_test_05.c:37:5: error: output operand constraint lacks ‘=’
+./bin/test_src/par_test_05.c:37:5: error: output operand constraint lacks ‘=’
+./bin/test_src/par_test_05.c:5:5: error: output operand constraint lacks ‘=’
+    5 |     __asm__ volatile (
+      |     ^~~~~~~
+./bin/test_src/par_test_05.c:5:5: error: invalid lvalue in asm output 0
+./bin/test_src/par_test_05.c:9:5: error: output operand constraint lacks ‘=’
+    9 |     __asm__ volatile (
+      |     ^~~~~~~
+./bin/test_src/par_test_05.c:9:5: error: invalid lvalue in asm output 0
+./bin/test_src/par_test_05.c:14:5: error: output operand constraint lacks ‘=’
+   14 |     __asm__ volatile (
+      |     ^~~~~~~
+./bin/test_src/par_test_05.c:14:5: error: invalid lvalue in asm output 0
+./bin/test_src/par_test_05.c:26:5: error: output operand constraint lacks ‘=’
+   26 |     __asm__ volatile (
+      |     ^~~~~~~
+./bin/test_src/par_test_05.c:26:5: error: invalid lvalue in asm output 0
+./bin/test_src/par_test_05.c:26:5: error: output operand constraint lacks ‘=’
+./bin/test_src/par_test_05.c:26:5: error: invalid lvalue in asm output 1
+./bin/test_src/par_test_05.c:26:5: error: output operand constraint lacks ‘=’
+./bin/test_src/par_test_05.c:26:5: error: invalid lvalue in asm output 2
+./bin/test_src/par_test_05.c:32:5: error: output operand constraint lacks ‘=’
+   32 |     __asm__ volatile (
+      |     ^~~~~~~
+./bin/test_src/par_test_05.c:32:5: error: invalid lvalue in asm output 0
+./bin/test_src/par_test_05.c:32:5: error: output operand constraint lacks ‘=’
+./bin/test_src/par_test_05.c:32:5: error: invalid lvalue in asm output 1
+./bin/test_src/par_test_05.c:32:5: error: output operand constraint lacks ‘=’
+./bin/test_src/par_test_05.c:32:5: error: invalid lvalue in asm output 2
+36    succ   par_test_05.c   20
+./bin/test_src/par_test_06.c: In function ‘main’:
+./bin/test_src/par_test_06.c:3:16: warning: implicit declaration of function ‘atomic_load’ [-Wimplicit-function-declaration]
+    3 |     int piyo = atomic_load(&hoge);
+      |                ^~~~~~~~~~~
+./bin/test_src/par_test_06.c:4:5: warning: implicit declaration of function ‘printf’ [-Wimplicit-function-declaration]
+    4 |     printf("piyo = %d.\n", piyo);
+      |     ^~~~~~
+./bin/test_src/par_test_06.c:4:5: warning: incompatible implicit declaration of built-in function ‘printf’
+./bin/test_src/par_test_06.c:1:1: note: include ‘<stdio.h>’ or provide a declaration of ‘printf’
+  +++ |+#include <stdio.h>
+    1 | int main(int argc, char * argv[]) {
+./bin/test_src/par_test_06.c:6:5: warning: implicit declaration of function ‘atomic_store’ [-Wimplicit-function-declaration]
+    6 |     atomic_store(&hoge, piyo);
+      |     ^~~~~~~~~~~~
+37    succ   par_test_06.c   21
+38    succ   par_test_07.c   22
+39    succ   par_test_08.c   23
+40    succ   par_test_09.c   24
+41    succ   par_test_10.c   25
+42    succ   par_test_11.c   26
+43    succ   par_test_12.c   27
+./bin/test_src/switch_test_01.c: In function ‘tttst’:
+./bin/test_src/switch_test_01.c:7:17: warning: statement will never be executed [-Wswitch-unreachable]
+    7 |         for(int j=0;j<10;++j){
+      |                 ^
+44    succ   switch_test_01.c   28
+45    fail   type_test_01.c   29
+46    fail   type_test_02.c   29
+47    succ   type_test_03.c   29
+48    fail   type_test_04.c   30
+49    succ   type_test_05.c   30
+50    succ   type_test_06.c   31
+51    succ   type_test_07.c   32
+52    succ   type_test_08.c   33
+53    succ   type_test_09.c   34
+54    succ   vector_test.c   35
+success : 36
+error : 18

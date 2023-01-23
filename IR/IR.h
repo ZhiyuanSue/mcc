@@ -82,7 +82,7 @@ IR_INS* add_new_ins(IR_BB* bb);
 
 
 char* label_allocator(void);    /*allocate a label name for a bb*/
-IR_REG* reg_allocator(IR_MODULE* irm,enum data_type type,IR_INS* op,VEC* reg_vec);
+IR_REG* reg_allocator(IR_MODULE* irm,enum data_type type,VEC* reg_vec);
 
 void print_IR(IR_MODULE* irm);
 void print_INS(IR_INS* ins,size_t indentation);

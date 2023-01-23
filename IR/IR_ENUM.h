@@ -7,8 +7,7 @@
 #define OPERAND_NUM 16
 enum data_type{
     DATA_NONE,
-    DATA_SIGNED,
-    DATA_UNSIGNED,
+    DATA_INTEGER,
     DATA_FLOAT,
     DATA_POINTER,
 };
@@ -32,7 +31,8 @@ enum operand_flow{
 /*instruction operation type*/
 enum ins_op
 {
-    OP_NONE,OP_RET,OP_BR,OP_CALL,
+    OP_NONE,
+    OP_RET,OP_BR,OP_CALL,OP_RECV,
 
     OP_ASS,OP_FADD,OP_SUB,OP_FSUB,
     OP_MUL,OP_FMUL,OP_UDIV,OP_SDIV,

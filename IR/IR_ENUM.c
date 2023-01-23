@@ -13,7 +13,8 @@ char operand_name_string[OPERAND_NUM][OPERAND_STR_LEN]=
 };
 char op_name_string[OP_NUM][OP_STRING_LEN]=
 {
-    "OP_NONE","OP_RET","OP_BR","OP_CALL",
+    "OP_NONE",
+    "OP_RET","OP_BR","OP_CALL","OP_RECV",
 
     "OP_ASS","OP_FADD","OP_SUB","OP_FSUB",
     "OP_MUL","OP_FMUL","OP_UDIV","OP_SDIV",

@@ -84,7 +84,7 @@ char* label_allocator(void)
     return NULL;
 }
 static size_t next_alloc_reg_id=0;
-IR_REG* reg_allocator(IR_MODULE* irm,enum data_type d_type,IR_INS* op,VEC* reg_vec)
+IR_REG* reg_allocator(IR_MODULE* irm,enum data_type d_type,VEC* reg_vec)
 {
     IR_REG* new_reg=(IR_REG*)m_alloc(sizeof(IR_REG));
     new_reg->d_type=d_type;
