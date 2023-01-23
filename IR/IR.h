@@ -4,51 +4,40 @@
 #include "../tools/list.h"
 #include "../tools/symbol_table.h"
 #include "IR_ENUM.h"
-#define IR_DATA_TYPE \
-    enum data_type ir_d_type; \
-    int ir_d_len; 
 typedef struct module IR_MODULE;
 typedef struct function IR_FUNC;
 typedef struct basic_block IR_BB;
 typedef struct instruction IR_INS;
 typedef struct operand IR_OPERAND;
-typedef struct ir_register IR_REG;
+typedef struct IR_OPERAND_REG IR_REG;
+struct IR_OPERAND_REG{
+    enum data_type d_type;
+    size_t reg_id;
+    union{
+        size_t data_length;
+        struct{
+            enum data_storage_type pointer_data_stor_type;
+            size_t data_length;
+            signed long int off;    /*the offset from */
+        }pointer_attr;
+    }reg_attr;
+};
 typedef struct operand{
     enum operand_type type;
-    enum operand_flow direction;
     union{
-        struct ir_register{
-            enum reg_type type;
-            size_t reg_id;
-            IR_INS* op; /*as we use SSA format,one reg must be use by a previous instruction*/
-        } operand_reg;
-        struct {
-            IR_DATA_TYPE
-        } operand_imm;
-        struct {
-            IR_BB* op;
-        } operand_label;
-        struct {
-            void* p;
-        } operand_pointer;
-        struct {
-            IR_FUNC* function;
-        } operand_func;
-        struct {
-            size_t start_off_sfp;      /*the start of array*/
-            IR_OPERAND* array_element;
-            bool is_vla;
-            union{
-                size_t length;
-                void* length_assign_expr_node;
-            };
-        } operand_vector;
-        struct {
-            size_t start_off_sfp;
-            size_t totol_bytes; /*it must use align,so use bytes,not bit*/
-            void* initializer_value;
-        } operand_obj;
-    } operand_data;
+        struct IR_OPERAND_DATA{
+            enum data_storage_type data_stor_type;
+            size_t data_length;
+            size_t data_align;
+        }operand_data_type;
+        struct IR_OPERAND_IMM{
+            signed long int imm_data;
+        }operand_imm_type;
+        struct IR_OPERAND_CODE{
+            IR_BB* code_position;   /*it must point to a label position*/
+        }operand_code_type;
+        IR_REG operand_reg_type;
+    }operand_data;
 }IR_OPERAND;
 
 typedef struct instruction{
@@ -71,6 +60,7 @@ typedef struct module{
     VEC* func_list;
     VEC* global_and_external_symbols;
     VEC* reg_list;
+    VEC* bind_reg_list;
 }IR_MODULE;
 typedef struct function{
     char* func_name;
@@ -92,7 +82,7 @@ IR_INS* add_new_ins(IR_BB* bb);
 
 
 char* label_allocator(void);    /*allocate a label name for a bb*/
-IR_REG* reg_allocator(IR_MODULE* irm,enum reg_type type,IR_INS* op);
+IR_REG* reg_allocator(IR_MODULE* irm,enum data_type type,IR_INS* op,VEC* reg_vec);
 
 void print_IR(IR_MODULE* irm);
 void print_INS(IR_INS* ins,size_t indentation);

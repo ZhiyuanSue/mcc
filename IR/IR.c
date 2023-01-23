@@ -84,13 +84,13 @@ char* label_allocator(void)
     return NULL;
 }
 static size_t next_alloc_reg_id=0;
-IR_REG* reg_allocator(IR_MODULE* irm,enum reg_type type,IR_INS* op)
+IR_REG* reg_allocator(IR_MODULE* irm,enum data_type d_type,IR_INS* op,VEC* reg_vec)
 {
     IR_REG* new_reg=(IR_REG*)m_alloc(sizeof(IR_REG));
-    new_reg->type=type;
+    new_reg->d_type=d_type;
     new_reg->reg_id=next_alloc_reg_id;
     next_alloc_reg_id++;
-    VECinsert(irm->reg_list,(void*)new_reg);
+    VECinsert(reg_vec,(void*)new_reg);
     return new_reg;
 }
 void print_IR(IR_MODULE* irm)

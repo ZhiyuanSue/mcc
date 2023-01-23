@@ -5,27 +5,25 @@
 #define OP_NUM 256
 #define OPERAND_STR_LEN 16
 #define OPERAND_NUM 16
-enum reg_type{
-    REG_TYPE_NONE,
-    REG_TYPE_INT,
-    REG_TYPE_REAL,
-};
 enum data_type{
     DATA_NONE,
     DATA_SIGNED,
     DATA_UNSIGNED,
-    DATA_FLOAT
+    DATA_FLOAT,
+    DATA_POINTER,
 };
 enum operand_type{
-    OPERAND_NONE,   /*no operand*/
-    OPERAND_VOID,   /*void operand type*/
-    OPERAND_REG, /*the operand is a register*/
-    OPERAND_IMM, /*immediate*/
-    OPERAND_POINTER,    /*pointer*/
-    OPERAND_LABEL, /*label position*/
-    OPERAND_FUNC, /*function position*/
-    OPERAND_VECTOR, /*an array type,which might have special machine instructions to accelerate it*/
-    OPERAND_OBJ, /*an object,including struct union or another complex type*/
+    OPERAND_NONE,
+    OPERAND_DATA,
+    OPERAND_IMM,
+    OPERAND_CODE,
+    OPERAND_REG,
+};
+enum data_storage_type{
+    IR_STOR_NONE,
+    IR_STOR_GLOBAL,
+    IR_STOR_THREAD,
+    IR_STOR_STACK,
 };
 enum operand_flow{
     FLOW_IN,
