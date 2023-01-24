@@ -20,7 +20,7 @@ enum operand_type{
 };
 enum data_storage_type{
     IR_STOR_NONE,
-    IR_STOR_GLOBAL,
+    IR_STOR_STATIC,
     IR_STOR_THREAD,
     IR_STOR_STACK,
 };

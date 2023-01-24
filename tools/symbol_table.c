@@ -54,12 +54,14 @@ SYM_ITEM* Create_symbol_item(char* symbol,NMSP name_space){
     tmp->align_size=0;
     tmp->linkage=LKA_NONE;
     tmp->fspec_type=FSPEC_NONE;
+    tmp->stor_type=IR_STOR_NONE;
     tmp->Thread_local=false;
     tmp->data_size=0;
     tmp->data_field=(VALUE_DATA*)m_alloc(sizeof(VALUE_DATA));
     m_memset(tmp->data_field,'\0',sizeof(VALUE_DATA));
     tmp->type_vec=InitVEC(DEFAULT_CAPICITY);
     tmp->const_expr=false;
+    tmp->init_value=NULL;
     return tmp;
 }
 bool insert_symbol(SYM* symbol_table,SYM_ITEM* symbol_item){

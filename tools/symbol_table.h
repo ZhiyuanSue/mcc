@@ -5,6 +5,7 @@
 #include "namespace.h"
 #include "m_type.h"
 #include "m_type_vec.h"
+#include "../IR/IR_ENUM.h"
 #define PRINT_SYMBOLE_TABLE 1
 #define PRINT_TYPEDEF_TABLE 0
 enum scope_type{
@@ -16,6 +17,11 @@ enum linkage_type{
 enum function_spec_type{
     FSPEC_NONE,FSPEC_INLINE,FSPEC_NORETURN
 };
+typedef struct sym_item SYM_ITEM;
+typedef struct{
+    SYM_ITEM* sym_item;
+    void* data;
+}STATIC_STOR_VALUE;
 typedef struct sym_table SYM;
 struct sym_table{
     unsigned int level;
@@ -38,9 +44,11 @@ typedef struct sym_item{
     int align_size;
     enum linkage_type linkage;
     enum function_spec_type fspec_type;
+    enum data_storage_type stor_type;
     bool Thread_local;
     bool defined;
     bool declared;
+    STATIC_STOR_VALUE* init_value;
 }SYM_ITEM;
 typedef struct{
     bool have_ret;

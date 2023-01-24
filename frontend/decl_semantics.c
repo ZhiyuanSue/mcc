@@ -462,7 +462,10 @@ bool declarator_type(AST_BASE* declarator_node,
                             }
                             //if(tmpt&&tmpt->modifier)
                             //    tmpt->typ_stor=tmpstor;
-                        }   /*still need insert*/
+                            if(insert_symbol(declarator_node->symbol_table,tmpsi))
+                                tmp_token->symbol_item=tmpsi;
+                            should_insert=false;
+                        }   /*still need insert,but do not build a new one, insert the previous one*/
                     }
                 }
             }

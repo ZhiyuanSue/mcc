@@ -95,10 +95,11 @@ IR_REG* reg_allocator(IR_MODULE* irm,enum data_type d_type,VEC* reg_vec)
 }
 void print_IR(IR_MODULE* irm)
 {
-    printf("<external declarations>:%ld declarations in total\n",VECLEN(irm->global_and_external_symbols));
-    for(size_t i=0;i<VECLEN(irm->global_and_external_symbols);++i)
+    printf("<external declarations>:%ld declarations in total\n",VECLEN(irm->static_stor_symbols));
+    for(size_t i=0;i<VECLEN(irm->static_stor_symbols);++i)
     {
-        SYM_ITEM* tmpsi=(SYM_ITEM*)VEC_GET_ITEM(irm->global_and_external_symbols,i);
+        STATIC_STOR_VALUE* value=(STATIC_STOR_VALUE*)VEC_GET_ITEM(irm->static_stor_symbols,i);
+        SYM_ITEM* tmpsi=value->sym_item;
         print_symbol(tmpsi,0);
     }
     printf("<function definitions>:%ld functions in total\n",VECLEN(irm->func_list));

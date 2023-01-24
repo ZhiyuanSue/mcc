@@ -58,7 +58,7 @@ bool GenINS(IR_INS* ins,
 
 typedef struct module{
     VEC* func_list;
-    VEC* global_and_external_symbols;
+    VEC* static_stor_symbols;
     VEC* reg_list;
     VEC* bind_reg_list;
 }IR_MODULE;
