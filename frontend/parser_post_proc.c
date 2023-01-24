@@ -314,8 +314,16 @@ AST_BASE* post_processing(AST_BASE* curr_ast)
                 tmpsi->declared=true;
                 tmpsi->data_size=0;
                 tmpsi->data_field=NULL;
+                tmpsi->align_size=0;
+                tmpsi->linkage=LKA_NONE;
+                tmpsi->fspec_type=FSPEC_NONE;
+                tmpsi->stor_type=IR_STOR_NONE;
+                tmpsi->data_size=0;
+                tmpsi->data_field=NULL;
                 M_TYPE* tmpt=build_base_type(TP_LABEL);
                 tmpsi->type_vec=InitVEC(DEFAULT_CAPICITY);
+                tmpsi->const_expr=false;
+                tmpsi->init_value=NULL;
                 VECinsert(tmpsi->type_vec,tmpt);
                 SYM* target_symbol_table=curr_ast->symbol_table;
                 while(1)

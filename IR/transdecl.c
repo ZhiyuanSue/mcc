@@ -32,9 +32,12 @@ bool declaration_trans(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR_BB*
             if(tmp_m_type&&(tmp_m_type->typ_stor==TP_EXTERN||tmp_m_type->typ_stor==TP_EXTERN_THREAD_LOCAL))
                 return true;
         }
-        /*judge whether the symbol size is 0*/
+        /*judge type*/
         M_TYPE* tmp_type=Type_VEC_get_actual_base_type(tmpsi->type_vec);
-        if(tmp_type->typ_category!=TP_FUNCTION&&Type_size(tmpsi->type_vec)==0)
+        if(!((tmp_type->typ_category>=TP_SCHAR&&tmp_type->typ_category<=TP_ARRAY)))
+            return true;
+        /*judge whether the symbol size is 0*/
+        if(Type_size(tmpsi->type_vec)==0)
         {
             C_ERROR(C0096_ERR_STOR_SIZE_ISNT_KNOWN,identifier_node);
             goto error;
@@ -68,6 +71,7 @@ bool declaration_trans(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR_BB*
             */
             STATIC_STOR_VALUE* value=(STATIC_STOR_VALUE*)m_alloc(sizeof(STATIC_STOR_VALUE));
             value->sym_item=tmpsi;
+            tmpsi->init_value=value;
             size_t data_size=Type_size(tmpsi->type_vec);
             value->data=m_alloc(data_size);
             memset(value->data,0,data_size);
@@ -92,7 +96,9 @@ bool fill_in_static_stor_value(AST_BASE* initializer_node,STATIC_STOR_VALUE* val
 {
     if(!initializer_node||!value||initializer_node->type!=initializer)
         goto error;
+    ERROR_ITEM* tei=(ERROR_ITEM*)m_alloc(sizeof(ERROR_ITEM));
 
+    m_free(tei);
     return true;
 error:
     return false;

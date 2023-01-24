@@ -45,7 +45,6 @@ typedef struct sym_item{
     enum linkage_type linkage;
     enum function_spec_type fspec_type;
     enum data_storage_type stor_type;
-    bool Thread_local;
     bool defined;
     bool declared;
     STATIC_STOR_VALUE* init_value;
@@ -67,6 +66,7 @@ void del_symbol_typedef_table(SYM* symbol_table,char* symbol);
 void Del_symbol_table(SYM* symbol_table);
 void print_symbol_table(SYM* symbol_table);
 void print_symbol(SYM_ITEM* symbol,size_t indentation);
+void print_static_stor_value(STATIC_STOR_VALUE* value,size_t data_size,size_t indentation);
 VEC* get_symbol_hash(HASH* h);
 unsigned long long int SymbolCharToKey(char* symbol,NMSP name_space);
 bool symbol_item_cmp(void* a,void* b);
@@ -83,9 +83,14 @@ inline bool Copy_sym_item(SYM_ITEM* new,SYM_ITEM* old){
     new->defined=old->defined;
     new->key=old->key;
     new->linkage=old->linkage;
+    new->fspec_type=old->fspec_type;
+    new->stor_type=old->stor_type;
     new->name_space=old->name_space;
     new->type_vec=old->type_vec;
     new->value=old->value;
+    new->align_size=old->align_size;
+    new->const_expr=old->const_expr;
+    new->init_value=old->init_value;
     return true;
 }
 #endif

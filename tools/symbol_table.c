@@ -55,7 +55,6 @@ SYM_ITEM* Create_symbol_item(char* symbol,NMSP name_space){
     tmp->linkage=LKA_NONE;
     tmp->fspec_type=FSPEC_NONE;
     tmp->stor_type=IR_STOR_NONE;
-    tmp->Thread_local=false;
     tmp->data_size=0;
     tmp->data_field=(VALUE_DATA*)m_alloc(sizeof(VALUE_DATA));
     m_memset(tmp->data_field,'\0',sizeof(VALUE_DATA));
@@ -168,7 +167,6 @@ void print_symbol(SYM_ITEM* symbol,size_t indentation)
     printf("type::<");
     M_TYPE* tmpfunct=NULL;
     M_TYPE* tmpt=NULL;
-    
     if(symbol->type_vec){
         for(int j=VECLEN(symbol->type_vec)-1;j>=0;--j){
             tmpt=VEC_GET_ITEM(symbol->type_vec,j);
@@ -182,6 +180,9 @@ void print_symbol(SYM_ITEM* symbol,size_t indentation)
         }
     }
     printf(">\n");
+    if(symbol->init_value){
+        print_static_stor_value(symbol->init_value,Type_size(symbol->type_vec),indentation+2);
+    }
     tmpt=Type_VEC_get_actual_base_type(symbol->type_vec);
     if(tmpfunct){
         VEC* paravec=((TP_FUNC*)tmpfunct)->func_parameters;
@@ -249,6 +250,39 @@ void print_symbol(SYM_ITEM* symbol,size_t indentation)
             }
             printf("array len is: %zu\n",((TP_ARR*)tmpt)->axis_size);
         }
+    }
+}
+void print_static_stor_value(STATIC_STOR_VALUE* value,size_t data_size,size_t indentation)
+{
+    if(!value)
+        return;
+    for(size_t j=0;j<indentation;++j)
+        printf("\t");
+    printf("this symbol have static storage and the following is value:\n");
+    char* p=value->data;
+    if(!value->data)
+        return;
+    char tmp;
+    for(size_t i=0;i<data_size;++i){
+        if(i%4==0)
+        {
+            for(size_t j=0;j<indentation;++j)
+                printf("\t");
+        }
+        tmp=*p;
+        for(size_t j=0;j<8;++j)
+        {
+            if(tmp&0x1)
+                printf("1");
+            else
+                printf("0");
+            tmp>>=1;
+        }
+        p++;
+        if(i%4==3)
+            printf("\n");
+        else 
+            printf(" , ");
     }
 }
 VEC* get_symbol_hash(HASH* h){

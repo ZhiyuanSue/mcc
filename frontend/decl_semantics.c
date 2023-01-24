@@ -142,8 +142,6 @@ bool declaration_type(AST_BASE* ast_node,VEC* dec_symbol_item_list)
                 M_TYPE* tmpt=Type_VEC_get_spec_other(tmpsi->type_vec);
                 if(tmpt){
                     tmpsi->fspec_type=tmpt->func_spec;
-                    if(tmpt->typ_stor==TP_EXTERN_THREAD_LOCAL||tmpt->typ_stor==TP_STATIC_THREAD_LOCAL)
-                        tmpsi->Thread_local=true;
                     tmpsi->align_size=tmpt->align_spec;
                 }
                 /*initialize part*/
@@ -1195,7 +1193,6 @@ bool abs_declarator_type(AST_BASE* abstract_declarator_node,
 }
 bool initializer_semantic(AST_BASE* initializer_node,VEC* target_type_vec,size_t off)
 {
-    /*TODO: char array type*/
     if(!initializer_node||initializer_node->type!=initializer||!target_type_vec)
         goto error;
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
@@ -1227,9 +1224,7 @@ bool initializer_semantic(AST_BASE* initializer_node,VEC* target_type_vec,size_t
         }
         /*please consider the null pointer constant*/
         if(!assignment_type_check(unary_type_vec,assign_type_vec))
-        {
             goto error;
-        }
     }
     else{
         sub_node=AST_GET_CHILD(initializer_node,1);
