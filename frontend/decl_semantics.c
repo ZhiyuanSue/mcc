@@ -153,7 +153,7 @@ bool declaration_type(AST_BASE* ast_node,VEC* dec_symbol_item_list)
                         return false;
                     }
                     AST_BASE* initializer_node=AST_GET_CHILD(init_dec_node,2);
-                    if(!initializer_semantic(initializer_node,tmpsi->type_vec,0)){
+                    if(!initializer_semantic(initializer_node,tmpsi->type_vec,0,0)){
                         return false;
                     }
                 }
@@ -1191,7 +1191,7 @@ bool abs_declarator_type(AST_BASE* abstract_declarator_node,
     m_free(tei);
     return type_vec;
 }
-bool initializer_semantic(AST_BASE* initializer_node,VEC* target_type_vec,size_t off)
+bool initializer_semantic(AST_BASE* initializer_node,VEC* target_type_vec,size_t off,size_t curr_obj_off)
 {
     if(!initializer_node||initializer_node->type!=initializer||!target_type_vec)
         goto error;
@@ -1228,7 +1228,7 @@ bool initializer_semantic(AST_BASE* initializer_node,VEC* target_type_vec,size_t
     }
     else{
         sub_node=AST_GET_CHILD(initializer_node,1);
-        if(!initializer_list_semantic(sub_node,target_type_vec,off))
+        if(!initializer_list_semantic(sub_node,target_type_vec,off,curr_obj_off))
             goto error;
     }
     m_free(tei);
@@ -1236,12 +1236,12 @@ bool initializer_semantic(AST_BASE* initializer_node,VEC* target_type_vec,size_t
 error:
     return false;
 }
-bool initializer_list_semantic(AST_BASE* initializer_list_node,VEC* type_vec,size_t off){
+bool initializer_list_semantic(AST_BASE* initializer_list_node,VEC* type_vec,size_t off,size_t curr_obj_off){
     if(!initializer_list_node||initializer_list_node->type!=initializer_list||!type_vec)
         goto error;
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
     M_TYPE* tmp_type=Type_VEC_get_actual_base_type(type_vec);
-    size_t total_size=Type_size(type_vec)*8;
+    size_t total_size=off+Type_size(type_vec)*8;
     bool array_unknown_size=false;
     bool variable_length_array=false;
     if((!tmp_type->complete)&&(tmp_type->typ_category==TP_ARRAY)&&((TP_ARR*)tmp_type)->is_vla)
@@ -1254,7 +1254,7 @@ bool initializer_list_semantic(AST_BASE* initializer_list_node,VEC* type_vec,siz
             break;
         if(sub_node->type==initializer){
             /*test the sub initializer begin with left brace or not*/
-            if(!initializer_search(sub_node,type_vec,&off,0,false,0,0))
+            if(!initializer_search(sub_node,type_vec,&off,curr_obj_off,false,0,0))
             {
                 C_ERROR(C0072_ERR_ASSIGN_OPERAND,initializer_list_node);
                 goto error;
@@ -1378,7 +1378,7 @@ bool initializer_search(
         {
             goto error;
         }
-        if(!initializer_semantic(initializer_node,type_vec,(*off)))
+        if(!initializer_semantic(initializer_node,type_vec,(*off),curr_obj_off))
         {
             goto error;
         }
@@ -1400,7 +1400,7 @@ bool initializer_search(
         VEC* sub_obj_type=InitVEC(DEFAULT_CAPICITY);
         M_TYPE* sint_type=build_base_type(TP_SINT);
         VECinsert(sub_obj_type,sint_type);
-        if(!initializer_semantic(initializer_node,sub_obj_type,(*off)))
+        if(!initializer_semantic(initializer_node,sub_obj_type,(*off),curr_obj_off))
             goto error;
         /* a enum cannot be a bit field,so add the sint size*/
         initializer_node->init_attribute->off=curr_obj_off;
@@ -1444,7 +1444,7 @@ bool initializer_search(
                 }
             }
             else{
-                if(initializer_semantic(initializer_node,sub_obj_type_vec,(*off)))
+                if(initializer_semantic(initializer_node,sub_obj_type_vec,(*off),curr_obj_off))
                 {
                     initializer_node->init_attribute->off=curr_obj_off;
                     initializer_node->init_attribute->size=union_size;
@@ -1531,7 +1531,7 @@ bool initializer_search(
                 }
             }
             else{
-                if(initializer_semantic(initializer_node,sub_obj_type_vec,(*off)))
+                if(initializer_semantic(initializer_node,sub_obj_type_vec,(*off),curr_obj_off))
                 {
                     initializer_node->init_attribute->off=curr_obj_off;
                     if(index==VECLEN(su_member_list)-1)
@@ -1624,7 +1624,7 @@ bool initializer_search(
                 goto error;
         }
         else{
-            if(initializer_semantic(initializer_node,sub_obj_type_vec,(*off)))
+            if(initializer_semantic(initializer_node,sub_obj_type_vec,(*off),curr_obj_off))
             {
                 initializer_node->init_attribute->off=curr_obj_off;
                 initializer_node->init_attribute->size=sub_type_size;
