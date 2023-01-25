@@ -123,6 +123,7 @@ const char error_describe[ERROR_NUMBER][ERROR_DES_LEN]={
     "C0094:a designator has the form '.identifier',but not a struct or union type or one member of current struct or union",
     "C0095:If the declaration of an identifier has block scope, and the identifier has external or internal linkage, the declaration shall have no initializer for the identifier.",
     "C0096:storage size isn't known",
+    "C0097:static storage symbol need constant expression",
     /*warning*/
     "W0001:",
     "W0002:Unknown warning",

@@ -1254,24 +1254,10 @@ bool initializer_list_semantic(AST_BASE* initializer_list_node,VEC* type_vec,siz
             break;
         if(sub_node->type==initializer){
             /*test the sub initializer begin with left brace or not*/
-            bool begin_with_left_brace=false;
-            if(AST_CHILD_NUM(sub_node)!=1)
-                begin_with_left_brace=true;
-            if(begin_with_left_brace)
+            if(!initializer_search(sub_node,type_vec,&off,0,false,0,0))
             {
-                if(!initializer_search(sub_node,type_vec,&off,0,true,false,0))
-                {
-                    C_ERROR(C0072_ERR_ASSIGN_OPERAND,initializer_list_node);
-                    goto error;
-                }
-            }
-            else
-            {
-                if(!initializer_search(sub_node,type_vec,&off,0,false,false,0))
-                {
-                    C_ERROR(C0072_ERR_ASSIGN_OPERAND,initializer_list_node);
-                    goto error;
-                }
+                C_ERROR(C0072_ERR_ASSIGN_OPERAND,initializer_list_node);
+                goto error;
             }
         }
         else if(sub_node->type==designation){
@@ -1379,9 +1365,9 @@ bool initializer_search(
     VEC* type_vec,
     size_t* off,
     size_t curr_obj_off,
-    bool begin_with_left_brace,
     bool bit_field,
-    size_t bit_field_size)
+    size_t bit_field_size,
+    size_t level)
 {
     if(!initializer_node||!type_vec||!off)
         goto error;
@@ -1389,18 +1375,22 @@ bool initializer_search(
     M_TYPE* tmp_type=Type_VEC_get_actual_base_type(type_vec);
     if(IS_SCALAR_TYPE(tmp_type->typ_category)){ /*recursive base*/
         if((*off)!=curr_obj_off)    /*goto the terminal, cannot search deeper*/
+        {
             goto error;
+        }
         if(!initializer_semantic(initializer_node,type_vec,(*off)))
+        {
             goto error;
+        }
         initializer_node->init_attribute->off=curr_obj_off;
         if(bit_field)
         {
             initializer_node->init_attribute->size=bit_field_size;
-            off+=bit_field_size;
+            (*off)+=bit_field_size;
         }
         else{
             initializer_node->init_attribute->size=Type_size(type_vec)*8;
-            off+=Type_size(type_vec)*8;
+            (*off)+=Type_size(type_vec)*8;
         }
     }
     else if(tmp_type->typ_category==TP_ENUM)
@@ -1415,7 +1405,7 @@ bool initializer_search(
         /* a enum cannot be a bit field,so add the sint size*/
         initializer_node->init_attribute->off=curr_obj_off;
         initializer_node->init_attribute->size=Type_size(sub_obj_type)*8;
-        off+=Type_size(sub_obj_type)*8;
+        (*off)+=Type_size(sub_obj_type)*8;
     }
     else if(tmp_type->typ_category==TP_UNION)
     {
@@ -1439,16 +1429,14 @@ bool initializer_search(
             sub_obj_type_vec=member->type_vec;
             if(curr_obj_off!=*off)
             {
-                if(begin_with_left_brace)
-                    goto error;
                 if(!initializer_search(
                     initializer_node,
                     sub_obj_type_vec,
                     off,
                     curr_obj_off,
-                    false,
                     member->bit_field,
-                    member->bit_field_size
+                    member->bit_field_size,
+                    level+1
                 ))
                     goto error;
                 if((*off)>=curr_obj_off+union_size){
@@ -1465,16 +1453,14 @@ bool initializer_search(
                     goto succ;
                 }
                 else{
-                    if(begin_with_left_brace)
-                        goto error;
                     if(!initializer_search(
                         initializer_node,
                         sub_obj_type_vec,
                         off,
                         curr_obj_off,
-                        false,
                         member->bit_field,
-                        member->bit_field_size
+                        member->bit_field_size,
+                        level+1
                     ))
                         goto error;
                     if((*off)>=curr_obj_off+union_size){
@@ -1530,16 +1516,14 @@ bool initializer_search(
         if(find_member&&member){
             sub_obj_type_vec=member->type_vec;
             if((*off)!=curr_obj_off){
-                if(begin_with_left_brace)
-                    goto error;
                 if(!initializer_search(
                     initializer_node,
                     sub_obj_type_vec,
                     off,
                     curr_obj_off,
-                    false,
                     member_bit_field,
-                    member_bit_field_size
+                    member_bit_field_size,
+                    level+1
                 ))
                     goto error;
                 if((*off)>=struct_start_off+struct_size){
@@ -1553,7 +1537,7 @@ bool initializer_search(
                     if(index==VECLEN(su_member_list)-1)
                     {
                         initializer_node->init_attribute->size=struct_size;
-                        off+=struct_size;
+                        (*off)+=struct_size;
                     }
                     else{
                         TP_SU_MEMBER* next_member=NULL;
@@ -1598,21 +1582,19 @@ bool initializer_search(
                         else    /*it means no next member start with different offset*/
                         {
                             initializer_node->init_attribute->size=struct_size;
-                            off+=struct_size;
+                            (*off)+=struct_size;
                         }
                     }
                 }
                 else{
-                    if(begin_with_left_brace)
-                        goto error;
                     if(!initializer_search(
                         initializer_node,
                         sub_obj_type_vec,
                         off,
                         curr_obj_off,
-                        false,
                         member_bit_field,
-                        member_bit_field_size
+                        member_bit_field_size,
+                        level+1
                     ))
                         goto error;
                     if((*off)>=struct_start_off+struct_size){
@@ -1628,18 +1610,16 @@ bool initializer_search(
     {
         VEC* sub_obj_type_vec=Type_VEC_get_Array_TO(type_vec,true);
         size_t sub_type_size=Type_size(sub_obj_type_vec)*8;
+        curr_obj_off+=sub_type_size*(((*off)-curr_obj_off)/sub_type_size);
         if(curr_obj_off!=(*off)){
-            curr_obj_off+=sub_type_size*(((*off)-curr_obj_off)/sub_type_size);
-            if(begin_with_left_brace)
-                goto error;
             if(!initializer_search(
                 initializer_node,
                 sub_obj_type_vec,
                 off,
                 curr_obj_off,
                 false,
-                false,
-                0
+                0,
+                level+1
             ))
                 goto error;
         }
@@ -1648,20 +1628,18 @@ bool initializer_search(
             {
                 initializer_node->init_attribute->off=curr_obj_off;
                 initializer_node->init_attribute->size=sub_type_size;
-                off+=sub_type_size;
+                (*off)+=sub_type_size;
                 goto succ;
             }
             else{
-                if(begin_with_left_brace)
-                    goto error;
                 if(!initializer_search(
                     initializer_node,
                     sub_obj_type_vec,
                     off,
                     curr_obj_off,
                     false,
-                    false,
-                    0
+                    0,
+                    level+1
                 ))
                     goto error;
             }

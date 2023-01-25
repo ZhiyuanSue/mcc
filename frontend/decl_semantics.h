@@ -9,7 +9,7 @@ bool initializer_search(
     VEC* type_vec,
     size_t* off,
     size_t curr_obj_off,
-    bool begin_with_left_brace,
     bool bit_field,
-    size_t bit_field_size);
+    size_t bit_field_size,
+    size_t level);
 #endif   

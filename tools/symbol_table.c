@@ -157,6 +157,8 @@ void print_symbol_table(SYM* symbol_table)  /*just a print for test,don't care t
 }
 void print_symbol(SYM_ITEM* symbol,size_t indentation)
 {
+    if(!symbol)
+        return;
     for(int j=0;j<=indentation+1;++j){
         printf("    ");
     }

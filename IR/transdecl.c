@@ -94,10 +94,32 @@ error:
 }
 bool fill_in_static_stor_value(AST_BASE* initializer_node,STATIC_STOR_VALUE* value)
 {
+    /*as we have calculated the off and the size of one initializer node,just fill data in it*/
     if(!initializer_node||!value||initializer_node->type!=initializer)
         goto error;
     ERROR_ITEM* tei=(ERROR_ITEM*)m_alloc(sizeof(ERROR_ITEM));
+    AST_BASE* sub_node=AST_GET_CHILD(initializer_node,0);
+    if(sub_node->type!=left_brace)
+    {
+        if(sub_node->type==postfix_expr){
+            AST_BASE* sub_sub_node=AST_GET_CHILD(sub_node,1);
+            if(sub_sub_node&&sub_sub_node->type==type_name){
 
+                goto succ;
+            }
+        }
+        if(!sub_node->expr_attribute->const_expr)
+        {
+            C_ERROR(C0097_ERR_STATIC_STOR_CONST,sub_node);
+            goto error;
+        }
+        /*then fill in and trunc(if bit field)*/
+
+    }
+    else{
+
+    }
+succ:
     m_free(tei);
     return true;
 error:
