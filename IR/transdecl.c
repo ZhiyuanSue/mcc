@@ -1,4 +1,5 @@
 #include "transdecl.h"
+extern size_t type_data_size[TYPE_NUM];
 static size_t global_off=0;
 static size_t thread_off=0;
 static size_t stack_off=0;
@@ -72,9 +73,9 @@ bool declaration_trans(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR_BB*
             STATIC_STOR_VALUE* value=(STATIC_STOR_VALUE*)m_alloc(sizeof(STATIC_STOR_VALUE));
             value->sym_item=tmpsi;
             tmpsi->init_value=value;
-            size_t data_size=Type_size(tmpsi->type_vec);
-            value->data=m_alloc(data_size);
-            memset(value->data,0,data_size);
+
+            value->value_vec=InitVEC(DEFAULT_CAPICITY);
+
             if(AST_CHILD_NUM(init_decl_node)==3){
                 AST_BASE* initializer_node=AST_GET_CHILD(init_decl_node,2);
                 if(!fill_in_static_stor_value(initializer_node,value))
@@ -124,7 +125,22 @@ bool fill_in_static_stor_value(AST_BASE* initializer_node,STATIC_STOR_VALUE* val
         }
         /*then fill in and trunc(if bit field)*/
         INIT_NODE_ATTR* init_attr=initializer_node->init_attribute;
+        /*first,try to cast the data*/
+        /*not bit field case*/
+        if(8*type_data_size[init_attr->scalar_type->typ_category]==init_attr->size&&init_attr->off%8==0)
+        {
+            /*fill in*/
 
+        }/*bit field case:emmm...actually,I have no idea of how to trunc*/
+        else{
+            /*use a new tmp data to store the value*/
+
+            /*use 'and' to trunc*/
+            
+            /*shift it according to the off*/
+            
+            /*use 'or' to fill in the data*/
+        }
     }
     m_free(tei);
     return true;

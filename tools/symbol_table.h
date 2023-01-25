@@ -17,10 +17,18 @@ enum linkage_type{
 enum function_spec_type{
     FSPEC_NONE,FSPEC_INLINE,FSPEC_NORETURN
 };
+enum static_storage_value_type{
+    SSVT_NONE,
+    SSVT_FUNCTION_POINTER,
+};
 typedef struct sym_item SYM_ITEM;
 typedef struct{
-    SYM_ITEM* sym_item;
+    enum static_storage_value_type value_data_type;
     void* data;
+}STATIC_STOR_VALUE_ELEM;
+typedef struct{
+    SYM_ITEM* sym_item;
+    VEC* value_vec;
 }STATIC_STOR_VALUE;
 typedef struct sym_table SYM;
 struct sym_table{

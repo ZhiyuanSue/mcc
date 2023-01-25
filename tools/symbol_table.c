@@ -261,30 +261,39 @@ void print_static_stor_value(STATIC_STOR_VALUE* value,size_t data_size,size_t in
     for(size_t j=0;j<indentation;++j)
         printf("\t");
     printf("this symbol have static storage and the following is value:\n");
-    char* p=value->data;
-    if(!value->data)
-        return;
-    char tmp;
-    for(size_t i=0;i<data_size;++i){
-        if(i%4==0)
-        {
-            for(size_t j=0;j<indentation;++j)
-                printf("\t");
+    for(size_t i=0;i<VECLEN(value->value_vec);++i){
+        STATIC_STOR_VALUE_ELEM* value_elem=VEC_GET_ITEM(value->value_vec,i);
+        if(value_elem->value_data_type==SSVT_NONE){
+            char* p=value_elem->data;
+            if(!value_elem->data)
+                return;
+            char tmp;
+            for(size_t j=0;j<data_size;++j){
+                if(j%4==0)
+                {
+                    for(size_t k=0;k<indentation;++k)
+                        printf("\t");
+                }
+                tmp=*p;
+                for(size_t k=0;k<8;++k)
+                {
+                    if(tmp&0x1)
+                        printf("1");
+                    else
+                        printf("0");
+                    tmp>>=1;
+                }
+                p++;
+                if(j%4==3)
+                    printf("\n");
+                else 
+                    printf(" , ");
+            }
         }
-        tmp=*p;
-        for(size_t j=0;j<8;++j)
+        else if(value_elem->value_data_type==SSVT_FUNCTION_POINTER)
         {
-            if(tmp&0x1)
-                printf("1");
-            else
-                printf("0");
-            tmp>>=1;
+            printf("<function pointer to %s>\n",((TP_FUNC*)(value_elem->data))->func_name);
         }
-        p++;
-        if(i%4==3)
-            printf("\n");
-        else 
-            printf(" , ");
     }
 }
 VEC* get_symbol_hash(HASH* h){

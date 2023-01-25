@@ -1392,6 +1392,7 @@ bool initializer_search(
             initializer_node->init_attribute->size=Type_size(type_vec)*8;
             (*off)+=Type_size(type_vec)*8;
         }
+        initializer_node->init_attribute->scalar_type=tmp_type;
     }
     else if(tmp_type->typ_category==TP_ENUM)
     {   /*recursive base*/
@@ -1406,6 +1407,7 @@ bool initializer_search(
         initializer_node->init_attribute->off=curr_obj_off;
         initializer_node->init_attribute->size=Type_size(sub_obj_type)*8;
         (*off)+=Type_size(sub_obj_type)*8;
+        initializer_node->init_attribute->scalar_type=sint_type;
     }
     else if(tmp_type->typ_category==TP_UNION)
     {
@@ -1486,24 +1488,26 @@ bool initializer_search(
         VEC* su_member_list=((TP_SU*)tmp_type)->members;
         VEC* sub_obj_type_vec=NULL;
         size_t struct_start_off=curr_obj_off;
+        size_t member_start;
         for(size_t i=0;i<VECLEN(su_member_list);++i)
         {
+            member_start=curr_obj_off;
             member=(TP_SU_MEMBER*)VEC_GET_ITEM(su_member_list,i);
-            member_bit_field=0;
+            member_bit_field=false;
             member_bit_field_size=0;
             /*get the member's actual off*/
-            curr_obj_off+=member->offset*8;
+            member_start+=member->offset*8;
             if(member->bit_field){
-                curr_obj_off+=member->bit_field_offset;
+                member_start+=member->bit_field_offset;
                 member_bit_field=true;
                 member_bit_field_size=member->bit_field_size;
             }
-            size_t member_end=curr_obj_off;
+            size_t member_end=member_start;
             if(bit_field)
                 member_end+=member_bit_field_size;
             else
                 member_end+=Type_size(member->type_vec)*8;
-            if((curr_obj_off<=(*off)&&member_end>(*off))||(((TP_SU*)tmp_type)->curr_designated_member==member))
+            if((member_start<=(*off)&&member_end>(*off))||(((TP_SU*)tmp_type)->curr_designated_member==member))
             {   /*
                     unlike the union,the struct must calculate some data,so it have to check all
                     actually,I think just record the index in member list might works.
@@ -1514,6 +1518,7 @@ bool initializer_search(
             }
         }
         if(find_member&&member){
+            curr_obj_off=member_start;
             sub_obj_type_vec=member->type_vec;
             if((*off)!=curr_obj_off){
                 if(!initializer_search(
