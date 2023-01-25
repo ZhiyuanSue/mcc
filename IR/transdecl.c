@@ -99,27 +99,33 @@ bool fill_in_static_stor_value(AST_BASE* initializer_node,STATIC_STOR_VALUE* val
         goto error;
     ERROR_ITEM* tei=(ERROR_ITEM*)m_alloc(sizeof(ERROR_ITEM));
     AST_BASE* sub_node=AST_GET_CHILD(initializer_node,0);
-    if(sub_node->type!=left_brace)
-    {
-        if(sub_node->type==postfix_expr){
-            AST_BASE* sub_sub_node=AST_GET_CHILD(sub_node,1);
-            if(sub_sub_node&&sub_sub_node->type==type_name){
-
-                goto succ;
+    AST_BASE* initializer_list_node=NULL;
+    if(sub_node->type==postfix_expr){
+        AST_BASE* sub_sub_node=AST_GET_CHILD(sub_node,1);
+        if(sub_sub_node&&sub_sub_node->type==type_name){
+            initializer_list_node=AST_GET_CHILD(sub_node,4);
+        }
+    }
+    else if(sub_node->type==left_brace)
+        initializer_list_node=AST_GET_CHILD(initializer_node,1);
+    if(initializer_list_node){
+        for(size_t i=0;i<AST_CHILD_NUM(initializer_list_node);++i){
+            AST_BASE* sub_init_node=AST_GET_CHILD(initializer_list_node,i);
+            if(sub_init_node->type==initializer){
+                fill_in_static_stor_value(sub_init_node,value);
             }
         }
-        if(!sub_node->expr_attribute->const_expr)
+    }
+    else{
+        if(!IS_EXPR_NODE(sub_node->type)||!sub_node->expr_attribute->const_expr)
         {
             C_ERROR(C0097_ERR_STATIC_STOR_CONST,sub_node);
             goto error;
         }
         /*then fill in and trunc(if bit field)*/
+        INIT_NODE_ATTR* init_attr=initializer_node->init_attribute;
 
     }
-    else{
-
-    }
-succ:
     m_free(tei);
     return true;
 error:
