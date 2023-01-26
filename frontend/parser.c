@@ -403,7 +403,7 @@ bool p_symbol_table(AST_BASE* ast_node,SYM* father){
         ast_node->init_attribute=m_alloc(sizeof(INIT_NODE_ATTR));
         ast_node->init_attribute->off=0;
         ast_node->init_attribute->size=0;
-        ast_node->init_attribute->scalar_type=NULL;
+        ast_node->init_attribute->type_vec=NULL;
     }
     else if(ast_node->type==declaration)
     {

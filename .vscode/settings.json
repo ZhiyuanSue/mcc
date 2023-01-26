@@ -13,6 +13,8 @@
         "defs.h": "c",
         "mcc_main.h": "c",
         "trans.h": "c",
-        "mem.h": "c"
+        "mem.h": "c",
+        "ir.h": "c",
+        "symbol_table.h": "c"
     }
 }

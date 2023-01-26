@@ -76,6 +76,10 @@ bool declaration_trans(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR_BB*
 
             value->value_vec=InitVEC(DEFAULT_CAPICITY);
 
+            size_t value_size=Type_size(tmpsi->type_vec);
+            value->value_data=m_alloc(value_size);
+            memset(value->value_data,0,value_size);
+
             if(AST_CHILD_NUM(init_decl_node)==3){
                 AST_BASE* initializer_node=AST_GET_CHILD(init_decl_node,2);
                 if(!fill_in_static_stor_value(initializer_node,value))
@@ -118,19 +122,51 @@ bool fill_in_static_stor_value(AST_BASE* initializer_node,STATIC_STOR_VALUE* val
         }
     }
     else{
-        if(!IS_EXPR_NODE(sub_node->type)||!sub_node->expr_attribute->const_expr)
+        if(!IS_EXPR_NODE(sub_node->type)||!(sub_node->expr_attribute->const_expr))
         {
             C_ERROR(C0097_ERR_STATIC_STOR_CONST,sub_node);
             goto error;
         }
         /*then fill in and trunc(if bit field)*/
         INIT_NODE_ATTR* init_attr=initializer_node->init_attribute;
+        M_TYPE* tmp_type=Type_VEC_get_actual_base_type(init_attr->type_vec);
+        if(!tmp_type||!IS_SCALAR_TYPE(tmp_type->typ_category))
+        {
+            print_type_vec(init_attr->type_vec);
+            printf("not a terminal initializer,error\n");
+            goto error; /*actually impossible if everything ok*/
+        }
         /*first,try to cast the data*/
         /*not bit field case*/
-        if(8*type_data_size[init_attr->scalar_type->typ_category]==init_attr->size&&init_attr->off%8==0)
+        size_t data_spec_size=type_data_size[tmp_type->typ_category];
+        printf("off %ld size %ld\n",init_attr->off,init_attr->size);
+        printf("data spec size %ld\n",data_spec_size);
+        if((8*data_spec_size)==init_attr->size&&(init_attr->off)%8==0)
         {
             /*fill in*/
-
+            
+            STATIC_STOR_VALUE_ELEM* elem=m_alloc(data_spec_size);
+            elem->byte_width=data_spec_size;
+            if(tmp_type->typ_category==TP_POINT){
+                AST_BASE* sub_sub_node=AST_GET_CHILD(sub_node,0);
+                if(sub_node->type==primary_expression&&sub_sub_node&&sub_sub_node->type==identifier){
+                    elem->value_data_type=SSVT_POINTER;
+                    
+                }
+                else{
+                    elem->value_data_type=SSVT_NONE;
+                }
+                
+            }
+            else{
+                elem->value_data_type=SSVT_NONE;
+                elem->data=value+(init_attr->off)/8;
+            }
+            /*in struct, there might have some space between two elements*/
+            if(init_attr->off!=0){
+                
+            }
+            VECinsert(value->value_vec,(void*)elem);
         }/*bit field case:emmm...actually,I have no idea of how to trunc*/
         else{
             /*use a new tmp data to store the value*/

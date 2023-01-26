@@ -77,8 +77,10 @@ error:
     return NULL;
 }
 static size_t label_id=0;
-char* label_allocator(void)
+char* label_allocator(char* default_name)
 {
+    if(default_name!=NULL)
+        return default_name;
     label_id++;
 
     return NULL;
@@ -116,11 +118,10 @@ void print_IR(IR_MODULE* irm)
             {
                 IR_BB* curr_bb=(IR_BB*)bb_p;
                 LIST_NODE* ins_p=curr_bb->Instruction_list;
-                if(ins_p)
-                    printf("<basic block label:%s>\n",curr_bb->bb_label);
+                printf("\t<basic block label:%s>\n",curr_bb->bb_label);
                 while (ins_p)
                 {
-                    print_INS((IR_INS*)ins_p,1);
+                    print_INS((IR_INS*)ins_p,2);
                     ins_p=ins_p->next;
                     if(ins_p==curr_bb->Instruction_list)
                         break;
@@ -137,8 +138,8 @@ void print_INS(IR_INS* ins,size_t indentation)
 {
     if(!ins)
         return;
-    for(size_t i=0;i<indentation+1;++i){
-        printf(" ");
+    for(size_t i=0;i<indentation;++i){
+        printf("\t");
     }
     printf("<op:%s,",op_name_string[ins->op]);
     printf("dst:%s,",operand_name_string[ins->dst->type]);

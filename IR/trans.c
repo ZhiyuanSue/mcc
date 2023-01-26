@@ -57,16 +57,18 @@ bool trans_func(AST_BASE* ast_node,IR_FUNC* ir_func)
 
     /*add a return basic block,in which only one ins, ret*/
     IR_BB* last_bb=add_new_bb(ir_func);
-    ir_func->BB_list=(LIST_NODE*)last_bb;
-
-    last_bb->bb_label=label_allocator();
+    last_bb->bb_label=label_allocator("func end");
     IR_INS* ret_ins=add_new_ins(last_bb);
     last_bb->Instruction_list=(LIST_NODE*)ret_ins;
 
     GenINS(ret_ins,OP_RET,NULL,NULL,NULL);
+
+    ast_node->symbol_table->func_end_bb=last_bb;
     /*compound stmt part*/
     IR_BB* compound_bb=add_new_bb(ir_func);
     _add_before((LIST_NODE*)last_bb,(LIST_NODE*)compound_bb);
+    compound_bb->bb_label=((TP_FUNC*)tmpsi)->func_name;
+    ir_func->BB_list=(LIST_NODE*)compound_bb;
     AST_BASE* compount_stmt_node=AST_GET_CHILD(ast_node,AST_CHILD_NUM(ast_node)-1);
     compound_stmt_trans(compount_stmt_node,compound_bb);
     return true;

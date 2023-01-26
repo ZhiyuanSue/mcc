@@ -17,7 +17,7 @@ typedef struct{
 typedef struct{
     size_t off;
     size_t size;
-    M_TYPE* scalar_type;    /*only terminal initializer reserve this type, in order to fill in the data*/
+    VEC* type_vec;
 }INIT_NODE_ATTR;
 typedef struct{
     VEC* decl_symbol_item_list;

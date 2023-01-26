@@ -38,7 +38,11 @@ SYM* Create_symbol_table(SYM* father,enum scope_type type){
         symbol_table->st_attr_type[0]=0;
         symbol_table->st_attr_type[1]=0;
         symbol_table->st_attr_type[2]=0;
-    }   
+    }
+    symbol_table->switch_begin_bb=NULL;
+    symbol_table->loop_begin_bb=NULL;
+    symbol_table->loop_end_bb=NULL;
+    symbol_table->switch_end_bb=symbol_table->func_end_bb=NULL;
     symbol_table->st_attr=NULL;
     return symbol_table;
 }
@@ -182,6 +186,14 @@ void print_symbol(SYM_ITEM* symbol,size_t indentation)
         }
     }
     printf(">\n");
+    
+    if(symbol->const_expr)
+    {
+        for(int j=0;j<=indentation+2;++j){
+            printf("    ");
+        }
+        printf("a const expr symbol\n");
+    }
     if(symbol->init_value){
         print_static_stor_value(symbol->init_value,Type_size(symbol->type_vec),indentation+2);
     }
@@ -268,10 +280,10 @@ void print_static_stor_value(STATIC_STOR_VALUE* value,size_t data_size,size_t in
             if(!value_elem->data)
                 return;
             char tmp;
-            for(size_t j=0;j<data_size;++j){
+            for(size_t j=0;j<value_elem->byte_width;++j){
                 if(j%4==0)
                 {
-                    for(size_t k=0;k<indentation;++k)
+                    for(size_t k=0;k<indentation+1;++k)
                         printf("\t");
                 }
                 tmp=*p;
@@ -289,8 +301,9 @@ void print_static_stor_value(STATIC_STOR_VALUE* value,size_t data_size,size_t in
                 else 
                     printf(" , ");
             }
+            printf("\n");
         }
-        else if(value_elem->value_data_type==SSVT_FUNCTION_POINTER)
+        else if(value_elem->value_data_type==SSVT_POINTER)
         {
             printf("<function pointer to %s>\n",((TP_FUNC*)(value_elem->data))->func_name);
         }

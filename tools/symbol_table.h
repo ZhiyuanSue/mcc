@@ -19,15 +19,23 @@ enum function_spec_type{
 };
 enum static_storage_value_type{
     SSVT_NONE,
-    SSVT_FUNCTION_POINTER,
+    SSVT_POINTER,
 };
 typedef struct sym_item SYM_ITEM;
+typedef struct module IR_MODULE;
+typedef struct function IR_FUNC;
+typedef struct basic_block IR_BB;
+typedef struct instruction IR_INS;
+typedef struct operand IR_OPERAND;
+typedef struct IR_OPERAND_REG IR_REG;
 typedef struct{
     enum static_storage_value_type value_data_type;
+    size_t byte_width;  /*1 -byte,2 -word,4 -long(not the long in C),8 -quad*/
     void* data;
 }STATIC_STOR_VALUE_ELEM;
 typedef struct{
     SYM_ITEM* sym_item;
+    void* value_data;   /*use this to alloc a memory*/
     VEC* value_vec;
 }STATIC_STOR_VALUE;
 typedef struct sym_table SYM;
@@ -41,6 +49,8 @@ struct sym_table{
     HASH* typedef_name_table;
     HASH* enum_const_table;
     unsigned int st_attr_type[3];    /*0-switch,1-loop,2-func*/
+    IR_BB* switch_begin_bb,*loop_begin_bb;   /*the two others should not be used*/
+    IR_BB* switch_end_bb,*loop_end_bb,*func_end_bb;
     void* st_attr;  /*if you need more attributes ,
                         use this to point to a struct, like the following SYMBOL_TABLE_FUNC_ATTR or SYMBOL_TABLE_SWITCH_ATTR*/
 };

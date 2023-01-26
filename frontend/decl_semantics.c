@@ -1223,8 +1223,11 @@ bool initializer_semantic(AST_BASE* initializer_node,VEC* target_type_vec,size_t
                 assign_base_type->typ_category=TP_NULL_POINTER_CONSTANT;
         }
         /*please consider the null pointer constant*/
+        print_type_vec(unary_type_vec);
+        print_type_vec(assign_type_vec);
         if(!assignment_type_check(unary_type_vec,assign_type_vec))
             goto error;
+        initializer_node->init_attribute->type_vec=target_type_vec;
     }
     else{
         sub_node=AST_GET_CHILD(initializer_node,1);
@@ -1392,7 +1395,6 @@ bool initializer_search(
             initializer_node->init_attribute->size=Type_size(type_vec)*8;
             (*off)+=Type_size(type_vec)*8;
         }
-        initializer_node->init_attribute->scalar_type=tmp_type;
     }
     else if(tmp_type->typ_category==TP_ENUM)
     {   /*recursive base*/
@@ -1407,7 +1409,6 @@ bool initializer_search(
         initializer_node->init_attribute->off=curr_obj_off;
         initializer_node->init_attribute->size=Type_size(sub_obj_type)*8;
         (*off)+=Type_size(sub_obj_type)*8;
-        initializer_node->init_attribute->scalar_type=sint_type;
     }
     else if(tmp_type->typ_category==TP_UNION)
     {
@@ -1579,7 +1580,7 @@ bool initializer_search(
                             if(member->bit_field)
                                 initializer_node->init_attribute->size=member->bit_field_size;
                             else
-                                initializer_node->init_attribute->size=Type_size(member->type_vec);
+                                initializer_node->init_attribute->size=Type_size(member->type_vec)*8;
                             (*off)=next_member->offset*8;
                             if(next_member->bit_field)
                                 off+=member->bit_field_offset;

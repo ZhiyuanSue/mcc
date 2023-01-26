@@ -4,12 +4,6 @@
 #include "../tools/list.h"
 #include "../tools/symbol_table.h"
 #include "IR_ENUM.h"
-typedef struct module IR_MODULE;
-typedef struct function IR_FUNC;
-typedef struct basic_block IR_BB;
-typedef struct instruction IR_INS;
-typedef struct operand IR_OPERAND;
-typedef struct IR_OPERAND_REG IR_REG;
 struct IR_OPERAND_REG{
     enum data_type d_type;
     size_t reg_id;
@@ -81,7 +75,7 @@ IR_BB* add_new_bb(IR_FUNC* func);
 IR_INS* add_new_ins(IR_BB* bb);
 
 
-char* label_allocator(void);    /*allocate a label name for a bb*/
+char* label_allocator(char* default_name);    /*allocate a label name for a bb*/
 IR_REG* reg_allocator(IR_MODULE* irm,enum data_type type,VEC* reg_vec);
 
 void print_IR(IR_MODULE* irm);

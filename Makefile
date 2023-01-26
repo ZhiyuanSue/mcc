@@ -34,6 +34,14 @@ clean:
 clean_obj:
 	rm -rf ${MCC_ROOT_OBJ}
 
+clean_asm:
+	rm -f ${Bin}/test_asm/*
+	rm -f ${MCC_ROOT_ASM}/*
+
+clean_pre:
+	rm -f ${MCC_ROOT_PRE}/*
+
+
 #wildcard 通配符，例如：$(wildcard $(DIR)/*.c)表示某个目录下所有的c文件
 #parsubst 用于替换的，例如要编译所有的c变成.o文件，那这.o文件的名称肯定需要生成，例如
 # $(patsubst %.c,$(OBJ)/%.o,$(notdir $(SOURCE)))
