@@ -145,5 +145,18 @@ void print_INS(IR_INS* ins,size_t indentation)
     printf("<op:%s,",op_name_string[ins->op]);
     printf("dst:%s,",operand_name_string[ins->dst->type]);
     printf("src1:%s,",operand_name_string[ins->src1->type]);
-    printf("src2:%s>\n",operand_name_string[ins->src2->type]);
+    if(ins->src1->type==OPERAND_CODE)
+    {
+        printf("(to label {");
+        printf("%s",ins->src1->operand_data.operand_code_type.code_position->bb_label);
+        printf("})");
+    }
+    printf("src2:%s",operand_name_string[ins->src2->type]);
+    if(ins->src2->type==OPERAND_CODE)
+    {
+        printf("(to label {");
+        printf("%s",ins->src2->operand_data.operand_code_type.code_position->bb_label);
+        printf("})");
+    }
+    printf(">\n");
 }

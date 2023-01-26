@@ -257,6 +257,24 @@ bool continue_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
         goto error;
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
     /*continue have only one case,jmp to the loop start block*/
+    SYM* target_symbol_table=ast_node->symbol_table;
+    while(1){
+        if(target_symbol_table->father==NULL||(target_symbol_table->father->st_attr_type[1])!=(target_symbol_table->st_attr_type[1]))
+            break;
+        else
+            target_symbol_table=target_symbol_table->father;
+    }
+    IR_BB* target_bb=target_symbol_table->loop_begin_bb;
+    /*jmp to the function end bb*/
+    IR_INS* ret_ins=add_new_ins(ir_bb);
+    if(ir_bb->Instruction_list==NULL)
+        ir_bb->Instruction_list=(LIST_NODE*)ret_ins;
+    else
+        _add_before((LIST_NODE*)(ir_bb->Instruction_list),(LIST_NODE*)ret_ins);
+    IR_OPERAND* tmp_operand=(IR_OPERAND*)m_alloc(sizeof(IR_OPERAND));
+    tmp_operand->type=OPERAND_CODE;
+    tmp_operand->operand_data.operand_code_type.code_position=target_bb;
+    GenINS(ret_ins,OP_BR,NULL,tmp_operand,NULL);
     m_free(tei);
     return true;
 error:
@@ -268,6 +286,36 @@ bool break_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
         goto error;
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
     /*break might have two case ,break a switch or a loop*/
+    SYM* target_symbol_table=ast_node->symbol_table;
+    IR_BB* target_bb=NULL;
+    while(1){
+        if(target_symbol_table->father==NULL)
+            break;
+        else if((target_symbol_table->father->st_attr_type[0])!=(target_symbol_table->st_attr_type[0]))
+        {
+            target_bb=target_symbol_table->switch_begin_bb;
+            break;
+        }
+        else if((target_symbol_table->father->st_attr_type[1])!=(target_symbol_table->st_attr_type[1]))
+        {
+            target_bb=target_symbol_table->loop_begin_bb;
+            break;
+        }
+        else
+            target_symbol_table=target_symbol_table->father;
+    }
+    if(!target_bb)
+        goto error;
+    /*jmp to the function end bb*/
+    IR_INS* ret_ins=add_new_ins(ir_bb);
+    if(ir_bb->Instruction_list==NULL)
+        ir_bb->Instruction_list=(LIST_NODE*)ret_ins;
+    else
+        _add_before((LIST_NODE*)(ir_bb->Instruction_list),(LIST_NODE*)ret_ins);
+    IR_OPERAND* tmp_operand=(IR_OPERAND*)m_alloc(sizeof(IR_OPERAND));
+    tmp_operand->type=OPERAND_CODE;
+    tmp_operand->operand_data.operand_code_type.code_position=target_bb;
+    GenINS(ret_ins,OP_BR,NULL,tmp_operand,NULL);
     m_free(tei);
     return true;
 error:
