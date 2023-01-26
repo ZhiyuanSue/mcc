@@ -1,4 +1,5 @@
 #include "transstmt.h"
+extern IR_BB* curr_bb;
 /*as semantic has been done,so ,we needn't do too much checks*/
 bool stmt_trans_dispatch(AST_BASE* ast_node,IR_BB* ir_bb)
 {
@@ -35,6 +36,7 @@ bool labeled_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     else{   /*identifier case*/
         IR_BB* new_bb=add_new_bb(ir_bb->func);
         _add_after((LIST_NODE*)ir_bb,(LIST_NODE*)new_bb);
+        curr_bb=new_bb;
         new_bb->bb_label=label_node->token->value;
         stmt_trans_dispatch(statement_node,new_bb);
     }
@@ -50,9 +52,9 @@ bool compound_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     for(size_t i=1;i<AST_CHILD_NUM(ast_node)-1;++i){
         AST_BASE* sub_ast=AST_GET_CHILD(ast_node,i);
         if(sub_ast){
-            if(sub_ast->type==declaration&&!declaration_trans(sub_ast,ir_bb->IR_module,ir_bb->func,ir_bb))
+            if(sub_ast->type==declaration&&!declaration_trans(sub_ast,ir_bb->IR_module,ir_bb->func,curr_bb))
                 goto error;
-            else if(sub_ast->type==statement&&!stmt_trans_dispatch(sub_ast,ir_bb))
+            else if(sub_ast->type==statement&&!stmt_trans_dispatch(sub_ast,curr_bb))
                 goto error;
         }
     }
@@ -86,12 +88,14 @@ bool if_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     /*deal with expr part*/
     IR_BB* expr_bb=add_new_bb(ir_bb->func);
     _add_after((LIST_NODE*)ir_bb,(LIST_NODE*)expr_bb);
+    curr_bb=expr_bb;
     expr_bb->bb_label=label_allocator("if expr");
     if(!expr_trans_dispatch(expr_node,expr_bb))
         goto error;
     
     /*deal with stmt part*/
     IR_BB* if_stmt_bb=add_new_bb(ir_bb->func);
+    curr_bb=if_stmt_bb;
     _add_after((LIST_NODE*)expr_bb,(LIST_NODE*)if_stmt_bb);
     if_stmt_bb->bb_label=label_allocator("if stmt");
     stmt_node=AST_GET_CHILD(ast_node,6);
@@ -99,6 +103,7 @@ bool if_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
         goto error;
     /*add a if end block*/
     IR_BB* if_end_bb=add_new_bb(ir_bb->func);
+    curr_bb=if_end_bb;
     _add_after((LIST_NODE*)if_stmt_bb,(LIST_NODE*)if_end_bb);
     if_end_bb->bb_label=label_allocator("if end");
     if(AST_CHILD_NUM(ast_node)==7)  /*else part*/
@@ -133,6 +138,7 @@ bool switch_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     IR_BB* expr_bb=add_new_bb(ir_bb->func);
     ast_node->symbol_table->switch_begin_bb=expr_bb;
     _add_after((LIST_NODE*)ir_bb,(LIST_NODE*)expr_bb);
+    curr_bb=expr_bb;
     expr_bb->bb_label=label_allocator("switch expr");
     AST_BASE* expr_node=AST_GET_CHILD(ast_node,2);
     if(!expr_trans_dispatch(expr_node,expr_bb))
@@ -141,11 +147,13 @@ bool switch_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     /*add stmt bb*/
     IR_BB* stmt_bb=add_new_bb(ir_bb->func);
     _add_after((LIST_NODE*)expr_bb,(LIST_NODE*)stmt_bb);
-    expr_bb->bb_label=label_allocator("switch stmt");
+    curr_bb=stmt_bb;
+    stmt_bb->bb_label=label_allocator("switch stmt");
     AST_BASE* stmt_node=AST_GET_CHILD(ast_node,4);
     if(!stmt_trans_dispatch(stmt_node,stmt_bb))
         goto error;
     
+    curr_bb=end_bb;
     m_free(tei);
     return true;
 error:
@@ -156,6 +164,30 @@ bool while_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     if(!ast_node||!ir_bb||ast_node->type!=while_stmt)
         goto error;
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
+    /*add while end bb*/
+    IR_BB* end_bb=add_new_bb(ir_bb->func);
+    ast_node->symbol_table->loop_end_bb=end_bb;
+    _add_after((LIST_NODE*)ir_bb,(LIST_NODE*)end_bb);
+    end_bb->bb_label=label_allocator("while end");
+    
+    /*add expr bb*/
+    IR_BB* expr_bb=add_new_bb(ir_bb->func);
+    ast_node->symbol_table->loop_begin_bb=expr_bb;
+    _add_after((LIST_NODE*)ir_bb,(LIST_NODE*)expr_bb);
+    curr_bb=expr_bb;
+    expr_bb->bb_label=label_allocator("while expr");
+    AST_BASE* expr_node=AST_GET_CHILD(ast_node,2);
+    if(!expr_trans_dispatch(expr_node,expr_bb))
+        goto error;
+    
+    /*add stmt bb*/
+    IR_BB* stmt_bb=add_new_bb(ir_bb->func);
+    _add_after((LIST_NODE*)expr_bb,(LIST_NODE*)stmt_bb);
+    curr_bb=stmt_bb;
+    stmt_bb->bb_label=label_allocator("while stmt");
+    AST_BASE* stmt_node=AST_GET_CHILD(ast_node,4);
+    if(!stmt_trans_dispatch(stmt_node,stmt_bb))
+        goto error;
     
     m_free(tei);
     return true;
@@ -167,7 +199,30 @@ bool do_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     if(!ast_node||!ir_bb||ast_node->type!=do_stmt)
         goto error;
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
+    /*add do end bb*/
+    IR_BB* end_bb=add_new_bb(ir_bb->func);
+    ast_node->symbol_table->loop_end_bb=end_bb;
+    _add_after((LIST_NODE*)ir_bb,(LIST_NODE*)end_bb);
+    end_bb->bb_label=label_allocator("do end");
     
+    /*add stmt bb*/
+    IR_BB* stmt_bb=add_new_bb(ir_bb->func);
+    ast_node->symbol_table->loop_begin_bb=stmt_bb;
+    _add_after((LIST_NODE*)ir_bb,(LIST_NODE*)stmt_bb);
+    curr_bb=stmt_bb;
+    stmt_bb->bb_label=label_allocator("do stmt");
+    AST_BASE* stmt_node=AST_GET_CHILD(ast_node,4);
+    if(!stmt_trans_dispatch(stmt_node,stmt_bb))
+        goto error;
+    
+    /*add expr bb*/
+    IR_BB* expr_bb=add_new_bb(ir_bb->func);
+    _add_after((LIST_NODE*)stmt_bb,(LIST_NODE*)expr_bb);
+    curr_bb=expr_bb;
+    expr_bb->bb_label=label_allocator("do expr");
+    AST_BASE* expr_node=AST_GET_CHILD(ast_node,2);
+    if(!expr_trans_dispatch(expr_node,expr_bb))
+        goto error;
     m_free(tei);
     return true;
 error:
@@ -179,6 +234,7 @@ bool for_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
         goto error;
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
     
+
     m_free(tei);
     return true;
 error:
@@ -199,6 +255,9 @@ bool continue_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
 {   
     if(!ast_node||!ir_bb||ast_node->type!=continue_stmt)
         goto error;
+    ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
+    /*continue have only one case,jmp to the loop start block*/
+    m_free(tei);
     return true;
 error:
     return false;
@@ -207,6 +266,9 @@ bool break_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
 {
     if(!ast_node||!ir_bb||ast_node->type!=break_stmt)
         goto error;
+    ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
+    /*break might have two case ,break a switch or a loop*/
+    m_free(tei);
     return true;
 error:
     return false;
@@ -215,6 +277,25 @@ bool return_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
 {
     if(!ast_node||!ir_bb||ast_node->type!=return_stmt)
         goto error;
+    ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
+    AST_BASE* expr_node=AST_GET_CHILD(ast_node,1);
+    if(AST_CHILD_NUM(ast_node)==3)
+    {
+        if(!expr_trans_dispatch(expr_node,ir_bb))
+            goto error;
+        /*TODO:write in the return value*/
+    }
+    /*jmp to the function end bb*/
+    IR_INS* ret_ins=add_new_ins(ir_bb);
+    if(ir_bb->Instruction_list==NULL)
+        ir_bb->Instruction_list=(LIST_NODE*)ret_ins;
+    else
+        _add_before((LIST_NODE*)(ir_bb->Instruction_list),(LIST_NODE*)ret_ins);
+    IR_OPERAND* tmp_operand=(IR_OPERAND*)m_alloc(sizeof(IR_OPERAND));
+    tmp_operand->type=OPERAND_CODE;
+    tmp_operand->operand_data.operand_code_type.code_position=ir_bb->func->symbol_table->func_end_bb;
+    GenINS(ret_ins,OP_BR,NULL,tmp_operand,NULL);
+    m_free(tei);
     return true;
 error:
     return false;
@@ -223,6 +304,7 @@ bool asm_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
 {
     if(!ast_node||!ir_bb||ast_node->type!=asm_stmt)
         goto error;
+    /*I don't want to deal with it...emm*/
     return true;
 error:
     return false;

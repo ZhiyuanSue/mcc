@@ -2,14 +2,10 @@
 char operand_name_string[OPERAND_NUM][OPERAND_STR_LEN]=
 {
     "OPERAND_NONE",
-    "OPERAND_VOID",
-    "OPERAND_REG",
+    "OPERAND_DATA",
     "OPERAND_IMM",
-    "OPERAND_POINTER",
-    "OPERAND_LABEL",
-    "OPERAND_FUNC",
-    "OPERAND_VECTOR",
-    "OPERAND_OBJ", 
+    "OPERAND_CODE",
+    "OPERAND_REG",
 };
 char op_name_string[OP_NUM][OP_STRING_LEN]=
 {

@@ -61,6 +61,7 @@ typedef struct function{
     VEC* register_list;
     IR_MODULE* IR_module;
     LIST_NODE* BB_list;
+    SYM* symbol_table;
 }IR_FUNC;
 typedef struct basic_block{
     LIST_NODE node;

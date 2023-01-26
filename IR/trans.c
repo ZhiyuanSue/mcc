@@ -1,5 +1,5 @@
 #include "trans.h"
-
+IR_BB* curr_bb=NULL;
 IR_MODULE* trans_to_IR(AST_BASE* ast_node)
 {   /*do some init work*/
     if(!ast_node||ast_node->type!=translation_unit)
@@ -53,6 +53,11 @@ bool trans_func(AST_BASE* ast_node,IR_FUNC* ir_func)
     if(!ast_node||!ir_func||ast_node->type!=function_definition)
         goto error;
     SYM_ITEM* tmpsi=ast_node->func_attribute;
+    M_TYPE* tmpt=Type_VEC_get_actual_base_type(tmpsi->type_vec);
+    if(!(tmpt->typ_category==TP_FUNCTION))
+        goto error;
+    ir_func->func_name=((TP_FUNC*)tmpt)->func_name;
+    ir_func->symbol_table=ast_node->symbol_table;
     /*do some work for arguments*/
 
     /*add a return basic block,in which only one ins, ret*/
@@ -67,7 +72,8 @@ bool trans_func(AST_BASE* ast_node,IR_FUNC* ir_func)
     /*compound stmt part*/
     IR_BB* compound_bb=add_new_bb(ir_func);
     _add_before((LIST_NODE*)last_bb,(LIST_NODE*)compound_bb);
-    compound_bb->bb_label=((TP_FUNC*)tmpsi)->func_name;
+    curr_bb=compound_bb;
+    compound_bb->bb_label=((TP_FUNC*)tmpt)->func_name;
     ir_func->BB_list=(LIST_NODE*)compound_bb;
     AST_BASE* compount_stmt_node=AST_GET_CHILD(ast_node,AST_CHILD_NUM(ast_node)-1);
     compound_stmt_trans(compount_stmt_node,compound_bb);

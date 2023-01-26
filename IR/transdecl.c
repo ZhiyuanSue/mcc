@@ -139,8 +139,6 @@ bool fill_in_static_stor_value(AST_BASE* initializer_node,STATIC_STOR_VALUE* val
         /*first,try to cast the data*/
         /*not bit field case*/
         size_t data_spec_size=type_data_size[tmp_type->typ_category];
-        printf("off %ld size %ld\n",init_attr->off,init_attr->size);
-        printf("data spec size %ld\n",data_spec_size);
         if((8*data_spec_size)==init_attr->size&&(init_attr->off)%8==0)
         {
             /*fill in*/

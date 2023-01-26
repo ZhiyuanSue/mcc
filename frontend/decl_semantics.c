@@ -1223,8 +1223,6 @@ bool initializer_semantic(AST_BASE* initializer_node,VEC* target_type_vec,size_t
                 assign_base_type->typ_category=TP_NULL_POINTER_CONSTANT;
         }
         /*please consider the null pointer constant*/
-        print_type_vec(unary_type_vec);
-        print_type_vec(assign_type_vec);
         if(!assignment_type_check(unary_type_vec,assign_type_vec))
             goto error;
         initializer_node->init_attribute->type_vec=target_type_vec;

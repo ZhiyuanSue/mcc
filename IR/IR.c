@@ -37,6 +37,7 @@ IR_FUNC* add_new_func(IR_MODULE* irm)
     new_function->func_name=NULL;
     new_function->register_list=NULL;
     new_function->IR_module=irm;
+    new_function->symbol_table=NULL;
     VECinsert(irm->func_list,(void*)new_function);
     return new_function;
 error:

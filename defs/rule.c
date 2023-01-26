@@ -645,7 +645,7 @@ const char parsers[MAX_RULE_NUM][RULE_CHAR_LEN]={
     
     "iteration_stmt:&{&while_stmt}|&{&do_stmt}|&{&for_stmt}",
     "&while_stmt:${KW_while}${(}&{expression}${)}&{statement}",
-    "&do_stmt:${KW_do}&{statement}${(}&{expression}${)}${;}",
+    "&do_stmt:${KW_do}&{statement}${KW_while}${(}&{expression}${)}${;}",
     "&for_stmt:${KW_for}${(}&{&for_expr}&{&expression_opt}${;}&{&expression_opt}${)}&{statement}",
     "&for_expr:&{declaration}|&{&-for_expr}",
     "&-for_expr:&{&expression_opt}${;}",
