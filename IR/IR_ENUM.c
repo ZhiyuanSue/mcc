@@ -1,11 +1,11 @@
 #include "IR_ENUM.h"
 char operand_name_string[OPERAND_NUM][OPERAND_STR_LEN]=
 {
-    "OPERAND_NONE",
-    "OPERAND_DATA",
-    "OPERAND_IMM",
-    "OPERAND_CODE",
-    "OPERAND_REG",
+    "NONE",
+    "DATA",
+    "IMM",
+    "CODE",
+    "REG",
 };
 char op_name_string[OP_NUM][OP_STRING_LEN]=
 {

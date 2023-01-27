@@ -69,12 +69,31 @@ bool trans_func(AST_BASE* ast_node,IR_FUNC* ir_func)
     GenINS(ret_ins,OP_RET,NULL,NULL,NULL);
 
     ast_node->symbol_table->func_end_bb=last_bb;
+
     /*compound stmt part*/
     IR_BB* compound_bb=add_new_bb(ir_func);
     _add_before((LIST_NODE*)last_bb,(LIST_NODE*)compound_bb);
     curr_bb=compound_bb;
     compound_bb->bb_label=((TP_FUNC*)tmpt)->func_name;
     ir_func->BB_list=(LIST_NODE*)compound_bb;
+    /*
+        if there's some labels in the function, it must dealed first,
+        otherwise the goto stmt might cannot find the bb
+    */
+    VEC* label_si_vec=get_symbol_hash(ast_node->symbol_table->sym_hash_table);
+    for(size_t i=0;i<VECLEN(label_si_vec);++i)
+    {
+        tmpsi=VEC_GET_ITEM(label_si_vec,i);
+        if(!tmpsi||tmpsi->count<=0)
+            continue;
+        IR_BB* label_bb=add_new_bb(ir_func);
+        _add_after((LIST_NODE*)curr_bb,(LIST_NODE*)label_bb);
+        label_bb->bb_label=tmpsi->value;
+        curr_bb=label_bb;
+        tmpt=Type_VEC_get_actual_base_type(tmpsi->type_vec);
+    }
+    /*return to the first bb and start*/
+    curr_bb=compound_bb;
     AST_BASE* compount_stmt_node=AST_GET_CHILD(ast_node,AST_CHILD_NUM(ast_node)-1);
     compound_stmt_trans(compount_stmt_node,compound_bb);
     return true;
