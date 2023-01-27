@@ -28,6 +28,24 @@ bool GenINS(IR_INS* ins,
 error:
     return false;
 }
+bool GenREG(
+    IR_REG* reg,
+    enum data_type type,
+    VEC* reg_list,
+    IR_INS* ins,
+    size_t data_length
+){
+    if(!reg||!reg_list)
+        goto error;
+    reg->d_type=type;
+    reg->reg_id=VECLEN(reg_list);
+    VECinsert(reg_list,(void*)reg);
+    reg->ins=ins;
+    reg->data_length=data_length;
+    return true;
+error:
+    return false;
+}
 IR_FUNC* add_new_func(IR_MODULE* irm)
 {
     if(!irm)
@@ -85,16 +103,6 @@ char* label_allocator(char* default_name)
     label_id++;
 
     return NULL;
-}
-static size_t next_alloc_reg_id=0;
-IR_REG* reg_allocator(IR_MODULE* irm,enum data_type d_type,VEC* reg_vec)
-{
-    IR_REG* new_reg=(IR_REG*)m_alloc(sizeof(IR_REG));
-    new_reg->d_type=d_type;
-    new_reg->reg_id=next_alloc_reg_id;
-    next_alloc_reg_id++;
-    VECinsert(reg_vec,(void*)new_reg);
-    return new_reg;
 }
 void print_IR(IR_MODULE* irm)
 {

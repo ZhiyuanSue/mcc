@@ -1,8 +1,9 @@
 #include "transdecl.h"
 extern size_t type_data_size[TYPE_NUM];
-static size_t global_off=0;
-static size_t thread_off=0;
-static size_t stack_off=0;
+size_t stack_off;
+/*Hint: the stack address goes down,
+but the off set to positive,when you calculate the true address of a symbol on a stack
+please don't forget that pointer*/
 bool declaration_trans(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR_BB* ir_bb)
 {
     ERROR_ITEM* tei=(ERROR_ITEM*)m_alloc(sizeof(ERROR_ITEM));
@@ -88,8 +89,7 @@ bool declaration_trans(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR_BB*
             VECinsert(irm->static_stor_symbols,(void*)value);
         }
         else if(tmpsi->stor_type==IR_STOR_STACK){
-            /*not static storage,generate code to fill in the data*/
-            ;
+            alloca_on_stack_value(ast_node,irm,ir_func,ir_bb,tmpsi);
         }
     }
     m_free(tei);
@@ -177,6 +177,50 @@ bool fill_in_static_stor_value(AST_BASE* initializer_node,STATIC_STOR_VALUE* val
         }
     }
     m_free(tei);
+    return true;
+error:
+    return false;
+}
+bool alloca_on_stack_value(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR_BB* ir_bb,SYM_ITEM* tmpsi)
+{
+    if(!ast_node||!irm||!ir_func||!ir_bb||!tmpsi)
+        goto error;
+    /*not static storage,generate code to fill in the data*/
+    IR_INS* alloca_ins=add_new_ins(ir_bb);
+    if(ir_bb->Instruction_list==NULL)
+        ir_bb->Instruction_list=(LIST_NODE*)alloca_ins;
+    else
+        _add_before((LIST_NODE*)(ir_bb->Instruction_list),(LIST_NODE*)alloca_ins);
+    /*please remember bind the symbol to the reg and instruction*/
+    IR_REG* dst_reg=(IR_REG*)m_alloc(sizeof(IR_REG));
+#if __WORDSIZE==32
+    GenREG(dst_reg,DATA_POINTER,irm->reg_list,alloca_ins,4);
+#elif __WORDSIZE==64
+    GenREG(dst_reg,DATA_POINTER,irm->reg_list,alloca_ins,8);
+#endif
+    tmpsi->ir_reg=dst_reg;
+
+    IR_OPERAND* alloca_dst=m_alloc(sizeof(IR_OPERAND));
+    alloca_dst->type=OPERAND_REG;
+    alloca_dst->operand_data.operand_reg_type=dst_reg;
+
+    size_t alloca_size=Type_size(tmpsi->type_vec); 
+    IR_OPERAND* alloca_src1=m_alloc(sizeof(IR_OPERAND));
+    alloca_src1->type=OPERAND_IMM;
+    alloca_src1->operand_data.operand_imm_type.imm_data=alloca_size;
+
+    size_t alloca_align=Type_align(tmpsi->type_vec);
+    IR_OPERAND* alloca_src2=m_alloc(sizeof(IR_OPERAND));
+    alloca_src2->type=OPERAND_IMM;
+    alloca_src2->operand_data.operand_imm_type.imm_data=alloca_align;
+
+    GenINS(alloca_ins,OP_ALLOCA,alloca_dst,alloca_src1,alloca_src2);
+
+    /*fill the data in the reg of pointer */
+    stack_off=MCC_ALIGN(stack_off,alloca_align);
+    dst_reg->pointer_attr.off=stack_off;
+    dst_reg->pointer_attr.pointer_data_stor_type=IR_STOR_STACK;
+    stack_off+=alloca_size;
     return true;
 error:
     return false;

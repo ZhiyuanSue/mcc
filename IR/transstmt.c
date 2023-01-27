@@ -28,10 +28,11 @@ bool labeled_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     AST_BASE* label_node=AST_GET_CHILD(ast_node,0);
     AST_BASE* statement_node=(AST_BASE*)VEC_BACK(ast_node->child);
     if(label_node->type==KW_case){
-
+        /*find the switch begin expr*/
     }
     else if(label_node->type==KW_default){
-
+        /*do nothing*/
+        
     }
     else{   /*identifier case*/
         char* id_name=label_node->token->value;

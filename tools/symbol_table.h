@@ -65,7 +65,13 @@ typedef struct sym_item{
     enum data_storage_type stor_type;
     bool defined;
     bool declared;
-    STATIC_STOR_VALUE* init_value;
+    union{
+        STATIC_STOR_VALUE* init_value;
+        IR_REG* ir_reg;
+        /*use stor_type to decide which one to use
+        and if you want to init this union,for it's all pointer, so just init once
+        */
+    };
 }SYM_ITEM;
 typedef struct{
     bool have_ret;

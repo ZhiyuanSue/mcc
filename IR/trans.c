@@ -1,5 +1,6 @@
 #include "trans.h"
 IR_BB* curr_bb=NULL;
+extern size_t stack_off;
 IR_MODULE* trans_to_IR(AST_BASE* ast_node)
 {   /*do some init work*/
     if(!ast_node||ast_node->type!=translation_unit)
@@ -11,14 +12,21 @@ IR_MODULE* trans_to_IR(AST_BASE* ast_node)
     res->bind_reg_list=InitVEC(DEFAULT_CAPICITY);
     for(size_t i=0;i<6;++i){
         /*push int regs into bind reg list*/
-        IR_REG* tmp_reg=reg_allocator(res,DATA_INTEGER,res->bind_reg_list);
+        IR_REG* tmp_reg=m_alloc(sizeof(IR_REG));
+#if __WORDSIZE==32
+        GenREG(tmp_reg,DATA_INTEGER,res->bind_reg_list,NULL,4);
+#elif __WORDSIZE==64
+        GenREG(tmp_reg,DATA_INTEGER,res->bind_reg_list,NULL,8); /*a bind reg, not a SSA reg*/
+#endif
     }
     for(size_t i=0;i<8;++i){
         /*push float fegs into bind reg list*/
-        IR_REG* tmp_reg=reg_allocator(res,DATA_FLOAT,res->bind_reg_list);
+        IR_REG* tmp_reg=m_alloc(sizeof(IR_REG));
+        GenREG(tmp_reg,DATA_FLOAT,res->bind_reg_list,NULL,128);
     }
     /*push count reg*/
-    IR_REG* tmp_reg=reg_allocator(res,DATA_INTEGER,res->bind_reg_list);
+    IR_REG* tmp_reg=m_alloc(sizeof(IR_REG));
+    GenREG(tmp_reg,DATA_INTEGER,res->bind_reg_list,NULL,1);
     for(size_t i=0;i<AST_CHILD_NUM(ast_node);++i)
     {
         AST_BASE* external_decl_node=AST_GET_CHILD(ast_node,i);
@@ -94,6 +102,7 @@ bool trans_func(AST_BASE* ast_node,IR_FUNC* ir_func)
     }
     /*return to the first bb and start*/
     curr_bb=compound_bb;
+    stack_off=0;    /*for every function begin,the stack base come back to 0*/
     AST_BASE* compount_stmt_node=AST_GET_CHILD(ast_node,AST_CHILD_NUM(ast_node)-1);
     compound_stmt_trans(compount_stmt_node,compound_bb);
     return true;
