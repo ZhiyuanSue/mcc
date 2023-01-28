@@ -53,17 +53,39 @@ typedef union cmp_cond{
     enum IR_OP_ICMP_COND icmp_cond;
     enum IR_OP_FCMP_COND fcmp_cond;
 }CMP_COND_ATTR;
-bool GenINS(IR_INS* ins,
-    enum ins_op op,
-    IR_OPERAND* dst,
-    IR_OPERAND* src1,
-    IR_OPERAND* src2);   /*use add_new_ins to get a new one and fill in the data*/
-bool GenREG(
-    IR_REG* reg,
+IR_REG* GenREG(
     enum data_type type,
     VEC* reg_list,
     IR_INS* ins,
     size_t data_length
+);
+bool GenREGPointerType(
+    IR_REG* reg,
+    VEC* type_vec
+);
+bool GenINS(
+    IR_INS* ins,
+    enum ins_op op,
+    IR_OPERAND* dst,
+    IR_OPERAND* src1,
+    IR_OPERAND* src2);   /*use add_new_ins to get a new one and fill in the data*/
+IR_OPERAND* GenOPERAND_DATA(
+    enum data_storage_type data_stor_type,
+    size_t data_length,
+    size_t data_align
+);
+IR_OPERAND* GenOPERAND_IMM(
+    enum TP_CATEGORY imm_type,
+    signed long long int imm_int_data,
+    float imm_float_data,
+    double imm_double_data,
+    long double imm_long_double_data
+);
+IR_OPERAND* GenOPERAND_CODE(
+    IR_BB* code_position
+);
+IR_OPERAND* GenOPERAND_REG(
+    IR_REG* operand_reg
 );
 typedef struct module{
     VEC* func_list;

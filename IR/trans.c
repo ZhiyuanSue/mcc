@@ -12,21 +12,18 @@ IR_MODULE* trans_to_IR(AST_BASE* ast_node)
     res->bind_reg_list=InitVEC(DEFAULT_CAPICITY);
     for(size_t i=0;i<6;++i){
         /*push int regs into bind reg list*/
-        IR_REG* tmp_reg=m_alloc(sizeof(IR_REG));
 #if __WORDSIZE==32
-        GenREG(tmp_reg,DATA_INTEGER,res->bind_reg_list,NULL,4);
+        GenREG(DATA_INTEGER,res->bind_reg_list,NULL,4);
 #elif __WORDSIZE==64
-        GenREG(tmp_reg,DATA_INTEGER,res->bind_reg_list,NULL,8); /*a bind reg, not a SSA reg*/
+        GenREG(DATA_INTEGER,res->bind_reg_list,NULL,8); /*a bind reg, not a SSA reg*/
 #endif
     }
     for(size_t i=0;i<8;++i){
         /*push float fegs into bind reg list*/
-        IR_REG* tmp_reg=m_alloc(sizeof(IR_REG));
-        GenREG(tmp_reg,DATA_FLOAT,res->bind_reg_list,NULL,128);
+        GenREG(DATA_FLOAT,res->bind_reg_list,NULL,128);
     }
     /*push count reg*/
-    IR_REG* tmp_reg=m_alloc(sizeof(IR_REG));
-    GenREG(tmp_reg,DATA_INTEGER,res->bind_reg_list,NULL,1);
+    GenREG(DATA_INTEGER,res->bind_reg_list,NULL,1);
     for(size_t i=0;i<AST_CHILD_NUM(ast_node);++i)
     {
         AST_BASE* external_decl_node=AST_GET_CHILD(ast_node,i);

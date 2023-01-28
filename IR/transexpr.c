@@ -152,6 +152,50 @@ bool pri_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
 {
     if(!ast_node||!ir_bb)
         goto error;
+    AST_BASE* child_node=NULL;
+    if(AST_CHILD_NUM(ast_node)==1)
+    {
+        child_node=AST_GET_CHILD(ast_node,0);
+        switch(child_node->type){
+            case identifier:
+            {
+                SYM_ITEM* find_tmpsi=find_symbol(ast_node->symbol_table,child_node->token->value,NMSP_DEFAULT);
+                
+            }
+            case integer_constant:
+            {
+
+            }
+            case floating_constant:
+            {
+            }
+            case enum_const:
+            {
+            }
+            case char_const:
+            {
+
+            }
+            case string:
+            {
+
+            }
+            case generic_selection:
+            {
+
+            }
+            default:
+                goto error;
+        }
+    }
+    else if(AST_CHILD_NUM(ast_node)==3)
+    {
+        child_node=AST_GET_CHILD(ast_node,1);
+        if(!expr_trans_dispatch(child_node,ir_bb))
+            goto error;
+    }
+    else
+        goto error;
     return true;
 error:
     return false;

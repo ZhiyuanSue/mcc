@@ -1,7 +1,8 @@
 #include "IR.h"
 extern char operand_name_string[OPERAND_NUM][OPERAND_STR_LEN];
 extern char op_name_string[OP_NUM][OP_STRING_LEN];
-bool GenINS(IR_INS* ins,
+bool GenINS(
+    IR_INS* ins,
     enum ins_op op,
     IR_OPERAND* dst,
     IR_OPERAND* src1,
@@ -30,23 +31,119 @@ bool GenINS(IR_INS* ins,
 error:
     return false;
 }
-bool GenREG(
-    IR_REG* reg,
+IR_REG* GenREG(
     enum data_type type,
     VEC* reg_list,
     IR_INS* ins,
     size_t data_length
 ){
-    if(!reg||!reg_list)
+    if(!reg_list)
         goto error;
+    IR_REG* reg=m_alloc(sizeof(IR_REG));
     reg->d_type=type;
     reg->reg_id=VECLEN(reg_list);
     VECinsert(reg_list,(void*)reg);
     reg->ins=ins;
     reg->data_length=data_length;
-    return true;
+    return reg;
 error:
-    return false;
+    return NULL;
+}
+bool GenREGPointerType(
+    IR_REG* reg,
+    VEC* type_vec
+){
+    M_TYPE* tmpt=Type_VEC_get_actual_base_type(type_vec);
+    if(IS_INT_TYPE(tmpt->typ_category)||tmpt->typ_category==TP_POINT||tmpt->typ_category==TP_ENUM)
+        reg->d_type=DATA_POINTER_INTEGER;
+    else if(IS_FLOAT_TYPE(tmpt->typ_category))
+        reg->d_type=DATA_POINTER_FLOAT;
+    else if(tmpt->typ_category==TP_UNION_STRUCT||tmpt->typ_category==TP_UNION||tmpt->typ_category==TP_STRUCT)
+        reg->d_type=DATA_POINTER_STRUCT_UNION;
+    else if(tmpt->typ_category==TP_ARRAY)
+    {
+        type_vec=Type_VEC_get_Array_TO(type_vec,true);
+        tmpt=Type_VEC_get_actual_base_type(type_vec);
+        if(IS_INT_TYPE(tmpt->typ_category)||tmpt->typ_category==TP_POINT||tmpt->typ_category==TP_ENUM)
+            reg->d_type=DATA_POINTER_INTEGER_ARRAY;
+        else if(IS_FLOAT_TYPE(tmpt->typ_category))
+            reg->d_type=DATA_POINTER_FLOAT_ARRAY;
+        else
+            reg->d_type=DATA_POINTER_OTHER_ARRAY;
+    }
+    return true;
+}
+IR_OPERAND* GenOPERAND_DATA(
+    enum data_storage_type data_stor_type,
+    size_t data_length,
+    size_t data_align
+)
+{
+    if(data_stor_type==IR_STOR_NONE)
+        goto error;
+    IR_OPERAND* operand=m_alloc(sizeof(IR_OPERAND));
+    operand->type=OPERAND_DATA;
+    operand->operand_data.operand_data_type.data_stor_type=data_stor_type;
+    operand->operand_data.operand_data_type.data_length=data_length;
+    operand->operand_data.operand_data_type.data_align=data_align;
+    return operand;
+error:
+    return NULL;
+}
+IR_OPERAND* GenOPERAND_IMM(
+    enum TP_CATEGORY imm_type,
+    signed long long int imm_int_data,
+    float imm_float_data,
+    double imm_double_data,
+    long double imm_long_double_data
+)
+{
+    if(imm_type==TP_SPEC_NONE)
+        goto error;
+    IR_OPERAND* operand=m_alloc(sizeof(IR_OPERAND));
+    operand->type=OPERAND_IMM;
+    operand->operand_data.operand_imm_type.imm_type=imm_type;
+    if(imm_type==TP_NULL_POINTER_CONSTANT)
+        operand->operand_data.operand_imm_type.imm_int_data=0;
+    else if(IS_INT_TYPE(imm_type)||imm_type==TP_ENUM||imm_type==TP_POINT)
+        operand->operand_data.operand_imm_type.imm_int_data=imm_int_data;
+    else if(imm_type==TP_FLOAT)
+        operand->operand_data.operand_imm_type.imm_float_data=imm_float_data;
+    else if(imm_type==TP_DOUBLE)
+        operand->operand_data.operand_imm_type.imm_float_data=imm_float_data;
+    else if(imm_type==TP_LONG_DOUBLE)
+        operand->operand_data.operand_imm_type.imm_float_data=imm_float_data;
+    else
+        goto error;
+    return operand;
+error:
+    return NULL;
+}
+IR_OPERAND* GenOPERAND_CODE(
+    IR_BB* code_position
+)
+{
+    if(!code_position)
+        goto error;
+    IR_OPERAND* operand=m_alloc(sizeof(IR_OPERAND));
+    operand->type=OPERAND_CODE;
+    operand->operand_data.operand_code_type.code_position=code_position;
+    return operand;
+error:
+    return NULL;
+}
+IR_OPERAND* GenOPERAND_REG(
+    IR_REG* operand_reg
+)
+{
+    if(!operand_reg)
+        goto error;
+    IR_OPERAND* operand=m_alloc(sizeof(IR_OPERAND));
+    operand->type=OPERAND_REG;
+    operand->operand_data.operand_reg_type=operand_reg;
+    return operand;
+error:
+    return NULL;
 }
 IR_FUNC* add_new_func(IR_MODULE* irm)
 {
