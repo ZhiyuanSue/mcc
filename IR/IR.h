@@ -49,6 +49,10 @@ typedef struct instruction{
     IR_BB* block;
     void* other_attr;
 }IR_INS;
+typedef union cmp_cond{
+    enum IR_OP_ICMP_COND icmp_cond;
+    enum IR_OP_FCMP_COND fcmp_cond;
+}CMP_COND_ATTR;
 bool GenINS(IR_INS* ins,
     enum ins_op op,
     IR_OPERAND* dst,

@@ -13,6 +13,7 @@ typedef struct{
     bool is_lvalue:1;
     bool complete:1;
     bool is_bit_field:1;
+    IR_REG* expr_reg;
 }EXPR_NODE_ATTR;
 typedef struct{
     size_t off;

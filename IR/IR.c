@@ -23,7 +23,9 @@ bool GenINS(IR_INS* ins,
     if(src2==NULL)
         ins->src2->type=OPERAND_NONE;
     else
-        ins->src2=src2;    
+        ins->src2=src2;
+    if(op==OP_ICMP||op==OP_FCMP)
+        ins->other_attr=(void*)m_alloc(sizeof(CMP_COND_ATTR));
     return true;
 error:
     return false;

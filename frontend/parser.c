@@ -397,6 +397,7 @@ bool p_symbol_table(AST_BASE* ast_node,SYM* father){
         ast_node->expr_attribute->type_vec=NULL;
         ast_node->expr_attribute->complete=false;
         ast_node->expr_attribute->is_bit_field=false;
+        ast_node->expr_attribute->expr_reg=NULL;
     }
     else if(ast_node->type==initializer)
     {
