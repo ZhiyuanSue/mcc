@@ -9,7 +9,12 @@ enum data_type{
     DATA_NONE,
     DATA_INTEGER,
     DATA_FLOAT,
-    DATA_POINTER,
+    DATA_POINTER_INTEGER,   /*if a pointer to a pointer ,also use int*/
+    DATA_POINTER_FLOAT,
+    DATA_POINTER_INTEGER_ARRAY,
+    DATA_POINTER_FLOAT_ARRAY,
+    DATA_POINTER_OTHER_ARRAY,   /*include array ,struct/union*/
+    DATA_POINTER_STRUCT_UNION
 };
 enum operand_type{
     OPERAND_NONE,
@@ -53,6 +58,15 @@ enum ins_op
 };
 enum OP_CMP_RES{
     RES_NONE,
+};
+enum IR_OP_ICMP_COND{
+    ICMP_NONE,
+    ICMP_EQ,ICMP_NE,
+    ICMP_UGT,ICMP_UGE,ICMP_ULT,ICMP_ULE,
+    ICMP_SGT,ICMP_SGE,ICMP_SLT,ICMP_SLE,
+};
+enum IR_OP_FCMP_COND{
+    FCMP_NONE
 };
 
 #endif

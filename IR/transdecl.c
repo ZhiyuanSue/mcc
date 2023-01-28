@@ -194,10 +194,29 @@ bool alloca_on_stack_value(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR
     /*please remember bind the symbol to the reg and instruction*/
     IR_REG* dst_reg=(IR_REG*)m_alloc(sizeof(IR_REG));
 #if __WORDSIZE==32
-    GenREG(dst_reg,DATA_POINTER,irm->reg_list,alloca_ins,4);
+    GenREG(dst_reg,DATA_POINTER_INTEGER,irm->reg_list,alloca_ins,4);
 #elif __WORDSIZE==64
-    GenREG(dst_reg,DATA_POINTER,irm->reg_list,alloca_ins,8);
+    GenREG(dst_reg,DATA_POINTER_INTEGER,irm->reg_list,alloca_ins,8);
 #endif
+    VEC* tmp_type_vec=tmpsi->type_vec;
+    M_TYPE* tmpt=Type_VEC_get_actual_base_type(tmp_type_vec);
+    if(IS_INT_TYPE(tmpt->typ_category)||tmpt->typ_category==TP_POINT||tmpt->typ_category==TP_ENUM)
+        dst_reg->d_type=DATA_POINTER_INTEGER;
+    else if(IS_FLOAT_TYPE(tmpt->typ_category))
+        dst_reg->d_type=DATA_POINTER_FLOAT;
+    else if(tmpt->typ_category==TP_UNION_STRUCT||tmpt->typ_category==TP_UNION||tmpt->typ_category==TP_STRUCT)
+        dst_reg->d_type=DATA_POINTER_STRUCT_UNION;
+    else if(tmpt->typ_category==TP_ARRAY)
+    {
+        tmp_type_vec=Type_VEC_get_Array_TO(tmp_type_vec,true);
+        tmpt=Type_VEC_get_actual_base_type(tmp_type_vec);
+        if(IS_INT_TYPE(tmpt->typ_category)||tmpt->typ_category==TP_POINT||tmpt->typ_category==TP_ENUM)
+            dst_reg->d_type=DATA_POINTER_INTEGER_ARRAY;
+        else if(IS_FLOAT_TYPE(tmpt->typ_category))
+            dst_reg->d_type=DATA_POINTER_FLOAT_ARRAY;
+        else
+            dst_reg->d_type=DATA_POINTER_OTHER_ARRAY;
+    }
     tmpsi->ir_reg=dst_reg;
 
     IR_OPERAND* alloca_dst=m_alloc(sizeof(IR_OPERAND));
@@ -207,12 +226,14 @@ bool alloca_on_stack_value(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR
     size_t alloca_size=Type_size(tmpsi->type_vec); 
     IR_OPERAND* alloca_src1=m_alloc(sizeof(IR_OPERAND));
     alloca_src1->type=OPERAND_IMM;
-    alloca_src1->operand_data.operand_imm_type.imm_data=alloca_size;
+    alloca_src1->operand_data.operand_imm_type.imm_type=TP_USLONG;
+    alloca_src1->operand_data.operand_imm_type.imm_long_double_data=alloca_size;
 
     size_t alloca_align=Type_align(tmpsi->type_vec);
     IR_OPERAND* alloca_src2=m_alloc(sizeof(IR_OPERAND));
     alloca_src2->type=OPERAND_IMM;
-    alloca_src2->operand_data.operand_imm_type.imm_data=alloca_align;
+    alloca_src2->operand_data.operand_imm_type.imm_type=TP_USLONG;
+    alloca_src2->operand_data.operand_imm_type.imm_long_double_data=alloca_align;
 
     GenINS(alloca_ins,OP_ALLOCA,alloca_dst,alloca_src1,alloca_src2);
 
@@ -221,6 +242,11 @@ bool alloca_on_stack_value(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR
     dst_reg->pointer_attr.off=stack_off;
     dst_reg->pointer_attr.pointer_data_stor_type=IR_STOR_STACK;
     stack_off+=alloca_size;
+
+
+    /*TODO:if have initializer part, init it,but this time need to insert instructions*/
+
+
     return true;
 error:
     return false;

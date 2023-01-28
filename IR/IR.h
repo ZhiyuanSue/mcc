@@ -23,7 +23,13 @@ typedef struct operand{
             size_t data_align;
         }operand_data_type;
         struct IR_OPERAND_IMM{
-            signed long int imm_data;
+            enum TP_CATEGORY imm_type;
+            union{  /*for the int type can cast without any accuracy loss*/
+                signed long long int imm_int_data;
+                float imm_float_data;
+                double imm_double_data;
+                long double imm_long_double_data;
+            };
         }operand_imm_type;
         struct IR_OPERAND_CODE{
             IR_BB* code_position;   /*it must point to a label position*/
@@ -41,6 +47,7 @@ typedef struct instruction{
     IR_MODULE* IR_module;
     IR_FUNC* func;
     IR_BB* block;
+    void* other_attr;
 }IR_INS;
 bool GenINS(IR_INS* ins,
     enum ins_op op,
