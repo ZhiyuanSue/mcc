@@ -6,6 +6,7 @@
 /bin/test_asm/*
 /bin/mcc
 /bin/test_out/*
+/bin/testlog.txt
 .DS_Store
 .vscode
 */.DS_Store

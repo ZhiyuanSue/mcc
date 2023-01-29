@@ -9,12 +9,15 @@ enum data_type{
     DATA_NONE,
     DATA_INTEGER,
     DATA_FLOAT,
+    DATA_COMPLEX,
     DATA_POINTER_INTEGER,   /*if a pointer to a pointer ,also use int*/
     DATA_POINTER_FLOAT,
+    DATA_POINTER_COMPLEX,
     DATA_POINTER_INTEGER_ARRAY,
     DATA_POINTER_FLOAT_ARRAY,
     DATA_POINTER_OTHER_ARRAY,   /*include array ,struct/union*/
-    DATA_POINTER_STRUCT_UNION
+    DATA_POINTER_STRUCT_UNION,
+    DATA_POINTER_FUNCTION,
 };
 enum operand_type{
     OPERAND_NONE,
@@ -54,7 +57,7 @@ enum ins_op
     OP_FEXT,OP_FTOUI,OP_FTOSI,OP_UITOF,
     OP_SITOF,
 
-    OP_ICMP,OP_FCMP,OP_PHI
+    OP_ICMP,OP_FCMP,OP_PHI,OP_MOV
 };
 enum OP_CMP_RES{
     RES_NONE,

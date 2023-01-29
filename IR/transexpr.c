@@ -1,4 +1,5 @@
 #include "transexpr.h"
+extern size_t type_data_size[TYPE_NUM];
 bool expr_trans_dispatch(AST_BASE* ast_node,IR_BB* ir_bb)
 {
     if(!ast_node||!ir_bb)
@@ -151,11 +152,15 @@ error:
 }
 bool pri_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
 {
+    IR_INS* res_ins=m_alloc(sizeof(IR_INS));
+    GenINS(res_ins,OP_NONE,NULL,NULL,NULL);
     if(!ast_node||!ir_bb)
         goto error;
     AST_BASE* child_node=NULL;
+    ast_node->expr_attribute->expr_op=res_ins;
     if(AST_CHILD_NUM(ast_node)==1)
     {
+        insert_ins_to_bb(res_ins,ir_bb);
         child_node=AST_GET_CHILD(ast_node,0);
         switch(child_node->type){
             case identifier:
@@ -170,49 +175,62 @@ bool pri_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
                         if(IS_INT_TYPE(tmp_type->typ_category))
                         {
                             signed long long int tmp_int_const= get_int_const(tmp_type->typ_category,find_tmpsi->data_field,true);
-                            ast_node->expr_attribute->expr_operand=GenOPERAND_IMM(
+                            IR_OPERAND* operand=GenOPERAND_IMM(
                                 tmp_type->typ_category,tmp_int_const,0);
+                            IR_REG* res_reg=GenREG(DATA_INTEGER,ir_bb->IR_module->reg_list,res_ins,type_data_size[tmp_type->typ_category]*8);
+                            GenINS(res_ins,OP_MOV,GenOPERAND_REG(res_reg),operand,NULL);
                         }
                         else if(IS_FLOAT_TYPE(tmp_type->typ_category)){
                             long double tmp_float_const= get_float_const(tmp_type->typ_category,find_tmpsi->data_field,true);
-                            ast_node->expr_attribute->expr_operand=GenOPERAND_IMM(
+                            IR_OPERAND* operand=GenOPERAND_IMM(
                                 tmp_type->typ_category,0,&tmp_float_const);
+                            IR_REG* res_reg=GenREG(DATA_FLOAT,ir_bb->IR_module->reg_list,res_ins,type_data_size[tmp_type->typ_category]*8);
+                            GenINS(res_ins,OP_MOV,GenOPERAND_REG(res_reg),operand,NULL);
                         }
 #if _CPLX_SUPPORT==1
                         else if(IS_COMPLEX_TYPE(tmp_type->typ_category))
                         {
                             long double* tmp_complex_const=get_complex_const(tmp_type->typ_category,find_tmpsi->data_field,true);
-                            ast_node->expr_attribute->expr_operand=GenOPERAND_IMM(
+                            IR_OPERAND* operand=GenOPERAND_IMM(
                                 tmp_type->typ_category,0,tmp_complex_const);
+                            IR_REG* res_reg=GenREG(DATA_COMPLEX,ir_bb->IR_module->reg_list,res_ins,type_data_size[tmp_type->typ_category]*8);
+                            GenINS(res_ins,OP_MOV,GenOPERAND_REG(res_reg),operand,NULL);
                         }
 #endif
                     }
                     else{   /*insert a load instruction*/
-                        IR_INS* load_ins=m_alloc(sizeof(IR_INS));
-                        insert_ins_to_bb(load_ins,ir_bb);
-                        IR_REG* dst_reg=GenREG(DATA_NONE,ir_bb->IR_module->reg_list,load_ins,Type_size(tmpsi_type_vec));
+                        IR_REG* dst_reg=GenREG(DATA_NONE,ir_bb->IR_module->reg_list,res_ins,Type_size(tmpsi_type_vec));
                         GenREGPointerType(dst_reg,tmpsi_type_vec);
                         IR_OPERAND* dst_operand=GenOPERAND_REG(dst_reg);
                         IR_OPERAND* src1_operand=GenOPERAND_REG(find_tmpsi->ir_reg);
                         IR_OPERAND* src2_operand=GenOPERAND_IMM(TP_USLONG,Type_size(tmpsi_type_vec),0);
-                        GenINS(load_ins,OP_LOAD,dst_operand,src1_operand,src2_operand);
+                        GenINS(res_ins,OP_LOAD,dst_operand,src1_operand,src2_operand);
                     }
                 }
                 else if(tmp_type->typ_category==TP_FUNCTION)
                 {
-                    ast_node->expr_attribute->expr_operand=GenOPERAND_CODE((IR_BB*)(((TP_FUNC*)tmp_type)->ir_func->BB_list));
+                    IR_OPERAND* operand=GenOPERAND_CODE((IR_BB*)(((TP_FUNC*)tmp_type)->ir_func->BB_list));
+                    IR_REG* res_reg=GenREG(DATA_POINTER_FUNCTION,ir_bb->IR_module->reg_list,res_ins,type_data_size[tmp_type->typ_category]*8);
+                    GenINS(res_ins,OP_MOV,GenOPERAND_REG(res_reg),operand,NULL);
                 }
                 else if(tmp_type->typ_category==TP_ENUM)
                 {
-
+                    signed long long int tmp_int_const= get_int_const(tmp_type->typ_category,find_tmpsi->data_field,true);
+                    IR_OPERAND* operand=GenOPERAND_IMM(TP_USLONG,tmp_int_const,0);
+                    IR_REG* res_reg=GenREG(DATA_INTEGER,ir_bb->IR_module->reg_list,res_ins,type_data_size[tmp_type->typ_category]*8);
+                    GenINS(res_ins,OP_MOV,GenOPERAND_REG(res_reg),operand,NULL);
                 }
-                else if(tmp_type->typ_category==TP_NULL_POINTER_CONSTANT)
-                {
-
+                else if(tmp_type->typ_category==TP_NULL_POINTER_CONSTANT){
+                    IR_OPERAND* operand=GenOPERAND_IMM(TP_USLONG,0,0);
+                    IR_REG* res_reg=GenREG(DATA_POINTER_INTEGER,ir_bb->IR_module->reg_list,res_ins,type_data_size[tmp_type->typ_category]*8);
+                    GenINS(res_ins,OP_MOV,GenOPERAND_REG(res_reg),operand,NULL);
                 }
                 else if(tmp_type->typ_category==TP_ARRAY)
                 {
-
+                    IR_OPERAND* operand=GenOPERAND_REG(find_tmpsi->ir_reg);
+                    IR_REG* res_reg=GenREG(DATA_POINTER_INTEGER,ir_bb->IR_module->reg_list,res_ins,type_data_size[tmp_type->typ_category]*8);
+                    GenREGPointerType(res_reg,tmpsi_type_vec);
+                    GenINS(res_ins,OP_MOV,GenOPERAND_REG(res_reg),operand,NULL);
                 }
                 else if(tmp_type->typ_category==TP_STRUCT||tmp_type->typ_category==TP_UNION||tmp_type->typ_category==TP_UNION_STRUCT)
                 {
@@ -223,20 +241,27 @@ bool pri_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
 
                 }
             }
+            case enum_const:
             case integer_constant:
+            case char_const:
             {
-                
+                VEC* type_vec=ast_node->expr_attribute->type_vec;
+                M_TYPE* tmpt=Type_VEC_get_actual_base_type(type_vec);
+                signed long long int tmp_int_const= get_int_const(tmpt->typ_category,ast_node->expr_attribute->data_field,true);
+                IR_OPERAND* operand=GenOPERAND_IMM(
+                    tmpt->typ_category,tmp_int_const,0);
+                IR_REG* res_reg=GenREG(DATA_INTEGER,ir_bb->IR_module->reg_list,res_ins,type_data_size[tmpt->typ_category]*8);
+                GenINS(res_ins,OP_MOV,GenOPERAND_REG(res_reg),operand,NULL);
             }
             case floating_constant:
             {
-
-            }
-            case enum_const:
-            {
-            }
-            case char_const:
-            {
-
+                VEC* type_vec=ast_node->expr_attribute->type_vec;
+                M_TYPE* tmpt=Type_VEC_get_actual_base_type(type_vec);
+                long double tmp_float_const= get_float_const(tmpt->typ_category,ast_node->expr_attribute->data_field,true);
+                IR_OPERAND* operand=GenOPERAND_IMM(
+                    tmpt->typ_category,0,&tmp_float_const);
+                IR_REG* res_reg=GenREG(DATA_FLOAT,ir_bb->IR_module->reg_list,res_ins,type_data_size[tmpt->typ_category]*8);
+                GenINS(res_ins,OP_MOV,GenOPERAND_REG(res_reg),operand,NULL);
             }
             case string:
             {
@@ -260,5 +285,6 @@ bool pri_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
         goto error;
     return true;
 error:
+    //m_free(res_ins);
     return false;
 }

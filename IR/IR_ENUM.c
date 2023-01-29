@@ -27,5 +27,5 @@ char op_name_string[OP_NUM][OP_STRING_LEN]=
     "OP_FEXT","OP_FTOUI","OP_FTOSI","OP_UITOF",
     "OP_SITOF",
 
-    "OP_ICMP","OP_FCMP","OP_PHI"
+    "OP_ICMP","OP_FCMP","OP_PHI","OP_MOV",
 };

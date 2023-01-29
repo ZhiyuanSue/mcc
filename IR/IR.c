@@ -19,21 +19,32 @@ bool GenINS(
         ins->dst->type=OPERAND_NONE;
     }
     else
+    {
+        if(ins->dst!=dst)
+            m_free(ins->dst);
         ins->dst=dst;
+    }
     if(src1==NULL)
     {
         ins->src1=m_alloc(sizeof(IR_OPERAND));
         ins->src1->type=OPERAND_NONE;
     }
-    else
+    else{
+        if(ins->src1!=src1)
+            m_free(ins->src1);
         ins->src1=src1;
+    }
     if(src2==NULL)
     {
         ins->src2=m_alloc(sizeof(IR_OPERAND));
         ins->src2->type=OPERAND_NONE;
     }
     else
+    {
+        if(ins->src2!=src2)
+            m_free(ins->src2);
         ins->src2=src2;
+    }
     if(op==OP_ICMP||op==OP_FCMP)
         ins->other_attr=(void*)m_alloc(sizeof(CMP_COND_ATTR));
     return true;
@@ -67,6 +78,10 @@ bool GenREGPointerType(
         reg->d_type=DATA_POINTER_INTEGER;
     else if(IS_FLOAT_TYPE(tmpt->typ_category))
         reg->d_type=DATA_POINTER_FLOAT;
+#if _CPLX_SUPPORT==1
+    else if(IS_COMPLEX_TYPE(tmpt->typ_category))
+        reg->d_type=DATA_POINTER_COMPLEX;
+#endif
     else if(tmpt->typ_category==TP_UNION_STRUCT||tmpt->typ_category==TP_UNION||tmpt->typ_category==TP_STRUCT)
         reg->d_type=DATA_POINTER_STRUCT_UNION;
     else if(tmpt->typ_category==TP_ARRAY)

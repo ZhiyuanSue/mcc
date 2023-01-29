@@ -99,7 +99,6 @@ bool if_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     expr_bb->bb_label=label_allocator("if expr");
     if(!expr_trans_dispatch(expr_node,expr_bb))
         goto error;
-    
     /*deal with stmt part*/
     IR_BB* if_stmt_bb=add_new_bb(ir_bb->func);
     curr_bb=if_stmt_bb;
@@ -359,10 +358,7 @@ bool return_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     }
     /*jmp to the function end bb*/
     IR_INS* ret_ins=add_new_ins(ir_bb);
-    if(ir_bb->Instruction_list==NULL)
-        ir_bb->Instruction_list=(LIST_NODE*)ret_ins;
-    else
-        _add_before((LIST_NODE*)(ir_bb->Instruction_list),(LIST_NODE*)ret_ins);
+    insert_ins_to_bb(ret_ins,ir_bb);
     IR_OPERAND* tmp_operand=(IR_OPERAND*)m_alloc(sizeof(IR_OPERAND));
     tmp_operand->type=OPERAND_CODE;
     tmp_operand->operand_data.operand_code_type.code_position=ir_bb->func->symbol_table->func_end_bb;

@@ -6,6 +6,10 @@ void init_list_node(LIST_NODE* p)
 }
 void _add_before(LIST_NODE *p,LIST_NODE *new_node)
 {
+    if(!p||!new_node)
+        return;
+    if(p==new_node)
+        return;
     new_node->prev=p->prev;
     new_node->next=p;
     p->prev->next=new_node;
@@ -13,6 +17,10 @@ void _add_before(LIST_NODE *p,LIST_NODE *new_node)
 }
 void _add_after(LIST_NODE *p,LIST_NODE *new_node)
 {
+    if(!p||!new_node)
+        return;
+    if(p==new_node)
+        return;
     new_node->prev=p;
     new_node->next=p->next;
     p->next->prev=new_node;
