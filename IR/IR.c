@@ -1,6 +1,7 @@
 #include "IR.h"
 extern char operand_name_string[OPERAND_NUM][OPERAND_STR_LEN];
 extern char op_name_string[OP_NUM][OP_STRING_LEN];
+extern char data_type_name_string[OPERAND_NUM][OPERAND_STR_LEN];
 bool GenINS(
     IR_INS* ins,
     enum ins_op op,
@@ -264,7 +265,7 @@ void print_IR(IR_MODULE* irm)
                 printf("\t<basic block label:%s>\n",curr_bb->bb_label);
                 while (ins_p)
                 {
-                    print_INS((IR_INS*)ins_p,2);
+                    print_INS((IR_INS*)ins_p,1);
                     ins_p=ins_p->next;
                     if(ins_p==curr_bb->Instruction_list)
                         break;
@@ -284,21 +285,60 @@ void print_INS(IR_INS* ins,size_t indentation)
     for(size_t i=0;i<indentation;++i){
         printf("\t");
     }
-    printf("<op:%s,",op_name_string[ins->op]);
-    printf("dst:%s,",operand_name_string[ins->dst->type]);
-    printf("src1:%s,",operand_name_string[ins->src1->type]);
-    if(ins->src1->type==OPERAND_CODE)
-    {
-        printf("(to label {");
-        printf("%s",ins->src1->operand_data.operand_code_type.code_position->bb_label);
-        printf("})");
+    for(size_t i=0;i<indentation;++i){
+        printf("\t");
     }
-    printf("src2:%s",operand_name_string[ins->src2->type]);
-    if(ins->src2->type==OPERAND_CODE)
-    {
-        printf("(to label {");
-        printf("%s",ins->src2->operand_data.operand_code_type.code_position->bb_label);
-        printf("})");
+    printf("->\t");
+    printf("op:%s\n",op_name_string[ins->op]);
+
+    for(size_t i=0;i<indentation+2;++i){
+        printf("\t");
     }
-    printf(">\n");
+    printf("dst:\t");
+    print_OPERAND(ins->dst,indentation+2);
+    printf(",\n");
+    for(size_t i=0;i<indentation+2;++i){
+        printf("\t");
+    }
+    printf("src1:\t");
+    print_OPERAND(ins->src1,indentation+2);
+    printf(",\n");
+    for(size_t i=0;i<indentation+2;++i){
+        printf("\t");
+    }
+    printf("src2:\t");
+    print_OPERAND(ins->src2,indentation+2);
+    printf(",\n");
+}
+void print_OPERAND(IR_OPERAND* operand,size_t indentation)
+{
+    printf("%s",operand_name_string[operand->type]);
+    if(operand->type==OPERAND_NONE)
+        ;
+    else if(operand->type==OPERAND_CODE)
+        printf("{label:%s}",operand->operand_data.operand_code_type.code_position->bb_label);
+    else if(operand->type==OPERAND_DATA)
+    {
+        //enum data_storage_type data_stor=operand->operand_data.operand_data_type.data_stor_type;
+        size_t length=operand->operand_data.operand_data_type.data_length;
+        size_t align=operand->operand_data.operand_data_type.data_align;
+        printf("{len:%ld align:%ld}",length,align);
+    }
+    else if(operand->type==OPERAND_IMM)
+    {
+        if(IS_INT_TYPE(operand->operand_data.operand_imm_type.imm_type))
+            printf("{%lld}",operand->operand_data.operand_imm_type.imm_int_data);
+        else if(IS_FLOAT_TYPE(operand->operand_data.operand_imm_type.imm_type))
+            printf("{%Lf}",operand->operand_data.operand_imm_type.imm_float_data[0]);
+        else if(IS_COMPLEX_TYPE(operand->operand_data.operand_imm_type.imm_type))
+            printf("{%Lf + %Lf i}",operand->operand_data.operand_imm_type.imm_float_data[0],operand->operand_data.operand_imm_type.imm_float_data[1]);
+    }
+    else if(operand->type==OPERAND_REG)
+    {
+        printf("{data_type:%s id:%ld len:%ld}",
+            data_type_name_string[operand->operand_data.operand_reg_type->d_type],
+            operand->operand_data.operand_reg_type->reg_id,
+            operand->operand_data.operand_reg_type->data_length
+            );
+    }
 }

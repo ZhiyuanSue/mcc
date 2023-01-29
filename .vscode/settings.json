@@ -15,6 +15,7 @@
         "trans.h": "c",
         "mem.h": "c",
         "ir.h": "c",
-        "symbol_table.h": "c"
+        "symbol_table.h": "c",
+        "ir_enum.h": "c"
     }
 }

@@ -7,6 +7,21 @@ char operand_name_string[OPERAND_NUM][OPERAND_STR_LEN]=
     "CODE",
     "REG",
 };
+char data_type_name_string[OPERAND_NUM][OPERAND_STR_LEN]=
+{
+    "NONE",
+    "INTEGER",
+    "FLOAT",
+    "COMPLEX",
+    "POINT_INTEGER",
+    "POINT_FLOAT",
+    "POINT_COMPLEX",
+    "POINT_INT_ARR",
+    "POINT_FLOAT_ARR",
+    "POINT_OTHER_ARR",
+    "POINT_SU",
+    "POINT_FUNCTION",
+};
 char op_name_string[OP_NUM][OP_STRING_LEN]=
 {
     "OP_NONE",

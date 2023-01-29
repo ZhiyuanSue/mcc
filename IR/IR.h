@@ -118,5 +118,5 @@ char* label_allocator(char* default_name);    /*allocate a label name for a bb*/
 
 void print_IR(IR_MODULE* irm);
 void print_INS(IR_INS* ins,size_t indentation);
-void print_OPERAND(IR_OPERAND* operand);
+void print_OPERAND(IR_OPERAND* operand,size_t indentation);
 #endif
