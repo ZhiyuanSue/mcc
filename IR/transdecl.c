@@ -187,10 +187,7 @@ bool alloca_on_stack_value(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR
         goto error;
     /*not static storage,generate code to fill in the data*/
     IR_INS* alloca_ins=add_new_ins(ir_bb);
-    if(ir_bb->Instruction_list==NULL)
-        ir_bb->Instruction_list=(LIST_NODE*)alloca_ins;
-    else
-        _add_before((LIST_NODE*)(ir_bb->Instruction_list),(LIST_NODE*)alloca_ins);
+    insert_ins_to_bb(alloca_ins,ir_bb);
     /*please remember bind the symbol to the reg and instruction*/
 #if __WORDSIZE==32
     IR_REG* dst_reg=GenREG(DATA_POINTER_INTEGER,irm->reg_list,alloca_ins,4);
@@ -204,19 +201,18 @@ bool alloca_on_stack_value(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR
 
     IR_OPERAND* alloca_dst=GenOPERAND_REG(dst_reg);
 
-    double tmparr[2]={0,0};
     size_t alloca_size=Type_size(tmpsi->type_vec); 
     IR_OPERAND* alloca_src1=GenOPERAND_IMM(
         TP_USLONG,
         alloca_size,
-        tmparr,tmparr,tmparr
+        0
     );
 
     size_t alloca_align=Type_align(tmpsi->type_vec);
     IR_OPERAND* alloca_src2=GenOPERAND_IMM(
         TP_USLONG,
         alloca_align,
-        tmparr,tmparr,tmparr
+        0
     );
 
     GenINS(alloca_ins,OP_ALLOCA,alloca_dst,alloca_src1,alloca_src2);

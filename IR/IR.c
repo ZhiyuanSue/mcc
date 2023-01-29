@@ -14,15 +14,24 @@ bool GenINS(
     /*fill in*/
     ins->op=op;
     if(dst==NULL)
+    {
+        ins->dst=m_alloc(sizeof(IR_OPERAND));
         ins->dst->type=OPERAND_NONE;
+    }
     else
         ins->dst=dst;
     if(src1==NULL)
+    {
+        ins->src1=m_alloc(sizeof(IR_OPERAND));
         ins->src1->type=OPERAND_NONE;
+    }
     else
         ins->src1=src1;
     if(src2==NULL)
+    {
+        ins->src2=m_alloc(sizeof(IR_OPERAND));
         ins->src2->type=OPERAND_NONE;
+    }
     else
         ins->src2=src2;
     if(op==OP_ICMP||op==OP_FCMP)
@@ -93,9 +102,7 @@ error:
 IR_OPERAND* GenOPERAND_IMM(
     enum TP_CATEGORY imm_type,
     signed long long int imm_int_data,
-    float imm_float_data[2],
-    double imm_double_data[2],
-    long double imm_long_double_data[2]
+    long double imm_float_data[2]
 )
 {
     if(imm_type==TP_SPEC_NONE)
@@ -107,19 +114,11 @@ IR_OPERAND* GenOPERAND_IMM(
         operand->operand_data.operand_imm_type.imm_int_data=0;
     else if(IS_INT_TYPE(imm_type)||imm_type==TP_ENUM||imm_type==TP_POINT)
         operand->operand_data.operand_imm_type.imm_int_data=(signed long long int )imm_int_data;
-    else if(imm_type==TP_FLOAT)
-        operand->operand_data.operand_imm_type.imm_float_data[0]=imm_float_data[0];
-    else if(imm_type==TP_DOUBLE)
-        operand->operand_data.operand_imm_type.imm_float_data[0]=imm_float_data[0];
-    else if(imm_type==TP_LONG_DOUBLE)
+    else if(IS_FLOAT_TYPE(imm_type))
         operand->operand_data.operand_imm_type.imm_float_data[0]=imm_float_data[0];
 #if _CPLX_SUPPORT==1
     /*complex case,not tested*/
-    else if(imm_type==TP_FLOAT_COMPLEX)
-        operand->operand_data.operand_imm_type.imm_float_data[1]=imm_float_data[1];
-    else if(imm_type==TP_DOUBLE_COMPLEX)
-        operand->operand_data.operand_imm_type.imm_float_data[1]=imm_float_data[1];
-    else if(imm_type==TP_LONG_DOUBLE_COMPLEX)
+    if(IS_COMPLEX_TYPE(imm_type))
         operand->operand_data.operand_imm_type.imm_float_data[1]=imm_float_data[1];
 #endif
     else
@@ -202,6 +201,18 @@ IR_INS* add_new_ins(IR_BB* bb)
     return new_ins;
 error:
     return NULL;
+}
+bool insert_ins_to_bb(IR_INS* ins,IR_BB* ir_bb)
+{
+    if(!ins||!ir_bb)
+        goto error;
+    if(ir_bb->Instruction_list==NULL)
+        ir_bb->Instruction_list=(LIST_NODE*)ins;
+    else
+        _add_before((LIST_NODE*)(ir_bb->Instruction_list),(LIST_NODE*)ins);
+    return true;
+error:
+    return false;
 }
 static size_t label_id=0;
 char* label_allocator(char* default_name)

@@ -49,7 +49,6 @@ IR_MODULE* trans_to_IR(AST_BASE* ast_node)
             goto error;
         }
     }
-    printf("finish init\n");
     for(size_t i=0;i<AST_CHILD_NUM(ast_node);++i)
     {
         AST_BASE* external_decl_node=AST_GET_CHILD(ast_node,i);
@@ -58,9 +57,9 @@ IR_MODULE* trans_to_IR(AST_BASE* ast_node)
         {
             /*return to the first bb and start*/
             TP_FUNC* function_type=ast_child->func_attribute->function_type;
-            curr_bb=(IR_BB*)function_type->ir_func->BB_list;
+            curr_bb=(IR_BB*)(function_type->ir_func->BB_list);
             stack_off=0;    /*for every function begin,the stack base come back to 0*/
-            AST_BASE* compount_stmt_node=AST_GET_CHILD(ast_node,AST_CHILD_NUM(ast_node)-1);
+            AST_BASE* compount_stmt_node=AST_GET_CHILD(ast_child,AST_CHILD_NUM(ast_child)-1);
             compound_stmt_trans(compount_stmt_node,curr_bb);
         }
     }

@@ -166,23 +166,66 @@ bool pri_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
                 if(IS_BASE_TYPE(tmp_type->typ_category))
                 {
                     M_TYPE* tmp_q_type=Type_VEC_get_qual(tmpsi_type_vec);
-                    if((tmp_q_type->type_qual)&0x08){       /*declared a const identifier*/
-                        //ast_node->expr_attribute->expr_operand=GenOPERAND_IMM(
-                        //    tmp_type->typ_category,
-                        //);
+                    if(tmp_q_type&&((tmp_q_type->type_qual)&0x08)){       /*declared a const identifier*/
+                        if(IS_INT_TYPE(tmp_type->typ_category))
+                        {
+                            signed long long int tmp_int_const= get_int_const(tmp_type->typ_category,find_tmpsi->data_field,true);
+                            ast_node->expr_attribute->expr_operand=GenOPERAND_IMM(
+                                tmp_type->typ_category,tmp_int_const,0);
+                        }
+                        else if(IS_FLOAT_TYPE(tmp_type->typ_category)){
+                            long double tmp_float_const= get_float_const(tmp_type->typ_category,find_tmpsi->data_field,true);
+                            ast_node->expr_attribute->expr_operand=GenOPERAND_IMM(
+                                tmp_type->typ_category,0,&tmp_float_const);
+                        }
+#if _CPLX_SUPPORT==1
+                        else if(IS_COMPLEX_TYPE(tmp_type->typ_category))
+                        {
+                            long double* tmp_complex_const=get_complex_const(tmp_type->typ_category,find_tmpsi->data_field,true);
+                            ast_node->expr_attribute->expr_operand=GenOPERAND_IMM(
+                                tmp_type->typ_category,0,tmp_complex_const);
+                        }
+#endif
                     }
                     else{   /*insert a load instruction*/
-
+                        IR_INS* load_ins=m_alloc(sizeof(IR_INS));
+                        insert_ins_to_bb(load_ins,ir_bb);
+                        IR_REG* dst_reg=GenREG(DATA_NONE,ir_bb->IR_module->reg_list,load_ins,Type_size(tmpsi_type_vec));
+                        GenREGPointerType(dst_reg,tmpsi_type_vec);
+                        IR_OPERAND* dst_operand=GenOPERAND_REG(dst_reg);
+                        IR_OPERAND* src1_operand=GenOPERAND_REG(find_tmpsi->ir_reg);
+                        IR_OPERAND* src2_operand=GenOPERAND_IMM(TP_USLONG,Type_size(tmpsi_type_vec),0);
+                        GenINS(load_ins,OP_LOAD,dst_operand,src1_operand,src2_operand);
                     }
                 }
                 else if(tmp_type->typ_category==TP_FUNCTION)
                 {
-                    ast_node->expr_attribute->expr_operand=GenOPERAND_CODE(((TP_FUNC*)tmp_type)->ir_func);
+                    ast_node->expr_attribute->expr_operand=GenOPERAND_CODE((IR_BB*)(((TP_FUNC*)tmp_type)->ir_func->BB_list));
+                }
+                else if(tmp_type->typ_category==TP_ENUM)
+                {
+
+                }
+                else if(tmp_type->typ_category==TP_NULL_POINTER_CONSTANT)
+                {
+
+                }
+                else if(tmp_type->typ_category==TP_ARRAY)
+                {
+
+                }
+                else if(tmp_type->typ_category==TP_STRUCT||tmp_type->typ_category==TP_UNION||tmp_type->typ_category==TP_UNION_STRUCT)
+                {
+                    
+                }
+                else if(tmp_type->typ_category==TP_POINT)
+                {
+
                 }
             }
             case integer_constant:
             {
-
+                
             }
             case floating_constant:
             {

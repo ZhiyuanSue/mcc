@@ -11,6 +11,7 @@ bool stmt_trans_dispatch(AST_BASE* ast_node,IR_BB* ir_bb)
         goto_stmt_trans,continue_stmt_trans,break_stmt_trans,return_stmt_trans,
         asm_stmt_trans
     };
+    //printf("%s\n",rule_type_str[ast_node->type]);
     if(IS_STMT_NODE(ast_node->type))
         return stmt_trans_dis[ast_node->type-labeled_stmt](ast_node,ir_bb);
     if(ast_node->type==statement)
@@ -149,7 +150,7 @@ bool switch_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     AST_BASE* expr_node=AST_GET_CHILD(ast_node,2);
     if(!expr_trans_dispatch(expr_node,expr_bb))
         goto error;
-
+    
     /*add stmt bb*/
     IR_BB* stmt_bb=add_new_bb(ir_bb->func);
     _add_after((LIST_NODE*)expr_bb,(LIST_NODE*)stmt_bb);
@@ -158,7 +159,6 @@ bool switch_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     AST_BASE* stmt_node=AST_GET_CHILD(ast_node,4);
     if(!stmt_trans_dispatch(stmt_node,stmt_bb))
         goto error;
-    
     curr_bb=end_bb;
     m_free(tei);
     return true;
