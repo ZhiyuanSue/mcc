@@ -185,7 +185,7 @@ bool function_definition_type(AST_BASE* ast_node)
     /*start compound statement*/
     if(!compound_statement(compound_stmt_node))
         goto error;
-    ast_node->func_attribute=tmpsi;
+    ast_node->func_attribute->func_attribute=tmpsi;
     m_free(tei);
     return true;
 error:

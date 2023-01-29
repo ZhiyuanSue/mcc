@@ -412,7 +412,12 @@ bool p_symbol_table(AST_BASE* ast_node,SYM* father){
         ast_node->decl_attribute->decl_symbol_item_list=NULL;
     }
     else if(ast_node->type==function_definition)
-        ast_node->func_attribute=NULL;
+    {
+        ast_node->func_attribute=m_alloc(sizeof(FUNC_NODE_ATTR));
+        ast_node->func_attribute->func_attribute=NULL;
+        ast_node->func_attribute->function_type=NULL;
+    }
+        
     VECpopback(trace_stack);
     return true;
 }

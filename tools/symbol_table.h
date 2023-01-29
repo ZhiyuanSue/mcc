@@ -22,12 +22,6 @@ enum static_storage_value_type{
     SSVT_POINTER,
 };
 typedef struct sym_item SYM_ITEM;
-typedef struct module IR_MODULE;
-typedef struct function IR_FUNC;
-typedef struct basic_block IR_BB;
-typedef struct instruction IR_INS;
-typedef struct operand IR_OPERAND;
-typedef struct IR_OPERAND_REG IR_REG;
 typedef struct{
     enum static_storage_value_type value_data_type;
     size_t byte_width;  /*1 -byte,2 -word,4 -long(not the long in C),8 -quad*/

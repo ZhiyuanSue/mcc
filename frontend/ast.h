@@ -23,6 +23,10 @@ typedef struct{
 typedef struct{
     VEC* decl_symbol_item_list;
 }DECL_NODE_ATTR;
+typedef struct{
+    SYM_ITEM* func_attribute;
+    TP_FUNC* function_type;
+}FUNC_NODE_ATTR;
 typedef struct ast_base AST_BASE;
 struct ast_base{
     enum rule_type_enum type;
@@ -36,7 +40,7 @@ struct ast_base{
         EXPR_NODE_ATTR* expr_attribute;
         INIT_NODE_ATTR* init_attribute;
         DECL_NODE_ATTR* decl_attribute;
-        SYM_ITEM* func_attribute;
+        FUNC_NODE_ATTR* func_attribute;
     };
 };
 

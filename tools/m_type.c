@@ -121,6 +121,7 @@ M_TYPE* build_base_type(
         res->have_ellipsis=false;
         res->is_old_style=false;
         res->complete=true;
+        res->ir_func=NULL;
 #if __WORDSIZE==64
         res->fcc=SYSTEM_V_AMD64;
 #elif __WORDSIZE==32

@@ -144,6 +144,7 @@ bool postfix_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
 {
     if(!ast_node||!ir_bb)
         goto error;
+    
     return true;
 error:
     return false;
@@ -160,7 +161,16 @@ bool pri_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
             case identifier:
             {
                 SYM_ITEM* find_tmpsi=find_symbol(ast_node->symbol_table,child_node->token->value,NMSP_DEFAULT);
-                
+                VEC* tmpsi_type_vec=find_tmpsi->type_vec;
+                M_TYPE* tmp_type=Type_VEC_get_actual_base_type(tmpsi_type_vec);
+                if(IS_BASE_TYPE(tmp_type->typ_category))
+                {
+
+                }
+                else if(tmp_type->typ_category==TP_FUNCTION)
+                {
+                    
+                }
             }
             case integer_constant:
             {
@@ -168,6 +178,7 @@ bool pri_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
             }
             case floating_constant:
             {
+
             }
             case enum_const:
             {
@@ -178,7 +189,7 @@ bool pri_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
             }
             case string:
             {
-
+                
             }
             case generic_selection:
             {

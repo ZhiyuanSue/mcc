@@ -49,6 +49,21 @@ IR_MODULE* trans_to_IR(AST_BASE* ast_node)
             goto error;
         }
     }
+    printf("finish init\n");
+    for(size_t i=0;i<AST_CHILD_NUM(ast_node);++i)
+    {
+        AST_BASE* external_decl_node=AST_GET_CHILD(ast_node,i);
+        AST_BASE* ast_child=AST_GET_CHILD(external_decl_node,0);
+        if(ast_child->type==function_definition)
+        {
+            /*return to the first bb and start*/
+            TP_FUNC* function_type=ast_child->func_attribute->function_type;
+            curr_bb=(IR_BB*)function_type->ir_func->BB_list;
+            stack_off=0;    /*for every function begin,the stack base come back to 0*/
+            AST_BASE* compount_stmt_node=AST_GET_CHILD(ast_node,AST_CHILD_NUM(ast_node)-1);
+            compound_stmt_trans(compount_stmt_node,curr_bb);
+        }
+    }
     return res;
 error:
     return NULL;
@@ -57,14 +72,15 @@ bool trans_func(AST_BASE* ast_node,IR_FUNC* ir_func)
 {
     if(!ast_node||!ir_func||ast_node->type!=function_definition)
         goto error;
-    SYM_ITEM* tmpsi=ast_node->func_attribute;
+    SYM_ITEM* tmpsi=ast_node->func_attribute->func_attribute;
     M_TYPE* tmpt=Type_VEC_get_actual_base_type(tmpsi->type_vec);
     if(!(tmpt->typ_category==TP_FUNCTION))
         goto error;
     ir_func->func_name=((TP_FUNC*)tmpt)->func_name;
     ir_func->symbol_table=ast_node->symbol_table;
+    ast_node->func_attribute->function_type=(TP_FUNC*)tmpt;
+    ((TP_FUNC*)tmpt)->ir_func=ir_func;
     /*do some work for arguments*/
-
     /*add a return basic block,in which only one ins, ret*/
     IR_BB* last_bb=add_new_bb(ir_func);
     last_bb->bb_label=label_allocator("func end");
@@ -97,11 +113,6 @@ bool trans_func(AST_BASE* ast_node,IR_FUNC* ir_func)
         curr_bb=label_bb;
         tmpt=Type_VEC_get_actual_base_type(tmpsi->type_vec);
     }
-    /*return to the first bb and start*/
-    curr_bb=compound_bb;
-    stack_off=0;    /*for every function begin,the stack base come back to 0*/
-    AST_BASE* compount_stmt_node=AST_GET_CHILD(ast_node,AST_CHILD_NUM(ast_node)-1);
-    compound_stmt_trans(compount_stmt_node,compound_bb);
     return true;
 error:
     return false;
