@@ -26,9 +26,15 @@ typedef struct operand{
             enum TP_CATEGORY imm_type;
             union{  /*for the int type can cast without any accuracy loss*/
                 signed long long int imm_int_data;
+#if _CPLX_SUPPORT==0
                 float imm_float_data;
                 double imm_double_data;
                 long double imm_long_double_data;
+#elif _CPLX_SUPPORT==1
+                float imm_float_data[2];
+                double imm_double_data[2];
+                long double imm_long_double_data[2];
+#endif
             };
         }operand_imm_type;
         struct IR_OPERAND_CODE{
@@ -77,9 +83,9 @@ IR_OPERAND* GenOPERAND_DATA(
 IR_OPERAND* GenOPERAND_IMM(
     enum TP_CATEGORY imm_type,
     signed long long int imm_int_data,
-    float imm_float_data,
-    double imm_double_data,
-    long double imm_long_double_data
+    float imm_float_data[2],
+    double imm_double_data[2],
+    long double imm_long_double_data[2]
 );
 IR_OPERAND* GenOPERAND_CODE(
     IR_BB* code_position
@@ -116,4 +122,5 @@ char* label_allocator(char* default_name);    /*allocate a label name for a bb*/
 
 void print_IR(IR_MODULE* irm);
 void print_INS(IR_INS* ins,size_t indentation);
+void print_OPERAND(IR_OPERAND* operand);
 #endif

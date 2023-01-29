@@ -165,11 +165,19 @@ bool pri_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
                 M_TYPE* tmp_type=Type_VEC_get_actual_base_type(tmpsi_type_vec);
                 if(IS_BASE_TYPE(tmp_type->typ_category))
                 {
+                    M_TYPE* tmp_q_type=Type_VEC_get_qual(tmpsi_type_vec);
+                    if((tmp_q_type->type_qual)&0x08){       /*declared a const identifier*/
+                        //ast_node->expr_attribute->expr_operand=GenOPERAND_IMM(
+                        //    tmp_type->typ_category,
+                        //);
+                    }
+                    else{   /*insert a load instruction*/
 
+                    }
                 }
                 else if(tmp_type->typ_category==TP_FUNCTION)
                 {
-                    
+                    ast_node->expr_attribute->expr_operand=GenOPERAND_CODE(((TP_FUNC*)tmp_type)->ir_func);
                 }
             }
             case integer_constant:

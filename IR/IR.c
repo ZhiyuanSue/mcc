@@ -93,9 +93,9 @@ error:
 IR_OPERAND* GenOPERAND_IMM(
     enum TP_CATEGORY imm_type,
     signed long long int imm_int_data,
-    float imm_float_data,
-    double imm_double_data,
-    long double imm_long_double_data
+    float imm_float_data[2],
+    double imm_double_data[2],
+    long double imm_long_double_data[2]
 )
 {
     if(imm_type==TP_SPEC_NONE)
@@ -106,13 +106,22 @@ IR_OPERAND* GenOPERAND_IMM(
     if(imm_type==TP_NULL_POINTER_CONSTANT)
         operand->operand_data.operand_imm_type.imm_int_data=0;
     else if(IS_INT_TYPE(imm_type)||imm_type==TP_ENUM||imm_type==TP_POINT)
-        operand->operand_data.operand_imm_type.imm_int_data=imm_int_data;
+        operand->operand_data.operand_imm_type.imm_int_data=(signed long long int )imm_int_data;
     else if(imm_type==TP_FLOAT)
-        operand->operand_data.operand_imm_type.imm_float_data=imm_float_data;
+        operand->operand_data.operand_imm_type.imm_float_data[0]=imm_float_data[0];
     else if(imm_type==TP_DOUBLE)
-        operand->operand_data.operand_imm_type.imm_float_data=imm_float_data;
+        operand->operand_data.operand_imm_type.imm_float_data[0]=imm_float_data[0];
     else if(imm_type==TP_LONG_DOUBLE)
-        operand->operand_data.operand_imm_type.imm_float_data=imm_float_data;
+        operand->operand_data.operand_imm_type.imm_float_data[0]=imm_float_data[0];
+#if _CPLX_SUPPORT==1
+    /*complex case,not tested*/
+    else if(imm_type==TP_FLOAT_COMPLEX)
+        operand->operand_data.operand_imm_type.imm_float_data[1]=imm_float_data[1];
+    else if(imm_type==TP_DOUBLE_COMPLEX)
+        operand->operand_data.operand_imm_type.imm_float_data[1]=imm_float_data[1];
+    else if(imm_type==TP_LONG_DOUBLE_COMPLEX)
+        operand->operand_data.operand_imm_type.imm_float_data[1]=imm_float_data[1];
+#endif
     else
         goto error;
     return operand;

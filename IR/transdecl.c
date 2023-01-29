@@ -204,20 +204,21 @@ bool alloca_on_stack_value(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR
 
     IR_OPERAND* alloca_dst=GenOPERAND_REG(dst_reg);
 
+    double tmparr[2]={0,0};
     size_t alloca_size=Type_size(tmpsi->type_vec); 
     IR_OPERAND* alloca_src1=GenOPERAND_IMM(
         TP_USLONG,
         alloca_size,
-        0,0,0
+        tmparr,tmparr,tmparr
     );
 
     size_t alloca_align=Type_align(tmpsi->type_vec);
     IR_OPERAND* alloca_src2=GenOPERAND_IMM(
         TP_USLONG,
         alloca_align,
-        0,0,0
+        tmparr,tmparr,tmparr
     );
-    
+
     GenINS(alloca_ins,OP_ALLOCA,alloca_dst,alloca_src1,alloca_src2);
 
     /*fill the data in the reg of pointer */
