@@ -187,38 +187,16 @@ bool alloca_on_stack_value(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR
     /*not static storage,generate code to fill in the data*/
     IR_INS* alloca_ins=add_new_ins(ir_bb);
     insert_ins_to_bb(alloca_ins,ir_bb);
-    /*please remember bind the symbol to the reg and instruction*/
-#if __WORDSIZE==32
-    IR_REG* dst_reg=GenREG(DATA_POINTER_INTEGER,irm->reg_list,alloca_ins,4);
-#elif __WORDSIZE==64
-    IR_REG* dst_reg=GenREG(DATA_POINTER_INTEGER,irm->reg_list,alloca_ins,8);
-#endif
     VEC* tmp_type_vec=tmpsi->type_vec;
 
-    GenREGPointerType(dst_reg,tmp_type_vec);
-
-    IR_OPERAND* alloca_dst=GenOPERAND_REG(dst_reg);
-
     size_t alloca_size=Type_size(tmpsi->type_vec); 
-    IR_OPERAND* alloca_src1=GenOPERAND_IMM(
-        TP_USLONG,
-        alloca_size,
-        0
-    );
-
     size_t alloca_align=Type_align(tmpsi->type_vec);
-    IR_OPERAND* alloca_src2=GenOPERAND_IMM(
-        TP_USLONG,
-        alloca_align,
-        0
-    );
 
-    GenINS(alloca_ins,OP_ALLOCA,alloca_dst,alloca_src1,alloca_src2);
+    GenINS(alloca_ins,OP_ALLOCA,ast_node->symbol,ast_node->symbol,NULL);
 
     /*fill the data in the reg of pointer */
     stack_off=MCC_ALIGN(stack_off,alloca_align);
-    dst_reg->pointer_attr.off=stack_off;
-    dst_reg->pointer_attr.pointer_data_stor_type=IR_STOR_STACK;
+    ast_node->symbol->stor_type=IR_STOR_REG;
     stack_off+=alloca_size;
 
 

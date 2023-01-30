@@ -86,8 +86,6 @@ typedef struct module IR_MODULE;
 typedef struct function IR_FUNC;
 typedef struct basic_block IR_BB;
 typedef struct instruction IR_INS;
-typedef struct operand IR_OPERAND;
-typedef struct IR_OPERAND_REG IR_REG;
 typedef struct {
     HASH_COMMON
     TP_COMMON
