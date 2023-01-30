@@ -5,6 +5,7 @@
 #include "namespace.h"
 #include "m_type.h"
 #include "m_type_vec.h"
+#include "symbol_str_alloc.h"
 #include "../IR/IR_ENUM.h"
 #define PRINT_SYMBOLE_TABLE 1
 #define PRINT_TYPEDEF_TABLE 0
@@ -51,21 +52,17 @@ struct sym_table{
 typedef struct sym_item{
     HASH_COMMON
     DATA_VALUE
-    char* value;
+    char* value;    /*name string*/
     NMSP name_space;
     int align_size;
     enum linkage_type linkage;
     enum function_spec_type fspec_type;
     enum data_storage_type stor_type;
-    bool defined;
-    bool declared;
-    union{
-        STATIC_STOR_VALUE* init_value;
-        IR_REG* ir_reg;
-        /*use stor_type to decide which one to use
-        and if you want to init this union,for it's all pointer, so just init once
-        */
-    };
+    bool defined:1;
+    bool declared:1;
+    bool is_lvalue:1;   /*only used one expr node*/
+    bool complete:1;
+    bool is_bit_field:1;
 }SYM_ITEM;
 typedef struct{
     bool have_ret;
@@ -108,7 +105,9 @@ inline bool Copy_sym_item(SYM_ITEM* new,SYM_ITEM* old){
     new->value=old->value;
     new->align_size=old->align_size;
     new->const_expr=old->const_expr;
-    new->init_value=old->init_value;
+    new->is_lvalue=old->is_lvalue;
+    new->complete=old->complete;
+    new->is_bit_field=old->is_bit_field;
     return true;
 }
 #endif

@@ -387,19 +387,7 @@ bool p_symbol_table(AST_BASE* ast_node,SYM* father){
     {
         return false;
     }
-    if(IS_EXPR_NODE(ast_node->type)){    /*only the expr node have such a field to promise the operation safe*/
-        ast_node->expr_attribute=m_alloc(sizeof(EXPR_NODE_ATTR));
-        ast_node->expr_attribute->const_expr=false;
-        ast_node->expr_attribute->data_field=m_alloc(sizeof(VALUE_DATA));
-        m_memset(ast_node->expr_attribute->data_field,'\0',sizeof(VALUE_DATA));
-        ast_node->expr_attribute->data_size=0;
-        ast_node->expr_attribute->is_lvalue=false;
-        ast_node->expr_attribute->type_vec=NULL;
-        ast_node->expr_attribute->complete=false;
-        ast_node->expr_attribute->is_bit_field=false;
-        ast_node->expr_attribute->expr_op=NULL;
-    }
-    else if(ast_node->type==initializer)
+    if(ast_node->type==initializer)
     {
         ast_node->init_attribute=m_alloc(sizeof(INIT_NODE_ATTR));
         ast_node->init_attribute->off=0;
@@ -408,14 +396,11 @@ bool p_symbol_table(AST_BASE* ast_node,SYM* father){
     }
     else if(ast_node->type==declaration)
     {
-        ast_node->decl_attribute=m_alloc(sizeof(DECL_NODE_ATTR));
-        ast_node->decl_attribute->decl_symbol_item_list=NULL;
+        ast_node->decl_symbol_item_list=NULL;
     }
-    else if(ast_node->type==function_definition)
+    else if(IS_EXPR_NODE(ast_node->type)||ast_node->type==function_definition)
     {
-        ast_node->func_attribute=m_alloc(sizeof(FUNC_NODE_ATTR));
-        ast_node->func_attribute->func_attribute=NULL;
-        ast_node->func_attribute->function_type=NULL;
+        ast_node->symbol=NULL;
     }
         
     VECpopback(trace_stack);

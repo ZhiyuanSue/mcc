@@ -5,6 +5,7 @@
 #include "../tools/mcc_error.h"
 #include "../tools/ARG.h"
 #include "../tools/EBNF.h"
+#include "../tools/symbol_str_alloc.h"
 #include "../frontend/preprocessor.h"
 #include "../frontend/lex.h"
 #include "../frontend/parser.h"

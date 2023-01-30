@@ -18,6 +18,14 @@ bool expr_dispatch(AST_BASE* expr_node)
         pri_expr_value
     };
     bool res=false;
+    expr_node->symbol=Create_symbol_item(tmp_symbol_str_alloc("reg.expr."),NMSP_DEFAULT);
+    if(!expr_node->symbol)
+    {
+        printf("alloc symbol error\n");
+        return false;
+    }
+    if(!insert_symbol(expr_node->symbol_table,expr_node->symbol))
+        return false;
     if(expr_node->type==expression)
         res=expr[0](expr_node);
     else if(expr_node->type>=assignment_expr&&expr_node->type<=primary_expression){
@@ -42,7 +50,7 @@ bool cond_expr_value(AST_BASE* ast_node)
     AST_BASE* logical_or_expr_node=AST_GET_CHILD(ast_node,0);
     if(!expr_dispatch(logical_or_expr_node))
         goto error;
-    M_TYPE* tmpt=Type_VEC_get_actual_base_type(logical_or_expr_node->expr_attribute->type_vec);
+    M_TYPE* tmpt=Type_VEC_get_actual_base_type(logical_or_expr_node->symbol->type_vec);
     if(!IS_SCALAR_TYPE(tmpt->typ_category))
     {
         C_ERROR(C0062_ERR_OPERAND_SCALAR_TYPE,ast_node);
@@ -56,17 +64,17 @@ bool cond_expr_value(AST_BASE* ast_node)
     VEC* tmp_type_vec=InitVEC(DEFAULT_CAPICITY);
     M_TYPE* res_type=NULL;
     M_TYPE* one_type,* two_type;
-    one_type=Type_VEC_get_actual_base_type(operand_one->expr_attribute->type_vec);
-    if(IS_INT_TYPE(one_type->typ_category)&&operand_one->expr_attribute->const_expr){
-        long long int null_pointer_value=TP_INT_CAST_TYPE(one_type->typ_category,operand_one->expr_attribute->data_field);
+    one_type=Type_VEC_get_actual_base_type(operand_one->symbol->type_vec);
+    if(IS_INT_TYPE(one_type->typ_category)&&operand_one->symbol->const_expr){
+        long long int null_pointer_value=TP_INT_CAST_TYPE(one_type->typ_category,operand_one->symbol->data_field);
         if(null_pointer_value==0)
         {
             one_type->typ_category=TP_NULL_POINTER_CONSTANT;
         }
     }
-    two_type=Type_VEC_get_actual_base_type(operand_two->expr_attribute->type_vec);
-    if(IS_INT_TYPE(two_type->typ_category)&&operand_two->expr_attribute->const_expr){
-        long long int null_pointer_value=TP_INT_CAST_TYPE(two_type->typ_category,operand_two->expr_attribute->data_field);
+    two_type=Type_VEC_get_actual_base_type(operand_two->symbol->type_vec);
+    if(IS_INT_TYPE(two_type->typ_category)&&operand_two->symbol->const_expr){
+        long long int null_pointer_value=TP_INT_CAST_TYPE(two_type->typ_category,operand_two->symbol->data_field);
         if(null_pointer_value==0)
         {
             two_type->typ_category=TP_NULL_POINTER_CONSTANT;
@@ -76,12 +84,12 @@ bool cond_expr_value(AST_BASE* ast_node)
     {
         if(one_type->typ_category==TP_NULL_POINTER_CONSTANT)
         {
-            operand_one->expr_attribute->data_field->sint=0;
+            operand_one->symbol->data_field->sint=0;
             one_type->typ_category=TP_SINT;
         }
         if(two_type->typ_category==TP_NULL_POINTER_CONSTANT)
         {
-            operand_two->expr_attribute->data_field->sint=0;
+            operand_two->symbol->data_field->sint=0;
             two_type->typ_category=TP_SINT;
         }
         res_type=usual_arith_conversion(&one_type,&two_type);
@@ -105,8 +113,8 @@ bool cond_expr_value(AST_BASE* ast_node)
     }
     else if(one_type->typ_category==TP_POINT&&two_type->typ_category==TP_POINT)
     {
-        VEC* point_one=Type_VEC_get_Pointer_TO(operand_one->expr_attribute->type_vec,true);
-        VEC* point_two=Type_VEC_get_Pointer_TO(operand_two->expr_attribute->type_vec,true);
+        VEC* point_one=Type_VEC_get_Pointer_TO(operand_one->symbol->type_vec,true);
+        VEC* point_two=Type_VEC_get_Pointer_TO(operand_two->symbol->type_vec,true);
         M_TYPE* point_base_one=Type_VEC_get_actual_base_type(point_one);
         M_TYPE* point_base_two=Type_VEC_get_actual_base_type(point_two);
         if(point_base_one->typ_category==TP_VOID&&point_base_two->typ_category!=TP_VOID)
@@ -138,13 +146,13 @@ bool cond_expr_value(AST_BASE* ast_node)
     else if(one_type->typ_category==TP_POINT&&two_type->typ_category==TP_NULL_POINTER_CONSTANT)
     {
         DelVEC(tmp_type_vec);
-        VECcpy(operand_one->expr_attribute->type_vec,&tmp_type_vec);
+        VECcpy(operand_one->symbol->type_vec,&tmp_type_vec);
         legal=true;
     }
     else if(two_type->typ_category==TP_POINT&&one_type->typ_category==TP_NULL_POINTER_CONSTANT)
     {
         DelVEC(tmp_type_vec);
-        VECcpy(operand_two->expr_attribute->type_vec,&tmp_type_vec);
+        VECcpy(operand_two->symbol->type_vec,&tmp_type_vec);
         legal=true;
     }
     if(!legal)
@@ -154,29 +162,29 @@ bool cond_expr_value(AST_BASE* ast_node)
     }
     if(point_qual)
     {
-        M_TYPE* tmp_qual=Type_composite_qual(Type_VEC_get_qual(operand_one->expr_attribute->type_vec),Type_VEC_get_qual(operand_two->expr_attribute->type_vec));
+        M_TYPE* tmp_qual=Type_composite_qual(Type_VEC_get_qual(operand_one->symbol->type_vec),Type_VEC_get_qual(operand_two->symbol->type_vec));
         if(tmp_qual)
             VECinsert(tmp_type_vec,(void*)tmp_qual);
     }
-    ast_node->expr_attribute->type_vec=tmp_type_vec;
+    ast_node->symbol->type_vec=tmp_type_vec;
     /*as for const expr,if logical_or_expr_node result is true ,only the first one is const,no need to consider the second,if false, the same*/
     /*TODO:const expr*/
     bool const_expr=false;
     
-    if(logical_or_expr_node->expr_attribute->const_expr){
-        int one_or_two=logical_const(tmpt->typ_category,logical_or_expr_node->expr_attribute->data_field);
-        if(one_or_two==0&&operand_two->expr_attribute->const_expr)
+    if(logical_or_expr_node->symbol->const_expr){
+        int one_or_two=logical_const(tmpt->typ_category,logical_or_expr_node->symbol->data_field);
+        if(one_or_two==0&&operand_two->symbol->const_expr)
         {
             const_expr=true;
-            memcpy(ast_node->expr_attribute->data_field,operand_two->expr_attribute->data_field,sizeof(VALUE_DATA));
+            memcpy(ast_node->symbol->data_field,operand_two->symbol->data_field,sizeof(VALUE_DATA));
         }
-        else if(one_or_two==1&&operand_one->expr_attribute->const_expr)
+        else if(one_or_two==1&&operand_one->symbol->const_expr)
         {
             const_expr=true;
-            memcpy(ast_node->expr_attribute->data_field,operand_one->expr_attribute->data_field,sizeof(VALUE_DATA));
+            memcpy(ast_node->symbol->data_field,operand_one->symbol->data_field,sizeof(VALUE_DATA));
         }
     }
-    ast_node->expr_attribute->const_expr=const_expr;
+    ast_node->symbol->const_expr=const_expr;
     m_free(tei);
 #ifdef _TEST_SEMANTICS_
     print_expr_type(ast_node);
@@ -213,12 +221,12 @@ bool expr_value(AST_BASE* ast_node)
         if(!expr_dispatch(assignment_expr_node))
             goto error;
     }
-    VECcpy(assignment_expr_node->expr_attribute->type_vec,&(ast_node->expr_attribute->type_vec));
-    if(assignment_expr_node&&assignment_expr_node->expr_attribute->const_expr)
+    VECcpy(assignment_expr_node->symbol->type_vec,&(ast_node->symbol->type_vec));
+    if(assignment_expr_node&&assignment_expr_node->symbol->const_expr)
     {
-        ast_node->expr_attribute->const_expr=true;
-        ast_node->expr_attribute->data_size=assignment_expr_node->expr_attribute->data_size;
-        memcpy(ast_node->expr_attribute->data_field,assignment_expr_node->expr_attribute->data_field,sizeof(VALUE_DATA));
+        ast_node->symbol->const_expr=true;
+        ast_node->symbol->data_size=assignment_expr_node->symbol->data_size;
+        memcpy(ast_node->symbol->data_field,assignment_expr_node->symbol->data_field,sizeof(VALUE_DATA));
     }
 #ifdef _TEST_SEMANTICS_
     print_expr_type(ast_node);
@@ -255,15 +263,15 @@ bool assign_expr_value(AST_BASE* ast_node)
         goto error;
     if(!expr_dispatch(assign_expr_node))
         goto error;
-    VEC* unary_type_vec=lvalue_convertion(unary_expr_node->expr_attribute->type_vec);
-    VEC* assign_type_vec=lvalue_convertion(assign_expr_node->expr_attribute->type_vec);
+    VEC* unary_type_vec=lvalue_convertion(unary_expr_node->symbol->type_vec);
+    VEC* assign_type_vec=lvalue_convertion(assign_expr_node->symbol->type_vec);
     M_TYPE* assign_base_type=Type_VEC_get_actual_base_type(assign_type_vec);
-    if(IS_INT_TYPE(assign_base_type->typ_category)&&assign_expr_node->expr_attribute->const_expr){
-        long long int null_pointer_value=TP_INT_CAST_TYPE(assign_base_type->typ_category,assign_expr_node->expr_attribute->data_field);
+    if(IS_INT_TYPE(assign_base_type->typ_category)&&assign_expr_node->symbol->const_expr){
+        long long int null_pointer_value=TP_INT_CAST_TYPE(assign_base_type->typ_category,assign_expr_node->symbol->data_field);
         if(null_pointer_value==0)
             assign_base_type->typ_category=TP_NULL_POINTER_CONSTANT;
     }
-    if(!unary_expr_node->expr_attribute->is_lvalue)
+    if(!unary_expr_node->symbol->is_lvalue)
     {
         C_ERROR(C0051_ERR_LVALUE_REQUIRED,ast_node);
         goto error;
@@ -283,11 +291,11 @@ bool assign_expr_value(AST_BASE* ast_node)
     else{
         ;/*no any other operators,which is changed in parser stage*/
     }
-    ast_node->expr_attribute->type_vec=unary_type_vec;
-    if(unary_expr_node->expr_attribute->const_expr)
+    ast_node->symbol->type_vec=unary_type_vec;
+    if(unary_expr_node->symbol->const_expr)
     {
-        ast_node->expr_attribute->const_expr=true;
-        memcpy(ast_node->expr_attribute->data_field,unary_expr_node->expr_attribute->data_field,sizeof(VALUE_DATA));
+        ast_node->symbol->const_expr=true;
+        memcpy(ast_node->symbol->data_field,unary_expr_node->symbol->data_field,sizeof(VALUE_DATA));
     }
     m_free(tei);
 #ifdef _TEST_SEMANTICS_
@@ -391,28 +399,28 @@ bool logical_or_expr_value(AST_BASE* ast_node)
         AST_BASE* logical_or_expr_node=AST_GET_CHILD(ast_node,i);
         if(!expr_dispatch(logical_or_expr_node))
             goto error;
-        M_TYPE* tmpt=Type_VEC_get_actual_base_type(logical_or_expr_node->expr_attribute->type_vec);
+        M_TYPE* tmpt=Type_VEC_get_actual_base_type(logical_or_expr_node->symbol->type_vec);
         if(!IS_SCALAR_TYPE(tmpt->typ_category))
         {
             C_ERROR(C0062_ERR_OPERAND_SCALAR_TYPE,ast_node);
             goto error;
         }
-        if(!logical_or_expr_node->expr_attribute->const_expr){
+        if(!logical_or_expr_node->symbol->const_expr){
             const_expr=false;
         }
         else{
-            const_or_value=logical_const(tmpt->typ_category,logical_or_expr_node->expr_attribute->data_field);
+            const_or_value=logical_const(tmpt->typ_category,logical_or_expr_node->symbol->data_field);
             if(const_or_value)
                 break;
         }
     }
     M_TYPE* tmpt=build_base_type(TP_SINT);
     VECinsert(tmp_type_vec,(void*)tmpt);
-    ast_node->expr_attribute->type_vec=tmp_type_vec;
-    ast_node->expr_attribute->const_expr=const_expr;
+    ast_node->symbol->type_vec=tmp_type_vec;
+    ast_node->symbol->const_expr=const_expr;
     if(const_expr){
-        ast_node->expr_attribute->data_size=type_data_size[TP_SINT];
-        ast_node->expr_attribute->data_field->sint=const_or_value;
+        ast_node->symbol->data_size=type_data_size[TP_SINT];
+        ast_node->symbol->data_field->sint=const_or_value;
     }
     m_free(tei);
 #ifdef _TEST_SEMANTICS_
@@ -450,28 +458,28 @@ bool logical_and_expr_value(AST_BASE* ast_node)
         AST_BASE* logical_and_expr_node=AST_GET_CHILD(ast_node,i);
         if(!expr_dispatch(logical_and_expr_node))
             goto error;
-        M_TYPE* tmpt=Type_VEC_get_actual_base_type(logical_and_expr_node->expr_attribute->type_vec);
+        M_TYPE* tmpt=Type_VEC_get_actual_base_type(logical_and_expr_node->symbol->type_vec);
         if(!IS_SCALAR_TYPE(tmpt->typ_category))
         {
             C_ERROR(C0062_ERR_OPERAND_SCALAR_TYPE,ast_node);
             goto error;
         }
-        if(!logical_and_expr_node->expr_attribute->const_expr){
+        if(!logical_and_expr_node->symbol->const_expr){
             const_expr=false;
         }
         else{
-            const_and_value=logical_const(tmpt->typ_category,logical_and_expr_node->expr_attribute->data_field);
+            const_and_value=logical_const(tmpt->typ_category,logical_and_expr_node->symbol->data_field);
             if(!const_and_value)
                 break;
         }
     }
     M_TYPE* tmpt=build_base_type(TP_SINT);
     VECinsert(tmp_type_vec,(void*)tmpt);
-    ast_node->expr_attribute->type_vec=tmp_type_vec;
-    ast_node->expr_attribute->const_expr=const_expr;
+    ast_node->symbol->type_vec=tmp_type_vec;
+    ast_node->symbol->const_expr=const_expr;
     if(const_expr){
-        ast_node->expr_attribute->data_size=type_data_size[TP_SINT];
-        ast_node->expr_attribute->data_field->sint=const_and_value;
+        ast_node->symbol->data_size=type_data_size[TP_SINT];
+        ast_node->symbol->data_field->sint=const_and_value;
     }
     m_free(tei);
 #ifdef _TEST_SEMANTICS_
@@ -511,19 +519,19 @@ bool bit_inclusive_or_expr_value(AST_BASE* ast_node)
         AST_BASE* inor_expr_node=AST_GET_CHILD(ast_node,i);
         if(!expr_dispatch(inor_expr_node))
             goto error;
-        M_TYPE* tmpt=Type_VEC_get_actual_base_type(inor_expr_node->expr_attribute->type_vec);
+        M_TYPE* tmpt=Type_VEC_get_actual_base_type(inor_expr_node->symbol->type_vec);
         if(!(IS_INT_TYPE(tmpt->typ_category)))
         {
             C_ERROR(C0060_ERR_OPERAND_INTEGER_TYPE,ast_node);
             goto error;
         }
         if(i==0){
-            VECcpy(inor_expr_node->expr_attribute->type_vec,&tmp_type_vec);
+            VECcpy(inor_expr_node->symbol->type_vec,&tmp_type_vec);
             res_type=tmpt;
-            if(inor_expr_node->expr_attribute->const_expr)
+            if(inor_expr_node->symbol->const_expr)
             {
                 const_expr=true;
-                const_value=TP_INT_CAST_TYPE(tmpt->typ_category,inor_expr_node->expr_attribute->data_field);
+                const_value=TP_INT_CAST_TYPE(tmpt->typ_category,inor_expr_node->symbol->data_field);
             }
             continue;
         }
@@ -531,19 +539,19 @@ bool bit_inclusive_or_expr_value(AST_BASE* ast_node)
         DelVEC(tmp_type_vec);
         tmp_type_vec=InitVEC(DEFAULT_CAPICITY);
         VECinsert(tmp_type_vec,(void*)res_type);
-        if(const_expr&&inor_expr_node->expr_attribute->const_expr)
+        if(const_expr&&inor_expr_node->symbol->const_expr)
         {
             const_expr=true;
-            const_value=const_value | TP_INT_CAST_TYPE(tmpt->typ_category,inor_expr_node->expr_attribute->data_field);
+            const_value=const_value | TP_INT_CAST_TYPE(tmpt->typ_category,inor_expr_node->symbol->data_field);
         }
     }
-    ast_node->expr_attribute->type_vec=tmp_type_vec;
-    ast_node->expr_attribute->const_expr=const_expr;
+    ast_node->symbol->type_vec=tmp_type_vec;
+    ast_node->symbol->const_expr=const_expr;
     if(const_expr)
     {
-        ast_node->expr_attribute->data_size=type_data_size[res_type->typ_category];
+        ast_node->symbol->data_size=type_data_size[res_type->typ_category];
         /*const_value*/
-        bitwise_const(res_type->typ_category,ast_node->expr_attribute->data_field,const_value);
+        bitwise_const(res_type->typ_category,ast_node->symbol->data_field,const_value);
     }
     m_free(tei);
 #ifdef _TEST_SEMANTICS_
@@ -583,19 +591,19 @@ bool bit_exclusive_or_expr_value(AST_BASE* ast_node)
         AST_BASE* exor_expr_node=AST_GET_CHILD(ast_node,i);
         if(!expr_dispatch(exor_expr_node))
             goto error;
-        M_TYPE* tmpt=Type_VEC_get_actual_base_type(exor_expr_node->expr_attribute->type_vec);
+        M_TYPE* tmpt=Type_VEC_get_actual_base_type(exor_expr_node->symbol->type_vec);
         if(!(IS_INT_TYPE(tmpt->typ_category)))
         {
             C_ERROR(C0060_ERR_OPERAND_INTEGER_TYPE,ast_node);
             goto error;
         }
         if(i==0){
-            VECcpy(exor_expr_node->expr_attribute->type_vec,&tmp_type_vec);
+            VECcpy(exor_expr_node->symbol->type_vec,&tmp_type_vec);
             res_type=tmpt;
-            if(exor_expr_node->expr_attribute->const_expr)
+            if(exor_expr_node->symbol->const_expr)
             {
                 const_expr=true;
-                const_value=TP_INT_CAST_TYPE(tmpt->typ_category,exor_expr_node->expr_attribute->data_field);
+                const_value=TP_INT_CAST_TYPE(tmpt->typ_category,exor_expr_node->symbol->data_field);
             }
             continue;
         }
@@ -603,19 +611,19 @@ bool bit_exclusive_or_expr_value(AST_BASE* ast_node)
         DelVEC(tmp_type_vec);
         tmp_type_vec=InitVEC(DEFAULT_CAPICITY);
         VECinsert(tmp_type_vec,(void*)res_type);
-        if(const_expr&&exor_expr_node->expr_attribute->const_expr)
+        if(const_expr&&exor_expr_node->symbol->const_expr)
         {
             const_expr=true;
-            const_value=const_value ^ TP_INT_CAST_TYPE(tmpt->typ_category,exor_expr_node->expr_attribute->data_field);
+            const_value=const_value ^ TP_INT_CAST_TYPE(tmpt->typ_category,exor_expr_node->symbol->data_field);
         }
     }
-    ast_node->expr_attribute->type_vec=tmp_type_vec;
-    ast_node->expr_attribute->const_expr=const_expr;
+    ast_node->symbol->type_vec=tmp_type_vec;
+    ast_node->symbol->const_expr=const_expr;
     if(const_expr)
     {
-        ast_node->expr_attribute->data_size=type_data_size[res_type->typ_category];
+        ast_node->symbol->data_size=type_data_size[res_type->typ_category];
         /*TODO:const_value DONE*/
-        bitwise_const(res_type->typ_category,ast_node->expr_attribute->data_field,const_value);
+        bitwise_const(res_type->typ_category,ast_node->symbol->data_field,const_value);
     }
     m_free(tei);
 #ifdef _TEST_SEMANTICS_
@@ -655,19 +663,19 @@ bool and_expr_value(AST_BASE* ast_node)
         AST_BASE* and_expr_node=AST_GET_CHILD(ast_node,i);
         if(!expr_dispatch(and_expr_node))
             goto error;
-        M_TYPE* tmpt=Type_VEC_get_actual_base_type(and_expr_node->expr_attribute->type_vec);
+        M_TYPE* tmpt=Type_VEC_get_actual_base_type(and_expr_node->symbol->type_vec);
         if(!(IS_INT_TYPE(tmpt->typ_category)))
         {
             C_ERROR(C0060_ERR_OPERAND_INTEGER_TYPE,ast_node);
             goto error;
         }
         if(i==0){
-            VECcpy(and_expr_node->expr_attribute->type_vec,&tmp_type_vec);
+            VECcpy(and_expr_node->symbol->type_vec,&tmp_type_vec);
             res_type=tmpt;
-            if(and_expr_node->expr_attribute->const_expr)
+            if(and_expr_node->symbol->const_expr)
             {
                 const_expr=true;
-                const_value=TP_INT_CAST_TYPE(tmpt->typ_category,and_expr_node->expr_attribute->data_field);
+                const_value=TP_INT_CAST_TYPE(tmpt->typ_category,and_expr_node->symbol->data_field);
             }
             continue;
         }
@@ -675,19 +683,19 @@ bool and_expr_value(AST_BASE* ast_node)
         DelVEC(tmp_type_vec);
         tmp_type_vec=InitVEC(DEFAULT_CAPICITY);
         VECinsert(tmp_type_vec,(void*)res_type);
-        if(const_expr&&and_expr_node->expr_attribute->const_expr)
+        if(const_expr&&and_expr_node->symbol->const_expr)
         {
             const_expr=true;
-            const_value=const_value & TP_INT_CAST_TYPE(tmpt->typ_category,and_expr_node->expr_attribute->data_field);
+            const_value=const_value & TP_INT_CAST_TYPE(tmpt->typ_category,and_expr_node->symbol->data_field);
         }
     }
-    ast_node->expr_attribute->type_vec=tmp_type_vec;
-    ast_node->expr_attribute->const_expr=const_expr;
+    ast_node->symbol->type_vec=tmp_type_vec;
+    ast_node->symbol->const_expr=const_expr;
     if(const_expr)
     {
-        ast_node->expr_attribute->data_size=type_data_size[res_type->typ_category];
+        ast_node->symbol->data_size=type_data_size[res_type->typ_category];
         /*const_value*/
-        bitwise_const(res_type->typ_category,ast_node->expr_attribute->data_field,const_value);
+        bitwise_const(res_type->typ_category,ast_node->symbol->data_field,const_value);
     }
     m_free(tei);
 #ifdef _TEST_SEMANTICS_
@@ -722,21 +730,21 @@ bool equal_expr_value(AST_BASE* ast_node)
     if(!expr_dispatch(equal_expr_node))
         goto error;
     VEC* tmp_type_vec=NULL;
-    bool const_expr=equal_expr_node->expr_attribute->const_expr;
+    bool const_expr=equal_expr_node->symbol->const_expr;
     /*TODO*/
     bool equal_value=false;
-    VECcpy(equal_expr_node->expr_attribute->type_vec,&tmp_type_vec);
+    VECcpy(equal_expr_node->symbol->type_vec,&tmp_type_vec);
     VALUE_DATA* tmp_data_field=m_alloc(sizeof(VALUE_DATA));
-    memcpy(tmp_data_field,equal_expr_node->expr_attribute->data_field,sizeof(VALUE_DATA));
+    memcpy(tmp_data_field,equal_expr_node->symbol->data_field,sizeof(VALUE_DATA));
     for(size_t i=0;i+2<AST_CHILD_NUM(ast_node);i+=2){
         AST_BASE* operator=AST_GET_CHILD(ast_node,i+1);
         AST_BASE* relation_expression_node=AST_GET_CHILD(ast_node,i+2);
         if(!expr_dispatch(relation_expression_node))
             goto error;
         M_TYPE* equal_base_type=Type_VEC_get_actual_base_type(tmp_type_vec);
-        M_TYPE* rela_base_type=Type_VEC_get_actual_base_type(relation_expression_node->expr_attribute->type_vec);
-        if(IS_INT_TYPE(rela_base_type->typ_category)&&relation_expression_node->expr_attribute->const_expr){
-            long long int null_pointer_value=TP_INT_CAST_TYPE(rela_base_type->typ_category,relation_expression_node->expr_attribute->data_field);
+        M_TYPE* rela_base_type=Type_VEC_get_actual_base_type(relation_expression_node->symbol->type_vec);
+        if(IS_INT_TYPE(rela_base_type->typ_category)&&relation_expression_node->symbol->const_expr){
+            long long int null_pointer_value=TP_INT_CAST_TYPE(rela_base_type->typ_category,relation_expression_node->symbol->data_field);
             if(null_pointer_value==0)
                 rela_base_type->typ_category=TP_NULL_POINTER_CONSTANT;
         }
@@ -747,62 +755,62 @@ bool equal_expr_value(AST_BASE* ast_node)
         bool legal=false;
         if(IS_ARTH_TYPE(equal_base_type->typ_category)&&IS_ARTH_TYPE(rela_base_type->typ_category))
         {
-            if(const_expr&&relation_expression_node->expr_attribute->const_expr){
+            if(const_expr&&relation_expression_node->symbol->const_expr){
                 const_expr=true;
                 /*I feels sad about this code,for I have to list all the cases*/
                 if(IS_INT_TYPE(equal_base_type->typ_category)&&IS_INT_TYPE(rela_base_type->typ_category))
                 {
                     long long int equal_base_value=get_int_const(equal_base_type->typ_category,tmp_data_field,true);
-                    long long int rela_base_value=get_int_const(rela_base_type->typ_category,relation_expression_node->expr_attribute->data_field,true);
+                    long long int rela_base_value=get_int_const(rela_base_type->typ_category,relation_expression_node->symbol->data_field,true);
                     equal_value=(equal_base_value==rela_base_value);
                 }
                 else if(IS_INT_TYPE(equal_base_type->typ_category)&&IS_FLOAT_TYPE(rela_base_type->typ_category))
                 {
                     long long int equal_base_value=get_int_const(equal_base_type->typ_category,tmp_data_field,true);
-                    long double rela_base_value=get_float_const(rela_base_type->typ_category,relation_expression_node->expr_attribute->data_field,true);
+                    long double rela_base_value=get_float_const(rela_base_type->typ_category,relation_expression_node->symbol->data_field,true);
                     equal_value=(equal_base_value==rela_base_value);
                 }
                 else if(IS_FLOAT_TYPE(equal_base_type->typ_category)&&IS_INT_TYPE(rela_base_type->typ_category))
                 {
                     long double equal_base_value=get_float_const(equal_base_type->typ_category,tmp_data_field,true);
-                    long long int rela_base_value=get_int_const(rela_base_type->typ_category,relation_expression_node->expr_attribute->data_field,true);
+                    long long int rela_base_value=get_int_const(rela_base_type->typ_category,relation_expression_node->symbol->data_field,true);
                     equal_value=(equal_base_value==rela_base_value);
                 }
                 else if(IS_FLOAT_TYPE(equal_base_type->typ_category)&&IS_FLOAT_TYPE(rela_base_type->typ_category))
                 {
                     long double equal_base_value=get_float_const(equal_base_type->typ_category,tmp_data_field,true);
-                    long double rela_base_value=get_float_const(rela_base_type->typ_category,relation_expression_node->expr_attribute->data_field,true);
+                    long double rela_base_value=get_float_const(rela_base_type->typ_category,relation_expression_node->symbol->data_field,true);
                     equal_value=(equal_base_value==rela_base_value);
                 }
 #if _CPLX_SUPPORT==1 
                 else if(IS_INT_TYPE(equal_base_type->typ_category)&&IS_COMPLEX_TYPE(rela_base_type->typ_category))
                 {
                     long long int equal_base_value=get_int_const(equal_base_type->typ_category,tmp_data_field,true);
-                    long double* rela_base_value=get_complex_const(rela_base_type->typ_category,relation_expression_node->expr_attribute->data_field,true);
+                    long double* rela_base_value=get_complex_const(rela_base_type->typ_category,relation_expression_node->symbol->data_field,true);
                     equal_value=((equal_base_value==*rela_base_value)&&(*(rela_base_value+1)==0));
                 }
                 else if(IS_COMPLEX_TYPE(equal_base_type->typ_category)&&IS_INT_TYPE(rela_base_type->typ_category))
                 {
                     long double* equal_base_value=get_complex_const(equal_base_type->typ_category,tmp_data_field,true);
-                    long long int rela_base_value=get_int_const(rela_base_type->typ_category,relation_expression_node->expr_attribute->data_field,true);
+                    long long int rela_base_value=get_int_const(rela_base_type->typ_category,relation_expression_node->symbol->data_field,true);
                     equal_value=((*equal_base_value==rela_base_value)&&(*(equal_base_value+1)==0));
                 }
                 else if(IS_COMPLEX_TYPE(equal_base_type->typ_category)&&IS_FLOAT_TYPE(rela_base_type->typ_category))
                 {
                     long double* equal_base_value=get_complex_const(equal_base_type->typ_category,tmp_data_field,true);
-                    long double rela_base_value=get_float_const(rela_base_type->typ_category,relation_expression_node->expr_attribute->data_field,true);
+                    long double rela_base_value=get_float_const(rela_base_type->typ_category,relation_expression_node->symbol->data_field,true);
                     equal_value=((*equal_base_value==rela_base_value)&&(*(equal_base_value+1)==0));
                 }
                 else if(IS_FLOAT_TYPE(equal_base_type->typ_category)&&IS_COMPLEX_TYPE(rela_base_type->typ_category))
                 {
                     long double equal_base_value=get_float_const(equal_base_type->typ_category,tmp_data_field,true);
-                    long double* rela_base_value=get_complex_const(rela_base_type->typ_category,relation_expression_node->expr_attribute->data_field,true);
+                    long double* rela_base_value=get_complex_const(rela_base_type->typ_category,relation_expression_node->symbol->data_field,true);
                     equal_value=((equal_base_value==*rela_base_value)&&(*(rela_base_value+1)==0));
                 }
                 else if(IS_COMPLEX_TYPE(equal_base_type->typ_category)&&IS_COMPLEX_TYPE(rela_base_type->typ_category))
                 {
                     long double* equal_base_value=get_complex_const(equal_base_type->typ_category,tmp_data_field,true);
-                    long double* rela_base_value=get_complex_const(rela_base_type->typ_category,relation_expression_node->expr_attribute->data_field,true);
+                    long double* rela_base_value=get_complex_const(rela_base_type->typ_category,relation_expression_node->symbol->data_field,true);
                     equal_value=(*equal_base_value==*rela_base_value)&&(*(equal_base_value+1)==*(rela_base_value+1));
                 }
 #endif
@@ -830,7 +838,7 @@ bool equal_expr_value(AST_BASE* ast_node)
         {
             const_expr=false;
             VEC* tmp_equal_vec=Type_VEC_get_Pointer_TO(tmp_type_vec,true);
-            VEC* tmp_rela_vec=Type_VEC_get_Pointer_TO(relation_expression_node->expr_attribute->type_vec,true);
+            VEC* tmp_rela_vec=Type_VEC_get_Pointer_TO(relation_expression_node->symbol->type_vec,true);
             if(compatible_types(tmp_equal_vec,tmp_rela_vec))
             {
                 legal=true;
@@ -864,7 +872,7 @@ bool equal_expr_value(AST_BASE* ast_node)
         {
             printf("type_vec\n");
             print_type_vec(tmp_type_vec);
-            print_type_vec(relation_expression_node->expr_attribute->type_vec);
+            print_type_vec(relation_expression_node->symbol->type_vec);
             C_ERROR(C0070_ERR_EQUAL_OPERAND,ast_node);
             goto error;
         }
@@ -873,12 +881,12 @@ bool equal_expr_value(AST_BASE* ast_node)
         M_TYPE* tmpt=build_base_type(TP_SINT);
         VECinsert(tmp_type_vec,(void*)tmpt);
     }
-    ast_node->expr_attribute->type_vec=tmp_type_vec;
-    ast_node->expr_attribute->const_expr=const_expr;
+    ast_node->symbol->type_vec=tmp_type_vec;
+    ast_node->symbol->const_expr=const_expr;
     if(const_expr)
     {
-        ast_node->expr_attribute->data_size=type_data_size[TP_SINT];
-        ast_node->expr_attribute->data_field->sint=tmp_data_field->sint;  /*only const_expr is true that this field is meaningful*/
+        ast_node->symbol->data_size=type_data_size[TP_SINT];
+        ast_node->symbol->data_field->sint=tmp_data_field->sint;  /*only const_expr is true that this field is meaningful*/
     }
     m_free(tei);
     m_free(tmp_data_field);
@@ -915,29 +923,29 @@ bool relation_expr_value(AST_BASE* ast_node)
     if(!expr_dispatch(relation_expr_node)){
         goto error;
     }
-    bool const_expr=relation_expr_node->expr_attribute->const_expr;
+    bool const_expr=relation_expr_node->symbol->const_expr;
     VALUE_DATA* tmp_data_field=m_alloc(sizeof(VALUE_DATA));
-    VECcpy(relation_expr_node->expr_attribute->type_vec,&tmp_type_vec);
-    memcpy(tmp_data_field,relation_expr_node->expr_attribute->data_field,sizeof(VALUE_DATA));
+    VECcpy(relation_expr_node->symbol->type_vec,&tmp_type_vec);
+    memcpy(tmp_data_field,relation_expr_node->symbol->data_field,sizeof(VALUE_DATA));
     for(size_t i=0;i+2<AST_CHILD_NUM(ast_node);i+=2){
         AST_BASE* operator=AST_GET_CHILD(ast_node,i+1);
         AST_BASE* shift_expr_node=AST_GET_CHILD(ast_node,i+2);
         if(!expr_dispatch(shift_expr_node))
             goto error;
         M_TYPE* rela_base_type=Type_VEC_get_actual_base_type(tmp_type_vec);
-        M_TYPE* shift_base_type=Type_VEC_get_actual_base_type(shift_expr_node->expr_attribute->type_vec);
+        M_TYPE* shift_base_type=Type_VEC_get_actual_base_type(shift_expr_node->symbol->type_vec);
         bool legal=false;
         bool pointcmp=false;
         if(IS_REAL_TYPE(rela_base_type->typ_category)&&IS_REAL_TYPE(shift_base_type->typ_category))
         {
             legal=true;
-            if(const_expr&&shift_expr_node->expr_attribute->const_expr)
+            if(const_expr&&shift_expr_node->symbol->const_expr)
             {
                 const_expr=true;
                 if(IS_INT_TYPE(rela_base_type->typ_category)&&IS_INT_TYPE(shift_base_type->typ_category))
                 {
                     long long int rela_base_value=get_int_const(rela_base_type->typ_category,tmp_data_field,true);
-                    long long int shift_base_value=get_int_const(shift_base_type->typ_category,shift_expr_node->expr_attribute->data_field,true);
+                    long long int shift_base_value=get_int_const(shift_base_type->typ_category,shift_expr_node->symbol->data_field,true);
                     if(operator->type==less_than)
                         tmp_data_field->sint=((rela_base_value<shift_base_value)?1:0);
                     else if(operator->type==greater_than)
@@ -950,7 +958,7 @@ bool relation_expr_value(AST_BASE* ast_node)
                 else if(IS_INT_TYPE(rela_base_type->typ_category)&&IS_FLOAT_TYPE(shift_base_type->typ_category))
                 {
                     long long int rela_base_value=get_int_const(rela_base_type->typ_category,tmp_data_field,true);
-                    long double shift_base_value=get_float_const(shift_base_type->typ_category,shift_expr_node->expr_attribute->data_field,true);
+                    long double shift_base_value=get_float_const(shift_base_type->typ_category,shift_expr_node->symbol->data_field,true);
                     if(operator->type==less_than)
                         tmp_data_field->sint=((rela_base_value<shift_base_value)?1:0);
                     else if(operator->type==greater_than)
@@ -963,7 +971,7 @@ bool relation_expr_value(AST_BASE* ast_node)
                 else if(IS_FLOAT_TYPE(rela_base_type->typ_category)&&IS_INT_TYPE(shift_base_type->typ_category))
                 {
                     long double rela_base_value=get_float_const(rela_base_type->typ_category,tmp_data_field,true);
-                    long long int shift_base_value=get_int_const(shift_base_type->typ_category,shift_expr_node->expr_attribute->data_field,true);
+                    long long int shift_base_value=get_int_const(shift_base_type->typ_category,shift_expr_node->symbol->data_field,true);
                     if(operator->type==less_than)
                         tmp_data_field->sint=(rela_base_value<shift_base_value)?1:0;
                     else if(operator->type==greater_than)
@@ -976,7 +984,7 @@ bool relation_expr_value(AST_BASE* ast_node)
                 else if(IS_FLOAT_TYPE(rela_base_type->typ_category)&&IS_FLOAT_TYPE(shift_base_type->typ_category))
                 {
                     long double rela_base_value=get_float_const(rela_base_type->typ_category,tmp_data_field,true);
-                    long double shift_base_value=get_float_const(shift_base_type->typ_category,shift_expr_node->expr_attribute->data_field,true);
+                    long double shift_base_value=get_float_const(shift_base_type->typ_category,shift_expr_node->symbol->data_field,true);
                     if(operator->type==less_than)
                         tmp_data_field->sint=(rela_base_value<shift_base_value)?1:0;
                     else if(operator->type==greater_than)
@@ -994,7 +1002,7 @@ bool relation_expr_value(AST_BASE* ast_node)
         {
             pointcmp=true;
             VEC* tmp_rela_vec=Type_VEC_get_Pointer_TO(tmp_type_vec,true);
-            VEC* tmp_shift_vec=Type_VEC_get_Pointer_TO(shift_expr_node->expr_attribute->type_vec,true);
+            VEC* tmp_shift_vec=Type_VEC_get_Pointer_TO(shift_expr_node->symbol->type_vec,true);
             if(compatible_types(tmp_rela_vec,tmp_shift_vec))
                 legal=true;
             DelVEC(tmp_rela_vec);
@@ -1018,11 +1026,11 @@ bool relation_expr_value(AST_BASE* ast_node)
         tmp_type_vec=InitVEC(DEFAULT_CAPICITY);
         VECinsert(tmp_type_vec,tmpt);
     }
-    ast_node->expr_attribute->type_vec=tmp_type_vec;
+    ast_node->symbol->type_vec=tmp_type_vec;
     if(const_expr){
-        ast_node->expr_attribute->const_expr=true;
-        ast_node->expr_attribute->data_size=type_data_size[TP_SINT];
-        ast_node->expr_attribute->data_field->sint=tmp_data_field->sint;
+        ast_node->symbol->const_expr=true;
+        ast_node->symbol->data_size=type_data_size[TP_SINT];
+        ast_node->symbol->data_field->sint=tmp_data_field->sint;
     }
     m_free(tei);
     m_free(tmp_data_field);
@@ -1060,16 +1068,16 @@ bool shift_expr_value(AST_BASE* ast_node)
     VALUE_DATA* tmp_data_field=m_alloc(sizeof(VALUE_DATA));
     if(!expr_dispatch(shift_expr_node))
         goto error;
-    VECcpy(shift_expr_node->expr_attribute->type_vec,&tmp_type_vec);
-    memcpy(tmp_data_field,shift_expr_node->expr_attribute->data_field,sizeof(VALUE_DATA));
-    bool const_expr=shift_expr_node->expr_attribute->const_expr;
+    VECcpy(shift_expr_node->symbol->type_vec,&tmp_type_vec);
+    memcpy(tmp_data_field,shift_expr_node->symbol->data_field,sizeof(VALUE_DATA));
+    bool const_expr=shift_expr_node->symbol->const_expr;
     for(size_t i=0;i+2<AST_CHILD_NUM(ast_node);i+=2){
         AST_BASE* shift_op_node=AST_GET_CHILD(ast_node,i+1);
         AST_BASE* add_expression_node=AST_GET_CHILD(ast_node,i+2);
         if(!expr_dispatch(add_expression_node))
             goto error;
         M_TYPE* shift_base_type=Type_VEC_get_actual_base_type(tmp_type_vec);
-        M_TYPE* add_base_type=Type_VEC_get_actual_base_type(add_expression_node->expr_attribute->type_vec);
+        M_TYPE* add_base_type=Type_VEC_get_actual_base_type(add_expression_node->symbol->type_vec);
         if((!IS_INT_TYPE(shift_base_type->typ_category))||(!IS_INT_TYPE(add_base_type->typ_category)))
         {
             C_ERROR(C0060_ERR_OPERAND_INTEGER_TYPE,ast_node);
@@ -1078,9 +1086,9 @@ bool shift_expr_value(AST_BASE* ast_node)
         if(integer_promotion(&shift_base_type))
             Type_VEC_change_actual_base_type(tmp_type_vec,shift_base_type);
         integer_promotion(&add_base_type);
-        if(const_expr&&add_expression_node->expr_attribute->const_expr){
+        if(const_expr&&add_expression_node->symbol->const_expr){
             long long int shift_base_int=get_int_const(shift_base_type->typ_category,tmp_data_field,true);
-            long long int add_base_int=get_int_const(add_base_type->typ_category,add_expression_node->expr_attribute->data_field,true);
+            long long int add_base_int=get_int_const(add_base_type->typ_category,add_expression_node->symbol->data_field,true);
             /*for unsigned long long and signed long long ,shift op is the same*/
             if(shift_op_node->type==left_shift)
             {
@@ -1095,11 +1103,11 @@ bool shift_expr_value(AST_BASE* ast_node)
     }
     M_TYPE* tmpt=Type_VEC_get_actual_base_type(tmp_type_vec);
     if(const_expr){
-        ast_node->expr_attribute->const_expr=true;
-        ast_node->expr_attribute->data_size=type_data_size[tmpt->typ_category];
-        cast_const(tmpt->typ_category,ast_node->expr_attribute->data_field,TP_SLONGLONG,tmp_data_field);
+        ast_node->symbol->const_expr=true;
+        ast_node->symbol->data_size=type_data_size[tmpt->typ_category];
+        cast_const(tmpt->typ_category,ast_node->symbol->data_field,TP_SLONGLONG,tmp_data_field);
     }
-    ast_node->expr_attribute->type_vec=tmp_type_vec;
+    ast_node->symbol->type_vec=tmp_type_vec;
     m_free(tei);
     m_free(tmp_data_field);
 #ifdef _TEST_SEMANTICS_
@@ -1134,12 +1142,12 @@ bool add_expr_value(AST_BASE* ast_node)
     AST_BASE* add_expression_node=AST_GET_CHILD(ast_node,0);
     if(!expr_dispatch(add_expression_node))
         goto error;
-    VECcpy(add_expression_node->expr_attribute->type_vec,&tmp_type_vec);
+    VECcpy(add_expression_node->symbol->type_vec,&tmp_type_vec);
     tmp_type_vec=lvalue_convertion(tmp_type_vec);
-    bool const_expr=add_expression_node->expr_attribute->const_expr;
+    bool const_expr=add_expression_node->symbol->const_expr;
     enum TP_CATEGORY tmp_category=TP_SPEC_NONE;
     VALUE_DATA* tmp_data_field=m_alloc(sizeof(VALUE_DATA));
-    memcpy(tmp_data_field,add_expression_node->expr_attribute->data_field,sizeof(VALUE_DATA));
+    memcpy(tmp_data_field,add_expression_node->symbol->data_field,sizeof(VALUE_DATA));
     for(size_t i=0;i+2<AST_CHILD_NUM(ast_node);i+=2)
     {
         AST_BASE* operator=AST_GET_CHILD(ast_node,i+1);
@@ -1147,12 +1155,12 @@ bool add_expr_value(AST_BASE* ast_node)
         bool pointer_add=false,ptrdiff=false;
         if(!expr_dispatch(mul_expression_node))
             goto error;
-        if(const_expr&&mul_expression_node->expr_attribute->const_expr)
+        if(const_expr&&mul_expression_node->symbol->const_expr)
             const_expr=true;
         else
             const_expr=false;
         M_TYPE* add_base_type=Type_VEC_get_actual_base_type(tmp_type_vec);
-        VEC* mul_type_vec=lvalue_convertion(mul_expression_node->expr_attribute->type_vec);
+        VEC* mul_type_vec=lvalue_convertion(mul_expression_node->symbol->type_vec);
         M_TYPE* mul_base_type=Type_VEC_get_actual_base_type(mul_type_vec);
         if(operator->type==plus){
             bool legal=false;
@@ -1225,7 +1233,7 @@ bool add_expr_value(AST_BASE* ast_node)
             if(IS_INT_TYPE(add_base_type->typ_category)&&IS_INT_TYPE(mul_base_type->typ_category))
             {
                 long long int add_base_value=get_int_const(add_base_type->typ_category,tmp_data_field,true);
-                long long int mul_base_value=get_int_const(mul_base_type->typ_category,mul_expression_node->expr_attribute->data_field,true);
+                long long int mul_base_value=get_int_const(mul_base_type->typ_category,mul_expression_node->symbol->data_field,true);
                 if(add_base_type->typ_category==TP_USLONGLONG||mul_base_type->typ_category==TP_USLONGLONG)
                 {
                     if(operator->type==plus)
@@ -1246,7 +1254,7 @@ bool add_expr_value(AST_BASE* ast_node)
             else if(IS_INT_TYPE(add_base_type->typ_category)&&IS_FLOAT_TYPE(mul_base_type->typ_category))
             {
                 long long int add_base_value=get_int_const(add_base_type->typ_category,tmp_data_field,true);
-                long double mul_base_value=get_float_const(mul_base_type->typ_category,mul_expression_node->expr_attribute->data_field,true);
+                long double mul_base_value=get_float_const(mul_base_type->typ_category,mul_expression_node->symbol->data_field,true);
                 if(operator->type==plus)
                     tmp_data_field->datalongdouble=add_base_value+mul_base_value;
                 else if(operator->type==minus)
@@ -1256,7 +1264,7 @@ bool add_expr_value(AST_BASE* ast_node)
             else if(IS_FLOAT_TYPE(add_base_type->typ_category)&&IS_INT_TYPE(mul_base_type->typ_category))
             {
                 long double add_base_value=get_float_const(add_base_type->typ_category,tmp_data_field,true);
-                long long int mul_base_value=get_int_const(mul_base_type->typ_category,mul_expression_node->expr_attribute->data_field,true);
+                long long int mul_base_value=get_int_const(mul_base_type->typ_category,mul_expression_node->symbol->data_field,true);
                 if(operator->type==plus)
                     tmp_data_field->datalongdouble=add_base_value+mul_base_value;
                 else if(operator->type==minus)
@@ -1266,7 +1274,7 @@ bool add_expr_value(AST_BASE* ast_node)
             else if(IS_FLOAT_TYPE(add_base_type->typ_category)&&IS_FLOAT_TYPE(mul_base_type->typ_category))
             {
                 long double add_base_value=get_float_const(add_base_type->typ_category,tmp_data_field,true);
-                long double mul_base_value=get_float_const(mul_base_type->typ_category,mul_expression_node->expr_attribute->data_field,true);
+                long double mul_base_value=get_float_const(mul_base_type->typ_category,mul_expression_node->symbol->data_field,true);
                 if(operator->type==plus)
                     tmp_data_field->datalongdouble=add_base_value+mul_base_value;
                 else if(operator->type==minus)
@@ -1277,7 +1285,7 @@ bool add_expr_value(AST_BASE* ast_node)
             else if(IS_INT_TYPE(add_base_type->typ_category)&&IS_COMPLEX_TYPE(mul_base_type->typ_category))
             {
                 long long int add_base_value=get_int_const(add_base_type->typ_category,tmp_data_field,true);
-                long double* mul_base_value=get_complex_const(mul_base_type->typ_category,mul_expression_node->expr_attribute->data_field,true);
+                long double* mul_base_value=get_complex_const(mul_base_type->typ_category,mul_expression_node->symbol->data_field,true);
                 if(operator->type==plus)
                     tmp_data_field->longdoublecomplex[0]=(long double)add_base_value+*mul_base_value;
                 else if(operator->type==minus)
@@ -1288,7 +1296,7 @@ bool add_expr_value(AST_BASE* ast_node)
             else if(IS_COMPLEX_TYPE(add_base_type->typ_category)&&IS_INT_TYPE(mul_base_type->typ_category))
             {
                 long double* add_base_value=get_complex_const(add_base_type->typ_category,tmp_data_field,true);
-                long long int mul_base_value=get_int_const(mul_base_type->typ_category,mul_expression_node->expr_attribute->data_field,true);
+                long long int mul_base_value=get_int_const(mul_base_type->typ_category,mul_expression_node->symbol->data_field,true);
                 if(operator->type==plus)
                     tmp_data_field->longdoublecomplex[0]=*add_base_value+(long double)mul_base_value;
                 else if(operator->type==minus)
@@ -1299,7 +1307,7 @@ bool add_expr_value(AST_BASE* ast_node)
             else if(IS_COMPLEX_TYPE(add_base_type->typ_category)&&IS_FLOAT_TYPE(mul_base_type->typ_category))
             {
                 long double* add_base_value=get_complex_const(add_base_type->typ_category,tmp_data_field,true);
-                long double mul_base_value=get_float_const(mul_base_type->typ_category,mul_expression_node->expr_attribute->data_field,true);
+                long double mul_base_value=get_float_const(mul_base_type->typ_category,mul_expression_node->symbol->data_field,true);
                 if(operator->type==plus)
                     tmp_data_field->longdoublecomplex[0]=*add_base_value+mul_base_value;
                 else if(operator->type==minus)
@@ -1310,7 +1318,7 @@ bool add_expr_value(AST_BASE* ast_node)
             else if(IS_FLOAT_TYPE(add_base_type->typ_category)&&IS_COMPLEX_TYPE(mul_base_type->typ_category))
             {
                 long double add_base_value=get_float_const(add_base_type->typ_category,tmp_data_field,true);
-                long double* mul_base_value=get_complex_const(mul_base_type->typ_category,mul_expression_node->expr_attribute->data_field,true);
+                long double* mul_base_value=get_complex_const(mul_base_type->typ_category,mul_expression_node->symbol->data_field,true);
                 if(operator->type==plus)
                     tmp_data_field->longdoublecomplex[0]=add_base_value+*mul_base_value;
                 else if(operator->type==minus)
@@ -1321,7 +1329,7 @@ bool add_expr_value(AST_BASE* ast_node)
             else if(IS_COMPLEX_TYPE(add_base_type->typ_category)&&IS_COMPLEX_TYPE(mul_base_type->typ_category))
             {
                 long double* add_base_value=get_complex_const(add_base_type->typ_category,tmp_data_field,true);
-                long double* mul_base_value=get_complex_const(mul_base_type->typ_category,mul_expression_node->expr_attribute->data_field,true);
+                long double* mul_base_value=get_complex_const(mul_base_type->typ_category,mul_expression_node->symbol->data_field,true);
                 if(operator->type==plus)
                 {
                     tmp_data_field->longdoublecomplex[0]=*add_base_value+*mul_base_value;
@@ -1354,13 +1362,13 @@ bool add_expr_value(AST_BASE* ast_node)
         if(tmpt)
             Type_VEC_change_actual_base_type(tmp_type_vec,tmpt);
     }
-    ast_node->expr_attribute->type_vec=tmp_type_vec;
+    ast_node->symbol->type_vec=tmp_type_vec;
     M_TYPE* tmpt=Type_VEC_get_actual_base_type(tmp_type_vec);
     if(const_expr){
         /*const expr case*/
-        ast_node->expr_attribute->const_expr=true;
-        ast_node->expr_attribute->data_size=type_data_size[tmpt->typ_category];
-        cast_const(tmpt->typ_category,ast_node->expr_attribute->data_field,tmp_category,tmp_data_field);
+        ast_node->symbol->const_expr=true;
+        ast_node->symbol->data_size=type_data_size[tmpt->typ_category];
+        cast_const(tmpt->typ_category,ast_node->symbol->data_field,tmp_category,tmp_data_field);
         /*const expr data*/
     }
     /*The result should not be a lvalue*/
@@ -1399,11 +1407,11 @@ bool mul_expr_value(AST_BASE* ast_node)
         goto error;
     }
     VEC* tmp_type_vec=NULL;
-    bool const_expr=mul_expression_node->expr_attribute->const_expr;
+    bool const_expr=mul_expression_node->symbol->const_expr;
     enum TP_CATEGORY tmp_category=TP_SPEC_NONE;
-    VECcpy(mul_expression_node->expr_attribute->type_vec,&tmp_type_vec);
+    VECcpy(mul_expression_node->symbol->type_vec,&tmp_type_vec);
     VALUE_DATA* tmp_data_field=m_alloc(sizeof(VALUE_DATA));
-    memcpy(tmp_data_field,mul_expression_node->expr_attribute->data_field,sizeof(VALUE_DATA));
+    memcpy(tmp_data_field,mul_expression_node->symbol->data_field,sizeof(VALUE_DATA));
     for(size_t i=0;i+2<AST_CHILD_NUM(ast_node);i+=2){
         AST_BASE* operator=AST_GET_CHILD(ast_node,i+1);
         AST_BASE* cast_expression_node=AST_GET_CHILD(ast_node,i+2);
@@ -1424,7 +1432,7 @@ bool mul_expr_value(AST_BASE* ast_node)
                 goto error;
             }
         }
-        cast_expr_type=Type_VEC_get_actual_base_type(cast_expression_node->expr_attribute->type_vec);
+        cast_expr_type=Type_VEC_get_actual_base_type(cast_expression_node->symbol->type_vec);
         if(!IS_ARTH_TYPE(cast_expr_type->typ_category)){
             C_ERROR(C0061_ERR_OPERAND_ARTHMATIC_TYPE,ast_node);
             goto error;
@@ -1435,13 +1443,13 @@ bool mul_expr_value(AST_BASE* ast_node)
                 goto error;
             }
         }
-        if(const_expr&&cast_expression_node->expr_attribute->const_expr)
+        if(const_expr&&cast_expression_node->symbol->const_expr)
         {
             /*TODO: mul const*/
             if(IS_INT_TYPE(mul_expr_type->typ_category)&&IS_INT_TYPE(cast_expr_type->typ_category))
             {
                 long long int mul_expr_value=get_int_const(mul_expr_type->typ_category,tmp_data_field,true);
-                long long int cast_expr_value=get_int_const(cast_expr_type->typ_category,cast_expression_node->expr_attribute->data_field,true);
+                long long int cast_expr_value=get_int_const(cast_expr_type->typ_category,cast_expression_node->symbol->data_field,true);
                 if(mul_expr_type->typ_category==TP_USLONGLONG||cast_expr_type->typ_category==TP_USLONGLONG)
                 {
                     if(operator->type==star)
@@ -1466,7 +1474,7 @@ bool mul_expr_value(AST_BASE* ast_node)
             else if(IS_INT_TYPE(mul_expr_type->typ_category)&&IS_FLOAT_TYPE(cast_expr_type->typ_category))
             {
                 long long int mul_expr_value=get_int_const(mul_expr_type->typ_category,tmp_data_field,true);
-                long double cast_expr_value=get_float_const(cast_expr_type->typ_category,cast_expression_node->expr_attribute->data_field,true);
+                long double cast_expr_value=get_float_const(cast_expr_type->typ_category,cast_expression_node->symbol->data_field,true);
                 if(operator->type==star)
                     tmp_data_field->datalongdouble=mul_expr_value*cast_expr_value;
                 else if(operator->type==forward_slash)
@@ -1476,7 +1484,7 @@ bool mul_expr_value(AST_BASE* ast_node)
             else if(IS_FLOAT_TYPE(mul_expr_type->typ_category)&&IS_INT_TYPE(cast_expr_type->typ_category))
             {
                 long double mul_expr_value=get_float_const(mul_expr_type->typ_category,tmp_data_field,true);
-                long long int cast_expr_value=get_int_const(cast_expr_type->typ_category,cast_expression_node->expr_attribute->data_field,true);
+                long long int cast_expr_value=get_int_const(cast_expr_type->typ_category,cast_expression_node->symbol->data_field,true);
                 if(operator->type==star)
                     tmp_data_field->datalongdouble=mul_expr_value*cast_expr_value;
                 else if(operator->type==forward_slash)
@@ -1486,7 +1494,7 @@ bool mul_expr_value(AST_BASE* ast_node)
             else if(IS_FLOAT_TYPE(mul_expr_type->typ_category)&&IS_FLOAT_TYPE(cast_expr_type->typ_category))
             {
                 long double mul_expr_value=get_float_const(mul_expr_type->typ_category,tmp_data_field,true);
-                long double cast_expr_value=get_float_const(cast_expr_type->typ_category,cast_expression_node->expr_attribute->data_field,true);
+                long double cast_expr_value=get_float_const(cast_expr_type->typ_category,cast_expression_node->symbol->data_field,true);
                 if(operator->type==star)
                     tmp_data_field->datalongdouble=mul_expr_value*cast_expr_value;
                 else if(operator->type==forward_slash)
@@ -1501,7 +1509,7 @@ bool mul_expr_value(AST_BASE* ast_node)
             else if(IS_INT_TYPE(mul_expr_type->typ_category)&&IS_COMPLEX_TYPE(cast_expr_type->typ_category))
             {
                 long long int mul_expr_value=get_int_const(mul_expr_type->typ_category,tmp_data_field,true);
-                long double* cast_expr_value=get_complex_const(cast_expr_type->typ_category,cast_expression_node->expr_attribute->data_field,true);
+                long double* cast_expr_value=get_complex_const(cast_expr_type->typ_category,cast_expression_node->symbol->data_field,true);
                 if(operator->type==star)
                 {
                     tmp_data_field->longdoublecomplex[0]=( (long double) mul_expr_value ) * (*cast_expr_value);
@@ -1518,7 +1526,7 @@ bool mul_expr_value(AST_BASE* ast_node)
             else if(IS_COMPLEX_TYPE(mul_expr_type->typ_category)&&IS_INT_TYPE(cast_expr_type->typ_category))
             {
                 long double* mul_expr_value=get_complex_const(mul_expr_type->typ_category,tmp_data_field,true);
-                long long int cast_expr_value=get_int_const(cast_expr_type->typ_category,cast_expression_node->expr_attribute->data_field,true);
+                long long int cast_expr_value=get_int_const(cast_expr_type->typ_category,cast_expression_node->symbol->data_field,true);
                 if(operator->type==star)
                 {
                     tmp_data_field->longdoublecomplex[0]=( *mul_expr_value ) * ( (long double)cast_expr_value );
@@ -1535,7 +1543,7 @@ bool mul_expr_value(AST_BASE* ast_node)
             else if(IS_COMPLEX_TYPE(mul_expr_type->typ_category)&&IS_FLOAT_TYPE(cast_expr_type->typ_category))
             {
                 long double* mul_expr_value=get_complex_const(mul_expr_type->typ_category,tmp_data_field,true);
-                long double cast_expr_value=get_float_const(cast_expr_type->typ_category,cast_expression_node->expr_attribute->data_field,true);
+                long double cast_expr_value=get_float_const(cast_expr_type->typ_category,cast_expression_node->symbol->data_field,true);
                 if(operator->type==star)
                 {
                     tmp_data_field->longdoublecomplex[0]=( *mul_expr_value ) * ( cast_expr_value );
@@ -1552,7 +1560,7 @@ bool mul_expr_value(AST_BASE* ast_node)
             else if(IS_FLOAT_TYPE(mul_expr_type->typ_category)&&IS_COMPLEX_TYPE(cast_expr_type->typ_category))
             {
                 long double mul_expr_value=get_float_const(mul_expr_type->typ_category,tmp_data_field,true);
-                long double* cast_expr_value=get_complex_const(cast_expr_type->typ_category,cast_expression_node->expr_attribute->data_field,true);
+                long double* cast_expr_value=get_complex_const(cast_expr_type->typ_category,cast_expression_node->symbol->data_field,true);
                 if(operator->type==star)
                 {
                     tmp_data_field->longdoublecomplex[0]=( (long double) mul_expr_value ) * (*cast_expr_value);
@@ -1569,7 +1577,7 @@ bool mul_expr_value(AST_BASE* ast_node)
             else if(IS_COMPLEX_TYPE(mul_expr_type->typ_category)&&IS_COMPLEX_TYPE(cast_expr_type->typ_category))
             {
                 long double* mul_expr_value=get_complex_const(mul_expr_type->typ_category,tmp_data_field,true);
-                long double* cast_expr_value=get_complex_const(cast_expr_type->typ_category,cast_expression_node->expr_attribute->data_field,true);
+                long double* cast_expr_value=get_complex_const(cast_expr_type->typ_category,cast_expression_node->symbol->data_field,true);
                 if(operator->type==star)
                 {
                     tmp_data_field->longdoublecomplex[0]=(*mul_expr_value)*(*cast_expr_value)-(*(mul_expr_value+1))*(*(cast_expr_value+1));
@@ -1595,13 +1603,13 @@ bool mul_expr_value(AST_BASE* ast_node)
         if(tmpt)
             Type_VEC_change_actual_base_type(tmp_type_vec,tmpt);
     }
-    ast_node->expr_attribute->type_vec=tmp_type_vec;
+    ast_node->symbol->type_vec=tmp_type_vec;
     /*obveriously, the lvalue is false*/
     M_TYPE* tmpt=Type_VEC_get_actual_base_type(tmp_type_vec);
     if(const_expr){
-        ast_node->expr_attribute->const_expr=true;
-        ast_node->expr_attribute->data_size=type_data_size[tmpt->typ_category];
-        cast_const(tmpt->typ_category,ast_node->expr_attribute->data_field,tmp_category,tmp_data_field);
+        ast_node->symbol->const_expr=true;
+        ast_node->symbol->data_size=type_data_size[tmpt->typ_category];
+        cast_const(tmpt->typ_category,ast_node->symbol->data_field,tmp_category,tmp_data_field);
         /*TODO:const expr value*/
     }
     m_free(tei);
@@ -1642,7 +1650,7 @@ bool cast_expr_value(AST_BASE* ast_node)
         goto error;
     if(!expr_dispatch(operand_node))
         goto error;
-    VECcpy(operand_node->expr_attribute->type_vec,&operand_vec);
+    VECcpy(operand_node->symbol->type_vec,&operand_vec);
     /*check types*/
     M_TYPE* tmp_tn_type=Type_VEC_get_actual_base_type(type_name_vec);
     if(!(tmp_tn_type->typ_category==TP_VOID)&&!IS_SCALAR_TYPE(tmp_tn_type->typ_category))
@@ -1663,12 +1671,12 @@ bool cast_expr_value(AST_BASE* ast_node)
         goto error;
     }
     DelVEC(operand_vec);
-    ast_node->expr_attribute->type_vec=type_name_vec;
-    if(operand_node->expr_attribute->const_expr)
+    ast_node->symbol->type_vec=type_name_vec;
+    if(operand_node->symbol->const_expr)
     {
-        ast_node->expr_attribute->const_expr=true;
-        ast_node->expr_attribute->data_size=type_data_size[tmp_tn_type->typ_category];
-        cast_const(tmp_tn_type->typ_category,ast_node->expr_attribute->data_field,tmp_op_type->typ_category,operand_node->expr_attribute->data_field);
+        ast_node->symbol->const_expr=true;
+        ast_node->symbol->data_size=type_data_size[tmp_tn_type->typ_category];
+        cast_const(tmp_tn_type->typ_category,ast_node->symbol->data_field,tmp_op_type->typ_category,operand_node->symbol->data_field);
     }
     /*A cast does not yield an lvalue*/
     m_free(tei);
@@ -1712,13 +1720,13 @@ bool unary_expr_value(AST_BASE* ast_node)
             operand_node=AST_GET_CHILD(ast_node,1);
             if(!expr_dispatch(operand_node))
                 goto error;
-            VECcpy(operand_node->expr_attribute->type_vec,&tmp_type_vec);
-            if(!operand_node->expr_attribute->is_lvalue)
+            VECcpy(operand_node->symbol->type_vec,&tmp_type_vec);
+            if(!operand_node->symbol->is_lvalue)
             {
                 C_ERROR(C0051_ERR_LVALUE_REQUIRED,operand_node);
                 goto error;
             }
-            if(!Type_VEC_modify_lvalue(tmp_type_vec,operand_node->expr_attribute->is_lvalue)){
+            if(!Type_VEC_modify_lvalue(tmp_type_vec,operand_node->symbol->is_lvalue)){
                 C_ERROR(C0056_ERR_EXPR_MODIFIABLE_LVALUE,operand_node);
                 goto error;
             }
@@ -1738,13 +1746,13 @@ bool unary_expr_value(AST_BASE* ast_node)
             operand_node=AST_GET_CHILD(ast_node,1);
             if(!expr_dispatch(operand_node))
                 goto error;
-            VECcpy(operand_node->expr_attribute->type_vec,&tmp_type_vec);
-            if(!operand_node->expr_attribute->is_lvalue)
+            VECcpy(operand_node->symbol->type_vec,&tmp_type_vec);
+            if(!operand_node->symbol->is_lvalue)
             {
                 C_ERROR(C0051_ERR_LVALUE_REQUIRED,operand_node);
                 goto error;
             }
-            if(!Type_VEC_modify_lvalue(tmp_type_vec,operand_node->expr_attribute->is_lvalue)){
+            if(!Type_VEC_modify_lvalue(tmp_type_vec,operand_node->symbol->is_lvalue)){
                 C_ERROR(C0056_ERR_EXPR_MODIFIABLE_LVALUE,operand_node);
                 goto error;
             }
@@ -1764,13 +1772,13 @@ bool unary_expr_value(AST_BASE* ast_node)
             operand_node=AST_GET_CHILD(ast_node,1);
             if(!expr_dispatch(operand_node))
                 goto error;
-            if(!operand_node->expr_attribute->is_lvalue)
+            if(!operand_node->symbol->is_lvalue)
             {
                 C_ERROR(C0051_ERR_LVALUE_REQUIRED,operand_node);
                 goto error;
             }
-            VECcpy(operand_node->expr_attribute->type_vec,&tmp_type_vec);
-            if(operand_node->expr_attribute->is_bit_field)
+            VECcpy(operand_node->symbol->type_vec,&tmp_type_vec);
+            if(operand_node->symbol->is_bit_field)
             {
                 C_ERROR(C0057_ERR_OPERAND_BIT_FIELD,operand_node);
                 goto error;
@@ -1790,7 +1798,7 @@ bool unary_expr_value(AST_BASE* ast_node)
             operand_node=AST_GET_CHILD(ast_node,1);
             if(!expr_dispatch(operand_node))
                 goto error;
-            VECcpy(operand_node->expr_attribute->type_vec,&tmp_type_vec);
+            VECcpy(operand_node->symbol->type_vec,&tmp_type_vec);
             tmp_type_vec=lvalue_convertion(tmp_type_vec);
             M_TYPE* tmpt=Type_VEC_get_actual_base_type(tmp_type_vec);
             if(tmpt->typ_category!=TP_POINT)
@@ -1809,16 +1817,16 @@ bool unary_expr_value(AST_BASE* ast_node)
             operand_node=AST_GET_CHILD(ast_node,1);
             if(!expr_dispatch(operand_node))
                 goto error;
-            VECcpy(operand_node->expr_attribute->type_vec,&tmp_type_vec);
+            VECcpy(operand_node->symbol->type_vec,&tmp_type_vec);
             M_TYPE* tmpt=Type_VEC_get_actual_base_type(tmp_type_vec);
             if(!IS_ARTH_TYPE(tmpt->typ_category)){
                 C_ERROR(C0061_ERR_OPERAND_ARTHMATIC_TYPE,operand_node);
                 goto error;
             }
-            if(operand_node->expr_attribute->const_expr)
+            if(operand_node->symbol->const_expr)
             {
                 const_expr=true;
-                plus_const(tmpt->typ_category,ast_node->expr_attribute->data_field,operand_node->expr_attribute->data_field);
+                plus_const(tmpt->typ_category,ast_node->symbol->data_field,operand_node->symbol->data_field);
             }
             if(integer_promotion(&tmpt))   /*no need to check the return*/
                 Type_VEC_change_actual_base_type(tmp_type_vec,tmpt);
@@ -1830,16 +1838,16 @@ bool unary_expr_value(AST_BASE* ast_node)
             operand_node=AST_GET_CHILD(ast_node,1);
             if(!expr_dispatch(operand_node))
                 goto error;
-            VECcpy(operand_node->expr_attribute->type_vec,&tmp_type_vec);
+            VECcpy(operand_node->symbol->type_vec,&tmp_type_vec);
             M_TYPE* tmpt=Type_VEC_get_actual_base_type(tmp_type_vec);
             if(!IS_ARTH_TYPE(tmpt->typ_category)){
                 C_ERROR(C0061_ERR_OPERAND_ARTHMATIC_TYPE,operand_node);
                 goto error;
             }
-            if(operand_node->expr_attribute->const_expr)
+            if(operand_node->symbol->const_expr)
             {
                 const_expr=true;
-                minus_const(tmpt->typ_category,ast_node->expr_attribute->data_field,operand_node->expr_attribute->data_field);
+                minus_const(tmpt->typ_category,ast_node->symbol->data_field,operand_node->symbol->data_field);
             }
             if(integer_promotion(&tmpt))
                 Type_VEC_change_actual_base_type(tmp_type_vec,tmpt);
@@ -1851,16 +1859,16 @@ bool unary_expr_value(AST_BASE* ast_node)
             operand_node=AST_GET_CHILD(ast_node,1);
             if(!expr_dispatch(operand_node))
                 goto error;
-            VECcpy(operand_node->expr_attribute->type_vec,&tmp_type_vec);
+            VECcpy(operand_node->symbol->type_vec,&tmp_type_vec);
             M_TYPE* tmpt=Type_VEC_get_actual_base_type(tmp_type_vec);
             if(!IS_INT_TYPE(tmpt->typ_category)){
                 C_ERROR(C0060_ERR_OPERAND_INTEGER_TYPE,operand_node);
                 goto error;
             }
-            if(operand_node->expr_attribute->const_expr)
+            if(operand_node->symbol->const_expr)
             {
                 const_expr=true;
-                tilde_const(tmpt->typ_category,ast_node->expr_attribute->data_field,operand_node->expr_attribute->data_field);
+                tilde_const(tmpt->typ_category,ast_node->symbol->data_field,operand_node->symbol->data_field);
             }
             if(integer_promotion(&tmpt))
                 Type_VEC_change_actual_base_type(tmp_type_vec,tmpt);
@@ -1872,16 +1880,16 @@ bool unary_expr_value(AST_BASE* ast_node)
             operand_node=AST_GET_CHILD(ast_node,1);
             if(!expr_dispatch(operand_node))
                 goto error;
-            VECcpy(operand_node->expr_attribute->type_vec,&tmp_type_vec);
+            VECcpy(operand_node->symbol->type_vec,&tmp_type_vec);
             M_TYPE* tmpt=Type_VEC_get_actual_base_type(tmp_type_vec);
             if(!IS_SCALAR_TYPE(tmpt->typ_category)){
                 C_ERROR(C0062_ERR_OPERAND_SCALAR_TYPE,operand_node);
                 goto error;
             }
-            if(operand_node->expr_attribute->const_expr)
+            if(operand_node->symbol->const_expr)
             {
                 const_expr=true;
-                ast_node->expr_attribute->data_field->sint=exclamation_const(tmpt->typ_category,operand_node->expr_attribute->data_field);
+                ast_node->symbol->data_field->sint=exclamation_const(tmpt->typ_category,operand_node->symbol->data_field);
             }
             DelVEC(tmp_type_vec);
             tmp_type_vec=InitVEC(DEFAULT_CAPICITY);
@@ -1900,8 +1908,8 @@ bool unary_expr_value(AST_BASE* ast_node)
             if(operand_node->type!=type_name){
                 if(!expr_dispatch(operand_node))
                     goto error;
-                VECcpy(operand_node->expr_attribute->type_vec,&tmp_type_vec);
-                if(operand_node->expr_attribute->is_bit_field){
+                VECcpy(operand_node->symbol->type_vec,&tmp_type_vec);
+                if(operand_node->symbol->is_bit_field){
                     C_ERROR(C0057_ERR_OPERAND_BIT_FIELD,operand_node);
                     goto error;
                 }
@@ -1928,8 +1936,8 @@ bool unary_expr_value(AST_BASE* ast_node)
                 goto error;
             }
             if(!Type_VEC_VLA(tmp_type_vec)){
-                ast_node->expr_attribute->data_size=type_data_size[TP_SINT];
-                ast_node->expr_attribute->data_field->sint=(int)Type_size(tmp_type_vec);
+                ast_node->symbol->data_size=type_data_size[TP_SINT];
+                ast_node->symbol->data_field->sint=(int)Type_size(tmp_type_vec);
                 const_expr=true;
             }
             DelVEC(tmp_type_vec);
@@ -1962,8 +1970,8 @@ bool unary_expr_value(AST_BASE* ast_node)
                 C_ERROR(C0064_ERR_SIZEOF_INCOMPLETE,operand_node);
                 goto error;
             }
-            ast_node->expr_attribute->data_size=type_data_size[TP_SINT];
-            ast_node->expr_attribute->data_field->sint=(int)Type_align(tmp_type_vec);
+            ast_node->symbol->data_size=type_data_size[TP_SINT];
+            ast_node->symbol->data_field->sint=(int)Type_align(tmp_type_vec);
             const_expr=true;
             DelVEC(tmp_type_vec);
             tmp_type_vec=InitVEC(DEFAULT_CAPICITY);
@@ -1977,9 +1985,9 @@ bool unary_expr_value(AST_BASE* ast_node)
             /*error,but impossible*/
             goto error;
     }
-    ast_node->expr_attribute->type_vec=tmp_type_vec;
-    ast_node->expr_attribute->is_lvalue=is_lvalue;
-    ast_node->expr_attribute->const_expr=const_expr;
+    ast_node->symbol->type_vec=tmp_type_vec;
+    ast_node->symbol->is_lvalue=is_lvalue;
+    ast_node->symbol->const_expr=const_expr;
     m_free(tei);
 #ifdef _TEST_SEMANTICS_
     print_expr_type(ast_node);
@@ -2026,13 +2034,13 @@ bool postfix_expr_value(AST_BASE* ast_node)
     int suffix_start_index=0;
     if(first_node&&first_node->type==primary_expression){
         suffix_start_index=1;
-        if(!pri_expr_value(first_node))
+        if(!expr_dispatch(first_node))
         {
             primary_fail=true;
             implicit_func_name=first_node->token->value;
         }
-        VECcpy(first_node->expr_attribute->type_vec,&tmp_l_type_vec);
-        is_lvalue=first_node->expr_attribute->is_lvalue;
+        VECcpy(first_node->symbol->type_vec,&tmp_l_type_vec);
+        is_lvalue=first_node->symbol->is_lvalue;
     }
     else if(first_node&&first_node->type==left_parenthesis){
         AST_BASE* type_name_node=NULL;
@@ -2074,7 +2082,7 @@ bool postfix_expr_value(AST_BASE* ast_node)
             tmp_ast=AST_GET_CHILD(ast_node,suffix_start_index+1);
             if(!expr_dispatch(tmp_ast))
                 goto error;
-            VECcpy(tmp_ast->expr_attribute->type_vec,&tmp_r_type_vec);
+            VECcpy(tmp_ast->symbol->type_vec,&tmp_r_type_vec);
             /*lvalue convertion*/
             old_l=tmp_l_type_vec;
             old_r=tmp_r_type_vec;
@@ -2139,10 +2147,10 @@ bool postfix_expr_value(AST_BASE* ast_node)
                     VECinsert(parameters,(void*)tmp_ast);
                     if(!expr_dispatch(tmp_ast))
                         return false;
-                    VEC* tmp_type_vec=lvalue_convertion(tmp_ast->expr_attribute->type_vec);
+                    VEC* tmp_type_vec=lvalue_convertion(tmp_ast->symbol->type_vec);
                     M_TYPE* assign_base_type=Type_VEC_get_actual_base_type(tmp_type_vec);
-                    if(IS_INT_TYPE(assign_base_type->typ_category)&&tmp_ast->expr_attribute->const_expr){
-                        long long int null_pointer_value=TP_INT_CAST_TYPE(assign_base_type->typ_category,tmp_ast->expr_attribute->data_field);
+                    if(IS_INT_TYPE(assign_base_type->typ_category)&&tmp_ast->symbol->const_expr){
+                        long long int null_pointer_value=TP_INT_CAST_TYPE(assign_base_type->typ_category,tmp_ast->symbol->data_field);
                         if(null_pointer_value==0)
                             assign_base_type->typ_category=TP_NULL_POINTER_CONSTANT;
                     }
@@ -2462,10 +2470,10 @@ bool postfix_expr_value(AST_BASE* ast_node)
             goto error;
     }
     /*TODO:compound literal part decide the const expr*/
-    ast_node->expr_attribute->const_expr=false;
-    ast_node->expr_attribute->type_vec=tmp_l_type_vec;
-    ast_node->expr_attribute->is_lvalue=is_lvalue;
-    ast_node->expr_attribute->is_bit_field=is_bit_field;
+    ast_node->symbol->const_expr=false;
+    ast_node->symbol->type_vec=tmp_l_type_vec;
+    ast_node->symbol->is_lvalue=is_lvalue;
+    ast_node->symbol->is_bit_field=is_bit_field;
     m_free(tei);
 #ifdef _TEST_SEMANTICS_
     print_expr_type(ast_node);
@@ -2502,7 +2510,7 @@ bool pri_expr_value(AST_BASE* ast_node)
         {
         case identifier:    /*find the symbol and use that to fill the ast node*/
         {
-            ast_node->expr_attribute->const_expr=false;
+            ast_node->symbol->const_expr=false;
             SYM_ITEM* find_tmpsi=find_symbol(ast_node->symbol_table,child_node->token->value,NMSP_DEFAULT);
             /*provided it has been declared as designating an object or a function, the namespace must be NMSP_DEFAULT */
             if(find_tmpsi){
@@ -2510,31 +2518,31 @@ bool pri_expr_value(AST_BASE* ast_node)
                 M_TYPE* tmp_type=Type_VEC_get_actual_base_type(tmpsi_type_vec);
                 if(tmp_type->typ_category==TP_TYPE_DEF_TYPE)
                 {
-                    VECcpy(((TP_DEF_TYPE*)tmp_type)->typedef_name_type,&(ast_node->expr_attribute->type_vec));
-                    ast_node->expr_attribute->data_size=find_tmpsi->data_size;
-                    memcpy(ast_node->expr_attribute->data_field,find_tmpsi->data_field,sizeof(VALUE_DATA));
-                    ast_node->expr_attribute->const_expr=find_tmpsi->const_expr;
+                    VECcpy(((TP_DEF_TYPE*)tmp_type)->typedef_name_type,&(ast_node->symbol->type_vec));
+                    ast_node->symbol->data_size=find_tmpsi->data_size;
+                    memcpy(ast_node->symbol->data_field,find_tmpsi->data_field,sizeof(VALUE_DATA));
+                    ast_node->symbol->const_expr=find_tmpsi->const_expr;
                     ast_node->token->symbol_item=(void*)find_tmpsi;
-                    ast_node->expr_attribute->is_lvalue=false;
+                    ast_node->symbol->is_lvalue=false;
                 }
                 else if(tmp_type->typ_category==TP_ENUM&&find_tmpsi->name_space!=NMSP_SU_TAG)
                 {
-                    ast_node->expr_attribute->type_vec=InitVEC(DEFAULT_CAPICITY);
+                    ast_node->symbol->type_vec=InitVEC(DEFAULT_CAPICITY);
                     M_TYPE* tmpt=build_base_type(TP_SINT);
-                    VECinsert(ast_node->expr_attribute->type_vec,tmpt);
-                    ast_node->expr_attribute->data_size=find_tmpsi->data_size;
-                    ast_node->expr_attribute->data_field->sint=find_tmpsi->data_field->sint;
-                    ast_node->expr_attribute->const_expr=find_tmpsi->const_expr;
+                    VECinsert(ast_node->symbol->type_vec,tmpt);
+                    ast_node->symbol->data_size=find_tmpsi->data_size;
+                    ast_node->symbol->data_field->sint=find_tmpsi->data_field->sint;
+                    ast_node->symbol->const_expr=find_tmpsi->const_expr;
                     ast_node->token->symbol_item=(void*)find_tmpsi;
-                    ast_node->expr_attribute->is_lvalue=true;
+                    ast_node->symbol->is_lvalue=true;
                 }
                 else{
-                    VECcpy(find_tmpsi->type_vec,&(ast_node->expr_attribute->type_vec));
-                    ast_node->expr_attribute->data_size=find_tmpsi->data_size;
-                    memcpy(ast_node->expr_attribute->data_field,find_tmpsi->data_field,sizeof(VALUE_DATA));  
-                    ast_node->expr_attribute->const_expr=find_tmpsi->const_expr;
+                    VECcpy(find_tmpsi->type_vec,&(ast_node->symbol->type_vec));
+                    ast_node->symbol->data_size=find_tmpsi->data_size;
+                    memcpy(ast_node->symbol->data_field,find_tmpsi->data_field,sizeof(VALUE_DATA));  
+                    ast_node->symbol->const_expr=find_tmpsi->const_expr;
                     ast_node->token->symbol_item=(void*)find_tmpsi;
-                    ast_node->expr_attribute->is_lvalue=true;
+                    ast_node->symbol->is_lvalue=true;
                 }
                 goto succ;
             }
@@ -2563,19 +2571,19 @@ bool pri_expr_value(AST_BASE* ast_node)
         }
         case enum_const:
         {
-            ast_node->expr_attribute->const_expr=true;
+            ast_node->symbol->const_expr=true;
             AST_BASE* enum_const_node=AST_GET_CHILD(ast_node,0);
             SYM_ITEM* tmpsi;
             tmpsi=find_symbol(ast_node->symbol_table,enum_const_node->token->value,NMSP_DEFAULT);
             if(HASH_ITEM_EXIST(((HASH_ITEM*)tmpsi))){
-                ast_node->expr_attribute->const_expr=true;
-                ast_node->expr_attribute->data_size=type_data_size[TP_SINT];
-                ast_node->expr_attribute->data_field->sint=tmpsi->data_field->sint;
+                ast_node->symbol->const_expr=true;
+                ast_node->symbol->data_size=type_data_size[TP_SINT];
+                ast_node->symbol->data_field->sint=tmpsi->data_field->sint;
                 M_TYPE* tmpt=build_base_type(TP_SINT);
                 if(tmpt)
                 {
-                    ast_node->expr_attribute->type_vec=InitVEC(DEFAULT_CAPICITY);
-                    VECinsert(ast_node->expr_attribute->type_vec,(void*)tmpt);
+                    ast_node->symbol->type_vec=InitVEC(DEFAULT_CAPICITY);
+                    VECinsert(ast_node->symbol->type_vec,(void*)tmpt);
                 }
             }
             goto error;
@@ -2587,23 +2595,23 @@ bool pri_expr_value(AST_BASE* ast_node)
         }
         case string:
         {
-            ast_node->expr_attribute->const_expr=false;
-            ast_node->expr_attribute->complete=true;
-            ast_node->expr_attribute->is_bit_field=false;
-            ast_node->expr_attribute->is_lvalue=false;
-            ast_node->expr_attribute->type_vec=InitVEC(DEFAULT_CAPICITY);
+            ast_node->symbol->const_expr=false;
+            ast_node->symbol->complete=true;
+            ast_node->symbol->is_bit_field=false;
+            ast_node->symbol->is_lvalue=false;
+            ast_node->symbol->type_vec=InitVEC(DEFAULT_CAPICITY);
             M_TYPE* tmpt=build_base_type(TP_SCHAR);
-            VECinsert(ast_node->expr_attribute->type_vec,tmpt);
+            VECinsert(ast_node->symbol->type_vec,tmpt);
             tmpt=build_base_type(TP_POINT);
-            VECinsert(ast_node->expr_attribute->type_vec,tmpt);
-            ast_node->expr_attribute->data_size=child_node->token->value_len*type_data_size[TP_SCHAR];
+            VECinsert(ast_node->symbol->type_vec,tmpt);
+            ast_node->symbol->data_size=child_node->token->value_len*type_data_size[TP_SCHAR];
             
             /*TODO,data field*/
             goto succ;
         }
         case generic_selection:
         {
-            ast_node->expr_attribute->const_expr=false;
+            ast_node->symbol->const_expr=false;
             /*TODO*/
             goto succ;
         }
@@ -2615,13 +2623,13 @@ bool pri_expr_value(AST_BASE* ast_node)
         child_node=AST_GET_CHILD(ast_node,1);
         if(!expr_dispatch(child_node))
             goto error;
-        VECcpy(child_node->expr_attribute->type_vec,&(ast_node->expr_attribute->type_vec));
-        ast_node->expr_attribute->is_lvalue=child_node->expr_attribute->is_lvalue;
-        ast_node->expr_attribute->complete=child_node->expr_attribute->complete;
-        ast_node->expr_attribute->const_expr=child_node->expr_attribute->const_expr;
-        ast_node->expr_attribute->is_bit_field=child_node->expr_attribute->is_bit_field;
-        ast_node->expr_attribute->data_size=child_node->expr_attribute->data_size;
-        memcpy(ast_node->expr_attribute->data_field,child_node->expr_attribute->data_field,sizeof(VALUE_DATA));
+        VECcpy(child_node->symbol->type_vec,&(ast_node->symbol->type_vec));
+        ast_node->symbol->is_lvalue=child_node->symbol->is_lvalue;
+        ast_node->symbol->complete=child_node->symbol->complete;
+        ast_node->symbol->const_expr=child_node->symbol->const_expr;
+        ast_node->symbol->is_bit_field=child_node->symbol->is_bit_field;
+        ast_node->symbol->data_size=child_node->symbol->data_size;
+        memcpy(ast_node->symbol->data_field,child_node->symbol->data_field,sizeof(VALUE_DATA));
     }
 succ:
 #ifdef _TEST_SEMANTICS_
@@ -2643,14 +2651,14 @@ error:
 fill_ast_data:
     if(cv==NULL)
         goto error;
-    ast_node->expr_attribute->const_expr=true;
-    ast_node->expr_attribute->data_size=type_data_size[cv->const_expr_type];
-    memcpy(ast_node->expr_attribute->data_field,cv->const_value,sizeof(VALUE_DATA));
+    ast_node->symbol->const_expr=true;
+    ast_node->symbol->data_size=type_data_size[cv->const_expr_type];
+    memcpy(ast_node->symbol->data_field,cv->const_value,sizeof(VALUE_DATA));
     M_TYPE* tmpt=build_base_type(cv->const_expr_type);
     if(tmpt)
     {
-        ast_node->expr_attribute->type_vec=InitVEC(DEFAULT_CAPICITY);
-        VECinsert(ast_node->expr_attribute->type_vec,(void*)tmpt);
+        ast_node->symbol->type_vec=InitVEC(DEFAULT_CAPICITY);
+        VECinsert(ast_node->symbol->type_vec,(void*)tmpt);
     }
     else
         goto error;
@@ -2671,10 +2679,10 @@ void print_expr_type(AST_BASE* node){
     for(int i=0;i<semantics_level;++i)
         printf("    ");
     printf("<Type>:");
-    if(!(node->expr_attribute)||!(node->expr_attribute->type_vec)||VECLEN(node->expr_attribute->type_vec)==0)
+    if(!(node->symbol)||!(node->symbol->type_vec)||VECLEN(node->symbol->type_vec)==0)
         printf("this expr node has no type!\n");
     else{
-        print_type_vec(node->expr_attribute->type_vec);
+        print_type_vec(node->symbol->type_vec);
     }
 #endif
 }

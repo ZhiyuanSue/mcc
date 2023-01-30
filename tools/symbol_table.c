@@ -61,10 +61,12 @@ SYM_ITEM* Create_symbol_item(char* symbol,NMSP name_space){
     tmp->stor_type=IR_STOR_NONE;
     tmp->data_size=0;
     tmp->data_field=(VALUE_DATA*)m_alloc(sizeof(VALUE_DATA));
+    tmp->is_lvalue=false;
+    tmp->complete=false;
+    tmp->is_bit_field=false;
     m_memset(tmp->data_field,'\0',sizeof(VALUE_DATA));
     tmp->type_vec=InitVEC(DEFAULT_CAPICITY);
     tmp->const_expr=false;
-    tmp->init_value=NULL;
     return tmp;
 }
 bool insert_symbol(SYM* symbol_table,SYM_ITEM* symbol_item){
@@ -194,9 +196,6 @@ void print_symbol(SYM_ITEM* symbol,size_t indentation)
         }
         printf("a const expr symbol\n");
     }
-    if(symbol->init_value){
-        print_static_stor_value(symbol->init_value,Type_size(symbol->type_vec),indentation+2);
-    }
     tmpt=Type_VEC_get_actual_base_type(symbol->type_vec);
     if(tmpfunct){
         VEC* paravec=((TP_FUNC*)tmpfunct)->func_parameters;
@@ -263,49 +262,6 @@ void print_symbol(SYM_ITEM* symbol,size_t indentation)
                 printf("    ");
             }
             printf("array len is: %zu\n",((TP_ARR*)tmpt)->axis_size);
-        }
-    }
-}
-void print_static_stor_value(STATIC_STOR_VALUE* value,size_t data_size,size_t indentation)
-{
-    if(!value)
-        return;
-    for(size_t j=0;j<indentation;++j)
-        printf("\t");
-    printf("this symbol have static storage and the following is value:\n");
-    for(size_t i=0;i<VECLEN(value->value_vec);++i){
-        STATIC_STOR_VALUE_ELEM* value_elem=VEC_GET_ITEM(value->value_vec,i);
-        if(value_elem->value_data_type==SSVT_NONE){
-            char* p=value_elem->data;
-            if(!value_elem->data)
-                return;
-            char tmp;
-            for(size_t j=0;j<value_elem->byte_width;++j){
-                if(j%4==0)
-                {
-                    for(size_t k=0;k<indentation+1;++k)
-                        printf("\t");
-                }
-                tmp=*p;
-                for(size_t k=0;k<8;++k)
-                {
-                    if(tmp&0x1)
-                        printf("1");
-                    else
-                        printf("0");
-                    tmp>>=1;
-                }
-                p++;
-                if(j%4==3)
-                    printf("\n");
-                else 
-                    printf(" , ");
-            }
-            printf("\n");
-        }
-        else if(value_elem->value_data_type==SSVT_POINTER)
-        {
-            printf("<function pointer to %s>\n",((TP_FUNC*)(value_elem->data))->func_name);
         }
     }
 }

@@ -4,16 +4,18 @@ bool const_value(AST_BASE* ast_node)
 {
     if(!ast_node||ast_node->type!=constant_expr)
         return false;
-    ast_node->expr_attribute=m_alloc(sizeof(EXPR_NODE_ATTR));
-    ast_node->expr_attribute->data_field=malloc(sizeof(VALUE_DATA));
+    ast_node->symbol=Create_symbol_item(tmp_symbol_str_alloc("reg.const."),NMSP_DEFAULT);
+    if(!insert_symbol(ast_node->symbol_table,ast_node->symbol))
+        return false;
+    ast_node->symbol->data_field=malloc(sizeof(VALUE_DATA));
     AST_BASE* conditional_expr_node=AST_GET_CHILD(ast_node,0);
-    if(expr_dispatch(conditional_expr_node)&&conditional_expr_node->expr_attribute->const_expr)
+    if(expr_dispatch(conditional_expr_node)&&conditional_expr_node->symbol->const_expr)
     {
-        VECcpy(conditional_expr_node->expr_attribute->type_vec,&(ast_node->expr_attribute->type_vec));
-        ast_node->expr_attribute->data_size=conditional_expr_node->expr_attribute->data_size;
-        memcpy(ast_node->expr_attribute->data_field,conditional_expr_node->expr_attribute->data_field,sizeof(VALUE_DATA));  
-        ast_node->expr_attribute->const_expr=conditional_expr_node->expr_attribute->const_expr;
-        ast_node->expr_attribute->is_lvalue=conditional_expr_node->expr_attribute->is_lvalue;
+        VECcpy(conditional_expr_node->symbol->type_vec,&(ast_node->symbol->type_vec));
+        ast_node->symbol->data_size=conditional_expr_node->symbol->data_size;
+        memcpy(ast_node->symbol->data_field,conditional_expr_node->symbol->data_field,sizeof(VALUE_DATA));  
+        ast_node->symbol->const_expr=conditional_expr_node->symbol->const_expr;
+        ast_node->symbol->is_lvalue=conditional_expr_node->symbol->is_lvalue;
         return true;
     }
     else

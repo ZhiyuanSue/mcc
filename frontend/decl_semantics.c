@@ -180,7 +180,7 @@ bool declaration_type(AST_BASE* ast_node,VEC* dec_symbol_item_list)
             C_WARN(W0003_WARN_NO_DECLARATION_ANY_THING,ast_node);
         }   
     }
-    ast_node->decl_attribute->decl_symbol_item_list=dec_symbol_item_list;
+    ast_node->decl_symbol_item_list=dec_symbol_item_list;
     m_free(tei);
 #ifdef _TEST_SEMANTICS_
     for(size_t i=0;i<semantics_level;++i)
@@ -720,13 +720,13 @@ VEC* declaration_spec_qual_list_type(AST_BASE* dec_sq_list_node,
             {
                 if(!const_value(align_num_node))
                     return NULL;
-                M_TYPE* tmpt=Type_VEC_get_actual_base_type(align_num_node->expr_attribute->type_vec);
+                M_TYPE* tmpt=Type_VEC_get_actual_base_type(align_num_node->symbol->type_vec);
                 if(!IS_INT_TYPE(tmpt->typ_category))
                 {
                     C_ERROR(C0060_ERR_OPERAND_INTEGER_TYPE,align_num_node);
                     return NULL;
                 }
-                align_spec_cnt=(size_t)TP_INT_CAST_TYPE(tmpt->typ_category,align_num_node->expr_attribute->data_field);
+                align_spec_cnt=(size_t)TP_INT_CAST_TYPE(tmpt->typ_category,align_num_node->symbol->data_field);
             }
             if(!is_legal_align(align_spec_cnt))
             {
@@ -1213,12 +1213,12 @@ bool initializer_semantic(AST_BASE* initializer_node,VEC* target_type_vec,size_t
         /*use simple assignment rules to judge the type between target and source*/
         if(!expr_dispatch(sub_node))
             goto error;
-        VEC* sub_node_type=sub_node->expr_attribute->type_vec;
+        VEC* sub_node_type=sub_node->symbol->type_vec;
         VEC* unary_type_vec=lvalue_convertion(target_type_vec);
         VEC* assign_type_vec=lvalue_convertion(sub_node_type);
         M_TYPE* assign_base_type=Type_VEC_get_actual_base_type(assign_type_vec);
-        if(IS_INT_TYPE(assign_base_type->typ_category)&&sub_node->expr_attribute->const_expr){
-            long long int null_pointer_value=TP_INT_CAST_TYPE(assign_base_type->typ_category,sub_node->expr_attribute->data_field);
+        if(IS_INT_TYPE(assign_base_type->typ_category)&&sub_node->symbol->const_expr){
+            long long int null_pointer_value=TP_INT_CAST_TYPE(assign_base_type->typ_category,sub_node->symbol->data_field);
             if(null_pointer_value==0)
                 assign_base_type->typ_category=TP_NULL_POINTER_CONSTANT;
         }
@@ -1281,19 +1281,19 @@ bool initializer_list_semantic(AST_BASE* initializer_list_node,VEC* type_vec,siz
                     /*check const expr and integer nonnegative value*/
                     AST_BASE* const_expr_node=AST_GET_CHILD(designator_node,1);
                     if(!const_value(const_expr_node)||
-                        !const_expr_node->expr_attribute->const_expr)
+                        !const_expr_node->symbol->const_expr)
                     {   /*const*/
                         C_ERROR(C0093_ERR_INIT_DESIGNATOR_CONST_EXPR,designator_node);
                         goto error;
                     }
-                    M_TYPE* const_expr_type=Type_VEC_get_actual_base_type(const_expr_node->expr_attribute->type_vec);
+                    M_TYPE* const_expr_type=Type_VEC_get_actual_base_type(const_expr_node->symbol->type_vec);
                     if(!IS_INT_TYPE(const_expr_type->typ_category))
                     {   /*integer, you have to check the const first,then to get the type*/
                         C_ERROR(C0093_ERR_INIT_DESIGNATOR_CONST_EXPR,designator_node);
                         goto error;
                     }
                     /*nonnegative*/
-                    VALUE_DATA* tmp_data_field=const_expr_node->expr_attribute->data_field;
+                    VALUE_DATA* tmp_data_field=const_expr_node->symbol->data_field;
                     if(
                         ((const_expr_type->typ_category==TP_SCHAR)&&tmp_data_field->schar <=0)
                         ||((const_expr_type->typ_category==TP_SSHORT)&&tmp_data_field->sshort <=0)

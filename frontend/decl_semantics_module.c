@@ -135,12 +135,12 @@ TP_SU* struct_union_type(AST_BASE* struct_decl_list_node,
                 if(!const_expr)
                     return false;
                 /*get the right const_base_type*/
-                enum TP_CATEGORY const_base_type=(Type_VEC_get_actual_base_type(field_size_node->expr_attribute->type_vec))->typ_category;
+                enum TP_CATEGORY const_base_type=(Type_VEC_get_actual_base_type(field_size_node->symbol->type_vec))->typ_category;
                 if(!IS_INT_TYPE(const_base_type)){
                     C_ERROR(C0024_ERR_BIT_FIELD_WIDTH_INT,su_declarator_node);
                     return false;
                 }
-                unsigned long long int bit_field_size=(TP_INT_CAST_TYPE(const_base_type,field_size_node->expr_attribute->data_field));    /*set the bit field size*/
+                unsigned long long int bit_field_size=(TP_INT_CAST_TYPE(const_base_type,field_size_node->symbol->data_field));    /*set the bit field size*/
                 if(bit_field_size<0){
                     C_ERROR(C0024_ERR_BIT_FIELD_WIDTH_INT,su_declarator_node);
                     return false;
@@ -462,14 +462,14 @@ TP_ENUMERA* enum_type(AST_BASE* enumerator_list_node,AST_BASE* tag_node){
             bool const_expr=const_value(constant_expr_node);
             if(!const_expr)
                 return NULL;
-            enum TP_CATEGORY const_base_type=(Type_VEC_get_actual_base_type(constant_expr_node->expr_attribute->type_vec))->typ_category;
+            enum TP_CATEGORY const_base_type=(Type_VEC_get_actual_base_type(constant_expr_node->symbol->type_vec))->typ_category;
             if(!IS_INT_TYPE(const_base_type)){
                 C_ERROR(C0027_ERR_ENUM_NOT_INT,enumerator_list_node);
                 return NULL;
             }
-            find_tmpsi->data_field=constant_expr_node->expr_attribute->data_field;
+            find_tmpsi->data_field=constant_expr_node->symbol->data_field;
             /*promised an int type now*/
-            signed long long int test_enum_value=TP_INT_CAST_TYPE(const_base_type,constant_expr_node->expr_attribute->data_field);
+            signed long long int test_enum_value=TP_INT_CAST_TYPE(const_base_type,constant_expr_node->symbol->data_field);
             if(test_enum_value>INT32_MAX
                 ||test_enum_value<INT32_MIN)    /*out of int range*/
             {
@@ -749,16 +749,16 @@ TP_ARR* array_type(VEC* tmp_node_vec)
             {
                 goto error;
             }
-            enum TP_CATEGORY const_base_type=(Type_VEC_get_actual_base_type(assign_expr_node->expr_attribute->type_vec))->typ_category;
+            enum TP_CATEGORY const_base_type=(Type_VEC_get_actual_base_type(assign_expr_node->symbol->type_vec))->typ_category;
             if(!IS_INT_TYPE(const_base_type))
             {
                 C_ERROR(C0038_ERR_ARR_SIZE_INTEGER,assign_expr_node);
                 goto error;
             }
-            if(assign_expr_node->expr_attribute->const_expr){
+            if(assign_expr_node->symbol->const_expr){
                 res->is_vla=false;
                 res->complete=true;
-                signed long long int tmp_arr_axis_value=TP_INT_CAST_TYPE(const_base_type,assign_expr_node->expr_attribute->data_field);
+                signed long long int tmp_arr_axis_value=TP_INT_CAST_TYPE(const_base_type,assign_expr_node->symbol->data_field);
                 res->axis_size=tmp_arr_axis_value;
                 if(res->axis_size<=0){
                     C_ERROR(C0039_ERR_ARR_SIZE_ZERO,assign_expr_node);

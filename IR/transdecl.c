@@ -73,7 +73,6 @@ bool declaration_trans(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR_BB*
             */
             STATIC_STOR_VALUE* value=(STATIC_STOR_VALUE*)m_alloc(sizeof(STATIC_STOR_VALUE));
             value->sym_item=tmpsi;
-            tmpsi->init_value=value;
 
             value->value_vec=InitVEC(DEFAULT_CAPICITY);
 
@@ -122,7 +121,7 @@ bool fill_in_static_stor_value(AST_BASE* initializer_node,STATIC_STOR_VALUE* val
         }
     }
     else{
-        if(!IS_EXPR_NODE(sub_node->type)||!(sub_node->expr_attribute->const_expr))
+        if(!IS_EXPR_NODE(sub_node->type)||!(sub_node->symbol->const_expr))
         {
             C_ERROR(C0097_ERR_STATIC_STOR_CONST,sub_node);
             goto error;
@@ -197,7 +196,6 @@ bool alloca_on_stack_value(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR
     VEC* tmp_type_vec=tmpsi->type_vec;
 
     GenREGPointerType(dst_reg,tmp_type_vec);
-    tmpsi->ir_reg=dst_reg;
 
     IR_OPERAND* alloca_dst=GenOPERAND_REG(dst_reg);
 

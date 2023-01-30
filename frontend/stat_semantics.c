@@ -56,14 +56,14 @@ bool labeled_statement(AST_BASE* ast_node)
         }
         SYMBOL_TABLE_SWITCH_ATTR* tmp_switch_attr=(SYMBOL_TABLE_SWITCH_ATTR*)target_symbol_table->st_attr;
         unsigned long long int* tmp_value;
-        M_TYPE* const_node_type=Type_VEC_get_actual_base_type(const_expr_node->expr_attribute->type_vec);
+        M_TYPE* const_node_type=Type_VEC_get_actual_base_type(const_expr_node->symbol->type_vec);
         if(!IS_INT_TYPE(const_node_type->typ_category))
         {
             C_ERROR(C0060_ERR_OPERAND_INTEGER_TYPE,const_expr_node);
             goto error;
         }
-        cast_const(TP_USLONGLONG,const_expr_node->expr_attribute->data_field,const_node_type->typ_category,const_expr_node->expr_attribute->data_field);
-        unsigned long long int const_value=const_expr_node->expr_attribute->data_field->usllong;
+        cast_const(TP_USLONGLONG,const_expr_node->symbol->data_field,const_node_type->typ_category,const_expr_node->symbol->data_field);
+        unsigned long long int const_value=const_expr_node->symbol->data_field->usllong;
         for(size_t i=0;i<VECLEN(tmp_switch_attr->switch_value);++i)
         {
             tmp_value=(unsigned long long int*)VEC_GET_ITEM(tmp_switch_attr->switch_value,i);
@@ -210,7 +210,7 @@ bool if_statement(AST_BASE* ast_node)
     AST_BASE* stmt_node=AST_GET_CHILD(ast_node,4);
     if(!expr_dispatch(expr_node))
         goto error;
-    M_TYPE* tmpt=Type_VEC_get_actual_base_type(expr_node->expr_attribute->type_vec);
+    M_TYPE* tmpt=Type_VEC_get_actual_base_type(expr_node->symbol->type_vec);
     if(!IS_SCALAR_TYPE(tmpt->typ_category))
     {
         C_ERROR(C0062_ERR_OPERAND_SCALAR_TYPE,expr_node);
@@ -255,7 +255,7 @@ bool switch_statement(AST_BASE* ast_node)
     AST_BASE* expr_node=AST_GET_CHILD(ast_node,2);
     if(!expr_dispatch(expr_node))
         goto error;
-    M_TYPE* tmpt=Type_VEC_get_actual_base_type(expr_node->expr_attribute->type_vec);
+    M_TYPE* tmpt=Type_VEC_get_actual_base_type(expr_node->symbol->type_vec);
     if(!IS_INT_TYPE(tmpt->typ_category))
     {
         C_ERROR(C0060_ERR_OPERAND_INTEGER_TYPE,expr_node);
@@ -298,7 +298,7 @@ bool while_statement(AST_BASE* ast_node)
         goto error;
     if(!statement_dispatch(stmt_node))
         goto error;
-    M_TYPE* tmpt=Type_VEC_get_actual_base_type(expr_node->expr_attribute->type_vec);
+    M_TYPE* tmpt=Type_VEC_get_actual_base_type(expr_node->symbol->type_vec);
     if(!IS_SCALAR_TYPE(tmpt->typ_category))
     {
         C_ERROR(C0062_ERR_OPERAND_SCALAR_TYPE,ast_node);
@@ -338,7 +338,7 @@ bool do_statement(AST_BASE* ast_node)
         goto error;
     if(!statement_dispatch(stmt_node))
         goto error;
-    M_TYPE* tmpt=Type_VEC_get_actual_base_type(expr_node->expr_attribute->type_vec);
+    M_TYPE* tmpt=Type_VEC_get_actual_base_type(expr_node->symbol->type_vec);
     if(!IS_SCALAR_TYPE(tmpt->typ_category))
     {
         C_ERROR(C0062_ERR_OPERAND_SCALAR_TYPE,ast_node);

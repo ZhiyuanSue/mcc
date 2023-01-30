@@ -323,7 +323,9 @@ AST_BASE* post_processing(AST_BASE* curr_ast)
                 M_TYPE* tmpt=build_base_type(TP_LABEL);
                 tmpsi->type_vec=InitVEC(DEFAULT_CAPICITY);
                 tmpsi->const_expr=false;
-                tmpsi->init_value=NULL;
+                tmpsi->is_lvalue=false;
+                tmpsi->complete=false;
+                tmpsi->is_bit_field=false;
                 VECinsert(tmpsi->type_vec,tmpt);
                 SYM* target_symbol_table=curr_ast->symbol_table;
                 while(1)
