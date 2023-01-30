@@ -120,13 +120,6 @@ bool fill_in_static_stor_value(AST_BASE* initializer_node,STATIC_STOR_VALUE* val
         }
     }
     else{
-        printf("12%p\n",sub_node->symbol);
-        printf("13%s\n",rule_type_str[sub_node->type]);
-        if(sub_node->type==primary_expression)
-        {
-            AST_BASE* identifier_node=AST_GET_CHILD(sub_node,0);
-            printf("%s\n",identifier_node->token->value);
-        }
         if(!IS_EXPR_NODE(sub_node->type)||!(sub_node->symbol->const_expr))
         {
             C_ERROR(C0097_ERR_STATIC_STOR_CONST,sub_node);

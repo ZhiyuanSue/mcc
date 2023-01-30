@@ -226,8 +226,62 @@ bool for_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     if(!ast_node||!ir_bb||ast_node->type!=for_stmt)
         goto error;
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
-    
+    /*decide which one is expression node*/
+    AST_BASE* expr_node1=NULL;
+    AST_BASE* expr_node2=NULL;
+    AST_BASE* expr_node3=NULL;
 
+    
+    /*the for expr have 3 part: init, condition,step*/
+    /*add for init bb*/
+    IR_BB* init_bb=add_new_bb(ir_bb->func,".label.for.init.",true,ast_node->symbol_table);
+    _add_after((LIST_NODE*)ir_bb,(LIST_NODE*)init_bb);
+
+    /*add expr condition bb,which is the loop begin bb*/
+    IR_BB* cond_bb=add_new_bb(ir_bb->func,".label.for.cond.",true,ast_node->symbol_table);
+    _add_after((LIST_NODE*)init_bb,(LIST_NODE*)cond_bb);
+    ast_node->symbol_table->loop_begin_bb=cond_bb;
+
+    /*add stmt bb*/
+    IR_BB* stmt_bb=add_new_bb(ir_bb->func,".label.for.stmt.",true,ast_node->symbol_table);
+    _add_after((LIST_NODE*)cond_bb,(LIST_NODE*)stmt_bb);
+
+    /*add step bb*/
+    IR_BB* step_bb=add_new_bb(ir_bb->func,".label.for.step.",true,ast_node->symbol_table);
+    _add_after((LIST_NODE*)stmt_bb,(LIST_NODE*)step_bb);
+
+    /*add end bb*/
+    IR_BB* end_bb=add_new_bb(ir_bb->func,".label.for.end.",true,ast_node->symbol_table);
+    _add_after((LIST_NODE*)step_bb,(LIST_NODE*)end_bb);
+    ast_node->symbol_table->loop_end_bb=end_bb;
+    
+    if(expr_node1){
+        /*maybe a declaration*/
+        if(expr_node1->type==declaration)
+        {
+            if(!declaration_trans(expr_node1,init_bb->IR_module,init_bb->func,init_bb))
+                goto error;
+        }
+        else if(IS_EXPR_NODE(expr_node1->type))
+        {
+            if(!expr_trans_dispatch(expr_node1,init_bb))
+                goto error;
+        }
+        else
+            goto error;
+    }
+    if(expr_node2){
+        if(!expr_trans_dispatch(expr_node2,cond_bb))
+            goto error;
+    }
+    else{
+        /* An omitted expression-2 is replaced by a nonzero constant.*/
+
+    }
+    if(expr_node3){
+        if(!expr_trans_dispatch(expr_node3,step_bb))
+            goto error;
+    }
     m_free(tei);
     return true;
 error:

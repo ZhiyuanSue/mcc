@@ -133,27 +133,17 @@ void print_INS(IR_INS* ins,size_t indentation)
     for(size_t i=0;i<indentation;++i){
         printf("\t");
     }
-    printf("->\t");
-    printf("op:%s\n",op_name_string[ins->op]);
-
-    for(size_t i=0;i<indentation+2;++i){
-        printf("\t");
-    }
+    printf("<op:%s ",op_name_string[ins->op]);
     printf("dst:\t");
     print_OPERAND(ins->dst,indentation+2);
-    for(size_t i=0;i<indentation+2;++i){
-        printf("\t");
-    }
     printf("src1:\t");
     print_OPERAND(ins->src1,indentation+2);
-    for(size_t i=0;i<indentation+2;++i){
-        printf("\t");
-    }
     printf("src2:\t");
     print_OPERAND(ins->src2,indentation+2);
+    printf(">\n");
 }
 void print_OPERAND(SYM_ITEM* operand,size_t indentation)
 {
     if(!operand)
-        printf("None\n");
+        printf("None ");
 }
