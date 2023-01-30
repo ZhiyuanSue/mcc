@@ -6,7 +6,7 @@ char tmp_sym_alloc[SYM_STR_LEN];
 void str_allocator_init()
 {
     for(size_t i=0;i<SYM_STR_LEN;++i){
-        tmp_sym_alloc[i]='0';
+        tmp_sym_alloc[i]='\0';
     }
 }
 char char_add(char tmpc,bool* carry ){
@@ -32,12 +32,12 @@ char* tmp_symbol_str_alloc(char* prefix)
 {
     char* res=m_alloc(sizeof(char)*(SYM_STR_LEN+1));
     int i;
-    for(i=SYM_STR_LEN-1;i>=0;i--){
+    for(i=0;i<SYM_STR_LEN;i++){
         bool carry=false;
         tmp_sym_alloc[i]=char_add(tmp_sym_alloc[i],&carry);
         if(!carry)
             break;
-        if(i==0&&carry)
+        if(i==(SYM_STR_LEN-1)&&carry)
         {
             printf("symbol string allocator overflow\n");
             return NULL;
@@ -47,8 +47,10 @@ char* tmp_symbol_str_alloc(char* prefix)
     {
         res[i]=prefix[i];
     }
-    for(;i<SYM_STR_LEN;++i){
-        res[i]=tmp_sym_alloc[i];
+    for(int j=0;j+i<SYM_STR_LEN;++j){
+        if(tmp_sym_alloc[j]=='\0')
+            break;
+        res[i+j]=tmp_sym_alloc[j];
     }
     res[SYM_STR_LEN]='\0';
     return res;

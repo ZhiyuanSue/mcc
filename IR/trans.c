@@ -46,7 +46,7 @@ IR_MODULE* trans_to_IR(AST_BASE* ast_node)
             curr_bb=(IR_BB*)(function_type->ir_func->BB_list);
             stack_off=0;    /*for every function begin,the stack base come back to 0*/
             AST_BASE* compount_stmt_node=AST_GET_CHILD(ast_child,AST_CHILD_NUM(ast_child)-1);
-            //compound_stmt_trans(compount_stmt_node,curr_bb);
+            compound_stmt_trans(compount_stmt_node,curr_bb);
         }
     }
     return res;

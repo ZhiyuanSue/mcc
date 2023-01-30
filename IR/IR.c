@@ -46,6 +46,7 @@ IR_BB* add_new_bb(IR_FUNC* func,char* label_prefix,bool need_gen_new_label,SYM* 
         new_bb->symbol=Create_symbol_item(tmp_symbol_str_alloc(label_prefix),NMSP_DEFAULT);
     else
         new_bb->symbol=Create_symbol_item(label_prefix,NMSP_DEFAULT);
+    new_bb->symbol->count=HASH_CNT_IST;
     insert_symbol(symbol_table,new_bb->symbol);
     new_bb->func=func;
     new_bb->IR_module=func->IR_module;
@@ -139,19 +140,16 @@ void print_INS(IR_INS* ins,size_t indentation)
     }
     printf("dst:\t");
     print_OPERAND(ins->dst,indentation+2);
-    printf(",\n");
     for(size_t i=0;i<indentation+2;++i){
         printf("\t");
     }
     printf("src1:\t");
     print_OPERAND(ins->src1,indentation+2);
-    printf(",\n");
     for(size_t i=0;i<indentation+2;++i){
         printf("\t");
     }
     printf("src2:\t");
     print_OPERAND(ins->src2,indentation+2);
-    printf(",\n");
 }
 void print_OPERAND(SYM_ITEM* operand,size_t indentation)
 {
