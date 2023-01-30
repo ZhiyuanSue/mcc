@@ -18,12 +18,13 @@ bool expr_dispatch(AST_BASE* expr_node)
         pri_expr_value
     };
     bool res=false;
-    expr_node->symbol=Create_symbol_item(tmp_symbol_str_alloc("reg.expr."),NMSP_DEFAULT);
+    expr_node->symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg.expr."),NMSP_DEFAULT);
     if(!expr_node->symbol)
     {
         printf("alloc symbol error\n");
         return false;
     }
+    expr_node->symbol->count=HASH_CNT_IST;
     if(!insert_symbol(expr_node->symbol_table,expr_node->symbol))
         return false;
     if(expr_node->type==expression)

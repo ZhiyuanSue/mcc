@@ -130,8 +130,8 @@ void print_symbol_table(SYM* symbol_table)  /*just a print for test,don't care t
     for(int i=0;i<=symbol_table->level;++i){
         printf("    ");
     }
-    printf("<symbol table>\n");
     symbol_vec=get_symbol_hash(symbol_table->sym_hash_table);
+    printf("<symbol table have %ld symbols>\n",VECLEN(symbol_vec));
     for(size_t i=0;i<VECLEN(symbol_vec);++i){
         tmp=VEC_GET_ITEM(symbol_vec,i);
         if(!tmp||tmp->count<=0)
