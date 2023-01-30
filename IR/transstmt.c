@@ -93,20 +93,20 @@ bool if_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     AST_BASE* expr_node=AST_GET_CHILD(ast_node,2);
     AST_BASE* stmt_node=AST_GET_CHILD(ast_node,4);
     /*deal with expr part*/
-    IR_BB* expr_bb=add_new_bb(ir_bb->func,".label.if.expr",true,ast_node->symbol_table);
+    IR_BB* expr_bb=add_new_bb(ir_bb->func,".label.if.expr.",true,ast_node->symbol_table);
     _add_after((LIST_NODE*)ir_bb,(LIST_NODE*)expr_bb);
     curr_bb=expr_bb;
     if(!expr_trans_dispatch(expr_node,expr_bb))
         goto error;
     /*deal with stmt part*/
-    IR_BB* if_stmt_bb=add_new_bb(ir_bb->func,".label.if.stmt",true,ast_node->symbol_table);
+    IR_BB* if_stmt_bb=add_new_bb(ir_bb->func,".label.if.stmt.",true,ast_node->symbol_table);
     curr_bb=if_stmt_bb;
     _add_after((LIST_NODE*)expr_bb,(LIST_NODE*)if_stmt_bb);
     stmt_node=AST_GET_CHILD(ast_node,6);
     if(!stmt_trans_dispatch(stmt_node,if_stmt_bb))
         goto error;
     /*add a if end block*/
-    IR_BB* if_end_bb=add_new_bb(ir_bb->func,".label.if.end",true,ast_node->symbol_table);
+    IR_BB* if_end_bb=add_new_bb(ir_bb->func,".label.if.end.",true,ast_node->symbol_table);
     curr_bb=if_end_bb;
     _add_after((LIST_NODE*)if_stmt_bb,(LIST_NODE*)if_end_bb);
     if(AST_CHILD_NUM(ast_node)==7)  /*else part*/
@@ -132,12 +132,12 @@ bool switch_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
         goto error;
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
     /*add a end bb*/
-    IR_BB* end_bb=add_new_bb(ir_bb->func,".label.switch.end",true,ast_node->symbol_table);
+    IR_BB* end_bb=add_new_bb(ir_bb->func,".label.switch.end.",true,ast_node->symbol_table);
     ast_node->symbol_table->switch_end_bb=end_bb;
     _add_after((LIST_NODE*)ir_bb,(LIST_NODE*)end_bb);
 
     /*add expr bb*/
-    IR_BB* expr_bb=add_new_bb(ir_bb->func,".label.switch.expr",true,ast_node->symbol_table);
+    IR_BB* expr_bb=add_new_bb(ir_bb->func,".label.switch.expr.",true,ast_node->symbol_table);
     ast_node->symbol_table->switch_begin_bb=expr_bb;
     _add_after((LIST_NODE*)ir_bb,(LIST_NODE*)expr_bb);
     curr_bb=expr_bb;
@@ -146,7 +146,7 @@ bool switch_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
         goto error;
     
     /*add stmt bb*/
-    IR_BB* stmt_bb=add_new_bb(ir_bb->func,".label.switch.stmt",true,ast_node->symbol_table);
+    IR_BB* stmt_bb=add_new_bb(ir_bb->func,".label.switch.stmt.",true,ast_node->symbol_table);
     _add_after((LIST_NODE*)expr_bb,(LIST_NODE*)stmt_bb);
     curr_bb=stmt_bb;
     AST_BASE* stmt_node=AST_GET_CHILD(ast_node,4);
@@ -164,12 +164,12 @@ bool while_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
         goto error;
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
     /*add while end bb*/
-    IR_BB* end_bb=add_new_bb(ir_bb->func,".label.while.end",true,ast_node->symbol_table);
+    IR_BB* end_bb=add_new_bb(ir_bb->func,".label.while.end.",true,ast_node->symbol_table);
     ast_node->symbol_table->loop_end_bb=end_bb;
     _add_after((LIST_NODE*)ir_bb,(LIST_NODE*)end_bb);
     
     /*add expr bb*/
-    IR_BB* expr_bb=add_new_bb(ir_bb->func,".label.while.expr",true,ast_node->symbol_table);
+    IR_BB* expr_bb=add_new_bb(ir_bb->func,".label.while.expr.",true,ast_node->symbol_table);
     ast_node->symbol_table->loop_begin_bb=expr_bb;
     _add_after((LIST_NODE*)ir_bb,(LIST_NODE*)expr_bb);
     curr_bb=expr_bb;
@@ -178,7 +178,7 @@ bool while_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
         goto error;
     
     /*add stmt bb*/
-    IR_BB* stmt_bb=add_new_bb(ir_bb->func,".label.while.stmt",true,ast_node->symbol_table);
+    IR_BB* stmt_bb=add_new_bb(ir_bb->func,".label.while.stmt.",true,ast_node->symbol_table);
     _add_after((LIST_NODE*)expr_bb,(LIST_NODE*)stmt_bb);
     curr_bb=stmt_bb;
     AST_BASE* stmt_node=AST_GET_CHILD(ast_node,4);
@@ -196,12 +196,12 @@ bool do_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
         goto error;
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
     /*add do end bb*/
-    IR_BB* end_bb=add_new_bb(ir_bb->func,".label.do.end",true,ast_node->symbol_table);
+    IR_BB* end_bb=add_new_bb(ir_bb->func,".label.do.end.",true,ast_node->symbol_table);
     ast_node->symbol_table->loop_end_bb=end_bb;
     _add_after((LIST_NODE*)ir_bb,(LIST_NODE*)end_bb);
     
     /*add stmt bb*/
-    IR_BB* stmt_bb=add_new_bb(ir_bb->func,".label.do.stmt",true,ast_node->symbol_table);
+    IR_BB* stmt_bb=add_new_bb(ir_bb->func,".label.do.stmt.",true,ast_node->symbol_table);
     ast_node->symbol_table->loop_begin_bb=stmt_bb;
     _add_after((LIST_NODE*)ir_bb,(LIST_NODE*)stmt_bb);
     curr_bb=stmt_bb;
@@ -210,7 +210,7 @@ bool do_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
         goto error;
     
     /*add expr bb*/
-    IR_BB* expr_bb=add_new_bb(ir_bb->func,".label.do.expr",true,ast_node->symbol_table);
+    IR_BB* expr_bb=add_new_bb(ir_bb->func,".label.do.expr.",true,ast_node->symbol_table);
     _add_after((LIST_NODE*)stmt_bb,(LIST_NODE*)expr_bb);
     curr_bb=expr_bb;
     AST_BASE* expr_node=AST_GET_CHILD(ast_node,2);

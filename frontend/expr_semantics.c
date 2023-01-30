@@ -19,7 +19,7 @@ bool expr_dispatch(AST_BASE* expr_node)
     };
     bool res=false;
     expr_node->symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg.expr."),NMSP_DEFAULT);
-    if(!expr_node->symbol)
+    if(!(expr_node->symbol))
     {
         printf("alloc symbol error\n");
         return false;
@@ -43,7 +43,7 @@ bool cond_expr_value(AST_BASE* ast_node)
         printf("    ");
     printf("start condition expr\n");
 #endif
-    if(!ast_node||ast_node->type!=conditional_expr)
+    if(!ast_node||ast_node->type!=conditional_expr||!(ast_node->symbol))
         goto error;
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
     AST_BASE* operand_one=AST_GET_CHILD(ast_node,2);
@@ -213,7 +213,7 @@ bool expr_value(AST_BASE* ast_node)
     printf("start expr\n");
 #endif
     /*a constant should not contain comma op*/
-    if(!ast_node||ast_node->type!=expression)
+    if(!ast_node||ast_node->type!=expression||!(ast_node->symbol))
         goto error;
     AST_BASE* assignment_expr_node=NULL;
     for(size_t i=0;i<AST_CHILD_NUM(ast_node);i+=2)
@@ -254,7 +254,7 @@ bool assign_expr_value(AST_BASE* ast_node)
         printf("    ");
     printf("start assignment expr\n");
 #endif
-    if(!ast_node||ast_node->type!=assignment_expr)
+    if(!ast_node||ast_node->type!=assignment_expr||!(ast_node->symbol))
         goto error;
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
     AST_BASE* unary_expr_node=AST_GET_CHILD(ast_node,0);
@@ -390,7 +390,7 @@ bool logical_or_expr_value(AST_BASE* ast_node)
         printf("    ");
     printf("start logical and expr\n");
 #endif
-    if(!ast_node||ast_node->type!=logical_or_expr)
+    if(!ast_node||ast_node->type!=logical_or_expr||!(ast_node->symbol))
         goto error;
     bool const_expr=true;
     bool const_or_value=false;
@@ -449,7 +449,7 @@ bool logical_and_expr_value(AST_BASE* ast_node)
         printf("    ");
     printf("start logical and expr\n");
 #endif
-    if(!ast_node||ast_node->type!=logical_and_expr)
+    if(!ast_node||ast_node->type!=logical_and_expr||!(ast_node->symbol))
         goto error;
     bool const_expr=true;
     bool const_and_value=true;
@@ -508,7 +508,7 @@ bool bit_inclusive_or_expr_value(AST_BASE* ast_node)
         printf("    ");
     printf("start inor expr\n");
 #endif
-    if(!ast_node||ast_node->type!=inclusive_or_expr)
+    if(!ast_node||ast_node->type!=inclusive_or_expr||!(ast_node->symbol))
         goto error;
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
     bool const_expr=false;
@@ -580,7 +580,7 @@ bool bit_exclusive_or_expr_value(AST_BASE* ast_node)
         printf("    ");
     printf("start exor expr\n");
 #endif
-    if(!ast_node||ast_node->type!=exclusive_or_expr)
+    if(!ast_node||ast_node->type!=exclusive_or_expr||!(ast_node->symbol))
         goto error;
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
     bool const_expr=false;
@@ -652,7 +652,7 @@ bool and_expr_value(AST_BASE* ast_node)
         printf("    ");
     printf("start and expr\n");
 #endif
-    if(!ast_node||ast_node->type!=and_expression)
+    if(!ast_node||ast_node->type!=and_expression||!(ast_node->symbol))
         goto error;
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
     bool const_expr=false;
@@ -724,7 +724,7 @@ bool equal_expr_value(AST_BASE* ast_node)
         printf("    ");
     printf("start equal expr\n");
 #endif
-    if(!ast_node||ast_node->type!=equality_expr)
+    if(!ast_node||ast_node->type!=equality_expr||!(ast_node->symbol))
         goto error;
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
     AST_BASE* equal_expr_node=AST_GET_CHILD(ast_node,0);
@@ -916,7 +916,7 @@ bool relation_expr_value(AST_BASE* ast_node)
         printf("    ");
     printf("start relation expr\n");
 #endif
-    if(!ast_node||ast_node->type!=relational_expr)
+    if(!ast_node||ast_node->type!=relational_expr||!(ast_node->symbol))
         goto error;
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
     AST_BASE* relation_expr_node=AST_GET_CHILD(ast_node,0);
@@ -1061,7 +1061,7 @@ bool shift_expr_value(AST_BASE* ast_node)
         printf("    ");
     printf("start shift\n");
 #endif
-    if(!ast_node||ast_node->type!=shift_expr)
+    if(!ast_node||ast_node->type!=shift_expr||!(ast_node->symbol))
         goto error;
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM*));
     AST_BASE* shift_expr_node=AST_GET_CHILD(ast_node,0);
@@ -1136,7 +1136,7 @@ bool add_expr_value(AST_BASE* ast_node)
         printf("    ");
     printf("start add\n");
 #endif
-    if(!ast_node||ast_node->type!=additive_expr)
+    if(!ast_node||ast_node->type!=additive_expr||!(ast_node->symbol))
         goto error;
     ERROR_ITEM* tei=malloc(sizeof(ERROR_ITEM));
     VEC* tmp_type_vec=NULL;
@@ -1400,7 +1400,7 @@ bool mul_expr_value(AST_BASE* ast_node)
         printf("    ");
     printf("start mul\n");
 #endif
-    if(!ast_node||ast_node->type!=multi_expr)
+    if(!ast_node||ast_node->type!=multi_expr||!(ast_node->symbol))
         goto error;
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
     AST_BASE* mul_expression_node=AST_GET_CHILD(ast_node,0);
@@ -1640,7 +1640,7 @@ bool cast_expr_value(AST_BASE* ast_node)
         printf("    ");
     printf("start cast\n");
 #endif
-    if(!ast_node||ast_node->type!=cast_expr)
+    if(!ast_node||ast_node->type!=cast_expr||!(ast_node->symbol))
         goto error;
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
     VEC* type_name_vec;
@@ -2015,7 +2015,7 @@ bool postfix_expr_value(AST_BASE* ast_node)
         printf("    ");
     printf("start postfix expr\n");
 #endif
-    if(!ast_node||ast_node->type!=postfix_expr)
+    if(!ast_node||ast_node->type!=postfix_expr||!(ast_node->symbol))
         goto error;
     VEC* tmp_l_type_vec=NULL;
     VEC* tmp_r_type_vec=NULL;
@@ -2501,7 +2501,7 @@ bool pri_expr_value(AST_BASE* ast_node)
         printf("    ");
     printf("start primary expr\n");
 #endif
-    if(!ast_node||ast_node->type!=primary_expression)
+    if(!ast_node||ast_node->type!=primary_expression||!(ast_node->symbol))
         goto error;
     AST_BASE* child_node=NULL;
     CONST_VALUE* cv=NULL;

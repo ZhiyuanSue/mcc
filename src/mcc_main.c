@@ -74,7 +74,7 @@ int mcc_main(char* src_file,char* target_file){
         goto error;
 #ifdef _TEST_IR_
     printf("start print ir\n");
-    //print_IR(ir_module);
+    print_IR(ir_module);
     printf("end print ir\n");
 #endif
     /*if there's some warnings, it need be print*/

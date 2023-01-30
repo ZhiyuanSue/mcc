@@ -47,7 +47,8 @@ IR_BB* add_new_bb(IR_FUNC* func,char* label_prefix,bool need_gen_new_label,SYM* 
     else
         new_bb->symbol=Create_symbol_item(label_prefix,NMSP_DEFAULT);
     new_bb->symbol->count=HASH_CNT_IST;
-    insert_symbol(symbol_table,new_bb->symbol);
+    if(symbol_table->sp_type!=SPT_FUN)
+        insert_symbol(symbol_table,new_bb->symbol);
     new_bb->func=func;
     new_bb->IR_module=func->IR_module;
     return new_bb;

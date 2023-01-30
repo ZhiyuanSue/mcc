@@ -31,6 +31,7 @@ char char_add(char tmpc,bool* carry ){
 char* tmp_symbol_str_alloc(char* prefix)
 {
     char* res=m_alloc(sizeof(char)*(SYM_STR_LEN+1));
+    memset(res,'\0',SYM_STR_LEN+1);
     int i;
     for(i=0;i<SYM_STR_LEN;i++){
         bool carry=false;
@@ -52,6 +53,5 @@ char* tmp_symbol_str_alloc(char* prefix)
             break;
         res[i+j]=tmp_sym_alloc[j];
     }
-    res[SYM_STR_LEN]='\0';
     return res;
 }

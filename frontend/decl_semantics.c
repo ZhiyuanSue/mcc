@@ -1251,9 +1251,12 @@ bool initializer_list_semantic(AST_BASE* initializer_list_node,VEC* type_vec,siz
         variable_length_array=true;
     for(size_t i=0;i<AST_CHILD_NUM(initializer_list_node);++i){
         AST_BASE* sub_node=AST_GET_CHILD(initializer_list_node,i);
-        if(!variable_length_array&&!array_unknown_size&&off>=total_size)
-            break;
         if(sub_node->type==initializer){
+            if(!variable_length_array&&!array_unknown_size&&off>=total_size)
+            {
+                VECremove(initializer_list_node->child,i,i+1);
+                break;
+            }
             /*test the sub initializer begin with left brace or not*/
             if(!initializer_search(sub_node,type_vec,&off,curr_obj_off,false,0,0))
             {

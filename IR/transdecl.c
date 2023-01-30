@@ -79,7 +79,6 @@ bool declaration_trans(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR_BB*
             size_t value_size=Type_size(tmpsi->type_vec);
             value->value_data=m_alloc(value_size);
             memset(value->value_data,0,value_size);
-
             if(AST_CHILD_NUM(init_decl_node)==3){
                 AST_BASE* initializer_node=AST_GET_CHILD(init_decl_node,2);
                 if(!fill_in_static_stor_value(initializer_node,value))
@@ -121,6 +120,13 @@ bool fill_in_static_stor_value(AST_BASE* initializer_node,STATIC_STOR_VALUE* val
         }
     }
     else{
+        printf("12%p\n",sub_node->symbol);
+        printf("13%s\n",rule_type_str[sub_node->type]);
+        if(sub_node->type==primary_expression)
+        {
+            AST_BASE* identifier_node=AST_GET_CHILD(sub_node,0);
+            printf("%s\n",identifier_node->token->value);
+        }
         if(!IS_EXPR_NODE(sub_node->type)||!(sub_node->symbol->const_expr))
         {
             C_ERROR(C0097_ERR_STATIC_STOR_CONST,sub_node);
@@ -141,7 +147,6 @@ bool fill_in_static_stor_value(AST_BASE* initializer_node,STATIC_STOR_VALUE* val
         if((8*data_spec_size)==init_attr->size&&(init_attr->off)%8==0)
         {
             /*fill in*/
-            
             STATIC_STOR_VALUE_ELEM* elem=m_alloc(data_spec_size);
             elem->byte_width=data_spec_size;
             if(tmp_type->typ_category==TP_POINT){
