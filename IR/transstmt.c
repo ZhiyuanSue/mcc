@@ -19,6 +19,9 @@ bool stmt_trans_dispatch(AST_BASE* ast_node,IR_BB* ir_bb)
         return stmt_trans_dispatch(AST_GET_CHILD(ast_node,0),ir_bb);
     }
 error:
+#ifdef _TEST_IR_
+    printf("stmt_trans_dispatch fail\n");
+#endif
     return false;
 }
 bool labeled_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
@@ -50,6 +53,9 @@ bool labeled_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     m_free(tei);
     return true;
 error:
+#ifdef _TEST_IR_
+    printf("labeled stmt fail\n");
+#endif
     return false;
 }
 bool compound_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
@@ -67,6 +73,9 @@ bool compound_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     }
     return true;
 error:
+#ifdef _TEST_IR_
+    printf("compound stmt fail\n");
+#endif
     return false;
 }
 bool expr_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
@@ -83,6 +92,9 @@ bool expr_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
         goto error;
     return true;
 error:
+#ifdef _TEST_IR_
+    printf("expr_stmt fail\n");
+#endif
     return false;
 }
 bool if_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
@@ -102,9 +114,9 @@ bool if_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     IR_BB* if_stmt_bb=add_new_bb(ir_bb->func,".label.if.stmt.",true,ast_node->symbol_table);
     curr_bb=if_stmt_bb;
     _add_after((LIST_NODE*)expr_bb,(LIST_NODE*)if_stmt_bb);
-    stmt_node=AST_GET_CHILD(ast_node,6);
     if(!stmt_trans_dispatch(stmt_node,if_stmt_bb))
         goto error;
+        
     /*add a if end block*/
     IR_BB* if_end_bb=add_new_bb(ir_bb->func,".label.if.end.",true,ast_node->symbol_table);
     curr_bb=if_end_bb;
@@ -124,6 +136,9 @@ bool if_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     m_free(tei);
     return true;
 error:
+#ifdef _TEST_IR_
+    printf("if_stmt fail\n");
+#endif
     return false;
 }
 bool switch_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
@@ -156,6 +171,9 @@ bool switch_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     m_free(tei);
     return true;
 error:
+#ifdef _TEST_IR_
+    printf("switch stmt fail\n");
+#endif
     return false;
 }
 bool while_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
@@ -188,6 +206,9 @@ bool while_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     m_free(tei);
     return true;
 error:
+#ifdef _TEST_IR_
+    printf("whild stmt fail\n");
+#endif
     return false;
 }
 bool do_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
@@ -219,6 +240,9 @@ bool do_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     m_free(tei);
     return true;
 error:
+#ifdef _TEST_IR_
+    printf("do stmt fail\n");
+#endif
     return false;
 }
 bool for_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
@@ -227,11 +251,25 @@ bool for_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
         goto error;
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
     /*decide which one is expression node*/
-    AST_BASE* expr_node1=NULL;
-    AST_BASE* expr_node2=NULL;
-    AST_BASE* expr_node3=NULL;
-
-    
+    AST_BASE* expr_node[3]={NULL,NULL,NULL};
+    int curr_expr_node=0;
+    for(size_t i=2;i<AST_CHILD_NUM(ast_node)-2;i++)
+    {
+        AST_BASE* tmp_ast=AST_GET_CHILD(ast_node,i);
+        if(tmp_ast->type==declaration)
+        {
+            expr_node[0]=tmp_ast;
+            curr_expr_node=1;
+        }
+        else if(IS_EXPR_NODE(tmp_ast->type))
+        {
+            expr_node[curr_expr_node]=tmp_ast;
+        }
+        else if(tmp_ast->type==semi_colon)
+        {
+            curr_expr_node+=1;
+        }
+    }
     /*the for expr have 3 part: init, condition,step*/
     /*add for init bb*/
     IR_BB* init_bb=add_new_bb(ir_bb->func,".label.for.init.",true,ast_node->symbol_table);
@@ -255,36 +293,39 @@ bool for_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     _add_after((LIST_NODE*)step_bb,(LIST_NODE*)end_bb);
     ast_node->symbol_table->loop_end_bb=end_bb;
     
-    if(expr_node1){
+    if(expr_node[0]){
         /*maybe a declaration*/
-        if(expr_node1->type==declaration)
+        if(expr_node[0]->type==declaration)
         {
-            if(!declaration_trans(expr_node1,init_bb->IR_module,init_bb->func,init_bb))
+            if(!declaration_trans(expr_node[0],init_bb->IR_module,init_bb->func,init_bb))
                 goto error;
         }
-        else if(IS_EXPR_NODE(expr_node1->type))
+        else if(IS_EXPR_NODE(expr_node[0]->type))
         {
-            if(!expr_trans_dispatch(expr_node1,init_bb))
+            if(!expr_trans_dispatch(expr_node[0],init_bb))
                 goto error;
         }
         else
             goto error;
     }
-    if(expr_node2){
-        if(!expr_trans_dispatch(expr_node2,cond_bb))
+    if(expr_node[1]){
+        if(!expr_trans_dispatch(expr_node[1],cond_bb))
             goto error;
     }
     else{
         /* An omitted expression-2 is replaced by a nonzero constant.*/
 
     }
-    if(expr_node3){
-        if(!expr_trans_dispatch(expr_node3,step_bb))
+    if(expr_node[2]){
+        if(!expr_trans_dispatch(expr_node[2],step_bb))
             goto error;
     }
     m_free(tei);
     return true;
 error:
+#ifdef _TEST_IR_
+    printf("for stmt fail\n");
+#endif
     return false;
 }
 bool goto_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
@@ -308,6 +349,9 @@ bool goto_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     m_free(tei);
     return true;
 error:
+#ifdef _TEST_IR_
+    printf("goto stmt fail\n");
+#endif
     return false;
 }
 bool continue_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
@@ -331,6 +375,9 @@ bool continue_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     m_free(tei);
     return true;
 error:
+#ifdef _TEST_IR_
+    printf("continue stmt fail\n");
+#endif
     return false;
 }
 bool break_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
@@ -366,6 +413,9 @@ bool break_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     m_free(tei);
     return true;
 error:
+#ifdef _TEST_IR_
+    printf("break stmt fail\n");
+#endif
     return false;
 }
 bool return_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
@@ -387,6 +437,9 @@ bool return_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     m_free(tei);
     return true;
 error:
+#ifdef _TEST_IR_
+    printf("return stmt fail\n");
+#endif
     return false;
 }
 bool asm_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
@@ -396,5 +449,8 @@ bool asm_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     /*I don't want to deal with it...emm*/
     return true;
 error:
+#ifdef _TEST_IR_
+    printf("asm stmt fail\n");
+#endif
     return false;
 }
