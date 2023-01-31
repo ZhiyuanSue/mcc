@@ -101,7 +101,6 @@ TP_SU* struct_union_type(AST_BASE* struct_decl_list_node,
             SYM_ITEM* tmpsi=find_symbol_curr_table(declarator_node->symbol_table,declarator_char_name,nmsp);
             if(tmpsi)
                 tmpsi->linkage=LKA_NONE;
-            /*TODO:design offset algorithm:DONE*/
             if(is_bit_field){   /*have bit-field*/ /*TODO:if a declarator with colon*/
                 M_TYPE* tmpt=Type_VEC_get_spec_other(type_vec);
                 if(tmpt&&tmpt->align_spec>0)

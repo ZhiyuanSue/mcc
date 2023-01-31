@@ -252,6 +252,7 @@ bool for_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
     /*decide which one is expression node*/
     AST_BASE* expr_node[3]={NULL,NULL,NULL};
+    int second_semi_colon_posi=0;
     int curr_expr_node=0;
     for(size_t i=2;i<AST_CHILD_NUM(ast_node)-2;i++)
     {
@@ -267,6 +268,7 @@ bool for_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
         }
         else if(tmp_ast->type==semi_colon)
         {
+            second_semi_colon_posi=i;
             curr_expr_node+=1;
         }
     }

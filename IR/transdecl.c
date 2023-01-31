@@ -41,6 +41,7 @@ bool declaration_trans(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR_BB*
         /*judge whether the symbol size is 0*/
         if(Type_size(tmpsi->type_vec)==0)
         {
+            print_type_vec(tmpsi->type_vec);
             C_ERROR(C0096_ERR_STOR_SIZE_ISNT_KNOWN,identifier_node);
             goto error;
         }

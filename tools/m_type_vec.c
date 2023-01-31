@@ -236,6 +236,12 @@ size_t Type_align(VEC* type_vec)
     {
         res=type_data_size[TP_SINT];
     }
+    else if(tmpt->typ_category==TP_ARRAY)
+    {
+        VEC* tmp_type_vec=Type_VEC_get_Array_TO(type_vec,true);
+        tmpt=Type_VEC_get_actual_base_type(type_vec);
+        res=Type_align(tmp_type_vec);
+    }
     if(res<spec_res)
         res=spec_res;
     return res;

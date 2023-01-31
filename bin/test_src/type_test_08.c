@@ -10,4 +10,5 @@ struct test_bit_field_offset{
     char f:2;
     char :0;
     char g:2;
+    char h[2];
 } tbfo;
