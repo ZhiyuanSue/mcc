@@ -252,8 +252,8 @@ bool for_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
     /*decide which one is expression node*/
     AST_BASE* expr_node[3]={NULL,NULL,NULL};
-    int second_semi_colon_posi=0;
     int curr_expr_node=0;
+    SYM_ITEM* symbol=NULL;
     for(size_t i=2;i<AST_CHILD_NUM(ast_node)-2;i++)
     {
         AST_BASE* tmp_ast=AST_GET_CHILD(ast_node,i);
@@ -268,7 +268,6 @@ bool for_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
         }
         else if(tmp_ast->type==semi_colon)
         {
-            second_semi_colon_posi=i;
             curr_expr_node+=1;
         }
     }
@@ -313,15 +312,26 @@ bool for_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     if(expr_node[1]){
         if(!expr_trans_dispatch(expr_node[1],cond_bb))
             goto error;
+        symbol=expr_node[1]->symbol;
     }
     else{
         /* An omitted expression-2 is replaced by a nonzero constant.*/
-
+        symbol=Create_symbol_item(tmp_symbol_str_alloc(".imm."),NMSP_DEFAULT);
+        if(!insert_symbol(ast_node->symbol_table,symbol))
+            goto error;
+        symbol->const_expr=true;
+        symbol->data_field->sint=1;
+        M_TYPE* tmp_type=build_base_type(TP_SINT);
+        symbol->type_vec=InitVEC(DEFAULT_CAPICITY);
+        VECinsert(symbol->type_vec,(void*)tmp_type);
     }
     if(expr_node[2]){
         if(!expr_trans_dispatch(expr_node[2],step_bb))
             goto error;
     }
+    /*insert a jmp ins if the control expression is true*/
+    IR_INS* br_ins=add_new_ins(step_bb);
+    GenINS(br_ins,OP_BR,NULL,symbol,cond_bb->symbol);
     m_free(tei);
     return true;
 error:

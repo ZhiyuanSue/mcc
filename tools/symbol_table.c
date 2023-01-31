@@ -165,6 +165,8 @@ void print_symbol(SYM_ITEM* symbol,size_t indentation)
 {
     if(!symbol)
         return;
+    if((*(symbol->value))=='.')
+        return;
     for(int j=0;j<=indentation+1;++j){
         printf("    ");
     }
