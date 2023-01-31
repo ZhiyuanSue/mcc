@@ -1582,7 +1582,7 @@ bool initializer_search(
                                 initializer_node->init_attribute->size=member->bit_field_size;
                             else
                                 initializer_node->init_attribute->size=Type_size(member->type_vec)*8;
-                            (*off)=next_member->offset*8;
+                            (*off)=struct_start_off+(next_member->offset)*8;
                             if(next_member->bit_field)
                                 off+=member->bit_field_offset;
                         }
