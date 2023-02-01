@@ -332,6 +332,7 @@ bool for_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     /*insert a jmp ins if the control expression is true*/
     IR_INS* br_ins=add_new_ins(step_bb);
     GenINS(br_ins,OP_BR,NULL,symbol,cond_bb->symbol);
+    insert_ins_to_bb(br_ins,step_bb);
     m_free(tei);
     return true;
 error:

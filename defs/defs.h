@@ -28,6 +28,21 @@
 */
 #endif
 
+/*--target machine--*/
+#ifndef _X86_
+#define _X86_
+
+/*
+#ifndef _ARM_
+#define _ARM_
+*/
+
+/*
+#ifndef _RISC_V_
+#define _RISC_V_
+*/
+
+#endif
 
 /*--Address bit size--*/
 /*it will affect the sizeof(pointer)*/

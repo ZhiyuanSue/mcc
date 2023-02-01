@@ -1,7 +1,6 @@
 #ifndef _X86_BACKEND_H_
 #define _X86_BACKEND_H_
-#include "../../defs/defs.h"
-#include "../../tools/vector.h"
+#include "../backend.h"
 #define MAX_INS_RAW_NUM 1200
 struct x86_register{
     char* reg_name;
@@ -42,4 +41,7 @@ extern struct x86_ins_raw x86_64_ins_raw[MAX_INS_RAW_NUM];
 
 VEC* x86_ins_gen(int bit_len);
 
+bool gen_asm(IR_MODULE* irm,FILE* fp);
+bool gen_function(IR_FUNC* func,FILE* fp);
+bool gen_ins(IR_INS* ins,FILE* fp);
 #endif

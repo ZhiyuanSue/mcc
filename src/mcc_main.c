@@ -77,6 +77,8 @@ int mcc_main(char* src_file,char* target_file){
     print_IR(ir_module);
     printf("end print ir\n");
 #endif
+    if(!MCC_backend(ir_module,src_file,target_file))
+        goto error;
     /*if there's some warnings, it need be print*/
     for(size_t i=0;i<VECLEN(c_error);++i){
         ERROR_ITEM* ei=(ERROR_ITEM*)VEC_GET_ITEM(c_error,i);

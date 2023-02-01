@@ -17,6 +17,7 @@
         "ir.h": "c",
         "symbol_table.h": "c",
         "ir_enum.h": "c",
-        "list.h": "c"
+        "list.h": "c",
+        "vector.h": "c"
     }
 }

@@ -23,13 +23,13 @@ ${Target}:
 .PHONY:clean
 
 clean:
-	rm -f ${MCC_ROOT_OBJ}/*.o 
-	rm -f ${Target}
-	rm -f ${Bin}/test_out/*
-	rm -f ${MCC_ROOT_PRE}/*
-	rm -f ${MCC_BOOTSTRAP_OUT}/*
-	rm -f ${MCC_ROOT_ASM}/*
-	rm -f ${Bin}/test_asm/*
+	rm -rf ${MCC_ROOT_OBJ}/*.o 
+	rm -rf ${Target}
+	rm -rf ${Bin}/test_out/*
+	rm -rf ${MCC_ROOT_PRE}/*
+	rm -rf ${MCC_BOOTSTRAP_OUT}/*
+	rm -rf ${MCC_ROOT_ASM}/*
+	rm -rf ${Bin}/test_asm/*
 
 clean_obj:
 	rm -rf ${MCC_ROOT_OBJ}
