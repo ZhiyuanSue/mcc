@@ -11,7 +11,7 @@ bool trans_func(AST_BASE* ast_node,IR_FUNC* ir_func);
 
 /*decl*/
 bool declaration_trans(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR_BB* ir_bb);
-bool fill_in_static_stor_value(AST_BASE* initializer_node,STATIC_STOR_VALUE* value);
+bool fill_in_init_value(AST_BASE* initializer_node,STATIC_STOR_VALUE* value,bool static_stor);
 bool alloca_on_stack_value(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR_BB* ir_bb,SYM_ITEM* tmpsi);
 /*the global declaration is in module,and the local declaration must in one block*/
 

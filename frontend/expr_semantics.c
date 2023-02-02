@@ -2057,13 +2057,27 @@ bool postfix_expr_value(AST_BASE* ast_node)
                 break;
             }
         }
+        if(!type_name_node||!initializer_list_node)
+            goto error;
         /*get the type based on the compound literal*/
         tmp_l_type_vec=type_name_type(type_name_node);
-        if(initializer_list_node)
+        type_name_node->symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg.expr."),NMSP_DEFAULT);
+        if(!(type_name_node->symbol))
         {
-            if(!initializer_list_semantic(initializer_list_node,tmp_l_type_vec,0,0))
-                goto error;
+            printf("alloc symbol error\n");
+            goto error;
         }
+        type_name_node->symbol->count=HASH_CNT_IST;
+        if(!insert_symbol(type_name_node->symbol_table,type_name_node->symbol))
+            goto error;
+        VECappend(type_name_node->symbol->type_vec,tmp_l_type_vec);
+        type_name_node->symbol->align_size=Type_align(type_name_node->symbol->type_vec);
+        type_name_node->symbol->complete=true;
+        type_name_node->symbol->const_expr=true;
+        type_name_node->symbol->stor_type=IR_STOR_STACK;
+        type_name_node->symbol->data_field->pointer=(VEC*)InitVEC(DEFAULT_CAPICITY);
+        if(!initializer_list_semantic(initializer_list_node,tmp_l_type_vec,0,0,(VEC*)type_name_node->symbol->data_field->pointer))
+            goto error;
         is_lvalue=true;
     }
     else

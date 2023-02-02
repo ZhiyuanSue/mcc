@@ -67,6 +67,27 @@ bool declaration_trans(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR_BB*
             else
                 tmpsi->stor_type=IR_STOR_STACK;
         }
+        if(AST_CHILD_NUM(init_decl_node)==1)
+        {
+            if(tmpsi->stor_type==IR_STOR_STATIC||tmpsi->stor_type==IR_STOR_THREAD){
+                /*all set to zero*/
+            }
+            else if(tmpsi->stor_type==IR_STOR_STACK)
+            {
+
+            }
+        }
+        else if(AST_CHILD_NUM(init_decl_node)==3)
+        {
+            if(tmpsi->stor_type==IR_STOR_STATIC||tmpsi->stor_type==IR_STOR_THREAD){
+                
+            }
+            else if(tmpsi->stor_type==IR_STOR_STACK)
+            {
+                
+            }
+        }
+//------------------------------
         if(tmpsi->stor_type==IR_STOR_STATIC||tmpsi->stor_type==IR_STOR_THREAD){
             /*
                 if static storage symbol, calculate the const value to fill in data
@@ -82,7 +103,7 @@ bool declaration_trans(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR_BB*
             memset(value->value_data,0,value_size);
             if(AST_CHILD_NUM(init_decl_node)==3){
                 AST_BASE* initializer_node=AST_GET_CHILD(init_decl_node,2);
-                if(!fill_in_static_stor_value(initializer_node,value))
+                if(!fill_in_init_value(initializer_node,value,true))
                     goto error;
             }
             VECinsert(irm->static_stor_symbols,(void*)value);
@@ -90,13 +111,14 @@ bool declaration_trans(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR_BB*
         else if(tmpsi->stor_type==IR_STOR_STACK){
             alloca_on_stack_value(decl_node,irm,ir_func,ir_bb,tmpsi);
         }
+//-----------------------
     }
     m_free(tei);
     return true;
 error:
     return false;
 }
-bool fill_in_static_stor_value(AST_BASE* initializer_node,STATIC_STOR_VALUE* value)
+bool fill_in_init_value(AST_BASE* initializer_node,STATIC_STOR_VALUE* value,bool static_stor)
 {
     /*as we have calculated the off and the size of one initializer node,just fill data in it*/
     if(!initializer_node||!value||initializer_node->type!=initializer)
@@ -116,7 +138,7 @@ bool fill_in_static_stor_value(AST_BASE* initializer_node,STATIC_STOR_VALUE* val
         for(size_t i=0;i<AST_CHILD_NUM(initializer_list_node);++i){
             AST_BASE* sub_init_node=AST_GET_CHILD(initializer_list_node,i);
             if(sub_init_node->type==initializer){
-                fill_in_static_stor_value(sub_init_node,value);
+                fill_in_init_value(sub_init_node,value,static_stor);
             }
         }
     }
@@ -195,12 +217,11 @@ bool alloca_on_stack_value(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR
 
     /*fill the data in the reg of pointer */
     stack_off=MCC_ALIGN(stack_off,alloca_align);
-    ast_node->symbol->stor_type=IR_STOR_REG;
+    ast_node->symbol->stor_type=IR_STOR_STACK;
     stack_off+=alloca_size;
 
 
     /*TODO:if have initializer part, init it,but this time need a insert instructions*/
-
 
     return true;
 error:

@@ -11,5 +11,5 @@ bool initializer_search(
     size_t curr_obj_off,
     bool bit_field,
     size_t bit_field_size,
-    size_t level);
+    size_t level,VEC* init_node_list);
 #endif   

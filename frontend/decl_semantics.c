@@ -137,6 +137,7 @@ bool declaration_type(AST_BASE* ast_node,VEC* dec_symbol_item_list)
                 SYM_ITEM* tmpsi=find_symbol_curr_table(declarator_node->symbol_table,declarator_char_name,declarator_node->name_space);
                 if(!tmpsi)
                     return false;
+                declarator_node->symbol=tmpsi;
                 VECinsert(dec_symbol_item_list,(void*)tmpsi);
                 
                 M_TYPE* tmpt=Type_VEC_get_spec_other(tmpsi->type_vec);
@@ -152,8 +153,9 @@ bool declaration_type(AST_BASE* ast_node,VEC* dec_symbol_item_list)
                         C_ERROR(C0095_ERR_INIT_SCOPE_AND_LINKAGE,declarator_node);
                         return false;
                     }
+                    tmpsi->data_field->pointer=InitVEC(DEFAULT_CAPICITY);
                     AST_BASE* initializer_node=AST_GET_CHILD(init_dec_node,2);
-                    if(!initializer_semantic(initializer_node,tmpsi->type_vec,0,0)){
+                    if(!initializer_semantic(initializer_node,tmpsi->type_vec,0,0,(VEC*)tmpsi->data_field->pointer)){
                         return false;
                     }
                 }
@@ -506,10 +508,7 @@ bool declarator_type(AST_BASE* declarator_node,
                 else
                     tmpsi->type_vec=type_vec;
                 if(insert_symbol(declarator_node->symbol_table,tmpsi))
-                {
-                    declarator_node->symbol=tmpsi;
                     tmp_token->symbol_item=tmpsi;
-                }
             }
             break;
         }
@@ -1194,7 +1193,7 @@ bool abs_declarator_type(AST_BASE* abstract_declarator_node,
     m_free(tei);
     return type_vec;
 }
-bool initializer_semantic(AST_BASE* initializer_node,VEC* target_type_vec,size_t off,size_t curr_obj_off)
+bool initializer_semantic(AST_BASE* initializer_node,VEC* target_type_vec,size_t off,size_t curr_obj_off,VEC* init_node_list)
 {
     if(!initializer_node||initializer_node->type!=initializer||!target_type_vec)
         goto error;
@@ -1232,7 +1231,7 @@ bool initializer_semantic(AST_BASE* initializer_node,VEC* target_type_vec,size_t
     }
     else{
         sub_node=AST_GET_CHILD(initializer_node,1);
-        if(!initializer_list_semantic(sub_node,target_type_vec,off,curr_obj_off))
+        if(!initializer_list_semantic(sub_node,target_type_vec,off,curr_obj_off,init_node_list))
             goto error;
     }
     m_free(tei);
@@ -1240,7 +1239,7 @@ bool initializer_semantic(AST_BASE* initializer_node,VEC* target_type_vec,size_t
 error:
     return false;
 }
-bool initializer_list_semantic(AST_BASE* initializer_list_node,VEC* type_vec,size_t off,size_t curr_obj_off){
+bool initializer_list_semantic(AST_BASE* initializer_list_node,VEC* type_vec,size_t off,size_t curr_obj_off,VEC* init_node_list){
     if(!initializer_list_node||initializer_list_node->type!=initializer_list||!type_vec)
         goto error;
     ERROR_ITEM* tei=m_alloc(sizeof(ERROR_ITEM));
@@ -1261,7 +1260,7 @@ bool initializer_list_semantic(AST_BASE* initializer_list_node,VEC* type_vec,siz
                 break;
             }
             /*test the sub initializer begin with left brace or not*/
-            if(!initializer_search(sub_node,type_vec,&off,curr_obj_off,false,0,0))
+            if(!initializer_search(sub_node,type_vec,&off,curr_obj_off,false,0,0,init_node_list))
             {
                 C_ERROR(C0072_ERR_ASSIGN_OPERAND,initializer_list_node);
                 goto error;
@@ -1374,7 +1373,8 @@ bool initializer_search(
     size_t curr_obj_off,
     bool bit_field,
     size_t bit_field_size,
-    size_t level)
+    size_t level,
+    VEC* init_node_list)
 {
     if(!initializer_node||!type_vec||!off)
         goto error;
@@ -1385,10 +1385,11 @@ bool initializer_search(
         {
             goto error;
         }
-        if(!initializer_semantic(initializer_node,type_vec,(*off),curr_obj_off))
+        if(!initializer_semantic(initializer_node,type_vec,(*off),curr_obj_off,init_node_list))
         {
             goto error;
         }
+        VECinsert(init_node_list,(void*)initializer_node);
         initializer_node->init_attribute->off=curr_obj_off;
         if(bit_field)
         {
@@ -1407,9 +1408,10 @@ bool initializer_search(
         VEC* sub_obj_type=InitVEC(DEFAULT_CAPICITY);
         M_TYPE* sint_type=build_base_type(TP_SINT);
         VECinsert(sub_obj_type,sint_type);
-        if(!initializer_semantic(initializer_node,sub_obj_type,(*off),curr_obj_off))
+        if(!initializer_semantic(initializer_node,sub_obj_type,(*off),curr_obj_off,init_node_list))
             goto error;
         /* a enum cannot be a bit field,so add the sint size*/
+        VECinsert(init_node_list,(void*)initializer_node);
         initializer_node->init_attribute->off=curr_obj_off;
         initializer_node->init_attribute->size=Type_size(sub_obj_type)*8;
         (*off)+=Type_size(sub_obj_type)*8;
@@ -1443,7 +1445,8 @@ bool initializer_search(
                     curr_obj_off,
                     member->bit_field,
                     member->bit_field_size,
-                    level+1
+                    level+1,
+                    init_node_list
                 ))
                     goto error;
                 if((*off)>=curr_obj_off+union_size){
@@ -1451,8 +1454,9 @@ bool initializer_search(
                 }
             }
             else{
-                if(initializer_semantic(initializer_node,sub_obj_type_vec,(*off),curr_obj_off))
+                if(initializer_semantic(initializer_node,sub_obj_type_vec,(*off),curr_obj_off,init_node_list))
                 {
+                    VECinsert(init_node_list,(void*)initializer_node);
                     initializer_node->init_attribute->off=curr_obj_off;
                     initializer_node->init_attribute->size=union_size;
                     (*off)+=union_size;
@@ -1467,7 +1471,8 @@ bool initializer_search(
                         curr_obj_off,
                         member->bit_field,
                         member->bit_field_size,
-                        level+1
+                        level+1,
+                        init_node_list
                     ))
                         goto error;
                     if((*off)>=curr_obj_off+union_size){
@@ -1533,7 +1538,8 @@ bool initializer_search(
                     curr_obj_off,
                     member_bit_field,
                     member_bit_field_size,
-                    level+1
+                    level+1,
+                    init_node_list
                 ))
                     goto error;
                 if((*off)>=struct_start_off+struct_size){
@@ -1541,8 +1547,9 @@ bool initializer_search(
                 }
             }
             else{
-                if(initializer_semantic(initializer_node,sub_obj_type_vec,(*off),curr_obj_off))
+                if(initializer_semantic(initializer_node,sub_obj_type_vec,(*off),curr_obj_off,init_node_list))
                 {
+                    VECinsert(init_node_list,(void*)initializer_node);
                     initializer_node->init_attribute->off=curr_obj_off;
                     if(index==VECLEN(su_member_list)-1)
                     {
@@ -1604,7 +1611,8 @@ bool initializer_search(
                         curr_obj_off,
                         member_bit_field,
                         member_bit_field_size,
-                        level+1
+                        level+1,
+                        init_node_list
                     ))
                         goto error;
                     if((*off)>=struct_start_off+struct_size){
@@ -1629,13 +1637,15 @@ bool initializer_search(
                 curr_obj_off,
                 false,
                 0,
-                level+1
+                level+1,
+                init_node_list
             ))
                 goto error;
         }
         else{
-            if(initializer_semantic(initializer_node,sub_obj_type_vec,(*off),curr_obj_off))
+            if(initializer_semantic(initializer_node,sub_obj_type_vec,(*off),curr_obj_off,init_node_list))
             {
+                VECinsert(init_node_list,(void*)initializer_node);
                 initializer_node->init_attribute->off=curr_obj_off;
                 initializer_node->init_attribute->size=sub_type_size;
                 (*off)+=sub_type_size;
@@ -1649,7 +1659,8 @@ bool initializer_search(
                     curr_obj_off,
                     false,
                     0,
-                    level+1
+                    level+1,
+                    init_node_list
                 ))
                     goto error;
             }

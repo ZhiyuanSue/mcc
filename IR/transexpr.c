@@ -293,11 +293,8 @@ bool postfix_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
                 break;
             }
         }
-        if(initializer_list_node)
-        {
-            /*alloc a symbol on stack*/
-
-        }
+        curr_symbol=type_name_node->symbol;
+        /*alloc a symbol on stack*/
     }
     else
         goto error;
