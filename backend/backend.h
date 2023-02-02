@@ -2,6 +2,7 @@
 #define _BACKEND_H_
 #include "../defs/defs.h"
 #include "../IR/IR.h"
+#include "optimizer.h"
 #ifdef _ARM_
 #include "arm/arm_backend.h"
 #endif

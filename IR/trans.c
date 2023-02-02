@@ -67,7 +67,7 @@ bool trans_func(AST_BASE* ast_node,IR_FUNC* ir_func)
     ((TP_FUNC*)tmpt)->ir_func=ir_func;
     /*do some work for arguments*/
     /*add a return basic block,in which only one ins, ret*/
-    IR_BB* last_bb=add_new_bb(ir_func,"func end.",true,ast_node->symbol_table);
+    IR_BB* last_bb=add_new_bb(ir_func,".func.end.",true,ast_node->symbol_table);
     IR_INS* ret_ins=add_new_ins(last_bb);
     last_bb->Instruction_list=(LIST_NODE*)ret_ins;
 

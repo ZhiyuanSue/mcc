@@ -51,6 +51,7 @@ IR_BB* add_new_bb(IR_FUNC* func,char* label_prefix,bool need_gen_new_label,SYM* 
         insert_symbol(symbol_table,new_bb->symbol);
     new_bb->func=func;
     new_bb->IR_module=func->IR_module;
+    new_bb->ignore=false;
     return new_bb;
 error:
     return NULL;

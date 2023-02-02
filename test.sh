@@ -11,6 +11,7 @@
 mcc_path="./bin/mcc"
 test_src_path="./bin/test_src/"
 test_out_path="./bin/test_out/"
+test_asm_path="./bin/test_asm/"
 test_asm_gcc_path="./bin/test_asm/gcc/"
 test_asm_mcc_path="./bin/test_asm/mcc/"
 bit32=0
@@ -24,6 +25,9 @@ echo "start test"
 echo "=========="
 if [ ! -d ${test_out_path} ];then
     mkdir ${test_out_path}
+fi
+if [ ! -d ${test_asm_path} ];then
+    mkdir ${test_asm_path}
 fi
 if [ ! -d ${test_asm_gcc_path} ];then
     mkdir ${test_asm_gcc_path}

@@ -17,17 +17,11 @@ bool MCC_backend(IR_MODULE* irm,char* src_file,char* target_file)
     size_t src_file_name_len=strlen(src_file);
     char* src_file_name=m_alloc(sizeof(char)*src_file_name_len);
     memset(src_file_name,'\0',src_file_name_len);
-#ifdef _MAC_        /*different platform have different path seperate*/
-    char split_ch='/';
-#else
+#ifdef _MAC_
+    fprintf(fp,"\t.section\t__TEXT,__text,regular,pure_instructions\n");
+#endif
 #ifdef _UNIX_
     char split_ch='/';
-#else
-#ifdef _WIN_
-    char split_ch='\\';
-#endif
-#endif
-#endif
     size_t index;
     for(index=src_file_name_len;index>0;index--)
     {
@@ -40,9 +34,27 @@ bool MCC_backend(IR_MODULE* irm,char* src_file,char* target_file)
     for(size_t i=0;i+index<src_file_name_len;++i)
         src_file_name[i]=src_file[i+index];
     fprintf(fp,"\t.file\t\"%s\"\n",src_file_name);
+#endif
+    if(!optimizer(irm))
+        goto error;
     if(!gen_asm(irm,fp))
         goto error;
-    /*finally, it seems that the gnu might fill in some characters in the end*/
+    /*
+    finally, it seems that the gnu might fill in some characters in the end
+    but the format might different on mac and linux.
+    I have no idea of what to do, just copy it.
+    */    
+#ifdef _MAC_
+    fprintf(fp,".subsections_via_symbols\n");
+#endif
+#ifdef _UNIX_
+    
+    /*
+    I don't know what it did,but it seems like that code might used for the linker
+    may be you need to check the gcc source code.
+    so I just copied that here.
+    besides,the align of data is different between 32 and 64 bit target file
+    */
 #if __WORDSIZE==32
     char align_char='4';
 #elif __WORDSIZE==64
@@ -66,6 +78,7 @@ bool MCC_backend(IR_MODULE* irm,char* src_file,char* target_file)
     fprintf(fp,"3:\n");
     fprintf(fp,"\t.align %c\n",align_char);
     fprintf(fp,"4:\n");
+#endif
     fclose(fp);
     return true;
 error:

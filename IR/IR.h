@@ -44,6 +44,7 @@ typedef struct basic_block{
     IR_MODULE* IR_module;
     IR_FUNC* func;
     LIST_NODE* Instruction_list;
+    bool ignore;
 }IR_BB;
 
 IR_FUNC* add_new_func(IR_MODULE* irm,SYM_ITEM* func_symbol);
