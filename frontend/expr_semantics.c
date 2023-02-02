@@ -2059,7 +2059,6 @@ bool postfix_expr_value(AST_BASE* ast_node)
         }
         /*get the type based on the compound literal*/
         tmp_l_type_vec=type_name_type(type_name_node);
-        /*TODO: initializer part*/
         if(initializer_list_node)
         {
             if(!initializer_list_semantic(initializer_list_node,tmp_l_type_vec,0,0))

@@ -17,14 +17,18 @@ bool expr_trans_dispatch(AST_BASE* ast_node,IR_BB* ir_bb)
     else if(ast_node->type>=assignment_expr&&ast_node->type<=primary_expression){
         res=expr_translation[ast_node->type-assignment_expr+1](ast_node,ir_bb);
     }
+    else
+        goto error;
     return res;
 error:
     return false;
 }
 bool cond_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
 {
-    if(!ast_node||!ir_bb)
+    if(!ast_node||!ir_bb||ast_node->type!=conditional_expr)
         goto error;
+    if(ast_node->symbol->const_expr)
+        return true;
     return true;
 error:
     return false;
@@ -33,14 +37,18 @@ bool expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
 {
     if(!ast_node||!ir_bb)
         goto error;
+    if(ast_node->symbol->const_expr)
+        return true;
     return true;
 error:
     return false;
 }
 bool assign_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
 {
-    if(!ast_node||!ir_bb)
+    if(!ast_node||!ir_bb||ast_node->type!=assignment_expr)
         goto error;
+    if(ast_node->symbol->const_expr)
+        return true;
     return true;
 error:
     return false;
@@ -136,113 +144,203 @@ bool assign_trans(SYM_ITEM* src_symbol,
 }
 bool logical_or_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
 {
-    if(!ast_node||!ir_bb)
+    if(!ast_node||!ir_bb||ast_node->type!=logical_or_expr)
         goto error;
+    if(ast_node->symbol->const_expr)
+        return true;
     return true;
 error:
     return false;
 }
 bool logical_and_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
 {
-    if(!ast_node||!ir_bb)
+    if(!ast_node||!ir_bb||ast_node->type!=logical_and_expr)
         goto error;
+    if(ast_node->symbol->const_expr)
+        return true;
     return true;
 error:
     return false;
 }
 bool bit_inclusive_or_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
 {
-    if(!ast_node||!ir_bb)
+    if(!ast_node||!ir_bb||ast_node->type!=inclusive_or_expr)
         goto error;
+    if(ast_node->symbol->const_expr)
+        return true;
     return true;
 error:
     return false;
 }
 bool bit_exclusive_or_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
 {
-    if(!ast_node||!ir_bb)
+    if(!ast_node||!ir_bb||ast_node->type!=exclusive_or_expr)
         goto error;
+    if(ast_node->symbol->const_expr)
+        return true;
     return true;
 error:
     return false;
 }
 bool and_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
 {
-    if(!ast_node||!ir_bb)
+    if(!ast_node||!ir_bb||ast_node->type!=and_expression)
         goto error;
+    if(ast_node->symbol->const_expr)
+        return true;
     return true;
 error:
     return false;
 }
 bool equal_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
 {
-    if(!ast_node||!ir_bb)
+    if(!ast_node||!ir_bb||ast_node->type!=equality_expr)
         goto error;
+    if(ast_node->symbol->const_expr)
+        return true;
     return true;
 error:
     return false;
 }
 bool relation_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
 {
-    if(!ast_node||!ir_bb)
+    if(!ast_node||!ir_bb||ast_node->type!=relational_expr)
         goto error;
+    if(ast_node->symbol->const_expr)
+        return true;
     return true;
 error:
     return false;
 }
 bool shift_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
 {
-    if(!ast_node||!ir_bb)
+    if(!ast_node||!ir_bb||ast_node->type!=shift_expr)
         goto error;
+    if(ast_node->symbol->const_expr)
+        return true;
     return true;
 error:
     return false;
 }
 bool add_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
 {
-    if(!ast_node||!ir_bb)
+    if(!ast_node||!ir_bb||ast_node->type!=additive_expr)
         goto error;
+    if(ast_node->symbol->const_expr)
+        return true;
     return true;
 error:
     return false;
 }
 bool mul_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
 {
-    if(!ast_node||!ir_bb)
+    if(!ast_node||!ir_bb||ast_node->type!=multi_expr)
         goto error;
+    if(ast_node->symbol->const_expr)
+        return true;
     return true;
 error:
     return false;
 }
 bool cast_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
 {
-    if(!ast_node||!ir_bb)
+    if(!ast_node||!ir_bb||ast_node->type!=cast_expr)
         goto error;
+    if(ast_node->symbol->const_expr)
+        return true;
     return true;
 error:
     return false;
 }
 bool unary_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
 {
-    if(!ast_node||!ir_bb)
+    if(!ast_node||!ir_bb||ast_node->type!=unary_expr)
         goto error;
+    if(ast_node->symbol->const_expr)
+        return true;
     return true;
 error:
     return false;
 }
 bool postfix_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
 {
-    if(!ast_node||!ir_bb)
+    if(!ast_node||!ir_bb||ast_node->type!=postfix_expr)
         goto error;
-    
+    /*
+        if this postfix expr is a const value,do nothing
+    */
+    if(ast_node->symbol->const_expr)
+        return true;
+    /*not const expr*/
+    AST_BASE* first_node=AST_GET_CHILD(ast_node,0);
+    int suffix_start_index=0;
+    SYM_ITEM* curr_symbol=NULL;
+    if(first_node&&first_node->type==primary_expression){
+        suffix_start_index=1;
+        curr_symbol=first_node->symbol;
+    }
+    else if(first_node&&first_node->type==left_parenthesis){
+        AST_BASE* type_name_node=NULL;
+        AST_BASE* initializer_list_node=NULL;
+        for(size_t i=0;i<AST_CHILD_NUM(ast_node);++i){
+            AST_BASE* tmp_ast_node=AST_GET_CHILD(ast_node,i);
+            if(tmp_ast_node->type==type_name)
+                type_name_node=tmp_ast_node;
+            if(tmp_ast_node->type==initializer_list)
+                initializer_list_node=tmp_ast_node;
+            if(tmp_ast_node->type==right_brace){
+                suffix_start_index=i+1;
+                break;
+            }
+        }
+        if(initializer_list_node)
+        {
+            /*alloc a symbol on stack*/
+
+        }
+    }
+    else
+        goto error;
+    /**/
+    while(suffix_start_index<AST_CHILD_NUM(ast_node))
+    {
+        AST_BASE* tmp_ast=AST_GET_CHILD(ast_node,suffix_start_index);
+        if(tmp_ast->type==left_bracket){    /*Array case*/
+            suffix_start_index+=3;
+        }
+        else if(tmp_ast->type==left_parenthesis){   /*Function case:*/
+            for(size_t i=suffix_start_index;i<AST_CHILD_NUM(ast_node);++i){
+                tmp_ast=AST_GET_CHILD(ast_node,i);
+                if(tmp_ast->type==right_parenthesis)
+                {
+                    suffix_start_index=i+1;
+                    break;
+                }
+            }
+        }
+        else if(tmp_ast->type==dot){    /*struct*/
+            suffix_start_index+=2;
+        }
+        else if(tmp_ast->type==point){  /*point to struct*/
+            suffix_start_index+=2;
+        }
+        else if(tmp_ast->type==double_plus){    /* ++ */
+            suffix_start_index+=1;
+        }
+        else if(tmp_ast->type==double_minus){   /* -- */
+            suffix_start_index+=1;
+        }
+    }
     return true;
 error:
     return false;
 }
 bool pri_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
 {
-    if(!ast_node||!ir_bb)
+    if(!ast_node||!ir_bb||(ast_node->type)!=primary_expression)
         goto error;
+    if(ast_node->symbol->const_expr)
+        return true;
     return true;
 error:
     return false;

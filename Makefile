@@ -5,6 +5,7 @@ export MCC_ROOT_OBJ=${MCC_ROOT_DIR}/obj
 export MCC_ROOT_PRE=${MCC_ROOT_DIR}/pre
 export MCC_ROOT_ASM=${MCC_ROOT_DIR}/asm
 export MCC_BOOTSTRAP_OUT=${MCC_ROOT_DIR}/bin/bootstrap_print_out
+export MCC_BOOTSTRAP_ASM=${MCC_ROOT_DIR}/bin/bootstrap_asm_out
 Bin:=${MCC_ROOT_DIR}/bin
 Target:= ${Bin}/mcc
 modules += src backend IR frontend tools defs
@@ -28,6 +29,7 @@ clean:
 	rm -rf ${Bin}/test_out/*
 	rm -rf ${MCC_ROOT_PRE}/*
 	rm -rf ${MCC_BOOTSTRAP_OUT}/*
+	rm -rf ${MCC_BOOTSTRAP_ASM}/*
 	rm -rf ${MCC_ROOT_ASM}/*
 	rm -rf ${Bin}/test_asm/*
 
