@@ -506,7 +506,10 @@ bool declarator_type(AST_BASE* declarator_node,
                 else
                     tmpsi->type_vec=type_vec;
                 if(insert_symbol(declarator_node->symbol_table,tmpsi))
+                {
+                    declarator_node->symbol=tmpsi;
                     tmp_token->symbol_item=tmpsi;
+                }
             }
             break;
         }

@@ -88,7 +88,7 @@ bool declaration_trans(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR_BB*
             VECinsert(irm->static_stor_symbols,(void*)value);
         }
         else if(tmpsi->stor_type==IR_STOR_STACK){
-            alloca_on_stack_value(ast_node,irm,ir_func,ir_bb,tmpsi);
+            alloca_on_stack_value(decl_node,irm,ir_func,ir_bb,tmpsi);
         }
     }
     m_free(tei);

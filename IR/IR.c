@@ -146,5 +146,7 @@ void print_INS(IR_INS* ins,size_t indentation)
 void print_OPERAND(SYM_ITEM* operand,size_t indentation)
 {
     if(!operand)
-        printf("None ");
+        printf(" None ");
+    else
+        printf(" %s ",operand->value);
 }
