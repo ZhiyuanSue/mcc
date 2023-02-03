@@ -75,7 +75,6 @@ bool declaration_trans(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR_BB*
         {
             if(tmpsi->stor_type==IR_STOR_STATIC||tmpsi->stor_type==IR_STOR_THREAD){
                 /*all set to zero*/
-                printf("static\n");
             }
             else if(tmpsi->stor_type==IR_STOR_STACK){
                 if(!ir_func||!ir_bb)
@@ -83,14 +82,11 @@ bool declaration_trans(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR_BB*
                     printf("try to alloca but not find basic block\n");
                     goto error;
                 }
-                printf("stack\n");
             }
-            printf("%s\n",tmpsi->value);
         }
         else if(AST_CHILD_NUM(init_decl_node)==3)
         {
             if(tmpsi->stor_type==IR_STOR_STATIC||tmpsi->stor_type==IR_STOR_THREAD){
-                printf("static\n");
                 fill_in_init_value(tmpsi,stor_value,true,NULL,NULL);
             }
             else if(tmpsi->stor_type==IR_STOR_STACK){
@@ -99,16 +95,8 @@ bool declaration_trans(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR_BB*
                     printf("try to alloca but not find basic block\n");
                     goto error;
                 }
-                printf("stack\n");
                 SYM_ITEM* alloc_reg=alloca_on_stack_value(ir_bb,tmpsi);
                 fill_in_init_value(tmpsi,stor_value,false,alloc_reg,ir_bb);
-            }
-            printf("%s\n",tmpsi->value);
-            for(size_t i=0;i<VECLEN(((VEC*)(tmpsi->data_field->pointer)));++i)
-            {
-                AST_BASE* init_node=VEC_GET_ITEM(((VEC*)(tmpsi->data_field->pointer)),i);
-                print_type_vec(init_node->init_attribute->type_vec);
-                printf("%ld %ld\n",init_node->init_attribute->off,init_node->init_attribute->size);
             }
         }
         VECinsert(irm->static_stor_symbols,(void*)stor_value);
@@ -138,7 +126,6 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
     size_t veclen=VECLEN(((VEC*)symbol->data_field->pointer));
     for(size_t i=0;i<veclen;++i)
     {
-        printf("i%ld\n",i);
         AST_BASE* initializer_node=VEC_GET_ITEM( ((VEC*)symbol->data_field->pointer) ,i);
         AST_BASE* sub_node=AST_GET_CHILD(initializer_node,0);
         if(!IS_EXPR_NODE(sub_node->type))
@@ -158,11 +145,12 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
         }
         else{
             /*for static storage ,an error*/
+            /*
             if(static_stor)
             {
                 C_ERROR(C0097_ERR_STATIC_STOR_CONST,sub_node);
                 goto error;
-            }
+            }*/
             if(!expr_trans_dispatch(sub_node,ir_bb))
                 goto error;
             /*get the load position reg*/

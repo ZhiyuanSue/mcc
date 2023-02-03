@@ -39,6 +39,8 @@ bool MCC_backend(IR_MODULE* irm,char* src_file,char* target_file)
         goto error;
     if(!gen_asm(irm,fp))
         goto error;
+    if(!gen_static_stor_data(irm,fp))
+        goto error;
     /*
     finally, it seems that the gnu might fill in some characters in the end
     but the format might different on mac and linux.
@@ -83,4 +85,40 @@ bool MCC_backend(IR_MODULE* irm,char* src_file,char* target_file)
     return true;
 error:
     return false;
+}
+bool gen_static_stor_data(IR_MODULE* irm,FILE* fp)
+{
+    for(size_t i=0;i<VECLEN(irm->static_stor_symbols);++i)
+    {
+        STOR_VALUE* value=(STOR_VALUE*)VEC_GET_ITEM(irm->static_stor_symbols,i);
+        fprintf(fp,"\t.globl\t%s\n",value->sym_item->value);
+        fprintf(fp,"%s:\n",value->sym_item->value);
+        for(size_t j=0;j<VECLEN(value->value_vec);++j)
+        {
+            STOR_VALUE_ELEM* elem=VEC_GET_ITEM(value->value_vec,j);
+            if(elem->value_data_type==SSVT_NONE)
+            {
+                if(elem->byte_width==0)
+#ifdef _MAC_
+                    fprintf(fp,"\t.space\t%lld\n",elem->data);
+#endif
+#ifdef _UNIX_
+                    fprintf(fp,"\t.zero\t%lld\n",elem->data);
+#endif
+                else if(elem->byte_width==1)
+                    fprintf(fp,"\t.byte\t%lld\n",elem->data);
+                else if(elem->byte_width==2)
+                    fprintf(fp,"\t.word\t%lld\n",elem->data);
+                else if(elem->byte_width==4)
+                    fprintf(fp,"\t.long\t%lld\n",elem->data);
+                else if(elem->byte_width==8)
+                    fprintf(fp,"\t.quad\t%lld\n",elem->data); 
+            }
+            else if(elem->value_data_type==SSVT_POINTER)
+            {
+                fprintf(fp,"\t.quad\t%s\n",((SYM_ITEM*)elem->data)->value); 
+            }
+        }
+    }
+    return true;
 }

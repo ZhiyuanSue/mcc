@@ -13,5 +13,5 @@
 #include "x86/x86_backend.h"
 #endif
 bool MCC_backend(IR_MODULE* irm,char* src_file,char* target_file);
-
+bool gen_static_stor_data(IR_MODULE* irm,FILE* fp);
 #endif
