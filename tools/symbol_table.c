@@ -50,6 +50,7 @@ SYM_ITEM* Create_symbol_item(char* symbol,NMSP name_space){
     if(symbol==NULL)
         return NULL;
     SYM_ITEM* tmp=(SYM_ITEM*)m_alloc(sizeof(SYM_ITEM));
+    tmp->symbol_table=NULL;
     tmp->value=symbol;
     tmp->name_space=name_space;
     tmp->key=SymbolCharToKey(symbol,name_space);
@@ -70,6 +71,9 @@ SYM_ITEM* Create_symbol_item(char* symbol,NMSP name_space){
     return tmp;
 }
 bool insert_symbol(SYM* symbol_table,SYM_ITEM* symbol_item){
+    if(!symbol_table||!symbol_item)
+        return false;
+    symbol_item->symbol_table=symbol_table;
     return HASHInsert(symbol_table->sym_hash_table,(HASH_ITEM*)symbol_item,symbol_item_cmp);
 }
 SYM_ITEM* find_symbol(SYM* symbol_table,char* symbol,NMSP name_space){

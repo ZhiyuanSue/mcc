@@ -293,8 +293,8 @@ bool postfix_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
                 break;
             }
         }
-        curr_symbol=type_name_node->symbol;
         /*alloc a symbol on stack*/
+        curr_symbol=alloca_on_stack_value(ir_bb,type_name_node->symbol);
     }
     else
         goto error;
@@ -303,6 +303,7 @@ bool postfix_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     {
         AST_BASE* tmp_ast=AST_GET_CHILD(ast_node,suffix_start_index);
         if(tmp_ast->type==left_bracket){    /*Array case*/
+            
             suffix_start_index+=3;
         }
         else if(tmp_ast->type==left_parenthesis){   /*Function case:*/

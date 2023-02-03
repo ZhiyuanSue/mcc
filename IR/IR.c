@@ -90,9 +90,8 @@ void print_IR(IR_MODULE* irm)
     printf("<external declarations>:%ld declarations in total\n",VECLEN(irm->static_stor_symbols));
     for(size_t i=0;i<VECLEN(irm->static_stor_symbols);++i)
     {
-        STATIC_STOR_VALUE* value=(STATIC_STOR_VALUE*)VEC_GET_ITEM(irm->static_stor_symbols,i);
-        SYM_ITEM* tmpsi=value->sym_item;
-        print_symbol(tmpsi,0);
+        STOR_VALUE* value=(STOR_VALUE*)VEC_GET_ITEM(irm->static_stor_symbols,i);
+        print_static_stor_value(value);
     }
     printf("<function definitions>:%ld functions in total\n",VECLEN(irm->func_list));
     if(irm->func_list)
@@ -149,4 +148,9 @@ void print_OPERAND(SYM_ITEM* operand,size_t indentation)
         printf(" None ");
     else
         printf(" %s ",operand->value);
+}
+void print_static_stor_value(STOR_VALUE* value)
+{
+    printf("\t.globl\t%s\n",value->sym_item->value);
+
 }

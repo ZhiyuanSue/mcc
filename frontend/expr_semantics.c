@@ -2078,6 +2078,7 @@ bool postfix_expr_value(AST_BASE* ast_node)
         type_name_node->symbol->data_field->pointer=(VEC*)InitVEC(DEFAULT_CAPICITY);
         if(!initializer_list_semantic(initializer_list_node,tmp_l_type_vec,0,0,(VEC*)type_name_node->symbol->data_field->pointer))
             goto error;
+        
         is_lvalue=true;
     }
     else

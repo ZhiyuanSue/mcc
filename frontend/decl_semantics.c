@@ -158,6 +158,8 @@ bool declaration_type(AST_BASE* ast_node,VEC* dec_symbol_item_list)
                     if(!initializer_semantic(initializer_node,tmpsi->type_vec,0,0,(VEC*)tmpsi->data_field->pointer)){
                         return false;
                     }
+                    initializer_node->init_attribute->off=0;
+                    initializer_node->init_attribute->size=Type_size(tmpsi->type_vec);
                 }
                 else{
                     /*Default_implict_initialization part,do nothing*/
@@ -1228,6 +1230,7 @@ bool initializer_semantic(AST_BASE* initializer_node,VEC* target_type_vec,size_t
         if(!assignment_type_check(unary_type_vec,assign_type_vec))
             goto error;
         initializer_node->init_attribute->type_vec=target_type_vec;
+        VECinsert(init_node_list,(void*)initializer_node);
     }
     else{
         sub_node=AST_GET_CHILD(initializer_node,1);
@@ -1389,7 +1392,6 @@ bool initializer_search(
         {
             goto error;
         }
-        VECinsert(init_node_list,(void*)initializer_node);
         initializer_node->init_attribute->off=curr_obj_off;
         if(bit_field)
         {
@@ -1411,7 +1413,6 @@ bool initializer_search(
         if(!initializer_semantic(initializer_node,sub_obj_type,(*off),curr_obj_off,init_node_list))
             goto error;
         /* a enum cannot be a bit field,so add the sint size*/
-        VECinsert(init_node_list,(void*)initializer_node);
         initializer_node->init_attribute->off=curr_obj_off;
         initializer_node->init_attribute->size=Type_size(sub_obj_type)*8;
         (*off)+=Type_size(sub_obj_type)*8;
@@ -1456,7 +1457,6 @@ bool initializer_search(
             else{
                 if(initializer_semantic(initializer_node,sub_obj_type_vec,(*off),curr_obj_off,init_node_list))
                 {
-                    VECinsert(init_node_list,(void*)initializer_node);
                     initializer_node->init_attribute->off=curr_obj_off;
                     initializer_node->init_attribute->size=union_size;
                     (*off)+=union_size;
@@ -1549,7 +1549,6 @@ bool initializer_search(
             else{
                 if(initializer_semantic(initializer_node,sub_obj_type_vec,(*off),curr_obj_off,init_node_list))
                 {
-                    VECinsert(init_node_list,(void*)initializer_node);
                     initializer_node->init_attribute->off=curr_obj_off;
                     if(index==VECLEN(su_member_list)-1)
                     {
@@ -1645,7 +1644,6 @@ bool initializer_search(
         else{
             if(initializer_semantic(initializer_node,sub_obj_type_vec,(*off),curr_obj_off,init_node_list))
             {
-                VECinsert(init_node_list,(void*)initializer_node);
                 initializer_node->init_attribute->off=curr_obj_off;
                 initializer_node->init_attribute->size=sub_type_size;
                 (*off)+=sub_type_size;

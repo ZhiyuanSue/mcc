@@ -56,4 +56,5 @@ bool insert_ins_to_bb(IR_INS* ins,IR_BB* ir_bb);
 void print_IR(IR_MODULE* irm);
 void print_INS(IR_INS* ins,size_t indentation);
 void print_OPERAND(SYM_ITEM* operand,size_t indentation);
+void print_static_stor_value(STOR_VALUE* value);
 #endif

@@ -25,14 +25,15 @@ enum static_storage_value_type{
 typedef struct sym_item SYM_ITEM;
 typedef struct{
     enum static_storage_value_type value_data_type;
-    size_t byte_width;  /*1 -byte,2 -word,4 -long(not the long in C),8 -quad*/
-    void* data;
-}STATIC_STOR_VALUE_ELEM;
+    size_t byte_width;  /*0 -zero byte, 1 -byte,2 -word,4 -long(not the long in C),8 -quad*/
+    unsigned long long int data;
+    /*if the data stores a value of pointer and the wordsize is 32,need judgement and cast*/
+    void* bit_field_init_attr;
+}STOR_VALUE_ELEM;
 typedef struct{
     SYM_ITEM* sym_item;
-    void* value_data;   /*use this to alloc a memory*/
     VEC* value_vec;
-}STATIC_STOR_VALUE;
+}STOR_VALUE;
 typedef struct sym_table SYM;
 struct sym_table{
     unsigned int level;
@@ -52,6 +53,7 @@ struct sym_table{
 typedef struct sym_item{
     HASH_COMMON
     DATA_VALUE
+    SYM* symbol_table;
     char* value;    /*name string*/
     NMSP name_space;
     int align_size;
@@ -81,7 +83,6 @@ void del_symbol_typedef_table(SYM* symbol_table,char* symbol);
 void Del_symbol_table(SYM* symbol_table);
 void print_symbol_table(SYM* symbol_table);
 void print_symbol(SYM_ITEM* symbol,size_t indentation);
-void print_static_stor_value(STATIC_STOR_VALUE* value,size_t data_size,size_t indentation);
 VEC* get_symbol_hash(HASH* h);
 unsigned long long int SymbolCharToKey(char* symbol,NMSP name_space);
 bool symbol_item_cmp(void* a,void* b);
@@ -92,6 +93,7 @@ inline bool Copy_sym_item(SYM_ITEM* new,SYM_ITEM* old){
     if(!new)
         new=m_alloc(sizeof(SYM_ITEM));
     new->count=old->count;
+    new->symbol_table=old->symbol_table;
     new->data_field=old->data_field;
     new->data_size=old->data_size;
     new->declared=old->declared;

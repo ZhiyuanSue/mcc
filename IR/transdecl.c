@@ -67,163 +67,199 @@ bool declaration_trans(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR_BB*
             else
                 tmpsi->stor_type=IR_STOR_STACK;
         }
+        printf("var:");
+        STOR_VALUE* stor_value=(STOR_VALUE*)m_alloc(sizeof(STOR_VALUE));
+        stor_value->value_vec=InitVEC(DEFAULT_CAPICITY);
+        stor_value->sym_item=tmpsi;
         if(AST_CHILD_NUM(init_decl_node)==1)
         {
             if(tmpsi->stor_type==IR_STOR_STATIC||tmpsi->stor_type==IR_STOR_THREAD){
                 /*all set to zero*/
+                printf("static\n");
             }
-            else if(tmpsi->stor_type==IR_STOR_STACK)
-            {
-
+            else if(tmpsi->stor_type==IR_STOR_STACK){
+                if(!ir_func||!ir_bb)
+                {
+                    printf("try to alloca but not find basic block\n");
+                    goto error;
+                }
+                printf("stack\n");
             }
+            printf("%s\n",tmpsi->value);
         }
         else if(AST_CHILD_NUM(init_decl_node)==3)
         {
             if(tmpsi->stor_type==IR_STOR_STATIC||tmpsi->stor_type==IR_STOR_THREAD){
-                
+                printf("static\n");
+                fill_in_init_value(tmpsi,stor_value,true,NULL,NULL);
             }
-            else if(tmpsi->stor_type==IR_STOR_STACK)
-            {
-                
-            }
-        }
-//------------------------------
-        if(tmpsi->stor_type==IR_STOR_STATIC||tmpsi->stor_type==IR_STOR_THREAD){
-            /*
-                if static storage symbol, calculate the const value to fill in data
-                and all the init node must be const value
-            */
-            STATIC_STOR_VALUE* value=(STATIC_STOR_VALUE*)m_alloc(sizeof(STATIC_STOR_VALUE));
-            value->sym_item=tmpsi;
-
-            value->value_vec=InitVEC(DEFAULT_CAPICITY);
-
-            size_t value_size=Type_size(tmpsi->type_vec);
-            value->value_data=m_alloc(value_size);
-            memset(value->value_data,0,value_size);
-            if(AST_CHILD_NUM(init_decl_node)==3){
-                AST_BASE* initializer_node=AST_GET_CHILD(init_decl_node,2);
-                if(!fill_in_init_value(initializer_node,value,true))
+            else if(tmpsi->stor_type==IR_STOR_STACK){
+                if(!ir_func||!ir_bb)
+                {
+                    printf("try to alloca but not find basic block\n");
                     goto error;
+                }
+                printf("stack\n");
+                SYM_ITEM* alloc_reg=alloca_on_stack_value(ir_bb,tmpsi);
+                fill_in_init_value(tmpsi,stor_value,false,alloc_reg,ir_bb);
             }
-            VECinsert(irm->static_stor_symbols,(void*)value);
+            printf("%s\n",tmpsi->value);
+            for(size_t i=0;i<VECLEN(((VEC*)(tmpsi->data_field->pointer)));++i)
+            {
+                AST_BASE* init_node=VEC_GET_ITEM(((VEC*)(tmpsi->data_field->pointer)),i);
+                print_type_vec(init_node->init_attribute->type_vec);
+                printf("%ld %ld\n",init_node->init_attribute->off,init_node->init_attribute->size);
+            }
         }
-        else if(tmpsi->stor_type==IR_STOR_STACK){
-            alloca_on_stack_value(decl_node,irm,ir_func,ir_bb,tmpsi);
-        }
-//-----------------------
+        VECinsert(irm->static_stor_symbols,(void*)stor_value);
     }
     m_free(tei);
     return true;
 error:
     return false;
 }
-bool fill_in_init_value(AST_BASE* initializer_node,STATIC_STOR_VALUE* value,bool static_stor)
+bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_ITEM* alloc_reg,IR_BB* ir_bb)
 {
+    printf("fill in init\n");
     /*as we have calculated the off and the size of one initializer node,just fill data in it*/
-    if(!initializer_node||!value||initializer_node->type!=initializer)
+    if(!symbol||!value)
         goto error;
+    if(!static_stor&&!alloc_reg&&!ir_bb)
+    {
+        printf("a value alloc on stack but without enough info!\n");  /*impossible*/
+        goto error;
+    }
+    if(!(symbol->data_field->pointer))
+    {
+        printf("need a init list\n");  /*impossible*/
+        goto error;
+    }
     ERROR_ITEM* tei=(ERROR_ITEM*)m_alloc(sizeof(ERROR_ITEM));
-    AST_BASE* sub_node=AST_GET_CHILD(initializer_node,0);
-    AST_BASE* initializer_list_node=NULL;
-    if(sub_node->type==postfix_expr){
-        AST_BASE* sub_sub_node=AST_GET_CHILD(sub_node,1);
-        if(sub_sub_node&&sub_sub_node->type==type_name){
-            initializer_list_node=AST_GET_CHILD(sub_node,4);
-        }
-    }
-    else if(sub_node->type==left_brace)
-        initializer_list_node=AST_GET_CHILD(initializer_node,1);
-    if(initializer_list_node){
-        for(size_t i=0;i<AST_CHILD_NUM(initializer_list_node);++i){
-            AST_BASE* sub_init_node=AST_GET_CHILD(initializer_list_node,i);
-            if(sub_init_node->type==initializer){
-                fill_in_init_value(sub_init_node,value,static_stor);
-            }
-        }
-    }
-    else{
-        if(!IS_EXPR_NODE(sub_node->type)||!(sub_node->symbol->const_expr))
+    size_t veclen=VECLEN(((VEC*)symbol->data_field->pointer));
+    for(size_t i=0;i<veclen;++i)
+    {
+        printf("i%ld\n",i);
+        AST_BASE* initializer_node=VEC_GET_ITEM( ((VEC*)symbol->data_field->pointer) ,i);
+        AST_BASE* sub_node=AST_GET_CHILD(initializer_node,0);
+        if(!IS_EXPR_NODE(sub_node->type))
         {
-            C_ERROR(C0097_ERR_STATIC_STOR_CONST,sub_node);
+            printf("initializer node not have a expr\n");  /*impossible*/
             goto error;
         }
-        /*then fill in and trunc(if bit field)*/
-        INIT_NODE_ATTR* init_attr=initializer_node->init_attribute;
-        M_TYPE* tmp_type=Type_VEC_get_actual_base_type(init_attr->type_vec);
-        if(!tmp_type||!IS_SCALAR_TYPE(tmp_type->typ_category))
+        STOR_VALUE_ELEM* elem=m_alloc(sizeof(STOR_VALUE_ELEM));
+        elem->bit_field_init_attr=NULL;
+        elem->value_data_type=SSVT_NONE;
+        elem->byte_width=elem->data=0;
+        VECinsert(value->value_vec,(void*)elem);
+        if(initializer_node->symbol->const_expr)
         {
-            print_type_vec(init_attr->type_vec);
-            printf("not a terminal initializer,error\n");
-            goto error; /*actually impossible if everything ok*/
+            elem->byte_width=Type_size(initializer_node->symbol->type_vec);
+            elem->value_data_type=SSVT_NONE;
         }
-        /*first,try to cast the data*/
-        /*not bit field case*/
-        size_t data_spec_size=type_data_size[tmp_type->typ_category];
-        if((8*data_spec_size)==init_attr->size&&(init_attr->off)%8==0)
-        {
-            /*fill in*/
-            STATIC_STOR_VALUE_ELEM* elem=m_alloc(data_spec_size);
-            elem->byte_width=data_spec_size;
-            if(tmp_type->typ_category==TP_POINT){
-                AST_BASE* sub_sub_node=AST_GET_CHILD(sub_node,0);
-                if(sub_node->type==primary_expression&&sub_sub_node&&sub_sub_node->type==identifier){
-                    elem->value_data_type=SSVT_POINTER;
-                    
-                }
-                else{
-                    elem->value_data_type=SSVT_NONE;
-                }
-                
-            }
-            else{
-                elem->value_data_type=SSVT_NONE;
-                elem->data=value+(init_attr->off)/8;
-            }
-            /*in struct, there might have some space between two elements*/
-            if(init_attr->off!=0){
-                
-            }
-            VECinsert(value->value_vec,(void*)elem);
-        }/*bit field case:emmm...actually,I have no idea of how to trunc*/
         else{
-            /*use a new tmp data to store the value*/
+            /*for static storage ,an error*/
+            if(static_stor)
+            {
+                C_ERROR(C0097_ERR_STATIC_STOR_CONST,sub_node);
+                goto error;
+            }
+            if(!expr_trans_dispatch(sub_node,ir_bb))
+                goto error;
+            /*get the load position reg*/
+            SYM_ITEM* load_posi_symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
+            if(!insert_symbol(alloc_reg->symbol_table,load_posi_symbol))
+                goto error;
+            VECappend(symbol->type_vec,load_posi_symbol->type_vec);
+            M_TYPE* pointer_type=build_base_type(TP_POINT);
+            VECinsert(load_posi_symbol->type_vec,(void*)pointer_type);
+            load_posi_symbol->stor_type=IR_STOR_STACK;
+            load_posi_symbol->data_field->slong=(signed long int)(alloc_reg->data_field->slong+(initializer_node->init_attribute->off)/8);
+            
+            IR_INS* store_ins=add_new_ins(ir_bb);
+            insert_ins_to_bb(store_ins,ir_bb);
+            if(initializer_node->init_attribute->size!=Type_size(initializer_node->init_attribute->type_vec))    /*trunc*/
+            {
+                IR_INS* trunc_ins=add_new_ins(ir_bb);
+                insert_ins_to_bb(trunc_ins,ir_bb);
+                //GenINS(trunc_ins,OP_TRUNC,,,NULL);
+            }
+            if((initializer_node->init_attribute->off)%8!=0)
+            {   /*shift to left*/
+                IR_INS* shift_ins=add_new_ins(ir_bb);
+                insert_ins_to_bb(shift_ins,ir_bb);
 
-            /*use 'and' to trunc*/
-            
-            /*shift it according to the off*/
-            
-            /*use 'or' to fill in the data*/
+                //GenINS(shift_ins,OP_SHL,,,NULL);
+            }
+            GenINS(store_ins,OP_STORE,NULL,load_posi_symbol,NULL);
         }
+        /*
+            if two init nodes or a init and the end have a padding,just insert zero space
+            but that only used for static storage
+        */
+        if(static_stor)
+        {
+            size_t off=initializer_node->init_attribute->off+initializer_node->init_attribute->size;
+            off=MCC_ALIGN(off,8);
+            size_t next_begin_off;
+            if(i==veclen-1)
+                next_begin_off=Type_size(symbol->type_vec)*8;
+            else
+            {
+                AST_BASE* next_initializer_node=VEC_GET_ITEM( ((VEC*)symbol->data_field->pointer) ,i);
+                next_begin_off=next_initializer_node->init_attribute->off;
+            }
+            if(next_begin_off-off>8)
+            {
+                elem=m_alloc(sizeof(STOR_VALUE_ELEM));
+                elem->byte_width=0;
+                elem->value_data_type=SSVT_NONE;
+                elem->data=(next_begin_off-off)/8;
+                VECinsert(value->value_vec,(void*)elem);
+            }
+        }
+        
+    }
+    /*if a const expr, and a bit field, merge it*/
+    for(size_t i=0;i<VECLEN(value->value_vec);++i)
+    {
+        STOR_VALUE_ELEM* tmp_elem=VEC_GET_ITEM(value->value_vec,i);
+        if(!tmp_elem->bit_field_init_attr)
+            continue;
+        
     }
     m_free(tei);
     return true;
 error:
     return false;
 }
-bool alloca_on_stack_value(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR_BB* ir_bb,SYM_ITEM* tmpsi)
+SYM_ITEM* alloca_on_stack_value(IR_BB* ir_bb,SYM_ITEM* symbol)
 {
-    if(!ast_node||!irm||!ir_func||!ir_bb||!tmpsi)
+    if(!ir_bb||!symbol)
         goto error;
     /*not static storage,generate code to fill in the data*/
     IR_INS* alloca_ins=add_new_ins(ir_bb);
     insert_ins_to_bb(alloca_ins,ir_bb);
-    VEC* tmp_type_vec=tmpsi->type_vec;
+    VEC* tmp_type_vec=symbol->type_vec;
 
-    size_t alloca_size=Type_size(tmpsi->type_vec); 
-    size_t alloca_align=Type_align(tmpsi->type_vec);
+    size_t alloca_size=Type_size(symbol->type_vec); 
+    size_t alloca_align=Type_align(symbol->type_vec);
 
-    GenINS(alloca_ins,OP_ALLOCA,ast_node->symbol,ast_node->symbol,NULL);
+    /*gen a new symbol*/
+    SYM_ITEM* res=Create_symbol_item(tmp_symbol_str_alloc(".stack."),NMSP_DEFAULT);
+    if(!insert_symbol(symbol->symbol_table,res))
+        goto error;
+    VECappend(symbol->type_vec,res->type_vec);
+    M_TYPE* pointer_type=build_base_type(TP_POINT);
+    VECinsert(res->type_vec,(void*)pointer_type);
+    GenINS(alloca_ins,OP_ALLOCA,res,symbol,NULL);
 
     /*fill the data in the reg of pointer */
     stack_off=MCC_ALIGN(stack_off,alloca_align);
-    ast_node->symbol->stor_type=IR_STOR_STACK;
+    res->stor_type=IR_STOR_STACK;
+    res->data_field->slong=(signed long int)stack_off;
     stack_off+=alloca_size;
 
-
-    /*TODO:if have initializer part, init it,but this time need a insert instructions*/
-
-    return true;
+    return res;
 error:
-    return false;
+    return NULL;
 }
