@@ -14,7 +14,9 @@ bool GenINS(
 
     /*fill in*/
     ins->op=op;
-    
+    ins->dst=dst;
+    ins->src1=src1;
+    ins->src2=src2;
     if(op==OP_ICMP||op==OP_FCMP)
         ins->other_attr=(void*)m_alloc(sizeof(CMP_COND_ATTR));
     return true;
