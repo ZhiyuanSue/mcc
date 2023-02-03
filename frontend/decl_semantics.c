@@ -1458,7 +1458,7 @@ bool initializer_search(
                 if(initializer_semantic(initializer_node,sub_obj_type_vec,(*off),curr_obj_off,init_node_list))
                 {
                     initializer_node->init_attribute->off=curr_obj_off;
-                    initializer_node->init_attribute->size=union_size;
+                    initializer_node->init_attribute->size=Type_size(sub_obj_type_vec)*8;
                     (*off)+=union_size;
                     ((TP_SU*)tmp_type)->curr_designated_member=NULL;
                     goto succ;
@@ -1552,7 +1552,7 @@ bool initializer_search(
                     initializer_node->init_attribute->off=curr_obj_off;
                     if(index==VECLEN(su_member_list)-1)
                     {
-                        initializer_node->init_attribute->size=struct_size;
+                        initializer_node->init_attribute->size=Type_size(sub_obj_type_vec)*8;
                         (*off)+=struct_size;
                     }
                     else{
@@ -1593,11 +1593,11 @@ bool initializer_search(
                                 initializer_node->init_attribute->size=Type_size(member->type_vec)*8;
                             (*off)=struct_start_off+(next_member->offset)*8;
                             if(next_member->bit_field)
-                                off+=member->bit_field_offset;
+                                (*off)+=member->bit_field_offset;
                         }
                         else    /*it means no next member start with different offset*/
                         {
-                            initializer_node->init_attribute->size=struct_size;
+                            initializer_node->init_attribute->size=Type_size(sub_obj_type_vec)*8;
                             (*off)+=struct_size;
                         }
                     }

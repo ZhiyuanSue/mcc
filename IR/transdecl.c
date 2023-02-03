@@ -148,7 +148,6 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
         AST_BASE* initializer_node=VEC_GET_ITEM( ((VEC*)(symbol->data_field->pointer)) ,index);
         if(!initializer_node)
             break;
-        printf("%ld %ld\n",initializer_node->init_attribute->off,initializer_node->init_attribute->size);
         AST_BASE* sub_node=AST_GET_CHILD(initializer_node,0);
         if(!IS_EXPR_NODE(sub_node->type))
         {
@@ -170,7 +169,6 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
         VEC* bit_field_vec=InitVEC(DEFAULT_CAPICITY);
         while(is_bit_field_init(initializer_node))
         {
-            printf("bitfield\n");
             VECinsert(bit_field_vec,(void*)initializer_node);
             index++;
             initializer_node=VEC_GET_ITEM( ((VEC*)symbol->data_field->pointer) ,index);
@@ -336,8 +334,6 @@ bool is_bit_field_init(AST_BASE* initializer_node)
 {
     if(!initializer_node||!initializer_node->init_attribute)
         return false;
-    printf("%ld\n",initializer_node->init_attribute->size);
-    print_type_vec(initializer_node->init_attribute->type_vec);
     if((initializer_node->init_attribute->off)%8!=0||(initializer_node->init_attribute->size)!=8*Type_size(initializer_node->init_attribute->type_vec))
         return true;
     return false;
