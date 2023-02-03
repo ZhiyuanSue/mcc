@@ -156,27 +156,27 @@ void print_static_stor_value(STOR_VALUE* value)
     for(size_t i=0;i<VECLEN(value->value_vec);++i)
     {
         STOR_VALUE_ELEM* elem=VEC_GET_ITEM(value->value_vec,i);
-        if(elem->value_data_type==SSVT_NONE)
+        if(elem&&elem->value_data_type==SSVT_NONE)
         {
             if(elem->byte_width==0)
 #ifdef _MAC_
-                printf("\t.space\t%lld\n",elem->data);
+                printf("\t.space\t%llu\n",elem->idata);
 #endif
 #ifdef _UNIX_
-                printf("\t.zero\t%lld\n",elem->data);
+                printf("\t.zero\t%llu\n",elem->idata);
 #endif
             else if(elem->byte_width==1)
-                printf("\t.byte\t%lld\n",elem->data);
+                printf("\t.byte\t%llu\n",elem->idata);
             else if(elem->byte_width==2)
-                printf("\t.word\t%lld\n",elem->data);
+                printf("\t.word\t%llu\n",elem->idata);
             else if(elem->byte_width==4)
-                printf("\t.long\t%lld\n",elem->data);
+                printf("\t.long\t%llu\n",elem->idata);
             else if(elem->byte_width==8)
-                printf("\t.quad\t%lld\n",elem->data); 
+                printf("\t.quad\t%llu\n",elem->idata); 
         }
         else if(elem->value_data_type==SSVT_POINTER)
         {
-            printf("\t.quad\t%s\n",((SYM_ITEM*)elem->data)->value); 
+            printf("\t.quad\t%s\n",((SYM_ITEM*)(elem->idata))->value); 
         }
     }
 }

@@ -96,27 +96,27 @@ bool gen_static_stor_data(IR_MODULE* irm,FILE* fp)
         for(size_t j=0;j<VECLEN(value->value_vec);++j)
         {
             STOR_VALUE_ELEM* elem=VEC_GET_ITEM(value->value_vec,j);
-            if(elem->value_data_type==SSVT_NONE)
+            if(elem&&elem->value_data_type==SSVT_NONE)
             {
                 if(elem->byte_width==0)
 #ifdef _MAC_
-                    fprintf(fp,"\t.space\t%lld\n",elem->data);
+                    fprintf(fp,"\t.space\t%llu\n",elem->idata);
 #endif
 #ifdef _UNIX_
-                    fprintf(fp,"\t.zero\t%lld\n",elem->data);
+                    fprintf(fp,"\t.zero\t%llu\n",elem->idata);
 #endif
                 else if(elem->byte_width==1)
-                    fprintf(fp,"\t.byte\t%lld\n",elem->data);
+                    fprintf(fp,"\t.byte\t%llu\n",elem->idata);
                 else if(elem->byte_width==2)
-                    fprintf(fp,"\t.word\t%lld\n",elem->data);
+                    fprintf(fp,"\t.word\t%llu\n",elem->idata);
                 else if(elem->byte_width==4)
-                    fprintf(fp,"\t.long\t%lld\n",elem->data);
+                    fprintf(fp,"\t.long\t%llu\n",elem->idata);
                 else if(elem->byte_width==8)
-                    fprintf(fp,"\t.quad\t%lld\n",elem->data); 
+                    fprintf(fp,"\t.quad\t%llu\n",elem->idata); 
             }
             else if(elem->value_data_type==SSVT_POINTER)
             {
-                fprintf(fp,"\t.quad\t%s\n",((SYM_ITEM*)elem->data)->value); 
+                fprintf(fp,"\t.quad\t%s\n",((SYM_ITEM*)elem->idata)->value); 
             }
         }
     }

@@ -159,7 +159,7 @@ bool declaration_type(AST_BASE* ast_node,VEC* dec_symbol_item_list)
                         return false;
                     }
                     initializer_node->init_attribute->off=0;
-                    initializer_node->init_attribute->size=Type_size(tmpsi->type_vec);
+                    initializer_node->init_attribute->size=Type_size(tmpsi->type_vec)*8;
                 }
                 else{
                     /*Default_implict_initialization part,do nothing*/

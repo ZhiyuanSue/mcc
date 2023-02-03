@@ -1,6 +1,9 @@
-int abcd[]={1,2};
+int abcd=1;
 int *p[2]={&abcd,0};
+
 void test(void){
-    int efgh=1;
-    static int *ppp[2]={&efgh,0};
+    struct a{
+        int a;
+        int b;
+    }bbb={abcd,0};
 }

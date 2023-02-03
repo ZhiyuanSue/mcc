@@ -67,7 +67,6 @@ bool declaration_trans(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR_BB*
             else
                 tmpsi->stor_type=IR_STOR_STACK;
         }
-        printf("var:");
         STOR_VALUE* stor_value=(STOR_VALUE*)m_alloc(sizeof(STOR_VALUE));
         stor_value->value_vec=InitVEC(DEFAULT_CAPICITY);
         stor_value->sym_item=tmpsi;
@@ -75,6 +74,12 @@ bool declaration_trans(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR_BB*
         {
             if(tmpsi->stor_type==IR_STOR_STATIC||tmpsi->stor_type==IR_STOR_THREAD){
                 /*all set to zero*/
+                STOR_VALUE_ELEM* elem=m_alloc(sizeof(STOR_VALUE_ELEM));
+                elem->byte_width=0;
+                elem->value_data_type=SSVT_NONE;
+                elem->idata=Type_size(tmpsi->type_vec);
+                elem->bit_field_init_attr=NULL;
+                VECinsert(irm->static_stor_symbols,(void*)stor_value);
             }
             else if(tmpsi->stor_type==IR_STOR_STACK){
                 if(!ir_func||!ir_bb)
@@ -86,8 +91,22 @@ bool declaration_trans(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR_BB*
         }
         else if(AST_CHILD_NUM(init_decl_node)==3)
         {
+            /*sort the initializer node list accroding to the off*/
+            VEC* tmpv=(VEC*)(tmpsi->data_field->pointer);
+            for(size_t j=0;j<VECLEN(tmpv);++j){
+                for(size_t k=j+1;k<VECLEN(tmpv);++k)
+                {
+                    AST_BASE* tmpj=VEC_GET_ITEM(tmpv,j);
+                    AST_BASE* tmpk=VEC_GET_ITEM(tmpv,k);
+                    if(tmpj->init_attribute->off>tmpk->init_attribute->off)
+                    {
+                        VECswapItem(tmpv,j,k);
+                    }
+                }
+            }
             if(tmpsi->stor_type==IR_STOR_STATIC||tmpsi->stor_type==IR_STOR_THREAD){
                 fill_in_init_value(tmpsi,stor_value,true,NULL,NULL);
+                VECinsert(irm->static_stor_symbols,(void*)stor_value);
             }
             else if(tmpsi->stor_type==IR_STOR_STACK){
                 if(!ir_func||!ir_bb)
@@ -99,7 +118,7 @@ bool declaration_trans(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR_BB*
                 fill_in_init_value(tmpsi,stor_value,false,alloc_reg,ir_bb);
             }
         }
-        VECinsert(irm->static_stor_symbols,(void*)stor_value);
+        
     }
     m_free(tei);
     return true;
@@ -108,7 +127,6 @@ error:
 }
 bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_ITEM* alloc_reg,IR_BB* ir_bb)
 {
-    printf("fill in init\n");
     /*as we have calculated the off and the size of one initializer node,just fill data in it*/
     if(!symbol||!value)
         goto error;
@@ -123,34 +141,115 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
         goto error;
     }
     ERROR_ITEM* tei=(ERROR_ITEM*)m_alloc(sizeof(ERROR_ITEM));
-    size_t veclen=VECLEN(((VEC*)symbol->data_field->pointer));
-    for(size_t i=0;i<veclen;++i)
+    size_t veclen=VECLEN(((VEC*)(symbol->data_field->pointer)));
+    size_t index=0;
+    for(size_t index=0;index < veclen ; ++index)
     {
-        AST_BASE* initializer_node=VEC_GET_ITEM( ((VEC*)symbol->data_field->pointer) ,i);
+        AST_BASE* initializer_node=VEC_GET_ITEM( ((VEC*)(symbol->data_field->pointer)) ,index);
+        if(!initializer_node)
+            break;
+        printf("%ld %ld\n",initializer_node->init_attribute->off,initializer_node->init_attribute->size);
         AST_BASE* sub_node=AST_GET_CHILD(initializer_node,0);
         if(!IS_EXPR_NODE(sub_node->type))
         {
             printf("initializer node not have a expr\n");  /*impossible*/
             goto error;
         }
-        STOR_VALUE_ELEM* elem=m_alloc(sizeof(STOR_VALUE_ELEM));
+        STOR_VALUE_ELEM* elem=NULL;
+        if(static_stor&&index==0&&initializer_node->init_attribute->off!=0)
+        {
+            /*if the first init node off is not 0,need padding*/
+            elem=m_alloc(sizeof(STOR_VALUE_ELEM));
+            elem->value_data_type=SSVT_NONE;
+            elem->byte_width=0;
+            elem->idata=initializer_node->init_attribute->off/8;
+            elem->bit_field_init_attr=NULL;
+            VECinsert(value->value_vec,(void*)elem);
+        }
+        /*deal with uninterrupted bit field case*/
+        VEC* bit_field_vec=InitVEC(DEFAULT_CAPICITY);
+        while(is_bit_field_init(initializer_node))
+        {
+            printf("bitfield\n");
+            VECinsert(bit_field_vec,(void*)initializer_node);
+            index++;
+            initializer_node=VEC_GET_ITEM( ((VEC*)symbol->data_field->pointer) ,index);
+        }
+        if(VECLEN(bit_field_vec))
+        {
+            fill_in_bit_field_init_value(bit_field_vec,value,static_stor,alloc_reg,ir_bb);
+            continue;
+        }
+        /*the other cases must not be bit field*/
+        elem=m_alloc(sizeof(STOR_VALUE_ELEM));
         elem->bit_field_init_attr=NULL;
         elem->value_data_type=SSVT_NONE;
-        elem->byte_width=elem->data=0;
+        elem->byte_width=elem->idata=0;
         VECinsert(value->value_vec,(void*)elem);
-        if(initializer_node->symbol->const_expr)
+        if(sub_node->symbol->const_expr)
         {
-            elem->byte_width=Type_size(initializer_node->symbol->type_vec);
-            elem->value_data_type=SSVT_NONE;
+            VEC* type_vec = initializer_node->init_attribute->type_vec;
+            M_TYPE* tmpt=Type_VEC_get_actual_base_type(type_vec);
+            if(IS_INT_TYPE(tmpt->typ_category))
+            {
+                elem->byte_width=Type_size(type_vec);
+                elem->value_data_type=SSVT_NONE;
+                elem->idata=get_int_const(tmpt->typ_category,sub_node->symbol->data_field,true);
+            }
+            else if(IS_FLOAT_TYPE(tmpt->typ_category))
+            {
+                elem->byte_width=Type_size(type_vec);
+                elem->value_data_type=SSVT_NONE;
+                elem->fdata[0]=get_float_const(tmpt->typ_category,sub_node->symbol->data_field,true);
+            }
+            else if(IS_COMPLEX_TYPE(tmpt->typ_category))
+            {
+                elem->byte_width=Type_size(type_vec);
+                elem->value_data_type=SSVT_NONE;
+                long double* fp=get_complex_const(tmpt->typ_category,sub_node->symbol->data_field,true);
+                elem->fdata[0]=fp[0];
+                elem->fdata[1]=fp[1];
+            }
+            else if(tmpt->typ_category==TP_NULL_POINTER_CONSTANT)
+            {
+                elem->byte_width=type_data_size[TP_POINT];
+                elem->value_data_type=SSVT_NONE;
+                elem->idata=0;
+            }
+            else if(tmpt->typ_category==TP_POINT)
+            {
+                elem->byte_width=type_data_size[TP_POINT];
+                elem->value_data_type=SSVT_NONE;
+                elem->pdata=(void*)get_int_const(tmpt->typ_category,sub_node->symbol->data_field,true);
+            }
+            else if(tmpt->typ_category==TP_ENUM)
+            {
+                elem->byte_width=type_data_size[TP_ENUM];
+                elem->value_data_type=SSVT_NONE;
+                elem->idata=get_int_const(TP_SINT,sub_node->symbol->data_field,true);
+            }
+            else if(tmpt->typ_category==TP_FUNCTION)
+            {
+                elem->byte_width=type_data_size[TP_POINT];
+                elem->value_data_type=SSVT_POINTER;
+                elem->pdata=((TP_FUNC*)tmpt)->ir_func->symbol;
+            }
+            else if(tmpt->typ_category==TP_ARRAY)
+            {
+                
+            }
+            else if(tmpt->typ_category==TP_UNION||tmpt->typ_category==TP_STRUCT)
+            {
+
+            }
         }
         else{
             /*for static storage ,an error*/
-            /*
             if(static_stor)
             {
                 C_ERROR(C0097_ERR_STATIC_STOR_CONST,sub_node);
                 goto error;
-            }*/
+            }
             if(!expr_trans_dispatch(sub_node,ir_bb))
                 goto error;
             /*get the load position reg*/
@@ -165,19 +264,6 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
             
             IR_INS* store_ins=add_new_ins(ir_bb);
             insert_ins_to_bb(store_ins,ir_bb);
-            if(initializer_node->init_attribute->size!=Type_size(initializer_node->init_attribute->type_vec))    /*trunc*/
-            {
-                IR_INS* trunc_ins=add_new_ins(ir_bb);
-                insert_ins_to_bb(trunc_ins,ir_bb);
-                //GenINS(trunc_ins,OP_TRUNC,,,NULL);
-            }
-            if((initializer_node->init_attribute->off)%8!=0)
-            {   /*shift to left*/
-                IR_INS* shift_ins=add_new_ins(ir_bb);
-                insert_ins_to_bb(shift_ins,ir_bb);
-
-                //GenINS(shift_ins,OP_SHL,,,NULL);
-            }
             GenINS(store_ins,OP_STORE,NULL,load_posi_symbol,NULL);
         }
         /*
@@ -189,31 +275,22 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
             size_t off=initializer_node->init_attribute->off+initializer_node->init_attribute->size;
             off=MCC_ALIGN(off,8);
             size_t next_begin_off;
-            if(i==veclen-1)
+            if(index==veclen-1)
                 next_begin_off=Type_size(symbol->type_vec)*8;
             else
             {
-                AST_BASE* next_initializer_node=VEC_GET_ITEM( ((VEC*)symbol->data_field->pointer) ,i);
+                AST_BASE* next_initializer_node=VEC_GET_ITEM( ((VEC*)symbol->data_field->pointer) ,index+1);
                 next_begin_off=next_initializer_node->init_attribute->off;
             }
-            if(next_begin_off-off>8)
+            if((size_t)(next_begin_off-8)>(size_t)off)
             {
                 elem=m_alloc(sizeof(STOR_VALUE_ELEM));
                 elem->byte_width=0;
                 elem->value_data_type=SSVT_NONE;
-                elem->data=(next_begin_off-off)/8;
+                elem->idata=(next_begin_off-off)/8;
                 VECinsert(value->value_vec,(void*)elem);
             }
         }
-        
-    }
-    /*if a const expr, and a bit field, merge it*/
-    for(size_t i=0;i<VECLEN(value->value_vec);++i)
-    {
-        STOR_VALUE_ELEM* tmp_elem=VEC_GET_ITEM(value->value_vec,i);
-        if(!tmp_elem->bit_field_init_attr)
-            continue;
-        
     }
     m_free(tei);
     return true;
@@ -250,4 +327,18 @@ SYM_ITEM* alloca_on_stack_value(IR_BB* ir_bb,SYM_ITEM* symbol)
     return res;
 error:
     return NULL;
+}
+bool fill_in_bit_field_init_value(VEC* init_node_list,STOR_VALUE* value,bool static_stor,SYM_ITEM* alloc_reg,IR_BB* ir_bb)
+{
+    return true;
+}
+bool is_bit_field_init(AST_BASE* initializer_node)
+{
+    if(!initializer_node||!initializer_node->init_attribute)
+        return false;
+    printf("%ld\n",initializer_node->init_attribute->size);
+    print_type_vec(initializer_node->init_attribute->type_vec);
+    if((initializer_node->init_attribute->off)%8!=0||(initializer_node->init_attribute->size)!=8*Type_size(initializer_node->init_attribute->type_vec))
+        return true;
+    return false;
 }

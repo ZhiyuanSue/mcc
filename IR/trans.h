@@ -3,6 +3,7 @@
 #include "IR.h"
 #include "../frontend/ast.h"
 #include "../tools/m_type_vec.h"
+#include "../frontend/const_expr.h"
 extern VEC* c_error;
 extern char* filename;
 /*The following trans is used to translate the AST to the IR*/
@@ -12,6 +13,7 @@ bool trans_func(AST_BASE* ast_node,IR_FUNC* ir_func);
 /*decl*/
 bool declaration_trans(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR_BB* ir_bb);
 bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_ITEM* alloc_reg,IR_BB* ir_bb);
+bool fill_in_bit_field_init_value(VEC* init_node_list,STOR_VALUE* value,bool static_stor,SYM_ITEM* alloc_reg,IR_BB* ir_bb);
 SYM_ITEM* alloca_on_stack_value(IR_BB* ir_bb,SYM_ITEM* symbol);
 /*the global declaration is in module,and the local declaration must in one block*/
 

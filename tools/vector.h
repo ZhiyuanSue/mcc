@@ -20,6 +20,7 @@ void VECpopback(VEC* v);
 void VECexpand(VEC* v);
 void VECshrink(VEC* v);
 void VECcpy(VEC* src,VEC** dst);
+void VECswapItem(VEC* v,size_t i,size_t j);
 inline void VECappend(VEC* src,VEC* dst){
     if(!src||!dst)
         return;

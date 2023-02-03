@@ -61,6 +61,15 @@ void VECcpy(VEC* src,VEC** dst){
     }
     (*dst)->len=src->len;
 }
+void VECswapItem(VEC* v,size_t i,size_t j)
+{
+    if(!v)
+        return;
+    void* p;
+    p=v->data[i];
+    v->data[i]=v->data[j];
+    v->data[j]=p;
+}
 void DelVEC(VEC* v)
 {
     if(v==NULL) return;
