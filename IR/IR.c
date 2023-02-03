@@ -152,5 +152,31 @@ void print_OPERAND(SYM_ITEM* operand,size_t indentation)
 void print_static_stor_value(STOR_VALUE* value)
 {
     printf("\t.globl\t%s\n",value->sym_item->value);
-
+    printf("%s:\n",value->sym_item->value);
+    for(size_t i=0;i<VECLEN(value->value_vec);++i)
+    {
+        STOR_VALUE_ELEM* elem=VEC_GET_ITEM(value->value_vec,i);
+        if(elem->value_data_type==SSVT_NONE)
+        {
+            if(elem->byte_width==0)
+#ifdef _MAC_
+                printf("\t.space\t%lld\n",elem->data);
+#endif
+#ifdef _UNIX_
+                printf("\t.zero\t%lld\n",elem->data);
+#endif
+            else if(elem->byte_width==1)
+                printf("\t.byte\t%lld\n",elem->data);
+            else if(elem->byte_width==2)
+                printf("\t.word\t%lld\n",elem->data);
+            else if(elem->byte_width==4)
+                printf("\t.long\t%lld\n",elem->data);
+            else if(elem->byte_width==8)
+                printf("\t.quad\t%lld\n",elem->data); 
+        }
+        else if(elem->value_data_type==SSVT_POINTER)
+        {
+            printf("\t.quad\t%s\n",((SYM_ITEM*)elem->data)->value); 
+        }
+    }
 }
