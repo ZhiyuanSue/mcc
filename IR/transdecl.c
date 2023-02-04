@@ -142,7 +142,6 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
     }
     ERROR_ITEM* tei=(ERROR_ITEM*)m_alloc(sizeof(ERROR_ITEM));
     size_t veclen=VECLEN(((VEC*)(symbol->data_field->pointer)));
-    size_t index=0;
     for(size_t index=0;index < veclen ; ++index)
     {
         AST_BASE* initializer_node=VEC_GET_ITEM( ((VEC*)(symbol->data_field->pointer)) ,index);

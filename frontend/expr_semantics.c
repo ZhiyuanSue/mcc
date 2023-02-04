@@ -2094,10 +2094,10 @@ bool postfix_expr_value(AST_BASE* ast_node)
         if(tmp_ast->type==left_bracket){    /*Array case*/
             if(primary_fail)
                 goto error;
-            tmp_ast=AST_GET_CHILD(ast_node,suffix_start_index+1);
-            if(!expr_dispatch(tmp_ast))
+            AST_BASE* arr_ast=AST_GET_CHILD(ast_node,suffix_start_index+1);
+            if(!expr_dispatch(arr_ast))
                 goto error;
-            VECcpy(tmp_ast->symbol->type_vec,&tmp_r_type_vec);
+            VECcpy(arr_ast->symbol->type_vec,&tmp_r_type_vec);
             /*lvalue convertion*/
             old_l=tmp_l_type_vec;
             old_r=tmp_r_type_vec;
@@ -2144,8 +2144,14 @@ bool postfix_expr_value(AST_BASE* ast_node)
             }
             DelVEC(old_l);
             DelVEC(old_r);
-            suffix_start_index+=3;
             is_lvalue=true;
+            suffix_start_index+=3;
+            /*generate a reg*/
+            tmp_ast->symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
+            tmp_ast->symbol->count=HASH_CNT_IST;
+            insert_symbol(tmp_ast->symbol_table,tmp_ast->symbol);
+            VECappend(tmp_l_type_vec,tmp_ast->symbol->type_vec);
+            tmp_ast->symbol->stor_type=IR_STOR_REG;
         }
         else if(tmp_ast->type==left_parenthesis){   /*Function case:*/
             VEC* parameters=InitVEC(DEFAULT_CAPICITY);
@@ -2157,21 +2163,21 @@ bool postfix_expr_value(AST_BASE* ast_node)
                 DelVEC(old_l);
             /*get all the parameters*/
             for(size_t i=suffix_start_index;i<AST_CHILD_NUM(ast_node);++i){
-                tmp_ast=AST_GET_CHILD(ast_node,i);
-                if(IS_EXPR_NODE(tmp_ast->type)){
-                    VECinsert(parameters,(void*)tmp_ast);
-                    if(!expr_dispatch(tmp_ast))
+                AST_BASE* para_ast=AST_GET_CHILD(ast_node,i);
+                if(IS_EXPR_NODE(para_ast->type)){
+                    VECinsert(parameters,(void*)para_ast);
+                    if(!expr_dispatch(para_ast))
                         return false;
-                    VEC* tmp_type_vec=lvalue_convertion(tmp_ast->symbol->type_vec);
+                    VEC* tmp_type_vec=lvalue_convertion(para_ast->symbol->type_vec);
                     M_TYPE* assign_base_type=Type_VEC_get_actual_base_type(tmp_type_vec);
-                    if(IS_INT_TYPE(assign_base_type->typ_category)&&tmp_ast->symbol->const_expr){
-                        long long int null_pointer_value=TP_INT_CAST_TYPE(assign_base_type->typ_category,tmp_ast->symbol->data_field);
+                    if(IS_INT_TYPE(assign_base_type->typ_category)&&para_ast->symbol->const_expr){
+                        long long int null_pointer_value=TP_INT_CAST_TYPE(assign_base_type->typ_category,para_ast->symbol->data_field);
                         if(null_pointer_value==0)
                             assign_base_type->typ_category=TP_NULL_POINTER_CONSTANT;
                     }
                     VECinsert(parameter_type_vecs,(void*)tmp_type_vec);
                 }
-                if(tmp_ast->type==right_parenthesis)
+                if(para_ast->type==right_parenthesis)
                 {
                     suffix_start_index=i+1;
                     break;
@@ -2314,6 +2320,12 @@ bool postfix_expr_value(AST_BASE* ast_node)
             if(old_l!=tmp_l_type_vec)
                 DelVEC(old_l);
             is_lvalue=true;
+            /*generate a reg*/
+            tmp_ast->symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
+            tmp_ast->symbol->count=HASH_CNT_IST;
+            insert_symbol(tmp_ast->symbol_table,tmp_ast->symbol);
+            VECappend(tmp_l_type_vec,tmp_ast->symbol->type_vec);
+            tmp_ast->symbol->stor_type=IR_STOR_REG;
         }
         else if(tmp_ast->type==dot){    /*struct*/
             if(primary_fail)
@@ -2343,6 +2355,7 @@ bool postfix_expr_value(AST_BASE* ast_node)
                     have_member=true;
                     if(tmp_member->bit_field)
                         is_bit_field=true;
+                    break;
                 }
             }
             if(!have_member)
@@ -2368,6 +2381,12 @@ bool postfix_expr_value(AST_BASE* ast_node)
             if(is_lvalue)
                 is_lvalue=true;
             suffix_start_index+=2;
+            /*generate a reg*/
+            tmp_ast->symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
+            tmp_ast->symbol->count=HASH_CNT_IST;
+            insert_symbol(tmp_ast->symbol_table,tmp_ast->symbol);
+            VECappend(tmp_l_type_vec,tmp_ast->symbol->type_vec);
+            tmp_ast->symbol->stor_type=IR_STOR_REG;
         }
         else if(tmp_ast->type==point){  /*point to struct*/
             if(primary_fail)
@@ -2408,6 +2427,7 @@ bool postfix_expr_value(AST_BASE* ast_node)
                     have_member=true;
                     if(tmp_member->bit_field)
                         is_bit_field=true;
+                    break;
                 }
             }
             if(!have_member)
@@ -2432,6 +2452,12 @@ bool postfix_expr_value(AST_BASE* ast_node)
             }
             is_lvalue=true;
             suffix_start_index+=2;
+            /*generate a reg*/
+            tmp_ast->symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
+            tmp_ast->symbol->count=HASH_CNT_IST;
+            insert_symbol(tmp_ast->symbol_table,tmp_ast->symbol);
+            VECappend(tmp_l_type_vec,tmp_ast->symbol->type_vec);
+            tmp_ast->symbol->stor_type=IR_STOR_REG;
         }
         else if(tmp_ast->type==double_plus){    /* ++ */
             if(primary_fail)
@@ -2456,6 +2482,12 @@ bool postfix_expr_value(AST_BASE* ast_node)
             is_lvalue=false;
             is_bit_field=false;
             suffix_start_index+=1;
+            /*generate a reg*/
+            tmp_ast->symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
+            tmp_ast->symbol->count=HASH_CNT_IST;
+            insert_symbol(tmp_ast->symbol_table,tmp_ast->symbol);
+            VECappend(tmp_l_type_vec,tmp_ast->symbol->type_vec);
+            tmp_ast->symbol->stor_type=IR_STOR_REG;
         }
         else if(tmp_ast->type==double_minus){   /* -- */
             if(primary_fail)
@@ -2480,6 +2512,12 @@ bool postfix_expr_value(AST_BASE* ast_node)
             is_lvalue=false;
             is_bit_field=false;
             suffix_start_index+=1;
+            /*generate a reg*/
+            tmp_ast->symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
+            tmp_ast->symbol->count=HASH_CNT_IST;
+            insert_symbol(tmp_ast->symbol_table,tmp_ast->symbol);
+            VECappend(tmp_l_type_vec,tmp_ast->symbol->type_vec);
+            tmp_ast->symbol->stor_type=IR_STOR_REG;
         }
         else
             goto error;

@@ -303,10 +303,26 @@ bool postfix_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     {
         AST_BASE* tmp_ast=AST_GET_CHILD(ast_node,suffix_start_index);
         if(tmp_ast->type==left_bracket){    /*Array case*/
-            
+            AST_BASE* arr_ast=AST_GET_CHILD(ast_node,suffix_start_index+1);
+            if(!expr_trans_dispatch(arr_ast,ir_bb))
+                goto error;
+            IR_INS* pointer_ins=add_new_ins(ir_bb);
+            insert_ins_to_bb(pointer_ins,ir_bb);
+            GenINS(pointer_ins,OP_ADD,tmp_ast->symbol,curr_symbol,arr_ast->symbol);
+
+            curr_symbol=tmp_ast->symbol;
             suffix_start_index+=3;
         }
         else if(tmp_ast->type==left_parenthesis){   /*Function case:*/
+            /*TODO:calculate the parameters and gen ins*/
+            
+
+            /*generate the call ins*/
+            IR_INS* call_ins=add_new_ins(ir_bb);
+            insert_ins_to_bb(call_ins,ir_bb);
+            GenINS(call_ins,OP_CALL,tmp_ast->symbol,curr_symbol,NULL);
+
+            curr_symbol=tmp_ast->symbol;
             for(size_t i=suffix_start_index;i<AST_CHILD_NUM(ast_node);++i){
                 tmp_ast=AST_GET_CHILD(ast_node,i);
                 if(tmp_ast->type==right_parenthesis)
@@ -317,15 +333,73 @@ bool postfix_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
             }
         }
         else if(tmp_ast->type==dot){    /*struct*/
+            
+            curr_symbol=tmp_ast->symbol;
             suffix_start_index+=2;
         }
         else if(tmp_ast->type==point){  /*point to struct*/
+            curr_symbol=tmp_ast->symbol;
             suffix_start_index+=2;
         }
         else if(tmp_ast->type==double_plus){    /* ++ */
+            /*remember,if the operand is a pointer,must add a size of that operand point to*/
+            M_TYPE* tmp_base=Type_VEC_get_actual_base_type(curr_symbol->type_vec);
+            
+            /*gen a imm symbol with value 1*/
+            SYM_ITEM* tmp_symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
+            tmp_symbol->count=HASH_CNT_IST;
+            insert_symbol(tmp_ast->symbol_table,tmp_symbol);
+            M_TYPE* base_type=build_base_type(TP_SINT);
+            VECinsert(tmp_symbol->type_vec,(void*)base_type);
+
+            IR_INS* add_ins=add_new_ins(ir_bb);
+            insert_ins_to_bb(add_ins,ir_bb);
+            if(tmp_base->typ_category==TP_POINT)
+            {
+                VEC* pointer_type_vec=Type_VEC_get_Pointer_TO(curr_symbol->type_vec,true);
+                tmp_symbol->data_field->sint=Type_size(pointer_type_vec);
+                GenINS(add_ins,OP_ADD,tmp_ast->symbol,curr_symbol,tmp_symbol);
+            }
+            else if(IS_REAL_TYPE(tmp_base->typ_category))
+            {
+                tmp_symbol->data_field->sint=1;
+                GenINS(add_ins,OP_ADD,tmp_ast->symbol,curr_symbol,tmp_symbol);
+            }
+            else    /*impossible error*/
+            {
+                goto error;
+            }
+            curr_symbol=tmp_ast->symbol;
             suffix_start_index+=1;
         }
         else if(tmp_ast->type==double_minus){   /* -- */
+            M_TYPE* tmp_base=Type_VEC_get_actual_base_type(curr_symbol->type_vec);
+            
+            /*gen a imm symbol with value 1*/
+            SYM_ITEM* tmp_symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
+            tmp_symbol->count=HASH_CNT_IST;
+            insert_symbol(tmp_ast->symbol_table,tmp_symbol);
+            M_TYPE* base_type=build_base_type(TP_SINT);
+            VECinsert(tmp_symbol->type_vec,(void*)base_type);
+
+            IR_INS* add_ins=add_new_ins(ir_bb);
+            insert_ins_to_bb(add_ins,ir_bb);
+            if(tmp_base->typ_category==TP_POINT)
+            {
+                VEC* pointer_type_vec=Type_VEC_get_Pointer_TO(curr_symbol->type_vec,true);
+                tmp_symbol->data_field->sint=-((signed int)Type_size(pointer_type_vec));
+                GenINS(add_ins,OP_ADD,tmp_ast->symbol,curr_symbol,tmp_symbol);
+            }
+            else if(IS_REAL_TYPE(tmp_base->typ_category))
+            {
+                tmp_symbol->data_field->sint=-1;
+                GenINS(add_ins,OP_ADD,tmp_ast->symbol,curr_symbol,tmp_symbol);
+            }
+            else    /*impossible error*/
+            {
+                goto error;
+            }
+            curr_symbol=tmp_ast->symbol;
             suffix_start_index+=1;
         }
     }

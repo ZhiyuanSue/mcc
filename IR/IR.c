@@ -100,9 +100,9 @@ void print_IR(IR_MODULE* irm)
     {
         for(size_t i=0;i<VECLEN(irm->func_list);++i)
         {
-            printf(".globl function:\n");
             /*print function*/
             IR_FUNC* curr_func=VEC_GET_ITEM(irm->func_list,i);
+            printf(".globl function:%s\n",curr_func->func_name);
             printf("{\n");
             LIST_NODE* bb_p=curr_func->BB_list;
             while(bb_p)
