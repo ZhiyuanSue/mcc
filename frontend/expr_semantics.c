@@ -414,6 +414,21 @@ bool logical_or_expr_value(AST_BASE* ast_node)
             if(const_or_value)
                 break;
         }
+        if(i!=0)
+        {
+            /*generate a reg symbol on the operator*/
+            AST_BASE* logical_or_op_node=AST_GET_CHILD(ast_node,i-1);
+            logical_or_op_node->symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
+            logical_or_op_node->symbol->count=HASH_CNT_IST;
+            insert_symbol(logical_or_op_node->symbol_table,logical_or_op_node->symbol);
+            M_TYPE* tmp_type=build_base_type(TP_BOOL);
+            VECinsert(logical_or_op_node->symbol->type_vec,(void*)tmp_type);
+            if(const_expr)
+            {
+                logical_or_op_node->symbol->const_expr=true;
+                logical_or_op_node->symbol->data_field->databool=const_or_value;
+            }
+        }
     }
     M_TYPE* tmpt=build_base_type(TP_SINT);
     VECinsert(tmp_type_vec,(void*)tmpt);
@@ -472,6 +487,21 @@ bool logical_and_expr_value(AST_BASE* ast_node)
             const_and_value=logical_const(tmpt->typ_category,logical_and_expr_node->symbol->data_field);
             if(!const_and_value)
                 break;
+        }
+        if(i!=0)
+        {
+            /*generate a reg symbol on the operator*/
+            AST_BASE* logical_and_op_node=AST_GET_CHILD(ast_node,i-1);
+            logical_and_op_node->symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
+            logical_and_op_node->symbol->count=HASH_CNT_IST;
+            insert_symbol(logical_and_op_node->symbol_table,logical_and_op_node->symbol);
+            M_TYPE* tmp_type=build_base_type(TP_BOOL);
+            VECinsert(logical_and_op_node->symbol->type_vec,(void*)tmp_type);
+            if(const_expr)
+            {
+                logical_and_op_node->symbol->const_expr=true;
+                logical_and_op_node->symbol->data_field->databool=const_and_value;
+            }
         }
     }
     M_TYPE* tmpt=build_base_type(TP_SINT);
@@ -545,6 +575,21 @@ bool bit_inclusive_or_expr_value(AST_BASE* ast_node)
             const_expr=true;
             const_value=const_value | TP_INT_CAST_TYPE(tmpt->typ_category,inor_expr_node->symbol->data_field);
         }
+        if(i!=0)
+        {
+            /*generate a reg symbol on the operator*/
+            AST_BASE* bit_inclusive_or_op_node=AST_GET_CHILD(ast_node,i-1);
+            bit_inclusive_or_op_node->symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
+            bit_inclusive_or_op_node->symbol->count=HASH_CNT_IST;
+            insert_symbol(bit_inclusive_or_op_node->symbol_table,bit_inclusive_or_op_node->symbol);
+            M_TYPE* tmp_type=build_base_type(TP_USLONGLONG);
+            VECinsert(bit_inclusive_or_op_node->symbol->type_vec,(void*)tmp_type);
+            if(const_expr)
+            {
+                bit_inclusive_or_op_node->symbol->const_expr=true;
+                bit_inclusive_or_op_node->symbol->data_field->databool=const_value;
+            }
+        }
     }
     ast_node->symbol->type_vec=tmp_type_vec;
     ast_node->symbol->const_expr=const_expr;
@@ -617,6 +662,21 @@ bool bit_exclusive_or_expr_value(AST_BASE* ast_node)
             const_expr=true;
             const_value=const_value ^ TP_INT_CAST_TYPE(tmpt->typ_category,exor_expr_node->symbol->data_field);
         }
+        if(i!=0)
+        {
+            /*generate a reg symbol on the operator*/
+            AST_BASE* bit_exclusive_or_op_node=AST_GET_CHILD(ast_node,i-1);
+            bit_exclusive_or_op_node->symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
+            bit_exclusive_or_op_node->symbol->count=HASH_CNT_IST;
+            insert_symbol(bit_exclusive_or_op_node->symbol_table,bit_exclusive_or_op_node->symbol);
+            M_TYPE* tmp_type=build_base_type(TP_USLONGLONG);
+            VECinsert(bit_exclusive_or_op_node->symbol->type_vec,(void*)tmp_type);
+            if(const_expr)
+            {
+                bit_exclusive_or_op_node->symbol->const_expr=true;
+                bit_exclusive_or_op_node->symbol->data_field->databool=const_value;
+            }
+        }
     }
     ast_node->symbol->type_vec=tmp_type_vec;
     ast_node->symbol->const_expr=const_expr;
@@ -688,6 +748,21 @@ bool and_expr_value(AST_BASE* ast_node)
         {
             const_expr=true;
             const_value=const_value & TP_INT_CAST_TYPE(tmpt->typ_category,and_expr_node->symbol->data_field);
+        }
+        if(i!=0)
+        {
+            /*generate a reg symbol on the operator*/
+            AST_BASE* and_op_node=AST_GET_CHILD(ast_node,i-1);
+            and_op_node->symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
+            and_op_node->symbol->count=HASH_CNT_IST;
+            insert_symbol(and_op_node->symbol_table,and_op_node->symbol);
+            M_TYPE* tmp_type=build_base_type(TP_USLONGLONG);
+            VECinsert(and_op_node->symbol->type_vec,(void*)tmp_type);
+            if(const_expr)
+            {
+                and_op_node->symbol->const_expr=true;
+                and_op_node->symbol->data_field->databool=const_value;
+            }
         }
     }
     ast_node->symbol->type_vec=tmp_type_vec;
@@ -881,6 +956,7 @@ bool equal_expr_value(AST_BASE* ast_node)
         tmp_type_vec=InitVEC(DEFAULT_CAPICITY);
         M_TYPE* tmpt=build_base_type(TP_SINT);
         VECinsert(tmp_type_vec,(void*)tmpt);
+        
     }
     ast_node->symbol->type_vec=tmp_type_vec;
     ast_node->symbol->const_expr=const_expr;

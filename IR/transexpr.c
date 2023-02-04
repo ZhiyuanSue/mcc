@@ -349,8 +349,6 @@ bool postfix_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
             SYM_ITEM* tmp_symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
             tmp_symbol->count=HASH_CNT_IST;
             insert_symbol(tmp_ast->symbol_table,tmp_symbol);
-            M_TYPE* base_type=build_base_type(TP_SINT);
-            VECinsert(tmp_symbol->type_vec,(void*)base_type);
 
             IR_INS* add_ins=add_new_ins(ir_bb);
             insert_ins_to_bb(add_ins,ir_bb);
@@ -362,7 +360,20 @@ bool postfix_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
             }
             else if(IS_REAL_TYPE(tmp_base->typ_category))
             {
-                tmp_symbol->data_field->sint=1;
+                if(IS_INT_TYPE(tmp_base->typ_category))
+                {
+                    M_TYPE* base_type=build_base_type(TP_SINT);
+                    VECinsert(tmp_symbol->type_vec,(void*)base_type);
+                    tmp_symbol->data_field->sint=1;
+                }
+                else if(IS_FLOAT_TYPE(tmp_base->typ_category))
+                {
+                    M_TYPE* base_type=build_base_type(TP_DOUBLE);
+                    VECinsert(tmp_symbol->type_vec,(void*)base_type);
+                    tmp_symbol->data_field->datadouble=1.0;
+                }
+                else
+                    goto error; /*impossible*/
                 GenINS(add_ins,OP_ADD,tmp_ast->symbol,curr_symbol,tmp_symbol);
             }
             else    /*impossible error*/
@@ -379,8 +390,6 @@ bool postfix_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
             SYM_ITEM* tmp_symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
             tmp_symbol->count=HASH_CNT_IST;
             insert_symbol(tmp_ast->symbol_table,tmp_symbol);
-            M_TYPE* base_type=build_base_type(TP_SINT);
-            VECinsert(tmp_symbol->type_vec,(void*)base_type);
 
             IR_INS* add_ins=add_new_ins(ir_bb);
             insert_ins_to_bb(add_ins,ir_bb);
@@ -392,7 +401,20 @@ bool postfix_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
             }
             else if(IS_REAL_TYPE(tmp_base->typ_category))
             {
-                tmp_symbol->data_field->sint=-1;
+                if(IS_INT_TYPE(tmp_base->typ_category))
+                {
+                    M_TYPE* base_type=build_base_type(TP_SINT);
+                    VECinsert(tmp_symbol->type_vec,(void*)base_type);
+                    tmp_symbol->data_field->sint=-1;
+                }
+                else if(IS_FLOAT_TYPE(tmp_base->typ_category))
+                {
+                    M_TYPE* base_type=build_base_type(TP_DOUBLE);
+                    VECinsert(tmp_symbol->type_vec,(void*)base_type);
+                    tmp_symbol->data_field->datadouble=-1.0;
+                }
+                else
+                    goto error; /*impossible*/
                 GenINS(add_ins,OP_ADD,tmp_ast->symbol,curr_symbol,tmp_symbol);
             }
             else    /*impossible error*/
