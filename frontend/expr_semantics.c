@@ -946,9 +946,6 @@ bool equal_expr_value(AST_BASE* ast_node)
         }
         if(!legal)
         {
-            printf("type_vec\n");
-            print_type_vec(tmp_type_vec);
-            print_type_vec(relation_expression_node->symbol->type_vec);
             C_ERROR(C0070_ERR_EQUAL_OPERAND,ast_node);
             goto error;
         }
@@ -956,7 +953,20 @@ bool equal_expr_value(AST_BASE* ast_node)
         tmp_type_vec=InitVEC(DEFAULT_CAPICITY);
         M_TYPE* tmpt=build_base_type(TP_SINT);
         VECinsert(tmp_type_vec,(void*)tmpt);
-        
+        if(i+1!=AST_CHILD_NUM(ast_node))
+        {
+            /*generate a reg symbol on the operator*/
+            operator->symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
+            operator->symbol->count=HASH_CNT_IST;
+            insert_symbol(operator->symbol_table,operator->symbol);
+            M_TYPE* tmp_type=build_base_type(TP_BOOL);
+            VECinsert(operator->symbol->type_vec,(void*)tmp_type);
+            if(const_expr)
+            {
+                operator->symbol->const_expr=true;
+                operator->symbol->data_field->databool=equal_value;
+            }
+        }
     }
     ast_node->symbol->type_vec=tmp_type_vec;
     ast_node->symbol->const_expr=const_expr;
@@ -1102,6 +1112,20 @@ bool relation_expr_value(AST_BASE* ast_node)
         DelVEC(tmp_type_vec);
         tmp_type_vec=InitVEC(DEFAULT_CAPICITY);
         VECinsert(tmp_type_vec,tmpt);
+        if(i+1!=AST_CHILD_NUM(ast_node))
+        {
+            /*generate a reg symbol on the operator*/
+            operator->symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
+            operator->symbol->count=HASH_CNT_IST;
+            insert_symbol(operator->symbol_table,operator->symbol);
+            M_TYPE* tmp_type=build_base_type(TP_BOOL);
+            VECinsert(operator->symbol->type_vec,(void*)tmp_type);
+            if(const_expr)
+            {
+                operator->symbol->const_expr=true;
+                operator->symbol->data_field->databool=(bool)(tmp_data_field->sint);
+            }
+        }
     }
     ast_node->symbol->type_vec=tmp_type_vec;
     if(const_expr){
@@ -1164,25 +1188,39 @@ bool shift_expr_value(AST_BASE* ast_node)
             Type_VEC_change_actual_base_type(tmp_type_vec,shift_base_type);
         integer_promotion(&add_base_type);
         if(const_expr&&add_expression_node->symbol->const_expr){
-            long long int shift_base_int=get_int_const(shift_base_type->typ_category,tmp_data_field,true);
-            long long int add_base_int=get_int_const(add_base_type->typ_category,add_expression_node->symbol->data_field,true);
+            unsigned long long int shift_base_int=(unsigned long long int )get_int_const(shift_base_type->typ_category,tmp_data_field,true);
+            unsigned long long int add_base_int=(unsigned long long int )get_int_const(add_base_type->typ_category,add_expression_node->symbol->data_field,true);
             /*for unsigned long long and signed long long ,shift op is the same*/
             if(shift_op_node->type==left_shift)
             {
-                tmp_data_field->sllong=shift_base_int<<add_base_int;
+                tmp_data_field->usllong=shift_base_int<<add_base_int;
             }
             else if(shift_op_node->type==right_shift)
             {
-                tmp_data_field->sllong=shift_base_int>>add_base_int;
+                tmp_data_field->usllong=shift_base_int>>add_base_int;
             }
-            cast_const(shift_base_type->typ_category,tmp_data_field,TP_SLONGLONG,tmp_data_field);
+            cast_const(shift_base_type->typ_category,tmp_data_field,TP_USLONGLONG,tmp_data_field);
+        }
+        if(i+1!=AST_CHILD_NUM(ast_node))
+        {
+            /*generate a reg symbol on the operator*/
+            shift_op_node->symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
+            shift_op_node->symbol->count=HASH_CNT_IST;
+            insert_symbol(shift_op_node->symbol_table,shift_op_node->symbol);
+            M_TYPE* tmp_type=build_base_type(TP_USLONGLONG);
+            VECinsert(shift_op_node->symbol->type_vec,(void*)tmp_type);
+            if(const_expr)
+            {
+                shift_op_node->symbol->const_expr=true;
+                shift_op_node->symbol->data_field->usllong=tmp_data_field->usllong;
+            }
         }
     }
     M_TYPE* tmpt=Type_VEC_get_actual_base_type(tmp_type_vec);
     if(const_expr){
         ast_node->symbol->const_expr=true;
         ast_node->symbol->data_size=type_data_size[tmpt->typ_category];
-        cast_const(tmpt->typ_category,ast_node->symbol->data_field,TP_SLONGLONG,tmp_data_field);
+        cast_const(tmpt->typ_category,ast_node->symbol->data_field,TP_USLONGLONG,tmp_data_field);
     }
     ast_node->symbol->type_vec=tmp_type_vec;
     m_free(tei);
@@ -1438,6 +1476,20 @@ bool add_expr_value(AST_BASE* ast_node)
             cast_const(tmpt->typ_category,tmp_data_field,tmp_category,tmp_data_field);
         if(tmpt)
             Type_VEC_change_actual_base_type(tmp_type_vec,tmpt);
+        if(i+1!=AST_CHILD_NUM(ast_node))
+        {
+            /*generate a reg symbol on the operator*/
+            operator->symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
+            operator->symbol->count=HASH_CNT_IST;
+            insert_symbol(operator->symbol_table,operator->symbol);
+            M_TYPE* tmp_type=build_base_type(tmpt->typ_category);
+            VECinsert(operator->symbol->type_vec,(void*)tmp_type);
+            if(const_expr)
+            {
+                operator->symbol->const_expr=true;
+                cast_const(tmpt->typ_category,operator->symbol->data_field,tmp_category,tmp_data_field);
+            }
+        }
     }
     ast_node->symbol->type_vec=tmp_type_vec;
     M_TYPE* tmpt=Type_VEC_get_actual_base_type(tmp_type_vec);
@@ -1679,6 +1731,20 @@ bool mul_expr_value(AST_BASE* ast_node)
             cast_const(tmpt->typ_category,tmp_data_field,tmp_category,tmp_data_field);
         if(tmpt)
             Type_VEC_change_actual_base_type(tmp_type_vec,tmpt);
+        if(i+1!=AST_CHILD_NUM(ast_node))
+        {
+            /*generate a reg symbol on the operator*/
+            operator->symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
+            operator->symbol->count=HASH_CNT_IST;
+            insert_symbol(operator->symbol_table,operator->symbol);
+            M_TYPE* tmp_type=build_base_type(tmpt->typ_category);
+            VECinsert(operator->symbol->type_vec,(void*)tmp_type);
+            if(const_expr)
+            {
+                operator->symbol->const_expr=true;
+                cast_const(tmpt->typ_category,operator->symbol->data_field,tmp_category,tmp_data_field);
+            }
+        }
     }
     ast_node->symbol->type_vec=tmp_type_vec;
     /*obveriously, the lvalue is false*/
