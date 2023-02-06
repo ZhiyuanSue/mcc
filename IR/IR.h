@@ -57,4 +57,7 @@ void print_IR(IR_MODULE* irm);
 void print_INS(IR_INS* ins,size_t indentation);
 void print_OPERAND(SYM_ITEM* operand,size_t indentation);
 void print_static_stor_value(STOR_VALUE* value);
+
+
+bool type_cast_trans(SYM_ITEM* dst,SYM_ITEM* src);
 #endif

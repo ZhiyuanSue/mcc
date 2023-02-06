@@ -182,3 +182,11 @@ void print_static_stor_value(STOR_VALUE* value)
         }
     }
 }
+bool type_cast_trans(SYM_ITEM* dst,SYM_ITEM* src)
+{
+    if(!dst||!src)
+        goto error;
+    return true;
+error:
+    return false;
+}

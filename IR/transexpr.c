@@ -151,6 +151,32 @@ bool logical_or_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
         goto error;
     if(ast_node->symbol->const_expr)
         return true;
+    bool prefix_const_expr=true;
+    AST_BASE* prefix_expr_node=NULL;
+    AST_BASE* right_expr_node=NULL;
+    for(size_t i=1;i+1<AST_CHILD_NUM(ast_node);i+=2)
+    {
+        AST_BASE* operator_node=AST_GET_CHILD(ast_node,i);
+        /*if the beginning sub expr are const expr, just use them directly*/    
+        if(prefix_const_expr)
+        {
+            if(operator_node->symbol->const_expr)
+            {
+                prefix_expr_node=operator_node;
+                continue;
+            }
+            else
+                prefix_const_expr=false;
+        }
+        if(prefix_expr_node==NULL)
+            prefix_expr_node=AST_GET_CHILD(ast_node,i-1);
+        right_expr_node=AST_GET_CHILD(ast_node,i+1);
+        IR_INS* logical_or_ins=add_new_ins(ir_bb);
+        insert_ins_to_bb(logical_or_ins,ir_bb);
+        GenINS(logical_or_ins,OP_OR,operator_node->symbol,prefix_expr_node->symbol,right_expr_node->symbol);
+    }
+    AST_BASE* res_node=AST_GET_CHILD(ast_node,AST_CHILD_NUM(ast_node)-2);
+    type_cast_trans(ast_node->symbol,res_node->symbol);
     return true;
 error:
     return false;
@@ -162,6 +188,8 @@ bool logical_and_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     if(ast_node->symbol->const_expr)
         return true; 
     bool prefix_const_expr=true;
+    AST_BASE* prefix_expr_node=NULL;
+    AST_BASE* right_expr_node=NULL;
     for(size_t i=1;i+1<AST_CHILD_NUM(ast_node);i+=2)
     {
         AST_BASE* operator_node=AST_GET_CHILD(ast_node,i);
@@ -169,11 +197,22 @@ bool logical_and_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
         if(prefix_const_expr)
         {
             if(operator_node->symbol->const_expr)
+            {
+                prefix_expr_node=operator_node;
                 continue;
+            }
             else
                 prefix_const_expr=false;
         }
+        if(prefix_expr_node==NULL)
+            prefix_expr_node=AST_GET_CHILD(ast_node,i-1);
+        right_expr_node=AST_GET_CHILD(ast_node,i+1);
+        IR_INS* logical_and_ins=add_new_ins(ir_bb);
+        insert_ins_to_bb(logical_and_ins,ir_bb);
+        GenINS(logical_and_ins,OP_AND,operator_node->symbol,prefix_expr_node->symbol,right_expr_node->symbol);
     }
+    AST_BASE* res_node=AST_GET_CHILD(ast_node,AST_CHILD_NUM(ast_node)-2);
+    type_cast_trans(ast_node->symbol,res_node->symbol);
     return true;
 error:
     return false;
@@ -184,6 +223,7 @@ bool bit_inclusive_or_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
         goto error;
     if(ast_node->symbol->const_expr)
         return true;
+    
     return true;
 error:
     return false;
@@ -194,6 +234,7 @@ bool bit_exclusive_or_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
         goto error;
     if(ast_node->symbol->const_expr)
         return true;
+    
     return true;
 error:
     return false;
