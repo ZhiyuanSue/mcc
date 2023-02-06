@@ -1,7 +1,14 @@
 #include "m_type_vec.h"
 extern size_t type_data_size[TYPE_NUM];
-int int_rank[TYPE_NUM+1]={255,255,2,2,3,3,4,4,5,5,6,6,255,255,255,1,
-    255,255,255,255,255,255,255,255,255,255,255,255,4
+int int_rank[TYPE_NUM+1]={
+        255,255,2,2,
+        3,3,4,4,
+        5,5,6,6,
+        255,255,255,1,
+        255,255,255,255,
+        255,255,255,255,
+        255,255,255,255,
+        4
 };
 bool Type_VEC_cmp(VEC* a,VEC* b){
     M_TYPE* tmpa=VEC_GET_ITEM(a,0);
@@ -604,6 +611,14 @@ M_TYPE* usual_arith_conversion(M_TYPE** operand_a,M_TYPE** operand_b){
             {
                 *operand_b=build_base_type(type_a);
                 return build_base_type(type_a);
+            }
+            else if(int_rank[type_a]==int_rank[type_b])
+            {
+                /*only the null pointer const case*/
+                if(type_a==TP_NULL_POINTER_CONSTANT)
+                    return build_base_type(type_b);
+                else if(type_b==TP_NULL_POINTER_CONSTANT)
+                    return build_base_type(type_a);
             }
         }
         else{

@@ -59,5 +59,6 @@ void print_OPERAND(SYM_ITEM* operand,size_t indentation);
 void print_static_stor_value(STOR_VALUE* value);
 
 
-bool type_cast_trans(SYM_ITEM* dst,SYM_ITEM* src);
+bool type_cast_trans(SYM_ITEM* dst,SYM_ITEM* src,IR_BB* ir_bb);
+M_TYPE* usual_arth_conversion_trans(SYM_ITEM** operand_a,SYM_ITEM** operand_b,IR_BB* ir_bb);
 #endif

@@ -11,7 +11,6 @@ bool expr_trans_dispatch(AST_BASE* ast_node,IR_BB* ir_bb)
         mul_expr_trans,cast_expr_trans,unary_expr_trans,postfix_expr_trans,
         pri_expr_trans
     };
-    
     bool res=false;
     if(ast_node->type==expression)
         res=expr_translation[0](ast_node,ir_bb);
@@ -186,7 +185,7 @@ bool logical_or_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
             insert_symbol(ast_node->symbol_table,prefix_symbol);
             tmp_prefix_expr_type=build_base_type(TP_BOOL);
             VECinsert(prefix_symbol->type_vec,(void*)tmp_prefix_expr_type);
-            type_cast_trans(prefix_symbol,prefix_expr_node->symbol);
+            type_cast_trans(prefix_symbol,prefix_expr_node->symbol,ir_bb);
         }
         M_TYPE* tmp_right_expr_type=Type_VEC_get_actual_base_type(right_expr_node->symbol->type_vec);
         if(tmp_right_expr_type->typ_category!=TP_BOOL)
@@ -196,7 +195,7 @@ bool logical_or_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
             insert_symbol(ast_node->symbol_table,right_symbol);
             tmp_right_expr_type=build_base_type(TP_BOOL);
             VECinsert(right_symbol->type_vec,(void*)tmp_right_expr_type);
-            type_cast_trans(right_symbol,right_expr_node->symbol);
+            type_cast_trans(right_symbol,right_expr_node->symbol,ir_bb);
         }
         IR_INS* logical_or_ins=add_new_ins(ir_bb);
         insert_ins_to_bb(logical_or_ins,ir_bb);
@@ -204,7 +203,7 @@ bool logical_or_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
         prefix_expr_node=operator_node;
     }
     AST_BASE* res_node=AST_GET_CHILD(ast_node,AST_CHILD_NUM(ast_node)-2);
-    type_cast_trans(ast_node->symbol,res_node->symbol);
+    type_cast_trans(ast_node->symbol,res_node->symbol,ir_bb);
     return true;
 error:
     return false;
@@ -249,7 +248,7 @@ bool logical_and_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
             insert_symbol(ast_node->symbol_table,prefix_symbol);
             tmp_prefix_expr_type=build_base_type(TP_BOOL);
             VECinsert(prefix_symbol->type_vec,(void*)tmp_prefix_expr_type);
-            type_cast_trans(prefix_symbol,prefix_expr_node->symbol);
+            type_cast_trans(prefix_symbol,prefix_expr_node->symbol,ir_bb);
         }
         M_TYPE* tmp_right_expr_type=Type_VEC_get_actual_base_type(right_expr_node->symbol->type_vec);
         if(tmp_right_expr_type->typ_category!=TP_BOOL)
@@ -259,7 +258,7 @@ bool logical_and_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
             insert_symbol(ast_node->symbol_table,right_symbol);
             tmp_right_expr_type=build_base_type(TP_BOOL);
             VECinsert(right_symbol->type_vec,(void*)tmp_right_expr_type);
-            type_cast_trans(right_symbol,right_expr_node->symbol);
+            type_cast_trans(right_symbol,right_expr_node->symbol,ir_bb);
         }
         IR_INS* logical_and_ins=add_new_ins(ir_bb);
         insert_ins_to_bb(logical_and_ins,ir_bb);
@@ -267,7 +266,7 @@ bool logical_and_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
         prefix_expr_node=operator_node;
     }
     AST_BASE* res_node=AST_GET_CHILD(ast_node,AST_CHILD_NUM(ast_node)-2);
-    type_cast_trans(ast_node->symbol,res_node->symbol);
+    type_cast_trans(ast_node->symbol,res_node->symbol,ir_bb);
     return true;
 error:
     return false;
@@ -278,7 +277,40 @@ bool bit_inclusive_or_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
         goto error;
     if(ast_node->symbol->const_expr)
         return true;
-    
+    bool prefix_const_expr=true;
+    AST_BASE* prefix_expr_node=NULL;
+    AST_BASE* right_expr_node=NULL;
+    SYM_ITEM* prefix_symbol=NULL;
+    SYM_ITEM* right_symbol=NULL;
+    for(size_t i=1;i+1<AST_CHILD_NUM(ast_node);i+=2)
+    {
+        AST_BASE* operator_node=AST_GET_CHILD(ast_node,i);
+        /*if the beginning sub expr are const expr, just use them directly*/    
+        if(prefix_const_expr)
+        {
+            if(operator_node->symbol->const_expr)
+            {
+                prefix_expr_node=operator_node;
+                continue;
+            }
+            else
+                prefix_const_expr=false;
+        }
+        if(prefix_expr_node==NULL)
+            prefix_expr_node=AST_GET_CHILD(ast_node,i-1);
+        right_expr_node=AST_GET_CHILD(ast_node,i+1);
+        if(!expr_trans_dispatch(right_expr_node,ir_bb))
+            goto error;
+        /*use the value directly and no need to cast*/
+        prefix_symbol=prefix_expr_node->symbol;
+        right_symbol=right_expr_node->symbol;
+        IR_INS* bit_inclusive_or_ins=add_new_ins(ir_bb);
+        insert_ins_to_bb(bit_inclusive_or_ins,ir_bb);
+        GenINS(bit_inclusive_or_ins,OP_OR,operator_node->symbol,prefix_symbol,right_symbol);
+        prefix_expr_node=operator_node;
+    }
+    AST_BASE* res_node=AST_GET_CHILD(ast_node,AST_CHILD_NUM(ast_node)-2);
+    type_cast_trans(ast_node->symbol,res_node->symbol,ir_bb);
     return true;
 error:
     return false;
@@ -289,7 +321,39 @@ bool bit_exclusive_or_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
         goto error;
     if(ast_node->symbol->const_expr)
         return true;
-    
+    bool prefix_const_expr=true;
+    AST_BASE* prefix_expr_node=NULL;
+    AST_BASE* right_expr_node=NULL;
+    SYM_ITEM* prefix_symbol=NULL;
+    SYM_ITEM* right_symbol=NULL;
+    for(size_t i=1;i+1<AST_CHILD_NUM(ast_node);i+=2)
+    {
+        AST_BASE* operator_node=AST_GET_CHILD(ast_node,i);
+        /*if the beginning sub expr are const expr, just use them directly*/    
+        if(prefix_const_expr)
+        {
+            if(operator_node->symbol->const_expr)
+            {
+                prefix_expr_node=operator_node;
+                continue;
+            }
+            else
+                prefix_const_expr=false;
+        }
+        if(prefix_expr_node==NULL)
+            prefix_expr_node=AST_GET_CHILD(ast_node,i-1);
+        right_expr_node=AST_GET_CHILD(ast_node,i+1);
+        if(!expr_trans_dispatch(right_expr_node,ir_bb))
+            goto error;
+        prefix_symbol=prefix_expr_node->symbol;
+        right_symbol=right_expr_node->symbol;
+        IR_INS* bit_exclusive_or_ins=add_new_ins(ir_bb);
+        insert_ins_to_bb(bit_exclusive_or_ins,ir_bb);
+        GenINS(bit_exclusive_or_ins,OP_XOR,operator_node->symbol,prefix_symbol,right_symbol);
+        prefix_expr_node=operator_node;
+    }
+    AST_BASE* res_node=AST_GET_CHILD(ast_node,AST_CHILD_NUM(ast_node)-2);
+    type_cast_trans(ast_node->symbol,res_node->symbol,ir_bb);
     return true;
 error:
     return false;
@@ -300,7 +364,40 @@ bool and_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
         goto error;
     if(ast_node->symbol->const_expr)
         return true;
-    
+    bool prefix_const_expr=true;
+    AST_BASE* prefix_expr_node=NULL;
+    AST_BASE* right_expr_node=NULL;
+    SYM_ITEM* prefix_symbol=NULL;
+    SYM_ITEM* right_symbol=NULL;
+    for(size_t i=1;i+1<AST_CHILD_NUM(ast_node);i+=2)
+    {
+        AST_BASE* operator_node=AST_GET_CHILD(ast_node,i);
+        /*if the beginning sub expr are const expr, just use them directly*/    
+        if(prefix_const_expr)
+        {
+            if(operator_node->symbol->const_expr)
+            {
+                prefix_expr_node=operator_node;
+                continue;
+            }
+            else
+                prefix_const_expr=false;
+        }
+        if(prefix_expr_node==NULL)
+            prefix_expr_node=AST_GET_CHILD(ast_node,i-1);
+        right_expr_node=AST_GET_CHILD(ast_node,i+1);
+        if(!expr_trans_dispatch(right_expr_node,ir_bb))
+            goto error;
+        prefix_symbol=prefix_expr_node->symbol;
+        right_symbol=right_expr_node->symbol;
+        M_TYPE* tmp_prefix_expr_type=Type_VEC_get_actual_base_type(prefix_expr_node->symbol->type_vec);
+        IR_INS* and_ins=add_new_ins(ir_bb);
+        insert_ins_to_bb(and_ins,ir_bb);
+        GenINS(and_ins,OP_AND,operator_node->symbol,prefix_symbol,right_symbol);
+        prefix_expr_node=operator_node;
+    }
+    AST_BASE* res_node=AST_GET_CHILD(ast_node,AST_CHILD_NUM(ast_node)-2);
+    type_cast_trans(ast_node->symbol,res_node->symbol,ir_bb);
     return true;
 error:
     return false;
@@ -311,6 +408,121 @@ bool equal_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
         goto error;
     if(ast_node->symbol->const_expr)
         return true;
+    bool prefix_const_expr=true;
+    AST_BASE* prefix_expr_node=NULL;
+    AST_BASE* right_expr_node=NULL;
+    SYM_ITEM* prefix_symbol=NULL;
+    SYM_ITEM* right_symbol=NULL;
+    for(size_t i=1;i+1<AST_CHILD_NUM(ast_node);i+=2)
+    {
+        AST_BASE* operator_node=AST_GET_CHILD(ast_node,i);
+        /*if the beginning sub expr are const expr, just use them directly*/    
+        if(prefix_const_expr)
+        {
+            if(operator_node->symbol->const_expr)
+            {
+                prefix_expr_node=operator_node;
+                continue;
+            }
+            else
+                prefix_const_expr=false;
+        }
+        if(prefix_expr_node==NULL)
+            prefix_expr_node=AST_GET_CHILD(ast_node,i-1);
+        right_expr_node=AST_GET_CHILD(ast_node,i+1);
+        if(!expr_trans_dispatch(right_expr_node,ir_bb))
+            goto error;
+        prefix_symbol=prefix_expr_node->symbol;
+        right_symbol=right_expr_node->symbol;
+        
+        M_TYPE* prefix_type=Type_VEC_get_actual_base_type(prefix_symbol->type_vec);
+        M_TYPE* right_type=Type_VEC_get_actual_base_type(right_symbol->type_vec);
+        if(IS_INT_TYPE(right_type->typ_category)&&right_symbol->const_expr){
+            long long int null_pointer_value=TP_INT_CAST_TYPE(right_type->typ_category,right_symbol->data_field);
+            if(null_pointer_value==0)
+                right_type->typ_category=TP_NULL_POINTER_CONSTANT;
+        }
+        if(prefix_type->typ_category==TP_ENUM)
+            prefix_type=build_base_type(TP_SINT);
+        if(right_type->typ_category==TP_ENUM)
+            right_type=build_base_type(TP_SINT);
+        if(IS_ARTH_TYPE(prefix_type->typ_category)&&IS_ARTH_TYPE(right_type->typ_category))
+        {
+            M_TYPE* cmp_type=usual_arth_conversion_trans(&prefix_symbol,&right_symbol,ir_bb);
+            if(IS_INT_TYPE(cmp_type->typ_category))
+            {
+                IR_INS* equal_ins=add_new_ins(ir_bb);
+                insert_ins_to_bb(equal_ins,ir_bb);
+                GenINS(equal_ins,OP_ICMP,operator_node->symbol,prefix_symbol,right_symbol);
+                equal_ins->other_attr=m_alloc(sizeof(CMP_COND_ATTR));
+                if(operator_node->type==double_equal)
+                {
+                    ((CMP_COND_ATTR*)(equal_ins->other_attr))->icmp_cond=ICMP_EQ;
+                }
+                else if(operator_node->type==un_equal)
+                {
+                    ((CMP_COND_ATTR*)(equal_ins->other_attr))->icmp_cond=ICMP_NE;
+                }
+            }
+            else if(IS_FLOAT_TYPE(cmp_type->typ_category))
+            {
+                /*the real number cannot compare directly,so if equal ,must be false,and unequal,must be true*/
+                if(operator_node->type==double_equal)
+                {
+                    operator_node->symbol->data_field->databool=false;
+                }
+                else if(operator_node->type==un_equal)
+                {
+                    operator_node->symbol->data_field->databool=true;
+                }
+            }
+#if _CPLX_SUPPORT==1
+            else if(IS_COMPLEX_TYPE(cmp_type->typ_category))
+            {
+                /*
+                    TODO:
+                    only the real part and the complex part are all equal, can that be equal
+                */
+                ;
+            }
+#endif
+
+        }
+        else if(prefix_type->typ_category==TP_POINT&&(right_type->typ_category==TP_POINT||right_type->typ_category==TP_NULL_POINTER_CONSTANT))
+        {
+            IR_INS* equal_ins=add_new_ins(ir_bb);
+            insert_ins_to_bb(equal_ins,ir_bb);
+            GenINS(equal_ins,OP_ICMP,operator_node->symbol,prefix_symbol,right_symbol);
+            equal_ins->other_attr=m_alloc(sizeof(CMP_COND_ATTR));
+            if(operator_node->type==double_equal)
+            {
+                ((CMP_COND_ATTR*)(equal_ins->other_attr))->icmp_cond=ICMP_EQ;
+            }
+            else if(operator_node->type==un_equal)
+            {
+                ((CMP_COND_ATTR*)(equal_ins->other_attr))->icmp_cond=ICMP_NE;
+            }
+        }
+        else if(right_type->typ_category==TP_POINT)
+        {
+            /*another one is a void pointer*/
+            IR_INS* equal_ins=add_new_ins(ir_bb);
+            insert_ins_to_bb(equal_ins,ir_bb);
+            GenINS(equal_ins,OP_ICMP,operator_node->symbol,prefix_symbol,right_symbol);
+            equal_ins->other_attr=m_alloc(sizeof(CMP_COND_ATTR));
+            if(operator_node->type==double_equal)
+            {
+                ((CMP_COND_ATTR*)(equal_ins->other_attr))->icmp_cond=ICMP_EQ;
+            }
+            else if(operator_node->type==un_equal)
+            {
+                ((CMP_COND_ATTR*)(equal_ins->other_attr))->icmp_cond=ICMP_NE;
+            }
+        }
+        prefix_expr_node=operator_node;
+    }
+    AST_BASE* res_node=AST_GET_CHILD(ast_node,AST_CHILD_NUM(ast_node)-2);
+    type_cast_trans(ast_node->symbol,res_node->symbol,ir_bb);
     return true;
 error:
     return false;
@@ -321,6 +533,109 @@ bool relation_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
         goto error;
     if(ast_node->symbol->const_expr)
         return true;
+    bool prefix_const_expr=true;
+    AST_BASE* prefix_expr_node=NULL;
+    AST_BASE* right_expr_node=NULL;
+    SYM_ITEM* prefix_symbol=NULL;
+    SYM_ITEM* right_symbol=NULL;
+    for(size_t i=1;i+1<AST_CHILD_NUM(ast_node);i+=2)
+    {
+        AST_BASE* operator_node=AST_GET_CHILD(ast_node,i);
+        /*if the beginning sub expr are const expr, just use them directly*/    
+        if(prefix_const_expr)
+        {
+            if(operator_node->symbol->const_expr)
+            {
+                prefix_expr_node=operator_node;
+                continue;
+            }
+            else
+                prefix_const_expr=false;
+        }
+        if(prefix_expr_node==NULL)
+            prefix_expr_node=AST_GET_CHILD(ast_node,i-1);
+        right_expr_node=AST_GET_CHILD(ast_node,i+1);
+        if(!expr_trans_dispatch(right_expr_node,ir_bb))
+            goto error;
+        prefix_symbol=prefix_expr_node->symbol;
+        right_symbol=right_expr_node->symbol;
+        
+        M_TYPE* prefix_type=Type_VEC_get_actual_base_type(prefix_symbol->type_vec);
+        M_TYPE* right_type=Type_VEC_get_actual_base_type(right_symbol->type_vec);
+        if(IS_INT_TYPE(right_type->typ_category)&&right_symbol->const_expr){
+            long long int null_pointer_value=TP_INT_CAST_TYPE(right_type->typ_category,right_symbol->data_field);
+            if(null_pointer_value==0)
+                right_type->typ_category=TP_NULL_POINTER_CONSTANT;
+        }
+        if(prefix_type->typ_category==TP_ENUM)
+            prefix_type=build_base_type(TP_SINT);
+        if(right_type->typ_category==TP_ENUM)
+            right_type=build_base_type(TP_SINT);
+        
+        if(IS_REAL_TYPE(prefix_type->typ_category)&&IS_REAL_TYPE(right_type->typ_category))
+        {
+            M_TYPE* cmp_type=usual_arth_conversion_trans(&prefix_symbol,&right_symbol,ir_bb);
+            IR_INS* equal_ins=add_new_ins(ir_bb);
+            insert_ins_to_bb(equal_ins,ir_bb);
+            equal_ins->other_attr=m_alloc(sizeof(CMP_COND_ATTR));
+            if(IS_INT_TYPE(cmp_type->typ_category)&&(cmp_type->typ_category)%2==0)
+            {
+                GenINS(equal_ins,OP_ICMP,operator_node->symbol,prefix_symbol,right_symbol);
+                if(operator_node->type==less_than)
+                    ((CMP_COND_ATTR*)(equal_ins->other_attr))->icmp_cond=ICMP_SLT;
+                else if(operator_node->type==greater_than)
+                    ((CMP_COND_ATTR*)(equal_ins->other_attr))->icmp_cond=ICMP_SGT;
+                else if(operator_node->type==less_equal)
+                    ((CMP_COND_ATTR*)(equal_ins->other_attr))->icmp_cond=ICMP_SLE;
+                else if(operator_node->type==greater_equal)
+                    ((CMP_COND_ATTR*)(equal_ins->other_attr))->icmp_cond=ICMP_SGE;
+            }
+            else if(IS_INT_TYPE(cmp_type->typ_category)&&(cmp_type->typ_category)%2==1)
+            {
+                GenINS(equal_ins,OP_ICMP,operator_node->symbol,prefix_symbol,right_symbol);
+                if(operator_node->type==less_than)
+                    ((CMP_COND_ATTR*)(equal_ins->other_attr))->icmp_cond=ICMP_ULT;
+                else if(operator_node->type==greater_than)
+                    ((CMP_COND_ATTR*)(equal_ins->other_attr))->icmp_cond=ICMP_UGT;
+                else if(operator_node->type==less_equal)
+                    ((CMP_COND_ATTR*)(equal_ins->other_attr))->icmp_cond=ICMP_ULE;
+                else if(operator_node->type==greater_equal)
+                    ((CMP_COND_ATTR*)(equal_ins->other_attr))->icmp_cond=ICMP_UGE;
+            }
+            else if(IS_FLOAT_TYPE(cmp_type->typ_category))
+            {
+                GenINS(equal_ins,OP_FCMP,operator_node->symbol,prefix_symbol,right_symbol);
+                if(operator_node->type==less_than)
+                    ((CMP_COND_ATTR*)(equal_ins->other_attr))->fcmp_cond=FCMP_ULT;
+                else if(operator_node->type==greater_than)
+                    ((CMP_COND_ATTR*)(equal_ins->other_attr))->fcmp_cond=FCMP_UGT;
+                else if(operator_node->type==less_equal)
+                    ((CMP_COND_ATTR*)(equal_ins->other_attr))->fcmp_cond=FCMP_ULE;
+                else if(operator_node->type==greater_equal)
+                    ((CMP_COND_ATTR*)(equal_ins->other_attr))->fcmp_cond=FCMP_UGE;
+            }
+        }
+        else if(prefix_type->typ_category==TP_POINT&&(right_type->typ_category==TP_POINT||right_type->typ_category==TP_NULL_POINTER_CONSTANT))
+        {
+            IR_INS* equal_ins=add_new_ins(ir_bb);
+            insert_ins_to_bb(equal_ins,ir_bb);
+            GenINS(equal_ins,OP_ICMP,operator_node->symbol,prefix_symbol,right_symbol);
+            equal_ins->other_attr=m_alloc(sizeof(CMP_COND_ATTR));
+            if(operator_node->type==less_than)
+                ((CMP_COND_ATTR*)(equal_ins->other_attr))->icmp_cond=ICMP_ULT;
+            else if(operator_node->type==greater_than)
+                ((CMP_COND_ATTR*)(equal_ins->other_attr))->icmp_cond=ICMP_UGT;
+            else if(operator_node->type==less_equal)
+                ((CMP_COND_ATTR*)(equal_ins->other_attr))->icmp_cond=ICMP_ULE;
+            else if(operator_node->type==greater_equal)
+                ((CMP_COND_ATTR*)(equal_ins->other_attr))->icmp_cond=ICMP_UGE;
+        }
+        else
+            goto error;
+        prefix_expr_node=operator_node;
+    }
+    AST_BASE* res_node=AST_GET_CHILD(ast_node,AST_CHILD_NUM(ast_node)-2);
+    type_cast_trans(ast_node->symbol,res_node->symbol,ir_bb);
     return true;
 error:
     return false;
@@ -331,6 +646,7 @@ bool shift_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
         goto error;
     if(ast_node->symbol->const_expr)
         return true;
+    
     return true;
 error:
     return false;

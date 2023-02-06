@@ -2,6 +2,8 @@
 extern char operand_name_string[OPERAND_NUM][OPERAND_STR_LEN];
 extern char op_name_string[OP_NUM][OP_STRING_LEN];
 extern char data_type_name_string[OPERAND_NUM][OPERAND_STR_LEN];
+extern char ICMP_str[OP_NUM][OP_STRING_LEN];
+extern char FCMP_str[OP_NUM][OP_STRING_LEN];
 bool GenINS(
     IR_INS* ins,
     enum ins_op op,
@@ -109,7 +111,7 @@ void print_IR(IR_MODULE* irm)
             {
                 IR_BB* curr_bb=(IR_BB*)bb_p;
                 LIST_NODE* ins_p=curr_bb->Instruction_list;
-                printf("\t<basic block label:%s>\n",curr_bb->symbol->value);
+                printf("\t<bb :%s>\n",curr_bb->symbol->value);
                 while (ins_p)
                 {
                     print_INS((IR_INS*)ins_p,1);
@@ -136,6 +138,10 @@ void print_INS(IR_INS* ins,size_t indentation)
         printf("\t");
     }
     printf("<op:%s ",op_name_string[ins->op]);
+    if(ins->op==OP_ICMP)
+        printf("%s\t",ICMP_str[((CMP_COND_ATTR*)(ins->other_attr))->icmp_cond]);
+    else if(ins->op==OP_FCMP)
+        printf("%s\t",FCMP_str[((CMP_COND_ATTR*)(ins->other_attr))->fcmp_cond]);
     printf("dst:\t");
     print_OPERAND(ins->dst,indentation+2);
     printf("src1:\t");
@@ -182,11 +188,46 @@ void print_static_stor_value(STOR_VALUE* value)
         }
     }
 }
-bool type_cast_trans(SYM_ITEM* dst,SYM_ITEM* src)
+bool type_cast_trans(SYM_ITEM* dst,SYM_ITEM* src,IR_BB* ir_bb)
 {
     if(!dst||!src)
         goto error;
     return true;
 error:
     return false;
+}
+M_TYPE* usual_arth_conversion_trans(SYM_ITEM** operand_a,SYM_ITEM** operand_b,IR_BB* ir_bb)
+{
+    if(!operand_a||!operand_b||!ir_bb)
+        goto error;
+    M_TYPE* tmp_prefix_expr_type=Type_VEC_get_actual_base_type((*operand_a)->type_vec);
+    M_TYPE* tmp_right_expr_type=Type_VEC_get_actual_base_type((*operand_b)->type_vec);
+    if(!IS_ARTH_TYPE(tmp_prefix_expr_type->typ_category)||!IS_ARTH_TYPE(tmp_right_expr_type->typ_category))
+        goto error;
+    SYM_ITEM* old_a=*operand_a;
+    SYM_ITEM* old_b=*operand_b;
+    SYM* symbol_table_a=(*operand_a)->symbol_table;
+    SYM* symbol_table_b=(*operand_b)->symbol_table;
+    M_TYPE* cmp_type=usual_arith_conversion(&tmp_prefix_expr_type,&tmp_right_expr_type);
+    if(tmp_prefix_expr_type->typ_category!=cmp_type->typ_category)
+    {
+        (*operand_a)=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
+        (*operand_a)->count=HASH_CNT_IST;
+        insert_symbol(symbol_table_a,(*operand_a));
+        tmp_prefix_expr_type=build_base_type(cmp_type->typ_category);
+        VECinsert((*operand_a)->type_vec,(void*)tmp_prefix_expr_type);
+        type_cast_trans((*operand_a),old_a,ir_bb);
+    }
+    if(tmp_right_expr_type->typ_category!=cmp_type->typ_category)
+    {
+        (*operand_b)=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
+        (*operand_b)->count=HASH_CNT_IST;
+        insert_symbol(symbol_table_b,(*operand_b));
+        tmp_right_expr_type=build_base_type(cmp_type->typ_category);
+        VECinsert((*operand_b)->type_vec,(void*)tmp_right_expr_type);
+        type_cast_trans((*operand_b),old_b,ir_bb);
+    }
+    return cmp_type;
+error:
+    return NULL;
 }

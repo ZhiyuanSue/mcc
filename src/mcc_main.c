@@ -70,6 +70,7 @@ int mcc_main(char* src_file,char* target_file){
         printf("end print symbol table\n");
     }
 #endif
+    printf("start trans\n");
     if(!(ir_module=trans_to_IR(ast_root)))
         goto error;
 #ifdef _TEST_IR_
