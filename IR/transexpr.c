@@ -154,6 +154,8 @@ bool logical_or_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     bool prefix_const_expr=true;
     AST_BASE* prefix_expr_node=NULL;
     AST_BASE* right_expr_node=NULL;
+    SYM_ITEM* prefix_symbol=NULL;
+    SYM_ITEM* right_symbol=NULL;
     for(size_t i=1;i+1<AST_CHILD_NUM(ast_node);i+=2)
     {
         AST_BASE* operator_node=AST_GET_CHILD(ast_node,i);
@@ -171,9 +173,35 @@ bool logical_or_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
         if(prefix_expr_node==NULL)
             prefix_expr_node=AST_GET_CHILD(ast_node,i-1);
         right_expr_node=AST_GET_CHILD(ast_node,i+1);
+        if(!expr_trans_dispatch(right_expr_node,ir_bb))
+            goto error;
+        /*if not a bool type,do some cast*/
+        prefix_symbol=prefix_expr_node->symbol;
+        right_symbol=right_expr_node->symbol;
+        M_TYPE* tmp_prefix_expr_type=Type_VEC_get_actual_base_type(prefix_expr_node->symbol->type_vec);
+        if(tmp_prefix_expr_type->typ_category!=TP_BOOL)
+        {
+            prefix_symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
+            prefix_symbol->count=HASH_CNT_IST;
+            insert_symbol(ast_node->symbol_table,prefix_symbol);
+            tmp_prefix_expr_type=build_base_type(TP_BOOL);
+            VECinsert(prefix_symbol->type_vec,(void*)tmp_prefix_expr_type);
+            type_cast_trans(prefix_symbol,prefix_expr_node->symbol);
+        }
+        M_TYPE* tmp_right_expr_type=Type_VEC_get_actual_base_type(right_expr_node->symbol->type_vec);
+        if(tmp_right_expr_type->typ_category!=TP_BOOL)
+        {
+            right_symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
+            right_symbol->count=HASH_CNT_IST;
+            insert_symbol(ast_node->symbol_table,right_symbol);
+            tmp_right_expr_type=build_base_type(TP_BOOL);
+            VECinsert(right_symbol->type_vec,(void*)tmp_right_expr_type);
+            type_cast_trans(right_symbol,right_expr_node->symbol);
+        }
         IR_INS* logical_or_ins=add_new_ins(ir_bb);
         insert_ins_to_bb(logical_or_ins,ir_bb);
-        GenINS(logical_or_ins,OP_OR,operator_node->symbol,prefix_expr_node->symbol,right_expr_node->symbol);
+        GenINS(logical_or_ins,OP_OR,operator_node->symbol,prefix_symbol,right_symbol);
+        prefix_expr_node=operator_node;
     }
     AST_BASE* res_node=AST_GET_CHILD(ast_node,AST_CHILD_NUM(ast_node)-2);
     type_cast_trans(ast_node->symbol,res_node->symbol);
@@ -190,6 +218,8 @@ bool logical_and_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     bool prefix_const_expr=true;
     AST_BASE* prefix_expr_node=NULL;
     AST_BASE* right_expr_node=NULL;
+    SYM_ITEM* prefix_symbol=NULL;
+    SYM_ITEM* right_symbol=NULL;
     for(size_t i=1;i+1<AST_CHILD_NUM(ast_node);i+=2)
     {
         AST_BASE* operator_node=AST_GET_CHILD(ast_node,i);
@@ -207,9 +237,34 @@ bool logical_and_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
         if(prefix_expr_node==NULL)
             prefix_expr_node=AST_GET_CHILD(ast_node,i-1);
         right_expr_node=AST_GET_CHILD(ast_node,i+1);
+        if(!expr_trans_dispatch(right_expr_node,ir_bb))
+            goto error;
+        prefix_symbol=prefix_expr_node->symbol;
+        right_symbol=right_expr_node->symbol;
+        M_TYPE* tmp_prefix_expr_type=Type_VEC_get_actual_base_type(prefix_expr_node->symbol->type_vec);
+        if(tmp_prefix_expr_type->typ_category!=TP_BOOL)
+        {
+            prefix_symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
+            prefix_symbol->count=HASH_CNT_IST;
+            insert_symbol(ast_node->symbol_table,prefix_symbol);
+            tmp_prefix_expr_type=build_base_type(TP_BOOL);
+            VECinsert(prefix_symbol->type_vec,(void*)tmp_prefix_expr_type);
+            type_cast_trans(prefix_symbol,prefix_expr_node->symbol);
+        }
+        M_TYPE* tmp_right_expr_type=Type_VEC_get_actual_base_type(right_expr_node->symbol->type_vec);
+        if(tmp_right_expr_type->typ_category!=TP_BOOL)
+        {
+            right_symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
+            right_symbol->count=HASH_CNT_IST;
+            insert_symbol(ast_node->symbol_table,right_symbol);
+            tmp_right_expr_type=build_base_type(TP_BOOL);
+            VECinsert(right_symbol->type_vec,(void*)tmp_right_expr_type);
+            type_cast_trans(right_symbol,right_expr_node->symbol);
+        }
         IR_INS* logical_and_ins=add_new_ins(ir_bb);
         insert_ins_to_bb(logical_and_ins,ir_bb);
         GenINS(logical_and_ins,OP_AND,operator_node->symbol,prefix_expr_node->symbol,right_expr_node->symbol);
+        prefix_expr_node=operator_node;
     }
     AST_BASE* res_node=AST_GET_CHILD(ast_node,AST_CHILD_NUM(ast_node)-2);
     type_cast_trans(ast_node->symbol,res_node->symbol);
@@ -245,6 +300,7 @@ bool and_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
         goto error;
     if(ast_node->symbol->const_expr)
         return true;
+    
     return true;
 error:
     return false;
