@@ -426,6 +426,7 @@ bool logical_or_expr_value(AST_BASE* ast_node)
             if(const_expr)
             {
                 logical_or_op_node->symbol->const_expr=true;
+                logical_or_op_node->symbol->data_size=type_data_size[TP_BOOL];
                 logical_or_op_node->symbol->data_field->databool=const_or_value;
             }
         }
@@ -500,6 +501,7 @@ bool logical_and_expr_value(AST_BASE* ast_node)
             if(const_expr)
             {
                 logical_and_op_node->symbol->const_expr=true;
+                logical_and_op_node->symbol->data_size=type_data_size[TP_BOOL];
                 logical_and_op_node->symbol->data_field->databool=const_and_value;
             }
         }
@@ -582,12 +584,13 @@ bool bit_inclusive_or_expr_value(AST_BASE* ast_node)
             bit_inclusive_or_op_node->symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
             bit_inclusive_or_op_node->symbol->count=HASH_CNT_IST;
             insert_symbol(bit_inclusive_or_op_node->symbol_table,bit_inclusive_or_op_node->symbol);
-            M_TYPE* tmp_type=build_base_type(TP_USLONGLONG);
+            M_TYPE* tmp_type=build_base_type(res_type->typ_category);
             VECinsert(bit_inclusive_or_op_node->symbol->type_vec,(void*)tmp_type);
             if(const_expr)
             {
                 bit_inclusive_or_op_node->symbol->const_expr=true;
-                bit_inclusive_or_op_node->symbol->data_field->databool=const_value;
+                bit_inclusive_or_op_node->symbol->data_size=type_data_size[res_type->typ_category];
+                bitwise_const(res_type->typ_category,bit_inclusive_or_op_node->symbol->data_field,const_value);
             }
         }
     }
@@ -596,7 +599,6 @@ bool bit_inclusive_or_expr_value(AST_BASE* ast_node)
     if(const_expr)
     {
         ast_node->symbol->data_size=type_data_size[res_type->typ_category];
-        /*const_value*/
         bitwise_const(res_type->typ_category,ast_node->symbol->data_field,const_value);
     }
     m_free(tei);
@@ -669,12 +671,13 @@ bool bit_exclusive_or_expr_value(AST_BASE* ast_node)
             bit_exclusive_or_op_node->symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
             bit_exclusive_or_op_node->symbol->count=HASH_CNT_IST;
             insert_symbol(bit_exclusive_or_op_node->symbol_table,bit_exclusive_or_op_node->symbol);
-            M_TYPE* tmp_type=build_base_type(TP_USLONGLONG);
+            M_TYPE* tmp_type=build_base_type(res_type->typ_category);
             VECinsert(bit_exclusive_or_op_node->symbol->type_vec,(void*)tmp_type);
             if(const_expr)
             {
                 bit_exclusive_or_op_node->symbol->const_expr=true;
-                bit_exclusive_or_op_node->symbol->data_field->databool=const_value;
+                bit_exclusive_or_op_node->symbol->data_size=type_data_size[res_type->typ_category];
+                bitwise_const(res_type->typ_category,bit_exclusive_or_op_node->symbol->data_field,const_value);
             }
         }
     }
@@ -683,7 +686,6 @@ bool bit_exclusive_or_expr_value(AST_BASE* ast_node)
     if(const_expr)
     {
         ast_node->symbol->data_size=type_data_size[res_type->typ_category];
-        /*TODO:const_value DONE*/
         bitwise_const(res_type->typ_category,ast_node->symbol->data_field,const_value);
     }
     m_free(tei);
@@ -756,12 +758,13 @@ bool and_expr_value(AST_BASE* ast_node)
             and_op_node->symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
             and_op_node->symbol->count=HASH_CNT_IST;
             insert_symbol(and_op_node->symbol_table,and_op_node->symbol);
-            M_TYPE* tmp_type=build_base_type(TP_USLONGLONG);
+            M_TYPE* tmp_type=build_base_type(res_type->typ_category);
             VECinsert(and_op_node->symbol->type_vec,(void*)tmp_type);
             if(const_expr)
             {
                 and_op_node->symbol->const_expr=true;
-                and_op_node->symbol->data_field->databool=const_value;
+                and_op_node->symbol->data_size=type_data_size[res_type->typ_category];
+                bitwise_const(res_type->typ_category,and_op_node->symbol->data_field,const_value);
             }
         }
     }
@@ -770,7 +773,6 @@ bool and_expr_value(AST_BASE* ast_node)
     if(const_expr)
     {
         ast_node->symbol->data_size=type_data_size[res_type->typ_category];
-        /*const_value*/
         bitwise_const(res_type->typ_category,ast_node->symbol->data_field,const_value);
     }
     m_free(tei);
@@ -964,7 +966,8 @@ bool equal_expr_value(AST_BASE* ast_node)
             if(const_expr)
             {
                 operator->symbol->const_expr=true;
-                operator->symbol->data_field->databool=equal_value;
+                operator->symbol->data_size=type_data_size[TP_BOOL];
+                operator->symbol->data_field->databool=(_Bool)(tmp_data_field->sint);
             }
         }
     }
@@ -1212,6 +1215,7 @@ bool shift_expr_value(AST_BASE* ast_node)
             if(const_expr)
             {
                 shift_op_node->symbol->const_expr=true;
+                shift_op_node->symbol->data_size=type_data_size[TP_USLONGLONG];
                 shift_op_node->symbol->data_field->usllong=tmp_data_field->usllong;
             }
         }
@@ -1487,6 +1491,7 @@ bool add_expr_value(AST_BASE* ast_node)
             if(const_expr)
             {
                 operator->symbol->const_expr=true;
+                operator->symbol->data_size=type_data_size[tmpt->typ_category];
                 cast_const(tmpt->typ_category,operator->symbol->data_field,tmp_category,tmp_data_field);
             }
         }
@@ -1549,7 +1554,6 @@ bool mul_expr_value(AST_BASE* ast_node)
         {
             goto error;
         }
-        
         mul_expr_type=Type_VEC_get_actual_base_type(tmp_type_vec);
         if(!IS_ARTH_TYPE(mul_expr_type->typ_category)){
             C_ERROR(C0061_ERR_OPERAND_ARTHMATIC_TYPE,ast_node);
@@ -1742,6 +1746,7 @@ bool mul_expr_value(AST_BASE* ast_node)
             if(const_expr)
             {
                 operator->symbol->const_expr=true;
+                operator->symbol->data_size=type_data_size[tmpt->typ_category];
                 cast_const(tmpt->typ_category,operator->symbol->data_field,tmp_category,tmp_data_field);
             }
         }

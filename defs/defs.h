@@ -80,7 +80,7 @@
 #endif
 
 #ifndef _TEST_AST_
-#define _TEST_AST_
+//#define _TEST_AST_
 #endif
 
 #ifndef _TEST_SEMANTICS_
@@ -88,7 +88,7 @@
 #endif
 
 #ifndef _TEST_SYMBOL_TABLE_
-#define _TEST_SYMBOL_TABLE_
+//#define _TEST_SYMBOL_TABLE_
 #endif
 
 #ifndef _TEST_IR_

@@ -207,7 +207,7 @@ bool while_stmt_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     return true;
 error:
 #ifdef _TEST_IR_
-    printf("whild stmt fail\n");
+    printf("while stmt fail\n");
 #endif
     return false;
 }

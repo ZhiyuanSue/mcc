@@ -11,6 +11,7 @@ bool expr_trans_dispatch(AST_BASE* ast_node,IR_BB* ir_bb)
         mul_expr_trans,cast_expr_trans,unary_expr_trans,postfix_expr_trans,
         pri_expr_trans
     };
+    
     bool res=false;
     if(ast_node->type==expression)
         res=expr_translation[0](ast_node,ir_bb);
@@ -19,6 +20,8 @@ bool expr_trans_dispatch(AST_BASE* ast_node,IR_BB* ir_bb)
     }
     else
         goto error;
+    if(res==false)
+        printf("expr trans dispatch %s\n",rule_type_str[ ast_node->type]);
     return res;
 error:
     return false;
@@ -157,7 +160,20 @@ bool logical_and_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     if(!ast_node||!ir_bb||ast_node->type!=logical_and_expr)
         goto error;
     if(ast_node->symbol->const_expr)
-        return true;
+        return true; 
+    bool prefix_const_expr=true;
+    for(size_t i=1;i+1<AST_CHILD_NUM(ast_node);i+=2)
+    {
+        AST_BASE* operator_node=AST_GET_CHILD(ast_node,i);
+        /*if the beginning sub expr are const expr, just use them directly*/    
+        if(prefix_const_expr)
+        {
+            if(operator_node->symbol->const_expr)
+                continue;
+            else
+                prefix_const_expr=false;
+        }
+    }
     return true;
 error:
     return false;
