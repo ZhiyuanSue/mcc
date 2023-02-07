@@ -1,14 +1,8 @@
 # Introduction
 
-**It is not usable now! I'm still writing the codes.**
+(By now, **only the front end of the mcc has been done.**
 
-**It is not usable now! I'm still writing the codes.**
-
-**It is not usable now! I'm still writing the codes.**
-
-(I think nobody will use it even after I finish it )
-
-
+And the backend of the complier is still need working)
 
 mcc(named by Magic C compiler) is a C compiler that designed completely support the C11 standard.
 
@@ -68,7 +62,7 @@ From now on, I just run it on x86_64.But as I used the IR, and translation a lan
 
 Just use GNU make and make it.
 
-In the future, I might build a VS version makefile, but I don't think it's meaningful, windows changes quietly.
+In the future, I might build a VS version makefile, but I don't think it's meaningful, windows changes quickly.
 
 If you need to change some configuration,you can rewrite the makefile and ./defs/defs.h.
 
@@ -108,7 +102,7 @@ for example:
 
 ```
 gcc -E hello_world.c -o hello_world.i      	/*preprocess*/
-./bin/mcc hello_world.i						/*use mcc to compile, you will get a hello_world.s file if success*/
+./bin/mcc hello_world.i hello_world.s		/*use mcc to compile, you will get a hello_world.s file if success*/
 gcc -c hello_world.s -o hello_world.o		/*assembler*/
 gcc hello_world.o -lc -o  hello_world		/*linker,please use -l to link to GCC lib*/
 ```
@@ -123,12 +117,6 @@ Do not directly include GCC's header file,and use -l to link
 Do not directly include GCC's header file,and use -l to link
 ```
 
-
-
-## use mcc to bootstrap
-
-
-
 ##  Implementation-defined Details
 
 This implementation-defined details in mcc is in ./defs/defs.h with macro format, you can change it as your wish
@@ -138,18 +126,6 @@ This implementation-defined details in mcc is in ./defs/defs.h with macro format
 · complex is supported
 
 · _Atomic is supported
-
-## License
-
-GPLv3 or later
-
-I promise the code except for the files under  ./lib is all written by myself. But those codes under ./lib and the asmer,linker might be gcc's or microsoft's. I have to use this license, because there licenses are GPL.
-
-In another word, if you only use my code and don't use any other code from gcc——maybe you need a frontend of C Complier, just ignore it——although it might cannot run.
-
-But in the future, maybe I will rewrite the lib and try to rebuild those parts. At that case, I might use no any other people's code, and the license might change.
-
-Of course, if you fork this project before my change, or I haven't change that, you can still use it with a GPLv3 license
 
 ## Current work with some examples(it need always change)
 
@@ -171,6 +147,20 @@ int main(void)
 ```
 
 Than in the ./bin/test_out/par_test_01.txt
+
+**If you want to see the following informations, you must find some micro in ./defs/defs.h and set them**
+
+```
+_TEST_AST_	/*print ast tree*/
+_TEST_SYMBOL_TABLE_	/*print symbol table*/
+_TEST_IR_	/*print ir*/
+```
+
+Other micros can also used to test some other part, you can try
+
+The size of output might be very huge,so disable them might save some out put space, it's up to you.
+
+### AST tree
 
 First you can see the AST tree:
 
@@ -205,6 +195,8 @@ start print ast tree
 finish print ast tree
 ```
 
+### Symbol table
+
 And you can also see the symbol table later:
 
 ```
@@ -234,8 +226,139 @@ reason:	C0054:Must be a pointer to struct/union and it's member
 
 It include the error place , and the error reason. Sometimes you might see a warning.
 
-## Future works
+### IR
 
-try to build an IR and a back end.
+Here,I copied some elements of IR from LLVM
 
-try to be more friendly for user.
+As you can see in the test cases, after the front end,the source will be translated into the 
+
+in an IR , some part should be present
+
+#### 1/ the static storage data
+
+let's use another example: ./bin/test_src/init_test_01.c
+
+the source code is:
+
+```
+int a[2]={1,2};
+int b={1};
+int c[1]={1,2};
+int d=4;
+struct tmpa{
+    int a;
+    int b;
+};
+struct tmpa tmp=(struct tmpa){1,2};
+struct{
+        int a[3],b;
+    } w[]={ {1},2,3,4,{5,6} ,[3]=7,8};
+struct{
+    int a;
+    double b;
+} x={.b=2.0};
+int y[4][3] = {
+    1, 3, 5, 2, 4, 6, 3, 5, 7
+};
+int z[4][3]={
+    {1,2},
+    {3,4},
+};
+```
+
+which tries to initialize a lot of static storage varibles.
+
+and you will see the output:
+
+```
+<external declarations>:9 declarations in total
+	.globl	a
+a:
+	.long	1
+	.long	2
+	.globl	b
+b:
+	.long	1
+	.globl	c
+c:
+	.long	1
+	.globl	d
+d:
+	.long	4
+	.globl	tmp
+tmp:
+	.space	0
+	.globl	w
+w:
+	.long	1
+	.space	12
+	.long	2
+	.long	3
+	.long	4
+	.long	5
+	.space	16
+	.long	7
+	.long	8
+	.space	8
+	.globl	x
+x:
+	.space	8
+	.quad	9223372036854775808
+	.globl	y
+y:
+	.long	1
+	.long	3
+	.long	5
+	.long	2
+	.long	4
+	.long	6
+	.long	3
+	.long	5
+	.long	7
+	.space	12
+	.globl	z
+z:
+	.long	1
+	.long	2
+	.space	4
+	.long	3
+	.long	4
+	.space	28
+```
+
+And above is the code style under mac, so '.space' is used to represent the '.zero' under the linux.
+
+#### 2/the function and the labels of basic blocks
+
+for the previous case: par_test_01.c
+
+the IR print out like:
+
+```
+<function definitions>:1 functions in total
+.globl function:main
+{
+	<bb :main>
+		<op:OP_BR :<None>:<None>:<None>>
+	<bb :.func.end.1>
+		<op:OP_RET :<None>:<None>:<None>>
+}
+```
+
+it have two basic block:
+
+a block named by the function name, and the function end block
+
+and in the basic blocks are some IR codes
+
+## License
+
+GPLv3 or later
+
+I promise the code except for the files under  ./lib is all written by myself. But those codes under ./lib and the asmer,linker might be gcc's or microsoft's. I have to use this license, because there licenses are GPL.
+
+In another word, if you only use my code and don't use any other code from gcc——maybe you need a frontend of C Complier, just ignore it——although it might cannot run.
+
+But in the future, maybe I will rewrite the lib and try to rebuild those parts. At that case, I might use no any other people's code, and the license might change.
+
+Of course, if you fork this project before my change, or I haven't change that, you can still use it with a GPLv3 license
