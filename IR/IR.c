@@ -142,20 +142,20 @@ void print_INS(IR_INS* ins,size_t indentation)
         printf("%s\t",ICMP_str[((CMP_COND_ATTR*)(ins->other_attr))->icmp_cond]);
     else if(ins->op==OP_FCMP)
         printf("%s\t",FCMP_str[((CMP_COND_ATTR*)(ins->other_attr))->fcmp_cond]);
-    printf("dst:\t");
+    printf(":");
     print_OPERAND(ins->dst,indentation+2);
-    printf("src1:\t");
+    printf(":");
     print_OPERAND(ins->src1,indentation+2);
-    printf("src2:\t");
+    printf(":");
     print_OPERAND(ins->src2,indentation+2);
     printf(">\n");
 }
 void print_OPERAND(SYM_ITEM* operand,size_t indentation)
 {
     if(!operand)
-        printf(" None ");
+        printf("<None>");
     else
-        printf(" %s ",operand->value);
+        printf("<%s>",operand->value);
 }
 void print_static_stor_value(STOR_VALUE* value)
 {

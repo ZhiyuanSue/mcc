@@ -1175,12 +1175,13 @@ bool shift_expr_value(AST_BASE* ast_node)
     VECcpy(shift_expr_node->symbol->type_vec,&tmp_type_vec);
     memcpy(tmp_data_field,shift_expr_node->symbol->data_field,sizeof(VALUE_DATA));
     bool const_expr=shift_expr_node->symbol->const_expr;
+    M_TYPE* shift_base_type=NULL;
     for(size_t i=0;i+2<AST_CHILD_NUM(ast_node);i+=2){
         AST_BASE* shift_op_node=AST_GET_CHILD(ast_node,i+1);
         AST_BASE* add_expression_node=AST_GET_CHILD(ast_node,i+2);
         if(!expr_dispatch(add_expression_node))
             goto error;
-        M_TYPE* shift_base_type=Type_VEC_get_actual_base_type(tmp_type_vec);
+        shift_base_type=Type_VEC_get_actual_base_type(tmp_type_vec);
         M_TYPE* add_base_type=Type_VEC_get_actual_base_type(add_expression_node->symbol->type_vec);
         if((!IS_INT_TYPE(shift_base_type->typ_category))||(!IS_INT_TYPE(add_base_type->typ_category)))
         {
@@ -1210,13 +1211,13 @@ bool shift_expr_value(AST_BASE* ast_node)
             shift_op_node->symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
             shift_op_node->symbol->count=HASH_CNT_IST;
             insert_symbol(shift_op_node->symbol_table,shift_op_node->symbol);
-            M_TYPE* tmp_type=build_base_type(TP_USLONGLONG);
+            M_TYPE* tmp_type=build_base_type(shift_base_type->typ_category);
             VECinsert(shift_op_node->symbol->type_vec,(void*)tmp_type);
             if(const_expr)
             {
                 shift_op_node->symbol->const_expr=true;
-                shift_op_node->symbol->data_size=type_data_size[TP_USLONGLONG];
-                shift_op_node->symbol->data_field->usllong=tmp_data_field->usllong;
+                shift_op_node->symbol->data_size=type_data_size[shift_base_type->typ_category];
+                cast_const(shift_base_type->typ_category,shift_op_node->symbol->data_field,shift_base_type->typ_category,tmp_data_field);
             }
         }
     }
@@ -1224,7 +1225,7 @@ bool shift_expr_value(AST_BASE* ast_node)
     if(const_expr){
         ast_node->symbol->const_expr=true;
         ast_node->symbol->data_size=type_data_size[tmpt->typ_category];
-        cast_const(tmpt->typ_category,ast_node->symbol->data_field,TP_USLONGLONG,tmp_data_field);
+        cast_const(tmpt->typ_category,ast_node->symbol->data_field,shift_base_type->typ_category,tmp_data_field);
     }
     ast_node->symbol->type_vec=tmp_type_vec;
     m_free(tei);

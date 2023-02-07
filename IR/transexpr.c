@@ -646,7 +646,61 @@ bool shift_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
         goto error;
     if(ast_node->symbol->const_expr)
         return true;
-    
+    bool prefix_const_expr=true;
+    AST_BASE* prefix_expr_node=NULL;
+    AST_BASE* right_expr_node=NULL;
+    SYM_ITEM* prefix_symbol=NULL;
+    SYM_ITEM* right_symbol=NULL;
+    for(size_t i=1;i+1<AST_CHILD_NUM(ast_node);i+=2)
+    {
+        AST_BASE* operator_node=AST_GET_CHILD(ast_node,i);
+        /*if the beginning sub expr are const expr, just use them directly*/    
+        if(prefix_const_expr)
+        {
+            if(operator_node->symbol->const_expr)
+            {
+                prefix_expr_node=operator_node;
+                continue;
+            }
+            else
+                prefix_const_expr=false;
+        }
+        if(prefix_expr_node==NULL)
+            prefix_expr_node=AST_GET_CHILD(ast_node,i-1);
+        right_expr_node=AST_GET_CHILD(ast_node,i+1);
+        if(!expr_trans_dispatch(right_expr_node,ir_bb))
+            goto error;
+        /*use the value directly and no need to cast*/
+        prefix_symbol=prefix_expr_node->symbol;
+        right_symbol=right_expr_node->symbol;
+        IR_INS* shift_op_ins=add_new_ins(ir_bb);
+        insert_ins_to_bb(shift_op_ins,ir_bb);
+        M_TYPE* base_int_type=Type_VEC_get_actual_base_type(operator_node->symbol->type_vec);
+        /*
+            Hint: logical shift and mathmatical shift
+            for C stardard, it haven't say any words about this
+            but most compliers have the same implement
+        */
+        if(base_int_type->typ_category%2==1)
+        {   /*unsigned*/
+            if(operator_node->type==left_shift)
+                GenINS(shift_op_ins,OP_SHL,operator_node->symbol,prefix_symbol,right_symbol);
+            else if(operator_node->type==right_shift)
+                GenINS(shift_op_ins,OP_SHR,operator_node->symbol,prefix_symbol,right_symbol);
+        }
+        else if(base_int_type->typ_category%2==0)
+        {   /*signed*/
+            if(operator_node->type==left_shift)
+                GenINS(shift_op_ins,OP_SAL,operator_node->symbol,prefix_symbol,right_symbol);
+            else if(operator_node->type==right_shift)
+                GenINS(shift_op_ins,OP_SAR,operator_node->symbol,prefix_symbol,right_symbol);
+        }
+        else
+            goto error;
+        prefix_expr_node=operator_node;
+    }
+    AST_BASE* res_node=AST_GET_CHILD(ast_node,AST_CHILD_NUM(ast_node)-2);
+    type_cast_trans(ast_node->symbol,res_node->symbol,ir_bb);
     return true;
 error:
     return false;
@@ -657,6 +711,40 @@ bool add_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
         goto error;
     if(ast_node->symbol->const_expr)
         return true;
+    bool prefix_const_expr=true;
+    AST_BASE* prefix_expr_node=NULL;
+    AST_BASE* right_expr_node=NULL;
+    SYM_ITEM* prefix_symbol=NULL;
+    SYM_ITEM* right_symbol=NULL;
+    for(size_t i=1;i+1<AST_CHILD_NUM(ast_node);i+=2)
+    {
+        AST_BASE* operator_node=AST_GET_CHILD(ast_node,i);
+        /*if the beginning sub expr are const expr, just use them directly*/    
+        if(prefix_const_expr)
+        {
+            if(operator_node->symbol->const_expr)
+            {
+                prefix_expr_node=operator_node;
+                continue;
+            }
+            else
+                prefix_const_expr=false;
+        }
+        if(prefix_expr_node==NULL)
+            prefix_expr_node=AST_GET_CHILD(ast_node,i-1);
+        right_expr_node=AST_GET_CHILD(ast_node,i+1);
+        if(!expr_trans_dispatch(right_expr_node,ir_bb))
+            goto error;
+        prefix_symbol=prefix_expr_node->symbol;
+        right_symbol=right_expr_node->symbol;
+        
+        IR_INS* add_ins=add_new_ins(ir_bb);
+        insert_ins_to_bb(add_ins,ir_bb);
+        GenINS(add_ins,OP_OR,operator_node->symbol,prefix_symbol,right_symbol);
+        prefix_expr_node=operator_node;
+    }
+    AST_BASE* res_node=AST_GET_CHILD(ast_node,AST_CHILD_NUM(ast_node)-2);
+    type_cast_trans(ast_node->symbol,res_node->symbol,ir_bb);
     return true;
 error:
     return false;
@@ -727,7 +815,6 @@ bool postfix_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
     }
     else
         goto error;
-    /**/
     while(suffix_start_index<AST_CHILD_NUM(ast_node))
     {
         AST_BASE* tmp_ast=AST_GET_CHILD(ast_node,suffix_start_index);
