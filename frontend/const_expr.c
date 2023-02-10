@@ -1,4 +1,8 @@
 #include "const_expr.h"
+/*
+    I known there's one thing called generic in C, and it's also in designation
+    but I don't think it's meaningful here--I still need so much codes to deal with different cases
+*/
 extern size_t type_data_size[TYPE_NUM];
 bool const_value(AST_BASE* ast_node)
 {

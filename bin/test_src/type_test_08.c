@@ -10,5 +10,6 @@ struct test_bit_field_offset{
     char f:2;
     char :0;
     char g:2;
+    enum test TT:3;
     char h[2];
 } tbfo;

@@ -118,7 +118,7 @@ TP_SU* struct_union_type(AST_BASE* struct_decl_list_node,
                     base_type_num++;
                     bit_field_base_type=tmpt->typ_category;
                 }
-                if(base_type_num!=1||IS_INT_TYPE(bit_field_base_type)==false)
+                if(base_type_num!=1||(!IS_INT_TYPE(bit_field_base_type)&&bit_field_base_type!=TP_ENUM))
                 {
                     C_ERROR(C0022_ERR_BIT_FIELD_TYPE,su_declarator_node);
                     return false;

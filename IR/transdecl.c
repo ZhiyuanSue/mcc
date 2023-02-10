@@ -180,6 +180,23 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
                 elem->byte_width=Type_size(type_vec);
                 elem->value_data_type=SVT_NONE;
                 elem->idata=get_int_const(tmpt->typ_category,sub_node->symbol->data_field,true);
+                /*
+                    if a bit field, do shift ,if need trunc ,also do it,
+                    only int type or enum need such a trunc
+                */
+                size_t bit_field_size=0;
+                if((initializer_node->init_attribute->size)!=8*Type_size(initializer_node->init_attribute->type_vec))
+                    bit_field_size=initializer_node->init_attribute->size;
+                size_t off_size=(initializer_node->init_attribute->off)%(8*Type_align(type_vec));
+                if(bit_field_size!=0)
+                {
+                    unsigned long long mask=0;
+                    for(size_t i=0;i<bit_field_size;++i)
+                        mask=(mask<<1)&((unsigned long long)0x1);
+                    elem->idata&=mask;
+                }
+                if(off_size!=0)
+                    elem->idata<<=off_size;
             }
             else if(IS_FLOAT_TYPE(tmpt->typ_category))
             {
@@ -212,6 +229,19 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
                 elem->byte_width=type_data_size[TP_ENUM];
                 elem->value_data_type=SVT_NONE;
                 elem->idata=get_int_const(TP_SINT,sub_node->symbol->data_field,true);
+                size_t bit_field_size=0;
+                if((initializer_node->init_attribute->size)!=8*Type_size(initializer_node->init_attribute->type_vec))
+                    bit_field_size=initializer_node->init_attribute->size;
+                size_t off_size=(initializer_node->init_attribute->off)%(8*Type_align(type_vec));
+                if(bit_field_size!=0)
+                {
+                    unsigned long long mask=0;
+                    for(size_t i=0;i<bit_field_size;++i)
+                        mask=(mask<<1)&((unsigned long long)0x1);
+                    elem->idata&=mask;
+                }
+                if(off_size!=0)
+                    elem->idata<<=off_size;
             }
             else if(tmpt->typ_category==TP_FUNCTION)
             {
@@ -224,15 +254,6 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
                 
             }
             else if(tmpt->typ_category==TP_UNION||tmpt->typ_category==TP_STRUCT)
-            {
-
-            }
-            /*if a bit field, do shift , if need trunc ,also do it*/
-            if((initializer_node->init_attribute->size)!=8*Type_size(initializer_node->init_attribute->type_vec))
-            {
-
-            }
-            if((initializer_node->init_attribute->off)%(8*Type_align(type_vec))!=0)
             {
 
             }
@@ -252,10 +273,20 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
             /*if a bit field, just trunc*/
             if((initializer_node->init_attribute->size)!=8*Type_size(initializer_node->init_attribute->type_vec))
             {
+                SYM_ITEM* trunc_symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
+                if(!insert_symbol(alloc_reg->symbol_table,trunc_symbol))
+                    goto error;
+                VECappend(curr_symbol->type_vec,trunc_symbol->type_vec);
+                trunc_symbol->stor_type=IR_STOR_STACK;
 
+                IR_INS* trunc_ins=add_new_ins(ir_bb);
+                insert_ins_to_bb(trunc_ins,ir_bb);
+                GenINS(trunc_ins,OP_SHL,trunc_symbol,curr_symbol,NULL);
+                curr_symbol=trunc_symbol;
             }
             /*if need a shifting, generate a shift ins*/
-            if((initializer_node->init_attribute->off)%(8*Type_align(curr_symbol->type_vec))!=0)
+            size_t off_size=(initializer_node->init_attribute->off)%(8*Type_align(curr_symbol->type_vec));
+            if(off_size!=0)
             {
                 /*shift res reg*/
                 SYM_ITEM* shift_symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
@@ -268,15 +299,17 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
                 SYM_ITEM* shift_size_symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
                 if(!insert_symbol(alloc_reg->symbol_table,shift_size_symbol))
                     goto error;
-                M_TYPE* size_type=build_base_type(TP_SINT);
+                M_TYPE* size_type=build_base_type(TP_USLONG);
                 VECinsert(shift_size_symbol->type_vec,(void*)size_type);
                 shift_size_symbol->stor_type=IR_STOR_IMM;
+                shift_size_symbol->data_field->uslong=off_size;
 
                 /*gen ins*/
-                IR_INS* store_ins=add_new_ins(ir_bb);
-                insert_ins_to_bb(store_ins,ir_bb);
-                GenINS(store_ins,OP_SHL,shift_symbol,curr_symbol,shift_size_symbol);
+                IR_INS* shift_ins=add_new_ins(ir_bb);
+                insert_ins_to_bb(shift_ins,ir_bb);
+                GenINS(shift_ins,OP_SHL,shift_symbol,curr_symbol,shift_size_symbol);
 
+                curr_symbol=shift_symbol;
             }
             /*change the the elem data*/
             elem->other_data=curr_symbol;
@@ -302,7 +335,6 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
             elem->idata=(next_begin_off-off)/8;
             VECinsert(value->value_vec,(void*)elem);
         }
-        
     }
     /*
         step3:if bit field and have a static storage ,just merge it
