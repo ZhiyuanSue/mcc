@@ -76,9 +76,9 @@ bool declaration_trans(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR_BB*
                 /*all set to zero*/
                 STOR_VALUE_ELEM* elem=m_alloc(sizeof(STOR_VALUE_ELEM));
                 elem->byte_width=0;
-                elem->value_data_type=SSVT_NONE;
+                elem->value_data_type=SVT_NONE;
                 elem->idata=Type_size(tmpsi->type_vec);
-                elem->bit_field_init_attr=NULL;
+                elem->init_attr=NULL;
                 VECinsert(irm->static_stor_symbols,(void*)stor_value);
             }
             else if(tmpsi->stor_type==IR_STOR_STACK){
@@ -158,30 +158,18 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
         {
             /*if the first init node off is not 0,need padding*/
             elem=m_alloc(sizeof(STOR_VALUE_ELEM));
-            elem->value_data_type=SSVT_NONE;
+            elem->value_data_type=SVT_NONE;
             elem->byte_width=0;
             elem->idata=initializer_node->init_attribute->off/8;
-            elem->bit_field_init_attr=NULL;
+            elem->init_attr=NULL;
             VECinsert(value->value_vec,(void*)elem);
         }
-        /*deal with uninterrupted bit field case*/
-        VEC* bit_field_vec=InitVEC(DEFAULT_CAPICITY);
-        while(is_bit_field_init(initializer_node))
-        {
-            VECinsert(bit_field_vec,(void*)initializer_node);
-            index++;
-            initializer_node=VEC_GET_ITEM( ((VEC*)symbol->data_field->pointer) ,index);
-        }
-        if(VECLEN(bit_field_vec))
-        {
-            fill_in_bit_field_init_value(bit_field_vec,value,static_stor,alloc_reg,ir_bb);
-            continue;
-        }
-        /*the other cases must not be bit field*/
+        /*step1: init all the elements according to the init list*/
         elem=m_alloc(sizeof(STOR_VALUE_ELEM));
-        elem->bit_field_init_attr=NULL;
-        elem->value_data_type=SSVT_NONE;
+        elem->init_attr=NULL;
+        elem->value_data_type=SVT_NONE;
         elem->byte_width=elem->idata=0;
+        elem->init_attr=initializer_node->init_attribute;
         VECinsert(value->value_vec,(void*)elem);
         if(sub_node->symbol->const_expr)
         {
@@ -190,19 +178,19 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
             if(IS_INT_TYPE(tmpt->typ_category))
             {
                 elem->byte_width=Type_size(type_vec);
-                elem->value_data_type=SSVT_NONE;
+                elem->value_data_type=SVT_NONE;
                 elem->idata=get_int_const(tmpt->typ_category,sub_node->symbol->data_field,true);
             }
             else if(IS_FLOAT_TYPE(tmpt->typ_category))
             {
                 elem->byte_width=Type_size(type_vec);
-                elem->value_data_type=SSVT_NONE;
+                elem->value_data_type=SVT_NONE;
                 elem->fdata[0]=get_float_const(tmpt->typ_category,sub_node->symbol->data_field,true);
             }
             else if(IS_COMPLEX_TYPE(tmpt->typ_category))
             {
                 elem->byte_width=Type_size(type_vec);
-                elem->value_data_type=SSVT_NONE;
+                elem->value_data_type=SVT_NONE;
                 long double* fp=get_complex_const(tmpt->typ_category,sub_node->symbol->data_field,true);
                 elem->fdata[0]=fp[0];
                 elem->fdata[1]=fp[1];
@@ -210,25 +198,25 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
             else if(tmpt->typ_category==TP_NULL_POINTER_CONSTANT)
             {
                 elem->byte_width=type_data_size[TP_POINT];
-                elem->value_data_type=SSVT_NONE;
+                elem->value_data_type=SVT_NONE;
                 elem->idata=0;
             }
             else if(tmpt->typ_category==TP_POINT)
             {
                 elem->byte_width=type_data_size[TP_POINT];
-                elem->value_data_type=SSVT_NONE;
+                elem->value_data_type=SVT_NONE;
                 elem->pdata=(void*)get_int_const(tmpt->typ_category,sub_node->symbol->data_field,true);
             }
             else if(tmpt->typ_category==TP_ENUM)
             {
                 elem->byte_width=type_data_size[TP_ENUM];
-                elem->value_data_type=SSVT_NONE;
+                elem->value_data_type=SVT_NONE;
                 elem->idata=get_int_const(TP_SINT,sub_node->symbol->data_field,true);
             }
             else if(tmpt->typ_category==TP_FUNCTION)
             {
                 elem->byte_width=type_data_size[TP_POINT];
-                elem->value_data_type=SSVT_POINTER;
+                elem->value_data_type=SVT_POINTER;
                 elem->pdata=((TP_FUNC*)tmpt)->ir_func->symbol;
             }
             else if(tmpt->typ_category==TP_ARRAY)
@@ -236,6 +224,15 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
                 
             }
             else if(tmpt->typ_category==TP_UNION||tmpt->typ_category==TP_STRUCT)
+            {
+
+            }
+            /*if a bit field, do shift , if need trunc ,also do it*/
+            if((initializer_node->init_attribute->size)!=8*Type_size(initializer_node->init_attribute->type_vec))
+            {
+
+            }
+            if((initializer_node->init_attribute->off)%(8*Type_align(type_vec))!=0)
             {
 
             }
@@ -249,45 +246,77 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
             }
             if(!expr_trans_dispatch(sub_node,ir_bb))
                 goto error;
-            /*get the load position reg*/
-            SYM_ITEM* load_posi_symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
-            if(!insert_symbol(alloc_reg->symbol_table,load_posi_symbol))
-                goto error;
-            VECappend(symbol->type_vec,load_posi_symbol->type_vec);
-            M_TYPE* pointer_type=build_base_type(TP_POINT);
-            VECinsert(load_posi_symbol->type_vec,(void*)pointer_type);
-            load_posi_symbol->stor_type=IR_STOR_STACK;
-            load_posi_symbol->data_field->slong=(signed long int)(alloc_reg->data_field->slong+(initializer_node->init_attribute->off)/8);
-            
-            IR_INS* store_ins=add_new_ins(ir_bb);
-            insert_ins_to_bb(store_ins,ir_bb);
-            GenINS(store_ins,OP_STORE,NULL,load_posi_symbol,NULL);
+            elem->byte_width=Type_size(sub_node->symbol->type_vec);
+            elem->value_data_type=SVT_REG;
+            SYM_ITEM* curr_symbol=sub_node->symbol;
+            /*if a bit field, just trunc*/
+            if((initializer_node->init_attribute->size)!=8*Type_size(initializer_node->init_attribute->type_vec))
+            {
+
+            }
+            /*if need a shifting, generate a shift ins*/
+            if((initializer_node->init_attribute->off)%(8*Type_align(curr_symbol->type_vec))!=0)
+            {
+                /*shift res reg*/
+                SYM_ITEM* shift_symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
+                if(!insert_symbol(alloc_reg->symbol_table,shift_symbol))
+                    goto error;
+                VECappend(curr_symbol->type_vec,shift_symbol->type_vec);
+                shift_symbol->stor_type=IR_STOR_STACK;
+                
+                /*shift size reg*/
+                SYM_ITEM* shift_size_symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
+                if(!insert_symbol(alloc_reg->symbol_table,shift_size_symbol))
+                    goto error;
+                M_TYPE* size_type=build_base_type(TP_SINT);
+                VECinsert(shift_size_symbol->type_vec,(void*)size_type);
+                shift_size_symbol->stor_type=IR_STOR_IMM;
+
+                /*gen ins*/
+                IR_INS* store_ins=add_new_ins(ir_bb);
+                insert_ins_to_bb(store_ins,ir_bb);
+                GenINS(store_ins,OP_SHL,shift_symbol,curr_symbol,shift_size_symbol);
+
+            }
+            /*change the the elem data*/
+            elem->other_data=curr_symbol;
         }
         /*
-            if two init nodes or a init and the end have a padding,just insert zero space
-            but that only used for static storage
+            step2:if two init nodes or a init node and the end need a padding,just insert zero space
         */
-        if(static_stor)
+        size_t off=initializer_node->init_attribute->off+initializer_node->init_attribute->size;
+        off=MCC_ALIGN(off,8);
+        size_t next_begin_off;
+        if(index==veclen-1)
+            next_begin_off=Type_size(symbol->type_vec)*8;
+        else
         {
-            size_t off=initializer_node->init_attribute->off+initializer_node->init_attribute->size;
-            off=MCC_ALIGN(off,8);
-            size_t next_begin_off;
-            if(index==veclen-1)
-                next_begin_off=Type_size(symbol->type_vec)*8;
-            else
-            {
-                AST_BASE* next_initializer_node=VEC_GET_ITEM( ((VEC*)symbol->data_field->pointer) ,index+1);
-                next_begin_off=next_initializer_node->init_attribute->off;
-            }
-            if((size_t)(next_begin_off-8)>(size_t)off)
-            {
-                elem=m_alloc(sizeof(STOR_VALUE_ELEM));
-                elem->byte_width=0;
-                elem->value_data_type=SSVT_NONE;
-                elem->idata=(next_begin_off-off)/8;
-                VECinsert(value->value_vec,(void*)elem);
-            }
+            AST_BASE* next_initializer_node=VEC_GET_ITEM( ((VEC*)symbol->data_field->pointer) ,index+1);
+            next_begin_off=next_initializer_node->init_attribute->off;
         }
+        if((size_t)(next_begin_off-8)>(size_t)off)
+        {
+            elem=m_alloc(sizeof(STOR_VALUE_ELEM));
+            elem->byte_width=0;
+            elem->value_data_type=SVT_NONE;
+            elem->idata=(next_begin_off-off)/8;
+            VECinsert(value->value_vec,(void*)elem);
+        }
+        
+    }
+    /*
+        step3:if bit field and have a static storage ,just merge it
+        if such a merge meet one or more elems not a static,gen ins
+        but this step need two for loop
+        first one deal with the const data, and the second one used to gen ins
+    */
+    for(size_t i=0;i<VECLEN(value->value_vec);++i)
+    {
+
+    }
+    for(size_t i=0;i<VECLEN(value->value_vec);++i)
+    {
+
     }
     m_free(tei);
     return true;
@@ -324,16 +353,4 @@ SYM_ITEM* alloca_on_stack_value(IR_BB* ir_bb,SYM_ITEM* symbol)
     return res;
 error:
     return NULL;
-}
-bool fill_in_bit_field_init_value(VEC* init_node_list,STOR_VALUE* value,bool static_stor,SYM_ITEM* alloc_reg,IR_BB* ir_bb)
-{
-    return true;
-}
-bool is_bit_field_init(AST_BASE* initializer_node)
-{
-    if(!initializer_node||!initializer_node->init_attribute)
-        return false;
-    if((initializer_node->init_attribute->off)%8!=0||(initializer_node->init_attribute->size)!=8*Type_size(initializer_node->init_attribute->type_vec))
-        return true;
-    return false;
 }

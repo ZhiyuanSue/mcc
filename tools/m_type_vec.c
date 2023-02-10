@@ -249,6 +249,11 @@ size_t Type_align(VEC* type_vec)
         tmpt=Type_VEC_get_actual_base_type(type_vec);
         res=Type_align(tmp_type_vec);
     }
+    else if(tmpt->typ_category==TP_FUNCTION)
+    {
+        /*a pointer's align*/
+        res=type_data_size[TP_POINT];
+    }
     if(res<spec_res)
         res=spec_res;
     return res;

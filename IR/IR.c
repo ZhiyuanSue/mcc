@@ -164,7 +164,7 @@ void print_static_stor_value(STOR_VALUE* value)
     for(size_t i=0;i<VECLEN(value->value_vec);++i)
     {
         STOR_VALUE_ELEM* elem=VEC_GET_ITEM(value->value_vec,i);
-        if(elem&&elem->value_data_type==SSVT_NONE)
+        if(elem&&elem->value_data_type==SVT_NONE)
         {
             if(elem->byte_width==0)
 #ifdef _MAC_
@@ -182,7 +182,7 @@ void print_static_stor_value(STOR_VALUE* value)
             else if(elem->byte_width==8)
                 printf("\t.quad\t%llu\n",elem->idata); 
         }
-        else if(elem->value_data_type==SSVT_POINTER)
+        else if(elem->value_data_type==SVT_POINTER)
         {
             printf("\t.quad\t%s\n",((SYM_ITEM*)(elem->idata))->value); 
         }

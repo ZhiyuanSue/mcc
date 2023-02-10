@@ -96,7 +96,7 @@ bool gen_static_stor_data(IR_MODULE* irm,FILE* fp)
         for(size_t j=0;j<VECLEN(value->value_vec);++j)
         {
             STOR_VALUE_ELEM* elem=VEC_GET_ITEM(value->value_vec,j);
-            if(elem&&elem->value_data_type==SSVT_NONE)
+            if(elem&&elem->value_data_type==SVT_NONE)
             {
                 if(elem->byte_width==0)
 #ifdef _MAC_
@@ -114,7 +114,7 @@ bool gen_static_stor_data(IR_MODULE* irm,FILE* fp)
                 else if(elem->byte_width==8)
                     fprintf(fp,"\t.quad\t%llu\n",elem->idata); 
             }
-            else if(elem->value_data_type==SSVT_POINTER)
+            else if(elem->value_data_type==SVT_POINTER)
             {
                 fprintf(fp,"\t.quad\t%s\n",((SYM_ITEM*)elem->idata)->value); 
             }

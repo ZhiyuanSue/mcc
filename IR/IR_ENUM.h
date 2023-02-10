@@ -32,6 +32,7 @@ enum data_storage_type{
     IR_STOR_THREAD,
     IR_STOR_STACK,
     IR_STOR_REG,
+    IR_STOR_IMM,
 };
 enum operand_flow{
     FLOW_IN,

@@ -18,21 +18,24 @@ enum linkage_type{
 enum function_spec_type{
     FSPEC_NONE,FSPEC_INLINE,FSPEC_NORETURN
 };
-enum static_storage_value_type{
-    SSVT_NONE,
-    SSVT_POINTER,
+enum storage_value_type{
+    SVT_NONE,
+    SVT_POINTER,
+    SVT_STRING,
+    SVT_REG,
 };
 typedef struct sym_item SYM_ITEM;
 typedef struct{
-    enum static_storage_value_type value_data_type;
+    enum storage_value_type value_data_type;
     size_t byte_width;  /*0 -zero byte, 1 -byte,2 -word,4 -long(not the long in C),8 -quad*/
     union{
         unsigned long long int idata;
         void* pdata;
         long double fdata[2];
+        void* other_data;
     };
     /*if the data stores a value of pointer and the wordsize is 32,need judgement and cast*/
-    void* bit_field_init_attr;
+    void* init_attr;
 }STOR_VALUE_ELEM;
 typedef struct{
     SYM_ITEM* sym_item;
