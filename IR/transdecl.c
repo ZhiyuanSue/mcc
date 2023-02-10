@@ -320,7 +320,7 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
         size_t off=initializer_node->init_attribute->off+initializer_node->init_attribute->size;
         off=MCC_ALIGN(off,8);
         size_t next_begin_off;
-        if(index==veclen-1)
+        if(index==veclen-1) /*goto the end*/
             next_begin_off=Type_size(symbol->type_vec)*8;
         else
         {

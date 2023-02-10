@@ -1501,7 +1501,7 @@ bool initializer_search(
         size_t member_start;
         for(size_t i=0;i<VECLEN(su_member_list);++i)
         {
-            member_start=curr_obj_off;
+            member_start=struct_start_off;
             member=(TP_SU_MEMBER*)VEC_GET_ITEM(su_member_list,i);
             member_bit_field=false;
             member_bit_field_size=0;
@@ -1513,7 +1513,7 @@ bool initializer_search(
                 member_bit_field_size=member->bit_field_size;
             }
             size_t member_end=member_start;
-            if(bit_field)
+            if(member_bit_field)
                 member_end+=member_bit_field_size;
             else
                 member_end+=Type_size(member->type_vec)*8;
@@ -1575,8 +1575,8 @@ bool initializer_search(
                         */
                         for(size_t j=index+1;j<VECLEN(su_member_list);++j)
                         {
-                            next_member=(TP_SU_MEMBER*)VEC_GET_ITEM(su_member_list,index+1);
-                            size_t tmp_next_member_off=next_member_off+(next_member->offset)*8; /*start test*/
+                            next_member=(TP_SU_MEMBER*)VEC_GET_ITEM(su_member_list,j);
+                            size_t tmp_next_member_off=struct_start_off+(next_member->offset)*8; /*start test*/
                             if(next_member->bit_field)
                                 tmp_next_member_off+=next_member->bit_field_offset;
                             if(tmp_next_member_off!=curr_obj_off)
@@ -1593,7 +1593,7 @@ bool initializer_search(
                                 initializer_node->init_attribute->size=Type_size(member->type_vec)*8;
                             (*off)=struct_start_off+(next_member->offset)*8;
                             if(next_member->bit_field)
-                                (*off)+=member->bit_field_offset;
+                                (*off)+=next_member->bit_field_offset;
                         }
                         else    /*it means no next member start with different offset*/
                         {
