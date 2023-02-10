@@ -179,7 +179,8 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
             {
                 elem->byte_width=Type_size(type_vec);
                 elem->value_data_type=SVT_NONE;
-                elem->idata=get_int_const(tmpt->typ_category,sub_node->symbol->data_field,true);
+                M_TYPE* sub_node_type=Type_VEC_get_actual_base_type(sub_node->symbol->type_vec);
+                elem->idata=get_int_const(sub_node_type->typ_category,sub_node->symbol->data_field,true);
                 /*
                     if a bit field, do shift ,if need trunc ,also do it,
                     only int type or enum need such a trunc
@@ -188,15 +189,20 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
                 if((initializer_node->init_attribute->size)!=8*Type_size(initializer_node->init_attribute->type_vec))
                     bit_field_size=initializer_node->init_attribute->size;
                 size_t off_size=(initializer_node->init_attribute->off)%(8*Type_align(type_vec));
+                printf("----\n");
+                printf("%llu\n",elem->idata);
                 if(bit_field_size!=0)
                 {
                     unsigned long long mask=0;
                     for(size_t i=0;i<bit_field_size;++i)
-                        mask=(mask<<1)&((unsigned long long)0x1);
+                        mask=(mask<<1)|((unsigned long long)0x1);
+                    printf("mask%llu\n",mask);
                     elem->idata&=mask;
                 }
+                printf("%llu\n",elem->idata);
                 if(off_size!=0)
                     elem->idata<<=off_size;
+                printf("%llu\n",elem->idata);
             }
             else if(IS_FLOAT_TYPE(tmpt->typ_category))
             {
@@ -237,7 +243,7 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
                 {
                     unsigned long long mask=0;
                     for(size_t i=0;i<bit_field_size;++i)
-                        mask=(mask<<1)&((unsigned long long)0x1);
+                        mask=(mask<<1)|((unsigned long long)0x1);
                     elem->idata&=mask;
                 }
                 if(off_size!=0)
@@ -281,7 +287,7 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
 
                 IR_INS* trunc_ins=add_new_ins(ir_bb);
                 insert_ins_to_bb(trunc_ins,ir_bb);
-                GenINS(trunc_ins,OP_SHL,trunc_symbol,curr_symbol,NULL);
+                GenINS(trunc_ins,OP_TRUNC,trunc_symbol,curr_symbol,NULL);
                 curr_symbol=trunc_symbol;
             }
             /*if need a shifting, generate a shift ins*/

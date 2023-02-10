@@ -1412,10 +1412,17 @@ bool initializer_search(
         VECinsert(sub_obj_type,sint_type);
         if(!initializer_semantic(initializer_node,sub_obj_type,(*off),curr_obj_off,init_node_list))
             goto error;
-        /* a enum cannot be a bit field,so add the sint size*/
+        /* a enum can also be a bit field*/
         initializer_node->init_attribute->off=curr_obj_off;
-        initializer_node->init_attribute->size=Type_size(sub_obj_type)*8;
-        (*off)+=Type_size(sub_obj_type)*8;
+        if(bit_field)
+        {
+            initializer_node->init_attribute->size=bit_field_size;
+            (*off)+=bit_field_size;
+        }
+        else{
+            initializer_node->init_attribute->size=Type_size(type_vec)*8;
+            (*off)+=Type_size(type_vec)*8;
+        }
     }
     else if(tmp_type->typ_category==TP_UNION)
     {
