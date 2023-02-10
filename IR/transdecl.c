@@ -189,20 +189,15 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
                 if((initializer_node->init_attribute->size)!=8*Type_size(initializer_node->init_attribute->type_vec))
                     bit_field_size=initializer_node->init_attribute->size;
                 size_t off_size=(initializer_node->init_attribute->off)%(8*Type_align(type_vec));
-                printf("----\n");
-                printf("%llu\n",elem->idata);
                 if(bit_field_size!=0)
                 {
                     unsigned long long mask=0;
                     for(size_t i=0;i<bit_field_size;++i)
                         mask=(mask<<1)|((unsigned long long)0x1);
-                    printf("mask%llu\n",mask);
                     elem->idata&=mask;
                 }
-                printf("%llu\n",elem->idata);
                 if(off_size!=0)
                     elem->idata<<=off_size;
-                printf("%llu\n",elem->idata);
             }
             else if(IS_FLOAT_TYPE(tmpt->typ_category))
             {

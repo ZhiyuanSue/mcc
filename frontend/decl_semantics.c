@@ -1586,7 +1586,7 @@ bool initializer_search(
                             size_t tmp_next_member_off=struct_start_off+(next_member->offset)*8; /*start test*/
                             if(next_member->bit_field)
                                 tmp_next_member_off+=next_member->bit_field_offset;
-                            if(tmp_next_member_off!=curr_obj_off)
+                            if(next_member->member_name&&tmp_next_member_off!=curr_obj_off)
                             {
                                 next_member_off=tmp_next_member_off;
                                 break;
