@@ -8,11 +8,6 @@
 #include "../tools/m_type.h"
 #define AST_CHILD_NUM(ast_node) ( (ast_node&& (ast_node->child)) ? (ast_node->child->len) : 0 )
 #define AST_GET_CHILD(ast_node,i) ( (ast_node && (ast_node->child) && (i<ast_node->child->len) ) ? (AST_BASE*)ast_node->child->data[i]: NULL )
-typedef struct{
-    size_t off;
-    size_t size;
-    VEC* type_vec;
-}INIT_NODE_ATTR;
 typedef struct ast_base AST_BASE;
 struct ast_base{
     enum rule_type_enum type;

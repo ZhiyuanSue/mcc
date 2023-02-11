@@ -75,6 +75,7 @@ bool declaration_trans(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR_BB*
             if(tmpsi->stor_type==IR_STOR_STATIC||tmpsi->stor_type==IR_STOR_THREAD){
                 /*all set to zero*/
                 STOR_VALUE_ELEM* elem=m_alloc(sizeof(STOR_VALUE_ELEM));
+                elem->bit_field=false;
                 elem->byte_width=0;
                 elem->value_data_type=SVT_NONE;
                 elem->idata=Type_size(tmpsi->type_vec);
@@ -142,7 +143,9 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
     }
     ERROR_ITEM* tei=(ERROR_ITEM*)m_alloc(sizeof(ERROR_ITEM));
     size_t veclen=VECLEN(((VEC*)(symbol->data_field->pointer)));
-    for(size_t index=0;index < veclen ; ++index)
+    size_t index;
+    bool init_have_bit_field=false;
+    for(index=0;index < veclen ; ++index)
     {
         AST_BASE* initializer_node=VEC_GET_ITEM( ((VEC*)(symbol->data_field->pointer)) ,index);
         if(!initializer_node)
@@ -158,6 +161,7 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
         {
             /*if the first init node off is not 0,need padding*/
             elem=m_alloc(sizeof(STOR_VALUE_ELEM));
+            elem->bit_field=false;
             elem->value_data_type=SVT_NONE;
             elem->byte_width=0;
             elem->idata=initializer_node->init_attribute->off/8;
@@ -166,6 +170,7 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
         }
         /*step1: init all the elements according to the init list*/
         elem=m_alloc(sizeof(STOR_VALUE_ELEM));
+        elem->bit_field=false;
         elem->init_attr=NULL;
         elem->value_data_type=SVT_NONE;
         elem->byte_width=elem->idata=0;
@@ -191,13 +196,19 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
                 size_t off_size=(initializer_node->init_attribute->off)%(8*Type_align(type_vec));
                 if(bit_field_size!=0)
                 {
+                    elem->bit_field=true;
+                    init_have_bit_field=true;
                     unsigned long long mask=0;
                     for(size_t i=0;i<bit_field_size;++i)
                         mask=(mask<<1)|((unsigned long long)0x1);
                     elem->idata&=mask;
                 }
                 if(off_size!=0)
+                {
+                    elem->bit_field=true;
                     elem->idata<<=off_size;
+                    init_have_bit_field=true;
+                }
             }
             else if(IS_FLOAT_TYPE(tmpt->typ_category))
             {
@@ -236,13 +247,19 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
                 size_t off_size=(initializer_node->init_attribute->off)%(8*Type_align(type_vec));
                 if(bit_field_size!=0)
                 {
+                    elem->bit_field=true;
+                    init_have_bit_field=true;
                     unsigned long long mask=0;
                     for(size_t i=0;i<bit_field_size;++i)
                         mask=(mask<<1)|((unsigned long long)0x1);
                     elem->idata&=mask;
                 }
                 if(off_size!=0)
+                {
+                    elem->bit_field=true;
                     elem->idata<<=off_size;
+                    init_have_bit_field=true;
+                }
             }
             else if(tmpt->typ_category==TP_FUNCTION)
             {
@@ -274,6 +291,7 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
             /*if a bit field, just trunc*/
             if((initializer_node->init_attribute->size)!=8*Type_size(initializer_node->init_attribute->type_vec))
             {
+                init_have_bit_field=true;
                 SYM_ITEM* trunc_symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
                 if(!insert_symbol(alloc_reg->symbol_table,trunc_symbol))
                     goto error;
@@ -289,6 +307,7 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
             size_t off_size=(initializer_node->init_attribute->off)%(8*Type_align(curr_symbol->type_vec));
             if(off_size!=0)
             {
+                init_have_bit_field=true;
                 /*shift res reg*/
                 SYM_ITEM* shift_symbol=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
                 if(!insert_symbol(alloc_reg->symbol_table,shift_symbol))
@@ -340,17 +359,72 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
     /*
         step3:if bit field and have a static storage ,just merge it
         if such a merge meet one or more elems not a static,gen ins
-        but this step need two for loop
+        but this step need two loops
         first one deal with the const data, and the second one used to gen ins
     */
-    for(size_t i=0;i<VECLEN(value->value_vec);++i)
+    if(init_have_bit_field)
     {
+        /*
+            sort,according to the specifier's start off
+            let's see an example in the type_test_08.c
+            in a struct have such three members:
+                char a:7;
+                char b:6;
+                int c:15;
+            and the place in symbol table is:
+                < a off:0 bit_off:0 bit_size:7 >
+                < b off:1 bit_off:0 bit_size:6 >
+                < c off:0 bit_off:14 bit_size:15 >
+            and the merge happens in a/c and b/c
+            here ,'a' have to skip 'b' to merge with 'c'
+            and it's very hard to deal with(the order might be more complex than that case)
+            the reason of this problem is the 'b' start off is 1.
+            if the order of 'b' and 'c' changed become 'a' 'c' 'b',the merge is much more easy
+            so here we need to sort it according to the off given by specifier.
+            Hint:such a sort must happen in continuing bit field members
+        */
+        VEC* tmpv=value->value_vec;
+        for(size_t j=0;j<VECLEN(tmpv);++j){
+            for(size_t k=j+1;k<VECLEN(tmpv);++k)
+            {
+                STOR_VALUE_ELEM* tmpj=VEC_GET_ITEM(tmpv,j);
+                STOR_VALUE_ELEM* tmpk=VEC_GET_ITEM(tmpv,k);
+                if(tmpj->bit_field&&tmpk->bit_field)
+                {
+                    size_t off_align_j=tmpj->init_attr->off/(Type_align(tmpj->init_attr->type_vec));
+                    size_t off_align_k=tmpk->init_attr->off/(Type_align(tmpk->init_attr->type_vec));
+                    if(off_align_j>off_align_k)
+                        VECswapItem(tmpv,j,k);
+                }
+            }
+        }
+        index=0;
+        while(index<VECLEN(value->value_vec))
+        {
+            
+            index++;
+        }
+        /*
+            sort,if all bit field,place the const part before the variable part
+            as declared before, the order after merge is not always sure,so we must make sure the order
+        */
+        tmpv=value->value_vec;
+        for(size_t j=0;j<VECLEN(tmpv);++j){
+            for(size_t k=j+1;k<VECLEN(tmpv);++k)
+            {
+                STOR_VALUE_ELEM* tmpj=VEC_GET_ITEM(tmpv,j);
+                STOR_VALUE_ELEM* tmpk=VEC_GET_ITEM(tmpv,k);
+                if(tmpj->bit_field&&tmpk->bit_field)
+                    if(tmpj->value_data_type==SVT_REG && tmpk->value_data_type==SVT_NONE)
+                        VECswapItem(tmpv,j,k);
+            }
+        }
+        for(size_t i=0;i<VECLEN(value->value_vec);++i)
+        {
 
+        }
     }
-    for(size_t i=0;i<VECLEN(value->value_vec);++i)
-    {
-
-    }
+    
     m_free(tei);
     return true;
 error:

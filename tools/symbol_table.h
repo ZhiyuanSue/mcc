@@ -24,8 +24,14 @@ enum storage_value_type{
     SVT_STRING,
     SVT_REG,
 };
+typedef struct{
+    size_t off;
+    size_t size;
+    VEC* type_vec;
+}INIT_NODE_ATTR;
 typedef struct sym_item SYM_ITEM;
 typedef struct{
+    bool bit_field;
     enum storage_value_type value_data_type;
     size_t byte_width;  /*0 -zero byte, 1 -byte,2 -word,4 -long(not the long in C),8 -quad*/
     union{
@@ -35,7 +41,7 @@ typedef struct{
         void* other_data;
     };
     /*if the data stores a value of pointer and the wordsize is 32,need judgement and cast*/
-    void* init_attr;
+    INIT_NODE_ATTR* init_attr;
 }STOR_VALUE_ELEM;
 typedef struct{
     SYM_ITEM* sym_item;
