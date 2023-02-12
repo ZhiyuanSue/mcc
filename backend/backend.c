@@ -96,7 +96,9 @@ bool gen_static_stor_data(IR_MODULE* irm,FILE* fp)
         for(size_t j=0;j<VECLEN(value->value_vec);++j)
         {
             STOR_VALUE_ELEM* elem=VEC_GET_ITEM(value->value_vec,j);
-            if(elem&&elem->value_data_type==SVT_NONE)
+            if(!elem||elem->ignore)
+                continue;
+            if(elem->value_data_type==SVT_NONE)
             {
                 if(elem->byte_width==0)
 #ifdef _MAC_

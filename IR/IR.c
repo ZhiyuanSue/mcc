@@ -164,7 +164,9 @@ void print_static_stor_value(STOR_VALUE* value)
     for(size_t i=0;i<VECLEN(value->value_vec);++i)
     {
         STOR_VALUE_ELEM* elem=VEC_GET_ITEM(value->value_vec,i);
-        if(elem&&elem->value_data_type==SVT_NONE)
+        if(!elem||elem->ignore)
+            continue;
+        if(elem->value_data_type==SVT_NONE)
         {
             if(elem->byte_width==0)
 #ifdef _MAC_

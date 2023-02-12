@@ -32,6 +32,7 @@ typedef struct{
 typedef struct sym_item SYM_ITEM;
 typedef struct{
     bool bit_field;
+    bool ignore;
     enum storage_value_type value_data_type;
     size_t byte_width;  /*0 -zero byte, 1 -byte,2 -word,4 -long(not the long in C),8 -quad*/
     union{

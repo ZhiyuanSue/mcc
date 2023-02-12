@@ -76,6 +76,7 @@ bool declaration_trans(AST_BASE* ast_node,IR_MODULE* irm,IR_FUNC* ir_func,IR_BB*
                 /*all set to zero*/
                 STOR_VALUE_ELEM* elem=m_alloc(sizeof(STOR_VALUE_ELEM));
                 elem->bit_field=false;
+                elem->ignore=false;
                 elem->byte_width=0;
                 elem->value_data_type=SVT_NONE;
                 elem->idata=Type_size(tmpsi->type_vec);
@@ -171,6 +172,7 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
         /*step1: init all the elements according to the init list*/
         elem=m_alloc(sizeof(STOR_VALUE_ELEM));
         elem->bit_field=false;
+        elem->ignore=false;
         elem->init_attr=NULL;
         elem->value_data_type=SVT_NONE;
         elem->byte_width=elem->idata=0;
@@ -358,9 +360,6 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
     }
     /*
         step3:if bit field and have a static storage ,just merge it
-        if such a merge meet one or more elems not a static,gen ins
-        but this step need two loops
-        first one deal with the const data, and the second one used to gen ins
     */
     if(init_have_bit_field)
     {
@@ -401,27 +400,89 @@ bool fill_in_init_value(SYM_ITEM* symbol,STOR_VALUE* value,bool static_stor,SYM_
         index=0;
         while(index<VECLEN(value->value_vec))
         {
-            
-            index++;
+            printf("curr index%ld\n",index);
+            STOR_VALUE_ELEM* curr_sve=VEC_GET_ITEM(value->value_vec,index);
+            if(curr_sve->bit_field==false||curr_sve->value_data_type==SVT_REG)
+            {
+                index++;
+                continue;
+            }
+            else{
+                size_t next_index=index+1;
+                STOR_VALUE_ELEM* next_sve=VEC_GET_ITEM(value->value_vec,next_index);
+                while(next_sve&& next_sve->bit_field)
+                {
+                    printf("next index%ld\n",next_index);
+                    if(next_sve->value_data_type!=SVT_REG)
+                    {
+                        int need_merge=0;   /*0-don't merge 1-next merge into the curr,2-curr merge into the next*/
+                        /*check the offset range and judge whether need merge*/
+                        size_t curr_begin=(curr_sve->init_attr->off)/Type_align(curr_sve->init_attr->type_vec);
+                        size_t curr_end=curr_begin+Type_size(curr_sve->init_attr->type_vec)*8;
+                        size_t next_begin=(next_sve->init_attr->off)/Type_align(next_sve->init_attr->type_vec);
+                        size_t next_end=next_begin+Type_size(next_sve->init_attr->type_vec)*8;
+                        if(curr_begin<=next_begin&&curr_end>=next_end)
+                            need_merge=1;
+                        else if(curr_begin<=next_begin&&curr_end>=next_end)
+                            need_merge=2;
+                        if(need_merge==1)
+                        {
+                            curr_sve->idata=(curr_sve->idata)|(next_sve->idata);
+                            next_sve->ignore=true;
+                        }
+                        else if(need_merge==2)
+                        {
+                            next_sve->idata=(next_sve->idata)|(curr_sve->idata);
+                            curr_sve->ignore=true;
+                            curr_sve=next_sve;
+                        }
+                    }
+                    next_index+=1;
+                    next_sve=VEC_GET_ITEM(value->value_vec,next_index);
+                }
+                index=next_index;
+            }
         }
-        /*
-            sort,if all bit field,place the const part before the variable part
-            as declared before, the order after merge is not always sure,so we must make sure the order
-        */
-        tmpv=value->value_vec;
-        for(size_t j=0;j<VECLEN(tmpv);++j){
-            for(size_t k=j+1;k<VECLEN(tmpv);++k)
+        for(size_t i=0;i<VECLEN(tmpv);++i)
+        {
+            STOR_VALUE_ELEM* tmp=VEC_GET_ITEM(tmpv,i);
+            if(tmp->ignore)
+            {
+                VECremove(tmpv,i,i+1);
+                m_free(tmp);
+            }
+        }
+    }
+    /*
+        step4: if it's a data on stack,gen ins
+        first sort,if all bit field,place the const part before the variable part
+        as declared before, the order after merge is not always sure,so we must make sure the order
+    */
+    if(!static_stor)
+    {
+        VEC* tmpv=value->value_vec;
+        for(int j=VECLEN(tmpv)-1;j>=0;--j){
+            for(int k=j-1;k>=0;--k)
             {
                 STOR_VALUE_ELEM* tmpj=VEC_GET_ITEM(tmpv,j);
                 STOR_VALUE_ELEM* tmpk=VEC_GET_ITEM(tmpv,k);
                 if(tmpj->bit_field&&tmpk->bit_field)
-                    if(tmpj->value_data_type==SVT_REG && tmpk->value_data_type==SVT_NONE)
+                    if(tmpk->value_data_type==SVT_REG && tmpj->value_data_type==SVT_NONE)
                         VECswapItem(tmpv,j,k);
             }
         }
         for(size_t i=0;i<VECLEN(value->value_vec);++i)
         {
+            /*symbol of store position*/
 
+            /*store size symbol*/
+
+            /*if a bit field, load the value, 'or' it,then store it*/
+
+            /*gen ins*/
+            //IR_INS* store_ins=Create_symbol_item(tmp_symbol_str_alloc(".reg."),NMSP_DEFAULT);
+            //insert_ins_to_bb(store_ins,ir_bb);
+            //GenINS(store_ins,OP_SHL,shift_symbol,curr_symbol,shift_size_symbol);
         }
     }
     
