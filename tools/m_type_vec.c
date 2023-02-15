@@ -556,12 +556,69 @@ VEC* lvalue_convertion(VEC* tmp_type_vec)
 bool compatible_types(VEC* type_vec_a,VEC* type_vec_b)
 {
     if(!type_vec_a||!type_vec_b)
-        return false;
-    printf("compatible_type part still need to do\n");
+        goto error;
+    if(type_vec_a==type_vec_b)
+        return true;
+    M_TYPE* tmpta;
+    M_TYPE* tmptb;
+    /*qual*/
+    tmpta=Type_VEC_get_qual(type_vec_a);
+    tmptb=Type_VEC_get_qual(type_vec_b);
+    if((tmpta==NULL&&tmptb!=NULL)||(tmpta!=NULL&&tmptb==NULL))
+        goto error;
+    else if(tmpta&&tmptb)
+    {
+        if(tmpta->type_qual!=tmptb->type_qual)
+            goto error;
+        type_vec_a=Type_VEC_unqualifier(type_vec_a,true);
+        type_vec_b=Type_VEC_unqualifier(type_vec_b,true);
+        return compatible_types(type_vec_a,type_vec_b);
+    }
+    /*now the type vec is unqualified*/
+    tmpta=Type_VEC_get_actual_base_type(type_vec_a);
+    tmptb=Type_VEC_get_actual_base_type(type_vec_b);
+    if(tmpta->typ_category!=tmptb->typ_category)
+        goto error;
+    if(tmpta->typ_category==TP_POINT)
+    {
+        type_vec_a=Type_VEC_get_Pointer_TO(type_vec_a,true);
+        type_vec_b=Type_VEC_get_Pointer_TO(type_vec_b,true);
+        return compatible_types(type_vec_a,type_vec_b);
+    }
+    else if(tmpta->typ_category==TP_FUNCTION)
+    {
+        type_vec_a=Type_VEC_get_func_return_type(type_vec_a,true);
+        type_vec_b=Type_VEC_get_func_return_type(type_vec_b,true);
+        TP_FUNC* fpa=(TP_FUNC*)tmpta;
+        TP_FUNC* fpb=(TP_FUNC*)tmptb;
+        if(!compatible_types(type_vec_a,type_vec_b))
+            goto error;
+        if(fpa->have_ellipsis!=fpb->have_ellipsis)
+            goto error;
+        if(VECLEN(fpa->func_parameters)!=VECLEN(fpb->func_parameters))
+            goto error;
+        for(size_t i=0;i<VECLEN(fpa->func_parameters);++i)
+        {
+            TP_FUNC_PARA* ppa=VEC_GET_ITEM(fpa->func_parameters,i);
+            TP_FUNC_PARA* ppb=VEC_GET_ITEM(fpb->func_parameters,i);
+            if(!compatible_types(ppa->type_vec,ppb->type_vec))
+                goto error;
+        }
+    }
+    else if(tmpta->typ_category==TP_ARRAY)
+    {
+
+    }
+    else if(tmpta->typ_category==TP_STRUCT||tmpta->typ_category==TP_UNION||tmpta->typ_category==TP_ENUM)
+    {
+
+    }
+    return true;
+error:
+    printf("uncompatible types are:\n");
     print_type_vec(type_vec_a);
     print_type_vec(type_vec_b);
-    /*TODO*/
-    return true;
+    return false;
 }
 VEC* composite_types(VEC* type_vec_a,VEC* type_vec_b,bool compatible_type)
 {

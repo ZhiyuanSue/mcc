@@ -359,6 +359,20 @@ bool assignment_type_check(VEC* unary_type_vec,VEC* assign_type_vec)
         {
             VEC* point_a=Type_VEC_get_Pointer_TO(unary_type_vec,true);
             VEC* point_b=Type_VEC_get_Pointer_TO(assign_type_vec,true);
+            qual_a=Type_VEC_get_qual(point_a);
+            qual_b=Type_VEC_get_qual(point_b);
+            if(qual_a)
+                point_a=Type_VEC_unqualifier(point_a,true);
+            if(qual_b)
+                point_b=Type_VEC_unqualifier(point_b,true);
+            /*the left operand point to must have all the qualifiers of right*/
+            if(!qual_a&&qual_b&&qual_b->type_qual!=0)
+                return false;
+            else if(qual_a&&qual_b)
+            {
+                if((qual_a->type_qual|qual_b->type_qual)^(qual_a->type_qual))
+                    return false;
+            }
             qual_a=Type_VEC_get_actual_base_type(point_a);
             qual_b=Type_VEC_get_actual_base_type(point_b);
             if(qual_a->typ_category==TP_VOID||qual_b->typ_category==TP_VOID)
