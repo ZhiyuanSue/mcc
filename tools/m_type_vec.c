@@ -604,14 +604,22 @@ bool compatible_types(VEC* type_vec_a,VEC* type_vec_b)
             if(!compatible_types(ppa->type_vec,ppb->type_vec))
                 goto error;
         }
+
     }
     else if(tmpta->typ_category==TP_ARRAY)
     {
-
+        type_vec_a=Type_VEC_get_Array_TO(type_vec_a,true);
+        type_vec_b=Type_VEC_get_Array_TO(type_vec_b,true);
+        if(!compatible_types(type_vec_a,type_vec_b))
+            goto error;
+        if((!((TP_ARR*)tmpta)->is_vla)&&(!((TP_ARR*)tmptb)->is_vla)&&(((TP_ARR*)tmpta)->axis_size!=((TP_ARR*)tmptb)->axis_size))
+            goto error;
     }
     else if(tmpta->typ_category==TP_STRUCT||tmpta->typ_category==TP_UNION||tmpta->typ_category==TP_ENUM)
     {
-
+        /*for the symbol must be same in a module*/
+        if(tmpta!=tmptb)
+            goto error;
     }
     return true;
 error:
