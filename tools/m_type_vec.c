@@ -576,7 +576,23 @@ bool compatible_types(VEC* type_vec_a,VEC* type_vec_b)
     }
     /*now the type vec is unqualified*/
     tmpta=Type_VEC_get_actual_base_type(type_vec_a);
+    if(tmpta->typ_category==TP_TYPE_DEF_TYPE)
+    {
+        type_vec_a=((TP_DEF_TYPE*)tmpta)->typedef_name_type;
+        tmpta=Type_VEC_get_actual_base_type(type_vec_a);
+    }
+    else if(tmpta->typ_category==TP_ENUM)
+        tmpta=build_base_type(TP_SINT);
+    
     tmptb=Type_VEC_get_actual_base_type(type_vec_b);
+    if(tmptb->typ_category==TP_TYPE_DEF_TYPE)
+    {
+        type_vec_b=((TP_DEF_TYPE*)tmptb)->typedef_name_type;
+        tmptb=Type_VEC_get_actual_base_type(type_vec_b);
+    }
+    else if(tmptb->typ_category==TP_ENUM)
+        tmptb=build_base_type(TP_SINT);
+    
     if(tmpta->typ_category!=tmptb->typ_category)
         goto error;
     if(tmpta->typ_category==TP_POINT)
