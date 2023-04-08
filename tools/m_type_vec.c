@@ -700,11 +700,15 @@ M_TYPE* usual_arith_conversion(M_TYPE** operand_a,M_TYPE** operand_b){
             }
             else if(int_rank[type_a]==int_rank[type_b])
             {
-                /*only the null pointer const case*/
+                /*the null pointer const case*/
                 if(type_a==TP_NULL_POINTER_CONSTANT)
                     return build_base_type(type_b);
                 else if(type_b==TP_NULL_POINTER_CONSTANT)
                     return build_base_type(type_a);
+                else    /*the unsigned and signed case,return unsigned type*/
+                {
+                    
+                }
             }
         }
         else{

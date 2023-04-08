@@ -82,65 +82,6 @@ bool assign_trans(SYM_ITEM* src_symbol,
             I also didn't find any warning or error in gcc(e.x. assign a double to an i1 type)
             so I just convert the float to int and then trunc it and assign,as other case did
         */
-        if(IS_INT_TYPE(src_base_type->typ_category)&&IS_INT_TYPE(dst_base_type->typ_category))
-        {
-
-        }
-        else if(IS_INT_TYPE(src_base_type->typ_category)&&IS_FLOAT_TYPE(dst_base_type->typ_category))
-        {
-
-        }
-        else if(IS_FLOAT_TYPE(src_base_type->typ_category)&&IS_INT_TYPE(dst_base_type->typ_category))
-        {
-
-        }
-        else if(IS_FLOAT_TYPE(src_base_type->typ_category)&&IS_FLOAT_TYPE(dst_base_type->typ_category))
-        {
-
-        }
-#if _CPLX_SUPPORT==1
-        else if(IS_COMPLEX_TYPE(src_base_type->typ_category)&&IS_INT_TYPE(dst_base_type->typ_category))
-        {
-
-        }
-        else if(IS_COMPLEX_TYPE(src_base_type->typ_category)&&IS_FLOAT_TYPE(dst_base_type->typ_category))
-        {
-
-        }
-        else if(IS_INT_TYPE(src_base_type->typ_category)&&IS_COMPLEX_TYPE(dst_base_type->typ_category))
-        {
-
-        }
-        else if(IS_FLOAT_TYPE(src_base_type->typ_category)&&IS_COMPLEX_TYPE(dst_base_type->typ_category))
-        {
-
-        }
-        else if(IS_COMPLEX_TYPE(src_base_type->typ_category)&&IS_COMPLEX_TYPE(dst_base_type->typ_category))
-        {
-
-        }
-#endif
-        /*then is struct /union case*/
-        /*else if()
-        {
-
-        }*/
-        /*here use lvalue conversion,so array or function also treated as pointer*/
-        /*point-point case*/
-        /*else if()
-        {
-
-        }*/
-        /*pointer-null pointer case*/
-        /*else if()
-        {
-
-        }*/
-        /*bool-pointer case*/
-        /*else if()
-        {
-
-        }*/
     }
     return true;
 }
@@ -740,7 +681,30 @@ bool add_expr_trans(AST_BASE* ast_node,IR_BB* ir_bb)
         
         IR_INS* add_ins=add_new_ins(ir_bb);
         insert_ins_to_bb(add_ins,ir_bb);
-        GenINS(add_ins,OP_OR,operator_node->symbol,prefix_symbol,right_symbol);
+
+        M_TYPE* prefix_type=Type_VEC_get_actual_base_type(prefix_symbol->type_vec);
+        M_TYPE* right_type=Type_VEC_get_actual_base_type(right_symbol->type_vec);
+        if(IS_INT_TYPE(prefix_type->typ_category)&&IS_INT_TYPE(right_type->typ_category))
+        {
+            GenINS(add_ins,OP_ADD,operator_node->symbol,prefix_symbol,right_symbol);
+        }
+        else if(IS_INT_TYPE(prefix_type->typ_category)&&IS_FLOAT_TYPE(right_type->typ_category))
+        {
+            M_TYPE* tmp_type=usual_arth_conversion_trans(&prefix_symbol,&right_symbol,ir_bb);
+            GenINS(add_ins,OP_FADD,operator_node->symbol,prefix_symbol,right_symbol);
+        }
+        else if(IS_FLOAT_TYPE(prefix_type->typ_category)&&IS_INT_TYPE(right_type->typ_category))
+        {
+            M_TYPE* tmp_type=usual_arth_conversion_trans(&prefix_symbol,&right_symbol,ir_bb);
+            GenINS(add_ins,OP_FADD,operator_node->symbol,prefix_symbol,right_symbol);
+        }
+        else if(IS_FLOAT_TYPE(prefix_type->typ_category)&&IS_FLOAT_TYPE(right_type->typ_category))
+        {
+            GenINS(add_ins,OP_FADD,operator_node->symbol,prefix_symbol,right_symbol);
+        }
+
+
+
         prefix_expr_node=operator_node;
     }
     AST_BASE* res_node=AST_GET_CHILD(ast_node,AST_CHILD_NUM(ast_node)-2);

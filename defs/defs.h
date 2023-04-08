@@ -80,7 +80,7 @@
 #endif
 
 #ifndef _TEST_AST_
-#define _TEST_AST_
+//#define _TEST_AST_
 #endif
 
 #ifndef _TEST_SEMANTICS_

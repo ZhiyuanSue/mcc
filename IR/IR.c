@@ -194,6 +194,48 @@ bool type_cast_trans(SYM_ITEM* dst,SYM_ITEM* src,IR_BB* ir_bb)
 {
     if(!dst||!src)
         goto error;
+    VEC* dst_type_vec=dst->type_vec;
+    VEC* src_type_vec=src->type_vec;
+    M_TYPE* dst_base_type=Type_VEC_get_actual_base_type(dst_type_vec);
+    M_TYPE* src_base_type=Type_VEC_get_actual_base_type(src_type_vec);
+    enum TP_CATEGORY dst_type_category=dst_base_type->typ_category;
+    enum TP_CATEGORY src_type_category=src_base_type->typ_category;
+    if(dst_type_category==src_type_category)
+        return true;
+    IR_INS* trans_ins=add_new_ins(ir_bb);
+    insert_ins_to_bb(trans_ins,ir_bb);
+    enum ins_op op=OP_NONE;
+    if(IS_INT_TYPE(dst_type_category)&&IS_INT_TYPE(src_type_category))
+    {
+        /*int trunc case*/
+
+        /*int zero extern*/
+
+        /*int signed extern*/
+
+    }
+    else if(IS_INT_TYPE(dst_type_category)&&IS_FLOAT_TYPE(src_type_category))
+    {
+        /*float to unsigned int*/
+
+        /*float to signed int*/
+
+    }
+    else if(IS_FLOAT_TYPE(dst_type_category)&&IS_INT_TYPE(src_type_category))
+    {
+        /*unsigned int to float*/
+
+        /*signed int to float*/
+
+    }
+    else if(IS_FLOAT_TYPE(dst_type_category)&&IS_FLOAT_TYPE(src_type_category))
+    {
+        /*float trunc*/
+
+        /*float extern*/
+
+    }
+    GenINS(trans_ins,op,dst,src,NULL);
     return true;
 error:
     return false;

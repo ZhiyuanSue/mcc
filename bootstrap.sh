@@ -32,7 +32,7 @@ for file in $(ls ${bootstrap_asm_out_path})
 do
     rm -rf ${bootstrap_asm_out_path}${file}
 done
-
+echo "start bootstrap"
 for file in $(ls ${bootstrap_src_path})
 do
     ((file_num++))
